@@ -1,0 +1,86 @@
+<h:form  xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:f="http://xmlns.jcp.org/jsf/core"
+     xmlns:h="http://xmlns.jcp.org/jsf/html"
+     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+     xmlns:p="http://primefaces.org/ui"
+     xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+    >
+    <p:column id="contentPage">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+
+                    <h2 class="section-heading text-uppercase">دوائر البلدية</h2>
+                    <br/><hr style="border: 2px solid orange;"/><br/><br/>
+                </div>
+            </div>
+            <div class="row text-center">
+                <ui:repeat value="#{sessionLists.departments}" var="department" id="fadeEffectImages">
+
+
+
+                    <div class="col-md-4">
+                        <p:commandLink id="nonAjax" action="#{buttonView.buttonAction}" style="margin-right:20px;" ajax="false">
+                            <span class="fa-stack fa-4x">
+                                <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                                <i class="fas #{department.image} fa-stack-1x fa-inverse"></i>
+                            </span>
+
+                            <h4 class="service-heading">#{department.nameA}</h4> 
+                        </p:commandLink>
+                    </div>
+
+                </ui:repeat>
+
+            </div>
+            <br/><br/>
+            <hr style="border: 2px solid orange;"/>
+            <br/><br/>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h:outputLink id="openDialogLink" value="javascript:void(0)" onclick="PF('dlg').show();">
+
+                        <a href="department.xhtml"></a>
+                        <span class="fa-stack fa-4x">
+                            <i class="fas fa-circle fa-stack-2x redcolor"></i>
+                            <i class="fas fa-plus fa-stack-1x fa-inverse warcolor "></i> 
+                        </span>
+
+                        <h4 class="service-heading " style="margin-top: 10px">اضافة دائرة</h4>
+                    </h:outputLink>
+
+                    <p:dialog id="addDepartment"  widgetVar="dlg" header="اضافة دائرة جديدة"  resizable="false" showEffect="clip" hideEffect="clip">
+
+
+
+
+
+
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <h:panelGrid columns="1" cellpadding="0">
+                                <p:inputText id="nameA" value="#{departmentsManage.department.nameA}" label="name" required="true"/>
+                                <p:message for="nameA" />
+                            </h:panelGrid>
+                            <h:outputLabel for="nameA" value=":اسم الدائرة بالعربية" />
+
+                            <p:commandButton  actionListener="#{departmentsManage.addDepartment()}"  value="اضافة" update="@form"/>
+
+                        </h:panelGrid>
+
+
+
+                    </p:dialog>  
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+
+        <!-- /.container-fluid -->
+    </p:column>
+</h:form>
+
+

@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Add Service Title</title>
+         <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <meta name="description" content=""/>
+        <meta name="author" content=""/>
+
+        <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"/>
+
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+
+        <!-- Custom styles for this template-->
+        <link href="css/sb-admin-2.min.css" rel="stylesheet"/>
+        <link href="css/amer.css" rel="stylesheet"/>
+
+    </h:head>
+    <h:body>
+
+        <div>
+            <h:form id="form">
+    
+ 
+    <p:dataTable id="allService" var="service" value="#{sessionLists.services}" editable="true" style="margin-bottom:20px">
+        <f:facet name="header">
+            الخدمات المقدمة
+        </f:facet>
+ 
+        <p:ajax event="rowEdit"  />
+        <p:ajax event="rowEditCancel"  />
+ 
+        <p:column headerText="الاسم">
+            <p:cellEditor>
+                <f:facet name="output"><h:outputText value="#{service.name}" /></f:facet>
+                <f:facet name="input"><p:inputText  value="#{service.name}" style="width:100%"/></f:facet>
+            </p:cellEditor>
+        </p:column>
+ 
+        <p:column headerText="ايام الاستجابة">
+            <p:cellEditor>
+                <f:facet name="output"><h:outputText value="#{service.days}" /></f:facet>
+                <f:facet name="input"><p:inputText value="#{service.days}" style="width:100%" /></f:facet>
+            </p:cellEditor>
+        </p:column>
+ 
+       <p:column headerText="التكلفة">
+            <p:cellEditor>
+                <f:facet name="output"><h:outputText value="#{service.cost}" /></f:facet>
+                <f:facet name="input"><p:inputText value="#{service.cost}" style="width:100%" /></f:facet>
+            </p:cellEditor>
+        </p:column>
+        
+        <p:column headerText="الحالة">
+          <p:cellEditor>
+              <f:facet name="output"><h:outputText value="#{service.status}" /></f:facet>
+              <f:facet name="input"><p:inputText value="#{service.status}" style="width:100%" /></f:facet>
+            </p:cellEditor>
+        </p:column>
+        
+ 
+        <p:column headerText="القسم">
+            <p:cellEditor>
+                <f:facet name="output"><h:outputText value="#{service.department.nameA}" /></f:facet>
+                <f:facet name="input">
+                    <h:selectOneMenu value="#{service.department.nameA}" style="width:100%">
+                        <f:selectItems value="#{sessionLists.departments}" var="department" itemLabel="#{department}" itemValue="#{department}" />
+                    </h:selectOneMenu>
+                </f:facet>
+            </p:cellEditor>
+        </p:column>
+ 
+        <p:column headerText="الدائرة">
+            <p:cellEditor>
+                <f:facet name="output"><h:outputText value="#{service.section.name}" /></f:facet>
+                <f:facet name="input">
+                    <h:selectOneMenu value="#{service.section.name}" style="width:100%">
+                        <f:selectItems value="#{sessionLists.sections}" var="section" itemLabel="#{section}" itemValue="#{section}" />
+                    </h:selectOneMenu>
+                </f:facet>
+            </p:cellEditor>
+        </p:column>
+        
+        <p:column style="width:35px">
+            <p:rowEditor />
+        </p:column>
+    </p:dataTable>
+            </h:form>
+        </div>
+
+
+
+    </h:body>
+</html>

@@ -1,0 +1,54 @@
+
+<div>
+    <form id="addnewservice" style="text-align: right"> 
+        <br/>
+        <div class="form-group col-md-12">
+            <outputLabel value="اسم الخدمة"  />
+            <br/>
+            <inputText id="nameservice" required="true" />
+        </div>
+        <div class="form-group col-md-12">
+            <outputLabel value="عدد أيام الاستجابه"/>
+            <br/>
+            <inputNumber id="dayeservice"/>
+        </div>
+
+        <div class="form-group col-md-12">
+            <outputLabel value="تكلفة الخدمة"/>
+            <br/>
+            <inputNumber id="costservice"/>
+        </div>
+
+        <div class="form-group col-md-12">
+            <outputLabel value="حالة الخدمة"/>
+            <br/>
+            <selectBooleanButton  onLabel="فعاله" offLabel="غير فعاله" onIcon="fa fa-check" offIcon="fa fa-times" />
+        </div>
+
+        <div class="form-group col-md-12">
+            <outputLabel value="الدائرة" for="dd" />
+            <br/>
+            <autoComplete id="dd" dropdown="true"  />
+        </div>
+
+        <div class="form-group col-md-12">
+            <outputLabel value="القسم" for="dd" />
+            <br/>
+            <autoComplete id="dd1" dropdown="true" />
+        </div>
+        <div class="form-group col-md-12" >
+            <outputLabel value="المرفقات" for="dd" />
+            <br/>
+
+            <selectCheckboxMenu id="multiple" value="#{sessionLists.attachments}" label="Service" multiple="true"
+                                  filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
+                <selectItems value="" />
+            </selectCheckboxMenu>
+
+
+        </div>
+
+    </form>
+
+</div>
+
