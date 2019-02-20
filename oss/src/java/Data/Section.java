@@ -1,7 +1,11 @@
 package Data;
 
+import DB.DB;
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -46,13 +50,6 @@ public class Section implements Serializable{
         this.id = id;
     }
 
-    
-
-    
-
-    
-
-   
 
     public String getName() {
         return name;
@@ -71,6 +68,38 @@ public class Section implements Serializable{
     public void setDepartmentNmae(String departmentNmae) {
         this.departmentNmae = departmentNmae;
     }
+    
+    public void update(){
+        String q  =" UPDATE section SET Dep_ID = "+departmentId+",Sec_ID = "+id+",Sec_Name = '"+name+"' WHERE `Sec_ID` = "+id+";";
+        try {
+            DB data = new DB();
+            data.write(q);
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Section.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Section.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    public void addToDB(){
+        String  q = "INSERT INTO section VALUES("+departmentId+",null,"+name+");";
+         try {
+            DB data = new DB();
+            data.write(q);
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Section.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Section.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    
 
     @Override
     public String toString() {

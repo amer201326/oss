@@ -11,8 +11,11 @@ import Data.Section;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
+import org.primefaces.event.RowEditEvent;
 
 /**
  *
@@ -105,12 +108,20 @@ public class DepartmentsManage implements Serializable{
         this.departmentNames = departmentNames;
     }
     
-    public List<Section> GetFSection(){
-        print("nnnnnnnnnn");
-        if(department != null)
-            return GetFromDB.getFsection(department.id);
+    public void fSection(){
+        System.out.println("uuuu");
+        if(department.id != -1)
+       fiterdSections = GetFromDB.getFsection(department.id);
         else
-            return  sessionLists.sections;
+            fiterdSections = sessionLists.sections;
     }
     
+    public void onSectionEdit(RowEditEvent event) {
+        ((Section) event.getObject()).update();
+       
+    }
+    
+    public void onSectionCancel(RowEditEvent event) {
+        
+    }
 }
