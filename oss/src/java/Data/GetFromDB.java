@@ -63,7 +63,7 @@ public class GetFromDB {
             
             ResultSet r = db.read(sql);
             while (r.next()) {
-                s = new Section(r.getInt(1),r.getInt(1),r.getString(2),r.getString(3));
+                s = new Section(r.getInt(1),r.getInt(2),r.getString(3),r.getString(4));
                 l.add(s);
             }
         } catch (Exception e) {
@@ -86,6 +86,24 @@ public class GetFromDB {
             System.out.println(e.getMessage());
         }
         return d;
+    }
+
+    public static List<Section> getFsection( int id) {
+        List<Section> l = new ArrayList<>();
+        Section s ;
+        try {
+            DB db = new DB();
+            String sql = "select s.Dep_ID ,s.Sec_ID,s.Sec_Name ,d.Dep_Name from section as s inner join department as d on s.Dep_ID = d.Dep_ID where d.Dep_ID = " +id+"; ";
+            
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                s = new Section(r.getInt(1),r.getInt(2),r.getString(3),r.getString(4));
+                l.add(s);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return l;
     }
 
 }

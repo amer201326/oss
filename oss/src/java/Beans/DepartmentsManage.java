@@ -27,14 +27,14 @@ public class DepartmentsManage implements Serializable{
     
     List<String> departmentNames;
     Section sectionSelected;
-    List<Section> fiterdSections = new ArrayList<>();
+    List<Section> fiterdSections ;
     
     String imageD;
     
     public DepartmentsManage() {
         department = new Department();
         sectionSelected = new Section();
-        fiterdSections = new ArrayList<>();
+        fiterdSections = GetFromDB.getSection();
     }
     
     public void addDepartment(){
@@ -105,6 +105,12 @@ public class DepartmentsManage implements Serializable{
         this.departmentNames = departmentNames;
     }
     
-    
+    public List<Section> GetFSection(){
+        print("nnnnnnnnnn");
+        if(department != null)
+            return GetFromDB.getFsection(department.id);
+        else
+            return  sessionLists.sections;
+    }
     
 }

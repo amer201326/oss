@@ -18,9 +18,9 @@ import java.util.logging.Logger;
  */
 public class Department implements Serializable {
 
-    int id;
-    String nameA;
-    String image;
+    public int id;
+    public String nameA;
+    public String image;
     
 
     public Department() {
