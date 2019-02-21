@@ -124,21 +124,21 @@
                                         </p:column>
                                     </p:dataTable>
 
-                               <!-- </h:form> -->
+                                </h:form>
                                 <p:commandButton value="Add Section" onclick="PF('dlg').show();" type="button" />
-                                
+                                <h:form>
 
                                     <p:dialog resizable="false" header="Add Section" widgetVar="dlg">
 
                                         <h:panelGrid columns="2" cellpadding="5">
 
                                             <h:outputLabel for="deid" value="deID:" />
-                                            <p:inputText id="deid" label="deid" value="#{section.departmentId}"/>
+                                            <p:inputText id="deid" label="deid" value="#{departmentsManage.newSection.departmentId}"/>
 
                                             <h:outputLabel for="name" value="Name:" />
-                                            <p:inputText id="name" label="name" value="#{section.name}"/>
+                                            <p:inputText id="name" label="name" value="#{departmentsManage.newSection.name}"/>
 
-                                            <p:commandButton value="Add" action="#{section.addToDB()}"  update="@form" oncomplete="PF('dlg').hide();"/>
+                                            <p:commandButton value="Add" actionListener="#{departmentsManage.newSection.addToDB()}"  update=":formSection" oncomplete="PF('dlg').hide();"/>
 
                                         </h:panelGrid>
                                     </p:dialog>  
@@ -151,7 +151,6 @@
                             <br/><br/>
 
                         </div>
-                        
 
 
                         <!-- /.container-fluid -->

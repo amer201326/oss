@@ -34,13 +34,14 @@ public class DepartmentsManage implements Serializable{
     List<Section> fiterdSections ;
     JobTitel jobtitel;
     List<JobTitel> jobtitle;
-    
+    Section newSection;
     String imageD;
     
     public DepartmentsManage() {
         department = new Department();
         sectionSelected = new Section();
         fiterdSections = GetFromDB.getSection();
+        newSection = new Section();
     }
     
     public void addDepartment(){
@@ -154,4 +155,13 @@ public class DepartmentsManage implements Serializable{
     public void onSectionCancel(RowEditEvent event) {
         
     }
+
+    public Section getNewSection() {
+        return newSection;
+    }
+
+    public void setNewSection(Section newSection) {
+        this.newSection = newSection;
+    }
+    
 }
