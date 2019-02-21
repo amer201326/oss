@@ -45,9 +45,8 @@ public class DepartmentsManage implements Serializable{
     }
     
     public void addDepartment(){
-        if(department.addToDataBase()){
-            sessionLists.getDepartments().add(department);
-        }
+        department.addToDataBase();
+         
         
     }
 
@@ -117,15 +116,15 @@ public class DepartmentsManage implements Serializable{
         if(department.id != -1)
        fiterdSections = GetFromDB.getFsection(department.id);
         else
-            fiterdSections = sessionLists.sections;
+            fiterdSections = GetFromDB.getSection();
     }
     
     public void jTitle(){
         System.out.println("uuuu");
-        if(jobtitel.getId() != -1)
-       fiterdSections = GetFromDB.getFsection(jobtitel.getId());
-        else
-            fiterdSections = sessionLists.sections;
+//        if(jobtitel.getId() != -1)
+//       fiterdSections = GetFromDB.getFsection(jobtitel.getId());
+//        else
+//            fiterdSections = sessionLists.sections;
     }
 
     public List<JobTitel> getJobtitle() {
@@ -164,4 +163,10 @@ public class DepartmentsManage implements Serializable{
         this.newSection = newSection;
     }
     
+    public List<Department> allDepartment(){
+        return GetFromDB.getDepartments();
+    }
+    public List<Section> allSection(){
+        return GetFromDB.getSection();
+    }
 }

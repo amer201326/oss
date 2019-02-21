@@ -75,7 +75,7 @@
                                         <p:selectOneMenu id="departments" value="#{departmentsManage.department.id}" dynamic="true" style="width:200px; height:100%;">
 
                                             <f:selectItem itemLabel="كل الدوائر" itemValue="-1" />
-                                            <f:selectItems value="#{sessionLists.departments}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}"/>
+                                            <f:selectItems value="#{departmentsManage.allDepartment()}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}"/>
                                             <p:ajax update=":formSection" event="itemSelect" listener="#{departmentsManage.fSection}" />
 
                                         </p:selectOneMenu>
@@ -117,7 +117,7 @@
                                                 <f:facet name="output"><h:outputText value="#{section.departmentNmae}" /></f:facet>
                                                 <f:facet name="input">
                                                     <h:selectOneMenu value="#{section.departmentId}" style="width:100%">
-                                                        <f:selectItems value="#{sessionLists.departments}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}" />
+                                                        <f:selectItems value="#{departmentsManage.allDepartment()}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}" />
                                                     </h:selectOneMenu>
                                                 </f:facet>
                                             </p:cellEditor>
@@ -128,7 +128,7 @@
                                 <p:commandButton value="Add Section" onclick="PF('dlg').show();" type="button" />
                                 <h:form>
 
-                                    <p:dialog resizable="false" header="Add Section" widgetVar="dlg">
+                                    <p:dialog id="DNewSection" resizable="false" header="Add Section" widgetVar="dlg">
 
                                         <h:panelGrid columns="2" cellpadding="5">
 
@@ -138,7 +138,7 @@
                                             <h:outputLabel for="name" value="Name:" />
                                             <p:inputText id="name" label="name" value="#{departmentsManage.newSection.name}"/>
 
-                                            <p:commandButton value="Add" actionListener="#{departmentsManage.newSection.addToDB()}"  update=":formSection" oncomplete="PF('dlg').hide();"/>
+                                            <p:commandButton value="Add" actionListener="#{departmentsManage.newSection.addToDB()}"  update=":formSection:singleDT,D:formSection:singleDTNewSection" oncomplete="PF('dlg').hide();"/>
 
                                         </h:panelGrid>
                                     </p:dialog>  

@@ -22,38 +22,12 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean(name = "sessionLists")
 @SessionScoped
 public class SessionLists implements Serializable{
-    List<Department> departments;
-    List<Section> sections;
-    List<Service> services;
 
     public SessionLists() {
-        this.departments = GetFromDB.getDepartments();
-        this.sections = GetFromDB.getSection();
     }
+    
 
-    public List<Department> getDepartments() {
-        return departments;
-    }
-
-    public void setDepartments(List<Department> departments) {
-        this.departments = departments;
-    }
-
-    public List<Service> getServices() {
-        return services;
-    }
-
-    public void setServices(List<Service> services) {
-        this.services = services;
-    }
-
-    public List<Section> getSections() {
-        return sections;
-    }
-
-    public void setSections(List<Section> sections) {
-        this.sections = sections;
-    }
+   
 
     
  
