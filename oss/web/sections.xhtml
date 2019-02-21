@@ -88,7 +88,6 @@
                                     <h:head id="msgs"/>
                                     <p:dataTable id="singleDT" var="section" value="#{departmentsManage.fiterdSections}"  editable="true" style="margin-bottom:20px" selectionMode="single" selection="#{departmentsManage.sectionSelected}" rowKey="#{section.id}">
 
-
                                         <f:facet name="header">
                                             Row Editing
                                         </f:facet>
@@ -124,10 +123,11 @@
                                         </p:column>
                                     </p:dataTable>
 
-                                </h:form>
-                                <p:commandButton value="Add Section" onclick="PF('dlg').show();" type="button" />
-                                <h:form>
-
+                                </h:form >
+                               
+                                
+                                <h:form id="dialog">
+                                     <p:commandButton value="Add Section" onclick="PF('dlg').show();" type="button" />
                                     <p:dialog id="DNewSection" resizable="false" header="Add Section" widgetVar="dlg">
 
                                         <h:panelGrid columns="2" cellpadding="5">
@@ -138,7 +138,7 @@
                                             <h:outputLabel for="name" value="Name:" />
                                             <p:inputText id="name" label="name" value="#{departmentsManage.newSection.name}"/>
 
-                                            <p:commandButton value="Add" actionListener="#{departmentsManage.newSection.addToDB()}"  update=":formSection:singleDT,D:formSection:singleDTNewSection" oncomplete="PF('dlg').hide();"/>
+                                            <p:commandButton value="Add" actionListener="#{departmentsManage.newSection.addToDB()}" update=":formSection" oncomplete="PF('dlg').hide();"/>
 
                                         </h:panelGrid>
                                     </p:dialog>  
