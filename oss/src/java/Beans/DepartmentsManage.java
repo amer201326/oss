@@ -7,6 +7,7 @@ package Beans;
 
 import Data.Department;
 import Data.GetFromDB;
+import Data.JobTitel;
 import Data.Section;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -31,6 +32,8 @@ public class DepartmentsManage implements Serializable{
     List<String> departmentNames;
     Section sectionSelected;
     List<Section> fiterdSections ;
+    JobTitel jobtitel;
+    List<JobTitel> jobtitle;
     
     String imageD;
     
@@ -115,6 +118,33 @@ public class DepartmentsManage implements Serializable{
         else
             fiterdSections = sessionLists.sections;
     }
+    
+    public void jTitle(){
+        System.out.println("uuuu");
+        if(jobtitel.getId() != -1)
+       fiterdSections = GetFromDB.getFsection(jobtitel.getId());
+        else
+            fiterdSections = sessionLists.sections;
+    }
+
+    public List<JobTitel> getJobtitle() {
+        return jobtitle;
+    }
+
+    public void setJobtitle(List<JobTitel> jobtitle) {
+        this.jobtitle = jobtitle;
+    }
+
+    public JobTitel getJobtitel() {
+        return jobtitel;
+    }
+
+    public void setJobtitel(JobTitel jobtitel) {
+        this.jobtitel = jobtitel;
+    }
+    
+    
+    
     
     public void onSectionEdit(RowEditEvent event) {
         ((Section) event.getObject()).update();

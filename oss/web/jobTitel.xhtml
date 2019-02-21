@@ -64,13 +64,13 @@
                             <div class="row">
                                 <div class="col-lg-12 text-center">
 
-                                    <h2 class="section-heading text-uppercase">الاقسام</h2>
+                                    <h2 class="section-heading text-uppercase">Job Tittle</h2>
                                     <br/><hr style="border: 2px solid orange;"/><br/><br/>
                                 </div>
                             </div>  
                             <div class="row text-center">
                                 <div class="float-lg-right float-right text#{$infix}-right" style="width: 100%">
-                                    <h:form>
+                                    <h:form >
                                         <!-- Style Addemployee form Bussectionlo-->
                                         <p:selectOneMenu id="departments" value="#{departmentsManage.department.id}" dynamic="true" style="width:200px; height:100%;">
 
@@ -82,8 +82,22 @@
 
                                         <p:outputLabel for="departments" style="margin-left: 4%" value="الدوائر " />
 
+
+                                        <p:selectOneMenu id="sections" value="#{departmentsManage.jobtitel.id}" dynamic="true" style="width:200px; height:100%;">
+
+                                            <f:selectItem itemLabel="All Sections" itemValue="-1" />
+                                            <f:selectItems value="#{sessionLists.sections}" var="s" itemLabel="#{s.id}" itemValue="#{s.name}"/>
+                                            <p:ajax update=":formSection" event="itemSelect" listener="#{departmentsManage.jTitle()}" />
+
+                                        </p:selectOneMenu>
+
+                                        <p:outputLabel for="departments" style="margin-left: 4%" value="Sections" />
+
                                     </h:form>
                                 </div>
+
+
+                                <!--Here-->
                                 <h:form id="formSection">
                                     <h:head id="msgs"/>
                                     <p:dataTable id="singleDT" var="section" value="#{departmentsManage.fiterdSections}"  editable="true" style="margin-bottom:20px" selectionMode="single" selection="#{departmentsManage.sectionSelected}" rowKey="#{section.id}">
@@ -124,24 +138,30 @@
                                         </p:column>
                                     </p:dataTable>
 
-                               <!-- </h:form> -->
-                                <p:commandButton value="Add Section" onclick="PF('dlg').show();" type="button" />
-                                
+                                </h:form>
+
+                                <h:form> 
+                                    <p:commandButton value="Add Section" onclick="PF('dlg').show();" type="button" />
 
                                     <p:dialog resizable="false" header="Add Section" widgetVar="dlg">
-
                                         <h:panelGrid columns="2" cellpadding="5">
+
+
 
                                             <h:outputLabel for="deid" value="deID:" />
                                             <p:inputText id="deid" label="deid" value="#{section.departmentId}"/>
 
+                                            <h:outputLabel for="id" value="Section ID:" />
+                                            <p:inputText id="id" label="id" value="#{section.id}"/>
+
+
                                             <h:outputLabel for="name" value="Name:" />
                                             <p:inputText id="name" label="name" value="#{section.name}"/>
 
-                                            <p:commandButton value="Add" action="#{section.addToDB()}"  update="@form" oncomplete="PF('dlg').hide();"/>
+                                            <p:commandButton value="Add" action="#{section.addToDB()}" update=":formSection" oncomplete="PF('dlg').hide();"/>
 
                                         </h:panelGrid>
-                                    </p:dialog>  
+                                    </p:dialog>      
 
                                 </h:form>
 
@@ -151,7 +171,6 @@
                             <br/><br/>
 
                         </div>
-                        
 
 
                         <!-- /.container-fluid -->

@@ -1,5 +1,9 @@
 package Data;
+import DB.DB;
 import java.io.Serializable;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -38,5 +42,21 @@ public class JobTitel implements Serializable{
     public void setName(String name) {
         this.name = name;
     }
+    
+    public void addJobToDB(){
+        String  q = "INSERT INTO jobtitle VALUES(" + id + ",'" + name + "');";
+         try {
+            DB data = new DB();
+            data.write(q);
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Section.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Section.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
     
 }

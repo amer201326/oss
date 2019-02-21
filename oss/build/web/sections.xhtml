@@ -43,10 +43,10 @@
                 box-sizing: border-box;
             }
             .ui-row-editor .ui-row-editor-pencil {
-        margin-left:8px;
-    }
+                margin-left:8px;
+            }
         </style>
-        
+
     </h:head>
     <h:body id="page-top">
         <div id="wrapper">
@@ -87,7 +87,7 @@
                                 <h:form id="formSection">
                                     <h:head id="msgs"/>
                                     <p:dataTable id="singleDT" var="section" value="#{departmentsManage.fiterdSections}"  editable="true" style="margin-bottom:20px" selectionMode="single" selection="#{departmentsManage.sectionSelected}" rowKey="#{section.id}">
-                                      
+
 
                                         <f:facet name="header">
                                             Row Editing
@@ -124,14 +124,34 @@
                                         </p:column>
                                     </p:dataTable>
 
+                               <!-- </h:form> -->
+                                <p:commandButton value="Add Section" onclick="PF('dlg').show();" type="button" />
+                                
+
+                                    <p:dialog resizable="false" header="Add Section" widgetVar="dlg">
+
+                                        <h:panelGrid columns="2" cellpadding="5">
+
+                                            <h:outputLabel for="deid" value="deID:" />
+                                            <p:inputText id="deid" label="deid" value="#{section.departmentId}"/>
+
+                                            <h:outputLabel for="name" value="Name:" />
+                                            <p:inputText id="name" label="name" value="#{section.name}"/>
+
+                                            <p:commandButton value="Add" action="#{section.addToDB()}"  update="@form" oncomplete="PF('dlg').hide();"/>
+
+                                        </h:panelGrid>
+                                    </p:dialog>  
 
                                 </h:form>
+
                             </div>
                             <br/><br/>
                             <hr style="border: 2px solid orange;"/>
                             <br/><br/>
 
                         </div>
+                        
 
 
                         <!-- /.container-fluid -->
