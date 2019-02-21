@@ -70,7 +70,7 @@
                             </div>  
                             <div class="row text-center">
                                 <div class="float-lg-right float-right text#{$infix}-right" style="width: 100%">
-                                    <h:form>
+                                    <h:form id="formSelectD">
                                         <!-- Style Addemployee form Bussectionlo-->
                                         <p:selectOneMenu id="departments" value="#{departmentsManage.department.id}" dynamic="true" style="width:200px; height:100%;">
 
@@ -124,21 +124,27 @@
                                     </p:dataTable>
 
                                 </h:form >
-                               
-                                
+
+
                                 <h:form id="dialog">
-                                     <p:commandButton value="Add Section" onclick="PF('dlg').show();" type="button" />
+                                    <p:commandButton value="Add Section" onclick="PF('dlg').show();" type="button" />
                                     <p:dialog id="DNewSection" resizable="false" header="Add Section" widgetVar="dlg">
 
                                         <h:panelGrid columns="2" cellpadding="5">
 
                                             <h:outputLabel for="deid" value="deID:" />
-                                            <p:inputText id="deid" label="deid" value="#{departmentsManage.newSection.departmentId}"/>
+                                            <p:selectOneMenu id="departments" value="#{departmentsManage.newSection.departmentId}" dynamic="true" style="width:200px; height:100%;">
+
+                                                
+                                                <f:selectItems value="#{departmentsManage.allDepartment()}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}"/>
+                                                
+
+                                            </p:selectOneMenu>
 
                                             <h:outputLabel for="name" value="Name:" />
                                             <p:inputText id="name" label="name" value="#{departmentsManage.newSection.name}"/>
 
-                                            <p:commandButton value="Add" actionListener="#{departmentsManage.newSection.addToDB()}" update=":formSection" oncomplete="PF('dlg').hide();"/>
+                                            <p:commandButton value="Add" actionListener="#{departmentsManage.addSection()}" update="@form :formSection :formSelectD" oncomplete="PF('dlg').hide();"/>
 
                                         </h:panelGrid>
                                     </p:dialog>  

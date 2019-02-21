@@ -85,7 +85,7 @@ public class Section implements Serializable{
     }
     
     public void addToDB(){
-        String  q = "INSERT INTO section (Dep_ID, Sec_ID, Sec_Name) VALUES('"+departmentId+"' ,null, '"+name+"');";
+        String  q = "INSERT INTO section (Dep_ID, Sec_ID, Sec_Name) VALUES("+departmentId+" ,null, '"+name+"');";
          try {
             DB data = new DB();
             data.write(q);

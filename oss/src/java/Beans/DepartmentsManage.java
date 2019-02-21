@@ -32,7 +32,7 @@ public class DepartmentsManage implements Serializable{
     List<String> departmentNames;
     Section sectionSelected;
     List<Section> fiterdSections ;
-    JobTitel jobtitel;
+    JobTitel jobtitelSelected;
     List<JobTitel> jobtitle;
     Section newSection;
     String imageD;
@@ -46,6 +46,13 @@ public class DepartmentsManage implements Serializable{
     
     public void addDepartment(){
         department.addToDataBase();
+         
+        
+    }
+    public void addSection(){
+        newSection.addToDB();
+        fiterdSections = GetFromDB.getSection();
+        newSection = new Section();
          
         
     }
@@ -120,11 +127,7 @@ public class DepartmentsManage implements Serializable{
     }
     
     public void jTitle(){
-        System.out.println("uuuu");
-//        if(jobtitel.getId() != -1)
-//       fiterdSections = GetFromDB.getFsection(jobtitel.getId());
-//        else
-//            fiterdSections = sessionLists.sections;
+
     }
 
     public List<JobTitel> getJobtitle() {
@@ -135,16 +138,13 @@ public class DepartmentsManage implements Serializable{
         this.jobtitle = jobtitle;
     }
 
-    public JobTitel getJobtitel() {
-        return jobtitel;
+    public JobTitel getJobtitelSelected() {
+        return jobtitelSelected;
     }
 
-    public void setJobtitel(JobTitel jobtitel) {
-        this.jobtitel = jobtitel;
+    public void setJobtitel(JobTitel jobtitelSelected) {
+        this.jobtitelSelected = jobtitelSelected;
     }
-    
-    
-    
     
     public void onSectionEdit(RowEditEvent event) {
         ((Section) event.getObject()).update();
@@ -154,7 +154,8 @@ public class DepartmentsManage implements Serializable{
     public void onSectionCancel(RowEditEvent event) {
         
     }
-
+    
+    
     public Section getNewSection() {
         return newSection;
     }
