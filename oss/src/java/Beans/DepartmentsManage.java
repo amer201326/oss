@@ -6,6 +6,7 @@
 package Beans;
 
 import Data.Department;
+import Data.Employee;
 import Data.GetFromDB;
 import Data.JobTitel;
 import Data.Section;
@@ -37,11 +38,15 @@ public class DepartmentsManage implements Serializable{
     Section newSection;
     String imageD;
     
+    List<Employee> employeeList;
+    Employee newEmployee;
+    
     public DepartmentsManage() {
         department = new Department();
         sectionSelected = new Section();
         fiterdSections = GetFromDB.getSection();
         newSection = new Section();
+        newEmployee = new Employee();
     }
     
     public void addDepartment(){
@@ -49,13 +54,20 @@ public class DepartmentsManage implements Serializable{
          
         
     }
+    
+     public void addEmployee(){
+        newEmployee.addEmployeeToDB();
+         
+        
+    }
     public void addSection(){
         newSection.addToDB();
         fiterdSections = GetFromDB.getSection();
         newSection = new Section();
-         
-        
+        employeeList = GetFromDB.getEmployees();
     }
+    
+    
 
     public SessionLists getSessionLists() {
         return sessionLists;
@@ -130,10 +142,7 @@ public class DepartmentsManage implements Serializable{
 
     }
 
-    public List<JobTitel> getJobtitle() {
-        return jobtitle;
-    }
-
+ 
     public void setJobtitle(List<JobTitel> jobtitle) {
         this.jobtitle = jobtitle;
     }
@@ -151,7 +160,16 @@ public class DepartmentsManage implements Serializable{
        
     }
     
+     public void onEmployeeEdit(RowEditEvent event) {
+        ((Employee) event.getObject()).update();
+       
+    }
+    
     public void onSectionCancel(RowEditEvent event) {
+        
+    }
+    
+    public void onEmployeeCancel(RowEditEvent event) {
         
     }
     
@@ -167,7 +185,30 @@ public class DepartmentsManage implements Serializable{
     public List<Department> allDepartment(){
         return GetFromDB.getDepartments();
     }
+    
+     public List<JobTitel> allJobs() {
+        return GetFromDB.getJobTittle();
+    }
+     
     public List<Section> allSection(){
         return GetFromDB.getSection();
     }
+
+    public List<Employee> getEmployeeList() {
+        return employeeList;
+    }
+
+    public void setEmployeeList(List<Employee> employeeList) {
+        this.employeeList = employeeList;
+    }
+
+    public Employee getNewEmployee() {
+        return newEmployee;
+    }
+
+    public void setNewEmployee(Employee newEmployee) {
+        this.newEmployee = newEmployee;
+    }
+    
+    
 }

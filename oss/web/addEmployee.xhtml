@@ -1,0 +1,257 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:ui="http://java.sun.com/jsf/facelets" 
+       xmlns:f="http://java.sun.com/jsf/core" 
+       xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <!-- Required meta tags-->
+        <meta charset="UTF-8"/>
+
+        <!-- Title Page-->
+        <title>إضافة موظف</title>
+
+        <!-- Icons font CSS-->
+        <link href="Resources/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all"/>
+        <link href="Resources/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all"/>
+
+
+        <!-- Font special for pages-->
+        <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet"/>
+
+        <!-- Vendor CSS-->
+        <link href="Resources/vendor/select2/select2.min.css" rel="stylesheet" media="all"/>
+        <link href="Resources/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all"/>
+
+        <!-- Main CSS-->
+        <link href="Resources/css/main.css" rel="stylesheet" media="all"/>
+
+    </h:head>
+
+    <h:body>
+        <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+            <div class="wrapper wrapper--w680">
+                <div class="card card-4"> <!-- Div para los margenes de la pagina -->
+                    <div class="card-body">
+                        <h2 class="title">إضافة موظف</h2>
+                        <p:separator /> <p:separator />
+                        <br/> <br/>
+
+                        <h:form id="myForm">
+
+                            <!-- La primera linea-->
+                            <div class="row row-space">
+                                <div class="col-2">
+                                    <div class="input-group">
+                                        <p:outputLabel class="label" value="*رقم الهوية"/>
+                                        <p:inputMask class="input--style-4 input1" type="text" mask="9 9999999 9" value="#{departmentsManage.newEmployee.emp_idCard}" required="true"/>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="input-group">
+                                        <p:outputLabel class="label" value="*الاسم الكامل"/>
+                                        <p:inputText class="input--style-4 input1" type="text" value="#{departmentsManage.newEmployee.emp_name}" required="true"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- La segunda linea -->
+                            <div class="row row-space">
+                                <div class="col-2">
+                                    <div class="input-group">
+                                        <p:outputLabel class="label" value="*الجوال"/>
+                                        <p:inputMask class="input--style-4 input1" type="text" mask="999-999-9999" value="#{departmentsManage.newEmployee.emp_mobile}" required="true"/>
+                                    </div>
+                                </div>
+
+                                <div class="col-2">
+                                    <div class="input-group">
+                                        <p:outputLabel class="label" value="التلفون"/>
+                                        <p:inputMask class="input--style-4 input1" type="text" value="#{departmentsManage.newEmployee.emp_tel}" mask="99-9999-999"/>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!--La tercera linea-->
+                            <div class="row row-space">
+
+                                <div class="col-2">
+                                    <div class="input-group">    <!--FALTA ESTA-->
+                                        <p:outputLabel class="label" value="الجنس"/>  <!--Falta este-->
+                                        <div class="p-t-10">
+                                            <h:panelGrid columns="2" cellpadding="5" class="mytable">
+                                                <p:selectOneRadio value="#{departmentsManage.newEmployee.emp_gender}" id="gender" class="label1">
+                                                    <f:selectItem itemLabel="ذكر" itemValue="M" />
+                                                    <f:selectItem  itemLabel="أنثى" itemValue="F" />
+                                                </p:selectOneRadio>
+                                            </h:panelGrid>
+                                        </div>
+                                    </div>
+                                </div> 
+
+
+                                <div class="col-2">
+                                    <div class="input-group">
+                                        <p:outputLabel class="label" value="*البريد الإلكتروني"/>
+                                        <p:inputText class="input--style-4 input1" type="email" value="#{departmentsManage.newEmployee.emp_email}" required="true"/>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- La cuarta linea -->
+                            <div class="row row-space">
+
+                                <div class="col-2"> <!--Aregla espacio-->
+                                </div>
+
+                                <div class="col-2"> <!--Debe ser calendario-->
+                                    <div class="input-group">
+                                        <p:outputLabel class="label" value="*تاريخ الميلاد"/>
+                                        <p:inputMask placeholder="YYYY/MM/DD" mask="9999/99/99" class="input--style-4 input1" type="text" value="#{departmentsManage.newEmployee.emp_birth}" required="true"/>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                            <!-- La quinta linea -->
+                            <div class="row row-space">
+                                <div class="col-2"> <!--Debe ser calendario-->
+                                    <div class="input-group">
+                                        <p:outputLabel class="label" value="تاريخ الانتهاء"/>
+                                        <p:inputMask mask="9999/99/99" placeholder="YYYY/MM/DD" value="#{departmentsManage.newEmployee.emp_EndDate}" class="input--style-4 input1" type="text"/>
+                                    </div>
+                                </div>
+                                <div class="col-2"> <!--Debe ser calendario-->
+                                    <div class="input-group">
+                                        <p:outputLabel class="label" value="*تاريخ البدء"/>
+                                        <p:inputMask mask="9999/99/99" placeholder="YYYY/MM/DD" value="#{departmentsManage.newEmployee.emp_StartDate}" class="input--style-4 input1" type="text" required="true"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- La sexta linea -->
+                            <br/>
+                            <h2 class="title">تحديد القسم</h2>
+
+                            <p:separator /> <p:separator />
+                            <br/><br/>
+
+
+                            <div class="row row-space">
+
+                                <div class="col-2"> 
+                                    <div class="input-group">
+                                        <h:outputLabel  for="sec_id" class="label" value="*القسم"/>
+
+                                        <h:selectOneMenu id="sec_id" value="#{departmentsManage.newEmployee.sec_id}" class="input--style-4 input1" required="true" label="Sec ID" >
+                                            <f:selectItems itemLabel="اختر واحدة" />
+                                            <f:selectItems value="#{departmentsManage.allSection()}" var="s" itemLabel="#{s.name}" itemValue="#{s.id}" />
+                                        </h:selectOneMenu>
+
+                                    </div>
+                                </div>
+                                <div class="col-2"> 
+                                    <div class="input-group">
+
+                                        <h:outputLabel  for="dep_id" class="label" value="*دائرة"/>
+                                        <h:selectOneMenu id="dep_id" value="#{departmentsManage.newEmployee.dep_id}" class="input--style-4 input1"   required="true" label="Dep ID">
+                                            <f:selectItems itemLabel="اختر واحدة" />
+                                            <f:selectItems value="#{departmentsManage.allDepartment()}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}" />
+                                        </h:selectOneMenu>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- La septima linea -->
+                            <div class="row row-space">
+
+                                <div class="col-2">
+
+                                </div>
+
+                                <div class="col-2"> 
+                                    <div class="input-group">
+                                        <h:outputLabel  for="job_id" class="label" value="*المسمى الوظيفة" />
+                                        <h:selectOneMenu id="job_id" value="#{departmentsManage.newEmployee.job_id}" class="input--style-4 input1"  required="true" label="Job ID" >
+                                            <f:selectItems itemLabel="اختر واحدة" itemValue="" />
+                                            <f:selectItems value="#{departmentsManage.allJobs()}" var="j" itemLabel="#{j.name}" itemValue="#{j.id}" />
+                                        </h:selectOneMenu>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!--La Octava Linea -->
+                            <br/>
+                            <h2 class="title">بيانات المستخدم</h2>
+
+                            <p:separator /> <p:separator />
+                            <br/><br/>
+
+                           <!-- <div class="row row-space">
+
+                                <div class="col-2"> 
+                                    <div class="input-group">
+                                        <p:outputLabel class="label" value="*كلمة المرور"/>
+                                        <p:password value="#{departmentsManage.newEmployee.emp_password}" class="input- -style-4 input1" id="password" feedback="true" required="true"/>
+                                    </div>
+                                </div>
+
+                                <div class="col-2"> 
+                                    <div class="input-group">
+                                        <p:outputLabel class="label" value="*اسم المستخدم"/>
+                                        <p:inputText value="#{departmentsManage.newEmployee.emp_username}" class="input- -style-4 input1" type="text" required="true"/>
+                                    </div>
+                                </div>
+
+                            </div> -->
+
+                            <!--La novena linea-->
+                           <!-- <div class="row row-space">
+                                <div class="col-2"> 
+                                </div>
+
+                                <div class="col-2"> 
+                                    <div class="input-group"> <!- -Falta esta- ->
+                                        <p:outputLabel class="label" value="*تأكيد كلمة المرور"/>
+                                        <p:password class="input- -style-4 input1" id="confirm" feedback="true" required="true"/>
+                                    </div>
+                                </div>
+                            </div> -->
+
+                            <p:commandButton value=" Reset إعادة تعيين" immediate="true" ajax="false" style="margin-right:20px;"  styleClass="ui-priority-primary">
+                                <p:resetInput target="myForm" />
+                                <f:ajax />
+                            </p:commandButton>
+                            
+                            <p:commandButton actionListener="#{departmentsManage.addEmployee()}" value="إضافة موظف" id="add_emp" update="@form" style="margin-right:20px;" styleClass="ui-priority-primary">
+                                <f:ajax />
+                            </p:commandButton>
+
+                            <p:messages id="messages" showDetail="true" autoUpdate="true" />
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Jquery JS-->
+        <script src="Resources/vendor/jquery/jquery.min.js"></script>
+        <!-- Vendor JS-->
+        <script src="Resources/vendor/select2/select2.min.js"></script>
+        <script src="Resources/vendor/datepicker/moment.min.js"></script>
+        <script src="Resources/vendor/datepicker/daterangepicker.js"></script>
+
+        <!-- Main JS-->
+        <script src="Resources/js/global.js"></script>
+    </h:body>
+
+</html>
+

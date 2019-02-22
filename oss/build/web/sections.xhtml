@@ -134,11 +134,7 @@
 
                                             <h:outputLabel for="deid" value="deID:" />
                                             <p:selectOneMenu id="departments" value="#{departmentsManage.newSection.departmentId}" dynamic="true" style="width:200px; height:100%;">
-
-                                                
                                                 <f:selectItems value="#{departmentsManage.allDepartment()}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}"/>
-                                                
-
                                             </p:selectOneMenu>
 
                                             <h:outputLabel for="name" value="Name:" />

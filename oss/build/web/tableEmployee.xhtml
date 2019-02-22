@@ -86,66 +86,81 @@
                                 </div>
                                 <h:form id="formSection">
                                     <h:head id="msgs"/>
-                                    <p:dataTable id="singleDT" var="section" value="#{departmentsManage.fiterdSections}"  editable="true" style="margin-bottom:20px" selectionMode="single" selection="#{departmentsManage.sectionSelected}" rowKey="#{section.id}">
+                                    <p:dataTable id="singleDT" var="employee" value="#{departmentsManage.employeeList}"  editable="true" style="margin-bottom:20px" selectionMode="single" selection="#{departmentsManage.newEmployee}" rowKey="#{employee.emp_id}">
 
                                         <f:facet name="header">
-                                            Row Editing
+                                            عرض جميع الموظفين
                                         </f:facet>
 
-                                        <p:ajax event="rowEdit" listener="#{departmentsManage.onSectionEdit}" update=":formSection:msgs" />
-                                        <p:ajax event="rowEditCancel" listener="#{departmentsManage.onSectionCancel}" update=":formSection:msgs" />
+
+
+
+
+
+
+                                        <p:ajax event="rowEdit" listener="#{departmentsManage.onEmployeeEdit}" update=":formSection:msgs" />
+                                        <p:ajax event="rowEditCancel" listener="#{departmentsManage.onEmployeeCancel}" update=":formSection:msgs" />
+
+
+
                                         <p:column style="width:10%;" headerText="تعديل">
                                             <p:rowEditor />
                                         </p:column>
-                                        <p:column headerText="الرقم">
+
+
+
+
+                                        <p:column headerText="البريد الإلكتروني">
                                             <p:cellEditor disabled="true">
-                                                <f:facet name="output"><h:outputText value="#{section.id}" /></f:facet>
-                                                <f:facet name="input"><p:inputText id="modelInput" value="#{section.id}" style="width:100%"/></f:facet>
+                                                <f:facet name="output"><h:outputText value="#{employee.emp_email}" /></f:facet>
+                                                <f:facet name="input"><p:inputText id="modelInput" value="#{employee.emp_email}" style="width:100%"/></f:facet>
                                             </p:cellEditor>
                                         </p:column>
 
-                                        <p:column headerText="اسم القسم">
+
+                                        <p:column headerText="الجوال">
                                             <p:cellEditor>
-                                                <f:facet name="output"><h:outputText value="#{section.name}" /></f:facet>
-                                                <f:facet name="input"><p:inputText value="#{section.name}" style="width:100%" label="Year"/></f:facet>
+                                                <f:facet name="output"><h:outputText value="#{employee.emp_mobile}" /></f:facet>
+                                                <f:facet name="input"><p:inputMask mask="999-999-9999" value="#{employee.emp_mobile}" style="width:100%" label="Year"/></f:facet>
                                             </p:cellEditor>
                                         </p:column>
 
+
+
+                                        <p:column headerText="الاسم الكامل">
+
+                                            <p:cellEditor>
+                                                <f:facet name="output"><h:outputText value="#{employee.emp_name}" /></f:facet>
+                                                <f:facet name="input"><p:inputText value="#{employee.emp_name}" style="width:100%" label="Year"/></f:facet>
+                                            </p:cellEditor>
+                                        </p:column> 
+
+
+                                        <p:column headerText="رقم تعريف الموظف">
+
+                                            <f:facet name="output"><h:outputText value="#{employee.emp_id}" /></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{employee.emp_id}" style="width:30%" /></f:facet>
+
+                                        </p:column>
+
+
+                                        
+                                        
                                         <p:column headerText="اسم الدارة">
-                                            <p:cellEditor>
-                                                <f:facet name="output"><h:outputText value="#{section.departmentNmae}" /></f:facet>
-                                                <f:facet name="input">
-                                                    <h:selectOneMenu value="#{section.departmentId}" style="width:100%">
-                                                        <f:selectItems value="#{departmentsManage.allDepartment()}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}" />
-                                                    </h:selectOneMenu>
-                                                </f:facet>
-                                            </p:cellEditor>
+
+                                            <f:facet name="output"><h:outputText value="#{employee.dep_id}" /></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{employee.dep_id}" style="width:30%" /></f:facet>
+
                                         </p:column>
+                                        
+
+                                       
                                     </p:dataTable>
 
                                 </h:form >
 
 
-                                <h:form id="dialog">
-                                    <p:commandButton value="Add Section" onclick="PF('dlg').show();" type="button" />
-                                    <p:dialog id="DNewSection" resizable="false" header="Add Section" widgetVar="dlg">
-
-                                        <h:panelGrid columns="2" cellpadding="5">
-
-                                            <h:outputLabel for="deid" value="deID:" />
-                                            <p:selectOneMenu id="departments" value="#{departmentsManage.newSection.departmentId}" dynamic="true" style="width:200px; height:100%;">
-                                                <f:selectItems value="#{departmentsManage.allDepartment()}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}"/>
-                                            </p:selectOneMenu>
-
-                                            <h:outputLabel for="name" value="Name:" />
-                                            <p:inputText id="name" label="name" value="#{departmentsManage.newSection.name}"/>
-
-                                            <p:commandButton value="Add" actionListener="#{departmentsManage.addSection()}" update="@form :formSection :formSelectD" oncomplete="PF('dlg').hide();"/>
-
-                                        </h:panelGrid>
-                                    </p:dialog>  
-
-                                </h:form>
+                               
 
                             </div>
                             <br/><br/>
@@ -204,4 +219,3 @@
 
     </h:body>
 </html>
-

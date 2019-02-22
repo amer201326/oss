@@ -36,6 +36,25 @@ public class GetFromDB {
         return departments;
     }
 
+    public static List<JobTitel> getJobTittle() {
+        JobTitel d = new JobTitel();
+        
+        List<JobTitel> job = new ArrayList<JobTitel>();
+        try {
+            DB db = new DB();
+            String sql = "SELECT * FROM jobtitle ;";
+            
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                d = new JobTitel(r.getInt(1),r.getString(2));
+                job.add(d);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return job;
+    }
+    
 
     public static List<String> getImageDepartment() {
         List<String> image = new ArrayList<String>();
@@ -106,4 +125,24 @@ public class GetFromDB {
         return l;
     }
 
+    
+    
+    
+    public static List<Employee> getEmployees() {
+       List<Employee> l = new ArrayList<>();
+        Employee s ;
+        try {
+            DB db = new DB();
+            String sql = "select * from employees ;";
+            
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                s = new Employee(r.getInt(1),r.getInt(2),r.getString(3),r.getString(4),r.getString(5));
+                l.add(s);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return l;
+    }
 }

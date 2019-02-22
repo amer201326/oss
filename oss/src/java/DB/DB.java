@@ -12,7 +12,7 @@ public class DB {
 
     public DB() throws SQLException, ClassNotFoundException {
         // Load the JDBC driver
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
     }
 
     public void startConnection() throws SQLException {
