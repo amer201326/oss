@@ -16,23 +16,23 @@ import java.util.logging.Logger;
  * @author me
  */
 public class JobTitel implements Serializable{
-    int id;
+    String id;
     String name;
 
     public JobTitel() {
     }
 
     public JobTitel(int id, String name) {
-        this.id = id;
+        this.id = id+"";
         this.name = name;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.id = id+"";
     }
 
     public String getName() {
@@ -44,7 +44,7 @@ public class JobTitel implements Serializable{
     }
     
     public void addJobToDB(){
-        String  q = "INSERT INTO jobtitle VALUES(" + id + ",'" + name + "');";
+        String  q = "INSERT INTO jobtitle VALUES(null,'" + name + "');";
          try {
             DB data = new DB();
             data.write(q);
@@ -56,6 +56,40 @@ public class JobTitel implements Serializable{
             Logger.getLogger(Section.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+    }
+    
+    public void update(){
+        String  q = "UPDATE jobtitle SET Job_name = '"+name+"' WHERE (Job_ID = "+id+");";
+        System.out.println(q);
+         try {
+            DB data = new DB();
+            data.write(q);
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Section.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Section.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+
+    public boolean delete() {
+        
+        String  q = "DELETE FROM jobtitle WHERE (Job_ID = "+id+");";
+        System.out.println(q);
+         try {
+            DB data = new DB();
+            data.write(q);
+            return true;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Section.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Section.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+         return false;
     }
     
     

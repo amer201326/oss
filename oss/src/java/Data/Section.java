@@ -98,6 +98,20 @@ public class Section implements Serializable{
         }
         
     }
+    public void deleteFromDB(){
+        
+        String  q = "DELETE FROM section WHERE (Sec_ID = "+id+")";
+         try {
+            DB data = new DB();
+            data.write(q);
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Section.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Section.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     
 

@@ -18,56 +18,87 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.RowEditEvent;
+import org.primefaces.event.SelectEvent;
 
 /**
  *
  * @author Amer$_$
  */
 @ManagedBean
-public class DepartmentsManage implements Serializable{
-    
+public class DepartmentsManage implements Serializable {
+
     Department department;
     @ManagedProperty(value = "#{sessionLists}")
     SessionLists sessionLists;
-    
+
     List<String> departmentNames;
     Section sectionSelected;
-    List<Section> fiterdSections ;
-    JobTitel jobtitelSelected;
-    List<JobTitel> jobtitle;
+    List<Section> fiterdSections;
+    List<JobTitel> jobTitels;
+
     Section newSection;
     String imageD;
-    
+
+    JobTitel newJob;
+
     List<Employee> employeeList;
     Employee newEmployee;
-    
+
+    public JobTitel j;
+
     public DepartmentsManage() {
+
         department = new Department();
         sectionSelected = new Section();
         fiterdSections = GetFromDB.getSection();
         newSection = new Section();
         newEmployee = new Employee();
+
+        newJob = new JobTitel();
+        jobTitels = GetFromDB.getJobTittle();
+
+        j = new JobTitel();
+
     }
-    
-    public void addDepartment(){
+
+    public void addDepartment() {
         department.addToDataBase();
-         
-        
+        department = new Department();
+
     }
-    
-     public void addEmployee(){
+
+    public void addEmployee() {
         newEmployee.addEmployeeToDB();
-         
-        
+        newEmployee = new Employee();
+
     }
-    public void addSection(){
+
+    public void addJobTitle() {
+        newJob.addJobToDB();
+        newJob = new JobTitel();
+        jobTitels = GetFromDB.getJobTittle();
+
+    }
+
+    public JobTitel getNewJob() {
+        return newJob;
+    }
+
+    public void setNewJob(JobTitel newJob) {
+        this.newJob = newJob;
+    }
+
+    public void addSection() {
         newSection.addToDB();
         fiterdSections = GetFromDB.getSection();
         newSection = new Section();
-        employeeList = GetFromDB.getEmployees();
+
     }
-    
-    
+
+    public void deleteSection() {
+        sectionSelected.deleteFromDB();
+        fiterdSections.remove(sectionSelected);
+    }
 
     public SessionLists getSessionLists() {
         return sessionLists;
@@ -76,10 +107,7 @@ public class DepartmentsManage implements Serializable{
     public void setSessionLists(SessionLists sessionLists) {
         this.sessionLists = sessionLists;
     }
-    
-    
-    
-    
+
     public Department getDepartment() {
         return department;
     }
@@ -87,8 +115,8 @@ public class DepartmentsManage implements Serializable{
     public void setDepartment(Department department) {
         this.department = department;
     }
-    
-    public List<String> getImageDepartment(){
+
+    public List<String> getImageDepartment() {
         return GetFromDB.getImageDepartment();
     }
 
@@ -116,10 +144,9 @@ public class DepartmentsManage implements Serializable{
     public void setFiterdSections(List<Section> fiterdSections) {
         this.fiterdSections = fiterdSections;
     }
-    
-    
-    public void print(String s){
-        System.out.println("done: "+s);
+
+    public void print(String s) {
+        System.out.println("done: " + s);
     }
 
     public List<String> getDepartmentNames() {
@@ -129,51 +156,50 @@ public class DepartmentsManage implements Serializable{
     public void setDepartmentNames(List<String> departmentNames) {
         this.departmentNames = departmentNames;
     }
-    
-    public void fSection(){
+
+    public void fSection() {
         System.out.println("uuuu");
-        if(department.id != -1)
-       fiterdSections = GetFromDB.getFsection(department.id);
-        else
+        if (department.id != -1) {
+            fiterdSections = GetFromDB.getFsection(department.id);
+        } else {
             fiterdSections = GetFromDB.getSection();
-    }
-    
-    public void jTitle(){
-
+        }
     }
 
- 
-    public void setJobtitle(List<JobTitel> jobtitle) {
-        this.jobtitle = jobtitle;
-    }
-
-    public JobTitel getJobtitelSelected() {
-        return jobtitelSelected;
-    }
-
-    public void setJobtitel(JobTitel jobtitelSelected) {
-        this.jobtitelSelected = jobtitelSelected;
-    }
-    
     public void onSectionEdit(RowEditEvent event) {
         ((Section) event.getObject()).update();
-       
+
     }
-    
-     public void onEmployeeEdit(RowEditEvent event) {
+
+    public void onJopTitleEdit(RowEditEvent event) {
+
+        ((JobTitel) event.getObject()).update();
+
+    }
+
+    public void onEmployeeEdit(RowEditEvent event) {
         ((Employee) event.getObject()).update();
-       
+
     }
-    
+
     public void onSectionCancel(RowEditEvent event) {
-        
+
     }
-    
+
     public void onEmployeeCancel(RowEditEvent event) {
-        
+
     }
-    
-    
+
+    public void onSectionSelected(SelectEvent event) {
+        System.out.println("form al ajax " + ((Section) event.getObject()).getId());
+        sectionSelected = (Section) event.getObject();
+    }
+
+    public void onJobSelected(SelectEvent event) {
+        System.out.println("form al ajax " + ((JobTitel) event.getObject()).getId());
+        j = (JobTitel) event.getObject();
+    }
+
     public Section getNewSection() {
         return newSection;
     }
@@ -181,16 +207,17 @@ public class DepartmentsManage implements Serializable{
     public void setNewSection(Section newSection) {
         this.newSection = newSection;
     }
-    
-    public List<Department> allDepartment(){
+
+    public List<Department> allDepartment() {
         return GetFromDB.getDepartments();
     }
-    
-     public List<JobTitel> allJobs() {
+
+    public List<JobTitel> allJobs() {
+
         return GetFromDB.getJobTittle();
     }
-     
-    public List<Section> allSection(){
+
+    public List<Section> allSection() {
         return GetFromDB.getSection();
     }
 
@@ -209,6 +236,28 @@ public class DepartmentsManage implements Serializable{
     public void setNewEmployee(Employee newEmployee) {
         this.newEmployee = newEmployee;
     }
-    
-    
+
+    public void setJobTitels(List<JobTitel> jobTitels) {
+        this.jobTitels = jobTitels;
+
+    }
+
+    public void deleteJopTitle() {
+        j.delete();
+        jobTitels.remove(j);
+    }
+
+    public List<JobTitel> getJobTitels() {
+        System.out.println("get method");
+        return jobTitels;
+    }
+
+    public JobTitel getJ() {
+        return j;
+    }
+
+    public void setJ(JobTitel j) {
+        this.j = j;
+    }
+
 }
