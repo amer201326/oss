@@ -1,0 +1,344 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <meta name="description" content=""/>
+        <meta name="author" content=""/>
+
+        <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"/>
+
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+
+        <!-- Custom styles for this template-->
+        <link href="css/sb-admin-2.min.css" rel="stylesheet"/>
+        <link href="css/amer.css" rel="stylesheet"/>
+        <style type="text/css">
+            .ui-datatable .ui-datatable-header {
+                text-align: right !important;
+            }
+
+            .ui-button-text-only .ui-button-text {
+                padding: 0.3em 0.4em;
+            }
+
+            .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-chkbox {
+                visibility: hidden;
+            }
+
+            .ui-filter-column .ui-column-customfilter .custom-filter {
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .year-spinner input {
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .ui-row-editor .ui-row-editor-pencil {
+                margin-left:8px;
+            }
+        </style>
+
+    </h:head>
+    <h:body id="page-top">
+        <div id="wrapper">
+            <div id="content-wrapper" class="d-flex flex-column">
+                <div id="content">
+
+                    <!-- Topbar -->
+                    <ui:include src="pages/heder.xhtml"/>
+                    <!-- End of Topbar -->
+
+                    <p:column id="contentPage">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-lg-12 text-center">
+
+                                    <h2 class="section-heading text-uppercase">Employee</h2>
+                                    <br/><hr style="border: 2px solid orange;"/><br/><br/>
+
+                                    <div class="row">
+                                        <div class="col-lg-6" style="text-align: right;">
+
+                                            <div class="card shadow mb-4">
+                                                <div class="card-header py-3">
+                                                    <h6 class="m-0 font-weight-bold text-primary">بيانات المستخدم</h6>
+                                                </div>
+                                                <div class="card-body">
+
+                                                    <div class="my-2"></div>
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                                            <p:inputText value="#{departmentsManage.newEmployee.emp_username}" class="form-control form-control-user" style="text-align:right;" type="text" required="true"/>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <p:outputLabel class="label" value="*اسم المستخدم"/>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="my-2"></div>
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                                            <p:password value="#{departmentsManage.newEmployee.emp_password}" class="form-control form-control-user" style="text-align:right;" id="password" feedback="true" required="true"/>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <p:outputLabel class="label" value="*كلمة المرور"/>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="my-2"></div>
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                                            <p:password class="form-control form-control-user" style="text-align:right;" id="confirm" feedback="true" required="true"/>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <p:outputLabel class="label" value="*تأكيد كلمة المرور"/>
+                                                        </div>
+
+
+
+
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card shadow mb-4">
+                                                <div class="card-header py-3">
+                                                    <h6 class="m-0 font-weight-bold text-primary">Permissions</h6>
+                                                </div>
+                                                <div class="card-body">
+
+                                                    <div class="my-2"></div>
+                                                    <div class="form-group row">
+                                                        <p:selectManyCheckbox class="form-control form-control-user" style="text-align:right;" id="grid" value="#{checkboxView.selectedCities}" layout="grid" columns="3">
+                                                            <f:selectItems value="#{checkboxView.cities}" var="city" itemLabel="#{city}" itemValue="#{city}" />
+                                                        </p:selectManyCheckbox>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--Trabajo 1-->
+                                    <div class="col-lg-6" style="text-align: right;">
+
+                                        <!-- Circle Buttons -->
+                                        <div class="card shadow mb-4">
+                                            <div class="card-header py-3">
+                                                <h6 class="m-0 font-weight-bold text-primary">إضافة موظف</h6>
+                                            </div>
+                                            <div class="card-body">
+
+                                                <div class="form-group row" >
+
+                                                    <div class="col-sm-6">
+                                                        <p:inputMask placeholder="*رقم الهوية" class="form-control form-control-user" style="text-align:right;" type="text" mask="9 9999999 9" value="#{departmentsManage.newEmployee.emp_idCard}" required="true"/>
+                                                    </div>
+                                                    <div class="col-sm-6 mb-3 mb-sm-0">
+
+                                                        <p:inputText placeholder="*الاسم الكامل" class="form-control form-control-user" style="text-align:right;" id="exampleFirstName" type="text" value="#{departmentsManage.newEmployee.emp_name}" required="true"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-6 mb-3 mb-sm-0">
+
+
+                                                        <p:inputMask placeholder="*الجوال" class="form-control form-control-user" style="text-align:right;" type="text" mask="999-999-9999" value="#{departmentsManage.newEmployee.emp_mobile}" required="true"/>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <p:inputMask placeholder="التلفون" class="form-control form-control-user" style="text-align:right;" type="text" value="#{departmentsManage.newEmployee.emp_tel}" mask="99-9999-999"/>
+                                                    </div>
+                                                </div>
+
+
+
+
+
+
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-6 mb-3 mb-sm-0">
+
+
+                                                        <div  style="float:right;">
+                                                            <h:panelGrid columns="2" cellpadding="5" class="mytable">
+                                                                <p:selectOneRadio value="#{departmentsManage.newEmployee.emp_gender}" id="gender" class="label1">
+                                                                    <f:selectItem itemLabel="ذكر" itemValue="M" />
+                                                                    <f:selectItem  itemLabel="أنثى" itemValue="F" />
+                                                                </p:selectOneRadio>
+                                                            </h:panelGrid>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <p:inputText placeholder="*البريد الإلكتروني" class="form-control form-control-user" style="text-align:right;" type="email" value="#{departmentsManage.newEmployee.emp_email}" required="true"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                                        <p:inputMask placeholder="YYYY-MM-DD" mask="9999-99-99" class="form-control form-control-user" style="text-align:right;" type="text" value="#{departmentsManage.newEmployee.emp_birth}" required="true"/>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <p:outputLabel class="label" value="*تاريخ الميلاد"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                                        <p:inputMask mask="9999-99-99" class="form-control form-control-user" style="text-align:right;" placeholder="YYYY-MM-DD" value="#{departmentsManage.newEmployee.emp_EndDate}" type="text"/>
+
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <p:outputLabel class="label" value="تاريخ الانتهاء"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                                        <p:inputMask mask="9999/99/99" class="form-control form-control-user" style="text-align:right;" placeholder="YYYY/MM/DD" value="#{departmentsManage.newEmployee.emp_StartDate}" type="text" required="true"/>                                                            
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <p:outputLabel class="label" value="*تاريخ البدء"/>
+                                                    </div>
+                                                </div>
+
+
+
+                                            </div>
+                                        </div>
+
+                                        <!-- Brand Buttons -->
+                                        <div class="card shadow mb-4" style="text-align: right;">
+                                            <div class="card-header py-3">
+                                                <h6 class="m-0 font-weight-bold text-primary">تحديد القسم</h6>
+                                            </div>
+                                            <div class="card-body">
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                                        <h:selectOneMenu id="sec_id" value="#{departmentsManage.newEmployee.sec_id}"  class="form-control form-control-user" style="text-align:right;" required="true" label="Sec ID" >
+                                                            <f:selectItems itemLabel="اختر واحدة" />
+                                                            <f:selectItems value="#{departmentsManage.allSection()}" var="s" itemLabel="#{s.name}" itemValue="#{s.id}" />
+                                                        </h:selectOneMenu>                                               
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <h:outputLabel  for="sec_id" class="label" value="*القسم"/>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-6">
+                                                        <h:selectOneMenu id="dep_id" value="#{departmentsManage.newEmployee.dep_id}" class="form-control form-control-user" style="text-align:right;"   required="true" label="Dep ID">
+                                                            <f:selectItems itemLabel="اختر واحدة" />
+                                                            <f:selectItems value="#{departmentsManage.allDepartment()}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}" />
+                                                        </h:selectOneMenu>
+                                                    </div>
+
+                                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                                        <h:outputLabel  for="dep_id" class="label" value="*دائرة"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-6 mb-3 mb-sm-0">
+
+                                                        <h:selectOneMenu id="job_id" value="#{departmentsManage.newEmployee.job_id}" class="form-control form-control-user" style="text-align:right;" required="true" label="Job ID" >
+                                                            <f:selectItems itemLabel="اختر واحدة" itemValue="" />
+                                                            <f:selectItems value="#{departmentsManage.allJobs()}" var="j" itemLabel="#{j.name}" itemValue="#{j.id}" />
+                                                        </h:selectOneMenu>
+
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <h:outputLabel  for="job_id" class="label" value="*المسمى الوظيفة" />
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+
+                                </div>
+
+
+                            </div>
+                        </div>  
+                        <div class="row text-center">
+                            <div class="float-lg-right float-right text#{$infix}-right" style="width: 100%">
+
+                            </div>
+
+                        </div>
+                        <br/><br/>
+                        <hr style="border: 2px solid orange;"/>
+                        <br/><br/>
+
+                </div>
+
+
+                <!-- /.container-fluid -->
+                </p:column>
+
+            </div>
+
+            <br/><br/>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright © Your Website 2019</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+
+
+        <ui:include src="pages/sidebar.xhtml"/>
+
+        </div>
+
+
+
+
+
+
+
+
+
+        <!-- Bootstrap core JavaScript-->
+        <!--<script src="vendor/jquery/jquery.min.js"></script>-->
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Core plugin JavaScript-->
+        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+        <!-- Custom scripts for all pages-->
+        <script src="js/sb-admin-2.min.js"></script>
+
+        <!-- Page level plugins -->
+
+        <script src="js/js.js" type="text/javascript"></script>
+
+    </h:body>
+</html>
+

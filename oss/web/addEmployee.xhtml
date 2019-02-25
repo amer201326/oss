@@ -29,7 +29,7 @@
 
     </h:head>
 
-    <h:body>
+    <h:body id="page-top">
         <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
             <div class="wrapper wrapper--w680">
                 <div class="card card-4"> <!-- Div para los margenes de la pagina -->
@@ -95,7 +95,7 @@
                                 <div class="col-2">
                                     <div class="input-group">
                                         <p:outputLabel class="label" value="*البريد الإلكتروني"/>
-                                        <p:inputText class="input--style-4 input1" type="email" value="#{departmentsManage.newEmployee.emp_email}" required="true"/>
+                                        <p:inputText placeholder="*البريد الإلكتروني" class="input--style-4 input1" type="email" value="#{departmentsManage.newEmployee.emp_email}" required="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -195,7 +195,7 @@
                             <p:separator /> <p:separator />
                             <br/><br/>
 
-                           <!-- <div class="row row-space">
+                            <div class="row row-space">
 
                                 <div class="col-2"> 
                                     <div class="input-group">
@@ -214,17 +214,17 @@
                             </div> -->
 
                             <!--La novena linea-->
-                           <!-- <div class="row row-space">
+                            <div class="row row-space">
                                 <div class="col-2"> 
                                 </div>
 
                                 <div class="col-2"> 
-                                    <div class="input-group"> <!- -Falta esta- ->
+                                    <div class="input-group"> 
                                         <p:outputLabel class="label" value="*تأكيد كلمة المرور"/>
                                         <p:password class="input- -style-4 input1" id="confirm" feedback="true" required="true"/>
                                     </div>
                                 </div>
-                            </div> -->
+                            </div> 
 
                             <p:commandButton value=" Reset إعادة تعيين" immediate="true" ajax="false" style="margin-right:20px;"  styleClass="ui-priority-primary">
                                 <p:resetInput target="myForm" />

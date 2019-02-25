@@ -9,6 +9,7 @@ import Data.Department;
 import Data.Employee;
 import Data.GetFromDB;
 import Data.JobTitel;
+import Data.Screen;
 import Data.Section;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public class DepartmentsManage implements Serializable {
     Section sectionSelected;
     List<Section> fiterdSections;
     List<JobTitel> jobTitels;
-
+    
     Section newSection;
     String imageD;
 
@@ -43,8 +44,15 @@ public class DepartmentsManage implements Serializable {
 
     List<Employee> employeeList;
     Employee newEmployee;
+    
+    List<Screen> screen;
+    Screen newScreen;
+    String[] selectedScreens;
 
     public JobTitel j;
+    
+    Department departmentEdit;
+    
 
     public DepartmentsManage() {
 
@@ -53,12 +61,13 @@ public class DepartmentsManage implements Serializable {
         fiterdSections = GetFromDB.getSection();
         newSection = new Section();
         newEmployee = new Employee();
-
+        
         newJob = new JobTitel();
         jobTitels = GetFromDB.getJobTittle();
-
+        departmentEdit = new Department();
         j = new JobTitel();
-
+        
+        
     }
 
     public void addDepartment() {
@@ -260,4 +269,30 @@ public class DepartmentsManage implements Serializable {
         this.j = j;
     }
 
+    public Department getDepartmentEdit() {
+        return departmentEdit;
+    }
+
+    public void setDepartmentEdit(Department departmentEdit) {
+        this.departmentEdit = departmentEdit;
+    }
+
+    public List<Screen> getScreen() {
+        return screen;
+    }
+
+    public void setScreen(List<Screen> screen) {
+        this.screen = screen;
+    }
+
+    public Screen getNewScreen() {
+        return newScreen;
+    }
+
+    public void setNewScreen(Screen newScreen) {
+        this.newScreen = newScreen;
+    }
+    
+    
+    
 }

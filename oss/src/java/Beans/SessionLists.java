@@ -22,9 +22,19 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean(name = "sessionLists")
 @SessionScoped
 public class SessionLists implements Serializable{
-
+    Department departmentSelected;
     public SessionLists() {
+        departmentSelected = new Department();
     }
+
+    public Department getDepartmentSelected() {
+        return departmentSelected;
+    }
+
+    public void setDepartmentSelected(Department departmentSelected) {
+        this.departmentSelected = departmentSelected;
+    }
+    
     
 
    

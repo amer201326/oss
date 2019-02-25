@@ -69,10 +69,10 @@
                                 </div>
                             </div>  
                             <div class="row text-center">
-                                <div class="float-lg-right float-right text#{$infix}-right" style="width: 100%">
+                                <div class="float-lg-right float-right text#{$infix}-right" style="width: 100%;margin-bottom: 30px">
                                     <h:form id="formSelectD">
                                         <!-- Style Addemployee form Bussectionlo-->
-                                        <p:selectOneMenu id="departments" value="#{departmentsManage.department.id}" dynamic="true" style="width:200px; height:100%;">
+                                        <p:selectOneMenu id="departments" value="#{departmentsManage.department.id}"  dynamic="true" style="width:200px; height:100%;">
 
                                             <f:selectItem itemLabel="كل الدوائر" itemValue="-1" />
                                             <f:selectItems value="#{departmentsManage.allDepartment()}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}"/>

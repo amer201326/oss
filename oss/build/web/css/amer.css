@@ -27,3 +27,10 @@
 .floatR{
     float: right;
 }
+.textR{
+    text-align: right;
+}
+
+#formSelectD:departments_label{
+     text-align: right;
+}
