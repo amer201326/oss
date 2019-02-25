@@ -11,6 +11,7 @@ import Data.GetFromDB;
 import Data.JobTitel;
 import Data.Screen;
 import Data.Section;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -89,6 +90,12 @@ public class DepartmentsManage implements Serializable {
 
     }
 
+    public void showDepartment(Department d) throws IOException{
+        System.out.println("go");
+        sessionLists.departmentSelected = d;
+        FacesContext.getCurrentInstance().getExternalContext().redirect("department.xhtml");
+    }
+    
     public JobTitel getNewJob() {
         return newJob;
     }

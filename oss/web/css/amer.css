@@ -34,3 +34,9 @@
 #formSelectD:departments_label{
      text-align: right;
 }
+
+
+.ui-organigram table{
+     margin: 0 auto;
+     
+}

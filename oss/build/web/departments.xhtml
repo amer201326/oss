@@ -26,16 +26,90 @@
     <h:body id="page-top">
 
         <div id="wrapper">
-            
+
 
             <div id="content-wrapper" class="d-flex flex-column">
 
                 <div id="content">
-                    
+
                     <!-- Topbar -->
                     <ui:include src="pages/heder.xhtml"/>
                     <!-- End of Topbar -->
-                    <ui:include src="pages/departments.xhtml"/>
+                    <p:column id="contentPage">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12 text-center">
+
+                                    <h2 class="section-heading text-uppercase">دوائر البلدية</h2>
+                                    <br/><hr style="border: 2px solid orange;"/><br/><br/>
+                                </div>
+                            </div>
+                            <h:form>
+                                <div class="row text-center">
+
+                                    <ui:repeat value="#{departmentsManage.allDepartment()}" var="department" id="fadeEffectImages">
+
+
+
+                                        <div class="col-md-4">
+                                            <h:commandLink action="#{departmentsManage.showDepartment(department)}" style="margin-right:20px;">
+                                                <span class="fa-stack fa-4x">
+                                                    <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                                                    <i class="fas #{department.image} fa-stack-1x fa-inverse"></i>
+                                                </span>
+
+                                                <h4 class="service-heading">#{department.nameA}</h4> 
+                                            </h:commandLink>
+                                        </div>
+
+                                    </ui:repeat>
+
+
+                                </div>
+                            </h:form>
+                            <br/><br/>
+                            <hr style="border: 2px solid orange;"/>
+                            <br/><br/>
+                            <div class="row">
+                                <div class="col-lg-12 text-center">
+                                    <h:outputLink id="openDialogLink" value="javascript:void(0)" onclick="PF('dlg').show();">
+
+
+                                        <span class="fa-stack fa-4x">
+                                            <i class="fas fa-circle fa-stack-2x redcolor"></i>
+                                            <i class="fas fa-plus fa-stack-1x fa-inverse warcolor "></i> 
+                                        </span>
+
+                                        <h4 class="service-heading " style="margin-top: 10px">اضافة دائرة</h4>
+                                    </h:outputLink>
+
+                                    <p:dialog id="addDepartment"  widgetVar="dlg" header="اضافة دائرة جديدة"  resizable="false" showEffect="clip" hideEffect="clip">
+                                        <h:form>
+                                            <h:panelGrid columns="2" cellpadding="5">
+                                                <h:panelGrid columns="1" cellpadding="0">
+                                                    <p:inputText id="nameA" value="#{departmentsManage.department.nameA}" label="name" required="true"/>
+                                                    <p:message for="nameA" />
+                                                </h:panelGrid>
+                                                <h:outputLabel for="nameA" value=":اسم الدائرة بالعربية" />
+
+                                                <p:commandButton  actionListener="#{departmentsManage.addDepartment()}"  value="اضافة" update="@form"/>
+
+                                            </h:panelGrid>
+                                        </h:form>
+
+
+                                    </p:dialog>  
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+
+
+                        <!-- /.container-fluid -->
+                    </p:column>
 
                 </div>
 
@@ -68,7 +142,7 @@
 
 
         <!-- Bootstrap core JavaScript-->
-         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
         <!-- Core plugin JavaScript-->
         <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -77,9 +151,9 @@
         <script src="js/sb-admin-2.min.js"></script>
 
         <!-- Page level plugins -->
-        
+
         <script src="js/js.js" type="text/javascript"></script>
-        
+
     </h:body>
 </html>
 

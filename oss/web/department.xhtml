@@ -78,14 +78,10 @@
                                                           autoScrollToSelection="#{organigramView.autoScrollToSelection}"
                                                           zoom="#{organigramView.zoom}"
                                                           selection="#{organigramView.selection}"
-                                                          style="width: 100%;align-items: center"
+                                                          style="width: 100%;"
                                                           >
 
-                                                <p:ajax event="dragdrop" process="@this" update="@form:growl" listener="#{organigramView.nodeDragDropListener}" />
-                                                <p:ajax event="select" process="@this" update="@form:growl" listener="#{organigramView.nodeSelectListener}" />
-                                                <p:ajax event="contextmenu" process="@this" />
-                                                <p:ajax event="collapse" process="@this" update="@form:growl" listener="#{organigramView.nodeCollapseListener}" />
-                                                <p:ajax event="expand" process="@this" update="@form:growl" listener="#{organigramView.nodeExpandListener}" />
+                                                
 
                                                 <p:organigramNode>
                                                     <h:outputText value="#{node.data}" />
@@ -110,37 +106,7 @@
                                                 </p:organigramNode>
                                             </p:organigram>
 
-                                            <p:contextMenu for="organigram" nodeType="employee">
-                                                <p:menuitem value="fire employee"
-                                                            update="organigram"
-                                                            icon="pi pi-times"
-                                                            action="#{organigramView.removeEmployee()}" />
-                                            </p:contextMenu>
-
-                                            <p:contextMenu for="organigram" nodeType="division">
-                                                <p:menuitem value="Add employee"
-                                                            ajax="false"
-                                                            icon="pi pi-plus"
-                                                            onclick="PF('addEmployeeDialog').show(); return false;" />
-                                                <p:menuitem value="Remove division"
-                                                            update="organigram @form:growl"
-                                                            icon="pi pi-times"
-                                                            action="#{organigramView.removeDivision()}" />
-                                            </p:contextMenu>
-
-                                            <p:dialog id="addEmployeeDialog"
-                                                      widgetVar="addEmployeeDialog"
-                                                      header="Add employee">
-
-                                                <p:inputText value="#{organigramView.employeeName}" />
-
-                                                <p:commandButton process="@parent"
-                                                                 update=":form:organigram"
-                                                                 value="Add"
-                                                                 action="#{organigramView.addEmployee()}"
-                                                                 oncomplete="PF('addEmployeeDialog').hide();"/>
-
-                                            </p:dialog>
+                                            
                                         </h:form>
                                     </div>
                                 </div>

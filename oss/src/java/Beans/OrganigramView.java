@@ -1,10 +1,15 @@
 package Beans;
 
 
+import Data.Department;
+import Data.GetFromDB;
+import Data.Section;
 import java.io.Serializable;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import org.primefaces.component.organigram.OrganigramHelper;
@@ -19,6 +24,9 @@ import org.primefaces.model.OrganigramNode;
 @ViewScoped
 public class OrganigramView implements Serializable {
  
+    @ManagedProperty(value = "#{sessionLists}")
+    SessionLists sessionLists;
+    
     private OrganigramNode rootNode;
     private OrganigramNode selection;
  
@@ -31,37 +39,33 @@ public class OrganigramView implements Serializable {
  
     @PostConstruct
     public void init() {
+        
+        Department d = sessionLists.departmentSelected;
         selection = new DefaultOrganigramNode(null, "Ridvan Agar", null);
  
-        rootNode = new DefaultOrganigramNode("root", "CommerceBay GmbH", null);
-        rootNode.setCollapsible(false);
+        rootNode = new DefaultOrganigramNode("root", d.nameA, null);
+        rootNode.setCollapsible(true);
         rootNode.setDroppable(true);
- 
- 
-        OrganigramNode softwareDevelopment = addDivision(rootNode, "Software Development", "Ridvan Agar");
- 
-        OrganigramNode teamJavaEE = addDivision(softwareDevelopment, "Team JavaEE");
-        addDivision(teamJavaEE, "JSF", "Thomas Andraschko");
-        addDivision(teamJavaEE, "Backend", "Marie Louise");
- 
-        OrganigramNode teamMobile = addDivision(softwareDevelopment, "Team Mobile");
-        addDivision(teamMobile, "Android", "Andy Ruby");
-        addDivision(teamMobile, "iOS", "Stevan Jobs");
- 
-        addDivision(rootNode, "Managed Services", "Thorsten Schultze", "Sandra Becker");
- 
-        OrganigramNode marketing = addDivision(rootNode, "Marketing");
-        addDivision(marketing, "Social Media", "Ali Mente", "Lisa Boehm");
-        addDivision(marketing, "Press", "Michael Gmeiner", "Hans Peter");
- 
-        addDivision(rootNode, "Management", "Hassan El Manfalouty");
+        rootNode.setSelectable(false);
+        
+        List<Section> sec = GetFromDB.getFsection(d.id);
+        String p[] = new String[sec.size()];
+        
+        for (int i = 0; i < p.length; i++) {
+            p[i] = sec.get(i).getName();
+            OrganigramNode softwareDevelopment = addDivision(rootNode, p[i]);
+        }
+        
+        
+        
+
     }
  
     protected OrganigramNode addDivision(OrganigramNode parent, String name, String... employees) {
         OrganigramNode divisionNode = new DefaultOrganigramNode("division", name, parent);
         divisionNode.setDroppable(true);
         divisionNode.setDraggable(true);
-        divisionNode.setSelectable(true);
+        divisionNode.setSelectable(false);
  
         if (employees != null) {
             for (String employee : employees) {
@@ -189,4 +193,16 @@ public class OrganigramView implements Serializable {
     public void setAutoScrollToSelection(boolean autoScrollToSelection) {
         this.autoScrollToSelection = autoScrollToSelection;
     }
+
+    public SessionLists getSessionLists() {
+        return sessionLists;
+    }
+
+    public void setSessionLists(SessionLists sessionLists) {
+        this.sessionLists = sessionLists;
+    }
+    
+    
+    
+    
 }
