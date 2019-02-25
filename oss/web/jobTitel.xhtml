@@ -78,7 +78,7 @@
                                 <h:form id="formSection">
                                     <h:head id="msgs"/>
 
-                                    <p:dataTable id="singleDT" var="jop" value="#{departmentsManage.jobTitels}" 
+                                    <p:dataTable id="singleDT" var="jop" value="#{departmentsManage.jobTitels}" dir="rtl" 
                                                  editable="true" style="margin-bottom:20px" rowKey="#{jop.id}" selectionMode="single" selection="#{departmentsManage.j}" >
 
 
@@ -89,29 +89,30 @@
                                         <p:ajax event="rowEdit" listener="#{departmentsManage.onJopTitleEdit}" update=":formSection:msgs" />
                                         <p:ajax event="rowEditCancel" listener="#{departmentsManage.onSectionCancel}" update=":formSection:msgs" />
 
-                                        <p:column style="width:10%;" headerText="تعديل">
-                                            <p:rowEditor />
-                                        </p:column>
 
-                                        
+
+
                                         <p:ajax event="rowSelect" process="@this    " update="formSection:diallogDelete" listener="#{departmentsManage.onJobSelected}"/>
-
+                                        <p:column headerText="الرقم" >
+                                            <p:cellEditor disabled="true">
+                                                <f:facet name="output"><h:outputText value="#{jop.id}" /></f:facet>
+                                                <f:facet name="input"><p:inputText id="modelInput" value="#{jop.id}" style="width:100%"/></f:facet>
+                                            </p:cellEditor>
+                                        </p:column>
                                         <p:column headerText="اسم القسم">
                                             <p:cellEditor>
                                                 <f:facet name="output"><h:outputText value="#{jop.name}" /></f:facet>
                                                 <f:facet name="input"><p:inputText value="#{jop.name}" style="width:100%" label="Year"/></f:facet>
                                             </p:cellEditor>
                                         </p:column>
-                                        <p:column headerText="الرقم">
-                                            <p:cellEditor disabled="true">
-                                                <f:facet name="output"><h:outputText value="#{jop.id}" /></f:facet>
-                                                <f:facet name="input"><p:inputText id="modelInput" value="#{jop.id}" style="width:100%"/></f:facet>
-                                            </p:cellEditor>
+
+                                        <p:column style="width:13%;" headerText="تعديل">
+                                            <p:rowEditor />
                                         </p:column>
 
                                     </p:dataTable>
                                     <p:dialog id="diallogDelete" resizable="false" header="Add Section" widgetVar="deleteD">
-                                        <h:panelGrid columns="2" cellpadding="5">
+                                        <h:panelGrid columns="2" cellpadding="5" >
 
                                             <h:outputLabel for="del" value="هل انت متأكد من حذف #{departmentsManage.j.name}" />
 
@@ -123,13 +124,16 @@
 
                                 </h:form>
 
-
-                                <p:commandButton value="اضافة " onclick="PF('dlg').show();" update=":formSection:deleteD" type="button" />
-                                <p:spacer width="30px"/>
-                                <p:commandButton value="حذف" onclick="PF('deleteD').show();" type="button"/>  
+                                <div class="text#{$infix}-right" style="width: 100%;">
+                                   <p:spacer width="30px"/>
+                                    <p:commandButton value="حذف" onclick="PF('deleteD').show();" type="button"/>  
+                                    <p:spacer width="30px"/>
+                                     <p:commandButton value="اضافة " onclick="PF('dlg').show();" update=":formSection:deleteD" type="button" />
+                                    
+                                </div>
                                 <h:form> 
-                                    
-                                    
+
+
                                     <p:dialog resizable="false" header="اضافة مسمى" widgetVar="dlg">
                                         <h:panelGrid columns="2" cellpadding="5">
 
@@ -141,7 +145,7 @@
                                         </h:panelGrid>
                                     </p:dialog> 
                                 </h:form>
-                                
+
 
                             </div>
                             <br/><br/>
