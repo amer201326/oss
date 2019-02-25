@@ -1,0 +1,296 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <meta name="description" content=""/>
+        <meta name="author" content=""/>
+
+        <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"/>
+
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+
+        <!-- Custom styles for this template-->
+        <link href="css/sb-admin-2.min.css" rel="stylesheet"/>
+        <link href="css/amer.css" rel="stylesheet"/>
+        <style type="text/css">
+            .ui-datatable .ui-datatable-header {
+                text-align: right !important;
+            }
+
+            .ui-button-text-only .ui-button-text {
+                padding: 0.3em 0.4em;
+            }
+
+            .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-chkbox {
+                visibility: hidden;
+            }
+
+            .ui-filter-column .ui-column-customfilter .custom-filter {
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .year-spinner input {
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .ui-row-editor .ui-row-editor-pencil {
+                margin-left:8px;
+            }
+        </style>
+
+    </h:head>
+    <h:body id="page-top">
+        <div id="wrapper">
+            <div id="content-wrapper" class="d-flex flex-column">
+                <div id="content">
+
+                    <!-- Topbar -->
+                    <ui:include src="pages/heder.xhtml"/>
+                    <!-- End of Topbar -->
+
+                    <p:column id="contentPage">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-lg-12 text-center">
+
+                                    <h2 class="section-heading text-uppercase">Hola</h2>
+                                    <br/><hr style="border: 2px solid orange;"/><br/><br/>
+
+                                    <div class="row">
+                                        <div class="col-lg-6" style="text-align: right;">
+
+                                            <div class="card shadow mb-4">
+                                                <div class="card-header py-3">
+                                                    <h6 class="m-0 font-weight-bold text-primary">Split Buttons with Icon</h6>
+                                                </div>
+                                                <div class="card-body">
+                                                    <p>Works with any button colors, just use the <code>.btn-icon-split</code> class and the markup in the examples below. The examples below also use the <code>.text-white-50</code> helper class on the icons for additional styling, but it is not required.</p>
+                                                    <a href="#" class="btn btn-primary btn-icon-split">
+                                                        <span class="icon text-white-50">
+                                                            <i class="fas fa-flag"></i>
+                                                        </span>
+                                                        <span class="text">Split Button Primary</span>
+                                                    </a>
+                                                    <div class="my-2"></div>
+                                                    <a href="#" class="btn btn-success btn-icon-split">
+                                                        <span class="icon text-white-50">
+                                                            <i class="fas fa-check"></i>
+                                                        </span>
+                                                        <span class="text">Split Button Success</span>
+                                                    </a>
+                                                    <div class="my-2"></div>
+                                                    <a href="#" class="btn btn-info btn-icon-split">
+                                                        <span class="icon text-white-50">
+                                                            <i class="fas fa-info-circle"></i>
+                                                        </span>
+                                                        <span class="text">Split Button Info</span>
+                                                    </a>
+                                                    <div class="my-2"></div>
+                                                    <a href="#" class="btn btn-warning btn-icon-split">
+                                                        <span class="icon text-white-50">
+                                                            <i class="fas fa-exclamation-triangle"></i>
+                                                        </span>
+                                                        <span class="text">Split Button Warning</span>
+                                                    </a>
+                                                    <div class="my-2"></div>
+                                                    <a href="#" class="btn btn-danger btn-icon-split">
+                                                        <span class="icon text-white-50">
+                                                            <i class="fas fa-trash"></i>
+                                                        </span>
+                                                        <span class="text">Split Button Danger</span>
+                                                    </a>
+                                                    <div class="my-2"></div>
+                                                    <a href="#" class="btn btn-secondary btn-icon-split">
+                                                        <span class="icon text-white-50">
+                                                            <i class="fas fa-arrow-right"></i>
+                                                        </span>
+                                                        <span class="text">Split Button Secondary</span>
+                                                    </a>
+                                                    <div class="my-2"></div>
+                                                    <a href="#" class="btn btn-light btn-icon-split">
+                                                        <span class="icon text-gray-600">
+                                                            <i class="fas fa-arrow-right"></i>
+                                                        </span>
+                                                        <span class="text">Split Button Primary</span>
+                                                    </a>
+                                                    <div class="mb-4"></div>
+                                                    <p>Also works with small and large button classes!</p>
+                                                    <a href="#" class="btn btn-primary btn-icon-split btn-sm">
+                                                        <span class="icon text-white-50">
+                                                            <i class="fas fa-flag"></i>
+                                                        </span>
+                                                        <span class="text">Split Button Small</span>
+                                                    </a>
+                                                    <div class="my-2"></div>
+                                                    <a href="#" class="btn btn-primary btn-icon-split btn-lg">
+                                                        <span class="icon text-white-50">
+                                                            <i class="fas fa-flag"></i>
+                                                        </span>
+                                                        <span class="text">Split Button Large</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <!--Trabajo 1-->
+                                        <div class="col-lg-6" style="text-align: right;">
+
+                                            <!-- Circle Buttons -->
+                                            <div class="card shadow mb-4">
+                                                <div class="card-header py-3">
+                                                    <h6 class="m-0 font-weight-bold text-primary">إضافة موظف</h6>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="form-group row" >
+                                                        
+                                                        <div class="col-sm-6">
+                                                            <p:inputMask placeholder="*رقم الهوية" class="form-control form-control-user" type="text" mask="9 9999999 9" value="#{departmentsManage.newEmployee.emp_idCard}" required="true"/>
+                                                        </div>
+                                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                                         
+                                                            <p:inputText placeholder="*الاسم الكامل" class="form-control form-control-user" id="exampleFirstName" type="text" value="#{departmentsManage.newEmployee.emp_name}" required="true"/>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                                            <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="First Name"/>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Last Name"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="email" class="form-control form-control-user" id="exampleInputEmail" placeholder="Email Address"/>
+                                                    </div>
+
+
+
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                                            <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="First Name"/>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Last Name"/>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                                            <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="First Name"/>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Last Name"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="email" class="form-control form-control-user" id="exampleInputEmail" placeholder="Email Address"/>
+                                                    </div>
+
+
+
+
+
+
+
+
+
+                                                </div>
+                                            </div>
+
+                                            <!-- Brand Buttons -->
+                                            <div class="card shadow mb-4" style="text-align: right;">
+                                                <div class="card-header py-3">
+                                                    <h6 class="m-0 font-weight-bold text-primary">Brand Buttons</h6>
+                                                </div>
+                                                <div class="card-body">
+                                                    <p>Google and Facebook buttons are available featuring each company's respective brand color. They are used on the user login and registration pages.</p>
+                                                    <p>You can create more custom buttons by adding a new color variable in the <code>_variables.scss</code> file and then using the Bootstrap button variant mixin to create a new style, as demonstrated in the <code>_buttons.scss</code> file.</p>
+                                                    <a href="#" class="btn btn-google btn-block"><i class="fab fa-google fa-fw"></i> .btn-google</a>
+                                                    <a href="#" class="btn btn-facebook btn-block"><i class="fab fa-facebook-f fa-fw"></i> .btn-facebook</a>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        lll
+
+                                    </div>
+
+
+                                </div>
+                            </div>  
+                            <div class="row text-center">
+                                <div class="float-lg-right float-right text#{$infix}-right" style="width: 100%">
+
+                                </div>
+
+                            </div>
+                            <br/><br/>
+                            <hr style="border: 2px solid orange;"/>
+                            <br/><br/>
+
+                        </div>
+
+
+                        <!-- /.container-fluid -->
+                    </p:column>
+
+                </div>
+
+                <br/><br/>
+                <!-- End of Main Content -->
+
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright © Your Website 2019</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End of Footer -->
+
+            </div>
+
+
+            <ui:include src="pages/sidebar.xhtml"/>
+
+        </div>
+
+
+
+
+
+
+
+
+
+        <!-- Bootstrap core JavaScript-->
+        <!--<script src="vendor/jquery/jquery.min.js"></script>-->
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Core plugin JavaScript-->
+        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+        <!-- Custom scripts for all pages-->
+        <script src="js/sb-admin-2.min.js"></script>
+
+        <!-- Page level plugins -->
+
+        <script src="js/js.js" type="text/javascript"></script>
+
+    </h:body>
+</html>
+
