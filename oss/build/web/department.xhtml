@@ -150,28 +150,30 @@
                                                 </p:column>
 
                                             </p:dataTable>
-                                            <p:dialog id="diallogDelete" resizable="false" header="Add Section" widgetVar="deleteD">
-                                                <h:panelGrid columns="2" cellpadding="5">
-
-                                                    <h:outputLabel for="del" value="هل انت متأكد من حذف #{departmentsManage.sectionSelected.name}" />
-
-
-                                                    <p:commandButton id="del" value="حذف" action="#{departmentsManage.deleteSection()}" update=":formOrganigram:organigram" oncomplete="PF('deleteD').hide();"/>
-
-                                                </h:panelGrid>
-                                            </p:dialog> 
-                                            
-                                            <p:commandButton value="اضافة قسم"  onclick="PF('dlg').show();" type="button" />
-                                            <p:spacer width="30px"/>
-                                            <p:commandButton value="حذف" onclick="PF('deleteD').show();" type="button"/>
-
                                         </h:form >
+                                        <h:form>
+                                        <p:dialog id="diallogDelete" resizable="false" header="Add Section" widgetVar="deleteD">
+                                            <h:panelGrid columns="2" cellpadding="5">
+
+                                                <h:outputLabel for="del" value="هل انت متأكد من حذف #{departmentsManage.sectionSelected.name}" />
+
+
+                                                <p:commandButton id="del" value="حذف" action="#{departmentsManage.deleteSection()}" update=":formOrganigram:organigram" oncomplete="PF('deleteD').hide();"/>
+
+                                            </h:panelGrid>
+                                        </p:dialog> 
+                                        </h:form>
+                                        <p:commandButton value="اضافة قسم"  onclick="PF('dlg').show();" type="button" />
+                                        <p:spacer width="30px"/>
+                                        <p:commandButton value="حذف" onclick="PF('deleteD').show();" type="button"/>
+
+
                                         <h:form id="dialog">
 
                                             <p:dialog id="DNewSection" resizable="false" header="Add Section" widgetVar="dlg">
 
                                                 <h:panelGrid columns="2" cellpadding="5">
-                                                    
+
                                                     <h:outputLabel for="name" value="Name:" />
                                                     <p:inputText id="name" label="name" value="#{departmentsManage.newSection.name}"/>
 
