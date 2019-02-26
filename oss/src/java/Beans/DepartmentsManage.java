@@ -110,6 +110,13 @@ public class DepartmentsManage implements Serializable {
         newSection = new Section();
 
     }
+    public void addSection(String id) {
+        newSection.setDepartmentId(id);
+        newSection.addToDB();
+        fiterdSections = GetFromDB.getSection();
+        newSection = new Section();
+
+    }
 
     public void deleteSection() {
         sectionSelected.deleteFromDB();

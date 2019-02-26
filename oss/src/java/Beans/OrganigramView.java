@@ -60,11 +60,15 @@ public class OrganigramView implements Serializable {
         
 
     }
+    
+    public List<Section> sectionsByID(){
+        return GetFromDB.getFsection(sessionLists.departmentSelected.id);
+    }
  
     protected OrganigramNode addDivision(OrganigramNode parent, String name, String... employees) {
         OrganigramNode divisionNode = new DefaultOrganigramNode("division", name, parent);
         divisionNode.setDroppable(true);
-        divisionNode.setDraggable(true);
+        divisionNode.setDraggable(false);
         divisionNode.setSelectable(false);
  
         if (employees != null) {

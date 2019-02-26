@@ -50,7 +50,7 @@
                                         <h6 class="m-0 font-weight-bold text-primary">Circle Buttons</h6>
                                     </div>
                                     <div class="card-body">
-                                        <h:form id="form">
+                                        <h:form id="formOrganigram">
 
                                             <style>
                                                 .ui-organigram .ui-organigram-node.division {
@@ -81,7 +81,7 @@
                                                           style="width: 100%;"
                                                           >
 
-                                                
+
 
                                                 <p:organigramNode>
                                                     <h:outputText value="#{node.data}" />
@@ -106,7 +106,7 @@
                                                 </p:organigramNode>
                                             </p:organigram>
 
-                                            
+
                                         </h:form>
                                     </div>
                                 </div>
@@ -119,20 +119,17 @@
                                     <div class="card-body">
                                         <h:form id="formSection">
                                             <h:head id="msgs"/>
-                                            <p:dataTable id="singleDT" var="section" value="#{departmentsManage.fiterdSections}"  editable="true" style="margin-bottom:20px"
-                                                         selectionMode="single" selection="#{departmentsManage.sectionSelected}" rowKey="#{section.id}">
+                                            <p:dataTable id="singleDT" var="section" value="#{organigramView.sectionsByID()}"  editable="true" style="margin-bottom:20px"
+                                                         selectionMode="single" dir="rtl" selection="#{departmentsManage.sectionSelected}" rowKey="#{section.id}">
 
                                                 <f:facet name="header">
-                                                    Row Editing
+                                                    اقسام الدائرة #{sessionLists.departmentSelected.nameA}
                                                 </f:facet>
 
                                                 <p:ajax event="rowEdit" listener="#{departmentsManage.onSectionEdit}" update=":formSection:msgs" />
                                                 <p:ajax event="rowEditCancel" listener="#{departmentsManage.onSectionCancel}" update=":formSection:msgs" />
-                                                <p:column style="width:10%;" headerText="تعديل">
-                                                    <p:rowEditor />
-                                                </p:column>
 
-                                                <p:ajax event="rowSelect" process="@this    " update="formSection:diallogDelete" listener="#{departmentsManage.onSectionSelected}"/>
+                                                <p:ajax event="rowSelect" process="@this" update="formSection:diallogDelete" listener="#{departmentsManage.onSectionSelected}"/>
                                                 <p:column headerText="الرقم">
                                                     <p:cellEditor disabled="true">
                                                         <f:facet name="output"><h:outputText value="#{section.id}" /></f:facet>
@@ -147,16 +144,11 @@
                                                     </p:cellEditor>
                                                 </p:column>
 
-                                                <p:column headerText="اسم الدارة">
-                                                    <p:cellEditor>
-                                                        <f:facet name="output"><h:outputText value="#{section.departmentNmae}" /></f:facet>
-                                                        <f:facet name="input">
-                                                            <h:selectOneMenu value="#{section.departmentId}" style="width:100%">
-                                                                <f:selectItems value="#{departmentsManage.allDepartment()}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}" />
-                                                            </h:selectOneMenu>
-                                                        </f:facet>
-                                                    </p:cellEditor>
+
+                                                <p:column style="width:10%;" headerText="تعديل">
+                                                    <p:rowEditor />
                                                 </p:column>
+
                                             </p:dataTable>
                                             <p:dialog id="diallogDelete" resizable="false" header="Add Section" widgetVar="deleteD">
                                                 <h:panelGrid columns="2" cellpadding="5">
@@ -164,12 +156,31 @@
                                                     <h:outputLabel for="del" value="هل انت متأكد من حذف #{departmentsManage.sectionSelected.name}" />
 
 
-                                                    <p:commandButton id="del" value="حذف" action="#{departmentsManage.deleteSection()}" update="formSection" oncomplete="PF('deleteD').hide();"/>
+                                                    <p:commandButton id="del" value="حذف" action="#{departmentsManage.deleteSection()}" update=":formOrganigram:organigram" oncomplete="PF('deleteD').hide();"/>
+
+                                                </h:panelGrid>
+                                            </p:dialog> 
+                                            
+                                            <p:commandButton value="اضافة قسم"  onclick="PF('dlg').show();" type="button" />
+                                            <p:spacer width="30px"/>
+                                            <p:commandButton value="حذف" onclick="PF('deleteD').show();" type="button"/>
+
+                                        </h:form >
+                                        <h:form id="dialog">
+
+                                            <p:dialog id="DNewSection" resizable="false" header="Add Section" widgetVar="dlg">
+
+                                                <h:panelGrid columns="2" cellpadding="5">
+                                                    
+                                                    <h:outputLabel for="name" value="Name:" />
+                                                    <p:inputText id="name" label="name" value="#{departmentsManage.newSection.name}"/>
+
+                                                    <p:commandButton value="Add" actionListener="#{departmentsManage.addSection(sessionLists.departmentSelected.id+'')}" update="@form :formSection :formOrganigram" oncomplete="PF('dlg').hide();"/>
 
                                                 </h:panelGrid>
                                             </p:dialog>  
 
-                                        </h:form >
+                                        </h:form>
 
                                     </div>
                                 </div>
@@ -226,7 +237,7 @@
                                                     <h:outputLabel for="del" value="هل انت متأكد من حذف #{departmentsManage.sectionSelected.name}" />
 
 
-                                                    <p:commandButton id="del" value="حذف" action="#{departmentsManage.deleteSection()}" update="formSection" oncomplete="PF('deleteD').hide();"/>
+                                                    <p:commandButton id="del" value="حذف" action="#{departmentsManage.deleteSection()}" update="formSection1" oncomplete="PF('deleteD').hide();"/>
 
                                                 </h:panelGrid>
                                             </p:dialog>  
