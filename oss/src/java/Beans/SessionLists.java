@@ -23,6 +23,7 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class SessionLists implements Serializable{
     Department departmentSelected;
+    Section sectionSelected;
     public SessionLists() {
         departmentSelected = new Department();
     }
@@ -33,6 +34,14 @@ public class SessionLists implements Serializable{
 
     public void setDepartmentSelected(Department departmentSelected) {
         this.departmentSelected = departmentSelected;
+    }
+
+    public Section getSectionSelected() {
+        return sectionSelected;
+    }
+
+    public void setSectionSelected(Section sectionSelected) {
+        this.sectionSelected = sectionSelected;
     }
     
     

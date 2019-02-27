@@ -7,8 +7,12 @@ package Data;
 
 import DB.DB;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -144,5 +148,123 @@ public class GetFromDB {
             System.out.println(e.getMessage());
         }
         return l;
+    }
+    
+    public static double getCostOfThisMonth() {
+
+        try {
+
+            DB db = new DB();
+            Calendar c = Calendar.getInstance();
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH) + 1;
+
+            String sql = "select sum(Cost) from decisions_department where Date between '" + year + "-" + month + "-" + "00' and '" + year + "-" + (month + 1) + "-" + "1';";
+
+            ResultSet r = db.read(sql);
+
+            while (r.next()) {
+
+                return r.getInt(1);
+            }
+
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return 0;
+    }
+    
+    
+    
+    
+    public static int[] getALLNumber(){
+        int[] all = new int[10];
+        try{
+            DB db = new DB();
+            String sql = "select count(Service_Citizen_ID) ,(select count(Service_Citizen_ID) from service_citizen where Status = 'done'),(select count(Service_Citizen_ID) from service_citizen where Status = 'view'),(select count(Service_Citizen_ID) from service_citizen where Status = 'notview'),(select count(Dep_ID) from department ),(select count(Sec_ID) from section ),(select count(Services_Provided_ID) from services_provided),(select count(Cit_ID) from citizen ),(select count(Service_Citizen_ID) from service_citizen),(select count(Emp_ID) from employees ) from service_citizen where Status = 'done' ;";
+            ResultSet r = db.read(sql);
+
+            while (r.next()) {
+                all[0] = r.getInt(1);
+                all[1] = r.getInt(2);
+                all[2] = r.getInt(3);
+                all[3] = r.getInt(4);
+                all[4] = r.getInt(5);
+                all[5] = r.getInt(6);
+                all[6] = r.getInt(7);
+                all[7] = r.getInt(8);
+                all[8] = r.getInt(9);
+                all[9] = r.getInt(10);
+                
+            }
+
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return all;
+    }
+    
+
+    public static Integer[] getNumberOfServicePerMonth() {
+
+        Integer[] months = new Integer[13];
+
+        try {
+
+            DB db = new DB();
+            Calendar c = Calendar.getInstance();
+            int year = c.get(Calendar.YEAR);
+            int currentMonth = c.get(Calendar.MONTH) + 1;
+
+            for (int i = 1; i <= currentMonth; i++) {
+                String sql = "select count(Services_Provided_ID) from decisions_department where Date  between '" + year + "-" + i + "-" + "00' and '" + year + "-" + (i + 1) + "-" + "1';";
+                ResultSet r = db.read(sql);
+                while (r.next()) {
+                    months[i] = r.getInt(1);
+                }
+            }
+
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return months;
+    }
+
+    
+   
+
+    public  static List<ServiceCount> getMore5ServiceRequest() {
+        List<ServiceCount> servicesCount = new ArrayList<ServiceCount>();
+        int i = 0;
+        int sum = 1;
+        try {
+
+            DB db = new DB();
+             String sql1 = "select sum(count) from service_count;";
+             ResultSet r1 = db.read(sql1);
+           while (r1.next()) {
+                 sum = r1.getInt(1);
+
+            }
+            System.out.println("aaaaaaaaa"+sum);
+            String sql = "select * from service_count order by count DESC LIMIT 5;";
+
+            ResultSet r = db.read(sql);
+
+            while (r.next()) {
+                servicesCount.add(new ServiceCount(r.getString(1), (r.getInt(2)/sum)*100));
+                
+                i++;
+
+            }
+
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return servicesCount;
+     
     }
 }

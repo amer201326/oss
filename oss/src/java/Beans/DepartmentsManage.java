@@ -5,16 +5,23 @@
  */
 package Beans;
 
+import DB.DB;
 import Data.Department;
 import Data.Employee;
 import Data.GetFromDB;
 import Data.JobTitel;
 import Data.Screen;
 import Data.Section;
+import Data.ServiceCount;
 import java.io.IOException;
 import java.io.Serializable;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -28,7 +35,8 @@ import org.primefaces.event.SelectEvent;
  */
 @ManagedBean
 public class DepartmentsManage implements Serializable {
-
+    
+    List<ServiceCount> servicesCount ;
     Department department;
     @ManagedProperty(value = "#{sessionLists}")
     SessionLists sessionLists;
@@ -37,7 +45,7 @@ public class DepartmentsManage implements Serializable {
     Section sectionSelected;
     List<Section> fiterdSections;
     List<JobTitel> jobTitels;
-    
+
     Section newSection;
     String imageD;
 
@@ -45,30 +53,35 @@ public class DepartmentsManage implements Serializable {
 
     List<Employee> employeeList;
     Employee newEmployee;
-    
+
     List<Screen> screen;
     Screen newScreen;
     String[] selectedScreens;
+    
+    int[] allParameter;
 
+  
+    
+    Integer[] servicePerMonth;
     public JobTitel j;
-    
+
     Department departmentEdit;
-    
 
     public DepartmentsManage() {
 
+        servicesCount = GetFromDB.getMore5ServiceRequest();
         department = new Department();
         sectionSelected = new Section();
         fiterdSections = GetFromDB.getSection();
         newSection = new Section();
         newEmployee = new Employee();
-        
+        servicePerMonth = GetFromDB.getNumberOfServicePerMonth();
         newJob = new JobTitel();
         jobTitels = GetFromDB.getJobTittle();
         departmentEdit = new Department();
         j = new JobTitel();
         
-        
+        allParameter = GetFromDB.getALLNumber();
     }
 
     public void addDepartment() {
@@ -90,12 +103,12 @@ public class DepartmentsManage implements Serializable {
 
     }
 
-    public void showDepartment(Department d) throws IOException{
+    public void showDepartment(Department d) throws IOException {
         System.out.println("go");
         sessionLists.departmentSelected = d;
         FacesContext.getCurrentInstance().getExternalContext().redirect("department.xhtml");
     }
-    
+
     public JobTitel getNewJob() {
         return newJob;
     }
@@ -110,6 +123,7 @@ public class DepartmentsManage implements Serializable {
         newSection = new Section();
 
     }
+
     public void addSection(String id) {
         newSection.setDepartmentId(id);
         newSection.addToDB();
@@ -119,8 +133,8 @@ public class DepartmentsManage implements Serializable {
     }
 
     public void deleteSection() {
-        sectionSelected.deleteFromDB();
-        fiterdSections.remove(sectionSelected);
+        sessionLists.sectionSelected.deleteFromDB();
+        fiterdSections.remove(sessionLists.sectionSelected);
     }
 
     public SessionLists getSessionLists() {
@@ -215,7 +229,7 @@ public class DepartmentsManage implements Serializable {
 
     public void onSectionSelected(SelectEvent event) {
         System.out.println("form al ajax " + ((Section) event.getObject()).getId());
-        sectionSelected = (Section) event.getObject();
+        sessionLists.sectionSelected = (Section) event.getObject();
     }
 
     public void onJobSelected(SelectEvent event) {
@@ -306,7 +320,61 @@ public class DepartmentsManage implements Serializable {
     public void setNewScreen(Screen newScreen) {
         this.newScreen = newScreen;
     }
+
+    public String[] getSelectedScreens() {
+        return selectedScreens;
+    }
+
+    public void setSelectedScreens(String[] selectedScreens) {
+        this.selectedScreens = selectedScreens;
+    }
+
+    //////////////////////
+    public double costOfThisMonth() {
+        return GetFromDB.getCostOfThisMonth();
+    }
+
+    
+    
+   
+    
+    public Integer[] numberOfServicePerMonth() {
+
+        return GetFromDB.getNumberOfServicePerMonth();
+    }
     
     
     
+
+    public int[] getAllParameter() {
+        return allParameter;
+    }
+
+    public void setAllParameter(int[] allParameter) {
+        this.allParameter = allParameter;
+    }
+
+    public List<ServiceCount> getServicesCount() {
+        return servicesCount;
+    }
+
+    public void setServicesCount(List<ServiceCount> servicesCount) {
+        this.servicesCount = servicesCount;
+    }
+    
+    
+
+    public Integer[] getServicePerMonth() {
+        return servicePerMonth;
+    }
+
+    public void setServicePerMonth(Integer[] servicePerMonth) {
+        this.servicePerMonth = servicePerMonth;
+    }
+
+    
+
+   
+    
+
 }
