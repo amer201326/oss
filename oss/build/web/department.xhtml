@@ -129,7 +129,7 @@
                                                 <p:ajax event="rowEdit" listener="#{departmentsManage.onSectionEdit}" update=":formSection:msgs" />
                                                 <p:ajax event="rowEditCancel" listener="#{departmentsManage.onSectionCancel}" update=":formSection:msgs" />
 
-                                                <p:ajax event="rowSelect" process="@this" update="formSection:diallogDelete" listener="#{departmentsManage.onSectionSelected}"/>
+                                                <p:ajax event="rowSelect" process="@this" update=":formDelete:diallogDelete" listener="#{departmentsManage.onSectionSelected}"/>
                                                 <p:column headerText="الرقم">
                                                     <p:cellEditor disabled="true">
                                                         <f:facet name="output"><h:outputText value="#{section.id}" /></f:facet>
@@ -151,14 +151,15 @@
 
                                             </p:dataTable>
                                         </h:form >
-                                        <h:form>
+                                        <h:form id="formDelete">
                                         <p:dialog id="diallogDelete" resizable="false" header="Add Section" widgetVar="deleteD">
                                             <h:panelGrid columns="2" cellpadding="5">
 
                                                 <h:outputLabel for="del" value="هل انت متأكد من حذف #{departmentsManage.sectionSelected.name}" />
 
 
-                                                <p:commandButton id="del" value="حذف" action="#{departmentsManage.deleteSection()}" update=":formOrganigram:organigram" oncomplete="PF('deleteD').hide();"/>
+                                                <p:commandButton id="del" value="حذف" action="#{departmentsManage.deleteSection()}"
+                                                                 update="@form :formSection :formOrganigram" oncomplete="PF('deleteD').hide();"/>
 
                                             </h:panelGrid>
                                         </p:dialog> 
@@ -177,7 +178,8 @@
                                                     <h:outputLabel for="name" value="Name:" />
                                                     <p:inputText id="name" label="name" value="#{departmentsManage.newSection.name}"/>
 
-                                                    <p:commandButton value="Add" actionListener="#{departmentsManage.addSection(sessionLists.departmentSelected.id+'')}" update="@form :formSection :formOrganigram" oncomplete="PF('dlg').hide();"/>
+                                                    <p:commandButton value="Add" actionListener="#{departmentsManage.addSection(sessionLists.departmentSelected.id+'')}"
+                                                                     update="@form :formSection :formOrganigram" oncomplete="PF('dlg').hide();"/>
 
                                                 </h:panelGrid>
                                             </p:dialog>  
@@ -186,68 +188,7 @@
 
                                     </div>
                                 </div>
-                                <br/><br/>
-                                <div class="card shadow mb-4">
-                                    <div class="card-header py-3">
-                                        <h6 class="m-0 font-weight-bold text-primary">Service of each department</h6>
-                                    </div>
-                                    <div class="card-body">
-                                        <h:form id="formSection1">
-                                            <h:head id="msgs1"/>
-                                            <p:dataTable id="singleDT" var="section" value="#{departmentsManage.fiterdSections}"  editable="true" style="margin-bottom:20px"
-                                                         selectionMode="single" selection="#{departmentsManage.sectionSelected}" rowKey="#{section.id}">
-
-                                                <f:facet name="header">
-                                                    Row Editing
-                                                </f:facet>
-
-                                                <p:ajax event="rowEdit" listener="#{departmentsManage.onSectionEdit}" update=":formSection1:msgs1" />
-                                                <p:ajax event="rowEditCancel" listener="#{departmentsManage.onSectionCancel}" update=":formSection1:msgs1" />
-                                                <p:column style="width:10%;" headerText="تعديل">
-                                                    <p:rowEditor />
-                                                </p:column>
-
-                                                <p:ajax event="rowSelect" process="@this    " update="formSection:diallogDelete" listener="#{departmentsManage.onSectionSelected}"/>
-                                                <p:column headerText="الرقم">
-                                                    <p:cellEditor disabled="true">
-                                                        <f:facet name="output"><h:outputText value="#{section.id}" /></f:facet>
-                                                        <f:facet name="input"><p:inputText id="modelInput" value="#{section.id}" style="width:100%"/></f:facet>
-                                                    </p:cellEditor>
-                                                </p:column>
-
-                                                <p:column headerText="اسم القسم">
-                                                    <p:cellEditor>
-                                                        <f:facet name="output"><h:outputText value="#{section.name}" /></f:facet>
-                                                        <f:facet name="input"><p:inputText value="#{section.name}" style="width:100%" label="Year"/></f:facet>
-                                                    </p:cellEditor>
-                                                </p:column>
-
-                                                <p:column headerText="اسم الدارة">
-                                                    <p:cellEditor>
-                                                        <f:facet name="output"><h:outputText value="#{section.departmentNmae}" /></f:facet>
-                                                        <f:facet name="input">
-                                                            <h:selectOneMenu value="#{section.departmentId}" style="width:100%">
-                                                                <f:selectItems value="#{departmentsManage.allDepartment()}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}" />
-                                                            </h:selectOneMenu>
-                                                        </f:facet>
-                                                    </p:cellEditor>
-                                                </p:column>
-                                            </p:dataTable>
-                                            <p:dialog id="diallogDelete" resizable="false" header="Add Section" widgetVar="deleteD">
-                                                <h:panelGrid columns="2" cellpadding="5">
-
-                                                    <h:outputLabel for="del" value="هل انت متأكد من حذف #{departmentsManage.sectionSelected.name}" />
-
-
-                                                    <p:commandButton id="del" value="حذف" action="#{departmentsManage.deleteSection()}" update="formSection1" oncomplete="PF('deleteD').hide();"/>
-
-                                                </h:panelGrid>
-                                            </p:dialog>  
-
-                                        </h:form >
-
-                                    </div>
-                                </div>
+                               
 
                             </div>
 

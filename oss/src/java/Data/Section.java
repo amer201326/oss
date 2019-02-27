@@ -101,6 +101,7 @@ public class Section implements Serializable{
     public void deleteFromDB(){
         
         String  q = "DELETE FROM section WHERE (Sec_ID = "+id+")";
+        System.out.println(q);
          try {
             DB data = new DB();
             data.write(q);
