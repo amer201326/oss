@@ -132,23 +132,7 @@ public class GetFromDB {
     
     
     
-    public static List<Employee> getEmployees() {
-       List<Employee> l = new ArrayList<>();
-        Employee s ;
-        try {
-            DB db = new DB();
-            String sql = "select * from employees ;";
-            
-            ResultSet r = db.read(sql);
-            while (r.next()) {
-                s = new Employee(r.getInt(1),r.getInt(2),r.getString(3),r.getString(4),r.getString(5));
-                l.add(s);
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        return l;
-    }
+    
     
     public static double getCostOfThisMonth() {
 
@@ -267,4 +251,27 @@ public class GetFromDB {
         return servicesCount;
      
     }
+
+    public static List<JobTitel> getJobTittle(String id) {
+        JobTitel d = new JobTitel();
+        
+        List<JobTitel> job = new ArrayList<JobTitel>();
+        try {
+            DB db = new DB();
+            
+            String sql = "SELECT * FROM jobtitle where Job_ID in( select Job_ID from  job_of_section where Sec_ID ="+id+");";
+            System.out.println(sql);
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                d = new JobTitel(r.getInt(1),r.getString(2));
+                job.add(d);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return job;
+
+
+    }
+    
 }

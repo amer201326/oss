@@ -35,8 +35,8 @@ import org.primefaces.event.SelectEvent;
  */
 @ManagedBean
 public class DepartmentsManage implements Serializable {
-    
-    List<ServiceCount> servicesCount ;
+
+    List<ServiceCount> servicesCount;
     Department department;
     @ManagedProperty(value = "#{sessionLists}")
     SessionLists sessionLists;
@@ -57,11 +57,9 @@ public class DepartmentsManage implements Serializable {
     List<Screen> screen;
     Screen newScreen;
     String[] selectedScreens;
-    
+
     int[] allParameter;
 
-  
-    
     Integer[] servicePerMonth;
     public JobTitel j;
 
@@ -80,7 +78,7 @@ public class DepartmentsManage implements Serializable {
         jobTitels = GetFromDB.getJobTittle();
         departmentEdit = new Department();
         j = new JobTitel();
-        
+
         allParameter = GetFromDB.getALLNumber();
     }
 
@@ -170,7 +168,7 @@ public class DepartmentsManage implements Serializable {
     }
 
     public void setSectionSelected(Section sectionSelected) {
-        print(sectionSelected.toString());
+
         this.sectionSelected = sectionSelected;
     }
 
@@ -334,17 +332,10 @@ public class DepartmentsManage implements Serializable {
         return GetFromDB.getCostOfThisMonth();
     }
 
-    
-    
-   
-    
     public Integer[] numberOfServicePerMonth() {
 
         return GetFromDB.getNumberOfServicePerMonth();
     }
-    
-    
-    
 
     public int[] getAllParameter() {
         return allParameter;
@@ -361,8 +352,6 @@ public class DepartmentsManage implements Serializable {
     public void setServicesCount(List<ServiceCount> servicesCount) {
         this.servicesCount = servicesCount;
     }
-    
-    
 
     public Integer[] getServicePerMonth() {
         return servicePerMonth;
@@ -372,9 +361,20 @@ public class DepartmentsManage implements Serializable {
         this.servicePerMonth = servicePerMonth;
     }
 
-    
+    public void putSectionSelectedToSession(Section s) {
+        System.out.println(s.getName());
+    }
 
-   
-    
+    public void gotToSection() {
+        sessionLists.sectionSelected = sectionSelected;
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>.........>>>>>>>>>>>>>>>>>>>>>>>>> > > >  " + sectionSelected.getName());
+        System.out.println(sessionLists.sectionSelected.getId());
+        try {
+
+            FacesContext.getCurrentInstance().getExternalContext().redirect("section.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(DepartmentsManage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
 }

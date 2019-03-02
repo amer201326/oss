@@ -87,7 +87,7 @@
                                 <h:form id="formSection">
                                     <h:head id="msgs"/>
                                     <p:dataTable id="singleDT" var="section" value="#{departmentsManage.fiterdSections}"  editable="true" style="margin-bottom:20px"
-                                                 selectionMode="single" selection="#{departmentsManage.sectionSelected}" rowKey="#{section.id}">
+                                                 selectionMode="single" dir="rtl" selection="#{departmentsManage.sectionSelected}" rowKey="#{section.id}">
 
                                         <f:facet name="header">
                                             Row Editing
@@ -95,10 +95,8 @@
 
                                         <p:ajax event="rowEdit" listener="#{departmentsManage.onSectionEdit}" update=":formSection:msgs" />
                                         <p:ajax event="rowEditCancel" listener="#{departmentsManage.onSectionCancel}" update=":formSection:msgs" />
-                                        <p:column style="width:10%;" headerText="تعديل">
-                                            <p:rowEditor />
-                                        </p:column>
-                                        
+
+
                                         <p:ajax event="rowSelect" process="@this    " update="formSection:diallogDelete" listener="#{departmentsManage.onSectionSelected}"/>
                                         <p:column headerText="الرقم">
                                             <p:cellEditor disabled="true">
@@ -124,8 +122,14 @@
                                                 </f:facet>
                                             </p:cellEditor>
                                         </p:column>
+
+                                        <p:column style="width:10%;" headerText="تعديل">
+                                            <p:rowEditor />
+                                        </p:column>
+
+
                                     </p:dataTable>
-                                     <p:dialog id="diallogDelete" resizable="false" header="Add Section" widgetVar="deleteD">
+                                    <p:dialog id="diallogDelete" resizable="false" header="Add Section" widgetVar="deleteD">
                                         <h:panelGrid columns="2" cellpadding="5">
 
                                             <h:outputLabel for="del" value="هل انت متأكد من حذف #{departmentsManage.sectionSelected.name}" />
@@ -135,12 +139,17 @@
 
                                         </h:panelGrid>
                                     </p:dialog>  
+                                    <p:commandButton value="فتح" actionListener="#{departmentsManage.gotToSection()}"  />
 
                                 </h:form >
-                                <p:commandButton value="اضافة قسم" onclick="PF('dlg').show();" type="button" />
-                                <p:spacer width="30px"/>
-                                <p:commandButton value="حذف" onclick="PF('deleteD').show();" type="button"/>
+                                <div class="text#{$infix}-left col-md-6">
+                                    <p:commandButton value="حذف" onclick="PF('deleteD').show();" type="button"/>
+                                </div>
+                                <div class="text#{$infix}-right col-md-6" style="width: 100%;">
 
+                                    <p:commandButton value="اضافة قسم" onclick="PF('dlg').show();" type="button" />
+                                    <p:spacer width="30px"/>
+                                </div>
                                 <h:form id="dialog">
 
                                     <p:dialog id="DNewSection" resizable="false" header="Add Section" widgetVar="dlg">

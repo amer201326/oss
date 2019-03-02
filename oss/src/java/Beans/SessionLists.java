@@ -7,6 +7,7 @@ package Beans;
 
 import Data.Department;
 import Data.GetFromDB;
+import Data.JobTitel;
 import Data.Section;
 import Data.SectionPath;
 import Data.Service;
@@ -24,8 +25,12 @@ import javax.faces.bean.SessionScoped;
 public class SessionLists implements Serializable{
     Department departmentSelected;
     Section sectionSelected;
+    JobTitel jobSelected;
+    
     public SessionLists() {
         departmentSelected = new Department();
+        sectionSelected = new Section();
+        jobSelected = new JobTitel();
     }
 
     public Department getDepartmentSelected() {
