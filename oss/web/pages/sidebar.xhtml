@@ -13,7 +13,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active float-right">
-        <a class="nav-link float-right" href="index.html">
+        <a class="nav-link float-right" href="index.xhtml">
             <i class="fas fa-fw fa-tachometer-alt " ></i>
 
             <span >الرئيسية</span>          
@@ -83,9 +83,17 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>الموظفين</span></a>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsethree" aria-expanded="true" aria-controls="collapsethree">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>الموظفين</span>
+        </a>
+        <div id="collapsethree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">ادارة الموظفين</h6>
+                <a class="collapse-item" href="employee.xhtml">اضافة موظف</a>
+                <a class="collapse-item" href="cards.html"><i class="fa fa-plusfa fa-plus">اضافة خدمة</i></a>
+            </div>
+        </div>
     </li>
 
     <!-- Divider -->

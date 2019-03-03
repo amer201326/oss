@@ -1,8 +1,9 @@
 package Beans;
 
-
 import Data.Department;
+import Data.Employee;
 import Data.GetFromDB;
+import Data.JobTitel;
 import Data.Section;
 import java.io.Serializable;
 import java.util.List;
@@ -23,54 +24,76 @@ import org.primefaces.model.OrganigramNode;
 @ManagedBean
 @ViewScoped
 public class OrganigramView implements Serializable {
- 
+
     @ManagedProperty(value = "#{sessionLists}")
     SessionLists sessionLists;
-    
+
     private OrganigramNode rootNode;
     private OrganigramNode selection;
- 
+
     private boolean zoom = false;
     private String style = "width: 800px";
     private int leafNodeConnectorHeight = 0;
     private boolean autoScrollToSelection = false;
- 
+
     private String employeeName;
- 
+
     @PostConstruct
     public void init() {
-        
+
         Department d = sessionLists.departmentSelected;
         selection = new DefaultOrganigramNode(null, "Ridvan Agar", null);
- 
-        rootNode = new DefaultOrganigramNode("root", d.nameA, null);
+
+        rootNode = new DefaultOrganigramNode("root", "دائرة : " + d.nameA, null);
         rootNode.setCollapsible(true);
         rootNode.setDroppable(true);
         rootNode.setSelectable(false);
-        
+
         List<Section> sec = GetFromDB.getFsection(d.id);
         String p[] = new String[sec.size()];
-        
+
         for (int i = 0; i < p.length; i++) {
-            p[i] = sec.get(i).getName();
-            OrganigramNode softwareDevelopment = addDivision(rootNode, p[i]);
+            Section s = sec.get(i);
+
+            OrganigramNode rootNodee2 = new DefaultOrganigramNode("root", "قسم : " + s.getName(), null);
+            rootNode.getChildren().add(rootNodee2);
+
+            try {
+                List<JobTitel> jobs = GetFromDB.getJobTittle(s.getId());
+                for (int j = 0; j < jobs.size(); j++) {
+                    JobTitel get = jobs.get(j);
+                    List<Employee> emp = GetFromDB.GetEmployeeForJobID(get.getId());
+                    String[] empName = new String[emp.size()];
+                    OrganigramNode divisionNode = addDivision(rootNodee2, get.getName());
+                    for (int k = 0; k < emp.size(); k++) {
+                        Employee get1 = emp.get(k);
+                        empName[k] = get1.getEmp_name();
+                        OrganigramNode employeeNode = new DefaultOrganigramNode("employee", empName[k], divisionNode);
+                        employeeNode.setDraggable(true);
+                        employeeNode.setSelectable(true);
+
+                    }
+
+                }
+
+            } catch (Exception e) {
+                break;
+            }
+
         }
-        
-        
-        
 
     }
-    
-    public List<Section> sectionsByID(){
+
+    public List<Section> sectionsByID() {
         return GetFromDB.getFsection(sessionLists.departmentSelected.id);
     }
- 
+
     protected OrganigramNode addDivision(OrganigramNode parent, String name, String... employees) {
         OrganigramNode divisionNode = new DefaultOrganigramNode("division", name, parent);
         divisionNode.setDroppable(true);
         divisionNode.setDraggable(false);
         divisionNode.setSelectable(false);
- 
+
         if (employees != null) {
             for (String employee : employees) {
                 OrganigramNode employeeNode = new DefaultOrganigramNode("employee", employee, divisionNode);
@@ -78,122 +101,122 @@ public class OrganigramView implements Serializable {
                 employeeNode.setSelectable(true);
             }
         }
- 
+
         return divisionNode;
     }
- 
+
     public void nodeDragDropListener(OrganigramNodeDragDropEvent event) {
         FacesMessage message = new FacesMessage();
         message.setSummary("Node '" + event.getOrganigramNode().getData() + "' moved from " + event.getSourceOrganigramNode().getData() + " to '" + event.getTargetOrganigramNode().getData() + "'");
         message.setSeverity(FacesMessage.SEVERITY_INFO);
- 
+
         //FacesContext.getCurrentInstance().addMessage(null, message);
     }
- 
+
     public void nodeSelectListener(OrganigramNodeSelectEvent event) {
         FacesMessage message = new FacesMessage();
         message.setSummary("Node '" + event.getOrganigramNode().getData() + "' selected.");
         message.setSeverity(FacesMessage.SEVERITY_INFO);
- 
+
         //FacesContext.getCurrentInstance().addMessage(null, message);
     }
- 
+
     public void nodeCollapseListener(OrganigramNodeCollapseEvent event) {
         FacesMessage message = new FacesMessage();
         message.setSummary("Node '" + event.getOrganigramNode().getData() + "' collapsed.");
         message.setSeverity(FacesMessage.SEVERITY_INFO);
- 
+
         //FacesContext.getCurrentInstance().addMessage(null, message);
     }
- 
+
     public void nodeExpandListener(OrganigramNodeExpandEvent event) {
         FacesMessage message = new FacesMessage();
         message.setSummary("Node '" + event.getOrganigramNode().getData() + "' expanded.");
         message.setSeverity(FacesMessage.SEVERITY_INFO);
- 
+
         //FacesContext.getCurrentInstance().addMessage(null, message);
     }
- 
+
     public void removeDivision() {
         // re-evaluate selection - might be a differenct object instance if viewstate serialization is enabled
         OrganigramNode currentSelection = OrganigramHelper.findTreeNode(rootNode, selection);
         setMessage(currentSelection.getData() + " will entfernt werden.", FacesMessage.SEVERITY_INFO);
     }
- 
+
     public void removeEmployee() {
         // re-evaluate selection - might be a differenct object instance if viewstate serialization is enabled
         OrganigramNode currentSelection = OrganigramHelper.findTreeNode(rootNode, selection);
         currentSelection.getParent().getChildren().remove(currentSelection);
     }
- 
+
     public void addEmployee() {
         // re-evaluate selection - might be a differenct object instance if viewstate serialization is enabled
         OrganigramNode currentSelection = OrganigramHelper.findTreeNode(rootNode, selection);
- 
+
         OrganigramNode employee = new DefaultOrganigramNode("employee", employeeName, currentSelection);
         employee.setDraggable(true);
         employee.setSelectable(true);
     }
- 
+
     private void setMessage(String msg, FacesMessage.Severity severity) {
         FacesMessage message = new FacesMessage();
         message.setSummary(msg);
         message.setSeverity(severity);
         //FacesContext.getCurrentInstance().addMessage(null, message);
     }
- 
+
     public OrganigramNode getRootNode() {
         return rootNode;
     }
- 
+
     public void setRootNode(OrganigramNode rootNode) {
         this.rootNode = rootNode;
     }
- 
+
     public OrganigramNode getSelection() {
         return selection;
     }
- 
+
     public void setSelection(OrganigramNode selection) {
         this.selection = selection;
     }
- 
+
     public boolean isZoom() {
         return zoom;
     }
- 
+
     public void setZoom(boolean zoom) {
         this.zoom = zoom;
     }
- 
+
     public String getEmployeeName() {
         return employeeName;
     }
- 
+
     public void setEmployeeName(String employeeName) {
         this.employeeName = employeeName;
     }
- 
+
     public String getStyle() {
         return style;
     }
- 
+
     public void setStyle(String style) {
         this.style = style;
     }
- 
+
     public int getLeafNodeConnectorHeight() {
         return leafNodeConnectorHeight;
     }
- 
+
     public void setLeafNodeConnectorHeight(int leafNodeConnectorHeight) {
         this.leafNodeConnectorHeight = leafNodeConnectorHeight;
     }
- 
+
     public boolean isAutoScrollToSelection() {
         return autoScrollToSelection;
     }
- 
+
     public void setAutoScrollToSelection(boolean autoScrollToSelection) {
         this.autoScrollToSelection = autoScrollToSelection;
     }
@@ -205,8 +228,5 @@ public class OrganigramView implements Serializable {
     public void setSessionLists(SessionLists sessionLists) {
         this.sessionLists = sessionLists;
     }
-    
-    
-    
-    
+
 }

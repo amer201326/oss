@@ -24,23 +24,23 @@
 
     </h:head>
     <h:body id="page-top">
-       
-
-            <!-- Page Wrapper -->
-            <div id="wrapper">
-                <!-- Sidebar -->
-
-                <div id="content-wrapper" class="d-flex flex-column">
 
 
-                    <!-- Main Content -->
-                    <div id="content" style="margin: 15px 15px 15px 15px;">
+        <!-- Page Wrapper -->
+        <div id="wrapper">
+            <!-- Sidebar -->
 
-                        <!-- Topbar -->
-                        <ui:include src="pages/heder.xhtml"/>
-                        <!-- End of Topbar -->
-                        <p:column id="contentPage">
-                            <h:form id="myForm">
+            <div id="content-wrapper" class="d-flex flex-column">
+
+
+                <!-- Main Content -->
+                <div id="content" style="margin: 15px 15px 15px 15px;">
+
+                    <!-- Topbar -->
+                    <ui:include src="pages/heder.xhtml"/>
+                    <!-- End of Topbar -->
+                    <p:column id="contentPage">
+                        <h:form id="formAddEmployee">
                             <div id="conts">
                                 <div class="row">
                                     <div class="col-lg-12 text-center">
@@ -61,7 +61,8 @@
                                                         <div class="my-2"></div>
                                                         <div class="form-group row">
                                                             <div class="col-sm-6 mb-3 mb-sm-0">
-                                                                <p:inputText value="#{departmentsManage.newEmployee.emp_username}" class="form-control form-control-user" style="text-align:right;" type="text" required="true"/>
+                                                                <!--  <p:inputText value="" class="form-control form-control-user" style="text-align:right;" type="text" required="true"/> -->
+                                                                <p:inputText value="" class="form-control form-control-user" style="text-align:right;" type="text" required="true"/>
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <p:outputLabel class="label" value="*اسم المستخدم"/>
@@ -71,7 +72,8 @@
                                                         <div class="my-2"></div>
                                                         <div class="form-group row">
                                                             <div class="col-sm-6 mb-3 mb-sm-0">
-                                                                <p:password value="#{departmentsManage.newEmployee.emp_password}" class="form-control" style="text-align:right;" id="password" feedback="true" inline="true" required="true"/>
+                                                                <!-- <p:password value="" class="form-control" style="text-align:right;" id="password" feedback="true" inline="true" required="true"/> -->
+                                                                <p:password value="" class="form-control" style="text-align:right;" id="password" feedback="true" inline="true" required="true"/> 
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <p:outputLabel class="label" value="*كلمة المرور"/>
@@ -96,41 +98,38 @@
                                                         <h6 class="m-0 font-weight-bold text-primary">Permissions</h6>
                                                     </div>
 
-                                                    <div class="card-body">
-                                                        <div class="my-2"></div>
 
-                                                        <p:selectManyCheckbox class="form-control-user" style="text-align:right;" id="grid" value="#{employeeManage.screen}" layout="grid" columns="3">
+                                                    <div class="my-2"></div>
 
-                                                            <f:selectItems value="#{employeeManage.screen}" var="emp" itemLabel="#{emp.screenName}" itemValue="#{emp.screenId}" />
+                                                    <p:selectManyCheckbox class="form-control-user" style="text-align:right;" id="grid" value="#{employeeManage.screen}" layout="grid" columns="3">
 
-                                                        </p:selectManyCheckbox>
+                                                        <f:selectItems value="#{employeeManage.screen}" var="emp" itemLabel="#{emp.screenName}" itemValue="#{emp.screenId}" />
 
-                                                    </div>
+                                                    </p:selectManyCheckbox>
+
+                                                    <div class="my-2"></div>
                                                 </div>
 
 
 
 
-                                                <div> <!--BUTTONS-->
-                                                    <!-- <div class="card-header py-3">
-                                                         <h6 class="m-0 font-weight-bold text-primary">Hola</h6>
-                                                     </div>-->
+                                                <div> 
 
                                                     <div>
 
                                                         <br/><p:separator/><br/>
                                                         <div class="my-2"></div>
                                                         <div >
-                                                            
-                                                                <p:commandButton value=" Reset إعادة تعيين" immediate="true" ajax="false" style="margin-right:20px;"  styleClass="ui-priority-primary">
-                                                                    <p:resetInput target="myForm" />
-                                                                    <f:ajax />
-                                                                </p:commandButton>
 
-                                                                <p:commandButton actionListener="#{departmentsManage.addEmployee()}" value="إضافة موظف" id="add_emp" update="@form" style="margin-right:20px;" styleClass="ui-priority-primary">
-                                                                    <f:ajax />
-                                                                </p:commandButton>
-                                                            
+                                                            <p:commandButton value=" Reset إعادة تعيين" immediate="true" ajax="false" style="margin-right:20px;"  styleClass="ui-priority-primary">
+                                                                <p:resetInput target="formAddEmployee" />
+                                                                <f:ajax />
+                                                            </p:commandButton>
+
+                                                            <p:commandButton actionListener="#{employeeManage.addEmployee()}" value="إضافة موظف" id="add_emp" update="@form" style="margin-right:20px;" styleClass="ui-priority-primary">
+                                                                <f:ajax />
+                                                            </p:commandButton>
+
                                                         </div>
 
 
@@ -164,11 +163,11 @@
                                                         <div class="form-group row" >
 
                                                             <div class="col-sm-6">
-                                                                <p:inputMask placeholder="*رقم الهوية" class="form-control form-control-user" style="text-align:right;" type="text" mask="9 9999999 9" value="#{departmentsManage.newEmployee.emp_idCard}" required="true"/>
+                                                                <p:inputMask placeholder="*رقم الهوية" class="form-control form-control-user" style="text-align:right;" type="text" mask="9 9999999 9" value="#{employeeManage.newEmployee.emp_idCard}" required="true"/>
                                                             </div>
                                                             <div class="col-sm-6 mb-3 mb-sm-0">
 
-                                                                <p:inputText placeholder="*الاسم الكامل" class="form-control form-control-user" style="text-align:right;" id="exampleFirstName" type="text" value="#{departmentsManage.newEmployee.emp_name}" required="true"/>
+                                                                <p:inputText placeholder="*الاسم الكامل" class="form-control form-control-user" style="text-align:right;" id="exampleFirstName" type="text" value="#{employeeManage.newEmployee.emp_name}" required="true"/>
                                                             </div>
                                                         </div>
 
@@ -176,10 +175,10 @@
                                                             <div class="col-sm-6 mb-3 mb-sm-0">
 
 
-                                                                <p:inputMask placeholder="*الجوال" class="form-control form-control-user" style="text-align:right;" type="text" mask="999-999-9999" value="#{departmentsManage.newEmployee.emp_mobile}" required="true"/>
+                                                                <p:inputMask placeholder="*الجوال" class="form-control form-control-user" style="text-align:right;" type="text" mask="999-999-9999" value="#{employeeManage.newEmployee.emp_mobile}" required="true"/>
                                                             </div>
                                                             <div class="col-sm-6">
-                                                                <p:inputMask placeholder="التلفون" class="form-control form-control-user" style="text-align:right;" type="text" value="#{departmentsManage.newEmployee.emp_tel}" mask="99-9999-999"/>
+                                                                <p:inputMask placeholder="التلفون" class="form-control form-control-user" style="text-align:right;" type="text" value="#{employeeManage.newEmployee.emp_tel}" mask="99-9999-999"/>
                                                             </div>
                                                         </div>
 
@@ -189,7 +188,7 @@
 
                                                                 <div  style="float:right;">
                                                                     <h:panelGrid columns="2" cellpadding="5" class="mytable">
-                                                                        <p:selectOneRadio value="#{departmentsManage.newEmployee.emp_gender}" id="gender" class="label1">
+                                                                        <p:selectOneRadio value="#{employeeManage.newEmployee.emp_gender}" id="gender" class="label1">
                                                                             <f:selectItem itemLabel="ذكر" itemValue="M" />
                                                                             <f:selectItem  itemLabel="أنثى" itemValue="F" />
                                                                         </p:selectOneRadio>
@@ -197,13 +196,13 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-6">
-                                                                <p:inputText placeholder="*البريد الإلكتروني" class="form-control form-control-user" style="text-align:right;" type="email" value="#{departmentsManage.newEmployee.emp_email}" required="true"/>
+                                                                <p:inputText placeholder="*البريد الإلكتروني" class="form-control form-control-user" style="text-align:right;" type="email" value="#{employeeManage.newEmployee.emp_email}" required="true"/>
                                                             </div>
                                                         </div>
 
                                                         <div class="form-group row">
                                                             <div class="col-sm-6 mb-3 mb-sm-0">
-                                                                <p:inputMask placeholder="YYYY-MM-DD" mask="9999-99-99" class="form-control form-control-user" style="text-align:right;" type="text" value="#{departmentsManage.newEmployee.emp_birth}" required="true"/>
+                                                                <p:inputMask placeholder="YYYY-MM-DD" mask="9999-99-99" class="form-control form-control-user" style="text-align:right;" type="text" value="#{employeeManage.newEmployee.emp_birth}" required="true"/>
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <p:outputLabel class="label" value="*تاريخ الميلاد"/>
@@ -212,7 +211,7 @@
 
                                                         <div class="form-group row">
                                                             <div class="col-sm-6 mb-3 mb-sm-0">
-                                                                <p:inputMask mask="9999-99-99" class="form-control form-control-user" style="text-align:right;" placeholder="YYYY-MM-DD" value="#{departmentsManage.newEmployee.emp_EndDate}" type="text"/>
+                                                                <p:inputMask mask="9999-99-99" class="form-control form-control-user" style="text-align:right;" placeholder="YYYY-MM-DD" value="#{employeeManage.newEmployee.emp_EndDate}" type="text"/>
 
                                                             </div>
                                                             <div class="col-sm-6">
@@ -222,7 +221,7 @@
 
                                                         <div class="form-group row">
                                                             <div class="col-sm-6 mb-3 mb-sm-0">
-                                                                <p:inputMask mask="9999-99-99" class="form-control form-control-user" style="text-align:right;" placeholder="YYYY-MM-DD" value="#{departmentsManage.newEmployee.emp_StartDate}" type="text" required="true"/>                                                            
+                                                                <p:inputMask mask="9999-99-99" class="form-control form-control-user" style="text-align:right;" placeholder="YYYY-MM-DD" value="#{employeeManage.newEmployee.emp_StartDate}" type="text" required="true"/>                                                            
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <p:outputLabel class="label" value="*تاريخ البدء"/>
@@ -240,10 +239,11 @@
 
                                                         <div class="form-group row">
                                                             <div class="col-sm-6">
-                                                                <h:selectOneMenu id="dep_id" value="#{departmentsManage.newEmployee.dep_id}" class="form-control form-control-user" style="text-align:right;"   required="true" label="Dep ID">
-                                                                    <f:selectItems itemLabel="اختر واحدة" />
-                                                                    <f:selectItems value="#{departmentsManage.allDepartment()}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}" />
-                                                                </h:selectOneMenu>
+                                                                <p:selectOneMenu id="dep_id" value="#{employeeManage.newEmployee.dep_id}"  class="form-control form-control-user" style="text-align:right;"   required="true">
+
+                                                                    <f:selectItems value="#{employeeManage.allDepartments}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}" />
+                                                                    <p:ajax update="formAddEmployee:sec_id" process="formAddEmployee:dep_id" event="itemSelect"  listener="#{employeeManage.putDepartmentSelected()}" />
+                                                                </p:selectOneMenu>
                                                             </div>
 
                                                             <div class="col-sm-6 mb-3 mb-sm-0">
@@ -252,10 +252,12 @@
                                                         </div>
                                                         <div class="form-group row">
                                                             <div class="col-sm-6 mb-3 mb-sm-0">
-                                                                <h:selectOneMenu id="sec_id" value="#{departmentsManage.newEmployee.sec_id}"  class="form-control form-control-user" style="text-align:right;" required="true" label="Sec ID" >
-                                                                    <f:selectItems itemLabel="اختر واحدة" />
-                                                                    <f:selectItems value="#{departmentsManage.allSection()}" var="s" itemLabel="#{s.name}" itemValue="#{s.id}" />
-                                                                </h:selectOneMenu>                                               
+                                                                <p:selectOneMenu id="sec_id" value="#{employeeManage.newEmployee.sec_id}"   class="form-control form-control-user" style="text-align:right;" required="true" >
+                                                                    
+                                                                    <f:selectItems value="#{employeeManage.allSections}" var="s" itemLabel="#{s.name}" itemValue="#{s.id}" />
+                                                                    <p:ajax update="formAddEmployee:job_id" process="formAddEmployee:sec_id" event="itemSelect"  listener="#{employeeManage.putSectionSelected()}" />
+
+                                                                </p:selectOneMenu>                                               
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <h:outputLabel  for="sec_id" class="label" value="*القسم"/>
@@ -268,10 +270,10 @@
                                                         <div class="form-group row">
                                                             <div class="col-sm-6 mb-3 mb-sm-0">
 
-                                                                <h:selectOneMenu id="job_id" value="#{departmentsManage.newEmployee.job_id}" class="form-control form-control-user" style="text-align:right;" required="true" label="Job ID" >
-                                                                    <f:selectItems itemLabel="اختر واحدة" itemValue="" />
-                                                                    <f:selectItems value="#{departmentsManage.allJobs()}" var="j" itemLabel="#{j.name}" itemValue="#{j.id}" />
-                                                                </h:selectOneMenu>
+                                                                <p:selectOneMenu id="job_id" value="#{employeeManage.newEmployee.job_id}"   class="form-control form-control-user" style="text-align:right;" required="true" label="Job ID" >
+                                                                    
+                                                                    <f:selectItems value="#{employeeManage.allJobs}" var="j" itemLabel="#{j.name}" itemValue="#{j.id}" />
+                                                                </p:selectOneMenu>
 
                                                             </div>
                                                             <div class="col-sm-6">
@@ -290,51 +292,46 @@
                                     </div>
                                 </div>
                             </div>
-                            </h:form>
-                        </p:column>
-                        <!-- Begin Page Content -->
-
-                    </div>
-
-                    <br/><br/>
-                    <!-- End of Main Content -->
-
-                    <!-- Footer -->
-                    <footer class="sticky-footer bg-white">
-                        <div class="container my-auto">
-                            <div class="copyright text-center my-auto">
-                                <span>Copyright © Your Website 2019</span>
-                            </div>
-                        </div>
-                    </footer>
-                    <!-- End of Footer -->
+                        </h:form>
+                    </p:column>
+                    <!-- Begin Page Content -->
 
                 </div>
 
+                <br/><br/>
+                <!-- End of Main Content -->
 
-                <ui:include src="pages/sidebar.xhtml"/>
-
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright © Your Website 2019</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End of Footer -->
 
             </div>
 
-            <!-- Bootstrap core JavaScript-->
-            <script src="vendor/jquery/jquery.min.js"></script>
-            <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-            <!-- Core plugin JavaScript-->
-            <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+            <ui:include src="pages/sidebar.xhtml"/>
 
-            <!-- Custom scripts for all pages-->
-            <script src="js/sb-admin-2.min.js"></script>
 
-            <!-- Page level plugins -->
-            <script src="vendor/chart.js/Chart.min.js"></script>
+        </div>
 
-            <!-- Page level custom scripts -->
-            <script src="js/demo/chart-area-demo.js"></script>
-            <script src="js/demo/chart-pie-demo.js"></script>
-            <script src="js/js.js" type="text/javascript"></script>
-       
+        <!--<script src="vendor/jquery/jquery.min.js"></script>-->
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Core plugin JavaScript-->
+        <!--<script src="vendor/jquery-easing/jquery.easing.min.js"></script>-->
+
+        <!-- Custom scripts for all pages-->
+        <script src="js/sb-admin-2.min.js"></script>
+
+        <!-- Page level plugins -->
+
+        <script src="js/js.js" type="text/javascript"></script>
+
     </h:body>
 </html>
 

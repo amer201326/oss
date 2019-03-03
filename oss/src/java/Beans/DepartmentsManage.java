@@ -52,7 +52,7 @@ public class DepartmentsManage implements Serializable {
     JobTitel newJob;
 
     List<Employee> employeeList;
-    Employee newEmployee;
+  
 
     List<Screen> screen;
     Screen newScreen;
@@ -72,7 +72,7 @@ public class DepartmentsManage implements Serializable {
         sectionSelected = new Section();
         fiterdSections = GetFromDB.getSection();
         newSection = new Section();
-        newEmployee = new Employee();
+        
         servicePerMonth = GetFromDB.getNumberOfServicePerMonth();
         newJob = new JobTitel();
         jobTitels = GetFromDB.getJobTittle();
@@ -88,11 +88,7 @@ public class DepartmentsManage implements Serializable {
 
     }
 
-    public void addEmployee() {
-        newEmployee.addEmployeeToDB();
-        newEmployee = new Employee();
-
-    }
+    
 
     public void addJobTitle() {
         newJob.addJobToDB();
@@ -264,13 +260,7 @@ public class DepartmentsManage implements Serializable {
         this.employeeList = employeeList;
     }
 
-    public Employee getNewEmployee() {
-        return newEmployee;
-    }
-
-    public void setNewEmployee(Employee newEmployee) {
-        this.newEmployee = newEmployee;
-    }
+    
 
     public void setJobTitels(List<JobTitel> jobTitels) {
         this.jobTitels = jobTitels;

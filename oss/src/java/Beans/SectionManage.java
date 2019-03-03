@@ -99,7 +99,8 @@ public class SectionManage {
     public void addJobForSec() {
         newJobOfsection.setIdSEction(Integer.parseInt(sessionLists.sectionSelected.getId()));
         if(!newJobOfsection.addToDB()){
-            FacesContext.getCurrentInstance().addMessage("formSection:eventsDT", new FacesMessage("you have used the maximum rents ", "you have used the maximum rents"));
+            //FacesContext.getCurrentInstance().addMessage("formSection:eventsDT", new FacesMessage( "Warning!", "لا يمكن اضافة نفس الوظيفة مرتين"));
+            FacesContext.getCurrentInstance().addMessage("formSection:eventsDT", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "لا يمكن اضافة نفس الوظيفة مرتين"));
         }
     }
 
