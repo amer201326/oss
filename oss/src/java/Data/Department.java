@@ -7,6 +7,7 @@ package Data;
 
 import DB.DB;
 import java.io.Serializable;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -99,7 +100,24 @@ public class Department implements Serializable {
         return false;
     }
 
-  
+  public void getNameFromDataBase() {
+      
+        try {
+            DB db = new DB();
+         String sql = "SELECT Dep_Name FROM department where Dep_ID = "+this.id+";";
+
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+               this.nameA = r.getString(1);
+              
+            }
+        } catch (Exception e) {
+            
+        }
+        
+       
+        
+    }
     
 
     

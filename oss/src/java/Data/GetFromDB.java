@@ -203,7 +203,8 @@ public class GetFromDB {
             int currentMonth = c.get(Calendar.MONTH) + 1;
 
             for (int i = 1; i <= currentMonth; i++) {
-                String sql = "select count(Services_Provided_ID) from decisions_department where Date  between '" + year + "-" + i + "-" + "00' and '" + year + "-" + (i + 1) + "-" + "1';";
+                String sql = "select count(Services_Provided_ID) from service_citizen where Date  between '" + year + "-" + i + "-" + "00' and '" + year + "-" + (i + 1) + "-" + "1';";
+                System.out.println(sql);
                 ResultSet r = db.read(sql);
                 while (r.next()) {
                     months[i] = r.getInt(1);
@@ -223,7 +224,7 @@ public class GetFromDB {
     public  static List<ServiceCount> getMore5ServiceRequest() {
         List<ServiceCount> servicesCount = new ArrayList<ServiceCount>();
         int i = 0;
-        int sum = 1;
+        double sum = 1;
         try {
 
             DB db = new DB();
@@ -239,7 +240,7 @@ public class GetFromDB {
             ResultSet r = db.read(sql);
 
             while (r.next()) {
-                servicesCount.add(new ServiceCount(r.getString(1), (r.getInt(2)/sum)*100));
+                servicesCount.add(new ServiceCount(r.getString(3), (int)((r.getInt(2)/sum)*100)));
                 
                 i++;
 
@@ -292,6 +293,31 @@ public class GetFromDB {
             System.out.println(e.getMessage());
         }
         return emp;
+    }
+    
+    
+    public static List<ServiceErr> getAllServices() {
+
+        ServiceErr s = new ServiceErr();
+
+        List<ServiceErr> services = new ArrayList<ServiceErr>();
+        try {
+            DB db = new DB();
+            String sql = "SELECT * FROM services_provided ;";
+
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+//                s = new Service(r.getInt(1), r.getString(2), r.getDouble(3),r.getInt(4),r.getString(5));
+//                s.department.id = r.getInt(6);
+//                s.department.getNameFromDataBase();
+//                s.section.id = r.getInt(7);
+//                s.section.getNameFromDataBase();
+//                services.add(s);
+            }
+            
+        } catch (Exception e) {
+        }
+        return services;
     }
     
 }

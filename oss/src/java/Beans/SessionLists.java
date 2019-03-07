@@ -10,7 +10,7 @@ import Data.GetFromDB;
 import Data.JobTitel;
 import Data.Section;
 import Data.SectionPath;
-import Data.Service;
+import Data.ServiceErr;
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;

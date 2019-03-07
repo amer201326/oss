@@ -1,13 +1,8 @@
 package Data;
 
 
-import DB.DB;
 import java.io.Serializable;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -19,20 +14,20 @@ import java.util.logging.Logger;
  *
  * @author me
  */
-public class Service implements Serializable{
+public class ServiceErr implements Serializable{
     int id;
     String name;
     int days;
     double cost;
-    String status;
+    boolean status;
     Department department;
     Section section;
     List<Department> path;
 
-    public Service() {
+    public ServiceErr() {
     }
 
-    public Service(int id, String name, int days, double cost, String status, Department department, Section section, List<Department> path) {
+    public ServiceErr(int id, String name, int days, double cost, boolean status, Department department, Section section, List<Department> path) {
         this.id = id;
         this.name = name;
         this.days = days;
@@ -42,15 +37,7 @@ public class Service implements Serializable{
         this.section = section;
         this.path = path;
     }
-    public Service(int id, String name,  double cost,int days, String status) {
-        this.id = id;
-        this.name = name;
-        this.days = days;
-        this.cost = cost;
-        this.status = status;
-        this.department = new Department();
-        this.section = new Section();
-    }
+    
 
     public int getId() {
         return id;
@@ -68,8 +55,6 @@ public class Service implements Serializable{
         this.name = name;
     }
 
-   
-
     public int getDays() {
         return days;
     }
@@ -86,15 +71,13 @@ public class Service implements Serializable{
         this.cost = cost;
     }
 
-    public String getStatus() {
+    public boolean isStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
-
-    
 
     public Department getDepartment() {
         return department;
@@ -120,20 +103,6 @@ public class Service implements Serializable{
     public void setPath(List<Department> path) {
         this.path = path;
     }
-    
-    public void update(){
-        try {
-            String  q = "UPDATE services_provided SET Serv_Name = '"+name+"',Serv_Cost = '"+cost+"', Serv_Days = '"+days+"',Serv_Case = '"+status+"' WHERE (Services_Provided_ID = "+id+");";
-            System.out.println("jjjjjjjjjjjjjjjjjjjjq"+q);
-            DB data = new DB();
-            data.write(q);
-            
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
-    
     
     
 }

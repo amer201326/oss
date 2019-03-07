@@ -44,10 +44,11 @@ public class OrganigramView implements Serializable {
         Department d = sessionLists.departmentSelected;
         selection = new DefaultOrganigramNode(null, "Ridvan Agar", null);
 
-        rootNode = new DefaultOrganigramNode("root", "دائرة : " + d.nameA, null);
+        rootNode = new DefaultOrganigramNode("department", "دائرة : " + d.nameA, null);
         rootNode.setCollapsible(true);
         rootNode.setDroppable(true);
-        rootNode.setSelectable(false);
+        rootNode.setSelectable(true);
+        
 
         List<Section> sec = GetFromDB.getFsection(d.id);
         String p[] = new String[sec.size()];
@@ -55,16 +56,19 @@ public class OrganigramView implements Serializable {
         for (int i = 0; i < p.length; i++) {
             Section s = sec.get(i);
 
-            OrganigramNode rootNodee2 = new DefaultOrganigramNode("root", "قسم : " + s.getName(), null);
+            OrganigramNode rootNodee2 = new DefaultOrganigramNode("section", "قسم : " + s.getName(), null);
+            rootNodee2.setSelectable(true);
             rootNode.getChildren().add(rootNodee2);
-
+            
             try {
                 List<JobTitel> jobs = GetFromDB.getJobTittle(s.getId());
                 for (int j = 0; j < jobs.size(); j++) {
                     JobTitel get = jobs.get(j);
                     List<Employee> emp = GetFromDB.GetEmployeeForJobID(get.getId());
                     String[] empName = new String[emp.size()];
-                    OrganigramNode divisionNode = addDivision(rootNodee2, get.getName());
+                    OrganigramNode divisionNode = new DefaultOrganigramNode("job",get.getName(), rootNodee2);
+                    divisionNode.setSelectable(true);
+                    System.out.println(divisionNode.getType());
                     for (int k = 0; k < emp.size(); k++) {
                         Employee get1 = emp.get(k);
                         empName[k] = get1.getEmp_name();
@@ -114,9 +118,7 @@ public class OrganigramView implements Serializable {
     }
 
     public void nodeSelectListener(OrganigramNodeSelectEvent event) {
-        FacesMessage message = new FacesMessage();
-        message.setSummary("Node '" + event.getOrganigramNode().getData() + "' selected.");
-        message.setSeverity(FacesMessage.SEVERITY_INFO);
+        System.out.println("event se;le");
 
         //FacesContext.getCurrentInstance().addMessage(null, message);
     }

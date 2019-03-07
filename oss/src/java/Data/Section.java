@@ -2,6 +2,7 @@ package Data;
 
 import DB.DB;
 import java.io.Serializable;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -113,7 +114,6 @@ public class Section implements Serializable{
             Logger.getLogger(Section.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
     
 
     @Override
