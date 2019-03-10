@@ -35,7 +35,7 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(int dep_id, int sec_id, int job_id, int emp_id, String emp_name, String emp_idCard, String emp_email, String emp_tel, String emp_mobile, String emp_gender, String emp_birth, String emp_StartDate, String emp_EndDate) {
+    public Employee(int dep_id, int sec_id, int job_id, int emp_id, String emp_name, String emp_idCard, String emp_email, String emp_tel, String emp_birth, String emp_StartDate, String emp_EndDate, String emp_mobile, String emp_gender) {
         this.dep_id = dep_id;
         this.sec_id = sec_id;
         this.job_id = job_id;
@@ -44,13 +44,32 @@ public class Employee {
         this.emp_idCard = emp_idCard;
         this.emp_email = emp_email;
         this.emp_tel = emp_tel;
-        this.emp_mobile = emp_mobile;
-        this.emp_gender = emp_gender;
         this.emp_birth = emp_birth;
         this.emp_StartDate = emp_StartDate;
         this.emp_EndDate = emp_EndDate;
+        this.emp_mobile = emp_mobile;
+        this.emp_gender = emp_gender;
+        
     }
 
+    public Employee(int dep_id, int emp_id, String emp_name, String emp_email, String emp_mobile) {
+        this.dep_id = dep_id;
+        this.emp_id = emp_id;
+        this.emp_name = emp_name;
+        this.emp_email = emp_email;
+        this.emp_mobile = emp_mobile;
+    }
+    
+    public Employee(String emp_idCard, int emp_id, String emp_name, String emp_mobile, String emp_email) {
+        this.emp_idCard = emp_idCard;
+        this.emp_id = emp_id;
+        this.emp_name = emp_name;
+         this.emp_mobile = emp_mobile;
+        this.emp_email = emp_email;
+        
+    }
+    
+    
     public int getDep_id() {
         return dep_id;
     }
@@ -160,13 +179,15 @@ public class Employee {
 
     public void addEmployeeToDB() {
         last += 1;
-        String q = "INSERT INTO employees (`Dep_ID`, `Sec_ID`, `Job_ID`, `Emp_ID`, `Emp_Name`, `Emp_ID_Card`, `Emp_Email`, `Emp_Telephone`, `Emp_Birthday`, `Emp_StartDate`, `Emp_EndDate`, `Emp_Mobile`,`Emp_Gender`, `Emp_UserName`, `Emp_Password`) \n"
-                + "VALUES (" + dep_id + "," + sec_id + "," + job_id + "," + "null" + ",'" + emp_name + "','" + emp_idCard + "','" + emp_email + "','"
+        String q = "INSERT INTO employees (`Dep_ID`, `Sec_ID`, `Job_ID`, `Emp_ID`, `Emp_Name`, `Emp_ID_Card`, `Emp_Email`, `Emp_Telephone`, `Emp_Birthday`, `Emp_StartDate`, `Emp_EndDate`, `Emp_Mobile`,`Emp_Gender`) \n"
+                + "VALUES (" + dep_id + "," + sec_id + "," + job_id + "," + emp_id + ",'" + emp_name + "','" + emp_idCard + "','" + emp_email + "','"
                 + emp_tel + "','" + emp_birth + "','" + emp_StartDate + "','" + emp_EndDate + "','" + emp_mobile + "','" + emp_gender + "');";
 
         try {
             DB data = new DB();
+             System.out.println(q);
             data.write(q);
+           
 
         } catch (SQLException ex) {
             Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
@@ -191,31 +212,18 @@ public class Employee {
 //
 //    }
 
-//    public void addEmpScreenToDB() {
-//        String q = "INSERT INTO employeescreen (`UserName`, `Screen_ID`) VALUES ('eman', '1');";
-//
-//        try {
-//            DB data = new DB();
-//            data.write(q);
-//
-//        } catch (SQLException ex) {
-//            Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (ClassNotFoundException ex) {
-//            Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//
-//    }
+   
 
     public void update() {
-        String q = " UPDATE employees SET Emp_Email = " + emp_email + ",Emp_Mobile = " + emp_mobile + ",Emp_Name = '" + emp_name + "' WHERE `Emp_ID` = " + emp_id + ";";
+        String q = "UPDATE employees SET Emp_Email = '" + emp_email + "',Emp_Mobile = '" + emp_mobile + "',Emp_Name = '" + emp_name + "' WHERE Emp_ID = " + emp_id + ";";
         try {
             DB data = new DB();
             data.write(q);
-
+            System.out.println(q);
         } catch (SQLException ex) {
-            Logger.getLogger(Section.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Section.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

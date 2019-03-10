@@ -9,22 +9,25 @@ import DB.DB;
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  *
- * @author Amer$_$
+ * @author me
  */
-public class Department implements Serializable {
+public class DepartmentPaths implements Serializable {
 
     public int id;
     public String nameA;
     public String image;
-    
+    int order;
+    public List<SectionPath> sections;
 
-    public Department() {
+    public DepartmentPaths() {
+        sections = new ArrayList<SectionPath>();
         List<String> im = GetFromDB.getImageDepartment();
         if(im.size()>0){
             image = GetFromDB.getImageDepartment().get((int)(Math.random() * im.size()));
@@ -41,7 +44,7 @@ public class Department implements Serializable {
     }
 
     
-    public Department(String nameA) {
+    public DepartmentPaths(String nameA) {
         this.nameA = nameA;
     }
 
@@ -50,7 +53,7 @@ public class Department implements Serializable {
 //        this.nameA = nameA;
 //    }
 
-    public Department(int id, String nameA, String image) {
+    public DepartmentPaths(int id, String nameA, String image) {
         this.id = id;
         this.nameA = nameA;
         this.image = image;
@@ -73,6 +76,14 @@ public class Department implements Serializable {
 
     public void setNameA(String nameA) {
         this.nameA = nameA;
+    }
+
+    public int getOrder() {
+        return order;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
     }
 
  
@@ -99,6 +110,38 @@ public class Department implements Serializable {
         }
         return false;
     }
+
+  
+    public void getNameFromDataBase() {
+      
+        try {
+            DB db = new DB();
+         String sql = "SELECT Dep_Name FROM department where Dep_ID = "+this.id+";";
+
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+               this.nameA = r.getString(1);
+              
+            }
+        } catch (Exception e) {
+            
+        }
+        
+       
+        
+    }
+
+    public List<SectionPath> getSections() {
+        return sections;
+    }
+
+    public void setSections(List<SectionPath> sections) {
+        this.sections = sections;
+    }
+
+    
+
+    
 
     
 }

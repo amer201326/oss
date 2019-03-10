@@ -20,32 +20,7 @@
         <!-- Custom styles for this template-->
         <link href="css/sb-admin-2.min.css" rel="stylesheet"/>
         <link href="css/amer.css" rel="stylesheet"/>
-        <style type="text/css">
-            .ui-datatable .ui-datatable-header {
-                text-align: right !important;
-            }
-
-            .ui-button-text-only .ui-button-text {
-                padding: 0.3em 0.4em;
-            }
-
-            .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-chkbox {
-                visibility: hidden;
-            }
-
-            .ui-filter-column .ui-column-customfilter .custom-filter {
-                width: 100%;
-                box-sizing: border-box;
-            }
-
-            .year-spinner input {
-                width: 100%;
-                box-sizing: border-box;
-            }
-            .ui-row-editor .ui-row-editor-pencil {
-                margin-left:8px;
-            }
-        </style>
+    
 
     </h:head>
     <h:body id="page-top">
@@ -64,7 +39,7 @@
                             <div class="row">
                                 <div class="col-lg-12 text-center">
 
-                                    <h2 class="section-heading text-uppercase">All Employees</h2>
+                                    <h2 class="section-heading text-uppercase">الموظفين</h2>
                                     <br/><hr style="border: 2px solid orange;"/><br/><br/>
                                 </div>
                             </div>  
@@ -72,30 +47,27 @@
                                 <div class="float-lg-right float-right text#{$infix}-right" style="width: 100%">
                                     <h:form id="formSelectD">
                                         <!-- Style Addemployee form Bussectionlo-->
-                                        <p:selectOneMenu id="departments" value="#{departmentsManage.department.id}" dynamic="true" style="width:200px; height:100%;">
+                                        <p:selectOneMenu id="employees" value="#{employeeManage.newEmployee.dep_id}" dynamic="true" style="width:200px; height:100%;">
 
-                                            <f:selectItem itemLabel="كل الدوائر" itemValue="-1" />
-                                            <f:selectItems value="#{departmentsManage.allDepartment()}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}"/>
-                                            <p:ajax update=":formSection" event="itemSelect" listener="#{departmentsManage.fSection}" />
+                                            <f:selectItem noSelectionOption="false" itemLabel="كل الدوائر" itemValue="-1" />
+                                            <f:selectItems value="#{employeeManage.allDepartments()}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}"/>
+                                            <p:ajax update=":formSection" event="itemSelect" listener="#{employeeManage.filterEmployee()}" />
 
                                         </p:selectOneMenu>
 
-                                        <p:outputLabel for="departments" style="margin-left: 4%" value="الدوائر " />
+                                        <p:outputLabel for="employees" style="margin-left: 4%" value="الدوائر " />
 
-                                    </h:form>
+                                    </h:form> <br/>
                                 </div>
+                                <a href="employee.xhtml"> اضافة موظف جديده</a>
                                 <h:form id="formSection">
+                                   
                                     <h:head id="msgs"/>
-                                    <p:dataTable id="singleDT" var="employee" value="#{departmentsManage.employeeList}"  editable="true" style="margin-bottom:20px" selectionMode="single" selection="#{departmentsManage.newEmployee}" rowKey="#{employee.emp_id}">
+                                    <p:dataTable id="singleDT" var="employee" value="#{employeeManage.allemployees}"  editable="true" style="margin-bottom:20px" selectionMode="single" selection="#{employeeManage.newEmployee}" rowKey="#{employee.emp_id}">
 
                                         <f:facet name="header">
                                             عرض جميع الموظفين
                                         </f:facet>
-
-
-
-
-
 
 
                                         <p:ajax event="rowEdit" listener="#{departmentsManage.onEmployeeEdit}" update=":formSection:msgs" />
@@ -108,10 +80,8 @@
                                         </p:column>
 
 
-
-
                                         <p:column headerText="البريد الإلكتروني">
-                                            <p:cellEditor disabled="true">
+                                            <p:cellEditor disabled="false">
                                                 <f:facet name="output"><h:outputText value="#{employee.emp_email}" /></f:facet>
                                                 <f:facet name="input"><p:inputText id="modelInput" value="#{employee.emp_email}" style="width:100%"/></f:facet>
                                             </p:cellEditor>
@@ -121,7 +91,7 @@
                                         <p:column headerText="الجوال">
                                             <p:cellEditor>
                                                 <f:facet name="output"><h:outputText value="#{employee.emp_mobile}" /></f:facet>
-                                                <f:facet name="input"><p:inputMask mask="999-999-9999" value="#{employee.emp_mobile}" style="width:100%" label="Year"/></f:facet>
+                                                <f:facet name="input"><p:inputText value="#{employee.emp_mobile}" style="width:100%" /></f:facet>
                                             </p:cellEditor>
                                         </p:column>
 
@@ -129,38 +99,38 @@
 
                                         <p:column headerText="الاسم الكامل">
 
-                                            <p:cellEditor>
+                                            <p:cellEditor >
                                                 <f:facet name="output"><h:outputText value="#{employee.emp_name}" /></f:facet>
-                                                <f:facet name="input"><p:inputText value="#{employee.emp_name}" style="width:100%" label="Year"/></f:facet>
+                                                <f:facet name="input"><p:inputText value="#{employee.emp_name}" style="width:100%"/></f:facet>
                                             </p:cellEditor>
                                         </p:column> 
 
 
                                         <p:column headerText="رقم تعريف الموظف">
-
-                                            <f:facet name="output"><h:outputText value="#{employee.emp_id}" /></f:facet>
-                                            <f:facet name="input"><p:inputText value="#{employee.emp_id}" style="width:30%" /></f:facet>
-
+                                            <p:cellEditor disabled="true" >
+                                                <f:facet name="output"><h:outputText value="#{employee.emp_id}" /></f:facet>
+                                                <f:facet name="input"><p:inputText value="#{employee.emp_id}" style="width:30%" /></f:facet>
+                                            </p:cellEditor>
                                         </p:column>
 
 
-                                        
-                                        
-                                        <p:column headerText="اسم الدارة">
 
-                                            <f:facet name="output"><h:outputText value="#{employee.dep_id}" /></f:facet>
-                                            <f:facet name="input"><p:inputText value="#{employee.dep_id}" style="width:30%" /></f:facet>
 
+                                        <p:column headerText="رقم هوية الموظف">
+                                            <p:cellEditor disabled="true" >
+                                                <f:facet name="output"><h:outputText value="#{employee.emp_idCard}"  /></f:facet>
+                                                <f:facet name="input"><p:inputText value="#{employee.emp_idCard}" style="width:30%" /></f:facet>
+                                            </p:cellEditor>
                                         </p:column>
-                                        
 
                                        
+
                                     </p:dataTable>
 
                                 </h:form >
 
 
-                               
+
 
                             </div>
                             <br/><br/>

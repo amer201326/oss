@@ -21,9 +21,7 @@
         <link href="css/sb-admin-2.min.css" rel="stylesheet"/>
         <link href="css/amer.css" rel="stylesheet"/>
         <style type="text/css">
-            .ui-datatable .ui-datatable-header {
-                text-align: right !important;
-            }
+           
 
             .ui-button-text-only .ui-button-text {
                 padding: 0.3em 0.4em;
@@ -68,7 +66,7 @@
                                     <br/><hr style="border: 2px solid orange;"/><br/><br/>
                                 </div>
                             </div>  
-                            <div class="row text-center">
+                            <div class="row text-center" > 
                                 <div class="float-lg-right float-right text#{$infix}-right" style="width: 100%;margin-bottom: 30px">
                                     <h:form id="formSelectD">
                                         <!-- Style Addemployee form Bussectionlo-->
@@ -86,11 +84,11 @@
                                 </div>
                                 <h:form id="formSection">
                                     <h:head id="msgs"/>
-                                    <p:dataTable id="singleDT" var="section" value="#{departmentsManage.fiterdSections}"  editable="true" style="margin-bottom:20px"
-                                                 selectionMode="single" dir="rtl" selection="#{departmentsManage.sectionSelected}" rowKey="#{section.id}">
+                                    <p:dataTable id="singleDT" var="section" value="#{departmentsManage.fiterdSections}"  editable="true" style="margin-bottom:20px; text-align:center;"
+                                                 selectionMode="single"  selection="#{departmentsManage.sectionSelected}" rowKey="#{section.id}">
 
-                                        <f:facet name="header">
-                                            Row Editing
+                                        <f:facet name="header" >
+                                            الاقسام
                                         </f:facet>
 
                                         <p:ajax event="rowEdit" listener="#{departmentsManage.onSectionEdit}" update=":formSection:msgs" />
@@ -129,13 +127,13 @@
 
 
                                     </p:dataTable>
-                                    <p:dialog id="diallogDelete" resizable="false" header="Add Section" widgetVar="deleteD">
+                                    <p:dialog id="diallogDelete" resizable="false" widgetVar="deleteD">
                                         <h:panelGrid columns="2" cellpadding="5">
 
                                             <h:outputLabel for="del" value="هل انت متأكد من حذف #{departmentsManage.sectionSelected.name}" />
+                                            <br/>
 
-
-                                            <p:commandButton id="del" value="حذف" action="#{departmentsManage.deleteSection()}" update="formSection" oncomplete="PF('deleteD').hide();"/>
+                                            <p:commandButton id="del" value="حذف" action="#{departmentsManage.deleteSection()}" update=":formSection" oncomplete="PF('deleteD').hide();"/>
 
                                         </h:panelGrid>
                                     </p:dialog>  
@@ -143,7 +141,7 @@
 
                                 </h:form >
                                 <div class="text#{$infix}-left col-md-6">
-                                    <p:commandButton value="حذف" onclick="PF('deleteD').show();" type="button"/>
+                                    <p:commandButton value="حذف" onclick="PF('deleteD').show();" type="button" />
                                 </div>
                                 <div class="text#{$infix}-right col-md-6" style="width: 100%;">
 
@@ -152,19 +150,19 @@
                                 </div>
                                 <h:form id="dialog">
 
-                                    <p:dialog id="DNewSection" resizable="false" header="Add Section" widgetVar="dlg">
+                                    <p:dialog id="DNewSection" resizable="false" header="اضافة قسم" widgetVar="dlg">
 
                                         <h:panelGrid columns="2" cellpadding="5">
 
-                                            <h:outputLabel for="deid" value="deID:" />
                                             <p:selectOneMenu id="departments" value="#{departmentsManage.newSection.departmentId}" dynamic="true" style="width:200px; height:100%;">
                                                 <f:selectItems value="#{departmentsManage.allDepartment()}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}"/>
                                             </p:selectOneMenu>
+                                            <h:outputLabel for="deid" value=":القسم" />
 
-                                            <h:outputLabel for="name" value="Name:" />
-                                            <p:inputText id="name" label="name" value="#{departmentsManage.newSection.name}"/>
+                                            <p:inputText id="name" label="name" value="#{departmentsManage.newSection.name}" size="16"/>
+                                            <h:outputLabel for="name" value=":اسم القسم" />
+                                            <p:commandButton value="اضافة" actionListener="#{departmentsManage.addSection()}" update="@form :formSection :formSelectD" oncomplete="PF('dlg').hide();"/>
 
-                                            <p:commandButton value="Add" actionListener="#{departmentsManage.addSection()}" update="@form :formSection :formSelectD" oncomplete="PF('dlg').hide();"/>
 
                                         </h:panelGrid>
                                     </p:dialog>  

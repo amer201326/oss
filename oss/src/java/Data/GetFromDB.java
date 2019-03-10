@@ -260,13 +260,13 @@ public class GetFromDB {
         try {
             DB db = new DB();
             
-            String sql = "SELECT * FROM jobtitle where Job_ID in( select Job_ID from  job_of_section where Sec_ID ="+id+");";
-            System.out.println(sql);
-            ResultSet r = db.read(sql);
-            while (r.next()) {
-                d = new JobTitel(r.getInt(1),r.getString(2));
-                job.add(d);
-            }
+//            String sql = "SELECT * FROM jobtitle where Job_ID in( select Job_ID from  job_of_section where Sec_ID ="+id+");";
+//            System.out.println(sql);
+//            ResultSet r = db.read(sql);
+//            while (r.next()) {
+//                d = new JobTitel(r.getInt(1),r.getString(2));
+//                job.add(d);
+//            }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

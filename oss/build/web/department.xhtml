@@ -143,7 +143,7 @@
                                             </p:dataTable>
                                         </h:form >
                                         <h:form id="formDelete">
-                                        <p:dialog id="diallogDelete" resizable="false" header="Add Section" widgetVar="deleteD">
+                                        <p:dialog id="diallogDelete" resizable="false" widgetVar="deleteD">
                                             <h:panelGrid columns="2" cellpadding="5">
 
                                                 <h:outputLabel for="del" value="هل انت متأكد من حذف #{departmentsManage.sectionSelected.name}" />
@@ -162,11 +162,11 @@
 
                                         <h:form id="dialog">
 
-                                            <p:dialog id="DNewSection" resizable="false" header="Add Section" widgetVar="dlg">
+                                            <p:dialog id="DNewSection" resizable="false" header="اضافة قسم" widgetVar="dlg">
 
                                                 <h:panelGrid columns="2" cellpadding="5">
 
-                                                    <h:outputLabel for="name" value="Name:" />
+                                                    <h:outputLabel for="name" value=":الاسم" />
                                                     <p:inputText id="name" label="name" value="#{departmentsManage.newSection.name}"/>
 
                                                     <p:commandButton value="Add" actionListener="#{departmentsManage.addSection(sessionLists.departmentSelected.id+'')}"
@@ -219,7 +219,7 @@
                                             </p:dataTable>
                                         </h:form >
                                         <h:form id="formDeleteJob">
-                                        <p:dialog id="diallogDelete" resizable="false" header="Add Section" widgetVar="deleteD">
+                                        <p:dialog id="diallogDelete" resizable="false" widgetVar="deleteD">
                                             <h:panelGrid columns="2" cellpadding="5">
 
                                                 <h:outputLabel for="del" value="هل انت متأكد من حذف #{departmentsManage.sectionSelected.name}" />
@@ -242,7 +242,7 @@
 
                                                 <h:panelGrid columns="2" cellpadding="5">
 
-                                                    <h:outputLabel for="name" value="Name:" />
+                                                    <h:outputLabel for="name" value=":الاسم" />
                                                     <p:inputText id="name" label="name" value="#{departmentsManage.newSection.name}"/>
 
                                                     <p:commandButton value="Add" actionListener="#{departmentsManage.addSection(sessionLists.departmentSelected.id+'')}"

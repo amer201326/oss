@@ -21,9 +21,7 @@
         <link href="css/sb-admin-2.min.css" rel="stylesheet"/>
         <link href="css/amer.css" rel="stylesheet"/>
         <style type="text/css">
-            .ui-datatable .ui-datatable-header {
-                text-align: right !important;
-            }
+            
 
             .ui-button-text-only .ui-button-text {
                 padding: 0.3em 0.4em;
@@ -74,21 +72,21 @@
                                     <h:head id="msgs"/>
                                     <p:dataTable id="eventsDT" var="job" value="#{sectionManage.jobOfSection}" selectionMode="single" selection="#{sectionManage.jobSelected}" rowKey="#{job.id}">
                                         <f:facet name="header">
-                                            Select Events
+                                           الوظائف
                                         </f:facet>
                                         <p:ajax event="rowSelect" listener="#{sectionManage.onRowSelect}" update=":formSection:msgs" />
                                         <p:ajax event="rowUnselect" listener="#{sectionManage.onRowUnselect}" update=":formSection:msgs" />
-                                        <p:column headerText="Id">
+                                        <p:column headerText="رقم الوظيفة">
                                             <h:outputText value="#{job.id}" />
                                         </p:column>
-                                        <p:column headerText="Year">
+                                        <p:column headerText="اسم الوظيفة">
                                             <h:outputText value="#{job.name}" />
                                         </p:column>
                                         
                                     </p:dataTable>
                                     <p:message  for="eventsDT" />
 
-                                    <p:dialog id="diallogDelete" resizable="false" header="Add Section" widgetVar="deleteD">
+                                    <p:dialog id="diallogDelete" resizable="false"  widgetVar="deleteD">
                                         <h:panelGrid columns="2" cellpadding="5">
 
                                             <h:outputLabel for="del" value="هل انت متأكد من حذف #{sectionManage.jobSelected.name}" />
@@ -107,7 +105,7 @@
                                 </div>
                                 <h:form id="dialog">
 
-                                    <p:dialog id="DNewjob" resizable="false" header="Add Section" widgetVar="dlg">
+                                    <p:dialog id="DNewjob" resizable="false" header="اضافة وظيفة" widgetVar="dlg">
 
                                         <h:panelGrid columns="2" cellpadding="5">
 

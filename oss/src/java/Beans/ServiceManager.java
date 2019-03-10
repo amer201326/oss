@@ -5,14 +5,16 @@
  */
 package Beans;
 
-import Data.Department;
-import Data.GetFromDB;
-import Data.Section;
-import Data.ServiceErr;
+import Data.DepartmentPaths;
+import Data.GetFromDBaraa;
+import Data.JobPath;
+import Data.SectionPath;
+import Data.Service;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
@@ -22,33 +24,51 @@ import org.primefaces.event.UnselectEvent;
  * @author me
  */
 @ManagedBean
-public class ServiceManager implements Serializable{
-    List<ServiceErr> allSrvices;
-    
+@ViewScoped
+public class ServiceManager implements Serializable {
+
+    List<Service> allSrvices;
+
     int orderDepartment;
     int idDepartment;
-    static List<Department> departmentsInPath ;
+    List<DepartmentPaths> departmentsInPath = new ArrayList<DepartmentPaths>();
 
-    Department selectDepartment;
+    int orderSection;
+    int idSection;
+    List<SectionPath> sectionsInPath = new ArrayList<SectionPath>();
+
+    int orderJob;
+    int idJob;
+    List<JobPath> jobInPath = new ArrayList<JobPath>();
+
+    DepartmentPaths selectDepartment;
+    SectionPath selectSection;
+
+    Service newServie = new Service();
+
     public ServiceManager() {
-        allSrvices = new ArrayList<ServiceErr>();
-        departmentsInPath = new ArrayList<Department>();
-        selectDepartment = new Department();
+        allSrvices = new ArrayList<Service>();
+        newServie = new Service();
+
+        selectDepartment = new DepartmentPaths();
+        selectSection = new SectionPath();
+
     }
 
-    public List<ServiceErr> getAllSrvices() {
-        return GetFromDB.getAllServices();
+    public List<Service> getAllSrvices() {
+        return GetFromDBaraa.getAllServices();
     }
 
-    public void setAllSrvices(List<ServiceErr> allSrvices) {
+    public void setAllSrvices(List<Service> allSrvices) {
         this.allSrvices = allSrvices;
     }
-    
+
     public void onServiceEdit(RowEditEvent event) {
-        System.out.println("Beans.ServiceManager.onServiceEdit()"+((ServiceErr) event.getObject()).getName());
-//        ((ServiceErr) event.getObject()).update();
+        System.out.println("Beans.ServiceManager.onServiceEdit()" + ((Service) event.getObject()).getName());
+        ((Service) event.getObject()).update();
 
     }
+
     public void onServiceEditCancel(RowEditEvent event) {
 
     }
@@ -68,40 +88,127 @@ public class ServiceManager implements Serializable{
     public void setIdDepartment(int idDepartment) {
         this.idDepartment = idDepartment;
     }
+
     public void addPathDepartment() {
-//        Department d = new Department();
-//        d.id = idDepartment;
-//        d.getNameFromDataBase();
-//        d.setOrder(orderDepartment);
-//        departmentsInPath.add(d);
+        DepartmentPaths d = new DepartmentPaths();
+        d.id = idDepartment;
+        d.getNameFromDataBase();
+        d.setOrder(orderDepartment);
+        departmentsInPath.add(d);
+        System.out.println("Beans.ServiceManager.addPathDepartment()" + departmentsInPath.size());
+
     }
 
-    public static List<Department> getDepartmentsInPath() {
+    public List<DepartmentPaths> getDepartmentsInPath() {
         return departmentsInPath;
     }
 
-    public static void setDepartmentsInPath(List<Department> departmentsInPath) {
-        ServiceManager.departmentsInPath = departmentsInPath;
+    public void setDepartmentsInPath(List<DepartmentPaths> departmentsInPath) {
+        this.departmentsInPath = departmentsInPath;
     }
 
-    
+    public List<SectionPath> getSectionsInPath() {
+        return selectDepartment.getSections();
+    }
+
+    public void setSectionsInPath(List<SectionPath> SectionsInPath) {
+        this.sectionsInPath = SectionsInPath;
+    }
+
+    public int getOrderSection() {
+        return orderSection;
+    }
+
+    public void setOrderSection(int orderSection) {
+        this.orderSection = orderSection;
+    }
+
+    public int getIdSection() {
+        return idSection;
+    }
+
+    public void setIdSection(int idSection) {
+        this.idSection = idSection;
+    }
+
+    public void addPathSection() {
+        SectionPath s = new SectionPath();
+        s.setId(idSection);
+        s.getNameFromDataBase();
+        s.setOrder(orderSection);
+        selectDepartment.sections.add(s);
+
+    }
+
+    public void addPathJob() {
+        JobPath j = new JobPath();
+        j.setId(idJob);
+        j.setOrder(orderJob);
+        j.getNameFromDataBase();
+        selectSection.jobs.add(j);
+
+    }
+
+    public List<JobPath> getJobInPath() {
+        return selectSection.jobs;
+    }
+
+    public void setJobInPath(List<JobPath> jobInPath) {
+        this.jobInPath = jobInPath;
+    }
+
     public void onRowSelect(SelectEvent event) {
-        
-    }
- 
-    public void onRowUnselect(UnselectEvent event) {
-        
+
     }
 
-    public Department getSelectDepartment() {
+    public void onRowUnselect(UnselectEvent event) {
+
+    }
+
+    public DepartmentPaths getSelectDepartment() {
         return selectDepartment;
     }
 
-    public void setSelectDepartment(Department selectDepartment) {
+    public void setSelectDepartment(DepartmentPaths selectDepartment) {
         this.selectDepartment = selectDepartment;
     }
-    
-      public List<Section> allPathSectionInDepartment() {
-       return null;
+
+    public SectionPath getSelectSection() {
+        return selectSection;
     }
+
+    public void setSelectSection(SectionPath selectSection) {
+        this.selectSection = selectSection;
+    }
+
+    public int getOrderJob() {
+        return orderJob;
+    }
+
+    public void setOrderJob(int orderJob) {
+        this.orderJob = orderJob;
+    }
+
+    public int getIdJob() {
+        return idJob;
+    }
+
+    public void setIdJob(int idJob) {
+        this.idJob = idJob;
+    }
+
+    public void addService() {
+        //GetFromDBaraa.addNewService(departmentsInPath);
+        newServie.addServiceToDB();
+        
+    }
+
+    public Service getNewServie() {
+        return newServie;
+    }
+
+    public void setNewServie(Service newServie) {
+        this.newServie = newServie;
+    }
+
 }
