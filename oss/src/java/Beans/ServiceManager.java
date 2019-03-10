@@ -55,9 +55,9 @@ public class ServiceManager implements Serializable {
 
     }
 
-//    public List<Service> getAllSrvices() {
-//        return GetFromDBaraa.getAllServices();
-//    }
+    public List<Service> getAllSrvices() {
+        return GetFromDBaraa.getAllServices();
+    }
 
     public void setAllSrvices(List<Service> allSrvices) {
         this.allSrvices = allSrvices;

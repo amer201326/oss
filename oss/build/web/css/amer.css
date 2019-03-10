@@ -55,4 +55,23 @@
     background: linear-gradient(to bottom, #88c048 0%,#69a038 100%);
 }
 
+.inLineB{
+    display: inline;
+}
 
+#addnewservice:grid div div div{
+    display: flex;
+    flex-direction: row-reverse;
+}
+.flexAm{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+
+.ui-widget-header {
+    /* border: 1px solid #53a9ea; */
+    background: white;
+    color: #ffffff;
+    font-weight: bold;
+}

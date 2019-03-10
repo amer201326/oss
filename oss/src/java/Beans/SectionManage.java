@@ -10,9 +10,11 @@ import Data.JobOfSection;
 import Data.JobTitel;
 import Data.Section;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
@@ -22,6 +24,7 @@ import org.primefaces.event.UnselectEvent;
  * @author Amer$_$
  */
 @ManagedBean
+@ViewScoped
 public class SectionManage {
 
     List<JobTitel> jobOfSection;
@@ -31,17 +34,23 @@ public class SectionManage {
     JobOfSection newJobOfsection;
     @ManagedProperty(value = "#{sessionLists}")
     SessionLists sessionLists;
-
+    
     public SectionManage() {
-        allJob = GetFromDB.getJobTittle();
+        
+
+    }
+     @PostConstruct
+    public void init() {
+       jobOfSection = GetFromDB.getJobTittle(sessionLists.sectionSelected.getId());
+       allJob = GetFromDB.getJobTittle();
 
         newJobOfsection = new JobOfSection();
-
+        
     }
 
     public List<JobTitel> getJobOfSection() {
 
-        jobOfSection = GetFromDB.getJobTittle(sessionLists.sectionSelected.getId());
+        
 
         return jobOfSection;
     }

@@ -25,6 +25,7 @@ import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.event.SelectEvent;
@@ -34,6 +35,7 @@ import org.primefaces.event.SelectEvent;
  * @author Amer$_$
  */
 @ManagedBean
+@ViewScoped
 public class DepartmentsManage implements Serializable {
 
     List<ServiceCount> servicesCount;
@@ -356,9 +358,7 @@ public class DepartmentsManage implements Serializable {
     }
 
     public void gotToSection() {
-        sessionLists.sectionSelected = sectionSelected;
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>.........>>>>>>>>>>>>>>>>>>>>>>>>> > > >  " + sectionSelected.getName());
-        System.out.println(sessionLists.sectionSelected.getId());
+        
         try {
 
             FacesContext.getCurrentInstance().getExternalContext().redirect("section.xhtml");

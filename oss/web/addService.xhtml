@@ -35,153 +35,201 @@
                     <ui:include src="pages/heder.xhtml"/>
                     <!-- End of Topbar -->
                     <p:column id="contentPage">
-                        
-                         <h:form id="addnewservice">
-                                <div id="conts">
-                                    <div class="row">
-                                        <div class="col-lg-12 text-center">
 
-                                            <!--NO ESCRIBIR ARRIBA-->
+                        <h:form id="addnewservice2">
+                            <div id="conts">
+                                <div class="row">
+                                    <div class="col-lg-12 text-center">
 
-                                            <h2 class="section-heading text-uppercase">اضافة خدمة</h2>
-                                            <br/><hr style="border: 2px solid orange;"/><br/>
-                                              <h2 class="section-heading text-uppercase"> معلومات الخدمة</h2><br/>
-
-                                            <div class="row">
-                                                <div class="col-lg-6" style="text-align: right;">
-
-                                                    <div class="card shadow mb-4">
-                                                        <div class="card-header py-3">
-                                                            <h6 class="m-0 font-weight-bold text-primary">المرفقات</h6>
-                                                        </div>
-
-                                                        <div class="card-body">
-                                                            <div class="my-2"></div>
-
-                                                            <p:selectManyCheckbox class="form-control-user" style="text-align:right;" id="grid" value="#{employeeManage.screen}" layout="grid" columns="3">
-
-                                                                <f:selectItems value="#{employeeManage.screen}" var="emp" itemLabel="#{emp.screenName}" itemValue="#{emp.screenId}" />
-
-                                                            </p:selectManyCheckbox>
+                                        <!--NO ESCRIBIR ARRIBA-->
+                                        <div class=" col-md-12 ">
+                                            <div class="card border-left-primary border-right-0 shadow h-100 py-2">
+                                                <div class="card-body">
+                                                    <div class="row no-gutters textR">
+                                                        <div class="col mr-2">
+                                                            <h2 class="section-heading text-uppercase">اضافة خدمة</h2>
 
                                                         </div>
+
                                                     </div>
-
                                                 </div>
+                                            </div>
+                                        </div>
 
-                                                <div class="col-lg-6" style="text-align: right; float: right;">
+                                        <br/><hr style="border: 2px solid orange;"/><br/>
 
-                                                    <div class="card shadow mb-4">
-                                                        <div class="card-header py-3">
-                                                            <h6 class="m-0 font-weight-bold text-primary">معلومات الخدمة </h6>
-                                                        </div>
-                                                        <div class="card-body">
+                                        <div class="col-lg-12 mb-4">
 
-                                                            <div class="form-group row">
-                                                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                                                    <p:inputText value="#{serviceManager.newServie.name}" class="form-control form-control-user" style="text-align:right;" type="text" id="ServiceName"  required="true"/>
-                                                                </div>
-                                                                <div class="col-sm-6">
-                                                                    <p:outputLabel class="label" value="*اسم الخدمة"/>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="form-group row">
-                                                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                                                    <p:inputText  value="#{serviceManager.newServie.days}"  class="form-control form-control-user" style="text-align:right;" type="number" id="DaysService" required="true"/>
-
-                                                                </div>
-                                                                <div class="col-sm-6">
-                                                                    <p:outputLabel class="label" value="*عدد ايام الاستجابه"/>
-                                                                </div>
-                                                            </div>
-
-
-                                                            <div class="form-group row">
-                                                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                                                    <p:inputText value="#{serviceManager.newServie.cost}" class="form-control form-control-user" id="Cost" style="text-align:right;"  type="number" required="true"/>                                                            
-
-                                                                </div>
-                                                                <div class="col-sm-6">
-                                                                    <p:outputLabel class="label" value="*رسوم الخدمة"/>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="form-group row" >
-
-                                                                <div class="col-sm-6">
-                                                                    <p:inputText value="#{serviceManager.newServie.status}" class="form-control form-control-user" style="text-align:right;" type="text"/>
-                                                                </div>
-                                                                <div class="col-sm-6 mb-3 mb-sm-0">
-
-                                                                    <p:outputLabel class="label" value="حالة الخدمه"/>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
+                                            <!-- Illustrations -->
+                                            <div class="card shadow mb-4">
+                                                <div class="card-header py-3">
+                                                    <div class="ui-grid-col-3 floatR">
+                                                        <h2 class="section-heading  inLineB" style="padding: 20px"> معلومات الخدمة</h2>
+                                                        <i class="fa fa-fw fa-chevron-left inLineB" ></i>
                                                     </div>
-                         
-                                                    <div class="card shadow mb-4" style="text-align: right;">
-                                                        <div class="card-header py-3">
-                                                            <h6 class="m-0 font-weight-bold text-primary">تتبع الخدمة الى </h6>
-                                                        </div>
-                                                        <div class="card-body">
 
-                                                            <div class="form-group row">
-                                                                <div class="col-sm-6">
-                                                                    <h:selectOneMenu id="dep_id" value="#{serviceManager.newServie.department.id}" class="form-control form-control-user" style="text-align:right;"   required="true" label="Dep ID">
-                                                                        <f:selectItems itemLabel="الدائرة" />
-                                                                        <f:selectItems value="#{departmentsManage.allDepartment()}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}" />
-                                                                    </h:selectOneMenu>
+                                                    <br/>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="text-center">
+                                                        <div class="row">
+                                                            <div class="col-lg-6" style="text-align: right;">
+
+                                                                <div class="card shadow mb-4">
+                                                                    <div class="card-header py-3">
+                                                                        <h6 class="m-0 font-weight-bold text-primary">المتطلبات</h6>
+                                                                    </div>
+
+                                                                    <div class="card-body">
+                                                                        <div class="my-2 " ></div> 
+
+                                                                        <p:selectManyCheckbox class="form-control-user"   id="grid" value="#{employeeManage.selectedScreens}" layout="responsive" columns="2" >
+
+                                                                            <f:selectItems value="#{employeeManage.screen}" var="emp" itemLabel="#{emp.screenName}" itemValue="#{emp.screenId}" />
+
+                                                                        </p:selectManyCheckbox>
+                                                                        <p:pickList id="pickList" value="#{employeeManage.screenSel}" var="s" itemLabel="#{s}" itemValue="#{s}" />
+
+
+                                                                    </div>
                                                                 </div>
 
-                                                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                                                    <h:outputLabel  for="dep_id" class="label" value="الدائرة"/>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                                                    <h:selectOneMenu id="sec_id"  value="#{serviceManager.newServie.section.id}" class="form-control form-control-user" style="text-align:right;" required="true" label="Sec ID" >
-                                                                        <f:selectItems itemLabel="القسم" />
-                                                                        <f:selectItems value="#{departmentsManage.allSection()}" var="s" itemLabel="#{s.name}" itemValue="#{s.id}" />
-                                                                    </h:selectOneMenu>                                               
-                                                                </div>
-                                                                <div class="col-sm-6">
-                                                                    <h:outputLabel  for="sec_id" class="label" value="القسم"/>
-                                                                </div>
                                                             </div>
 
+                                                            <div class="col-lg-6" style="text-align: right; float: right;">
 
+                                                                <div class="card shadow mb-4">
+                                                                    <div class="card-header py-3">
+                                                                        <h6 class="m-0 font-weight-bold text-primary">معلومات الخدمة </h6>
+                                                                    </div>
+                                                                    <div class="card-body">
+
+                                                                        <div class="form-group row">
+                                                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                                                                <p:inputText value="#{serviceManager.newServie.name}" class="form-control form-control-user" style="text-align:right;" type="text" id="ServiceName"  required="true"/>
+                                                                            </div>
+                                                                            <div class="col-sm-6">
+                                                                                <p:outputLabel class="label" value="*اسم الخدمة"/>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="form-group row">
+                                                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                                                                <p:inputText  value="#{serviceManager.newServie.days}"  class="form-control form-control-user" style="text-align:right;" type="number" id="DaysService" required="true"/>
+
+                                                                            </div>
+                                                                            <div class="col-sm-6">
+                                                                                <p:outputLabel class="label" value="*عدد ايام الاستجابه"/>
+                                                                            </div>
+                                                                        </div>
+
+
+                                                                        <div class="form-group row">
+                                                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                                                                <p:inputText value="#{serviceManager.newServie.cost}" class="form-control form-control-user" id="Cost" style="text-align:right;"  type="number" required="true"/>                                                            
+
+                                                                            </div>
+                                                                            <div class="col-sm-6">
+                                                                                <p:outputLabel class="label" value="*رسوم الخدمة"/>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="form-group row" >
+
+                                                                            <div class="col-sm-6">
+                                                                                <h:selectOneMenu id="states" value="#{serviceManager.newServie.status}" class="form-control form-control-user" style="text-align:right;"   required="true" label="Dep ID">
+
+                                                                                    <f:selectItem itemLabel="فعالة" itemValue="valid" />
+                                                                                    <f:selectItem itemLabel="غير فعالة" itemValue="notvalid" />
+                                                                                </h:selectOneMenu>
+                                                                            </div>
+                                                                            <div class="col-sm-6 mb-3 mb-sm-0">
+
+                                                                                <p:outputLabel class="label" value="حالة الخدمه"/>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="card shadow mb-4" style="text-align: right;">
+                                                                    <div class="card-header py-3">
+                                                                        <h6 class="m-0 font-weight-bold text-primary">تتبع الخدمة الى </h6>
+                                                                    </div>
+                                                                    <div class="card-body">
+
+                                                                        <div class="form-group row">
+                                                                            <div class="col-sm-6">
+                                                                                <h:selectOneMenu id="dep_id" value="#{serviceManager.newServie.department.id}"  class="form-control form-control-user" style="text-align:right;"   required="true" label="Dep ID">
+                                                                                    <f:selectItems itemLabel="الدائرة" />
+                                                                                    <f:selectItems value="#{departmentsManage.allDepartment()}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}" />
+                                                                                </h:selectOneMenu>
+                                                                            </div>
+
+                                                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                                                                <h:outputLabel  for="dep_id" class="label" value="الدائرة"/>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                                                                <h:selectOneMenu id="sec_id"  value="#{serviceManager.newServie.section.id}" class="form-control form-control-user" style="text-align:right;" required="true" label="Sec ID" >
+                                                                                    <f:selectItems itemLabel="القسم" />
+                                                                                    <f:selectItems value="#{departmentsManage.allSection()}" var="s" itemLabel="#{s.name}" itemValue="#{s.id}" />
+                                                                                </h:selectOneMenu>                                               
+                                                                            </div>
+                                                                            <div class="col-sm-6">
+                                                                                <h:outputLabel  for="sec_id" class="label" value="القسم"/>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <div class="col-sm-6 mb-3 mb-sm-0">
+
+                                                                                                                 
+                                                                            </div>
+                                                                            <div class="col-sm-6">
+                                                                                <h:outputLabel for="menu" value="Basic:" />
+                                                                            </div>
+                                                                        </div>
+
+
+
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
                                                         </div>
                                                     </div>
 
                                                 </div>
                                             </div>
 
-                                            <!--NO ESCRIBIR DESPUES DE AQUI-->
+
+
                                         </div>
+
+
+                                        <!--NO ESCRIBIR DESPUES DE AQUI-->
                                     </div>
                                 </div>
-                                                        
-    
-    <p:commandButton actionListener="#{serviceManager.addService()}" value="اضافة الخدمة" id="add_service"  update="@form"  style="margin-right:20px;" styleClass="ui-priority-primary">
-                                                                <f:ajax />
-                                                            </p:commandButton>
-                            </h:form>
-                        
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-lg-12 text-center">
+                            </div>
 
-                                    
-                                    <br/><hr style="border: 2px solid orange;"/>
-                                    <h2 class="section-heading text-uppercase"> مسار الخدمة</h2><br/>
-                                </div>
-                            </div>  
-                            <div class="row text-center">
 
-                               
-                                <h:form id="dialog">
+
+
+
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-lg-12 text-center">
+
+
+                                        <br/><hr style="border: 2px solid orange;"/>
+                                        <h2 class="section-heading text-uppercase"> مسار الخدمة</h2><br/>
+                                    </div>
+                                </div>  
+                                <div class="row text-center">
+
+
+
                                     <p:commandButton value="Add Department" onclick="PF('dlg').show();" type="button" />
                                     <p:dialog id="DNewSection" resizable="false" header="Add Department" widgetVar="dlg">
 
@@ -193,24 +241,23 @@
                                             </p:selectOneMenu>
 
                                             <h:outputLabel for="number" value="Number:" />
-                                            <p:inputNumber id="name" label="name" value="#{serviceManager.orderDepartment}"/>
+                                            <p:inputNumber id="name1" label="name" value="#{serviceManager.orderDepartment}"/>
 
-                                            <p:commandButton value="Add" actionListener="#{serviceManager.addPathDepartment()}" update="@form :formDepartment " oncomplete="PF('dlg').hide();"/>
+                                            <p:commandButton value="Add" actionListener="#{serviceManager.addPathDepartment()}" update="@form  " oncomplete="PF('dlg').hide();"/>
 
                                         </h:panelGrid>
                                     </p:dialog>  
 
-                                </h:form>
-                               <h:form id="formDepartment">
-                                    <h:head id="msgs"/>
+
+                                    <h:head id="msgs1"/>
                                     <p:dataTable id="singleDT" var="department" value="#{serviceManager.departmentsInPath}"  style="margin-bottom:20px"  selectionMode="single" selection="#{serviceManager.selectDepartment}" rowKey="#{department.id}" >
 
                                         <f:facet name="header">
-                                           الدوائر
+                                            الدوائر
                                         </f:facet>
-                                        
-                                        <p:ajax event="rowSelect" listener="#{serviceManager.onRowSelect}"  update=":formSection :formJob"/>
-                                        <p:ajax event="rowUnselect" listener="#{serviceManager.onRowUnselect}" update=":formSection"/>
+
+                                        <p:ajax event="rowSelect" listener="#{serviceManager.onRowSelect}"  update=" "/>
+                                        <p:ajax event="rowUnselect" listener="#{serviceManager.onRowUnselect}" update=""/>
 
                                         <p:column headerText="اسم الدائره">
 
@@ -227,59 +274,53 @@
 
                                     </p:dataTable>
 
-                                </h:form >
-                               
-                                   <h:form id="dialog2">
-                                       <p:commandButton value="Add Section" onclick="PF('dlg2').show();" type="button" />
+
+                                    <p:commandButton value="Add Section" onclick="PF('dlg2').show();" type="button" />
                                     <p:dialog id="NewSection" resizable="false" header="Add Section" widgetVar="dlg2">
 
                                         <h:panelGrid columns="2" cellpadding="5">
 
                                             <h:outputLabel for="deid2" value="Section : " />
-                                            
+
                                             <p:selectOneMenu id="sections" value="#{serviceManager.idSection}" dynamic="true" style="width:200px; height:100%;">
                                                 <f:selectItems value="#{departmentsManage.allSection()}" var="s" itemLabel="#{s.name}" itemValue="#{s.id}"/>
                                             </p:selectOneMenu>
-                                            
+
 
                                             <h:outputLabel for="number" value="Number:" />
-                                            <p:inputNumber id="name" label="name" value="#{serviceManager.orderSection}"/>
+                                            <p:inputNumber id="name2" label="name" value="#{serviceManager.orderSection}"/>
 
-                                            <p:commandButton value="Add" actionListener="#{serviceManager.addPathSection()}" update="@form :formSection" oncomplete="PF('dlg').hide();"/>
+                                            <p:commandButton value="Add" actionListener="#{serviceManager.addPathSection()}" update="@form " oncomplete="PF('dlg').hide();"/>
 
                                         </h:panelGrid>
                                     </p:dialog>  
 
-                                </h:form>
-                                 <h:form id="formSection">
-                                    <h:head id="msgs"/>
-                                    <p:dataTable id="singleDT" var="section" value="#{serviceManager.sectionsInPath}"   style="margin-bottom:20px"  selectionMode="single" selection="#{serviceManager.selectSection}" rowKey="#{section.id}">
+
+                                    <h:head id="msgs2"/>
+                                    <p:dataTable id="singleDT1" var="section" value="#{serviceManager.sectionsInPath}"   style="margin-bottom:20px"  selectionMode="single" selection="#{serviceManager.selectSection}" rowKey="#{section.id}">
 
                                         <f:facet name="header">
                                             الاقسام
                                         </f:facet>
 
-                                        <p:ajax event="rowSelect" listener="#{serviceManager.onRowSelect}"  update=":formJob"/>
-                                        <p:ajax event="rowUnselect" listener="#{serviceManager.onRowUnselect}" update=":formJob"/>
+                                        <p:ajax event="rowSelect" listener="#{serviceManager.onRowSelect}"  update=""/>
+                                        <p:ajax event="rowUnselect" listener="#{serviceManager.onRowUnselect}" update=""/>
 
-                                        
+
                                         <p:column headerText="اسم القسم">
                                             <h:outputText value="#{section.name}" />
-                                                
+
                                         </p:column>
 
                                         <p:column headerText=" التسلسل">
-                                            
+
                                             <h:outputText value="#{section.order}" /> 
-                                                
+
                                         </p:column>
-                                        
+
                                     </p:dataTable>
 
-                                </h:form >
 
-                             
-                                 <h:form id="dialog3">
                                     <p:commandButton value="Add job" onclick="PF('dlg3').show();" type="button" />
                                     <p:dialog id="newjob" resizable="false" header="Add JobTitle" widgetVar="dlg3">
 
@@ -291,22 +332,21 @@
                                             </p:selectOneMenu>
 
                                             <h:outputLabel for="number" value="Number:" />
-                                            <p:inputNumber id="name" label="name" value="#{serviceManager.orderJob}"/>
+                                            <p:inputNumber id="name3" label="name" value="#{serviceManager.orderJob}"/>
 
-                                            <p:commandButton value="Add" actionListener="#{serviceManager.addPathJob()}" update="@form :formJob " oncomplete="PF('dlg3').hide();"/>
+                                            <p:commandButton value="Add" actionListener="#{serviceManager.addPathJob()}" update="@form  " oncomplete="PF('dlg3').hide();"/>
 
                                         </h:panelGrid>
                                     </p:dialog>  
 
-                                </h:form>
-                               <h:form id="formJob">
-                                    <h:head id="msgs"/>
-                                    <p:dataTable id="singleDT" var="job" value="#{serviceManager.jobInPath}"  style="margin-bottom:20px"  >
+
+                                    <h:head id="msgs3"/>
+                                    <p:dataTable id="singleDT2" var="job" value="#{serviceManager.jobInPath}"  style="margin-bottom:20px"  >
 
                                         <f:facet name="header">
-                                           الوظائف
+                                            الوظائف
                                         </f:facet>
-                  
+
                                         <p:column headerText="اسم الدائره">
 
                                             <h:outputText value="#{job.name}" />
@@ -322,21 +362,22 @@
 
                                     </p:dataTable>
 
-                                
 
-                                </h:form >
-                             
-                             
 
-                     
+
+
+
+
+                                </div>
+                                <br/><br/>
+                                <hr style="border: 2px solid orange;"/>
+                                <br/><br/>
+                                <p:commandButton actionListener="#{serviceManager.addService()}" value="اضافة الخدمة" id="add_service"  update="@form"  style="margin-right:20px;" styleClass="ui-priority-primary">
+                                    <f:ajax />
+                                </p:commandButton>
 
                             </div>
-                            <br/><br/>
-                            <hr style="border: 2px solid orange;"/>
-                            <br/><br/>
-
-                        </div>
-
+                        </h:form>
 
                         <!-- /.container-fluid -->
                     </p:column>

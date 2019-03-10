@@ -25,6 +25,7 @@ import javax.faces.context.FacesContext;
 import org.primefaces.event.ItemSelectEvent;
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.event.SelectEvent;
+import org.primefaces.model.DualListModel;
 
 /**
  *
@@ -40,20 +41,28 @@ public class EmployeeManage implements Serializable {
     List<String> emp;
     String[] selectedEmployees;
     List<Screen> screen;
-    
+    String[] selectedScreens;
     List<Section> allSections;
     List<Department> allDepartments;
     List<JobTitel> allJobs;
-List<Employee> allemployees;
+    List<Employee> allemployees;
+    DualListModel<String> screenSel;
+
     public EmployeeManage() {
 
         newEmployee = new Employee();
         newEmployeeAccount = new EmployeeAccount();
         newEmpScreen = new EmployeeScreen();
         screen = GetDB_Eman.getScreens();
-        allDepartments  = GetFromDB.getDepartments();
+        List<String> scre = new ArrayList<>();
+        for (int i = 0; i < screen.size(); i++) {
+            Screen get = screen.get(i);
+            scre.add(get.getScreenName());
+        }
+        allDepartments = GetFromDB.getDepartments();
         allemployees = new ArrayList<Employee>();
-        
+        List<String> screenTarget = new ArrayList<String>();
+        screenSel =  new DualListModel<String>(scre, screenTarget);
         allSections = new ArrayList<Section>();
         allemployees = GetDB_Eman.getEmployee();
         try {
@@ -63,14 +72,13 @@ List<Employee> allemployees;
             try {
                 allJobs = GetFromDB.getJobTittle(s.getId());
             } catch (Exception e) {
-               allJobs = new ArrayList<>();
+                allJobs = new ArrayList<>();
             }
         } catch (Exception e) {
-             allSections = new ArrayList<>();
-        allJobs = new ArrayList<>();
+            allSections = new ArrayList<>();
+            allJobs = new ArrayList<>();
         }
-        
-        
+
         allSections = new ArrayList<>();
         allJobs = new ArrayList<>();
     }
@@ -81,17 +89,16 @@ List<Employee> allemployees;
         this.selectedEmployees = selectedEmployees;
     }
 
-     
-  
     public List<Department> allDepartments() {
-       return GetFromDB.getDepartments();
+        return GetFromDB.getDepartments();
     }
-      public List<Employee> getAllemployees() {
-          System.out.println("fffffffffffff");
-          System.out.println(allemployees.size());
+
+    public List<Employee> getAllemployees() {
+        System.out.println("fffffffffffff");
+        System.out.println(allemployees.size());
         return allemployees;
     }
-      
+
     public List<Screen> getScreen() {
         return screen;
     }
@@ -132,7 +139,6 @@ List<Employee> allemployees;
         this.newEmpScreen = newEmpScreen;
     }
 
-    
     public List<String> getEmp() {
         return emp;
     }
@@ -150,7 +156,7 @@ List<Employee> allemployees;
     }
 
     public List<Section> allSections() {
-      return GetFromDB.getSection();
+        return GetFromDB.getSection();
     }
 
     public void setAllSections(List<Section> allSections) {
@@ -164,43 +170,67 @@ List<Employee> allemployees;
     public void setAllJobs(List<JobTitel> allJobs) {
         this.allJobs = allJobs;
     }
-    
-    
-    
+
     public void addEmployee() {
-       newEmployee.setEmp_id((int)System.currentTimeMillis());
-       
+        newEmployee.setEmp_id((int) System.currentTimeMillis());
+
         newEmployee.addEmployeeToDB();
-        
+
         newEmployeeAccount.Emp_ID = newEmployee.getEmp_id();
-        
+
         newEmployeeAccount.addEmpAccountToDB();
         newEmpScreen.setEmp_ID(newEmployee.getEmp_id());
-        
+
         newEmpScreen.addEmpScreenToDB();
-        
+
         newEmployee = new Employee();
         newEmployeeAccount = new EmployeeAccount();
         newEmpScreen = new EmployeeScreen();
     }
-    
-    public void putDepartmentSelected(){
-       System.out.println("+++++++++++++ + + +  "+newEmployee.getDep_id());
+
+    public void putDepartmentSelected() {
+        System.out.println("+++++++++++++ + + +  " + newEmployee.getDep_id());
         allSections = GetFromDB.getFsection(newEmployee.getDep_id());
-        
+
     }
-    public void putSectionSelected(){
-        System.out.println("+++++++++++++ + + +  "+newEmployee.getSec_id());
-        allJobs = GetFromDB.getJobTittle(newEmployee.getSec_id()+"");
+
+    public void putSectionSelected() {
+        System.out.println("+++++++++++++ + + +  " + newEmployee.getSec_id());
+        allJobs = GetFromDB.getJobTittle(newEmployee.getSec_id() + "");
     }
-    
+
     public void filterEmployee() {
-       if (newEmployee.getDep_id() != -1) {
+        if (newEmployee.getDep_id() != -1) {
             allemployees = GetDB_Eman.getFEmployee(newEmployee.getDep_id());
         } else {
             allemployees = GetDB_Eman.getTableEmployee();
         }
-        
+
     }
-    
+
+    public String[] getSelectedScreens() {
+        return selectedScreens;
+    }
+
+    public void setSelectedScreens(String[] selectedScreens) {
+        this.selectedScreens = selectedScreens;
+    }
+
+    public List<Department> getAllDepartments() {
+        return allDepartments;
+    }
+
+    public void setAllDepartments(List<Department> allDepartments) {
+        this.allDepartments = allDepartments;
+    }
+
+    public DualListModel<String> getScreenSel() {
+        return screenSel;
+    }
+
+    public void setScreenSel(DualListModel<String> screenSel) {
+        this.screenSel = screenSel;
+    }
+
+  
 }

@@ -70,16 +70,16 @@
 
                                 <h:form id="formSection">
                                     <h:head id="msgs"/>
-                                    <p:dataTable id="eventsDT" var="job" value="#{sectionManage.jobOfSection}" selectionMode="single" selection="#{sectionManage.jobSelected}" rowKey="#{job.id}">
+                                    <p:dataTable id="eventsDT" sortBy="#{job.id}" var="job" value="#{sectionManage.jobOfSection}" selectionMode="single" selection="#{sectionManage.jobSelected}" rowKey="#{job.id}">
                                         <f:facet name="header">
                                            الوظائف
                                         </f:facet>
                                         <p:ajax event="rowSelect" listener="#{sectionManage.onRowSelect}" update=":formSection:msgs" />
                                         <p:ajax event="rowUnselect" listener="#{sectionManage.onRowUnselect}" update=":formSection:msgs" />
-                                        <p:column headerText="رقم الوظيفة">
+                                        <p:column headerText="رقم الوظيفة" sortBy="#{job.id}">
                                             <h:outputText value="#{job.id}" />
                                         </p:column>
-                                        <p:column headerText="اسم الوظيفة">
+                                        <p:column headerText="اسم الوظيفة" sortBy="#{job.name}">
                                             <h:outputText value="#{job.name}" />
                                         </p:column>
                                         
