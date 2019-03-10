@@ -29,6 +29,8 @@ public class Service implements Serializable {
     List<Department> path;
 
     public Service() {
+        this.department = new Department();
+        this.section = new Section();
     }
 
     public Service(int id, String name, int days, double cost, String status, Department department, Section section, List<Department> path) {
@@ -131,9 +133,8 @@ public class Service implements Serializable {
 
     public void addServiceToDB() {
 
-        String q = "INSERT INTO services_provided (`Serv_Name`, `Serv_Cost`, `Serv_Days`, `Serv_Case`, `Dep_ID`,`Sec_ID`) \n"
-                + "VALUES ('" + name + "','" + cost + "','" + days + "','" + status + "','" + department.id + "','" + section.id + "');";
-
+        String q = "INSERT INTO services_provided (`Services_Provided_ID`,`Serv_Name`, `Serv_Cost`, `Serv_Days`, `Serv_Case`, `Dep_ID`,`Sec_ID`) VALUES ('"+id+"','" + name + "','" + cost + "','" + days + "','" + status + "','" + department.id + "','" + section.id + "');";
+ System.out.println(q);
         try {
             DB data = new DB();
             System.out.println(q);

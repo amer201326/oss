@@ -55,9 +55,9 @@ public class ServiceManager implements Serializable {
 
     }
 
-    public List<Service> getAllSrvices() {
-        return GetFromDBaraa.getAllServices();
-    }
+//    public List<Service> getAllSrvices() {
+//        return GetFromDBaraa.getAllServices();
+//    }
 
     public void setAllSrvices(List<Service> allSrvices) {
         this.allSrvices = allSrvices;
@@ -199,6 +199,8 @@ public class ServiceManager implements Serializable {
 
     public void addService() {
         //GetFromDBaraa.addNewService(departmentsInPath);
+        System.out.println("kkkkkk"+newServie.toString());
+        newServie.setId((int)System.currentTimeMillis());
         newServie.addServiceToDB();
         
     }

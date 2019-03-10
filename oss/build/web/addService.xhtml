@@ -88,7 +88,7 @@
 
                                                             <div class="form-group row">
                                                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                                                    <p:inputMask  value="#{serviceManager.newServie.days}"  mask="999" class="form-control form-control-user" style="text-align:right;" id="DaysService" type="text" required="true"/>
+                                                                    <p:inputText  value="#{serviceManager.newServie.days}"  class="form-control form-control-user" style="text-align:right;" type="number" id="DaysService" required="true"/>
 
                                                                 </div>
                                                                 <div class="col-sm-6">
@@ -99,7 +99,7 @@
 
                                                             <div class="form-group row">
                                                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                                                    <p:inputText value="#{serviceManager.newServie.cost}" class="form-control form-control-user" id="Cost" style="text-align:right;"  type="text" required="true"/>                                                            
+                                                                    <p:inputText value="#{serviceManager.newServie.cost}" class="form-control form-control-user" id="Cost" style="text-align:right;"  type="number" required="true"/>                                                            
 
                                                                 </div>
                                                                 <div class="col-sm-6">
@@ -120,7 +120,7 @@
 
                                                         </div>
                                                     </div>
-
+                         
                                                     <div class="card shadow mb-4" style="text-align: right;">
                                                         <div class="card-header py-3">
                                                             <h6 class="m-0 font-weight-bold text-primary">تتبع الخدمة الى </h6>
@@ -129,7 +129,7 @@
 
                                                             <div class="form-group row">
                                                                 <div class="col-sm-6">
-                                                                    <h:selectOneMenu id="dep_id"  class="form-control form-control-user" style="text-align:right;"   required="true" label="Dep ID">
+                                                                    <h:selectOneMenu id="dep_id" value="#{serviceManager.newServie.department.id}" class="form-control form-control-user" style="text-align:right;"   required="true" label="Dep ID">
                                                                         <f:selectItems itemLabel="الدائرة" />
                                                                         <f:selectItems value="#{departmentsManage.allDepartment()}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}" />
                                                                     </h:selectOneMenu>
@@ -141,7 +141,7 @@
                                                             </div>
                                                             <div class="form-group row">
                                                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                                                    <h:selectOneMenu id="sec_id"   class="form-control form-control-user" style="text-align:right;" required="true" label="Sec ID" >
+                                                                    <h:selectOneMenu id="sec_id"  value="#{serviceManager.newServie.section.id}" class="form-control form-control-user" style="text-align:right;" required="true" label="Sec ID" >
                                                                         <f:selectItems itemLabel="القسم" />
                                                                         <f:selectItems value="#{departmentsManage.allSection()}" var="s" itemLabel="#{s.name}" itemValue="#{s.id}" />
                                                                     </h:selectOneMenu>                                               
@@ -162,6 +162,11 @@
                                         </div>
                                     </div>
                                 </div>
+                                                        
+    
+    <p:commandButton actionListener="#{serviceManager.addService()}" value="اضافة الخدمة" id="add_service"  update="@form"  style="margin-right:20px;" styleClass="ui-priority-primary">
+                                                                <f:ajax />
+                                                            </p:commandButton>
                             </h:form>
                         
                         <div class="container-fluid">
@@ -317,7 +322,7 @@
 
                                     </p:dataTable>
 
-                                    <p:commandButton value="اضافة الخدمة" actionListener="#{serviceManager.addService()}" />
+                                
 
                                 </h:form >
                              
