@@ -75,3 +75,24 @@
     color: #ffffff;
     font-weight: bold;
 }
+
+#addnewservice2 .ui-picklist .ui-picklist-list{
+    height: 400px;
+    width: 290px;
+}
+
+.flexRow{
+    display: flex;
+    flex-direction: row;
+}
+.flexCenter{
+    display: flex;
+    justify-content:center;
+}
+.padding10{
+    padding-top: 3px;
+}
+
+.sizeFont10{
+    font-size: xx-large;
+}

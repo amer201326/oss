@@ -319,5 +319,68 @@ public class GetFromDB {
         }
         return services;
     }
+
+    public static List<Screen> getScreens() {
+        Screen s = new Screen();
+
+        List<Screen> screen = new ArrayList<Screen>();
+        try {
+            DB db = new DB();
+            String sql = "SELECT * FROM screen ;";
+
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                s = new Screen(r.getInt(1), r.getString(2));
+                screen.add(s);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return screen;
+    }
+
+    public static List<JobOfSection> getJobOfSectio() {
+        
+        JobOfSection d = new JobOfSection();
+        
+        List<JobOfSection> job = new ArrayList<JobOfSection>();
+        try {
+            DB db = new DB();
+            
+            String sql = "select js.Job_ID , js.Sec_ID , j.Job_name from job_of_section as js , jobtitle as j where js.Job_ID  = j.Job_ID;";
+            System.out.println(sql);
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                d = new JobOfSection(r.getInt(1), r.getInt(2),r.getString(3));
+                job.add(d);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return job;
+    }
     
+    
+    
+    
+     public static List<ServiceAttachmentName> getServiceAttachmentName() {
+        
+        ServiceAttachmentName d = new ServiceAttachmentName();
+        
+        List<ServiceAttachmentName> attach = new ArrayList<ServiceAttachmentName>();
+        try {
+            DB db = new DB();
+            
+            String sql = "SELECT * FROM oss.serviceattachmentname;";
+            System.out.println(sql);
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                d = new ServiceAttachmentName(r.getInt(1), r.getString(2),r.getString(3));
+                attach.add(d);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return attach;
+    }
 }

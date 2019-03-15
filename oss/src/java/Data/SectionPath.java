@@ -11,22 +11,24 @@ import java.util.List;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author me
  */
-public class SectionPath implements Serializable{
+public class SectionPath implements Serializable {
+    int departmentId;
     int id;
     String name;
-    int order;
+    Integer order;
+    
     public List<JobPath> jobs;
 
     public SectionPath() {
         jobs = new ArrayList<JobPath>();
     }
 
-    public SectionPath(int id, String name, List<JobPath> jobs) {
+    public SectionPath(int departmentId, int id, String name, List<JobPath> jobs) {
+        this.departmentId = departmentId;
         this.id = id;
         this.name = name;
         this.jobs = jobs;
@@ -56,29 +58,26 @@ public class SectionPath implements Serializable{
         this.jobs = jobs;
     }
 
-    public int getOrder() {
+    public Integer getOrder() {
         return order;
     }
 
-    public void setOrder(int order) {
+    public void setOrder(Integer order) {
         this.order = order;
     }
-    
-    public void getNameFromDataBase() {
-      
-        try {
-            DB db = new DB();
-         String sql = "SELECT Sec_Name FROM section where Sec_ID = "+this.id+";";
 
-            ResultSet r = db.read(sql);
-            while (r.next()) {
-               this.name = r.getString(1);
-              
-            }
-        } catch (Exception e) {
-            
-        }
-       
-        
+    public int getDepartmentId() {
+        return departmentId;
     }
+
+    public void setDepartmentId(int departmentId) {
+        this.departmentId = departmentId;
+    }
+
+    @Override
+    public String toString() {
+        return "SectionPath{" + "departmentId=" + departmentId + ", id=" + id + ", name=" + name + ", order=" + order + ", jobs=" + jobs + '}';
+    }
+
+   
 }

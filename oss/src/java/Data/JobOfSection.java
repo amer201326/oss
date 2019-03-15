@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 public class JobOfSection {
       int idJob;
       int idSEction;
+      String name;
 
     public JobOfSection() {
     }
@@ -25,6 +26,13 @@ public class JobOfSection {
         this.idJob = idJob;
         this.idSEction = idSEction;
     }
+
+    public JobOfSection(int idJob, int idSEction, String name) {
+        this.idJob = idJob;
+        this.idSEction = idSEction;
+        this.name = name;
+    }
+    
 
     public int getIdJob() {
         return idJob;
@@ -77,4 +85,13 @@ public class JobOfSection {
               return false;
         }
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
 }

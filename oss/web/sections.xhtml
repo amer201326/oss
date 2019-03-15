@@ -95,7 +95,7 @@
                                         <p:ajax event="rowEditCancel" listener="#{departmentsManage.onSectionCancel}" update=":formSection:msgs" />
 
 
-                                        <p:ajax event="rowSelect" process="@this    " update="formSection:diallogDelete" listener="#{departmentsManage.onSectionSelected}"/>
+                                        <p:ajax event="rowSelect" process="@this" update="formSection:diallogDelete" listener="#{departmentsManage.onSectionSelected}"/>
                                         <p:column headerText="الرقم">
                                             <p:cellEditor disabled="true">
                                                 <f:facet name="output"><h:outputText value="#{section.id}" /></f:facet>

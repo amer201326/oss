@@ -5,9 +5,11 @@
  */
 package Beans;
 
+import Data.Department;
 import Data.DepartmentPaths;
 import Data.GetFromDBaraa;
 import Data.JobPath;
+import Data.Section;
 import Data.SectionPath;
 import Data.Service;
 import java.io.Serializable;
@@ -28,9 +30,15 @@ import org.primefaces.event.UnselectEvent;
 public class ServiceManager implements Serializable {
 
     List<Service> allSrvices;
-
-    int orderDepartment;
-    int idDepartment;
+    Boolean boolSection = false;
+    Boolean boolJob = false;
+    boolean pleaseSelectDepartment = true;
+    boolean pleaseSelectsection = true;
+   
+    
+    List<Section> fiterdSections;  
+    
+    
     List<DepartmentPaths> departmentsInPath = new ArrayList<DepartmentPaths>();
 
     int orderSection;
@@ -43,6 +51,22 @@ public class ServiceManager implements Serializable {
 
     DepartmentPaths selectDepartment;
     SectionPath selectSection;
+
+    public Boolean getBoolSection() {
+        return boolSection;
+    }
+
+    public void setBoolSection(Boolean boolSection) {
+        this.boolSection = boolSection;
+    }
+
+    public Boolean getBoolJob() {
+        return boolJob;
+    }
+
+    public void setBoolJob(Boolean boolJob) {
+        this.boolJob = boolJob;
+    }
 
     Service newServie = new Service();
 
@@ -158,11 +182,15 @@ public class ServiceManager implements Serializable {
     }
 
     public void onRowSelect(SelectEvent event) {
-
+        System.out.println((DepartmentPaths)event.getObject());
+        boolSection = true;
+        pleaseSelectDepartment = false;
+        System.out.println(pleaseSelectDepartment +" boolean is   >>  <<< ");
     }
 
     public void onRowUnselect(UnselectEvent event) {
-
+         boolSection = false;
+        pleaseSelectDepartment = true;
     }
 
     public DepartmentPaths getSelectDepartment() {
@@ -213,4 +241,31 @@ public class ServiceManager implements Serializable {
         this.newServie = newServie;
     }
 
+    public boolean isPleaseSelectDepartment() {
+        return pleaseSelectDepartment;
+    }
+
+    public void setPleaseSelectDepartment(boolean pleaseSelectDepartment) {
+        this.pleaseSelectDepartment = pleaseSelectDepartment;
+    }
+
+    public boolean isPleaseSelectsection() {
+        return pleaseSelectsection;
+    }
+
+    public void setPleaseSelectsection(boolean pleaseSelectsection) {
+        this.pleaseSelectsection = pleaseSelectsection;
+    }
+
+    public List<Section> getFiterdSections() {
+        if()
+        return fiterdSections;
+    }
+
+    public void setFiterdSections(List<Section> fiterdSections) {
+        this.fiterdSections = fiterdSections;
+    }
+    
+    
+    
 }

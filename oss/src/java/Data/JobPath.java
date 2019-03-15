@@ -13,9 +13,31 @@ import java.sql.ResultSet;
  * @author me
  */
 public class JobPath {
-   int id;
-   String name;
-   int order;
+
+    int sectionID;
+    int id;
+    String name;
+    int order;
+    
+    String idMarge;
+    public JobPath() {
+    }
+
+    public JobPath(int sectionID, int id, String name, int order) {
+        this.sectionID = sectionID;
+        this.id = id;
+        this.name = name;
+        this.order = order;
+        idMarge = id+"-"+sectionID;
+    }
+
+    public int getSectionID() {
+        return sectionID;
+    }
+
+    public void setSectionID(int sectionID) {
+        this.sectionID = sectionID;
+    }
 
     public int getId() {
         return id;
@@ -40,23 +62,22 @@ public class JobPath {
     public void setOrder(int order) {
         this.order = order;
     }
-   
-   public void getNameFromDataBase() {
-      
-        try {
-            DB db = new DB();
-         String sql = "SELECT Job_name FROM jobtitle where Job_ID = "+this.id+";";
 
-            ResultSet r = db.read(sql);
-            while (r.next()) {
-               this.name = r.getString(1);
-              
-            }
-        } catch (Exception e) {
-            
-        }
-        
-       
-        
+    public String getIdMarge() {
+        return idMarge;
     }
+
+    public void setIdMarge(String idMarge) {
+        this.idMarge = idMarge;
+    }
+    
+    public void idMarge(){
+        idMarge = id+"-"+sectionID;
+    }
+
+    @Override
+    public String toString() {
+        return "JobPath{" + "sectionID=" + sectionID + ", id=" + id + ", name=" + name + ", order=" + order + '}';
+    }
+    
 }

@@ -23,15 +23,12 @@ public class DepartmentPaths implements Serializable {
     public int id;
     public String nameA;
     public String image;
-    int order;
+    public Integer order;
     public List<SectionPath> sections;
 
     public DepartmentPaths() {
         sections = new ArrayList<SectionPath>();
-        List<String> im = GetFromDB.getImageDepartment();
-        if(im.size()>0){
-            image = GetFromDB.getImageDepartment().get((int)(Math.random() * im.size()));
-        }
+        
         
     }
     
@@ -48,10 +45,6 @@ public class DepartmentPaths implements Serializable {
         this.nameA = nameA;
     }
 
-//    public Department(int id, String nameA) {
-//        this.id = id;
-//        this.nameA = nameA;
-//    }
 
     public DepartmentPaths(int id, String nameA, String image) {
         this.id = id;
@@ -78,14 +71,15 @@ public class DepartmentPaths implements Serializable {
         this.nameA = nameA;
     }
 
-    public int getOrder() {
+    public Integer getOrder() {
         return order;
     }
 
-    public void setOrder(int order) {
+    public void setOrder(Integer order) {
         this.order = order;
     }
 
+    
  
 
     public boolean addToDataBase() {
