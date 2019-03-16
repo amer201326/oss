@@ -26,14 +26,14 @@ public class Service implements Serializable {
     String status;
     Department department;
     Section section;
-    List<Department> path;
+    List<DepartmentPaths> path;
 
     public Service() {
         this.department = new Department();
         this.section = new Section();
     }
 
-    public Service(int id, String name, int days, double cost, String status, Department department, Section section, List<Department> path) {
+    public Service(int id, String name, int days, double cost, String status, Department department, Section section, List<DepartmentPaths> path) {
         this.id = id;
         this.name = name;
         this.days = days;
@@ -110,13 +110,15 @@ public class Service implements Serializable {
         this.section = section;
     }
 
-    public List<Department> getPath() {
+    public List<DepartmentPaths> getPath() {
         return path;
     }
 
-    public void setPath(List<Department> path) {
+    public void setPath(List<DepartmentPaths> path) {
         this.path = path;
     }
+
+  
 
     public void update() {
         try {
@@ -146,9 +148,6 @@ public class Service implements Serializable {
 
     }
 
-    @Override
-    public String toString() {
-        return "Service{" + "id=" + id + ", name=" + name + ", days=" + days + ", cost=" + cost + ", status=" + status + ", department=" + department + ", section=" + section + '}';
-    }
+    
 
 }

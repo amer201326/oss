@@ -27,7 +27,7 @@ public class DepartmentPaths implements Serializable {
     public List<SectionPath> sections;
 
     public DepartmentPaths() {
-        sections = new ArrayList<SectionPath>();
+        sections = new ArrayList<>();
         
         
     }

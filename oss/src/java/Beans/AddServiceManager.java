@@ -129,11 +129,8 @@ public class AddServiceManager {
     }
 
     public void addService() {
-        System.out.println("add service");
-        for (int i = 0; i < attachmentNamesAndResaults.getTarget().size(); i++) {
-            String get = attachmentNamesAndResaults.getTarget().get(i);
-            System.out.println(get);
-        }
+      newService.setPath(departmentsInPath);
+      
     }
 
     public List<Section> filterSections() {
