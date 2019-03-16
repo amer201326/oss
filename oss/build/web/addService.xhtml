@@ -6,7 +6,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <title>Facelet Title</title>
+        <title>إضافة خدمة</title>
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -45,12 +45,10 @@
                                         <div class=" col-md-12 ">
                                             <div class="card border-left-primary border-right-0 shadow h-100 py-2">
                                                 <div class="card-body">
-                                                    <div class="row no-gutters textR">
+                                                    <div class="row no-gutters textC">
                                                         <div class="col mr-2">
                                                             <h2 class="section-heading text-uppercase">اضافة خدمة</h2>
-
                                                         </div>
-
                                                     </div>
                                                 </div>
                                             </div>
@@ -64,8 +62,8 @@
                                             <div class="card shadow mb-4">
                                                 <div class="card-header py-3">
                                                     <div class="ui-grid-col-3 floatR">
-                                                        <h2 class="section-heading  inLineB" style="padding: 20px"> معلومات الخدمة</h2>
-                                                        <i class="fa fa-fw fa-chevron-left inLineB" ></i>
+                                                        <h2 class="section-heading  inLineB" style="padding: 10px"><i class="fa fa-fw fa-chevron-left inLineB" ></i> معلومات الخدمة</h2>
+                                                        
                                                     </div>
 
                                                     <br/>
@@ -73,23 +71,39 @@
                                                 <div class="card-body">
                                                     <div class="text-center">
                                                         <div class="row">
-                                                            <div class="col-lg-6" style="text-align: right; min-width:700px ">
-
-                                                                <div class="card shadow mb-xl-4">
+                                                            <div class="col-lg-6" style="text-align: right; float: right;">
+                                                                <div class="card shadow mb-4" style="text-align: right;">
                                                                     <div class="card-header py-3">
-                                                                        <h6 class="m-0 font-weight-bold text-primary">المتطلبات</h6>
+                                                                        <h6 class="m-0 font-weight-bold text-primary">تتبع الخدمة الى </h6>
                                                                     </div>
-
                                                                     <div class="card-body">
-                                                                        <div class="my-2 " ></div> 
 
+                                                                        <div class="form-group row">
+                                                                            <div class="col-sm-6">
+                                                                                <p:selectOneMenu id="dep_id" value="#{addServiceManager.newService.department.id}"  class="form-control form-control-user" style="text-align:right;"   required="true" label="Dep ID">
+                                                                                    <f:selectItem itemLabel="الدائرة" noSelectionOption="true"/>
 
-                                                                        <p:pickList id="pickList"  value="#{addServiceManager.attachmentNamesAndResaults}" var="sna" 
-                                                                                    itemLabel="#{sna}" itemValue="#{sna}"  showSourceFilter="true" showTargetFilter="true">
-                                                                            <f:facet name="sourceCaption">كافة المرفقات</f:facet>
-                                                                            <f:facet name="targetCaption">المرفقات المختارة</f:facet>
-                                                                        </p:pickList>
-                                                                        
+                                                                                    <f:selectItems value="#{addServiceManager.departments}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}" />
+                                                                                    <p:ajax update="sec_id" process="@this" event="itemSelect" />
+                                                                                </p:selectOneMenu>
+                                                                            </div>
+
+                                                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                                                                <h:outputLabel  for="dep_id" class="label" value="الدائرة"/>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <div class="col-sm-6 mb-3 mb-sm-0"> 
+                                                                                <h:selectOneMenu id="sec_id"  value="#{addServiceManager.newService.section.id}" class="form-control form-control-user" style="text-align:right;" required="true" label="Sec ID" >
+                                                                                    <f:selectItems itemLabel="القسم" />
+                                                                                    <f:selectItems value="#{addServiceManager.filterSectionsForSer()}" var="s" itemLabel="#{s.name}" itemValue="#{s.id}" />
+                                                                                </h:selectOneMenu>                                               
+                                                                            </div>
+                                                                            <div class="col-sm-6">
+                                                                                <h:outputLabel  for="sec_id" class="label" value="القسم"/>
+                                                                            </div>
+                                                                        </div>
+
 
 
 
@@ -98,9 +112,11 @@
 
                                                             </div>
 
+
+
                                                             <div class="col-lg-6" style="text-align: right; float: right;">
 
-                                                                <div class="card shadow mb-4">
+                                                                <div class="card shadow mb-">
                                                                     <div class="card-header py-3">
                                                                         <h6 class="m-0 font-weight-bold text-primary">معلومات الخدمة </h6>
                                                                     </div>
@@ -154,52 +170,70 @@
                                                                     </div>
                                                                 </div>
 
-                                                                <div class="card shadow mb-4" style="text-align: right;">
-                                                                    <div class="card-header py-3">
-                                                                        <h6 class="m-0 font-weight-bold text-primary">تتبع الخدمة الى </h6>
-                                                                    </div>
-                                                                    <div class="card-body">
 
-                                                                        <div class="form-group row">
-                                                                            <div class="col-sm-6">
-                                                                                <p:selectOneMenu id="dep_id" value="#{addServiceManager.newService.department.id}"  class="form-control form-control-user" style="text-align:right;"   required="true" label="Dep ID">
-                                                                                    <f:selectItem itemLabel="الدائرة" noSelectionOption="true"/>
-                                                                                    
-                                                                                    <f:selectItems value="#{addServiceManager.departments}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}" />
-                                                                                    <p:ajax update="sec_id" process="@this" event="itemSelect" />
-                                                                                </p:selectOneMenu>
-                                                                            </div>
-
-                                                                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                                                                <h:outputLabel  for="dep_id" class="label" value="الدائرة"/>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group row">
-                                                                            <div class="col-sm-6 mb-3 mb-sm-0"> 
-                                                                                <h:selectOneMenu id="sec_id"  value="#{addServiceManager.newService.section.id}" class="form-control form-control-user" style="text-align:right;" required="true" label="Sec ID" >
-                                                                                    <f:selectItems itemLabel="القسم" />
-                                                                                    <f:selectItems value="#{addServiceManager.filterSectionsForSer()}" var="s" itemLabel="#{s.name}" itemValue="#{s.id}" />
-                                                                                </h:selectOneMenu>                                               
-                                                                            </div>
-                                                                            <div class="col-sm-6">
-                                                                                <h:outputLabel  for="sec_id" class="label" value="القسم"/>
-                                                                            </div>
-                                                                        </div>
-
-
-
-
-                                                                    </div>
-                                                                </div>
 
                                                             </div>
+
+
                                                         </div>
+
+
+
                                                     </div>
 
                                                 </div>
                                             </div>
 
 
+                                            <div class="col-lg-12 text-center mb-4">
+
+                                                <div class="card-body">
+                                                    <div class="text-center">
+                                                        <div class="row">
+                                                            <div class="col-lg-12" style="text-align: right; min-width:700px "></div>
+                                                            <br/>
+
+                                                            <div class="card shadow mb-4" style="text-align: right;">
+
+                                                                <div class="card-header py-3">
+                                                                    <div class="ui-grid-col-3 floatR">
+                                                                        <h2 class="section-heading  inLineB" style="padding: 20px"> معلومات الخدمة</h2>
+                                                                        <i class="fa fa-fw fa-chevron-left inLineB" ></i>
+                                                                    </div>
+
+                                                                    <br/>
+                                                                </div>
+                                                                <br/><br/> 
+
+                                                                <div class="col-lg-12" style="text-align: right; min-width:700px ">
+
+                                                                    <div class="card shadow mb-xl-4">
+
+
+                                                                        <div class="card-body">
+                                                                            <div class="my-2 " ></div> 
+
+
+                                                                            <p:pickList id="pickList"  value="#{addServiceManager.attachmentNamesAndResaults}" var="sna" 
+                                                                                        itemLabel="#{sna}" itemValue="#{sna}"  showSourceFilter="true" showTargetFilter="true">
+                                                                                <f:facet name="sourceCaption">كافة المرفقات</f:facet>
+                                                                                <f:facet name="targetCaption">المرفقات المختارة</f:facet>
+                                                                            </p:pickList>
+
+
+
+
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                         </div>
 
@@ -448,11 +482,11 @@
                                                     <h:head id="msgs3"/>
                                                     <p:outputPanel >
                                                         <p:autoUpdate/>
-                                                         <p:dataTable id="singleDT2" var="job"  emptyMessage="لا توجد سجلات" 
+                                                        <p:dataTable id="singleDT2" var="job"  emptyMessage="لا توجد سجلات" 
                                                                      rendered="#{addServiceManager.boolJob}" value="#{addServiceManager.filterJopPath()}"
                                                                      style="margin-bottom:20px"  selectionMode="single" selection="#{addServiceManager.selectedJobPath}"
                                                                      rowKey="#{job.idMarge}">
-                                                       
+
 
                                                             <f:facet name="header">
                                                                 الوظائف
@@ -466,7 +500,7 @@
 
                                                                 </div>
                                                             </f:facet>
-                                                             <p:ajax event="rowSelect" listener="#{addServiceManager.onRowSelectFromJob}"
+                                                            <p:ajax event="rowSelect" listener="#{addServiceManager.onRowSelectFromJob}"
                                                                     process="@this" />
                                                             <p:ajax event="rowUnselect" listener="#{addServiceManager.onRowUnselectFromJob}"
                                                                     process="@this" />
@@ -511,8 +545,8 @@
                                     <br/><br/>
                                     <p:commandButton actionListener="#{addServiceManager.addService()}" value="اضافة الخدمة" 
                                                      id="add_service" process="@this pickList ServiceName DaysService Cost states dep_id sec_id"  update="@form"  style="margin-right:20px;" styleClass="ui-priority-primary"/>
-                                        
-                                   
+
+
 
                                 </div>
                             </div>

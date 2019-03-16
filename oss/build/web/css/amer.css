@@ -26,15 +26,21 @@
 
 .floatR{
     float: right;
+    text-align: right;
+    width: 60%;
+    
 }
+
 .textR{
     text-align: right;
+}
+.textC{
+    text-align: center;
 }
 
 #formSelectD:departments_label{
     text-align: right;
 }
-
 
 .ui-organigram table{
     margin: 0 auto;
