@@ -296,29 +296,8 @@ public class GetFromDB {
     }
     
     
-    public static List<ServiceErr> getAllServices() {
-
-        ServiceErr s = new ServiceErr();
-
-        List<ServiceErr> services = new ArrayList<ServiceErr>();
-        try {
-            DB db = new DB();
-            String sql = "SELECT * FROM services_provided ;";
-
-            ResultSet r = db.read(sql);
-            while (r.next()) {
-//                s = new Service(r.getInt(1), r.getString(2), r.getDouble(3),r.getInt(4),r.getString(5));
-//                s.department.id = r.getInt(6);
-//                s.department.getNameFromDataBase();
-//                s.section.id = r.getInt(7);
-//                s.section.getNameFromDataBase();
-//                services.add(s);
-            }
-            
-        } catch (Exception e) {
-        }
-        return services;
-    }
+    
+    
 
     public static List<Screen> getScreens() {
         Screen s = new Screen();
@@ -382,5 +361,47 @@ public class GetFromDB {
             System.out.println(e.getMessage());
         }
         return attach;
+    }
+
+    static int getMaxIdService() {
+        int id = 0;
+        try {
+            DB db = new DB();
+            
+            String sql = "SELECT Services_Provided_ID FROM services_provided WHERE Services_Provided_ID = ( SELECT MAX(Services_Provided_ID) FROM services_provided ) ;";
+            System.out.println(sql);
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                id = r.getInt(1);
+                
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return id;
+    }
+    
+    public static List<Service> getAllServices() {
+
+        Service s = new Service();
+
+        List<Service> services = new ArrayList<Service>();
+        try {
+            DB db = new DB();
+            String sql = "select Services_Provided_ID ,Serv_Name,Serv_Cost,Serv_Days,Serv_Case,d.*,s.* from services_provided  inner join department as d on services_provided.DepartmentID = d.Dep_ID inner join section as s on services_provided.sectionID = s.Sec_ID;";
+
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                s = new Service(r.getInt(1), r.getString(2),r.getInt(1),
+                        r.getDouble(3),r.getString(4),new Department(r.getInt(5), r.getString(6),
+                                r.getString(7)),new Section(r.getInt(8), r.getInt(9), r.getString(10), r.getString(11)));
+                
+                services.add(s);
+            }
+            
+            
+        } catch (Exception e) {
+        }
+        return services;
     }
 }

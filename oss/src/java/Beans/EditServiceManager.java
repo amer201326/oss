@@ -16,15 +16,12 @@ import Data.Section;
 import Data.SectionPath;
 import Data.Service;
 import Data.ServiceAttachmentName;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
 import org.primefaces.model.DualListModel;
@@ -35,7 +32,7 @@ import org.primefaces.model.DualListModel;
  */
 @ManagedBean
 @ViewScoped
-public class AddServiceManager {
+public class EditServiceManager {
 
     Boolean boolSection = false;
     Boolean boolJob = false;
@@ -62,8 +59,8 @@ public class AddServiceManager {
     DualListModel<String> attachmentNamesAndResaults;
     @ManagedProperty(value = "#{sessionLists}")
     SessionLists sessionLists;
-
-    public AddServiceManager() {
+    
+    public EditServiceManager() {
         attachmentNames = GetFromDB.getServiceAttachmentName();
         attachmentNamesAndResaults = new DualListModel<>();
         for (int i = 0; i < attachmentNames.size(); i++) {
@@ -81,6 +78,13 @@ public class AddServiceManager {
         departmentPaths = new DepartmentPaths();
         jobPath = new JobPath();
         selectedJobPath = new JobPath();
+    }
+    @PostConstruct
+    public void init() {
+       newService = sessionLists.selectedService;
+       departmentsInPath = newService.getPath();
+       
+        
     }
 
     public DepartmentPaths getDepartmentPaths() {
@@ -155,14 +159,6 @@ public class AddServiceManager {
         newService.setPath(departmentsInPath);
         newService.addServiceToDB();
 
-    }
-    public void gotToEdit(){
-        try {
-
-            FacesContext.getCurrentInstance().getExternalContext().redirect("editService.xhtml?id="+sessionLists.selectedService.getId());
-        } catch (IOException ex) {
-            Logger.getLogger(DepartmentsManage.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     public List<Section> filterSections() {
@@ -456,6 +452,5 @@ public class AddServiceManager {
     public void setSessionLists(SessionLists sessionLists) {
         this.sessionLists = sessionLists;
     }
-    
     
 }

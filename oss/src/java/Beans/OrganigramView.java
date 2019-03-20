@@ -7,6 +7,7 @@ import Data.JobTitel;
 import Data.Section;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -48,7 +49,6 @@ public class OrganigramView implements Serializable {
         rootNode.setCollapsible(false);
         rootNode.setDroppable(false);
         rootNode.setSelectable(false);
-        
 
         List<Section> sec = GetFromDB.getFsection(d.id);
         String p[] = new String[sec.size()];
@@ -57,23 +57,22 @@ public class OrganigramView implements Serializable {
             Section s = sec.get(i);
 
             OrganigramNode rootNodee2 = new DefaultOrganigramNode("section", "قسم : " + s.getName(), null);
-           
+
             rootNode.getChildren().add(rootNodee2);
-            
+
             try {
                 List<JobTitel> jobs = GetFromDB.getJobTittle(s.getId());
                 for (int j = 0; j < jobs.size(); j++) {
                     JobTitel get = jobs.get(j);
                     List<Employee> emp = GetFromDB.GetEmployeeForJobID(get.getId());
                     String[] empName = new String[emp.size()];
-                    OrganigramNode divisionNode = new DefaultOrganigramNode("job",get.getName(), rootNodee2);
-                    
+                    OrganigramNode divisionNode = new DefaultOrganigramNode("job", get.getName(), rootNodee2);
+
                     System.out.println(divisionNode.getType());
                     for (int k = 0; k < emp.size(); k++) {
                         Employee get1 = emp.get(k);
                         empName[k] = get1.getEmp_name();
                         OrganigramNode employeeNode = new DefaultOrganigramNode("employee", empName[k], divisionNode);
-                        
 
                     }
 
@@ -88,6 +87,7 @@ public class OrganigramView implements Serializable {
     }
 
     public List<Section> sectionsByID() {
+        
         return GetFromDB.getFsection(sessionLists.departmentSelected.id);
     }
 

@@ -20,6 +20,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
@@ -82,6 +83,9 @@ public class DepartmentsManage implements Serializable {
         j = new JobTitel();
 
         allParameter = GetFromDB.getALLNumber();
+        Map<String, String> parameterMap = (Map<String, String>) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        String param = parameterMap.get("n");
+        System.out.println("__________+_+_++___________  + "+param);
     }
 
     public void addDepartment() {

@@ -27,13 +27,14 @@ public class Service implements Serializable {
     Department department;
     Section section;
     List<DepartmentPaths> path;
+    List<ServiceAttachmentName> attachmentNames;
 
     public Service() {
         this.department = new Department();
         this.section = new Section();
     }
 
-    public Service(int id, String name, int days, double cost, String status, Department department, Section section, List<DepartmentPaths> path) {
+    public Service(int id, String name, int days, double cost, String status, Department department, Section section) {
         this.id = id;
         this.name = name;
         this.days = days;
@@ -41,18 +42,8 @@ public class Service implements Serializable {
         this.status = status;
         this.department = department;
         this.section = section;
-        this.path = path;
     }
 
-    public Service(int id, String name, double cost, int days, String status) {
-        this.id = id;
-        this.name = name;
-        this.days = days;
-        this.cost = cost;
-        this.status = status;
-        this.department = new Department();
-        this.section = new Section();
-    }
 
     public int getId() {
         return id;
@@ -118,8 +109,6 @@ public class Service implements Serializable {
         this.path = path;
     }
 
-  
-
     public void update() {
         try {
             String q = "UPDATE services_provided SET Serv_Name = '" + name + "',Serv_Cost = '" + cost + "', Serv_Days = '" + days + "',Serv_Case = '" + status + "' WHERE (Services_Provided_ID = " + id + ");";
@@ -134,13 +123,37 @@ public class Service implements Serializable {
     }
 
     public void addServiceToDB() {
+        int idMax = GetFromDB.getMaxIdService();
+        this.id = idMax + 1;
 
-        String q = "INSERT INTO services_provided (`Services_Provided_ID`,`Serv_Name`, `Serv_Cost`, `Serv_Days`, `Serv_Case`, `Dep_ID`,`Sec_ID`) VALUES ('"+id+"','" + name + "','" + cost + "','" + days + "','" + status + "','" + department.id + "','" + section.id + "');";
- System.out.println(q);
         try {
             DB data = new DB();
-            System.out.println(q);
+            String q = "INSERT INTO services_provided VALUES ('" + id + "','" + name + "','" + cost + "','" + days + "','" + status + "','" + department.id + "','" + section.id + "');";
             data.write(q);
+            System.out.println(q);
+            for (int i = 0; i < path.size(); i++) {
+                DepartmentPaths get = path.get(i);
+                for (int j = 0; j < get.getSections().size(); j++) {
+                    SectionPath get1 = get.getSections().get(j);
+                    for (int k = 0; k < get1.getJobs().size(); k++) {
+                        JobPath get2 = get1.getJobs().get(k);
+                        if (get2.getSectionID() == get1.getId()) {
+                            q = "INSERT INTO steps_job VALUES(" + department.id + "," + section.id + "," + get2.id + "," + id + "," + get.order + "," + get1.order + "," + get2.order + ");";
+                            data.write(q);
+                            System.out.println(q);
+                        }
+
+                    }
+
+                }
+            }
+            for (int i = 0; i < attachmentNames.size(); i++) {
+                ServiceAttachmentName get = attachmentNames.get(i);
+                q = "INSERT INTO have_serviceattachment VALUES (" + id + ", " + get.id + ");";
+                data.write(q);
+                System.out.println(q);
+            }
+            
 
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
@@ -148,6 +161,47 @@ public class Service implements Serializable {
 
     }
 
+    public List<ServiceAttachmentName> getAttachmentNames() {
+        return attachmentNames;
+    }
+
+    public void setAttachmentNames(List<ServiceAttachmentName> attachmentNames) {
+        this.attachmentNames = attachmentNames;
+    }
+
+    public void simpleUpdate() {
+        try {
+            String q = "UPDATE services_provided SET Serv_Name = '" + name + "',Serv_Cost = '" + cost + "', Serv_Days = '" + days + "',Serv_Case = '" + status + "' WHERE (Services_Provided_ID = " + id + ");";
+            System.out.println(q);
+            DB data = new DB();
+            data.write(q);
+
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Service other = (Service) obj;
+       
+        if( this.id==other.id){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 73 * hash + this.id;
+        return hash;
+    }
 
 }

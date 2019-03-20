@@ -10,6 +10,7 @@ import Data.GetFromDB;
 import Data.JobTitel;
 import Data.Section;
 import Data.SectionPath;
+import Data.Service;
 import Data.ServiceErr;
 import java.io.Serializable;
 import java.util.List;
@@ -26,11 +27,14 @@ public class SessionLists implements Serializable{
     Department departmentSelected;
     Section sectionSelected;
     JobTitel jobSelected;
+    Service selectedService;
+    int id;
     
     public SessionLists() {
         departmentSelected = new Department();
         sectionSelected = new Section();
         jobSelected = new JobTitel();
+        selectedService = new Service();
     }
 
     public Department getDepartmentSelected() {
@@ -47,6 +51,31 @@ public class SessionLists implements Serializable{
 
     public void setSectionSelected(Section sectionSelected) {
         this.sectionSelected = sectionSelected;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public JobTitel getJobSelected() {
+        return jobSelected;
+    }
+
+    public void setJobSelected(JobTitel jobSelected) {
+        this.jobSelected = jobSelected;
+    }
+
+    public Service getSelectedService() {
+        return selectedService;
+    }
+
+    public void setSelectedService(Service selectedService) {
+        
+        this.selectedService = selectedService;
     }
     
     

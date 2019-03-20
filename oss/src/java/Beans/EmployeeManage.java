@@ -41,6 +41,7 @@ public class EmployeeManage implements Serializable {
     List<String> emp;
     String[] selectedEmployees;
     List<Screen> screen;
+    
     String[] selectedScreens;
     List<Section> allSections;
     List<Department> allDepartments;

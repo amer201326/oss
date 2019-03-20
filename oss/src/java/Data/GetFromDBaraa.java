@@ -22,20 +22,20 @@ public class GetFromDBaraa {
         List<Service> services = new ArrayList<Service>();
         try {
             DB db = new DB();
-            String sql = "SELECT Services_Provided_ID,Serv_Name,Serv_Cost,Serv_Days,Serv_Case,services_provided.Dep_ID,department.Dep_Name,section.Sec_ID,section.Sec_Name FROM services_provided INNER JOIN department ON services_provided.Dep_ID = department.Dep_ID INNER JOIN section ON services_provided.Dep_ID = department.Dep_ID ;";
+            String sql = "select Services_Provided_ID ,Serv_Name,Serv_Cost,Serv_Days,Serv_Case,d.*,s.* from services_provided  inner join department as d on services_provided.DepartmentID = d.Dep_ID inner join section as s on services_provided.sectionID = s.Sec_ID;";
 
             ResultSet r = db.read(sql);
             while (r.next()) {
-                s = new Service(r.getInt(1), r.getString(2), r.getDouble(3),r.getInt(4),r.getString(5));
-                s.department.id = r.getInt(6);
-                s.department.nameA = r.getString(7);
-                s.section.id = r.getString(8);
-                s.section.name = r.getString(9);
-                System.out.println(s.toString());
+                s = new Service(r.getInt(1), r.getString(2),r.getInt(3),
+                        r.getDouble(4),r.getString(5),new Department(r.getInt(6), r.getString(7),
+                                r.getString(8)),new Section(r.getInt(9), r.getInt(10), r.getString(11), r.getString(7)));
+                
                 services.add(s);
             }
             
         } catch (Exception e) {
+            System.out.println(e.getMessage());
+            
         }
         return services;
     }

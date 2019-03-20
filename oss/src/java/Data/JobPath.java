@@ -13,8 +13,9 @@ import java.sql.ResultSet;
  * @author me
  */
 public class JobPath {
-
+    int DepId;
     int sectionID;
+    
     int id;
     String name;
     int order;
@@ -74,6 +75,15 @@ public class JobPath {
     public void idMarge(){
         idMarge = id+"-"+sectionID;
     }
+
+    public int getDepId() {
+        return DepId;
+    }
+
+    public void setDepId(int DepId) {
+        this.DepId = DepId;
+    }
+    
 
     @Override
     public String toString() {
