@@ -21,7 +21,7 @@
         <link href="css/sb-admin-2.min.css" rel="stylesheet"/>
         <link href="css/amer.css" rel="stylesheet"/>
         <style type="text/css">
-           
+
 
             .ui-button-text-only .ui-button-text {
                 padding: 0.3em 0.4em;
@@ -62,83 +62,121 @@
                             <div class="row">
                                 <div class="col-lg-12 text-center">
 
-                                    <h2 class="jop-heading text-uppercase">المسمى الوظيفي</h2>
-                                    <br/><hr style="border: 2px solid orange;"/><br/><br/>
+
+                                    <div class=" col-md-12 ">
+                                        <div class="card border-left-warning border-right-0 shadow h-100 py-2">
+                                            <div class="card-body">
+                                                <div class="row no-gutters textC">
+                                                    <div class="col mr-2">
+                                                        <h2 class="jop-heading text-uppercase">المسمى الوظيفي</h2>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <br/><hr style="border: 2px solid orange;"/><br/>
                                 </div>
                             </div>  
                             <div class="row text-center">
                                 <div class="float-lg-right float-right text#{$infix}-right" style="width: 100%">
 
                                 </div>
+                                <div class="card shadow mb-4" style="text-align: right;">
+                                    <div class="card-body">
+                                        <div class="form-group row">
+                                            <div class="col-sm-12 mb-3 mb-sm-0">
+
+                                                <!--Here-->
+                                                <h:form id="formSection">
+                                                    <h:head id="msgs"/>
+
+                                                    <p:dataTable id="singleDT" var="jop" value="#{departmentsManage.jobTitels}"  
+                                                                 editable="true" style="margin-bottom:20px; text-align: center;" rowKey="#{jop.id}" selectionMode="single" 
+                                                                 selection="#{departmentsManage.j}" rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                                 rowsPerPageTemplate="5,10,15" >
 
 
-                                <!--Here-->
-                                <h:form id="formSection">
-                                    <h:head id="msgs"/>
+                                                        <f:facet name="header">
+                                                            المسمى الوظيفي
+                                                        </f:facet>
 
-                                    <p:dataTable id="singleDT" var="jop" value="#{departmentsManage.jobTitels}" dir="rtl" 
-                                                 editable="true" style="margin-bottom:20px" rowKey="#{jop.id}" selectionMode="single" selection="#{departmentsManage.j}" >
-
-
-                                        <f:facet name="header">
-                                            المسمى الوظيفي
-                                        </f:facet>
-
-                                        <p:ajax event="rowEdit" listener="#{departmentsManage.onJopTitleEdit}" update=":formSection:msgs" />
-                                        <p:ajax event="rowEditCancel" listener="#{departmentsManage.onSectionCancel}" update=":formSection:msgs" />
+                                                        <p:ajax event="rowEdit" listener="#{departmentsManage.onJopTitleEdit}" update=":formSection:msgs" />
+                                                        <p:ajax event="rowEditCancel" listener="#{departmentsManage.onSectionCancel}" update=":formSection:msgs" />
 
 
+                                                        <p:column style="width:13%;" headerText="تعديل">
+                                                            <p:rowEditor />
+                                                        </p:column>
+
+                                                        <p:ajax event="rowSelect" process="@this    " update="formSection:diallogDelete" listener="#{departmentsManage.onJobSelected}"/>
+                                                        <p:column headerText="اسم القسم">
+                                                            <p:cellEditor>
+                                                                <f:facet name="output"><h:outputText value="#{jop.name}" /></f:facet>
+                                                                <f:facet name="input"><p:inputText value="#{jop.name}" style="width:100%" label="Year"/></f:facet>
+                                                            </p:cellEditor>
+                                                        </p:column>
+
+                                                        <p:column headerText="الرقم" >
+                                                            <p:cellEditor disabled="true">
+                                                                <f:facet name="output"><h:outputText value="#{jop.id}" /></f:facet>
+                                                                <f:facet name="input"><p:inputText id="modelInput" value="#{jop.id}" style="width:100%"/></f:facet>
+                                                            </p:cellEditor>
+                                                        </p:column>
 
 
-                                        <p:ajax event="rowSelect" process="@this    " update="formSection:diallogDelete" listener="#{departmentsManage.onJobSelected}"/>
-                                        <p:column headerText="الرقم" >
-                                            <p:cellEditor disabled="true">
-                                                <f:facet name="output"><h:outputText value="#{jop.id}" /></f:facet>
-                                                <f:facet name="input"><p:inputText id="modelInput" value="#{jop.id}" style="width:100%"/></f:facet>
-                                            </p:cellEditor>
-                                        </p:column>
-                                        <p:column headerText="اسم القسم">
-                                            <p:cellEditor>
-                                                <f:facet name="output"><h:outputText value="#{jop.name}" /></f:facet>
-                                                <f:facet name="input"><p:inputText value="#{jop.name}" style="width:100%" label="Year"/></f:facet>
-                                            </p:cellEditor>
-                                        </p:column>
 
-                                        <p:column style="width:13%;" headerText="تعديل">
-                                            <p:rowEditor />
-                                        </p:column>
 
-                                    </p:dataTable>
-                                    <p:dialog id="diallogDelete" resizable="false"  widgetVar="deleteD">
-                                        <h:panelGrid columns="2" cellpadding="5" >
+                                                    </p:dataTable>
+                                                    <br/>
+                                                    <hr style="border: 2px solid orange;"/>
 
-                                            <h:outputLabel for="del" value="هل انت متأكد من حذف #{departmentsManage.j.name}" />
+                                                    <p:dialog id="diallogDelete" resizable="false"  widgetVar="deleteD" dir="rtl">
+                                                        <h:panelGrid columns="2" cellpadding="5" >
 
-                                            <br/>
+                                                            <h:outputLabel for="del" value="هل انت متأكد من حذف #{departmentsManage.j.name}" />
 
-                                            <p:commandButton id="del" value="حذف" action="#{departmentsManage.deleteJopTitle()}" update="formSection" oncomplete="PF('deleteD').hide();"/>
+                                                            <br/>
 
-                                        </h:panelGrid>
-                                    </p:dialog>  
+                                                            <p:commandButton id="del" value="حذف" action="#{departmentsManage.deleteJopTitle()}" update="formSection" oncomplete="PF('deleteD').hide();"/>
 
-                                </h:form>
+                                                        </h:panelGrid>
+                                                    </p:dialog>  
 
-                                <div class="text#{$infix}-right" style="width: 100%;">
-                                   <p:spacer width="30px"/>
+                                                </h:form>
+                                                <div style="display: flex; justify-content: center;"  class="col-sm-12">                                                
+                                                    <h:form>
+
+                                                        <button onclick="PF('deleteD').show();" class="myButtonD" type="button"> حذف قسم </button> &nbsp; &nbsp; &nbsp; &nbsp;
+                                                        <button onclick="PF('dlg').show();" class="myButtonC" type="button" update=":formSection:deleteD" >اضافة قسم</button> &nbsp; &nbsp; &nbsp;
+
+                                                    </h:form> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                               <!-- <div class="text#{$infix}-right" style="width: 100%;">
+                                    <p:spacer width="30px"/>
                                     <p:commandButton value="حذف" onclick="PF('deleteD').show();" type="button"/>  
                                     <p:spacer width="30px"/>
-                                     <p:commandButton value="اضافة " onclick="PF('dlg').show();" update=":formSection:deleteD" type="button" />
-                                    
-                                </div>
+                                    <p:commandButton value="اضافة " onclick="PF('dlg').show();" update=":formSection:deleteD" type="button" />
+
+                                </div>-->
                                 <h:form> 
 
 
-                                    <p:dialog resizable="false" header="اضافة مسمى وظيفي" widgetVar="dlg">
+                                    <p:dialog resizable="false" header="اضافة مسمى وظيفي" widgetVar="dlg" dir="rtl">
                                         <h:panelGrid columns="2" cellpadding="5">
 
-                                           
+                                            <h:outputLabel for="name" value="الاسم:" />
                                             <p:inputText id="name" label="name" value="#{departmentsManage.newJob.name}" required="true"/>
- <h:outputLabel for="name" value=":الاسم" />
+
                                             <p:commandButton value="اضافة" actionListener="#{departmentsManage.addJobTitle()}" update="@form :formSection" oncomplete="PF('dlg').hide();"/>
 
                                         </h:panelGrid>
@@ -147,9 +185,7 @@
 
 
                             </div>
-                            <br/><br/>
-                            <hr style="border: 2px solid orange;"/>
-                            <br/><br/>
+
 
                         </div>
 

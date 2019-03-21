@@ -6,7 +6,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <title>Facelet Title</title>
+        <title>الاقسام</title>
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -62,123 +62,182 @@
                             <div class="row">
                                 <div class="col-lg-12 text-center">
 
-                                    <h2 class="section-heading text-uppercase">الاقسام</h2>
+                                    <div class=" col-md-12 ">
+                                        <div class="card border-left-warning border-right-0 shadow h-100 py-2">
+                                            <div class="card-body">
+                                                <div class="row no-gutters textC">
+                                                    <div class="col mr-2">
+                                                        <h2 class="section-heading text-uppercase">الاقسام</h2>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                                     <br/><hr style="border: 2px solid orange;"/><br/><br/>
                                 </div>
                             </div>  
                             <div class="row text-center" > 
                                 <div class="float-lg-right float-right text#{$infix}-right" style="width: 100%;margin-bottom: 30px">
-                                    <h:form id="formSelectD">
-                                        <!-- Style Addemployee form Bussectionlo-->
-                                        <p:selectOneMenu id="departments" value="#{departmentsManage.department.id}"  dynamic="true" style="width:200px; height:100%;">
 
-                                            <f:selectItem itemLabel="كل الدوائر" itemValue="-1" />
-                                            <f:selectItems value="#{departmentsManage.allDepartment()}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}"/>
-                                            <p:ajax update=":formSection" event="itemSelect" listener="#{departmentsManage.fSection}" />
+                                    <div class="card shadow mb-4" style="text-align: right;">
+                                        <div class="card-body">
+                                            <div class="form-group row">
+                                                <div class="col-sm-12 mb-3 mb-sm-0">
 
-                                        </p:selectOneMenu>
 
-                                        <p:outputLabel for="departments" style="margin-left: 4%" value="الدوائر " />
 
-                                    </h:form>
+                                                    <h:form id="formSelectD">
+                                                        <!-- Style Addemployee form Bussectionlo-->
+                                                        <p:selectOneMenu id="departments" value="#{departmentsManage.department.id}"  dynamic="true" style="  width:200px; height:100%;">
+
+                                                            <f:selectItem itemLabel="كل الدوائر" itemValue="-1" />
+                                                            <f:selectItems value="#{departmentsManage.allDepartment()}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}"/>
+                                                            <p:ajax update=":formSection" event="itemSelect" listener="#{departmentsManage.fSection}" />
+
+                                                        </p:selectOneMenu>
+
+                                                        <p:outputLabel for="departments" style="font-size: 28px; margin-left: 4%" value="الدوائر " />
+
+                                                    </h:form>
+                                                    <hr/>
+                                                </div>
+                                                <h:form id="formSection">
+                                                    <h:head id="msgs"/>
+                                                    <p:dataTable id="singleDT" var="section" value="#{departmentsManage.fiterdSections}"  editable="true"  style="margin-bottom:20px; text-align:center;"
+                                                                 selectionMode="single"  selection="#{departmentsManage.sectionSelected}" rowKey="#{section.id}" rows="10"
+                                                                 paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                                 rowsPerPageTemplate="5,10,15">
+
+                                                        <f:facet name="header" class="tableHeader">
+                                                            الاقسام
+                                                        </f:facet>
+
+                                                        <p:ajax event="rowEdit" listener="#{departmentsManage.onSectionEdit}" update=":formSection:msgs" />
+                                                        <p:ajax event="rowEditCancel" listener="#{departmentsManage.onSectionCancel}" update=":formSection:msgs" />
+
+
+                                                        <p:ajax event="rowSelect" process="@this" update="formSection:diallogDelete" listener="#{departmentsManage.onSectionSelected}"/>
+
+
+
+                                                        <p:column style="width:10%;" headerText="تعديل">
+                                                            <p:rowEditor />
+                                                        </p:column>
+
+
+                                                        <p:column headerText="اسم القسم">
+                                                            <p:cellEditor>
+                                                                <f:facet name="output"><h:outputText value="#{section.name}" /></f:facet>
+                                                                <f:facet name="input"><p:inputText value="#{section.name}" style="width:100%" label="Year"/></f:facet>
+                                                            </p:cellEditor>
+                                                        </p:column>
+
+                                                        <p:column headerText="اسم الدارة">
+                                                            <p:cellEditor>
+                                                                <f:facet name="output"><h:outputText value="#{section.departmentNmae}" /></f:facet>
+                                                                <f:facet name="input">
+                                                                    <h:selectOneMenu value="#{section.departmentId}" style="width:100%">
+                                                                        <f:selectItems value="#{departmentsManage.allDepartment()}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}" />
+                                                                    </h:selectOneMenu>
+                                                                </f:facet>
+                                                            </p:cellEditor>
+                                                        </p:column>
+
+
+
+                                                        <p:column headerText="الرقم">
+                                                            <p:cellEditor disabled="true">
+                                                                <f:facet name="output"><h:outputText value="#{section.id}" /></f:facet>
+                                                                <f:facet name="input"><p:inputText id="modelInput" value="#{section.id}" style="width:100%"/></f:facet>
+                                                            </p:cellEditor>
+                                                        </p:column>
+
+
+
+
+                                                    </p:dataTable>
+                                                    <br/>
+                                                    <hr style="border: 2px solid orange;"/>
+
+
+
+                                                    <p:dialog id="diallogDelete" resizable="false" widgetVar="deleteD" dir="rtl">
+                                                        <h:panelGrid columns="2" cellpadding="5">
+
+                                                            <h:outputLabel for="del" value="هل انت متأكد من حذف #{departmentsManage.sectionSelected.name}" />
+                                                            <br/>
+
+                                                            <p:commandButton id="del" value="حذف" action="#{departmentsManage.deleteSection()}" update=":formSection" oncomplete="PF('deleteD').hide();"/>
+
+                                                        </h:panelGrid>
+                                                    </p:dialog>  
+                                                    <!--  <p:commandButton value="فتح" actionListener=""  />-->
+
+                                                </h:form >
+                                                <div style="display: flex; justify-content: center;"  class="col-sm-12">                                                
+                                                    <h:form>
+
+
+                                                        <button onclick="PF('deleteD').show();" class="myButtonD" type="button"> حذف قسم </button> &nbsp; &nbsp; &nbsp; &nbsp;
+                                                        <button onclick="PF('dlgOpenSec').show();" class="myButtonB" type="button">فتح قسم</button> &nbsp; &nbsp; &nbsp; &nbsp;
+
+                                                        <button onclick="PF('dlg').show();" class="myButtonC" type="button">اضافة قسم</button> &nbsp; &nbsp; &nbsp;
+
+
+                                                    </h:form>
+                                                </div>
+
+                                          <!-- <div class="text#{$infix}-left col-md-6">
+                                               <button onclick="PF('deleteD').show();" class="myButtonD" type="button">حذف</button>
+                                           </div>
+                                           <div class="text#{$infix}-right col-md-6" style="width: 100%;">
+
+                                               <button onclick="PF('dlg').show();" class="myButtonC" type="button">اضافة قسم</button>
+                                                
+                                               <p:spacer width="30px"/>
+                                           </div>-->
+                                                <h:form id="dialog">
+
+                                                    <p:dialog id="DNewSection" resizable="false" header="اضافة قسم" widgetVar="dlg" dir="rtl" >
+
+                                                        <h:panelGrid columns="2" cellpadding="5">
+                                                            <h:outputLabel for="deid" value="القسم:" />
+                                                            <p:selectOneMenu id="departments" value="#{departmentsManage.newSection.departmentId}" dynamic="true" style="width:200px; height:100%;">
+                                                                <f:selectItems value="#{departmentsManage.allDepartment()}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}"/>
+                                                            </p:selectOneMenu>
+
+                                                            <h:outputLabel for="name" value="اسم القسم:" />
+                                                            <p:inputText id="name" label="name" value="#{departmentsManage.newSection.name}" size="16"/>
+
+                                                            <p:commandButton value="اضافة" actionListener="#{departmentsManage.addSection()}" update="@form :formSection :formSelectD" oncomplete="PF('dlg').hide();"/>
+
+
+                                                        </h:panelGrid>
+                                                    </p:dialog>  
+
+                                                    <p:dialog id="openSection" resizable="false" header="اضافة قسم" widgetVar="dlgOpenSec" dir="rtl" >
+
+                                                        <h:panelGrid columns="2" cellpadding="5">
+
+
+
+
+
+                                                            <h:outputLabel for="name" value=" تم فتح القسم الذي اخترته" /> <br/>
+                                                            <p:commandButton value="فتح" actionListener="#{departmentsManage.gotToSection()}" oncomplete="PF('dlgOpenSec').hide();" />
+
+                                                        </h:panelGrid>
+                                                    </p:dialog>  
+
+                                                </h:form>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <h:form id="formSection">
-                                    <h:head id="msgs"/>
-                                    <p:dataTable id="singleDT" var="section" value="#{departmentsManage.fiterdSections}"  editable="true" style="margin-bottom:20px; text-align:center;"
-                                                 selectionMode="single"  selection="#{departmentsManage.sectionSelected}" rowKey="#{section.id}">
-
-                                        <f:facet name="header" >
-                                            الاقسام
-                                        </f:facet>
-
-                                        <p:ajax event="rowEdit" listener="#{departmentsManage.onSectionEdit}" update=":formSection:msgs" />
-                                        <p:ajax event="rowEditCancel" listener="#{departmentsManage.onSectionCancel}" update=":formSection:msgs" />
-
-
-                                        <p:ajax event="rowSelect" process="@this" update="formSection:diallogDelete" listener="#{departmentsManage.onSectionSelected}"/>
-                                        <p:column headerText="الرقم">
-                                            <p:cellEditor disabled="true">
-                                                <f:facet name="output"><h:outputText value="#{section.id}" /></f:facet>
-                                                <f:facet name="input"><p:inputText id="modelInput" value="#{section.id}" style="width:100%"/></f:facet>
-                                            </p:cellEditor>
-                                        </p:column>
-
-                                        <p:column headerText="اسم القسم">
-                                            <p:cellEditor>
-                                                <f:facet name="output"><h:outputText value="#{section.name}" /></f:facet>
-                                                <f:facet name="input"><p:inputText value="#{section.name}" style="width:100%" label="Year"/></f:facet>
-                                            </p:cellEditor>
-                                        </p:column>
-
-                                        <p:column headerText="اسم الدارة">
-                                            <p:cellEditor>
-                                                <f:facet name="output"><h:outputText value="#{section.departmentNmae}" /></f:facet>
-                                                <f:facet name="input">
-                                                    <h:selectOneMenu value="#{section.departmentId}" style="width:100%">
-                                                        <f:selectItems value="#{departmentsManage.allDepartment()}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}" />
-                                                    </h:selectOneMenu>
-                                                </f:facet>
-                                            </p:cellEditor>
-                                        </p:column>
-
-                                        <p:column style="width:10%;" headerText="تعديل">
-                                            <p:rowEditor />
-                                        </p:column>
-
-
-                                    </p:dataTable>
-                                    <p:dialog id="diallogDelete" resizable="false" widgetVar="deleteD">
-                                        <h:panelGrid columns="2" cellpadding="5">
-
-                                            <h:outputLabel for="del" value="هل انت متأكد من حذف #{departmentsManage.sectionSelected.name}" />
-                                            <br/>
-
-                                            <p:commandButton id="del" value="حذف" action="#{departmentsManage.deleteSection()}" update=":formSection" oncomplete="PF('deleteD').hide();"/>
-
-                                        </h:panelGrid>
-                                    </p:dialog>  
-                                    <p:commandButton value="فتح" actionListener="#{departmentsManage.gotToSection()}"  />
-
-                                </h:form >
-                                <div class="text#{$infix}-left col-md-6">
-                                    <p:commandButton value="حذف" onclick="PF('deleteD').show();" type="button" />
-                                </div>
-                                <div class="text#{$infix}-right col-md-6" style="width: 100%;">
-                                    <a  onclick="PF('dlg').show();" class="btn btn-success btn-icon-split">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-check"></i>
-                                        </span>
-                                        <span class="text">Split Button Success</span>
-                                    </a>
-                                    
-                                    <p:commandButton value="اضافة قسم" onclick="PF('dlg').show();" type="button" />
-                                    <p:spacer width="30px"/>
-                                </div>
-                                <h:form id="dialog">
-
-                                    <p:dialog id="DNewSection" resizable="false" header="اضافة قسم" widgetVar="dlg">
-
-                                        <h:panelGrid columns="2" cellpadding="5">
-
-                                            <p:selectOneMenu id="departments" value="#{departmentsManage.newSection.departmentId}" dynamic="true" style="width:200px; height:100%;">
-                                                <f:selectItems value="#{departmentsManage.allDepartment()}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}"/>
-                                            </p:selectOneMenu>
-                                            <h:outputLabel for="deid" value=":القسم" />
-
-                                            <p:inputText id="name" label="name" value="#{departmentsManage.newSection.name}" size="16"/>
-                                            <h:outputLabel for="name" value=":اسم القسم" />
-                                            <p:commandButton value="اضافة" actionListener="#{departmentsManage.addSection()}" update="@form :formSection :formSelectD" oncomplete="PF('dlg').hide();"/>
-
-
-                                        </h:panelGrid>
-                                    </p:dialog>  
-
-                                </h:form>
-
                             </div>
-                            <br/><br/>
-                            <hr style="border: 2px solid orange;"/>
-                            <br/><br/>
+
 
                         </div>
 

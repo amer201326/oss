@@ -7,7 +7,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough" class="rest">
     <h:head>
-        <title>Facelet</title>
+        <title>دوائر البلدية</title>
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -55,32 +55,51 @@
 
 
 
-                                    <br/><hr style="border: 2px solid orange;"/><br/><br/>
+                                    <br/><hr style="border: 2px solid orange;"/><br/>
                                 </div>
                             </div>
-                            <h:form>
-                                <div class="row text-center">
+                            <div class="card shadow mb-4" style="text-align: right;">
 
-                                    <ui:repeat value="#{departmentsManage.allDepartment()}" var="department" id="fadeEffectImages">
+                                <div class="card-body">
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-12 mb-3 mb-sm-0">
+
+
+                                            <h:form>
+                                                <p:outputPanel >
+                                                    <p:autoUpdate/>
+                                                    <div class="row text-center">
 
 
 
-                                        <div class="col-md-4">
-                                            <h:commandLink action="#{departmentsManage.showDepartment(department)}" style="margin-right:20px;">
-                                                <span class="fa-stack fa-4x">
-                                                    <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                                                    <i class="fas #{department.image} fa-stack-1x fa-inverse"></i>
-                                                </span>
+                                                        <br/>
+                                                        <ui:repeat value="#{departmentsManage.allDepartment()}" var="department" id="fadeEffectImages">
 
-                                                <h4 class="service-heading">#{department.nameA}</h4> 
-                                            </h:commandLink>
+                                                            <br/>
+
+                                                            <div class="col-md-4">
+                                                                <br/>
+                                                                <h:commandLink action="#{departmentsManage.showDepartment(department)}" style="margin-right:20px;">
+                                                                    <span class="fa-stack fa-4x">
+                                                                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                                                                        <i class="fas #{department.image} fa-stack-1x fa-inverse"></i>
+                                                                    </span>
+
+                                                                    <h4 class="service-headin56g">#{department.nameA}</h4> 
+                                                                </h:commandLink>
+                                                            </div>
+
+                                                        </ui:repeat>
+
+
+                                                    </div>
+                                                </p:outputPanel>
+                                            </h:form>
                                         </div>
-
-                                    </ui:repeat>
-
-
+                                    </div>
                                 </div>
-                            </h:form>
+                            </div>
                             <br/><br/>
                             <hr style="border: 2px solid orange;"/>
                             <br/><br/>
@@ -106,7 +125,7 @@
                                                 </h:panelGrid>
                                                 <h:outputLabel for="nameA" value=":اسم الدائرة " />
 
-                                                <p:commandButton  actionListener="#{departmentsManage.addDepartment()}"  value="اضافة" update="@form"/>
+                                                <p:commandButton  actionListener="#{departmentsManage.addDepartment()}"  value="اضافة" update="@form" oncomplete="PF('dlg').hide();"/>
 
                                             </h:panelGrid>
                                         </h:form>
