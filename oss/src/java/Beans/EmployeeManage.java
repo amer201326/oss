@@ -48,6 +48,7 @@ public class EmployeeManage implements Serializable {
     List<JobTitel> allJobs;
     List<Employee> allemployees;
     DualListModel<String> screenSel;
+    
 
     public EmployeeManage() {
 
@@ -83,6 +84,19 @@ public class EmployeeManage implements Serializable {
         allSections = new ArrayList<>();
         allJobs = new ArrayList<>();
     }
+    
+   public List<Section> filterSections() {
+        List<Section> list = new ArrayList<>();
+        for (int i = 0; i < allSections.size(); i++) {
+            Section get = allSections.get(i);
+            if (newEmployee.getDep_id() == Integer.parseInt(get.getDepartmentId())) {
+                list.add(get);
+            }
+
+        }
+        return list;
+    }
+    
 
     public EmployeeManage(List<Employee> employeeList, Employee newEmployee, String[] selectedEmployees) {
         this.employeeList = employeeList;
@@ -90,10 +104,7 @@ public class EmployeeManage implements Serializable {
         this.selectedEmployees = selectedEmployees;
     }
 
-    public List<Department> allDepartments() {
-        return GetFromDB.getDepartments();
-    }
-
+    
     public List<Employee> getAllemployees() {
         System.out.println("fffffffffffff");
         System.out.println(allemployees.size());

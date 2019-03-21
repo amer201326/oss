@@ -61,10 +61,10 @@
                                                         <div class="my-2"></div>
                                                         <div class="form-group row">
                                                             <div class="col-sm-6 mb-3 mb-sm-0">
-                                                               <!--  <p:inputText value="" class="form-control form-control-user" style="text-align:right;" type="text" required="true"/> -->
-                                                               <p:inputText value="#{employeeManage.newEmployeeAccount.userName}" class="form-control form-control-user" style="text-align:right;" type="text" required="true"/>
-                                                            
-                                                                
+                                                                <!--  <p:inputText value="" class="form-control form-control-user" style="text-align:right;" type="text" required="true"/> -->
+                                                                <p:inputText value="#{employeeManage.newEmployeeAccount.userName}" class="form-control form-control-user" style="text-align:right;" type="text" required="true"/>
+
+
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <p:outputLabel class="label" value="*اسم المستخدم"/>
@@ -75,7 +75,7 @@
                                                         <div class="form-group row">
                                                             <div class="col-sm-6 mb-3 mb-sm-0">
                                                                 <p:password value="#{employeeManage.newEmployeeAccount.password}" class="form-control" style="text-align:right;" id="password" feedback="true" inline="true" required="true"/> 
-                                                             
+
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <p:outputLabel class="label" value="*كلمة المرور"/>
@@ -141,16 +141,6 @@
 
                                                     </div>
                                                 </div>
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -244,8 +234,8 @@
                                                             <div class="col-sm-6">
                                                                 <p:selectOneMenu id="dep_id" value="#{employeeManage.newEmployee.dep_id}"   class="form-control form-control-user" style="text-align:right;"   required="true">
 
-                                                                    <f:selectItems value="#{employeeManage.allDepartments()}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}" />
-                                                                    
+                                                                    <f:selectItems value="#{employeeManage.allDepartments}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}" />
+                                                                    <p:ajax update="sec_id" />
                                                                 </p:selectOneMenu>
                                                             </div>
 
@@ -256,9 +246,9 @@
                                                         <div class="form-group row">
                                                             <div class="col-sm-6 mb-3 mb-sm-0">
                                                                 <p:selectOneMenu id="sec_id" value="#{employeeManage.newEmployee.sec_id}"    class="form-control form-control-user" style="text-align:right;" required="true" >
-                                                                    
-                                                                    <f:selectItems value="#{employeeManage.allSections()}" var="s" itemLabel="#{s.name}" itemValue="#{s.id}" />
-                                                                    
+
+                                                                    <f:selectItems value="#{employeeManage.filterSections()}" var="s" itemLabel="#{s.name}" itemValue="#{s.id}" />
+
 
                                                                 </p:selectOneMenu>                                               
                                                             </div>
@@ -274,7 +264,7 @@
                                                             <div class="col-sm-6 mb-3 mb-sm-0">
 
                                                                 <p:selectOneMenu id="job_id" value="#{employeeManage.newEmployee.job_id}"   class="form-control form-control-user" style="text-align:right;" required="true" label="Job ID" >
-                                                                    
+
                                                                     <f:selectItems value="#{employeeManage.allJobs()}" var="j" itemLabel="#{j.name}" itemValue="#{j.id}" />
                                                                 </p:selectOneMenu>
 
