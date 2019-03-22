@@ -79,8 +79,6 @@ ui-selectonemenu-trigger.myButton {
 
 .container {
   justify-content: center;
-  
-  
 }
 .tableHeader{
     text-align: right;
@@ -345,4 +343,16 @@ hr{
 .myButtonB:active {
 	position:relative;
 	top:1px;
+}
+.pading000{
+    padding: 0 0 0 0;
+    padding-right: 0;
+}
+#addnewservice2 label{
+    height: 35px;
+}
+#addnewservice2{
+    padding: 0 0 0 0;
+    padding-right: 0;
+    
 }

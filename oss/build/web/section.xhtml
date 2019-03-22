@@ -70,7 +70,11 @@
 
                                 <h:form id="formSection">
                                     <h:head id="msgs"/>
-                                    <p:dataTable id="eventsDT" sortBy="#{job.id}" var="job" value="#{sectionManage.jobOfSection}" selectionMode="single" selection="#{sectionManage.jobSelected}" rowKey="#{job.id}">
+                                    <p:dataTable id="eventsDT" sortBy="#{job.id}" var="job" value="#{sectionManage.jobOfSection}" 
+                                                 selectionMode="single" selection="#{sectionManage.jobSelected}" rowKey="#{job.id}"
+                                                 rows="10" paginator="true" 
+                                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                 rowsPerPageTemplate="5,10,15">
                                         <f:facet name="header">
                                            الوظائف
                                         </f:facet>
