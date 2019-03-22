@@ -11,9 +11,11 @@ import Data.EmployeeAccount;
 import Data.EmployeeScreen;
 import Data.GetDB_Eman;
 import Data.GetFromDB;
+import Data.JobOfSection;
 import Data.JobTitel;
 import Data.Screen;
 import Data.Section;
+import Data.ServiceAttachmentName;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,6 +23,7 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.ItemSelectEvent;
 import org.primefaces.event.RowEditEvent;
@@ -32,6 +35,7 @@ import org.primefaces.model.DualListModel;
  * @author Amer$_$
  */
 @ManagedBean
+@ViewScoped
 public class EmployeeManage implements Serializable {
 
     List<Employee> employeeList;
@@ -41,51 +45,66 @@ public class EmployeeManage implements Serializable {
     List<String> emp;
     String[] selectedEmployees;
     List<Screen> screen;
-    
+    DualListModel<String> screensNamesAndResaults;
     String[] selectedScreens;
     List<Section> allSections;
     List<Department> allDepartments;
     List<JobTitel> allJobs;
     List<Employee> allemployees;
     DualListModel<String> screenSel;
-    
+    List<JobOfSection> jobsOfSections;
 
     public EmployeeManage() {
 
+        allDepartments = GetFromDB.getDepartments();
+        allSections = GetFromDB.getSection();
+       
         newEmployee = new Employee();
-        newEmployeeAccount = new EmployeeAccount();
-        newEmpScreen = new EmployeeScreen();
+        
+        
+        
         screen = GetDB_Eman.getScreens();
-        List<String> scre = new ArrayList<>();
+        
+        screensNamesAndResaults = new DualListModel<>();
         for (int i = 0; i < screen.size(); i++) {
             Screen get = screen.get(i);
-            scre.add(get.getScreenName());
+            screensNamesAndResaults.getSource().add(get.getScreenName());
         }
-        allDepartments = GetFromDB.getDepartments();
-        allemployees = new ArrayList<Employee>();
-        List<String> screenTarget = new ArrayList<String>();
-        screenSel =  new DualListModel<String>(scre, screenTarget);
-        allSections = new ArrayList<Section>();
-        allemployees = GetDB_Eman.getEmployee();
-        try {
-            Department d = allDepartments.get(0);
-            allSections = GetFromDB.getFsection(d.getId());
-            Section s = allSections.get(0);
-            try {
-                allJobs = GetFromDB.getJobTittle(s.getId());
-            } catch (Exception e) {
-                allJobs = new ArrayList<>();
-            }
-        } catch (Exception e) {
-            allSections = new ArrayList<>();
-            allJobs = new ArrayList<>();
-        }
+       
+        newEmployeeAccount = new EmployeeAccount();
+        
+        jobsOfSections = GetFromDB.getJobOfSectio();
+///////
+///
 
-        allSections = new ArrayList<>();
-        allJobs = new ArrayList<>();
+       
+        
+        newEmpScreen = new EmployeeScreen();
+        
+
+      
+        
+       
+        
+        allemployees = GetDB_Eman.getEmployee();
+
+       
     }
-    
-   public List<Section> filterSections() {
+    public List<JobOfSection> filterJob() {
+        System.out.println("filter job");
+        List<JobOfSection> list = new ArrayList<>();
+        for (int i = 0; i < jobsOfSections.size(); i++) {
+            JobOfSection get = jobsOfSections.get(i);
+            if (newEmployee.getSec_id() == get.getIdSEction()) {
+                list.add(get);
+            }
+
+        }
+        return list;
+    }
+
+    public List<Section> filterSections() {
+        System.out.println("filter section");
         List<Section> list = new ArrayList<>();
         for (int i = 0; i < allSections.size(); i++) {
             Section get = allSections.get(i);
@@ -96,7 +115,6 @@ public class EmployeeManage implements Serializable {
         }
         return list;
     }
-    
 
     public EmployeeManage(List<Employee> employeeList, Employee newEmployee, String[] selectedEmployees) {
         this.employeeList = employeeList;
@@ -104,7 +122,6 @@ public class EmployeeManage implements Serializable {
         this.selectedEmployees = selectedEmployees;
     }
 
-    
     public List<Employee> getAllemployees() {
         System.out.println("fffffffffffff");
         System.out.println(allemployees.size());
@@ -184,20 +201,23 @@ public class EmployeeManage implements Serializable {
     }
 
     public void addEmployee() {
-        newEmployee.setEmp_id((int) System.currentTimeMillis());
-
-        newEmployee.addEmployeeToDB();
-
-        newEmployeeAccount.Emp_ID = newEmployee.getEmp_id();
-
-        newEmployeeAccount.addEmpAccountToDB();
-        newEmpScreen.setEmp_ID(newEmployee.getEmp_id());
-
-        newEmpScreen.addEmpScreenToDB();
-
-        newEmployee = new Employee();
-        newEmployeeAccount = new EmployeeAccount();
-        newEmpScreen = new EmployeeScreen();
+        System.out.println(newEmployee);
+        
+        
+//        newEmployee.setEmp_id((int) System.currentTimeMillis());
+//
+//        newEmployee.addEmployeeToDB();
+//
+//        newEmployeeAccount.Emp_ID = newEmployee.getEmp_id();
+//
+//        newEmployeeAccount.addEmpAccountToDB();
+//        newEmpScreen.setEmp_ID(newEmployee.getEmp_id());
+//
+//        newEmpScreen.addEmpScreenToDB();
+//
+//        newEmployee = new Employee();
+//        newEmployeeAccount = new EmployeeAccount();
+//        newEmpScreen = new EmployeeScreen();
     }
 
     public void putDepartmentSelected() {
@@ -244,5 +264,21 @@ public class EmployeeManage implements Serializable {
         this.screenSel = screenSel;
     }
 
-  
+    public DualListModel<String> getScreensNamesAndResaults() {
+        return screensNamesAndResaults;
+    }
+
+    public void setScreensNamesAndResaults(DualListModel<String> screensNamesAndResaults) {
+        this.screensNamesAndResaults = screensNamesAndResaults;
+    }
+
+    public List<JobOfSection> getJobsOfSections() {
+        return jobsOfSections;
+    }
+
+    public void setJobsOfSections(List<JobOfSection> jobsOfSections) {
+        this.jobsOfSections = jobsOfSections;
+    }
+    
+
 }

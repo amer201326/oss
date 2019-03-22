@@ -75,6 +75,7 @@ public class Employee {
     }
 
     public void setDep_id(int dep_id) {
+        
         this.dep_id = dep_id;
     }
 
@@ -227,5 +228,12 @@ public class Employee {
         }
 
     }
+
+    @Override
+    public String toString() {
+        return "Employee{" + "dep_id=" + dep_id + ", sec_id=" + sec_id + ", job_id=" + job_id + ", emp_id=" + emp_id + ", last=" + last + ", emp_name=" + emp_name + ", emp_idCard=" + emp_idCard + ", emp_email=" + emp_email + ", emp_tel=" + emp_tel + ", emp_mobile=" + emp_mobile + ", emp_gender=" + emp_gender + ", emp_birth=" + emp_birth + ", emp_StartDate=" + emp_StartDate + ", emp_EndDate=" + emp_EndDate + '}';
+    }
+    
+    
 
 }

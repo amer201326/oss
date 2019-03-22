@@ -62,12 +62,14 @@
                                                         <div class="form-group row">
                                                             <div class="col-sm-6 mb-3 mb-sm-0">
                                                                 <!--  <p:inputText value="" class="form-control form-control-user" style="text-align:right;" type="text" required="true"/> -->
-                                                                <p:inputText value="#{employeeManage.newEmployeeAccount.userName}" class="form-control form-control-user" style="text-align:right;" type="text" required="true"/>
+                                                                <p:inputText id="us" value="#{employeeManage.newEmployeeAccount.userName}"
+                                                                             class="form-control form-control-user" style="text-align:right;"
+                                                                             type="text" required="true"/>
 
 
                                                             </div>
                                                             <div class="col-sm-6">
-                                                                <p:outputLabel class="label" value="*اسم المستخدم"/>
+                                                                <p:outputLabel for="us" class="label" value="*اسم المستخدم"/>
                                                             </div>
                                                         </div>
 
@@ -104,11 +106,18 @@
 
                                                     <div class="my-2"></div>
 
-                                                    <p:selectManyCheckbox class="form-control-user"  style="text-align:right;" id="grid" value="#{employeeManage.selectedScreens}" layout="grid" columns="3">
+                                                    <div class="form-group row" >
 
-                                                        <f:selectItems value="#{employeeManage.screen}" var="emp" itemLabel="#{emp.screenName}" itemValue="#{emp.screenId}" />
 
-                                                    </p:selectManyCheckbox>
+                                                        <p:pickList id="pickList" value="#{employeeManage.screensNamesAndResaults}" var="sna" 
+                                                                    itemLabel="#{sna}" itemValue="#{sna}"  showSourceFilter="true" showTargetFilter="true"
+                                                                    style="position: center;">
+                                                            <f:facet name="sourceCaption">كافة المرفقات</f:facet>
+                                                            <f:facet name="targetCaption">المرفقات المختارة</f:facet>
+                                                        </p:pickList>  
+
+
+                                                    </div>
 
                                                     <div class="my-2"></div>
                                                 </div>
@@ -129,9 +138,7 @@
                                                                 <f:ajax />
                                                             </p:commandButton>
 
-                                                            <p:commandButton actionListener="#{employeeManage.addEmployee()}" value="إضافة موظف" id="add_emp"  update="@form"  style="margin-right:20px;" styleClass="ui-priority-primary">
-                                                                <f:ajax />
-                                                            </p:commandButton>
+                                                            <p:commandButton actionListener="#{employeeManage.addEmployee()}" value="إضافة موظف" id="add_emp"  update="@form"  style="margin-right:20px;" styleClass="ui-priority-primary"/>
 
                                                         </div>
 
@@ -204,11 +211,12 @@
 
                                                         <div class="form-group row">
                                                             <div class="col-sm-6 mb-3 mb-sm-0">
-                                                                <p:inputMask mask="9999-99-99" class="form-control form-control-user" style="text-align:right;" placeholder="YYYY-MM-DD" value="#{employeeManage.newEmployee.emp_EndDate}" type="text"/>
-
+                                                                
+                                                                <p:calendar selectOtherMonths="true" pattern="yyyy-MM-dd" navigator="true"/>
                                                             </div>
                                                             <div class="col-sm-6">
-                                                                <p:outputLabel class="label" value="تاريخ الانتهاء"/>
+                                                                <p:outputLabel  value="Popup:" />
+
                                                             </div>
                                                         </div>
 
@@ -235,7 +243,9 @@
                                                                 <p:selectOneMenu id="dep_id" value="#{employeeManage.newEmployee.dep_id}"   class="form-control form-control-user" style="text-align:right;"   required="true">
 
                                                                     <f:selectItems value="#{employeeManage.allDepartments}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}" />
-                                                                    <p:ajax update="sec_id" />
+
+                                                                    <p:ajax process="@this"  update="sec_id job_id" event="itemSelect" />
+
                                                                 </p:selectOneMenu>
                                                             </div>
 
@@ -248,7 +258,7 @@
                                                                 <p:selectOneMenu id="sec_id" value="#{employeeManage.newEmployee.sec_id}"    class="form-control form-control-user" style="text-align:right;" required="true" >
 
                                                                     <f:selectItems value="#{employeeManage.filterSections()}" var="s" itemLabel="#{s.name}" itemValue="#{s.id}" />
-
+                                                                    <p:ajax process="@this"  update="job_id" event="itemSelect" />
 
                                                                 </p:selectOneMenu>                                               
                                                             </div>
@@ -257,15 +267,12 @@
                                                             </div>
                                                         </div>
 
-
-
-
                                                         <div class="form-group row">
                                                             <div class="col-sm-6 mb-3 mb-sm-0">
 
                                                                 <p:selectOneMenu id="job_id" value="#{employeeManage.newEmployee.job_id}"   class="form-control form-control-user" style="text-align:right;" required="true" label="Job ID" >
 
-                                                                    <f:selectItems value="#{employeeManage.allJobs()}" var="j" itemLabel="#{j.name}" itemValue="#{j.id}" />
+                                                                    <f:selectItems value="#{employeeManage.filterJob()}" var="j" itemLabel="#{j.name}" itemValue="#{j.idJob}" />
                                                                 </p:selectOneMenu>
 
                                                             </div>
