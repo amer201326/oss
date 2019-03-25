@@ -6,7 +6,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <title>إضافة خدمة</title>
+        <title>تعديل خدمة</title>
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -54,7 +54,7 @@
                                             </div>
                                         </div>
 
-                                        <br/><hr style="border: 2px solid orange;"/><br/>
+                                        <br/><hr style="border: 2px solid orange; margin-left: 10px; margin-right: 10px;"/><br/>
 
                                         <div class="col-lg-12 mb-4">
 
@@ -80,7 +80,7 @@
 
                                                                         <div class="form-group row">
                                                                             <div class="col-sm-6">
-                                                                                <p:selectOneMenu id="dep_id" value="#{editServiceManager.newService.department.id}"  class="form-control form-control-user" style="text-align:right;"   required="true" label="Dep ID">
+                                                                                <p:selectOneMenu id="dep_id" value="#{editServiceManager.newService.department.id}"  class="pading000" style="text-align:right;"   required="true" label="Dep ID">
                                                                                     <f:selectItem itemLabel="الدائرة" noSelectionOption="true"/>
 
                                                                                     <f:selectItems value="#{editServiceManager.departments}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}" />
@@ -94,7 +94,7 @@
                                                                         </div>
                                                                         <div class="form-group row">
                                                                             <div class="col-sm-6 mb-3 mb-sm-0"> 
-                                                                                <h:selectOneMenu id="sec_id"  value="#{editServiceManager.newService.section.id}" class="form-control form-control-user" style="text-align:right;" required="true" label="Sec ID" >
+                                                                                <h:selectOneMenu id="sec_id"  value="#{editServiceManager.newService.section.id}" class="form-control form-control-user" style="text-align:center;" required="true" label="Sec ID" >
                                                                                     <f:selectItems itemLabel="القسم" />
                                                                                     <f:selectItems value="#{editServiceManager.filterSectionsForSer()}" var="s" itemLabel="#{s.name}" itemValue="#{s.id}" />
                                                                                 </h:selectOneMenu>                                               
@@ -124,7 +124,7 @@
 
                                                                         <div class="form-group row">
                                                                             <div class="col-sm-6 mb-3 mb-sm-0">
-                                                                                <p:inputText value="#{editServiceManager.newService.name}" class="form-control form-control-user" style="text-align:right;" type="text" id="ServiceName"  required="true"/>
+                                                                                <p:inputText value="#{editServiceManager.newService.name}" class="form-control form-control-user" style="text-align:center;" type="text" id="ServiceName"  required="true"/>
                                                                             </div>
                                                                             <div class="col-sm-6">
                                                                                 <p:outputLabel class="label" value="*اسم الخدمة"/>
@@ -204,23 +204,19 @@
                                                                     <br/>
                                                                 </div>
                                                                 <br/><br/> 
-
+                                                               
                                                                 <div class="col-lg-12" style="text-align: right; min-width:700px ">
 
                                                                     <div class="card shadow mb-xl-4">
 
 
                                                                         <div class="card-body">
-                                                                            <div class="my-2 " ></div> 
-
-
+                                                                           
                                                                             <p:pickList id="pickList"  value="#{editServiceManager.attachmentNamesAndResaults}" var="sna" 
                                                                                         itemLabel="#{sna}" itemValue="#{sna}"  showSourceFilter="true" showTargetFilter="true">
                                                                                 <f:facet name="sourceCaption">كافة المرفقات</f:facet>
                                                                                 <f:facet name="targetCaption">المرفقات المختارة</f:facet>
                                                                             </p:pickList>
-
-
 
 
                                                                         </div>

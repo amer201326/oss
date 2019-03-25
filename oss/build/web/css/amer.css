@@ -350,9 +350,12 @@ hr{
 }
 #addnewservice2 label{
     height: 35px;
+    min-width: 223px;
 }
 #addnewservice2{
     padding: 0 0 0 0;
     padding-right: 0;
-    
+   
 }
+
+

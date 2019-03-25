@@ -91,4 +91,30 @@ public class GetDB_Eman {
         return l;
     }
 
+     
+     
+     
+     
+     
+     public static List<ServiceAttachmentName> getAllAttachment() {
+        ServiceAttachmentName serviceAttch = new ServiceAttachmentName();
+        
+        List<ServiceAttachmentName> serviceAttachment = new ArrayList<ServiceAttachmentName>();
+        try {
+            DB db = new DB();
+            String sql = "SELECT * FROM serviceattachmentname ;";
+
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                serviceAttch = new ServiceAttachmentName(r.getInt(1), r.getString(2), r.getString(3));
+                serviceAttachment.add(serviceAttch);
+            }
+        } catch (Exception e) {
+            System.out.println("bb"+e.getMessage());
+        }
+        return serviceAttachment;
+    }
+     
+     
+     
 }

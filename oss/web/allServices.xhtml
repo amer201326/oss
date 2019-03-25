@@ -88,6 +88,7 @@
                                                     <p:ajax event="rowEdit" listener="#{servicesManager.onServiceEdit}" update=":form:msgs" />
                                                     <p:ajax event="rowEditCancel" listener="#{servicesManager.onServiceEditCancel}" update=":form:msgs" />
                                                     <p:ajax event="rowSelect" process="@this"  listener="#{servicesManager.seviceSelected}"/>
+                                                    
                                                     <p:column  style="width:90px;text-align: center">
                                                         <p:commandLink  actionListener="#{addServiceManager.gotToEdit()}" title="View Detail">
                                                             <h:outputText styleClass="fa fa-list-ul" style="margin:0 auto;" />
@@ -155,7 +156,7 @@
 
                                                     <p:column selectionMode="single" style="width:50px;text-align:center"/>
                                                     <f:facet name="footer">
-                                                        <p:commandButton   icon="fa fa-plus" value="sd"  />
+                                                        <p:commandButton   icon="fa fa-plus" value="إضافة"  />
                                                     </f:facet>
                                                 </p:dataTable>
 
