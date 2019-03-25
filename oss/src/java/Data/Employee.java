@@ -6,7 +6,13 @@
 package Data;
 
 import DB.DB;
+import java.io.Serializable;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -14,7 +20,7 @@ import java.util.logging.Logger;
  *
  * @author E
  */
-public class Employee {
+public class Employee implements Serializable {
 
     //Table employee
     int dep_id;
@@ -29,8 +35,10 @@ public class Employee {
     String emp_mobile;
     String emp_gender;
     String emp_birth;
+    Date birthDate;
     String emp_StartDate;
     String emp_EndDate;
+    List<Screen> screens;
 
     public Employee() {
     }
@@ -49,7 +57,7 @@ public class Employee {
         this.emp_EndDate = emp_EndDate;
         this.emp_mobile = emp_mobile;
         this.emp_gender = emp_gender;
-        
+
     }
 
     public Employee(int dep_id, int emp_id, String emp_name, String emp_email, String emp_mobile) {
@@ -59,23 +67,22 @@ public class Employee {
         this.emp_email = emp_email;
         this.emp_mobile = emp_mobile;
     }
-    
+
     public Employee(String emp_idCard, int emp_id, String emp_name, String emp_mobile, String emp_email) {
         this.emp_idCard = emp_idCard;
         this.emp_id = emp_id;
         this.emp_name = emp_name;
-         this.emp_mobile = emp_mobile;
+        this.emp_mobile = emp_mobile;
         this.emp_email = emp_email;
-        
+
     }
-    
-    
+
     public int getDep_id() {
         return dep_id;
     }
 
     public void setDep_id(int dep_id) {
-        
+
         this.dep_id = dep_id;
     }
 
@@ -174,25 +181,29 @@ public class Employee {
     public void setEmp_EndDate(String emp_EndDate) {
         this.emp_EndDate = emp_EndDate;
     }
-    
-    
-   
 
     public void addEmployeeToDB() {
+        
         last += 1;
-        String q = "INSERT INTO employees (`Dep_ID`, `Sec_ID`, `Job_ID`, `Emp_ID`, `Emp_Name`, `Emp_ID_Card`, `Emp_Email`, `Emp_Telephone`, `Emp_Birthday`, `Emp_StartDate`, `Emp_EndDate`, `Emp_Mobile`,`Emp_Gender`) \n"
+        String q = "INSERT INTO employees (`Dep_ID`, `Sec_ID`, `Job_ID`, `Emp_ID`, `Emp_Name`, `Emp_ID_Card`, `Emp_Email`, `Emp_Telephone`, `Emp_Birthday`, `Emp_StartDate`, `Emp_Mobile`,`Emp_Gender`) \n"
                 + "VALUES (" + dep_id + "," + sec_id + "," + job_id + "," + emp_id + ",'" + emp_name + "','" + emp_idCard + "','" + emp_email + "','"
-                + emp_tel + "','" + emp_birth + "','" + emp_StartDate + "','" + emp_EndDate + "','" + emp_mobile + "','" + emp_gender + "');";
+                + emp_tel + "','" + emp_birth + "','" + LocalDate.now() + "','" + emp_mobile + "','" + emp_gender + "');";
 
         try {
             DB data = new DB();
-             System.out.println(q);
+            System.out.println(q);
             data.write(q);
-           
+            for (int i = 0; i < screens.size(); i++) {
+                Screen get = screens.get(i);
+                
+                
+            }
 
         } catch (SQLException ex) {
+            System.out.println("error Add Employee");
             Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
+            System.out.println("error Add Employee");
             Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -212,9 +223,6 @@ public class Employee {
 //        }
 //
 //    }
-
-   
-
     public void update() {
         String q = "UPDATE employees SET Emp_Email = '" + emp_email + "',Emp_Mobile = '" + emp_mobile + "',Emp_Name = '" + emp_name + "' WHERE Emp_ID = " + emp_id + ";";
         try {
@@ -231,7 +239,35 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee{" + "dep_id=" + dep_id + ", sec_id=" + sec_id + ", job_id=" + job_id + ", emp_id=" + emp_id + ", last=" + last + ", emp_name=" + emp_name + ", emp_idCard=" + emp_idCard + ", emp_email=" + emp_email + ", emp_tel=" + emp_tel + ", emp_mobile=" + emp_mobile + ", emp_gender=" + emp_gender + ", emp_birth=" + emp_birth + ", emp_StartDate=" + emp_StartDate + ", emp_EndDate=" + emp_EndDate + '}';
+        return "Employee{" + "dep_id=" + dep_id + ", sec_id=" + sec_id + ", job_id=" + job_id + ", emp_id=" + emp_id + ", last=" + last + ", emp_name=" + emp_name + ", emp_idCard=" + emp_idCard + ", emp_email=" + emp_email + ", emp_tel=" + emp_tel + ", emp_mobile=" + emp_mobile + ", emp_gender=" + emp_gender + ", emp_birth=" + emp_birth + ", birthDate=" + birthDate + ", emp_StartDate=" + emp_StartDate + ", emp_EndDate=" + emp_EndDate + '}';
+    }
+
+    public int getLast() {
+        return last;
+    }
+
+    public void setLast(int last) {
+        this.last = last;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+        String dateString = format.format(birthDate);
+        this.emp_birth = dateString;
+        this.birthDate = birthDate;
+    }
+
+    public List<Screen> getScreens() {
+        return screens;
+    }
+
+    public void setScreens(List<Screen> screens) {
+        this.screens = screens;
     }
     
     

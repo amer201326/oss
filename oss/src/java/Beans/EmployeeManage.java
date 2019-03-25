@@ -61,8 +61,6 @@ public class EmployeeManage implements Serializable {
        
         newEmployee = new Employee();
         
-        
-        
         screen = GetDB_Eman.getScreens();
         
         screensNamesAndResaults = new DualListModel<>();
@@ -201,23 +199,29 @@ public class EmployeeManage implements Serializable {
     }
 
     public void addEmployee() {
-        System.out.println(newEmployee);
+      int id = GetFromDB.getMaxIDEmployee();
         
         
-//        newEmployee.setEmp_id((int) System.currentTimeMillis());
-//
-//        newEmployee.addEmployeeToDB();
-//
-//        newEmployeeAccount.Emp_ID = newEmployee.getEmp_id();
-//
-//        newEmployeeAccount.addEmpAccountToDB();
-//        newEmpScreen.setEmp_ID(newEmployee.getEmp_id());
-//
-//        newEmpScreen.addEmpScreenToDB();
-//
-//        newEmployee = new Employee();
-//        newEmployeeAccount = new EmployeeAccount();
-//        newEmpScreen = new EmployeeScreen();
+        newEmployee.setEmp_id(id+1);
+              
+        newEmployee.addEmployeeToDB();
+        List<Screen> scre = new ArrayList<>();
+        for (int i = 0; i < screensNamesAndResaults.getTarget().size(); i++) {
+            String get = screensNamesAndResaults.getTarget().get(i);
+            for (int j = 0; j < screen.size(); j++) {
+                Screen get1 = screen.get(j);
+                if(get.equals(get1.getScreenName())){
+                    scre.add(get1);
+                }
+            }
+            
+        }
+        newEmployee.setScreens(screen);
+        
+
+        newEmployee = new Employee();
+        newEmployeeAccount = new EmployeeAccount();
+        newEmpScreen = new EmployeeScreen();
     }
 
     public void putDepartmentSelected() {

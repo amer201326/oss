@@ -404,4 +404,22 @@ public class GetFromDB {
         }
         return services;
     }
+
+    public static int getMaxIDEmployee() {
+        int id = 0;
+        try {
+            DB db = new DB();
+            
+            String sql = "SELECT Emp_ID FROM employees WHERE Emp_ID = ( SELECT MAX(Emp_ID) FROM employees ) ;";
+            System.out.println(sql);
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                id = r.getInt(1);
+                
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return id;
+    }
 }
