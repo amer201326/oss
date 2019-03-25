@@ -25,10 +25,7 @@ public class Department implements Serializable {
     
 
     public Department() {
-        List<String> im = GetFromDB.getImageDepartment();
-        if(im.size()>0){
-            image = GetFromDB.getImageDepartment().get((int)(Math.random() * im.size()));
-        }
+        
         
     }
     

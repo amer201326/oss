@@ -112,7 +112,7 @@
                                                         </p:column>
 
                                                         <p:ajax event="rowSelect" process="@this    " update="formSection:diallogDelete" listener="#{departmentsManage.onJobSelected}"/>
-                                                        <p:column headerText="اسم القسم">
+                                                        <p:column headerText="الوظيفة">
                                                             <p:cellEditor>
                                                                 <f:facet name="output"><h:outputText value="#{jop.name}" /></f:facet>
                                                                 <f:facet name="input"><p:inputText value="#{jop.name}" style="width:100%" label="Year"/></f:facet>

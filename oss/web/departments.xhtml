@@ -17,7 +17,7 @@
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"/>
 
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-
+        <link href="css/jsa.css" rel="stylesheet" type="text/css"/>
         <!-- Custom styles for this template-->
         <link href="css/sb-admin-2.min.css" rel="stylesheet"/>
         <link href="css/amer.css" rel="stylesheet"/>
@@ -118,6 +118,28 @@
 
                                     <p:dialog id="addDepartment"  widgetVar="dlg" header="اضافة دائرة جديدة"  resizable="false" showEffect="clip" hideEffect="clip">
                                         <h:form>
+                                            <p:outputLabel value="اختر رمز"  />
+                                            <div id="iconlift" class="flexCenter" >
+                                                <div >
+                                                    <p:commandButton process="@this" action="#{departmentsManage.nextIconDep()}"  update="iconDepChange"
+                                                                     style="width: 40px;height: 100%" icon="fa fa-fw fa-angle-double-left"  />
+                                                </div>
+                                                <p:outputPanel id="iconDepChange" >
+                                                    <p:autoUpdate/>
+                                                    <div class="flip-diagonal-1-tr">
+                                                    <span class="fa-stack fa-4x ">
+                                                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                                                        <i class="fas #{departmentsManage.department.image} fa-stack-1x fa-inverse"></i>
+                                                    </span>
+                                                    </div>
+                                                </p:outputPanel>
+                                                <div >
+                                                    <p:commandButton process="@this" action="#{departmentsManage.backIconDep()}"  update="iconDepChange"
+                                                                     style="width: 40px;height: 100%" icon="fa fa-fw fa-angle-double-right"  />
+                                                </div>
+                                            </div>
+
+
                                             <h:panelGrid columns="2" cellpadding="5">
                                                 <h:panelGrid columns="1" cellpadding="0">
                                                     <p:inputText id="nameA" value="#{departmentsManage.department.nameA}" label="name" required="true"/>

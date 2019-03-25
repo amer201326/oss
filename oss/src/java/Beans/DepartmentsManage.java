@@ -38,17 +38,19 @@ import org.primefaces.event.SelectEvent;
 @ManagedBean
 @ViewScoped
 public class DepartmentsManage implements Serializable {
-
+    int indexDep = 0;
     List<ServiceCount> servicesCount;
     Department department;
     @ManagedProperty(value = "#{sessionLists}")
     SessionLists sessionLists;
-
+    
     List<String> departmentNames;
     Section sectionSelected;
     List<Section> fiterdSections;
     List<JobTitel> jobTitels;
 
+    List<String> im ;
+        
     Section newSection;
     String imageD;
 
@@ -72,10 +74,13 @@ public class DepartmentsManage implements Serializable {
 
         servicesCount = GetFromDB.getMore5ServiceRequest();
         department = new Department();
+        
         sectionSelected = new Section();
         fiterdSections = GetFromDB.getSection();
         newSection = new Section();
+        im = GetFromDB.getImageDepartment();
         
+        department.image = im.get(indexDep);
         servicePerMonth = GetFromDB.getNumberOfServicePerMonth();
         newJob = new JobTitel();
         jobTitels = GetFromDB.getJobTittle();
@@ -106,7 +111,7 @@ public class DepartmentsManage implements Serializable {
     public void showDepartment(Department d) throws IOException {
         System.out.println("go");
         sessionLists.departmentSelected = d;
-        FacesContext.getCurrentInstance().getExternalContext().redirect("department.xhtml");
+        FacesContext.getCurrentInstance().getExternalContext().redirect("department.xhtml?id="+d.id );
     }
 
     public JobTitel getNewJob() {
@@ -369,6 +374,20 @@ public class DepartmentsManage implements Serializable {
         } catch (IOException ex) {
             Logger.getLogger(DepartmentsManage.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void nextIconDep(){
+        indexDep++;
+        if(indexDep>im.size()-1)
+            indexDep--;
+        department.image = im.get(indexDep);
+    }
+    
+    public void backIconDep(){
+        indexDep--;
+        if(indexDep<0)
+            indexDep=0;
+        department.image = im.get(indexDep);
     }
 
 }

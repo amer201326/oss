@@ -6,8 +6,7 @@
 
 
 $(document).ready(function () {
-    $("#link1").click(function () {
-        
-        $("#conts").load("pages/department.xhtml");
-    });
+    
+    
 });
+

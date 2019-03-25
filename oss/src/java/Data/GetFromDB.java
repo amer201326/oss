@@ -326,11 +326,31 @@ public class GetFromDB {
         try {
             DB db = new DB();
             
-            String sql = "select js.Job_ID , js.Sec_ID , j.Job_name from job_of_section as js , jobtitle as j where js.Job_ID  = j.Job_ID;";
+            String sql = "SELECT  js.Job_ID ,js.Sec_ID,s.Sec_Name,j.Job_name   FROM job_of_section as js INNER JOIN section as s ON s.Sec_ID = js.Sec_ID INNER JOIN jobtitle as j ON j.Job_ID = js.Job_ID;";
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
-                d = new JobOfSection(r.getInt(1), r.getInt(2),r.getString(3));
+                d = new JobOfSection(r.getInt(1), r.getInt(2),r.getString(3),r.getString(4));
+                job.add(d);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return job;
+    }
+    public static List<JobOfSection> getJobOfSectio(String id) {
+        
+        JobOfSection d = new JobOfSection();
+        
+        List<JobOfSection> job = new ArrayList<JobOfSection>();
+        try {
+            DB db = new DB();
+            
+            String sql = "SELECT  js.Job_ID ,js.Sec_ID,s.Sec_Name,j.Job_name   FROM job_of_section as js INNER JOIN section as s ON s.Sec_ID = js.Sec_ID INNER JOIN jobtitle as j ON j.Job_ID = js.Job_ID INNER JOIN department as d ON s.Dep_ID = d.Dep_ID where d.Dep_ID = "+id+";";
+            System.out.println(sql);
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                d = new JobOfSection(r.getInt(1), r.getInt(2),r.getString(3),r.getString(4));
                 job.add(d);
             }
         } catch (Exception e) {
@@ -421,5 +441,42 @@ public class GetFromDB {
             System.out.println(e.getMessage());
         }
         return id;
+    }
+
+    public static Department getDepartmentById(String param) {
+        Department d = new Department();
+        
+       
+        try {
+            DB db = new DB();
+            String sql = "SELECT * FROM department where Dep_ID = "+param+";";
+            
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                d = new Department(r.getInt(1),r.getString(2),r.getString(3));
+                
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return d;
+    }
+
+    public static List<Employee> GetEmployeeinDepartment(String param) {
+         List<Employee> emp = new ArrayList<Employee>();
+        try {
+            DB db = new DB();
+            
+            String sql = "SELECT * FROM oss.employees where Dep_ID ="+param+";";
+            System.out.println(sql);
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                Employee e = new Employee(r.getInt(1), r.getInt(2), r.getInt(3), r.getInt(4), r.getString(5), r.getString(6), r.getString(7), r.getString(8), r.getString(9), r.getString(10), r.getString(11), r.getString(12), r.getString(13));
+                emp.add(e);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return emp;
     }
 }

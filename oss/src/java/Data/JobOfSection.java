@@ -18,7 +18,9 @@ import java.util.logging.Logger;
 public class JobOfSection implements Serializable{
       int idJob;
       int idSEction;
+      String SEctionName;
       String name;
+      
 
     public JobOfSection() {
     }
@@ -28,11 +30,16 @@ public class JobOfSection implements Serializable{
         this.idSEction = idSEction;
     }
 
-    public JobOfSection(int idJob, int idSEction, String name) {
+    public JobOfSection(int idJob, int idSEction, String SEctionName, String name) {
         this.idJob = idJob;
         this.idSEction = idSEction;
+        this.SEctionName = SEctionName;
         this.name = name;
     }
+
+    
+
+    
     
 
     public int getIdJob() {
@@ -94,5 +101,14 @@ public class JobOfSection implements Serializable{
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getSEctionName() {
+        return SEctionName;
+    }
+
+    public void setSEctionName(String SEctionName) {
+        this.SEctionName = SEctionName;
+    }
+    
     
 }

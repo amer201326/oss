@@ -50,7 +50,7 @@
                                         <p:selectOneMenu id="employees" value="#{employeeManage.newEmployee.dep_id}" dynamic="true" style="width:200px; height:100%;">
 
                                             <f:selectItem noSelectionOption="false" itemLabel="كل الدوائر" itemValue="-1" />
-                                            <f:selectItems value="#{employeeManage.allDepartments()}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}"/>
+                                            <f:selectItems value="#{employeeManage.allDepartments}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}"/>
                                             <p:ajax update=":formSection" event="itemSelect" listener="#{employeeManage.filterEmployee()}" />
 
                                         </p:selectOneMenu>
