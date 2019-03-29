@@ -90,7 +90,7 @@ public class Section implements Serializable{
          try {
             DB data = new DB();
             data.write(q);
-            
+             System.out.println(q);
             
         } catch (SQLException ex) {
             Logger.getLogger(Section.class.getName()).log(Level.SEVERE, null, ex);

@@ -44,7 +44,6 @@ public class Service implements Serializable {
         this.section = section;
     }
 
-
     public int getId() {
         return id;
     }
@@ -125,10 +124,14 @@ public class Service implements Serializable {
     public void addServiceToDB() {
         int idMax = GetFromDB.getMaxIdService();
         this.id = idMax + 1;
-
+        
         try {
             DB data = new DB();
-            String q = "INSERT INTO services_provided VALUES ('" + id + "','" + name + "','" + cost + "','" + days + "','" + status + "','" + department.id + "','" + section.id + "');";
+            String q = "start transaction;";
+            data.write(q);
+            
+            System.out.println(q);
+            q = "INSERT INTO services_provided VALUES ('" + id + "','" + name + "','" + cost + "','" + days + "','" + status + "','" + department.id + "','" + section.id + "');";
             data.write(q);
             System.out.println(q);
             for (int i = 0; i < path.size(); i++) {
@@ -153,9 +156,21 @@ public class Service implements Serializable {
                 data.write(q);
                 System.out.println(q);
             }
-            
+            q = "commit;";
+            data.write(q);
 
         } catch (SQLException | ClassNotFoundException ex) {
+            DB data;
+            try {
+                data = new DB();
+                String q = "rollback;";
+            data.write(q);
+            } catch (SQLException ex1) {
+                Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex1);
+            } catch (ClassNotFoundException ex1) {
+                Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+            
             Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -180,7 +195,7 @@ public class Service implements Serializable {
             Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -190,8 +205,8 @@ public class Service implements Serializable {
             return false;
         }
         final Service other = (Service) obj;
-       
-        if( this.id==other.id){
+
+        if (this.id == other.id) {
             return true;
         }
         return false;

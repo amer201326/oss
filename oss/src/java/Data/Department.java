@@ -97,5 +97,10 @@ public class Department implements Serializable {
         return false;
     }
 
+    @Override
+    public String toString() {
+        return "Department{" + "id=" + id + ", nameA=" + nameA + ", image=" + image + '}';
+    }
+
     
 }

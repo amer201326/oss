@@ -32,7 +32,7 @@
 
                 <div id="content">
 
-                    <!-- Topbar -->
+                    <!-- Topbar --> 
                     <ui:include src="pages/heder.xhtml"/>
                     <!-- End of Topbar -->
                     <div class="container-fluid" align="right">
@@ -61,13 +61,13 @@
                                                           value="#{departmentManager.rootNode}"
                                                           var="node"
                                                           leafNodeConnectorHeight="10"
-
+                                                          
                                                           zoom="#{departmentManager.zoom}"
                                                           selection="#{departmentManager.selection}"
                                                           style="width: 100%;"
                                                           >
 
-                                                <p:ajax event="select" process="@this" update="@form:growl"  />
+                                                
 
                                                 <p:organigramNode>
                                                     <h:outputText value="#{node.data}" />
@@ -75,19 +75,23 @@
 
                                                 <p:organigramNode type="department"
                                                                   icon="fa fa-home"
+                                                                  skipLeafHandling="true"
                                                                   style="border-radius: 10px;">
                                                     <h:outputText value="#{node.data}" />
+                                                    
                                                 </p:organigramNode>
 
                                                 <p:organigramNode type="section"
                                                                   styleClass="division"
                                                                   icon="fa fa-fw fa-th-large"
+                                                                  skipLeafHandling="true"
                                                                   iconPos="left">
                                                     <h:outputText value="#{node.data}" />
                                                 </p:organigramNode>
 
                                                 <p:organigramNode type="job"
                                                                   styleClass="backgraundRed"
+                                                                  skipLeafHandling="true"
                                                                   icon="pi pi-user">
                                                     <h:outputText value="#{node.data}" />
                                                 </p:organigramNode>
@@ -110,9 +114,9 @@
                                     </div>
                                     <div class="card-body">
                                         <h:form id="formSection">
-                                            <h:head id="msgs"/>
+                                            <h:head id="msgs11"/>
                                             <p:dataTable id="singleDT" var="section" value="#{departmentManager.sections}"  editable="true" style="margin-bottom:20px; text-align: center;"
-                                                         selectionMode="single" dir="rtl" selection="#{departmentManager.sectionSelected}" rowKey="#{section.id}" rows="10" paginator="true" 
+                                                         selectionMode="single" dir="rtl" selection="#{departmentManager.sectionSelected}" rowKey="#{section.id}-#{section.id.length()}" rows="10" paginator="true" 
                                                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                                          rowsPerPageTemplate="5,10,15">
 
@@ -120,7 +124,7 @@
                                                     اقسام الدائرة #{sessionLists.departmentSelected.nameA}
                                                 </f:facet>
 
-                                                <p:ajax event="rowEdit" listener="#{departmentManager.onSectionEdit}" update=":formSection:msgs" />
+                                                <p:ajax event="rowEdit" listener="#{departmentManager.onSectionEdit}" update=":formSection:msgs11" />
 
 
                                                 <p:ajax event="rowSelect" process="@this" update=":formDelete:diallogDelete" listener="#{departmentManager.onSectionSelected}"/>
@@ -205,7 +209,7 @@
                                     </div>
                                     <div class="card-body">
                                         <h:form id="formJob">
-                                            <h:head id="msgs"/>
+                                            
 
                                             <p:dataTable  var="jop" value="#{departmentManager.jobsOfSections}"  
                                                           style="margin-bottom:20px; text-align: center;" rowKey="#{jop.idJob}" selectionMode="single" 
@@ -216,11 +220,6 @@
                                                 <f:facet name="header">
                                                     المسمى الوظيفي
                                                 </f:facet>
-
-
-
-
-
 
                                                 <p:ajax event="rowSelect" process="@this    " update="formJob:diallogDelete" listener="#{departmentManager.onJobSelected}"/>
                                                 <p:column headerText="القسم">
@@ -235,14 +234,11 @@
                                                     <h:outputText value="#{jop.idJob}" />
                                                 </p:column>
 
-
-
-
                                             </p:dataTable>
                                             <br/>
                                             <hr style="border: 2px solid orange;"/>
 
-                                            <p:dialog id="diallogDelete" resizable="false"  widgetVar="deleteD" dir="rtl">
+                                            <p:dialog id="diallogDelete" resizable="false"  widgetVar="deleteJobFromD" dir="rtl">
                                                 <h:panelGrid columns="2" cellpadding="5" >
 
                                                     <h:outputLabel for="del" value="هل انت متأكد من حذف #{departmentManager.jobSelected.name}" />
@@ -258,8 +254,8 @@
                                         <div style="display: flex; justify-content: center;"  class="col-sm-12">                                                
                                             <h:form>
 
-                                                <button onclick="PF('deleteD').show();" class="myButtonD" type="button">حذف الوظيف</button> &nbsp; &nbsp; &nbsp; &nbsp;
-                                                <button onclick="PF('dlg').show();" class="myButtonC" type="button" update=":formJob:deleteD" >اضافة وظيفة</button> &nbsp; &nbsp; &nbsp;
+                                                <button onclick="PF('deleteJobFromD').show();" class="myButtonD" type="button">حذف الوظيف</button> &nbsp; &nbsp; &nbsp; &nbsp;
+                                                <button onclick="PF('jobAddDep').show();" class="myButtonC" type="button" update=":formJob:deleteD" >اضافة وظيفة</button> &nbsp; &nbsp; &nbsp;
 
                                             </h:form> 
                                             <h:form id="dialogforAddJob">
@@ -283,11 +279,7 @@
                                                 </p:dialog>  
 
                                             </h:form>
-                                            <h:form class="form-wrapper cf">
-                                                <p:autoComplete id="acDelay" styleClass="inputSearch" queryDelay="1000" placeholder="Search here..." value="#{books.searchOption.wordSearch}"  completeMethod="#{sessionLibrary.getNamesBooks}" effect="blind" />
-                                                <p:commandButton value="Search" actionListener="#{sessionLibrary.search(books.searchOption)}" process="@this acDelay"  class="buttonSearch"/>
-
-                                            </h:form> 
+                                            
                                         </div>
                                     </div>
                                 </div>

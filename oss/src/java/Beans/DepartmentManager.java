@@ -64,51 +64,19 @@ public class DepartmentManager implements Serializable{
         jobsOfSections = GetFromDB.getJobOfSectio(param);
         employees = GetFromDB.GetEmployeeinDepartment(param);
         jobSelected = new JobOfSection();
+        newSection = new Section();
         newJobOfsection = new JobOfSection();
+        sectionSelected = new Section();
         ////////////////
-        rootNode = new DefaultOrganigramNode("department", "دائرة : " + thisDepartment.nameA, null);
-        rootNode.setCollapsible(false);
-        rootNode.setDroppable(false);
-        rootNode.setSelectable(false);
-
-        for (int i = 0; i < sections.size(); i++) {
-            Section s = sections.get(i);
-
-            OrganigramNode rootNodee2 = new DefaultOrganigramNode("section", "قسم : " + s.getName(), null);
-
-            rootNode.getChildren().add(rootNodee2);
-
-            try {
-
-                for (int j = 0; j < jobsOfSections.size(); j++) {
-                    JobOfSection get = jobsOfSections.get(j);
-                    if (get.getIdSEction() == Integer.parseInt(s.getId())) {
-                        List<Employee> emp = GetFromDB.GetEmployeeForJobID(get.getIdJob() + "");
-                        String[] empName = new String[emp.size()];
-                        OrganigramNode divisionNode = new DefaultOrganigramNode("job", get.getName(), rootNodee2);
-
-                        System.out.println(divisionNode.getType());
-                        for (int k = 0; k < emp.size(); k++) {
-                            Employee get1 = emp.get(k);
-                            empName[k] = get1.getEmp_name();
-                            OrganigramNode employeeNode = new DefaultOrganigramNode("employee", empName[k], divisionNode);
-
-                        }
-                    }
-
-                }
-
-            } catch (Exception e) {
-                break;
-            }
-
-        }
+        creatOrganic();
 
         //////////////
     }
+ 
 
     public void onSectionEdit(RowEditEvent event) {
         ((Section) event.getObject()).update();
+        creatOrganic();
 
     }
      public void addJobForSec() {
@@ -116,7 +84,8 @@ public class DepartmentManager implements Serializable{
         if(!newJobOfsection.addToDB()){
             //FacesContext.getCurrentInstance().addMessage("formSection:eventsDT", new FacesMessage( "Warning!", "لا يمكن اضافة نفس الوظيفة مرتين"));
             FacesContext.getCurrentInstance().addMessage("formSection:eventsDT", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "لا يمكن اضافة نفس الوظيفة مرتين"));
-        }
+        }else
+            creatOrganic();
     }
 
    
@@ -134,17 +103,21 @@ public class DepartmentManager implements Serializable{
     public void deleteSection() {
         sectionSelected.deleteFromDB();
         sections.remove(sectionSelected);
+        creatOrganic();
     }
 
     public void addSection() {
+        newSection.setDepartmentId(thisDepartment.id+"");
         newSection.addToDB();
         sections.add(newSection);
+        creatOrganic();
         newSection = new Section();
 
     }
 
     public void deleteJopTitle() {
         jobSelected.delete();
+        creatOrganic();
         jobsOfSections.remove(jobSelected);
     }
 
@@ -282,6 +255,46 @@ public class DepartmentManager implements Serializable{
 
     public void setNewJobOfsection(JobOfSection newJobOfsection) {
         this.newJobOfsection = newJobOfsection;
+    }
+
+    private void creatOrganic() {
+        rootNode = new DefaultOrganigramNode("department", "دائرة : " + thisDepartment.nameA, null);
+        rootNode.setCollapsible(false);
+        rootNode.setDroppable(false);
+        rootNode.setSelectable(false);
+
+        for (int i = 0; i < sections.size(); i++) {
+            Section s = sections.get(i);
+
+            OrganigramNode rootNodee2 = new DefaultOrganigramNode("section", "قسم : " + s.getName(), null);
+
+            rootNode.getChildren().add(rootNodee2);
+
+            try {
+
+                for (int j = 0; j < jobsOfSections.size(); j++) {
+                    JobOfSection get = jobsOfSections.get(j);
+                    if (get.getIdSEction() == Integer.parseInt(s.getId())) {
+                        List<Employee> emp = GetFromDB.GetEmployeeForJobID(get.getIdJob() + "");
+                        String[] empName = new String[emp.size()];
+                        OrganigramNode divisionNode = new DefaultOrganigramNode("job", get.getName(), rootNodee2);
+
+                        System.out.println(divisionNode.getType());
+                        for (int k = 0; k < emp.size(); k++) {
+                            Employee get1 = emp.get(k);
+                            empName[k] = get1.getEmp_name();
+                            OrganigramNode employeeNode = new DefaultOrganigramNode("employee", empName[k], divisionNode);
+
+                        }
+                    }
+
+                }
+
+            } catch (Exception e) {
+                break;
+            }
+
+        }
     }
     
 

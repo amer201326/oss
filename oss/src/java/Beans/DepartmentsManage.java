@@ -123,6 +123,7 @@ public class DepartmentsManage implements Serializable {
     }
 
     public void addSection() {
+        System.out.println("addSection");
         newSection.addToDB();
         fiterdSections = GetFromDB.getSection();
         newSection = new Section();

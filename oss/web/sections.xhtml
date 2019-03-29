@@ -209,7 +209,7 @@
                                                             </p:selectOneMenu>
 
                                                             <h:outputLabel for="name" value="اسم القسم:" />
-                                                            <p:inputText id="name" label="name" value="#{departmentsManage.newSection.name}" size="16"/>
+                                                            <p:inputText id="name" label="name" value="#{departmentsManage.newSection.name}" size="16" rendered="true"/>
 
                                                             <p:commandButton value="اضافة" actionListener="#{departmentsManage.addSection()}" update="@form :formSection :formSelectD" oncomplete="PF('dlg').hide();"/>
 
