@@ -90,7 +90,7 @@
 
                                                 <h:head id="msgs"/>
                                                 <p:dataTable id="singleDT" var="employee" value="#{employeeManage.allemployees}"  editable="true" 
-                                                             style="margin-bottom:20px" selectionMode="single" selection="#{employeeManage.newEmployee}" 
+                                                             style="margin-bottom:20px" selectionMode="single" selection="#{employeeManage.employeeSelected}" 
                                                              rowKey="#{employee.emp_id}" rows="10"
                                                              paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                                              rowsPerPageTemplate="5,10,15">
@@ -102,12 +102,12 @@
 
                                                     <p:ajax event="rowEdit" listener="#{departmentsManage.onEmployeeEdit}" update=":formSection:msgs" />
                                                     <p:ajax event="rowEditCancel" listener="#{departmentsManage.onEmployeeCancel}" update=":formSection:msgs" />
-                                                    <p:ajax event="rowSelect" process="@this"  listener="#{employeeManage.employeeSelected}"/>
+                                                    <p:ajax event="rowSelect" process="@this"  listener="#{employeeManage.onSelectemployee}"/>
 
                                                     <p:column  style="width:70px;text-align: center">
-                                                        <p:commandLink  actionListener="#{addEmployeeManager.gotToEdit()}" title="View Detail">
+                                                        <p:commandLink  actionListener="#{addEmployeeManager.gotToEdit(employee.emp_id+'')}" title="View Detail">
                                                             <h:outputText styleClass="fa fa-list-ul" style="margin:0 auto;" />
-                                                            <f:setPropertyActionListener value="#{employee}" target="#{sessionLists.selectedEmployee}" />
+                                                            
                                                         </p:commandLink>
                                                     </p:column>
 

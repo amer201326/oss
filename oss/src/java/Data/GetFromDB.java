@@ -479,4 +479,23 @@ public class GetFromDB {
         }
         return emp;
     }
+
+    public static Employee GetEmployeeById(String param) {
+           Employee emp = new Employee();
+        try {
+            DB db = new DB();
+            
+            String sql = "SELECT * FROM oss.employees where Emp_ID ="+param+";";
+            System.out.println(sql);
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                 emp = new Employee(r.getInt(1), r.getInt(2), r.getInt(3), r.getInt(4), r.getString(5), r.getString(6), r.getString(7), r.getString(8), r.getString(9), r.getString(10), r.getString(11), r.getString(12), r.getString(13));
+                
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return emp;
+        
+    }
 }

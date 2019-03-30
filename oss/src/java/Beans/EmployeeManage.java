@@ -102,6 +102,10 @@ public class EmployeeManage implements Serializable {
         }
         return list;
     }
+    
+    public void onSelectemployee(SelectEvent event){
+        employeeSelected  = (Employee)event.getObject();
+    }
 
     public List<Section> filterSections() {
         System.out.println("filter section");
@@ -296,5 +300,5 @@ public class EmployeeManage implements Serializable {
         this.jobsOfSections = jobsOfSections;
     }
     
-
+    
 }

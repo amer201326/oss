@@ -33,10 +33,10 @@ public class AddEmployeeManager {
     
     
     
-    public void gotToEdit(){
+    public void gotToEdit(String id){
         try {
 
-            FacesContext.getCurrentInstance().getExternalContext().redirect("editEmployee.xhtml?id="+sessionLists.selectedEmployee.getEmp_id());
+            FacesContext.getCurrentInstance().getExternalContext().redirect("editEmployee.xhtml?id="+id);
         } catch (IOException ex) {
             Logger.getLogger(CitizenManage.class.getName()).log(Level.SEVERE, null, ex);
         }
