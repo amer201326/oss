@@ -75,7 +75,7 @@
                                     </div>
 
 
-                                    <br/><hr style="border: 2px solid orange;"/><br/><br/>
+                                    <br/><hr style="border: 2px solid orange;"/><br/>
                                 </div>
                             </div>  
                             <div class="row text-center" > 
@@ -90,7 +90,8 @@
 
                                                     <h:form id="formSelectD">
                                                         <!-- Style Addemployee form Bussectionlo-->
-                                                        <p:selectOneMenu id="departments" value="#{departmentsManage.department.id}"  dynamic="true" style="  width:200px; height:100%;">
+                                                        <p:selectOneMenu id="departments" value="#{departmentsManage.department.id}" class="pading000"
+                                                                         dynamic="true" style="min-width: 223px;">
 
                                                             <f:selectItem itemLabel="كل الدوائر" itemValue="-1" />
                                                             <f:selectItems value="#{departmentsManage.allDepartment()}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}"/>
@@ -138,7 +139,7 @@
                                                             <p:cellEditor>
                                                                 <f:facet name="output"><h:outputText value="#{section.departmentNmae}" /></f:facet>
                                                                 <f:facet name="input">
-                                                                    <h:selectOneMenu value="#{section.departmentId}" style="width:100%">
+                                                                    <h:selectOneMenu value="#{section.departmentId}" style="min-width: 223px;" class="pading000">
                                                                         <f:selectItems value="#{departmentsManage.allDepartment()}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}" />
                                                                     </h:selectOneMenu>
                                                                 </f:facet>
@@ -174,20 +175,26 @@
                                                         </h:panelGrid>
                                                     </p:dialog>  
                                                     <!--  <p:commandButton value="فتح" actionListener=""  />-->
-
-                                                </h:form >
-                                                <div style="display: flex; justify-content: center;"  class="col-sm-12">                                                
-                                                    <h:form>
+                                                    
+                                                    <div style="display: flex; justify-content: center;"  class="col-sm-12">                                                
+                                                  
 
 
                                                         <button onclick="PF('deleteD').show();" class="myButtonD" type="button"> حذف قسم </button> &nbsp; &nbsp; &nbsp; &nbsp;
-                                                        <button onclick="PF('dlgOpenSec').show();" class="myButtonB" type="button">فتح قسم</button> &nbsp; &nbsp; &nbsp; &nbsp;
+                                                     
+                                                          <p:commandButton value=" فتح قسم" class="myButtonB" actionListener="#{departmentsManage.gotToSection()}"
+                                                                         update="@form " />   &nbsp; &nbsp; &nbsp; &nbsp;
+                                                          
+
 
                                                         <button onclick="PF('dlg').show();" class="myButtonC" type="button">اضافة قسم</button> &nbsp; &nbsp; &nbsp;
 
 
-                                                    </h:form>
+                                                   
                                                 </div>
+
+                                                </h:form >
+                                                
 
                                           <!-- <div class="text#{$infix}-left col-md-6">
                                                <button onclick="PF('deleteD').show();" class="myButtonD" type="button">حذف</button>
@@ -204,12 +211,13 @@
 
                                                         <h:panelGrid columns="2" cellpadding="5">
                                                             <h:outputLabel for="deid" value="القسم:" />
-                                                            <p:selectOneMenu id="departments" value="#{departmentsManage.newSection.departmentId}" dynamic="true" style="width:200px; height:100%;">
+                                                            <p:selectOneMenu id="departments" value="#{departmentsManage.newSection.departmentId}" 
+                                                                             dynamic="true" style="min-width: 223px;" class="pading000">
                                                                 <f:selectItems value="#{departmentsManage.allDepartment()}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}"/>
                                                             </p:selectOneMenu>
 
                                                             <h:outputLabel for="name" value="اسم القسم:" />
-                                                            <p:inputText id="name" label="name" value="#{departmentsManage.newSection.name}" size="16" rendered="true"/>
+                                                            <p:inputText id="name" label="name" value="#{departmentsManage.newSection.name}" size="16" style="min-width: 223px;"/>
 
                                                             <p:commandButton value="اضافة" actionListener="#{departmentsManage.addSection()}" update="@form :formSection :formSelectD" oncomplete="PF('dlg').hide();"/>
 
@@ -217,19 +225,7 @@
                                                         </h:panelGrid>
                                                     </p:dialog>  
 
-                                                    <p:dialog id="openSection" resizable="false" header="اضافة قسم" widgetVar="dlgOpenSec" dir="rtl" >
-
-                                                        <h:panelGrid columns="2" cellpadding="5">
-
-
-
-
-
-                                                            <h:outputLabel for="name" value=" تم فتح القسم الذي اخترته" /> <br/>
-                                                            <p:commandButton value="فتح" actionListener="#{departmentsManage.gotToSection()}" oncomplete="PF('dlgOpenSec').hide();" />
-
-                                                        </h:panelGrid>
-                                                    </p:dialog>  
+                                               
 
                                                 </h:form>
                                             </div>

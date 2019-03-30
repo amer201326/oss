@@ -17,9 +17,9 @@ import javax.faces.bean.ViewScoped;
  *
  * @author Amer$_$
  */
-@ManagedBean
-@ViewScoped
+
 public class ServiceAttachmentName implements Serializable{
+    
     int id;
     String name;
     String srcFile;
@@ -98,8 +98,9 @@ public class ServiceAttachmentName implements Serializable{
          return false;
     }
     
-    public void addJobToDB(){
+    public void addAttachToDB(){
         String  q = "INSERT INTO serviceattachmentname VALUES(null,'" + name + "');";
+        
          try {
             DB data = new DB();
             data.write(q);
@@ -112,5 +113,8 @@ public class ServiceAttachmentName implements Serializable{
         }
         
     }
+    
+    
+    
     
 }

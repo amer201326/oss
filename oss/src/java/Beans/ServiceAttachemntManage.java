@@ -31,6 +31,7 @@ public class ServiceAttachemntManage implements Serializable{
     
     public ServiceAttachemntManage() {
         allServicesAttach = GetDB_Eman.getAllAttachment();
+        newService = new ServiceAttachmentName();
     }
 
     public ServiceAttachmentName getServ() {
@@ -77,9 +78,13 @@ public class ServiceAttachemntManage implements Serializable{
         this.newService = newService;
     }
      public void addAttachment() {
-        newService.addJobToDB();
+        System.out.println("11111111111111111111111111111111111111111");
+        newService.addAttachToDB();
+        System.out.println("222222222222222222222222222222222222222");
         newService = new ServiceAttachmentName();
         allServicesAttach = GetDB_Eman.getAllAttachment();
 
     }
+     
+     
 }

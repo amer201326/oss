@@ -53,6 +53,7 @@ public class EmployeeManage implements Serializable {
     List<Employee> allemployees;
     DualListModel<String> screenSel;
     List<JobOfSection> jobsOfSections;
+    Employee employeeSelected;
 
     public EmployeeManage() {
 
@@ -85,6 +86,7 @@ public class EmployeeManage implements Serializable {
        
         
         allemployees = GetDB_Eman.getEmployee();
+        employeeSelected = new Employee();
 
        
     }
@@ -153,6 +155,16 @@ public class EmployeeManage implements Serializable {
     public EmployeeAccount getNewEmployeeAccount() {
         return newEmployeeAccount;
     }
+
+    public Employee getEmployeeSelected() {
+        return employeeSelected;
+    }
+
+    public void setEmployeeSelected(Employee employeeSelected) {
+        this.employeeSelected = employeeSelected;
+    }
+    
+    
 
     public void setNewEmployeeAccount(EmployeeAccount newEmployeeAccount) {
         this.newEmployeeAccount = newEmployeeAccount;

@@ -88,7 +88,7 @@
                                     <div class="card-body">
                                         <div class="form-group row">
                                             <div class="col-sm-12 mb-3 mb-sm-0">
-
+                                                <br/>
                                                 <!--Here-->
                                                 <h:form id="formSection">
                                                     <h:head id="msgs"/>
@@ -176,11 +176,11 @@
 
                                             <h:outputLabel for="name" value="إضافة:" />
                                             <p:inputText id="name" label="name" value="#{serviceAttachemntManage.newService.name}" required="true"/>
-                                            
+
                                             <h:outputLabel for="name" value="الملاحظات:" />
                                             <p:inputTextarea rows="6" cols="33" style="min-width: 223px;"/> 
 
-                                             <p:commandButton value="اضافة" actionListener="#{serviceAttachemntManage.addAttachment()}" update="@form :formSection" oncomplete="PF('dlg').hide();"/>
+                                            <p:commandButton value="اضافة" actionListener="#{serviceAttachemntManage.addAttachment()}" update="@form :formSection" oncomplete="PF('dlg').hide();"/>
 
                                         </h:panelGrid>
                                     </p:dialog> 
@@ -190,8 +190,179 @@
                             </div>
 
 
+
+
                         </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <div class="container-fluid">
+
+                            <div class="row text-center">
+                                <div class="float-lg-right float-right text#{$infix}-right" style="width: 100%">
+
+                                </div>
+                                <div class="card shadow mb-4" style="text-align: right;">
+                                    <div class="card-body">
+                                        <div class="form-group row">
+                                            <div class="col-sm-12 mb-3 mb-sm-0">
+                                                <br/>
+                                                <!--Here-->
+                                                <h:form id="formAttach">
+                                                    <h:head id="msgs1"/>
+
+
+
+                                                    <p:dataTable id="singleDTattach" var="attachment" value="#{serviceAttachemntManage.allServicesAttach}"  
+                                                                 editable="true" style="margin-bottom:20px; text-align: center;" rowKey="#{attachment.id}" selectionMode="single" 
+                                                                 selection="#{serviceAttachemntManage.serv}" rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                                 rowsPerPageTemplate="5,10,15" >
+
+
+                                                        <f:facet name="header">
+                                                            متطلبات
+                                                        </f:facet>
+
+                                                        <p:ajax event="rowEdit" listener="#{serviceAttachemntManage.onAttachEdit}" update=":formAttach:msgs1" />
+                                                        <p:ajax event="rowEditCancel" listener="#{serviceAttachemntManage.onAttachCancel}" update=":formAttach:msgs1" />
+
+
+                                                        <p:column style="width:13%;" headerText="تعديل">
+                                                            <p:rowEditor />
+                                                        </p:column>
+                                                        <p:column headerText="الملف" >
+                                                            <p:cellEditor disabled="true">
+                                                                <f:facet name="output"><h:outputText value="#{attachment.srcFile}" /></f:facet>
+                                                                <f:facet name="input"><p:inputText  value="#{attachment.srcFile}" style="width:100%"/></f:facet>
+                                                            </p:cellEditor>
+                                                        </p:column>
+                                                        <p:ajax event="rowSelect" process="@this" update="formAttach:dialogDel" listener="#{serviceAttachemntManage.onAttachSelected}"/>
+                                                        <p:column headerText="الاسم">
+                                                            <p:cellEditor>
+                                                                <f:facet name="output"><h:outputText value="#{attachment.name}" /></f:facet>
+                                                                <f:facet name="input"><p:inputText value="#{attachment.name}" style="width:100%" label="Name"/></f:facet>
+                                                            </p:cellEditor>
+                                                        </p:column>
+
+                                                        <p:column headerText="الرقم" >
+                                                            <p:cellEditor disabled="true">
+                                                                <f:facet name="output"><h:outputText value="#{attachment.id}" /></f:facet>
+                                                                <f:facet name="input"><p:inputText id="modelInput1" value="#{attachment.id}" style="width:100%"/></f:facet>
+                                                            </p:cellEditor>
+                                                        </p:column>
+
+
+
+
+
+                                                    </p:dataTable>
+
+<p:dialog resizable="false" header=" إضافة مرفقات" widgetVar="dlg1" dir="rtl">
+                                                <h:panelGrid columns="2" cellpadding="5">
+
+                                                    <h:outputLabel for="name1" value="إضافة:" />
+                                                    <p:inputText id="name1" label="name" value="#{serviceAttachemntManage.newService.name}" required="true"/>
+
+                                                 <!--   <h:outputLabel for="nameD" value="الملاحظات:" />
+                                                    <p:inputTextarea id="nameD" rows="6" cols="33" style="min-width: 223px;"/> -->
+
+                                                    <p:commandButton value="اضافة" actionListener="#{serviceAttachemntManage.addAttachment()}" update="formAttach" oncomplete="PF('dlg1').hide();"/>
+
+                                                </h:panelGrid>
+                                            </p:dialog> 
+
+
+
+                                                    <p:dialog id="dialogDel" resizable="false"  widgetVar="deleteDlg" dir="rtl">
+                                                        <h:panelGrid columns="2" cellpadding="5" >
+
+                                                            <h:outputLabel for="dele" value="هل انت متأكد من حذف مرفق #{serviceAttachemntManage.serv.name}" />
+
+                                                            <br/>
+
+                                                            <p:commandButton id="dele" value="حذف" action="#{serviceAttachemntManage.deleteAttachment()}" update="formAttach" oncomplete="PF('deleteDlg').hide();"/>
+
+                                                        </h:panelGrid>
+                                                    </p:dialog>  
+
+                                                </h:form>
+
+                                                <h:form>
+                                                   
+                                                    <br/><p:separator/> <br/>
+                                                    <p:fileUpload  fileUploadListener="#{uploadManage.handleFileUpload}" mode="advanced" required="true"
+                                                                  uploadLabel="تحميل" cancelLabel="إلغاء" label="أختر" dragDropSupport="true" update="messages" 
+                                                                  sizeLimit="10000000" allowTypes="/(\.|\/)(doc|docx|xls|xlsx|pdf|jpe?g)$/" />
+
+                                                    <p:growl id="messages"  showDetail="false" showSummary="false"/>
+
+                                                </h:form>
+
+                                                <br/>
+                                                <hr style="border: 2px solid orange;"/>
+                                            </div>
+
+
+
+                                            <div style="display: flex; justify-content: center;"  class="col-sm-12">                                                
+                                                <h:form>
+
+                                                    <button onclick="PF('deleteDlg').show();" class="myButtonD" type="button"> حذف مرفق</button> &nbsp; &nbsp; &nbsp; &nbsp;
+                                                    <button onclick="PF('dlg1').show();" class="myButtonC" type="button" update=":formAttach:deleteDlg" >اضافة </button> &nbsp; &nbsp; &nbsp;
+
+                                                </h:form> 
+                                            </div>
+
+
+                                        </div>
+
+                                      
+                                    </div>
+                                </div>
+
+
+
+                               <!-- <div class="text#{$infix}-right" style="width: 100%;">
+                                    <p:spacer width="30px"/>
+                                    <p:commandButton value="حذف" onclick="PF('deleteD').show();" type="button"/>  
+                                    <p:spacer width="30px"/>
+                                    <p:commandButton value="اضافة " onclick="PF('dlg').show();" update=":formSection:deleteD" type="button" />
+
+                                </div>-->
+                                <h:form> 
+
+
+                                    <p:dialog resizable="false" header=" إضافة مرفقات" widgetVar="dlg" dir="rtl">
+                                        <h:panelGrid columns="2" cellpadding="5">
+
+                                            <h:outputLabel for="name" value="إضافة:" />
+                                            <p:inputText id="name" label="name" value="#{serviceAttachemntManage.newService.name}" required="true"/>
+
+                                            <h:outputLabel for="name" value="الملاحظات:" />
+                                            <p:inputTextarea rows="6" cols="33" style="min-width: 223px;"/> 
+
+                                            <p:commandButton value="اضافة" actionListener="#{serviceAttachemntManage.addAttachment()}" update="@form :formSection" oncomplete="PF('dlg').hide();"/>
+
+                                        </h:panelGrid>
+                                    </p:dialog> 
+                                </h:form>
+
+
+                            </div>
+
+                        </div>
 
                         <!-- /.container-fluid -->
                     </p:column>

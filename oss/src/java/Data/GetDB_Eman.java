@@ -117,4 +117,47 @@ public class GetDB_Eman {
      
      
      
+     
+     static int getMaxIdCitizen() {
+        int id = 0;
+        try {
+            DB db = new DB();
+            
+            String sql = "SELECT Cit_ID FROM citizen WHERE Cit_ID = ( SELECT MAX(Cit_ID) FROM citizen ) ;";
+            System.out.println(sql);
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                id = r.getInt(1);
+                
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return id;
+    }
+     
+     
+     public static List<Citizen> getallCitizen() {
+        Citizen cit = new Citizen();
+        
+        List<Citizen> c = new ArrayList<Citizen>();
+        try {
+            DB db = new DB();
+            String sql = "select c.Cit_ID, c.Cit_FirstName, c.Cit_FatherName, c.Cit_GrandfatherName, c.Cit_LastName, "
+                    + "c.Cit_ID_Card, c.Cit_Mobile, c.Cit_Email, c.Cit_Address from citizen as c inner join citizenaccount"
+                    + " as a on c.Cit_ID = a.Cit_ID;";
+
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                cit = new Citizen(r.getInt(1), r.getString(2), r.getString(3), r.getString(4), r.getString(5), 
+                        r.getString(6), r.getString(7), r.getString(8), r.getString(9));
+                c.add(cit);
+            }
+        } catch (Exception e) {
+            System.out.println("bb"+e.getMessage());
+        }
+        return c;
+    }
+     
+     
 }

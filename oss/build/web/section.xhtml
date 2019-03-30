@@ -21,7 +21,7 @@
         <link href="css/sb-admin-2.min.css" rel="stylesheet"/>
         <link href="css/amer.css" rel="stylesheet"/>
         <style type="text/css">
-            
+
 
             .ui-button-text-only .ui-button-text {
                 padding: 0.3em 0.4em;
@@ -59,80 +59,109 @@
                     <!-- End of Topbar -->
                     <p:column id="contentPage">
                         <div class="container-fluid">
+
                             <div class="row">
                                 <div class="col-lg-12 text-center">
 
-                                    <h2 class="section-heading text-uppercase">وظائف قسم #{sessionLists.sectionSelected.name}</h2>
-                                    <br/><hr style="border: 2px solid orange;"/><br/><br/>
+                                    <div class=" col-md-12 ">
+                                        <div class="card border-left-warning border-right-0 shadow h-100 py-2">
+                                            <div class="card-body">
+                                                <div class="row no-gutters textC">
+                                                    <div class="col mr-2">
+                                                        <h2 class="section-heading text-uppercase">وظائف قسم #{sessionLists.sectionSelected.name}</h2>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <br/><hr style="border: 2px solid orange;"/><br/>
                                 </div>
                             </div>  
+
+
+
+
+
+
+
+
+
+
+
                             <div class="row text-center">
+                                <div class="float-lg-right float-right text#{$infix}-right" style="width: 100%;margin-bottom: 30px">
+                                    <div class="card shadow mb-4" style="text-align: right;">
+                                        <div class="card-body"> <br/>
+                                            <h:form id="formSection">
+                                                <h:head id="msgs"/>
+                                                <p:dataTable id="eventsDT" sortBy="#{job.id}" var="job" value="#{sectionManage.jobOfSection}" 
+                                                             selectionMode="single" selection="#{sectionManage.jobSelected}" rowKey="#{job.id}"
+                                                             rows="10" paginator="true" 
+                                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                             rowsPerPageTemplate="5,10,15">
+                                                    <f:facet name="header">
+                                                        الوظائف
+                                                    </f:facet>
+                                                    <p:ajax event="rowSelect" listener="#{sectionManage.onRowSelect}" update=":formSection:msgs" />
+                                                    <p:ajax event="rowUnselect" listener="#{sectionManage.onRowUnselect}" update=":formSection:msgs" />
+                                                    <p:column headerText="رقم الوظيفة" sortBy="#{job.id}">
+                                                        <h:outputText value="#{job.id}" />
+                                                    </p:column>
+                                                    <p:column headerText="اسم الوظيفة" sortBy="#{job.name}">
+                                                        <h:outputText value="#{job.name}" />
+                                                    </p:column>
 
-                                <h:form id="formSection">
-                                    <h:head id="msgs"/>
-                                    <p:dataTable id="eventsDT" sortBy="#{job.id}" var="job" value="#{sectionManage.jobOfSection}" 
-                                                 selectionMode="single" selection="#{sectionManage.jobSelected}" rowKey="#{job.id}"
-                                                 rows="10" paginator="true" 
-                                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                                 rowsPerPageTemplate="5,10,15">
-                                        <f:facet name="header">
-                                           الوظائف
-                                        </f:facet>
-                                        <p:ajax event="rowSelect" listener="#{sectionManage.onRowSelect}" update=":formSection:msgs" />
-                                        <p:ajax event="rowUnselect" listener="#{sectionManage.onRowUnselect}" update=":formSection:msgs" />
-                                        <p:column headerText="رقم الوظيفة" sortBy="#{job.id}">
-                                            <h:outputText value="#{job.id}" />
-                                        </p:column>
-                                        <p:column headerText="اسم الوظيفة" sortBy="#{job.name}">
-                                            <h:outputText value="#{job.name}" />
-                                        </p:column>
-                                        
-                                    </p:dataTable>
-                                    <p:message  for="eventsDT" />
+                                                </p:dataTable>
+                                                <p:message  for="eventsDT" />
 
-                                    <p:dialog id="diallogDelete" resizable="false"  widgetVar="deleteD">
-                                        <h:panelGrid columns="2" cellpadding="5">
+                                                <p:dialog id="diallogDelete" resizable="false"  widgetVar="deleteD">
+                                                    <h:panelGrid columns="2" cellpadding="5">
 
-                                            <h:outputLabel for="del" value="هل انت متأكد من حذف #{sectionManage.jobSelected.name}" />
+                                                        <h:outputLabel for="del" value="هل انت متأكد من حذف #{sectionManage.jobSelected.name}" />
 
 
-                                            <p:commandButton id="del" value="حذف" action="#{sectionManage.deleteJobFromSection()}" update="formSection" oncomplete="PF('deleteD').hide();"/>
+                                                        <p:commandButton id="del" value="حذف" action="#{sectionManage.deleteJobFromSection()}" 
+                                                                         update="formSection" oncomplete="PF('deleteD').hide();" dir="rtl"/>
 
-                                        </h:panelGrid>
-                                    </p:dialog>  
+                                                    </h:panelGrid>
+                                                </p:dialog> 
+                                                <br/><hr style="border: 2px solid orange;"/><br/>
+                                                <div style="display: flex; justify-content: center;"  class="col-sm-12"> 
+                                                    <p:commandButton value="حذف" onclick="PF('deleteD').show();" type="button" class="myButtonD"/>
+                                                    <p:spacer width="25px"/>
+                                                    <p:commandButton value="اضافة وظيفة" onclick="PF('dlg').show();" type="button" class="myButtonC"/>
 
-                                </h:form >
-                                <div class="text#{$infix}-right" style="width: 100%;">
-                                    <p:commandButton value="اضافة وظيفة" onclick="PF('dlg').show();" type="button" />
-                                    <p:spacer width="30px"/>
-                                    <p:commandButton value="حذف" onclick="PF('deleteD').show();" type="button"/>
-                                </div>
-                                <h:form id="dialog">
+                                                </div>
+                                            </h:form >
 
-                                    <p:dialog id="DNewjob" resizable="false" header="اضافة وظيفة" widgetVar="dlg">
+                                            <h:form id="dialog">
 
-                                        <h:panelGrid columns="2" cellpadding="5">
+                                                <p:dialog id="DNewjob" resizable="false" header="اضافة وظيفة" widgetVar="dlg">
 
-                                            
-                                            <p:selectOneMenu id="job" value="#{sectionManage.newJobOfsection.idJob}" dynamic="true" style="width:200px; height:100%;">
-                                                <f:selectItems value="#{sectionManage.allJob}" var="d" itemLabel="#{d.name}" itemValue="#{d.id}"/>
-                                            </p:selectOneMenu>
-                                            <h:outputLabel for="deid" value="اختر وظيفة" />
+                                                    <h:panelGrid columns="2" cellpadding="5">
 
-                                        </h:panelGrid>
-                                        <h:link outcome="jobTitel.xhtml">
-                                            لاضافة وظائف اخرى اضغط هنا
-                                        </h:link>
-                                        <p:separator/>
-                                            <p:commandButton value="اضافة" actionListener="#{sectionManage.addJobForSec()}" update="@form :formSection" oncomplete="PF('dlg').hide();"/>
-                                    </p:dialog>  
 
-                                </h:form>
+                                                        <p:selectOneMenu id="job" value="#{sectionManage.newJobOfsection.idJob}" dynamic="true" style="width:200px; height:100%;">
+                                                            <f:selectItems value="#{sectionManage.allJob}" var="d" itemLabel="#{d.name}" itemValue="#{d.id}"/>
+                                                        </p:selectOneMenu>
+                                                        <h:outputLabel for="deid" value="اختر وظيفة" />
 
+                                                    </h:panelGrid>
+                                                    <h:link outcome="jobTitel.xhtml">
+                                                        لاضافة وظائف اخرى اضغط هنا
+                                                    </h:link>
+                                                    <p:separator/>
+                                                    <p:commandButton value="اضافة" actionListener="#{sectionManage.addJobForSec()}" update="@form :formSection" oncomplete="PF('dlg').hide();"/>
+                                                </p:dialog>  
+
+                                            </h:form>
+                                        </div>
+                                    </div>
+                                </div> 
                             </div>
-                            <br/><br/>
-                            <hr style="border: 2px solid orange;"/>
-                            <br/><br/>
+
 
                         </div>
 

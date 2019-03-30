@@ -5,7 +5,9 @@
  */
 package Beans;
 
+import Data.Citizen;
 import Data.Department;
+import Data.Employee;
 import Data.GetFromDB;
 import Data.JobTitel;
 import Data.Section;
@@ -28,6 +30,8 @@ public class SessionLists implements Serializable{
     Section sectionSelected;
     JobTitel jobSelected;
     Service selectedService;
+    Citizen seletedCitizen;
+    Employee selectedEmployee;
     int id;
     
     public SessionLists() {
@@ -35,6 +39,7 @@ public class SessionLists implements Serializable{
         sectionSelected = new Section();
         jobSelected = new JobTitel();
         selectedService = new Service();
+        seletedCitizen = new Citizen();
     }
 
     public Department getDepartmentSelected() {
@@ -49,6 +54,26 @@ public class SessionLists implements Serializable{
         return sectionSelected;
     }
 
+    public Employee getSelectedEmployee() {
+        return selectedEmployee;
+    }
+
+    public void setSelectedEmployee(Employee selectedEmployee) {
+        this.selectedEmployee = selectedEmployee;
+    }
+
+    
+    
+    public Citizen getSeletedCitizen() {
+        return seletedCitizen;
+    }
+
+    public void setSeletedCitizen(Citizen seletedCitizen) {
+        this.seletedCitizen = seletedCitizen;
+    }
+
+    
+    
     public void setSectionSelected(Section sectionSelected) {
         this.sectionSelected = sectionSelected;
     }
@@ -78,10 +103,6 @@ public class SessionLists implements Serializable{
         this.selectedService = selectedService;
     }
     
-    
-
-   
-
     
  
 }

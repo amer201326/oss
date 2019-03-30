@@ -109,11 +109,6 @@ public class JobOfSection implements Serializable{
     public void setSEctionName(String SEctionName) {
         this.SEctionName = SEctionName;
     }
-
-    @Override
-    public String toString() {
-        return "JobOfSection{" + "idJob=" + idJob + ", idSEction=" + idSEction + ", SEctionName=" + SEctionName + ", name=" + name + '}';
-    }
     
     
 }

@@ -85,9 +85,9 @@
                                                         الخدمات المقدمة
                                                     </f:facet>
 
-                                                    <p:ajax event="rowEdit" listener="#{servicesManager.onServiceEdit}" update=":form:msgs" />
-                                                    <p:ajax event="rowEditCancel" listener="#{servicesManager.onServiceEditCancel}" update=":form:msgs" />
-                                                    <p:ajax event="rowSelect" process="@this"  listener="#{servicesManager.seviceSelected}"/>
+                                                    <p:ajax event="rowEdit" listener="#{citizenManage.onCitizenEdit}" update=":form:msgs" />
+                                                    <p:ajax event="rowEditCancel" listener="#{citizenManage.onServiceEditCancel}" update=":form:msgs" />
+                                                    <p:ajax event="rowSelect" process="@this"  listener="#{citizenManage.citizenSelected}"/>
                                                     
                                                     <p:column  style="width:90px;text-align: center">
                                                         <p:commandLink  actionListener="#{addServiceManager.gotToEdit()}" title="View Detail">
@@ -155,9 +155,9 @@
 
 
                                                     <p:column selectionMode="single" style="width:50px;text-align:center"/>
-                                                    <f:facet name="footer">
+                                                   <!-- <f:facet name="footer">
                                                         <p:commandButton   icon="fa fa-plus" value="إضافة"  />
-                                                    </f:facet>
+                                                    </f:facet>-->
                                                 </p:dataTable>
 
 
