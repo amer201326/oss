@@ -8,6 +8,7 @@ package Beans;
 import Beans.CitizenManage;
 import Beans.SessionLists;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
@@ -21,7 +22,8 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 @ViewScoped
-public class AddCitizenManager {
+public class AddCitizenManager implements Serializable{
+    
       @ManagedProperty(value = "#{sessionLists}")
      SessionLists sessionLists;
 
