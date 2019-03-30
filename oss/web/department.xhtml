@@ -38,7 +38,26 @@
                     <div class="container-fluid" align="right">
 
                         <!-- Page Heading -->
-                        <h1 class="h3 mb-4 text-gray-800 text-center">#{departmentManager.thisDepartment.nameA}</h1>
+                        <div class="row">
+                            <div class="col-lg-12 text-center">
+
+                                <div class=" col-md-12 ">
+                                    <div class="card border-left-warning border-right-0 shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters textC">
+                                                <div class="col mr-2">
+                                                    <h1 class="h3 mb-4 text-gray-800 text-center section-heading 
+                                                        text-uppercase">#{departmentManager.thisDepartment.nameA}</h1>                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <br/><hr style="border: 2px solid orange; margin-left: 10px; margin-right: 10px;"/><br/>
+                            </div>
+                        </div>
+
+
 
                         <div class="row">
 
@@ -61,13 +80,13 @@
                                                           value="#{departmentManager.rootNode}"
                                                           var="node"
                                                           leafNodeConnectorHeight="10"
-                                                          
+
                                                           zoom="#{departmentManager.zoom}"
                                                           selection="#{departmentManager.selection}"
                                                           style="width: 100%;"
                                                           >
 
-                                                
+
 
                                                 <p:organigramNode>
                                                     <h:outputText value="#{node.data}" />
@@ -78,7 +97,7 @@
                                                                   skipLeafHandling="true"
                                                                   style="border-radius: 10px;">
                                                     <h:outputText value="#{node.data}" />
-                                                    
+
                                                 </p:organigramNode>
 
                                                 <p:organigramNode type="section"
@@ -116,7 +135,7 @@
                                         <h:form id="formSection">
                                             <h:head id="msgs11"/>
                                             <p:dataTable id="singleDT" var="section" value="#{departmentManager.sections}"  editable="true" style="margin-bottom:20px; text-align: center;"
-                                                         selectionMode="single" dir="rtl" selection="#{departmentManager.sectionSelected}" rowKey="#{section.id}-#{section.id.length()}" rows="10" paginator="true" 
+                                                         selectionMode="single"  selection="#{departmentManager.sectionSelected}" rowKey="#{section.id}-#{section.id.length()}" rows="10" paginator="true" 
                                                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                                          rowsPerPageTemplate="5,10,15">
 
@@ -128,12 +147,11 @@
 
 
                                                 <p:ajax event="rowSelect" process="@this" update=":formDelete:diallogDelete" listener="#{departmentManager.onSectionSelected}"/>
-                                                <p:column headerText="الرقم" style="text-align: center;">
-                                                    <p:cellEditor disabled="true">
-                                                        <f:facet name="output"><h:outputText value="#{section.id}" /></f:facet>
-                                                        <f:facet name="input"><p:inputText id="modelInput" value="#{section.id}" style="width:100%"/></f:facet>
-                                                    </p:cellEditor>
+
+                                                <p:column style="width:10%; text-align: center;" headerText="تعديل">
+                                                    <p:rowEditor />
                                                 </p:column>
+
 
                                                 <p:column headerText="اسم القسم" style="text-align: center;">
                                                     <p:cellEditor>
@@ -141,11 +159,14 @@
                                                         <f:facet name="input"><p:inputText value="#{section.name}" style="width:100%" label="Year"/></f:facet>
                                                     </p:cellEditor>
                                                 </p:column>
-
-
-                                                <p:column style="width:10%; text-align: center;" headerText="تعديل">
-                                                    <p:rowEditor />
+                                                <p:column headerText="الرقم" style="text-align: center;">
+                                                    <p:cellEditor disabled="true">
+                                                        <f:facet name="output"><h:outputText value="#{section.id}" /></f:facet>
+                                                        <f:facet name="input"><p:inputText id="modelInput" value="#{section.id}" style="width:100%"/></f:facet>
+                                                    </p:cellEditor>
                                                 </p:column>
+
+
 
                                             </p:dataTable>
                                         </h:form >
@@ -158,7 +179,7 @@
                                                 <h:panelGrid columns="2" cellpadding="5">
 
                                                     <h:outputLabel for="del" value="هل انت متأكد من حذف #{departmentManager.sectionSelected.name}" />
-
+                                                    <br/>
 
                                                     <p:commandButton id="del" value="حذف" action="#{departmentManager.deleteSection()}"
                                                                      update="@form :formSection :formOrganigram" oncomplete="PF('deleteD').hide();"/>
@@ -209,7 +230,7 @@
                                     </div>
                                     <div class="card-body">
                                         <h:form id="formJob">
-                                            
+
 
                                             <p:dataTable  var="jop" value="#{departmentManager.jobsOfSections}"  
                                                           style="margin-bottom:20px; text-align: center;" rowKey="#{jop.idJob}" selectionMode="single" 
@@ -260,26 +281,27 @@
                                             </h:form> 
                                             <h:form id="dialogforAddJob">
 
-                                                <p:dialog id="jobAddDep" resizable="false" header="اضافة وظيفة" widgetVar="jobAddDep">
+                                                <p:dialog id="jobAddDep" resizable="false" header="اضافة وظيفة" widgetVar="jobAddDep" dir="rtl">
 
                                                     <h:panelGrid columns="2" cellpadding="5">
 
-
-                                                        <p:selectOneMenu id="job" value="#{departmentManager.newJobOfsection.idJob}" dynamic="true" style="width:200px; height:100%;">
+                                                        <h:outputLabel for="deid" value="اختر وظيفة" />
+                                                        <p:selectOneMenu id="job" value="#{departmentManager.newJobOfsection.idJob}" dynamic="true" style="min-width:223px;" class="pading000">
                                                             <f:selectItems value="#{departmentManager.jobTitels}" var="d" itemLabel="#{d.name}" itemValue="#{d.id}"/>
                                                         </p:selectOneMenu>
-                                                        <h:outputLabel for="deid" value="اختر وظيفة" />
+
 
                                                     </h:panelGrid>
-                                                    <h:link outcome="jobTitel.xhtml">
-                                                        لاضافة وظائف اخرى اضغط هنا
+                                                    <br/>
+                                                    <h:link class="myButtonG" outcome="jobTitel.xhtml">
+                                                        <i class="fas fa-hand-point-left">&nbsp;لاضافة وظائف اخرى اضغط هنا</i>
                                                     </h:link>
                                                     <p:separator/>
                                                     <p:commandButton value="اضافة" actionListener="#{departmentManager.addJobForSec()}" update="@form :formJob" oncomplete="PF('jobAddDep').hide();"/>
                                                 </p:dialog>  
 
                                             </h:form>
-                                            
+
                                         </div>
                                     </div>
                                 </div>

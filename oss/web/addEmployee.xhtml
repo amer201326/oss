@@ -105,12 +105,14 @@
 
                                                     <div class="my-2"></div>
 
-                                                    <div class="form-group row" >
+                                                    <div class="form-group row" style="display:flex; 
+                                                         justify-content: flex-start; width: 220px; margin: 0 40px 0 40px;">
 
 
                                                         <p:pickList id="pickList" value="#{employeeManage.screensNamesAndResaults}" var="sna" 
                                                                     itemLabel="#{sna}" itemValue="#{sna}"  showSourceFilter="true" showTargetFilter="true"
-                                                                    style="position: center; min-width: 50px;">
+                                                                    style="display:flex; justify-content: space-between; width: 230px;
+                                                                    margin: 0px 0px 0px 0px; padding-left: 0;">
                                                             <f:facet name="sourceCaption">كافة المرفقات</f:facet>
                                                             <f:facet name="targetCaption">المرفقات المختارة</f:facet>
                                                         </p:pickList>  

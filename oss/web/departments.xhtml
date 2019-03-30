@@ -100,9 +100,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <br/><br/>
+                            <br/>
                             <hr style="border: 2px solid orange;"/>
-                            <br/><br/>
+                            <br/>
                             <div class="row">
                                 <div class="col-lg-12 text-center">
                                     <h:outputLink id="openDialogLink" value="javascript:void(0)" onclick="PF('dlg').show();">
@@ -118,7 +118,7 @@
 
                                     <p:dialog id="addDepartment"  widgetVar="dlg" header="اضافة دائرة جديدة"  resizable="false" showEffect="clip" hideEffect="clip">
                                         <h:form>
-                                            <p:outputLabel value="اختر رمز"  />
+                                            <h3>اختر رمز</h3> <p:separator/>
                                             <div id="iconlift" class="flexCenter" >
                                                 <div >
                                                     <p:commandButton process="@this" action="#{departmentsManage.nextIconDep()}"  update="iconDepChange"
@@ -132,13 +132,13 @@
                                                         <i class="fas #{departmentsManage.department.image} fa-stack-1x fa-inverse"></i>
                                                     </span>
                                                     </div>
-                                                </p:outputPanel>
+                                                </p:outputPanel> 
                                                 <div >
                                                     <p:commandButton process="@this" action="#{departmentsManage.backIconDep()}"  update="iconDepChange"
                                                                      style="width: 40px;height: 100%" icon="fa fa-fw fa-angle-double-right"  />
                                                 </div>
                                             </div>
-
+                                            <p:separator/>
 
                                             <h:panelGrid columns="2" cellpadding="5">
                                                 <h:panelGrid columns="1" cellpadding="0">
@@ -157,9 +157,6 @@
                                 </div>
                             </div>
 
-
-
-
                         </div>
 
 
@@ -168,7 +165,7 @@
 
                 </div>
 
-                <br/><br/>
+                <br/>
                 <!-- End of Main Content -->
 
                 <!-- Footer -->
