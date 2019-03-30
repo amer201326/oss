@@ -624,8 +624,12 @@ ui-picklist-caption ui-widget-header ui-corner-tl ui-corner-tr{
     margin-bottom: 10px;
 }
 
+table{
+    text-align: center;
+}
 
-
-
-
+.ui-selectonemenu-label .ui-inputfield .ui-corner-all{
+    text-align: center;
+    float: right;
+}
 

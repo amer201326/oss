@@ -7,7 +7,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough" class="rest">
     <h:head>
-        <title>اضافة موظف </title>
+        <title>تعديل موظف </title>
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -53,7 +53,7 @@
                                                 <div class="card-body">
                                                     <div class="row no-gutters textC">
                                                         <div class="col mr-2">
-                                                            <h2 class="section-heading text-uppercase">اضافة موظف جديد</h2>
+                                                            <h2 class="section-heading text-uppercase">تعديل موظف </h2>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -88,89 +88,6 @@
 
 
 
-
-                                                            </div>
-
-                                                        </div>
-
-
-                                                    </div>
-                                                </div>
-
-                                                <div class="card shadow mb-4">
-                                                    <div class="card-header py-3">
-                                                        <h6 class="m-0 font-weight-bold text-primary">صلاحيات</h6>
-                                                    </div>
-
-
-                                                    <div class="my-2"></div>
-
-                                                    <div class="form-group row" >
-
-
-                                                        <p:pickList id="pickList1" value="#{employeeManage.screensNamesAndResaults}" var="sna" class="pick"
-                                                                    itemLabel="#{sna}" itemValue="#{sna}"  showSourceFilter="true" showTargetFilter="true"
-                                                                    style="position: center; min-width: 50px;">
-                                                            <f:facet name="sourceCaption">كافة المرفقات</f:facet>
-                                                            <f:facet name="targetCaption">المرفقات المختارة</f:facet>
-                                                        </p:pickList>  
-
-
-                                                    </div>
-
-                                                    <div class="my-2"></div>
-                                                </div>
-
-                                            </div>
-
-
-                                            <div class="col-lg-6" style="text-align: right; float: right;">
-
-                                                <div class="card shadow mb-4">
-                                                    <div class="card-header py-3">
-                                                        <h6 class="m-0 font-weight-bold text-primary">إضافة موظف</h6>
-                                                    </div>
-                                                    <div class="card-body">
-
-                                                        <div class="form-group row">
-                                                            <div class="col-sm-12 mb-3 mb-sm-0">
-
-                                                                <h:panelGrid columns="2" dir="rtl" style="display: flex; justify-content: flex-start;">
-
-                                                                    <p:outputLabel for="compName" class="label" value="الاسم الكامل"/>
-                                                                    <p:inputText class="form-control form-control-user" style="text-align:right;"
-                                                                                 id="compName" type="text" value="#{employeeManage.newEmployee.emp_name}" 
-                                                                                 required="true"/>
-
-                                                                    <p:outputLabel for="idCard" class="label" value="رقم الهوية"/>
-                                                                    <p:inputMask id="idCard" class="form-control form-control-user" style="text-align:right;" 
-                                                                                 type="text" mask="9 9999999 9" value="#{employeeManage.newEmployee.emp_idCard}" required="true"/>
-
-                                                                    <p:outputLabel for="tel" class="label" value="التلفون"/>
-                                                                    <p:inputMask id="tel" class="form-control form-control-user" style="text-align:right;" 
-                                                                                 type="text" value="#{employeeManage.newEmployee.emp_tel}" mask="99-9999-999"/>
-
-                                                                    <p:outputLabel for="mobile" class="label" value="الجوال"/>
-                                                                    <p:inputMask id="mobile" class="form-control form-control-user" style="text-align:right;"
-                                                                                 type="text" mask="999-999-9999" value="#{employeeManage.newEmployee.emp_mobile}" required="true"/>
-
-                                                                    <p:outputLabel for="email1" class="label" value="البريد الإلكتروني"/>
-                                                                    <p:inputText id="email1" class="form-control form-control-user" style="text-align:right;" type="email"
-                                                                                 value="#{employeeManage.newEmployee.emp_email}" required="true"/>
-
-
-
-                                                                    <p:outputLabel for="gender" class="label" value="الجنس"/>
-                                                                    <p:selectOneRadio value="#{employeeManage.newEmployee.emp_gender}" id="gender" class="label1" required="true">
-                                                                        <f:selectItem itemLabel="ذكر" itemValue="M" />
-                                                                        <f:selectItem  itemLabel="أنثى" itemValue="F" />
-                                                                    </p:selectOneRadio>
-
-                                                                    <p:outputLabel for="barDa" class="label" value="تاريخ الميلاد"/>
-                                                                    <p:calendar id="barDa" selectOtherMonths="true" yearRange="c-100:c" class=" form-control-user"
-                                                                                pattern="yyyy-MM-dd" navigator="true" style="text-align:right;"
-                                                                                value="#{employeeManage.newEmployee.birthDate}" required="true"/>
-                                                                </h:panelGrid>
 
                                                             </div>
 
@@ -234,6 +151,100 @@
 
                                             </div>
 
+
+                                            <div class="col-lg-6" style="text-align: right; float: right;">
+
+                                                <div class="card shadow mb-4">
+                                                    <div class="card-header py-3">
+                                                        <h6 class="m-0 font-weight-bold text-primary">تعديل موظف</h6>
+                                                    </div>
+                                                    <div class="card-body">
+
+                                                        <div class="form-group row">
+                                                            <div class="col-sm-12 mb-3 mb-sm-0">
+
+                                                                <h:panelGrid columns="2" dir="rtl" style="display: flex; justify-content: flex-start;">
+
+                                                                    <p:outputLabel for="compName" class="label" value="الاسم الكامل"/>
+                                                                    <p:inputText class="form-control form-control-user" style="text-align:right;"
+                                                                                 id="compName" type="text" value="#{employeeManage.newEmployee.emp_name}" 
+                                                                                 required="true"/>
+
+                                                                    <p:outputLabel for="idCard" class="label" value="رقم الهوية"/>
+                                                                    <p:inputMask id="idCard" class="form-control form-control-user" style="text-align:right;" 
+                                                                                 type="text" mask="9 9999999 9" value="#{employeeManage.newEmployee.emp_idCard}" required="true"/>
+
+                                                                    <p:outputLabel for="tel" class="label" value="التلفون"/>
+                                                                    <p:inputMask id="tel" class="form-control form-control-user" style="text-align:right;" 
+                                                                                 type="text" value="#{employeeManage.newEmployee.emp_tel}" mask="99-9999-999"/>
+
+                                                                    <p:outputLabel for="mobile" class="label" value="الجوال"/>
+                                                                    <p:inputMask id="mobile" class="form-control form-control-user" style="text-align:right;"
+                                                                                 type="text" mask="999-999-9999" value="#{employeeManage.newEmployee.emp_mobile}" required="true"/>
+
+                                                                    <p:outputLabel for="email1" class="label" value="البريد الإلكتروني"/>
+                                                                    <p:inputText id="email1" class="form-control form-control-user" style="text-align:right;" type="email"
+                                                                                 value="#{employeeManage.newEmployee.emp_email}" required="true"/>
+
+
+
+                                                                    <p:outputLabel for="gender" class="label" value="الجنس"/>
+                                                                    <p:selectOneRadio value="#{employeeManage.newEmployee.emp_gender}" id="gender" class="label1" required="true">
+                                                                        <f:selectItem itemLabel="ذكر" itemValue="M" />
+                                                                        <f:selectItem  itemLabel="أنثى" itemValue="F" />
+                                                                    </p:selectOneRadio>
+
+                                                                    <p:outputLabel for="barDa" class="label" value="تاريخ الميلاد"/>
+                                                                    <p:calendar id="barDa" selectOtherMonths="true" yearRange="c-100:c" class=" form-control-user"
+                                                                                pattern="yyyy-MM-dd" navigator="true" style="text-align:right;"
+                                                                                value="#{employeeManage.newEmployee.birthDate}" required="true"/>
+                                                                </h:panelGrid>
+
+                                                            </div>
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="card shadow mb-4">
+                                                    <div class="card-header py-3">
+                                                        <h6 class="m-0 font-weight-bold text-primary">صلاحيات</h6>
+                                                    </div>
+
+
+                                                    <div class="my-2"></div>
+
+                                                    <div class="form-group row" style="display:flex; 
+                                                         justify-content: flex-start; width: 220px; margin: 0 40px 0 40px;">
+
+
+                                                       <p:pickList id="pickList1" value="#{employeeManage.screensNamesAndResaults}" var="sna" class="pick"
+                                                                    itemLabel="#{sna}" itemValue="#{sna}"  showSourceFilter="true" showTargetFilter="true"
+                                                                    style="display:flex; justify-content: space-between; width: 230px;
+                                                                    margin: 0px 0px 0px 0px; padding-left: 0;"> 
+                                                            <f:facet name="sourceCaption">كافة المرفقات</f:facet>
+                                                            <f:facet name="targetCaption">المرفقات المختارة</f:facet>
+                                                        </p:pickList>   
+
+                                                    </div>
+
+                                                    <div class="my-2"></div>
+                                                </div>
+
+
+
+
+
+
+
+
+
+
+                                            </div>
+
                                         </div>
                                         <br/><hr style="border: 2px solid orange; margin-left: 10px; margin-right: 10px;"/>
                                         <div style="display: flex; justify-content: center;"  class="col-sm-12">
@@ -247,7 +258,7 @@
                                                     <f:ajax />
                                                 </p:commandButton> &nbsp; &nbsp; &nbsp;
 
-                                                <p:commandButton actionListener="#{employeeManage.addEmployee()}" value="إضافة موظف" id="add_emp"  update="@form"  class="myButtonC" />
+                                                <p:commandButton actionListener="#{employeeManage.addEmployee()}" value="تعديل" id="add_emp"  update="@form"  class="myButtonC" />
 
                                             </div>
 

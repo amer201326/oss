@@ -93,7 +93,7 @@
                                                         <p:selectOneMenu id="departments" value="#{departmentsManage.department.id}" class="pading000"
                                                                          dynamic="true" style="min-width: 223px;">
 
-                                                            <f:selectItem itemLabel="كل الدوائر" itemValue="-1" />
+                                                            <f:selectItem  noSelectionOption="false" itemLabel="كل الدوائر" itemValue="-1" />
                                                             <f:selectItems value="#{departmentsManage.allDepartment()}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}"/>
                                                             <p:ajax update=":formSection" event="itemSelect" listener="#{departmentsManage.fSection}" />
 

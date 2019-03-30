@@ -74,7 +74,7 @@
                                                         <p:outputLabel for="employees" style="margin-left: 4%" value="الدوائر " />
 
                                                         <p:selectOneMenu id="employees" value="#{employeeManage.newEmployee.dep_id}" dynamic="true" 
-                                                                         class="padding000" style="min-width: 223px;">
+                                                                         class="padding000" style="min-width: 223px;  padding: 0 0 0 0; padding-right: 0;">
 
                                                             <f:selectItem noSelectionOption="false" itemLabel="كل الدوائر" itemValue="-1" />
                                                             <f:selectItems value="#{employeeManage.allDepartments}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}"/>
