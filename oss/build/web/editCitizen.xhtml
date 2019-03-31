@@ -90,23 +90,23 @@
                                                                             <h6 class="m-0 font-weight-bold text-primary">تعديل </h6>
                                                                         </div>
                                                                         <div class="card-body">
-                                                                            <h:panelGrid columns="2" dir="rtl" style="display: flex; justify-content: flex-start;">
+                                                                           <h:panelGrid columns="2" dir="rtl" style="display: flex; justify-content: flex-start;">
 
                                                                                 <p:outputLabel for="address" value="العنوان"/>
-                                                                                <p:inputText id="address" value="#{citizenManage.newCitizen.address}" required="true" 
+                                                                                <p:inputText id="address" value="#{citizenManage.newCitizen.address}" 
+                                                                                             class="form-control form-control-user" style="text-align:right;" type="text"/>
+                                                                                <p:outputLabel for="quarter" value="الحي" />
+                                                                                <p:inputText id="quarter" value="#{citizenManage.newCitizen.quarter}"  
                                                                                              class="form-control form-control-user" style="text-align:right;" type="text"/>
 
-                                                                                <p:outputLabel for="job" value="المهنة" />
-                                                                                <p:inputText id="job" value="#{citizenManage.newCitizen.citizenJob}" required="true" 
+                                                                                <p:outputLabel for="street" value="الشارع" />
+                                                                                <p:inputText id="street" value="#{citizenManage.newCitizen.street}" required="true" 
                                                                                              class="form-control form-control-user" style="text-align:right;" type="text"/>
 
-                                                                                <p:outputLabel for="passportNumber" value="رقم جواز السفر" />
-                                                                                <p:inputText id="passportNumber" value="#{citizenManage.newCitizen.passportNumber}" required="true" 
+                                                                                <p:outputLabel for="region" value="المنطقة" />
+                                                                                <p:inputText id="region" value="#{citizenManage.newCitizen.region}" required="true" 
                                                                                              class="form-control form-control-user" style="text-align:right;" type="text"/>
 
-                                                                                <p:outputLabel for="passportType" value="نوع جواز السفر" />
-                                                                                <p:inputText id="passportType" value="#{citizenManage.newCitizen.passportType}" required="true" 
-                                                                                             class="form-control form-control-user" style="text-align:right;" type="text"/>
 
 
                                                                             </h:panelGrid>
@@ -151,7 +151,7 @@
                                                                         </div>
                                                                         <div class="card-body">
 
-                                                                            <h:panelGrid columns="2" dir="rtl" style="display: flex; justify-content: flex-start;">
+                                                                              <h:panelGrid columns="2" dir="rtl" style="display: flex; justify-content: flex-start;">
 
                                                                                 <p:outputLabel for="firstName" value="الاسم الاول" />
                                                                                 <p:inputText id="firstName" value="#{citizenManage.newCitizen.firstName}" required="true" 
@@ -175,17 +175,14 @@
                                                                                         <f:selectItem itemLabel="ذكر" itemValue="M" />
                                                                                         <f:selectItem  itemLabel="أنثى" itemValue="F" />
                                                                                     </p:selectOneRadio>
-                                                                                </h:panelGrid>
-
-                                                                                <p:outputLabel for="familyMember" value="عدد افراد الاسرة" />
-                                                                                <p:inputText id="familyMember" value="#{citizenManage.newCitizen.familyMember}" required="true" 
-                                                                                             class="form-control form-control-user" style="text-align:right;" type="number"/>
+                                                                                </h:panelGrid>  
+                                                                                <br/>
+                                                                                <p:separator style="width: 250px;"/> 
+                                                                                
 
                                                                                 <p:outputLabel for="idCard" value="رقم الهوية" /> 
                                                                                 <p:inputMask id="idCard" class="form-control form-control-user"
                                                                                              style="text-align:right;" type="text" mask="9 9999999 9" value="#{citizenManage.newCitizen.idCard}" required="true"/>
-
-
 
                                                                                 <p:outputLabel for="mobile" value="الجوال" /> 
                                                                                 <p:inputMask id="mobile" class="form-control form-control-user" style="text-align:right;" 
@@ -204,7 +201,16 @@
                                                                                              style="text-align:right;" type="email" value="#{citizenManage.newCitizen.email}" 
                                                                                              required="true"/>
 
-
+                                                                                <p:outputLabel for="job" value="المهنة" />
+                                                                                <p:inputText id="job" value="#{citizenManage.newCitizen.citizenJob}" required="true" 
+                                                                                             class="form-control form-control-user" style="text-align:right;" type="text"/>
+                                                                                
+                                                                                <br/>
+                                                                                <p:separator style="width: 250px;"/> 
+                                                                                
+                                                                                <p:outputLabel for="familyMember" value="عدد افراد الاسرة" />
+                                                                                <p:inputText id="familyMember" value="#{citizenManage.newCitizen.familyMember}" required="true" 
+                                                                                             class="form-control form-control-user" style="text-align:right;" type="number"/>
 
                                                                                 <p:outputLabel for="placeOfBirth" value="مكان الولادة" />
                                                                                 <p:inputText id="placeOfBirth" value="#{citizenManage.newCitizen.placeOfBirth}" required="true" 
@@ -213,17 +219,15 @@
 
 
 
-                                                                                <p:outputLabel for="quarter" value="الحي" />
-                                                                                <p:inputText id="quarter" value="#{citizenManage.newCitizen.quarter}" required="true" 
+                                                                                <p:outputLabel for="passportNumber" value="رقم جواز السفر" />
+                                                                                <p:inputText id="passportNumber" value="#{citizenManage.newCitizen.passportNumber}" 
                                                                                              class="form-control form-control-user" style="text-align:right;" type="text"/>
 
-                                                                                <p:outputLabel for="street" value="الشارع" />
-                                                                                <p:inputText id="street" value="#{citizenManage.newCitizen.street}" required="true" 
+                                                                                <p:outputLabel for="passportType" value="نوع جواز السفر" />
+                                                                                <p:inputText id="passportType" value="#{citizenManage.newCitizen.passportType}" 
                                                                                              class="form-control form-control-user" style="text-align:right;" type="text"/>
 
-                                                                                <p:outputLabel for="region" value="المنطقة" />
-                                                                                <p:inputText id="region" value="#{citizenManage.newCitizen.region}" required="true" 
-                                                                                             class="form-control form-control-user" style="text-align:right;" type="text"/>
+
 
 
 
