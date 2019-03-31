@@ -133,6 +133,11 @@ public class DepartmentPaths implements Serializable {
         this.sections = sections;
     }
 
+    @Override
+    public String toString() {
+        return "DepartmentPaths{" + "id=" + id + ", nameA=" + nameA + ", image=" + image + ", order=" + order + ", sections=" + sections + '}';
+    }
+
     
 
     

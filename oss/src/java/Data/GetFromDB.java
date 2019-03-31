@@ -383,7 +383,7 @@ public class GetFromDB {
         return attach;
     }
 
-    static int getMaxIdService() {
+    public static int getMaxIdService() {
         int id = 0;
         try {
             DB db = new DB();
@@ -408,13 +408,13 @@ public class GetFromDB {
         List<Service> services = new ArrayList<Service>();
         try {
             DB db = new DB();
-            String sql = "select Services_Provided_ID ,Serv_Name,Serv_Cost,Serv_Days,Serv_Case,d.*,s.* from services_provided  inner join department as d on services_provided.DepartmentID = d.Dep_ID inner join section as s on services_provided.sectionID = s.Sec_ID;";
+            String sql = "select Services_Provided_ID ,Serv_Name,Serv_Cost,Serv_Days,Serv_Case,d.*,s.*,note from services_provided  inner join department as d on services_provided.DepartmentID = d.Dep_ID inner join section as s on services_provided.sectionID = s.Sec_ID;";
 
             ResultSet r = db.read(sql);
             while (r.next()) {
-                s = new Service(r.getInt(1), r.getString(2),r.getInt(1),
-                        r.getDouble(3),r.getString(4),new Department(r.getInt(5), r.getString(6),
-                                r.getString(7)),new Section(r.getInt(8), r.getInt(9), r.getString(10), r.getString(11)));
+                s = new Service(r.getInt(1), r.getString(2),r.getDouble(3),r.getInt(4),r.getString(5)
+                        ,new Department(r.getInt(6), r.getString(7),r.getString(8)),
+                        new Section(r.getInt(9), r.getInt(10), r.getString(11), r.getString(7)),r.getString(12));
                 
                 services.add(s);
             }
@@ -497,5 +497,67 @@ public class GetFromDB {
         }
         return emp;
         
+    }
+    
+    public static List<Integer> getAttavhmentForserviceById(String id) {
+        List<Integer> name = new ArrayList<>();
+        try {
+            DB db = new DB();
+            
+            String sql = "SELECT * FROM have_serviceattachment where Services_Provided_ID ="+id+";";
+            System.out.println(sql);
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                name.add(r.getInt(2));
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return name;
+    }
+
+    public static List<JobPath> getPahtForService(int id) {
+        List<JobPath> path = new ArrayList<>();
+        
+        try {
+            DB db = new DB();
+            
+            String sql = "SELECT * FROM oss.steps_job where Services_Provided_ID = "+id+";";
+            System.out.println(sql);
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                path.add(new JobPath(r.getInt(1), r.getInt(2), r.getInt(3), r.getInt(4), r.getInt(5), r.getInt(6)));
+                
+                
+                
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return path;
+    }
+
+    public static Service getServiceByID(String id) {
+        Service s = new Service();
+
+       
+        try {
+            DB db = new DB();
+            String sql = "select Services_Provided_ID ,Serv_Name,Serv_Cost,Serv_Days,Serv_Case,d.*,s.*,note from services_provided  inner join department as d on services_provided.DepartmentID = d.Dep_ID inner join section as s on services_provided.sectionID = s.Sec_ID;";
+            System.out.println(sql);
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                s = new Service(r.getInt(1), r.getString(2),r.getDouble(3),r.getInt(4),r.getString(5)
+                        ,new Department(r.getInt(6), r.getString(7),r.getString(8)),
+                        new Section(r.getInt(9), r.getInt(10), r.getString(11), r.getString(7)),r.getString(12));
+                
+                
+            }
+            
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return s;
     }
 }

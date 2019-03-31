@@ -74,7 +74,7 @@
 
                                                 <h:head id="msgs"/>
                                                 <p:dataTable id="allService" var="service" value="#{servicesManager.allSrvices}"
-                                                             editable="true" style="margin-bottom:20px; text-align: center;"
+                                                              style="margin-bottom:20px; text-align: center;"
                                                              selection="#{servicesManager.seviceSelected}"
                                                              rowKey="#{service.id}" rows="10" paginator="true" 
                                                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -85,79 +85,49 @@
                                                         الخدمات المقدمة
                                                     </f:facet>
 
-                                                    <p:ajax event="rowEdit" listener="#{citizenManage.onCitizenEdit}" update=":form:msgs" />
-                                                    <p:ajax event="rowEditCancel" listener="#{citizenManage.onServiceEditCancel}" update=":form:msgs" />
-                                                    <p:ajax event="rowSelect" process="@this"  listener="#{citizenManage.citizenSelected}"/>
+                                                    
+                                                    
+                                                    <p:ajax event="rowSelect" process="@this"  listener="#{servicesManager.onServiceSelect}"/>
                                                     
                                                     <p:column  style="width:90px;text-align: center">
-                                                        <p:commandLink  actionListener="#{addServiceManager.gotToEdit()}" title="View Detail">
+                                                        <p:commandLink  actionListener="#{servicesManager.gotToEdit(service.id)}" title="View Detail">
                                                             <h:outputText styleClass="fa fa-list-ul" style="margin:0 auto;" />
                                                             
                                                         </p:commandLink>
                                                     </p:column>
-                                                    <p:column  style="width:35px">
-                                                        <p:rowEditor/>
-                                                    </p:column>
+                                                    
 
                                                     <p:column headerText="ايام الاستجابة">
-                                                        <p:cellEditor>
-                                                            <f:facet name="output"><h:outputText value="#{service.days}" /></f:facet>
-                                                            <f:facet name="input"><p:inputText value="#{service.days}" style="width:100%" /></f:facet>
-                                                        </p:cellEditor>
+                                                       <h:outputText value="#{service.days}" />
+                                                       
                                                     </p:column>
 
                                                     <p:column headerText="التكلفة">
-                                                        <p:cellEditor>
-                                                            <f:facet name="output"><h:outputText value="#{service.cost}" /></f:facet>
-                                                            <f:facet name="input"><p:inputText value="#{service.cost}" style="width:100%" /></f:facet>
-                                                        </p:cellEditor>
+                                                        <h:outputText value="#{service.cost}" />
                                                     </p:column>
 
                                                     <p:column headerText="الحالة">
-                                                        <p:cellEditor>
-                                                            <f:facet name="output"><h:outputText value="#{service.status}" /></f:facet>
-                                                            <f:facet name="input"><p:inputText value="#{service.status}" style="width:100%" /></f:facet>
-                                                        </p:cellEditor>
+                                                        <h:outputText value="#{service.status}" />
                                                     </p:column>
 
 
                                                     <p:column headerText="القسم">
-                                                        <p:cellEditor>
-                                                            <f:facet name="output"><h:outputText value="#{service.department.nameA}" /></f:facet>
-                                                            <f:facet name="input">
-                                                                <h:selectOneMenu value="#{service.department.nameA}" style="width:100%">
-                                                                    <f:selectItems value="#{servicesManager.allSec}" var="sec" itemLabel="#{sec.name}"
-                                                                                   itemValue="#{sec.id}" />
-                                                                </h:selectOneMenu>
-                                                            </f:facet>
-                                                        </p:cellEditor>
+                                                        <h:outputText value="#{service.section.name}" />
                                                     </p:column>
 
                                                     <p:column headerText="الدائرة">
-                                                        <p:cellEditor>
-                                                            <f:facet name="output"><h:outputText value="#{service.section.name}" /></f:facet>
-                                                            <f:facet name="input">
-                                                                <h:selectOneMenu value="#{service.section.name}" style="width:100%">
-                                                                    <f:selectItems value="#{servicesManager.allDep}" var="dep" itemLabel="#{dep.nameA}" itemValue="#{dep.id}" />
-                                                                </h:selectOneMenu>
-                                                            </f:facet>
-                                                        </p:cellEditor>
+                                                       <h:outputText value="#{service.department.nameA}" />
                                                     </p:column>
 
 
                                                     <p:column headerText="الاسم">
-                                                        <p:cellEditor>
-                                                            <f:facet name="output"><h:outputText value="#{service.name}" /></f:facet>
-                                                            <f:facet name="input"><p:inputText  value="#{service.name}" style="width:100%"/></f:facet>
-                                                        </p:cellEditor> 
+                                                       <h:outputText value="#{service.name}" />
                                                     </p:column>
 
 
 
                                                     <p:column selectionMode="single" style="width:50px;text-align:center"/>
-                                                   <!-- <f:facet name="footer">
-                                                        <p:commandButton   icon="fa fa-plus" value="إضافة"  />
-                                                    </f:facet>-->
+                                                   
                                                 </p:dataTable>
 
 

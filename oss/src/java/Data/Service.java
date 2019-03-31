@@ -21,12 +21,15 @@ public class Service implements Serializable {
 
     int id;
     String name;
-    int days;
     double cost;
+    int days;
+    
     String status;
     Department department;
     Section section;
-    List<DepartmentPaths> path;
+    
+    String note;
+    List<JobPath> path;
     List<ServiceAttachmentName> attachmentNames;
 
     public Service() {
@@ -34,14 +37,21 @@ public class Service implements Serializable {
         this.section = new Section();
     }
 
-    public Service(int id, String name, int days, double cost, String status, Department department, Section section) {
+    public Service(int id, String name, double cost, int days, String status, Department department, Section section,String note) {
         this.id = id;
         this.name = name;
-        this.days = days;
         this.cost = cost;
+        this.days = days;
         this.status = status;
         this.department = department;
         this.section = section;
+        this.note = note;
+    }
+
+    
+
+    public void fillPath() {
+        path = GetFromDB.getPahtForService(id);
     }
 
     public int getId() {
@@ -100,13 +110,7 @@ public class Service implements Serializable {
         this.section = section;
     }
 
-    public List<DepartmentPaths> getPath() {
-        return path;
-    }
-
-    public void setPath(List<DepartmentPaths> path) {
-        this.path = path;
-    }
+    
 
     public void update() {
         try {
@@ -124,32 +128,27 @@ public class Service implements Serializable {
     public void addServiceToDB() {
         int idMax = GetFromDB.getMaxIdService();
         this.id = idMax + 1;
-        
+
         try {
             DB data = new DB();
             String q = "start transaction;";
             data.write(q);
-            
+
             System.out.println(q);
             q = "INSERT INTO services_provided VALUES ('" + id + "','" + name + "','" + cost + "','" + days + "','" + status + "','" + department.id + "','" + section.id + "');";
             data.write(q);
             System.out.println(q);
-            for (int i = 0; i < path.size(); i++) {
-                DepartmentPaths get = path.get(i);
-                for (int j = 0; j < get.getSections().size(); j++) {
-                    SectionPath get1 = get.getSections().get(j);
-                    for (int k = 0; k < get1.getJobs().size(); k++) {
-                        JobPath get2 = get1.getJobs().get(k);
-                        if (get2.getSectionID() == get1.getId()) {
-                            q = "INSERT INTO steps_job VALUES(" + department.id + "," + section.id + "," + get2.id + "," + id + "," + get.order + "," + get1.order + "," + get2.order + ");";
-                            data.write(q);
-                            System.out.println(q);
-                        }
 
-                    }
+            for (int k = 0; k < path.size(); k++) {
+                JobPath get2 = path.get(k);
+                
+                    q = "INSERT INTO steps_job VALUES(" + get2.DepId + "," + get2.sectionID + "," + get2.id + "," + id + "," + get2.dOrder + "," + get2.sOrder + "," + get2.order + ");";
+                    data.write(q);
+                    System.out.println(q);
+                
 
-                }
             }
+
             for (int i = 0; i < attachmentNames.size(); i++) {
                 ServiceAttachmentName get = attachmentNames.get(i);
                 q = "INSERT INTO have_serviceattachment VALUES (" + id + ", " + get.id + ");";
@@ -164,13 +163,13 @@ public class Service implements Serializable {
             try {
                 data = new DB();
                 String q = "rollback;";
-            data.write(q);
+                data.write(q);
             } catch (SQLException ex1) {
                 Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex1);
             } catch (ClassNotFoundException ex1) {
                 Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex1);
             }
-            
+
             Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -218,5 +217,24 @@ public class Service implements Serializable {
         hash = 73 * hash + this.id;
         return hash;
     }
+
+    public List<JobPath> getPath() {
+        return path;
+    }
+
+    public void setPath(List<JobPath> path) {
+        this.path = path;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+    
+    
+    
 
 }

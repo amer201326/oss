@@ -16,6 +16,7 @@ import Data.Section;
 import Data.SectionPath;
 import Data.Service;
 import Data.ServiceAttachmentName;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -34,7 +35,7 @@ import org.primefaces.model.DualListModel;
  */
 @ManagedBean
 @ViewScoped
-public class EditServiceManager {
+public class EditServiceManager implements Serializable{
 
     Boolean boolSection = false;
     Boolean boolJob = false;
@@ -59,19 +60,31 @@ public class EditServiceManager {
     List<JobOfSection> filterJobsOfSections;
 
     DualListModel<String> attachmentNamesAndResaults;
-    @ManagedProperty(value = "#{sessionLists}")
-    SessionLists sessionLists;
-    
+
     public EditServiceManager() {
         Map<String, String> parameterMap = (Map<String, String>) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         String id = parameterMap.get("id");
-        
-        
+
         attachmentNames = GetFromDB.getServiceAttachmentName();
+        List<Integer> attachmentIds = GetFromDB.getAttavhmentForserviceById(id);
         attachmentNamesAndResaults = new DualListModel<>();
+
         for (int i = 0; i < attachmentNames.size(); i++) {
             ServiceAttachmentName get = attachmentNames.get(i);
-            attachmentNamesAndResaults.getSource().add(get.getName());
+            
+            boolean b = false;
+            for (int j = 0; j < attachmentIds.size(); j++) {
+                Integer idat = attachmentIds.get(j);
+                if (get.getId() == idat) {
+                    
+                    attachmentNamesAndResaults.getTarget().add(get.getName());
+                    b = true;
+                }
+
+            }
+            if (!b) {
+                attachmentNamesAndResaults.getSource().add(get.getName());
+            }
         }
 
         departments = GetFromDB.getDepartments();
@@ -79,18 +92,12 @@ public class EditServiceManager {
         jobsOfSections = GetFromDB.getJobOfSectio();
         sectionPath_new = new SectionPath();
         selectSectionPath = new SectionPath();
-        newService = new Service();
+        newService = GetFromDB.getServiceByID(id);
         selectDepartmentPath = new DepartmentPaths();
         departmentPaths = new DepartmentPaths();
         jobPath = new JobPath();
         selectedJobPath = new JobPath();
-    }
-    @PostConstruct
-    public void init() {
-       newService = sessionLists.selectedService;
-       departmentsInPath = newService.getPath();
-       
-        
+        departmentsInPath = getPathASDep();
     }
 
     public DepartmentPaths getDepartmentPaths() {
@@ -124,7 +131,7 @@ public class EditServiceManager {
             }
 
         }
-        
+
         selectDepartmentPath.getSections().add(sectionPath_new);
         sectionPath_new = new SectionPath();
 
@@ -143,29 +150,29 @@ public class EditServiceManager {
 
         }
         System.out.println(jobPath.toString());
-        
+
         selectSectionPath.getJobs().add(jobPath);
         jobPath = new JobPath();
     }
 
-    public void addService() {
-        
-        List<ServiceAttachmentName> l = new ArrayList<>();
-        for (int i = 0; i < attachmentNamesAndResaults.getTarget().size(); i++) {
-            String get = attachmentNamesAndResaults.getTarget().get(i);
-            for (int j = 0; j < attachmentNames.size(); j++) {
-                ServiceAttachmentName get1 = attachmentNames.get(j);
-                if(get.equals(get1.getName())){
-                    l.add(get1);
-                }
-                
-            }
-        }
-        newService.setAttachmentNames(l);
-        newService.setPath(departmentsInPath);
-        newService.addServiceToDB();
-
-    }
+//    public void addService() {
+//
+//        List<ServiceAttachmentName> l = new ArrayList<>();
+//        for (int i = 0; i < attachmentNamesAndResaults.getTarget().size(); i++) {
+//            String get = attachmentNamesAndResaults.getTarget().get(i);
+//            for (int j = 0; j < attachmentNames.size(); j++) {
+//                ServiceAttachmentName get1 = attachmentNames.get(j);
+//                if (get.equals(get1.getName())) {
+//                    l.add(get1);
+//                }
+//
+//            }
+//        }
+//        newService.setAttachmentNames(l);
+//        newService.setPath(departmentsInPath);
+//        newService.addServiceToDB();
+//
+//    }
 
     public List<Section> filterSections() {
         List<Section> list = new ArrayList<>();
@@ -207,6 +214,7 @@ public class EditServiceManager {
         List<SectionPath> list = new ArrayList<>();
         for (int i = 0; i < selectDepartmentPath.getSections().size(); i++) {
             SectionPath get = selectDepartmentPath.getSections().get(i);
+            System.out.println("----------"+get);
             if (selectDepartmentPath.id == get.getDepartmentId()) {
                 list.add(get);
             }
@@ -269,7 +277,7 @@ public class EditServiceManager {
     public void deleteJobPath() {
         System.out.println("delete job");
         System.out.println(selectedJobPath);
-        
+
         selectSectionPath.getJobs().remove(selectedJobPath);
         selectedJobPath = new JobPath();
     }
@@ -279,7 +287,7 @@ public class EditServiceManager {
         System.out.println(selectedJobPath);
 
         departmentsInPath.remove(selectDepartmentPath);
-        
+
         boolSection = false;
         pleaseSelectDepartment = true;
         boolJob = false;
@@ -295,7 +303,6 @@ public class EditServiceManager {
         System.out.println(selectedJobPath);
 
         selectDepartmentPath.getSections().remove(selectSectionPath);
-        
 
         boolJob = false;
         pleaseSelectsection = true;
@@ -393,8 +400,6 @@ public class EditServiceManager {
         this.departmentsInPath = departmentsInPath;
     }
 
-  
-
     public DepartmentPaths getSelectDepartmentPath() {
         return selectDepartmentPath;
     }
@@ -451,12 +456,81 @@ public class EditServiceManager {
         this.attachmentNamesAndResaults = attachmentNamesAndResaults;
     }
 
-    public SessionLists getSessionLists() {
-        return sessionLists;
+    private List<DepartmentPaths> getPathASDep() {
+        List<DepartmentPaths> debp = new ArrayList<>();
+        List<JobPath> jobs = GetFromDB.getPahtForService(newService.getId());
+        for (int i = 0; i < jobs.size(); i++) {
+            JobPath jp = jobs.get(i);
+            boolean dbol = false;
+            for (int j = 0; j < debp.size(); j++) {
+                DepartmentPaths d = debp.get(j);
+                if (d.id == jp.getDepId() && d.order == jp.getdOrder()) {
+                    dbol = true;
+                    boolean sbol = false;
+                    for (int k = 0; k < d.sections.size(); k++) {
+                        SectionPath sec = d.sections.get(k);
+                        if (sec.getId() == jp.getSectionID() && sec.getOrder() == jp.getsOrder()) {
+                            sbol = true;
+                            JobPath jpath = new JobPath(d.id, sec.getId(), jp.getId(), d.order, sec.getOrder(), jp.getOrder());
+                            sec.getJobs().add(jpath);
+
+                            break;
+                        }
+                    }
+                    if (!sbol) {
+
+                        SectionPath spath = new SectionPath();
+                        spath.setId(jp.getSectionID());
+                        spath.setOrder(jp.getsOrder());
+                        spath.setName(getnameForSection(spath.getId()));
+                        spath.setDepartmentId( d.id);
+                        JobPath jpath = new JobPath(d.id, spath.getId(), jp.getId(), d.order, spath.getOrder(), jp.getOrder());
+                        spath.getJobs().add(jpath);
+                        d.sections.add(spath);
+
+                    }
+                    break;
+                }
+            }
+            if (!dbol) {
+                DepartmentPaths dpath = new DepartmentPaths();
+                dpath.id = jp.getDepId();
+                dpath.order = jp.getdOrder();
+                dpath.nameA = getNameDep(dpath.id);
+                SectionPath spath = new SectionPath();
+                spath.setId(jp.getSectionID());
+                spath.setOrder(jp.getsOrder());
+                spath.setName(getnameForSection(spath.getId()));
+                spath.setDepartmentId( dpath.id);
+                JobPath jpath = new JobPath(dpath.id, spath.getId(), jp.getId(), dpath.order, spath.getOrder(), jp.getOrder());
+                spath.getJobs().add(jpath);
+                dpath.sections.add(spath);
+                debp.add(dpath);
+                System.out.println(dpath.sections.size());
+            }
+            
+        }
+        return  debp;
     }
 
-    public void setSessionLists(SessionLists sessionLists) {
-        this.sessionLists = sessionLists;
+    private String getNameDep(int id) {
+        for (int i = 0; i < departments.size(); i++) {
+            Department get = departments.get(i);
+            if (get.getId() == id) {
+                return get.getNameA();
+            }
+        }
+        return null;
     }
-    
+
+    private String getnameForSection(int id) {
+        for (int i = 0; i < sections.size(); i++) {
+            Section get = sections.get(i);
+            if (Integer.parseInt(get.getId()) == id) {
+                return get.getName();
+            }
+        }
+        return null;
+    }
+
 }

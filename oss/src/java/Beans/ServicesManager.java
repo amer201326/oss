@@ -13,12 +13,16 @@ import Data.JobPath;
 import Data.Section;
 import Data.SectionPath;
 import Data.Service;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
@@ -31,8 +35,7 @@ import org.primefaces.event.UnselectEvent;
 @ViewScoped
 public class ServicesManager implements Serializable {
     
-    @ManagedProperty(value = "#{sessionLists}")
-    SessionLists sessionLists;
+   
     
     List<Service> allSrvices;
     List<Department> allDep;
@@ -40,7 +43,7 @@ public class ServicesManager implements Serializable {
     Service seviceSelected;
 
     public ServicesManager() {
-        allSrvices = GetFromDBaraa.getAllServices();
+        allSrvices = GetFromDB.getAllServices();
         allDep = GetFromDB.getDepartments();
         allSec = GetFromDB.getSection();
         seviceSelected = new Service();
@@ -55,11 +58,20 @@ public class ServicesManager implements Serializable {
         
         
     }
-    
-    public void saveIdService(int id){
-        System.out.println(id +"<<");
-        sessionLists.id = id;
+    public void onServiceSelect(SelectEvent event){
+        seviceSelected = (Service)event.getObject();
     }
+    
+    public void gotToEdit(String id){
+        try {
+
+            FacesContext.getCurrentInstance().getExternalContext().redirect("editService.xhtml?id="+id);
+        } catch (IOException ex) {
+            Logger.getLogger(DepartmentsManage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
     
     
     
@@ -97,13 +109,6 @@ public class ServicesManager implements Serializable {
         this.seviceSelected = seviceSelected;
     }
 
-    public SessionLists getSessionLists() {
-        return sessionLists;
-    }
-
-    public void setSessionLists(SessionLists sessionLists) {
-        this.sessionLists = sessionLists;
-    }
     
     
     

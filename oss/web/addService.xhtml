@@ -210,7 +210,7 @@
                                             <div class="card shadow mb-4">
                                                 <div class="card-header py-3">
                                                     <div class="ui-grid-col-3 floatR">
-                                                        <h2 class="section-heading  inLineB" style="padding: 10px"><i class="fa fa-fw fa-chevron-left inLineB" ></i> معلومات الخدمة</h2>
+                                                        <h2 class="section-heading  inLineB" style="padding: 10px"><i class="fa fa-fw fa-chevron-left inLineB" ></i>المرفقات والملاحظات</h2>
 
                                                     </div>
 
@@ -223,24 +223,24 @@
 
                                                         <div class="row">
 
-                                                            <div class="col-lg-5" style="text-align: right; float: right;">
+                                                            <div class="col-lg-6" style="text-align: right; float: right;">
                                                                 <div class="card shadow mb-4" style="text-align: right;">
 
                                                                     <div class="card-header py-3">
-                                                                        <h6 class="m-0 font-weight-bold text-primary">معلومات اضافية </h6>
+                                                                        <h6 class="m-0 font-weight-bold text-primary">ملاحظات</h6>
                                                                     </div>
-                                                                    
-                                                                    
+
+
                                                                     <div class="card-body">
                                                                         <div class="form-group row">
-                                                                            <div class="col-sm-6">
-                                                                                <p:inputTextarea rows="6" cols="33" /> 
+                                                                            <div class="col-sm-12">
+                                                                                <p:inputTextarea value="#{addServiceManager.newService.note}" rows="6" cols="50" dir="rtl"/> 
 
                                                                             </div>
-                                                                           
-                                                                            
+
+
                                                                         </div>
-                               
+
                                                                     </div>
 
                                                                 </div>
@@ -248,26 +248,38 @@
                                                             </div>
 
 
-                                                            &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; 
+
+
                                                             <div class="col-lg-6" style="text-align: right; float: right;">
+                                                                <div class="card shadow mb-4" style="text-align: right;">
+
+                                                                    <div class="card-header py-3">
+                                                                        <h6 class="m-0 font-weight-bold text-primary">المرفقات</h6>
+                                                                    </div>
 
 
+                                                                    <div class="card-body">
+                                                                        <div class="form-group row">
+                                                                            <div class="col-sm-12">
+                                                                                <div style="display: flex; justify-content: center; min-width: 70px;"  class="col-sm-12" >
+                                                                                    <p:pickList id="pickList" value="#{addServiceManager.attachmentNamesAndResaults}" var="sna" 
+                                                                                                itemLabel="#{sna}" itemValue="#{sna}"  showSourceFilter="true" showTargetFilter="true"
+                                                                                                style="position: center;">
+                                                                                        <f:facet name="sourceCaption">كافة المرفقات</f:facet>
+                                                                                        <f:facet name="targetCaption">المرفقات المختارة</f:facet>
+                                                                                    </p:pickList>  
+                                                                                </div>
 
-                                                                <div class="form-group row" >
+                                                                            </div>
 
-                                                                    <div style="display: flex; justify-content: center; min-width: 70px;"  class="col-sm-12" >
-                                                                        <p:pickList id="pickList" value="#{addServiceManager.attachmentNamesAndResaults}" var="sna" 
-                                                                                    itemLabel="#{sna}" itemValue="#{sna}"  showSourceFilter="true" showTargetFilter="true"
-                                                                                    style="position: center;">
-                                                                            <f:facet name="sourceCaption">كافة المرفقات</f:facet>
-                                                                            <f:facet name="targetCaption">المرفقات المختارة</f:facet>
-                                                                        </p:pickList>  
+
+                                                                        </div>
+
                                                                     </div>
 
                                                                 </div>
 
                                                             </div>
-
 
 
 
@@ -300,7 +312,7 @@
                                             <div class="card shadow mb-4">
                                                 <div class="card-header py-3">
                                                     <div class="ui-grid-col-3 floatR">
-                                                        <h2 class="section-heading  inLineB" style="padding: 10px"><i class="fa fa-fw fa-chevron-left inLineB" ></i> معلومات الخدمة</h2>
+                                                        <h2 class="section-heading  inLineB" style="padding: 10px"><i class="fa fa-fw fa-chevron-left inLineB" ></i> المسار</h2>
 
                                                     </div>
 
@@ -554,7 +566,7 @@
 
                                                                                 <h:outputLabel for="jobs" value="وظيفة: " />
                                                                                 <p:selectOneMenu id="jobs" required="true" value="#{addServiceManager.jobPath.id}" 
-                                                                                                class="pading000" dynamic="true" style="min-width: 223px;">
+                                                                                                 class="pading000" dynamic="true" style="min-width: 223px;">
                                                                                     <f:selectItem noSelectionOption="true" itemLabel="اختار وظيفة" />
                                                                                     <f:selectItems value="#{addServiceManager.filterJop()}" var="j" itemLabel="#{j.name}" itemValue="#{j.idJob}"/>
                                                                                 </p:selectOneMenu>
@@ -620,7 +632,7 @@
                                                                                         process="@this" />
                                                                                 <p:ajax event="rowUnselect" listener="#{addServiceManager.onRowUnselectFromJob}"
                                                                                         process="@this" />
-                                                                                <p:column headerText="اسم الدائره">
+                                                                                <p:column headerText="الوظيفة">
 
                                                                                     <h:outputText value="#{job.name}" />
 

@@ -18,7 +18,10 @@ public class JobPath {
     
     int id;
     String name;
+    int dOrder;
+    int sOrder;
     int order;
+    
     
     String idMarge;
     public JobPath() {
@@ -31,6 +34,17 @@ public class JobPath {
         this.order = order;
         idMarge = id+"-"+sectionID;
     }
+
+    public JobPath(int DepId, int sectionID, int id, int dOrder, int sOrder, int order) {
+        this.DepId = DepId;
+        this.sectionID = sectionID;
+        this.id = id;
+        this.dOrder = dOrder;
+        this.sOrder = sOrder;
+        this.order = order;
+        idMarge = id+"-"+sectionID;
+    }
+    
 
     public int getSectionID() {
         return sectionID;
@@ -89,5 +103,22 @@ public class JobPath {
     public String toString() {
         return "JobPath{" + "sectionID=" + sectionID + ", id=" + id + ", name=" + name + ", order=" + order + '}';
     }
+
+    public int getdOrder() {
+        return dOrder;
+    }
+
+    public void setdOrder(int dOrder) {
+        this.dOrder = dOrder;
+    }
+
+    public int getsOrder() {
+        return sOrder;
+    }
+
+    public void setsOrder(int sOrder) {
+        this.sOrder = sOrder;
+    }
+    
     
 }
