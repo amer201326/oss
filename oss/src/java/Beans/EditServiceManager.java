@@ -18,10 +18,12 @@ import Data.Service;
 import Data.ServiceAttachmentName;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
 import org.primefaces.model.DualListModel;
@@ -61,6 +63,10 @@ public class EditServiceManager {
     SessionLists sessionLists;
     
     public EditServiceManager() {
+        Map<String, String> parameterMap = (Map<String, String>) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        String id = parameterMap.get("id");
+        
+        
         attachmentNames = GetFromDB.getServiceAttachmentName();
         attachmentNamesAndResaults = new DualListModel<>();
         for (int i = 0; i < attachmentNames.size(); i++) {

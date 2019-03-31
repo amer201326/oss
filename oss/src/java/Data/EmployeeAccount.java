@@ -6,6 +6,7 @@
 package Data;
 
 import DB.DB;
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,7 +15,7 @@ import java.util.logging.Logger;
  *
  * @author me
  */
-public class EmployeeAccount {
+public class EmployeeAccount implements Serializable{
 
     public int Emp_ID;
     String UserName;
