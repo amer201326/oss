@@ -25,12 +25,14 @@ public class CitizenManage implements Serializable {
     Citizen newCitizen;
     List<Citizen> allCitizen;
     Citizen citizenSelected;
+    List<Citizen> filterCitizen;
 
     public CitizenManage() {
 
         newCitizen = new Citizen();
         allCitizen = GetDB_Eman.getallCitizen();
         citizenSelected = new Citizen();
+        
 
     }
 
@@ -74,4 +76,14 @@ public class CitizenManage implements Serializable {
         
     }
 
+    public List<Citizen> getFilterCitizen() {
+        return filterCitizen;
+    }
+
+    public void setFilterCitizen(List<Citizen> filterCitizen) {
+        this.filterCitizen = filterCitizen;
+    }
+
+    
+    
 }

@@ -74,7 +74,7 @@ public class Citizen implements Serializable{
         this.passportType = passportType;
     }
 
-    public Citizen(int id, String FirstName, String FatherName, String GrandFatherName, String LastName, String idCard, String mobile, String email, String address) {
+    public Citizen(int id, String FirstName, String FatherName, String GrandFatherName, String LastName, String idCard, String mobile, String email, String region) {
         this.id = id;
         this.FirstName = FirstName;
         this.FatherName = FatherName;
@@ -83,7 +83,7 @@ public class Citizen implements Serializable{
         this.idCard = idCard;
         this.mobile = mobile;
         this.email = email;
-        this.address = address;
+        this.region = region;
     }
     
     
@@ -318,7 +318,7 @@ public class Citizen implements Serializable{
     
     public void citizenUpdate() {
         try {
-            String q = "UPDATE citizen SET Cit_Email = '" + email + "',Cit_ID_Card = '" + idCard + "', Cit_Mobile = '" + mobile + "',Cit_Address = '" + address + "' WHERE (Cit_ID = " + id + ");";
+            String q = "UPDATE citizen SET Cit_Email = '" + email + "',Cit_ID_Card = '" + idCard + "', Cit_Mobile = '" + mobile + "',Cit_Region = '" + region + "' WHERE (Cit_ID = " + id + ");";
             System.out.println(q);
             DB data = new DB();
             data.write(q);

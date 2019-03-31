@@ -144,7 +144,7 @@ public class GetDB_Eman {
         try {
             DB db = new DB();
             String sql = "select c.Cit_ID, c.Cit_FirstName, c.Cit_FatherName, c.Cit_GrandfatherName, c.Cit_LastName, "
-                    + "c.Cit_ID_Card, c.Cit_Mobile, c.Cit_Email, c.Cit_Address from citizen as c inner join citizenaccount"
+                    + "c.Cit_ID_Card, c.Cit_Mobile, c.Cit_Email, c.Cit_Region from citizen as c inner join citizenaccount"
                     + " as a on c.Cit_ID = a.Cit_ID;";
 
             ResultSet r = db.read(sql);

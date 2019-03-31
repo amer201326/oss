@@ -56,8 +56,8 @@
                             <br/><hr style="border: 2px solid orange; margin-left: 10px; margin-right: 10px;"/><br/>
                         </div>
                     </div>
-                    
-                    
+
+
                     <div class="row text-center" style="margin: 10px 10px 10px 10px;"> 
                         <div class="float-lg-right float-right text#{$infix}-right" style="width: 100%; margin-bottom: 30px;">
 
@@ -76,77 +76,87 @@
 
                                                 <h:head id="msgs"/>
                                                 <p:dataTable id="allCitizens" var="citizen" value="#{citizenManage.allCitizen}"
-                                                             editable="true" style="margin-bottom:20px; text-align: center;"
-                                                             selection="#{citizenManage.citizenSelected}"
+                                                             editable="true" style="margin-bottom:20px; text-align: center;" widgetVar="citizenTable"
+                                                             selection="#{citizenManage.citizenSelected}" dir="rtl"
                                                              rowKey="#{citizen.id}" rows="10" paginator="true" 
                                                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                                             rowsPerPageTemplate="5,10,15">
+                                                             rowsPerPageTemplate="5,10,15" 
+                                                             emptyMessage="لم يتم العثور على مواطن" filteredValue="#{citizenManage.filterCitizen}">
 
 
                                                     <f:facet name="header"  >
+                                                        
                                                         جميع المواطنين
+                                                        
+                                                        <p:outputPanel style="display: flex; justify-content: flex-start;">
+                                                            <h:outputText value="البحث: " style="font-size: 16px; margin-top: 8px;"/> &nbsp;
+                                                            <p:inputText id="globalFilter" onkeyup="PF('citizenTable').filter()" style="width:150px" placeholder="أدخل الكلمة"/>
+                                                        </p:outputPanel>
                                                     </f:facet>
 
                                                     <p:ajax event="rowEdit" listener="#{citizenManage.onCitizenEdit}" update=":form:msgs" />
                                                     <p:ajax event="rowEditCancel" listener="#{citizenManage.onCitizenEditCancel}" update=":form:msgs" />
                                                     <p:ajax event="rowSelect" process="@this"  listener="#{citizenManage.citizenSelected}"/>
-                                                    
-                                                    <p:column  style="width:70px;text-align: center">
-                                                        <p:commandLink  actionListener="#{addCitizenManager.gotToEdit()}" title="View Detail">
-                                                            <h:outputText styleClass="fa fa-list-ul" style="margin:0 auto;" />
-                                                            <f:setPropertyActionListener value="#{citizen}" target="#{sessionLists.seletedCitizen}" />
-                                                        </p:commandLink>
-                                                    </p:column>
-                                                    <p:column  style="width:35px">
-                                                        <p:rowEditor/>
-                                                    </p:column>
 
-                                                    <p:column headerText="العنوان" style="width: 130px;">
-                                                        <p:cellEditor>
-                                                            <f:facet name="output"><h:outputText value="#{citizen.address}" /></f:facet>
-                                                            <f:facet name="input"><p:inputText value="#{citizen.address}" style="width:100%" /></f:facet>
-                                                        </p:cellEditor>
-                                                    </p:column>
-
-                                                    <p:column headerText="البريد الإلكتروني	">
-                                                        <p:cellEditor>
-                                                            <f:facet name="output"><h:outputText value="#{citizen.email}" /></f:facet>
-                                                            <f:facet name="input"><p:inputText value="#{citizen.email}" style="width:100%" /></f:facet>
-                                                        </p:cellEditor>
-                                                    </p:column>
-
-                                                    <p:column headerText="الجوال" style="width: 160px;">
-                                                        <p:cellEditor>
-                                                            <f:facet name="output"><h:outputText value="#{citizen.mobile}" /></f:facet>
-                                                            <f:facet name="input"><p:inputText value="#{citizen.mobile}" style="width:100%" /></f:facet>
-                                                        </p:cellEditor>
-                                                    </p:column>
-                                                    
-                                                   
-
-
-                                                    <p:column headerText="الاسم" style="width: 300px;">
+                                                    <p:column selectionMode="single" style="width:45px;text-align:center"/>
+                                                    <p:column  filterBy="#{citizen.id}" headerText="الرقم" style="width: 55px; text-align: center;">
                                                         <p:cellEditor disabled="true">
-                                                            <f:facet name="output"><h:outputText value="#{citizen.firstName}
-                                                                                                 #{citizen.lastName} " /></f:facet>
-                                                            <f:facet name="input"><p:inputText  value="#{citizen.firstName} 
-                                                                                                 #{citizen.lastName} " style="width:100%"/></f:facet>
-                                                        </p:cellEditor> 
-                                                    </p:column>
-
-                                                   <p:column headerText="الرقم" style="width: 55px;">
-                                                         <p:cellEditor disabled="true">
                                                             <f:facet name="output"><h:outputText value="#{citizen.id}" /></f:facet>
                                                             <f:facet name="input"><p:inputText value="#{citizen.id}" style="width:100%" /></f:facet>
                                                         </p:cellEditor> 
                                                     </p:column>
 
 
+                                                    <p:column filterBy="#{citizen.firstName}" headerText="الاسم" style="width: 300px; text-align: center;">
+                                                        <p:cellEditor disabled="true">
+                                                            <f:facet name="output"><h:outputText value="#{citizen.firstName}
+                                                                                                 #{citizen.lastName} " /></f:facet>
+                                                            <f:facet name="input"><p:inputText  value="#{citizen.firstName} 
+                                                                                                #{citizen.lastName} " style="width:100%"/></f:facet>
+                                                        </p:cellEditor> 
+                                                    </p:column>
 
-                                                    <p:column selectionMode="single" style="width:45px;text-align:center"/>
-                                                   <!-- <f:facet name="footer">
-                                                        <p:commandButton   icon="fa fa-plus" value="إضافة"  />
-                                                    </f:facet>-->
+                                                    <p:column filterBy="#{citizen.mobile}" headerText="الجوال" style="width: 160px; text-align: center;">
+                                                        <p:cellEditor>
+                                                            <f:facet name="output"><h:outputText value="#{citizen.mobile}" /></f:facet>
+                                                            <f:facet name="input"><p:inputText value="#{citizen.mobile}" style="width:100%" /></f:facet>
+                                                        </p:cellEditor>
+                                                    </p:column>
+
+                                                    <p:column filterBy="#{citizen.email}" headerText="البريد الإلكتروني	" style="text-align: center;">
+                                                        <p:cellEditor>
+                                                            <f:facet name="output"><h:outputText value="#{citizen.email}" /></f:facet>
+                                                            <f:facet name="input"><p:inputText value="#{citizen.email}" style="width:100%" /></f:facet>
+                                                        </p:cellEditor>
+                                                    </p:column>
+
+
+
+                                                    <p:column filterBy="#{citizen.region}" filterOptions="false" headerText="المنطقة" style="width: 130px; text-align: center;">
+                                                        <p:cellEditor>
+                                                            <f:facet name="output"><h:outputText value="#{citizen.region}" /></f:facet>
+                                                            <f:facet name="input"><p:inputText value="#{citizen.region}" style="width:100%" /></f:facet>
+                                                        </p:cellEditor>
+                                                    </p:column>
+
+                                                    <p:column  style="width:35px">
+                                                        <p:rowEditor/>
+                                                    </p:column>
+
+
+                                                    <p:column style="width:70px;text-align: center">
+                                                        <p:commandLink  actionListener="#{addCitizenManager.gotToEdit()}" title="View Detail">
+                                                            <h:outputText styleClass="fa fa-list-ul" style="margin:0 auto;" />
+                                                            <f:setPropertyActionListener value="#{citizen}" target="#{sessionLists.seletedCitizen}" />
+                                                        </p:commandLink>
+                                                    </p:column>
+
+
+
+
+                                                    <!-- <f:facet name="footer">
+                                                         <p:commandButton   icon="fa fa-plus" value="إضافة"  />
+                                                     </f:facet>-->
                                                 </p:dataTable>
 
 
