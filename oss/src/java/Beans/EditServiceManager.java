@@ -155,24 +155,43 @@ public class EditServiceManager implements Serializable{
         jobPath = new JobPath();
     }
 
-//    public void addService() {
-//
-//        List<ServiceAttachmentName> l = new ArrayList<>();
-//        for (int i = 0; i < attachmentNamesAndResaults.getTarget().size(); i++) {
-//            String get = attachmentNamesAndResaults.getTarget().get(i);
-//            for (int j = 0; j < attachmentNames.size(); j++) {
-//                ServiceAttachmentName get1 = attachmentNames.get(j);
-//                if (get.equals(get1.getName())) {
-//                    l.add(get1);
-//                }
-//
-//            }
-//        }
-//        newService.setAttachmentNames(l);
-//        newService.setPath(departmentsInPath);
-//        newService.addServiceToDB();
-//
-//    }
+    public void editService() {
+
+        List<ServiceAttachmentName> l = new ArrayList<>();
+        for (int i = 0; i < attachmentNamesAndResaults.getTarget().size(); i++) {
+            String get = attachmentNamesAndResaults.getTarget().get(i);
+            for (int j = 0; j < attachmentNames.size(); j++) {
+                ServiceAttachmentName get1 = attachmentNames.get(j);
+                if(get.equals(get1.getName())){
+                    l.add(get1);
+                }
+                
+            }
+        }
+        newService.setAttachmentNames(l);
+        List<JobPath> path = new ArrayList<>();
+        
+        for (int i = 0; i < departmentsInPath.size(); i++) {
+                DepartmentPaths get = departmentsInPath.get(i);
+                for (int j = 0; j < get.getSections().size(); j++) {
+                    SectionPath get1 = get.getSections().get(j);
+                    for (int k = 0; k < get1.getJobs().size(); k++) {
+                        JobPath get2 = get1.getJobs().get(k);
+                        get2.setDepId(get.id);
+                        get2.setdOrder(get.order);
+                        get2.setSectionID(get1.getId());
+                        get2.setsOrder(get1.getOrder());
+                        path.add(get2);
+
+                    }
+
+                }
+            }
+        newService.setPath(path);
+        System.out.println(newService.getNote());
+        newService.update();
+
+    }
 
     public List<Section> filterSections() {
         List<Section> list = new ArrayList<>();
@@ -472,6 +491,7 @@ public class EditServiceManager implements Serializable{
                         if (sec.getId() == jp.getSectionID() && sec.getOrder() == jp.getsOrder()) {
                             sbol = true;
                             JobPath jpath = new JobPath(d.id, sec.getId(), jp.getId(), d.order, sec.getOrder(), jp.getOrder());
+                            jpath.setName(getJobName(jp.getId()));
                             sec.getJobs().add(jpath);
 
                             break;
@@ -485,6 +505,7 @@ public class EditServiceManager implements Serializable{
                         spath.setName(getnameForSection(spath.getId()));
                         spath.setDepartmentId( d.id);
                         JobPath jpath = new JobPath(d.id, spath.getId(), jp.getId(), d.order, spath.getOrder(), jp.getOrder());
+                        jpath.setName(getJobName(jp.getId()));
                         spath.getJobs().add(jpath);
                         d.sections.add(spath);
 
@@ -503,6 +524,7 @@ public class EditServiceManager implements Serializable{
                 spath.setName(getnameForSection(spath.getId()));
                 spath.setDepartmentId( dpath.id);
                 JobPath jpath = new JobPath(dpath.id, spath.getId(), jp.getId(), dpath.order, spath.getOrder(), jp.getOrder());
+                jpath.setName(getJobName(jp.getId()));
                 spath.getJobs().add(jpath);
                 dpath.sections.add(spath);
                 debp.add(dpath);
@@ -531,6 +553,16 @@ public class EditServiceManager implements Serializable{
             }
         }
         return null;
+    }
+
+    private String getJobName(int id) {
+        for (int i = 0; i < jobsOfSections.size(); i++) {
+            JobOfSection get = jobsOfSections.get(i);
+            if(get.getIdJob() == id){
+                return  get.getName();
+            }
+        }
+        return "";
     }
 
 }

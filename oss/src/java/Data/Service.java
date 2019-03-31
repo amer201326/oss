@@ -23,11 +23,11 @@ public class Service implements Serializable {
     String name;
     double cost;
     int days;
-    
+
     String status;
     Department department;
     Section section;
-    
+
     String note;
     List<JobPath> path;
     List<ServiceAttachmentName> attachmentNames;
@@ -37,7 +37,7 @@ public class Service implements Serializable {
         this.section = new Section();
     }
 
-    public Service(int id, String name, double cost, int days, String status, Department department, Section section,String note) {
+    public Service(int id, String name, double cost, int days, String status, Department department, Section section, String note) {
         this.id = id;
         this.name = name;
         this.cost = cost;
@@ -47,8 +47,6 @@ public class Service implements Serializable {
         this.section = section;
         this.note = note;
     }
-
-    
 
     public void fillPath() {
         path = GetFromDB.getPahtForService(id);
@@ -110,16 +108,50 @@ public class Service implements Serializable {
         this.section = section;
     }
 
-    
-
     public void update() {
         try {
-            String q = "UPDATE services_provided SET Serv_Name = '" + name + "',Serv_Cost = '" + cost + "', Serv_Days = '" + days + "',Serv_Case = '" + status + "' WHERE (Services_Provided_ID = " + id + ");";
-            System.out.println("jjjjjjjjjjjjjjjjjjjjq" + q);
             DB data = new DB();
+            String q = "start transaction;";
+            data.write(q);
+            q = "UPDATE services_provided SET Serv_Name = '" + name + "',Serv_Cost = '" + cost + "', Serv_Days = '" + days + "',Serv_Case = '" + status + "' , note = '"+note+"' WHERE (Services_Provided_ID = " + id + ");";
+            System.out.println(q);
+
+            data.write(q);
+            q = "DELETE FROM have_serviceattachment WHERE Services_Provided_ID = " + id + ";";
+            System.out.println(q);
+            data.write(q);
+             q = "DELETE FROM steps_job WHERE Services_Provided_ID =  " + id + ";";
+             System.out.println(q);
+            data.write(q);
+            for (int k = 0; k < path.size(); k++) {
+                JobPath get2 = path.get(k);
+
+                q = "INSERT INTO steps_job VALUES(" + get2.DepId + "," + get2.sectionID + "," + get2.id + "," + id + "," + get2.dOrder + "," + get2.sOrder + "," + get2.order + ");";
+                data.write(q);
+                System.out.println(q);
+
+            }
+
+            for (int i = 0; i < attachmentNames.size(); i++) {
+                ServiceAttachmentName get = attachmentNames.get(i);
+                q = "INSERT INTO have_serviceattachment VALUES (" + id + ", " + get.id + ");";
+                data.write(q);
+                System.out.println(q);
+            }
+            q = "commit;";
             data.write(q);
 
         } catch (SQLException | ClassNotFoundException ex) {
+            DB data;
+            try {
+                data = new DB();
+                String q = "rollback;";
+                data.write(q);
+            } catch (SQLException ex1) {
+                Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex1);
+            } catch (ClassNotFoundException ex1) {
+                Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex1);
+            }
             Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -135,17 +167,16 @@ public class Service implements Serializable {
             data.write(q);
 
             System.out.println(q);
-            q = "INSERT INTO services_provided VALUES ('" + id + "','" + name + "','" + cost + "','" + days + "','" + status + "','" + department.id + "','" + section.id + "');";
+            q = "INSERT INTO services_provided VALUES ('" + id + "','" + name + "','" + cost + "','" + days + "','" + status + "','" + department.id + "','" + section.id + "','" + note + "');";
             data.write(q);
             System.out.println(q);
 
             for (int k = 0; k < path.size(); k++) {
                 JobPath get2 = path.get(k);
-                
-                    q = "INSERT INTO steps_job VALUES(" + get2.DepId + "," + get2.sectionID + "," + get2.id + "," + id + "," + get2.dOrder + "," + get2.sOrder + "," + get2.order + ");";
-                    data.write(q);
-                    System.out.println(q);
-                
+
+                q = "INSERT INTO steps_job VALUES(" + get2.DepId + "," + get2.sectionID + "," + get2.id + "," + id + "," + get2.dOrder + "," + get2.sOrder + "," + get2.order + ");";
+                data.write(q);
+                System.out.println(q);
 
             }
 
@@ -233,8 +264,5 @@ public class Service implements Serializable {
     public void setNote(String note) {
         this.note = note;
     }
-    
-    
-    
 
 }
