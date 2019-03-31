@@ -75,8 +75,11 @@ public class DepartmentManager implements Serializable{
  
 
     public void onSectionEdit(RowEditEvent event) {
-        ((Section) event.getObject()).update();
+        Section s = ((Section) event.getObject());
+        s.update();
         creatOrganic();
+        jobsOfSections = GetFromDB.getJobOfSectio(thisDepartment.id+"");
+        
 
     }
      public void addJobForSec() {

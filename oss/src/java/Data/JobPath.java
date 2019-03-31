@@ -6,13 +6,14 @@
 package Data;
 
 import DB.DB;
+import java.io.Serializable;
 import java.sql.ResultSet;
 
 /**
  *
  * @author me
  */
-public class JobPath {
+public class JobPath implements Serializable{
     int DepId;
     int sectionID;
     

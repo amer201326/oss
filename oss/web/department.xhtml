@@ -143,9 +143,7 @@
                                                     اقسام الدائرة #{sessionLists.departmentSelected.nameA}
                                                 </f:facet>
 
-                                                <p:ajax event="rowEdit" listener="#{departmentManager.onSectionEdit}" update=":formSection:msgs11 @form :formOrganigram :formJob" />
-
-
+                                                <p:ajax event="rowEdit" listener="#{departmentManager.onSectionEdit}" update=":formSection:msgs11 :formSection:singleDT :formOrganigram :formJob:tableJob" />
                                                 <p:ajax event="rowSelect" process="@this" update=":formDelete:diallogDelete" listener="#{departmentManager.onSectionSelected}"/>
 
                                                 <p:column style="width:10%; text-align: center;" headerText="تعديل">
@@ -232,7 +230,7 @@
                                         <h:form id="formJob">
 
 
-                                            <p:dataTable  var="jop" value="#{departmentManager.jobsOfSections}"  
+                                            <p:dataTable id="tableJob"  var="jop" value="#{departmentManager.jobsOfSections}"  
                                                           style="margin-bottom:20px; text-align: center;" rowKey="#{jop.idJob}" selectionMode="single" 
                                                           selection="#{departmentManager.jobSelected}" rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                                           rowsPerPageTemplate="5,10,15" >
@@ -285,7 +283,7 @@
 
                                                     <h:panelGrid columns="2" cellpadding="5">
 
-                                                        <h:outputLabel for="deid" value="اختر وظيفة" />
+                                                        <h:outputLabel for="job" value="اختر وظيفة" />
                                                         <p:selectOneMenu id="job" value="#{departmentManager.newJobOfsection.idJob}" dynamic="true" style="min-width:223px;" class="pading000">
                                                             <f:selectItems value="#{departmentManager.jobTitels}" var="d" itemLabel="#{d.name}" itemValue="#{d.id}"/>
                                                         </p:selectOneMenu>
