@@ -175,10 +175,15 @@
                                                                                         <f:selectItem itemLabel="ذكر" itemValue="M" />
                                                                                         <f:selectItem  itemLabel="أنثى" itemValue="F" />
                                                                                     </p:selectOneRadio>
-                                                                                </h:panelGrid>  
+                                                                                </h:panelGrid> 
+
                                                                                 <br/>
                                                                                 <p:separator style="width: 250px;"/> 
-                                                                                
+
+                                                                                <p:outputLabel for="birthday" value="تاريخ الميلاد"/>
+                                                                                <p:calendar id="birthday" selectOtherMonths="true" yearRange="c-100:c"
+                                                                                            pattern="yyyy-MM-dd" navigator="true" style="text-align:right; width: 223px;"
+                                                                                            value="#{citizenManage.newCitizen.birthday}" required="true"/>
 
                                                                                 <p:outputLabel for="idCard" value="رقم الهوية" /> 
                                                                                 <p:inputMask id="idCard" class="form-control form-control-user"
@@ -204,10 +209,10 @@
                                                                                 <p:outputLabel for="job" value="المهنة" />
                                                                                 <p:inputText id="job" value="#{citizenManage.newCitizen.citizenJob}" required="true" 
                                                                                              class="form-control form-control-user" style="text-align:right;" type="text"/>
-                                                                                
+
                                                                                 <br/>
                                                                                 <p:separator style="width: 250px;"/> 
-                                                                                
+
                                                                                 <p:outputLabel for="familyMember" value="عدد افراد الاسرة" />
                                                                                 <p:inputText id="familyMember" value="#{citizenManage.newCitizen.familyMember}" required="true" 
                                                                                              class="form-control form-control-user" style="text-align:right;" type="number"/>
