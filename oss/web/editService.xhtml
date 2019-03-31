@@ -234,7 +234,7 @@
                                                                     <div class="card-body">
                                                                         <div class="form-group row">
                                                                             <div class="col-sm-12">
-                                                                                <p:inputTextarea value="#{editServiceManager.newService.note}" rows="6" cols="50" dir="rtl"/> 
+                                                                                <p:inputTextarea id="note" value="#{editServiceManager.newService.note}" rows="6" cols="50" dir="rtl"/> 
 
                                                                             </div>
 
@@ -689,9 +689,9 @@
 
                                                                         <h:outputLabel  value="تعديل الخدمة" /> <br/>
 
-                                                                        <p:commandButton actionListener="#{editServiceManager.addService()}" value="تعديل الخدمة" 
+                                                                        <p:commandButton actionListener="#{editServiceManager.editService()}" value="تعديل الخدمة" 
                                                                                          id="add_service" oncomplete="PF('dlgAddSer').hide();" 
-                                                                                         process="@this pickList ServiceName DaysService Cost states dep_id sec_id"  
+                                                                                         process="@this pickList note ServiceName DaysService Cost states dep_id sec_id"  
                                                                                          update="@form"  style="margin-right:20px;" styleClass="ui-priority-primary"/>
 
                                                                     </h:panelGrid>
