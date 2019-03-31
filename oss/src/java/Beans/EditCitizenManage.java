@@ -8,11 +8,10 @@ package Beans;
 import Data.Citizen;
 import Data.CitizenAccount;
 import Data.GetDB_Eman;
-import java.io.IOException;
+import Data.GetFromDB;
 import java.io.Serializable;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -24,16 +23,17 @@ import org.primefaces.event.RowEditEvent;
  */
 @ManagedBean
 @ViewScoped
-public class CitizenManage implements Serializable {
+public class EditCitizenManage implements Serializable {
 
     Citizen newCitizen;
     List<Citizen> allCitizen;
     Citizen citizenSelected;
     List<Citizen> filterCitizen;
 
-    public CitizenManage() {
-
-        newCitizen = new Citizen();
+    public EditCitizenManage() {
+        Map<String, String> parameterMap = (Map<String, String>) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        String id = parameterMap.get("id");
+       // newCitizen = GetFromDB.getCitizenById(id);
         allCitizen = GetDB_Eman.getallCitizen();
         citizenSelected = new Citizen();
         
@@ -88,13 +88,6 @@ public class CitizenManage implements Serializable {
         this.filterCitizen = filterCitizen;
     }
 
-    public void gotToEdit(int id){
-        try {
-
-            FacesContext.getCurrentInstance().getExternalContext().redirect("editCitizen.xhtml?id="+id);
-        } catch (IOException ex) {
-            Logger.getLogger(CitizenManage.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+    
     
 }

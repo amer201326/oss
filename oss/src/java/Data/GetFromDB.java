@@ -560,4 +560,25 @@ public class GetFromDB {
         }
         return s;
     }
+
+//    public static Citizen getCitizenById(String id) {
+//        Citizen cit = new Citizen();
+//        
+//        
+//        try {
+//            DB db = new DB();
+//            String sql = "select c.* from citizen as c inner join citizenaccount"
+//                    + " as a on c.Cit_ID = a.Cit_ID where ;";
+//
+//            ResultSet r = db.read(sql);
+//            while (r.next()) {
+//                cit = new Citizen(r.getInt(1), r.getString(2), r.getString(3), r.getString(4), r.getString(5), 
+//                        r.getString(6), r.getString(7), r.getString(8), r.getString(9));
+//                c.add(cit);
+//            }
+//        } catch (Exception e) {
+//            System.out.println("bb"+e.getMessage());
+//        }
+//        return c;
+//    }
 }
