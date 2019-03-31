@@ -16,40 +16,39 @@ import java.util.logging.Logger;
  *
  * @author Eman
  */
-public class Citizen implements Serializable{
+public class Citizen implements Serializable {
+
     int id;
     String FirstName;
     String FatherName;
     String GrandFatherName;
     String LastName;
     String Gender;
-    
+
     int last = 0;
     int familyMember;
     String idCard;
     String telephone;
     String mobile;
     String email;
-    
+
     String fax;
     String birthday;
-    
-    
+
     String placeOfBirth;
-    
+
     String region;
     String quarter;
     String street;
-    
-    
+
     String address;
     String citizenJob;
     String passportNumber;
     String passportType;
     CitizenAccount account;
 
-    public Citizen(int id, String FirstName, String FatherName, String GrandFatherName, String LastName, String Gender, int familyMember, 
-            String idCard, String telephone, String mobile, String email, String fax, String birthday, String placeOfBirth, String region, 
+    public Citizen(int id, String FirstName, String FatherName, String GrandFatherName, String LastName, String Gender, int familyMember,
+            String idCard, String telephone, String mobile, String email, String fax, String birthday, String placeOfBirth, String region,
             String quarter, String street, String address, String citizenJob, String passportNumber, String passportType) {
         this.id = id;
         this.FirstName = FirstName;
@@ -85,8 +84,6 @@ public class Citizen implements Serializable{
         this.email = email;
         this.region = region;
     }
-    
-    
 
     public Citizen() {
         account = new CitizenAccount();
@@ -108,8 +105,6 @@ public class Citizen implements Serializable{
         this.account = account;
     }
 
-    
-
     public String getIdCard() {
         return idCard;
     }
@@ -118,9 +113,6 @@ public class Citizen implements Serializable{
         this.idCard = idCard;
     }
 
-    
-   
-    
     public int getId() {
         return id;
     }
@@ -176,8 +168,6 @@ public class Citizen implements Serializable{
     public void setFamilyMember(int familyMember) {
         this.familyMember = familyMember;
     }
-
-    
 
     public String getTelephone() {
         return telephone;
@@ -282,30 +272,28 @@ public class Citizen implements Serializable{
     public void setPassportType(String passportType) {
         this.passportType = passportType;
     }
-    
-    
-    
+
     public void addCitizenToDB() {
-        
+
         int idMax = GetDB_Eman.getMaxIdCitizen();
         this.id = idMax + 1;
         String q = "INSERT INTO citizen (`Cit_ID`, `Cit_FirstName`, `Cit_FatherName`, `Cit_GrandfatherName`, `Cit_LastName`, `Cit_Gender`, "
                 + "`Cit_FamilyMembers`, `Cit_ID_Card`, `Cit_Telephone`, `Cit_Mobile`, `Cit_Email`,`Cit_Fax`, `Cit_Birthday`,`Cit_PlaceOfBirth`, "
                 + "`Cit_Region`,`Cit_Quarter`, `Cit_Street`,`Cit_Address`, `Cit_Job`, `Cit_PassportNumber`,`Cit_PassportType`) \n"
-                + "VALUES (" + id + ",'" + FirstName + "','" +FatherName + "','" + GrandFatherName + "','" + LastName + "','" + Gender + "'," + 
-                  familyMember + ",'" + idCard + "','" + telephone + "','" + mobile + "','" + email + 
-                "','" + fax + "','" + birthday + "','" + placeOfBirth +  "','" +                    
-                region + "','" + quarter + "','" + street + "','" + address + "','" + citizenJob + "','" + passportNumber + "','"
+                + "VALUES (" + id + ",'" + FirstName + "','" + FatherName + "','" + GrandFatherName + "','" + LastName + "','" + Gender + "',"
+                + familyMember + ",'" + idCard + "','" + telephone + "','" + mobile + "','" + email
+                + "','" + fax + "','" + birthday + "','" + placeOfBirth + "','"
+                + region + "','" + quarter + "','" + street + "','" + address + "','" + citizenJob + "','" + passportNumber + "','"
                 + passportType + "');";
 
         try {
             DB data = new DB();
-            
+
             System.out.println(q);
             data.write(q);
             account.Cit_ID = this.id;
             account.addCitizenAccountToDB();
-            
+
         } catch (SQLException ex) {
             System.out.println("error Add citizen");
             Logger.getLogger(Citizen.class.getName()).log(Level.SEVERE, null, ex);
@@ -315,9 +303,10 @@ public class Citizen implements Serializable{
         }
 
     }
-    
+
     public void citizenUpdate() {
         try {
+
             String q = "UPDATE citizen SET Cit_Email = '" + email + "',Cit_ID_Card = '" + idCard + "', Cit_Mobile = '" + mobile + "',Cit_Region = '" + region + "' WHERE (Cit_ID = " + id + ");";
             System.out.println(q);
             DB data = new DB();
@@ -328,8 +317,28 @@ public class Citizen implements Serializable{
         }
     }
 
-    
-    
-    
-    
+    public void updateCitizen() {
+        String q = "UPDATE citizen SET Cit_FirstName = '" + FirstName + "',Cit_FatherName = '" + FatherName
+                + "', Cit_GrandfatherName = '" + GrandFatherName + "',Cit_LastName = '" + LastName
+                + "', Cit_Gender = '" + Gender + "',Cit_FamilyMembers = '" + familyMember
+                + "', Cit_ID_Card = '" + idCard + "',Cit_Telephone = '" + telephone + "', Cit_Mobile = '"
+                + mobile + "',Cit_Email = '" + email + "', Cit_Fax = '" + fax + "',Cit_Birthday = '" + birthday
+                + "',Cit_PlaceOfBirth = '" + placeOfBirth + "', Cit_Region = '" + region + "',Cit_Quarter = '" + quarter
+                + "',Cit_Street = '" + street + "', Cit_Address = '" + address + "',Cit_Job = '" + citizenJob
+                + "',Cit_PassportNumber = '" + passportNumber + "', Cit_PassportType = '" + passportNumber
+                + "' WHERE (Cit_ID = " + id + ");";
+        try {
+            DB data = new DB();
+
+            data.write(q);
+            account.updateCit();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Citizen.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Citizen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
 }

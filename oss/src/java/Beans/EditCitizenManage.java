@@ -23,71 +23,38 @@ import org.primefaces.event.RowEditEvent;
  */
 @ManagedBean
 @ViewScoped
-public class EditCitizenManage implements Serializable {
+public class EditCitizenManage implements Serializable{
 
-    Citizen newCitizen;
-    List<Citizen> allCitizen;
-    Citizen citizenSelected;
-    List<Citizen> filterCitizen;
+    Citizen citizenEdit;
 
     public EditCitizenManage() {
         Map<String, String> parameterMap = (Map<String, String>) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         String id = parameterMap.get("id");
-       // newCitizen = GetFromDB.getCitizenById(id);
-        allCitizen = GetDB_Eman.getallCitizen();
-        citizenSelected = new Citizen();
-        
+
+        citizenEdit = GetDB_Eman.GetCitizenById(id);
 
     }
 
-    public void addCitizen() {
+    public void editCitizen() {
 
-        newCitizen.addCitizenToDB();
-
-        //انتقال الي صفحة كل المواطنين
+        citizenEdit.updateCitizen();
     }
 
-    public List<Citizen> getAllCitizen() {
-        return allCitizen;
+    public Citizen getCitizenEdit() {
+        return citizenEdit;
     }
 
-    public void setAllCitizen(List<Citizen> allCitizen) {
-        this.allCitizen = allCitizen;
+    public void setCitizenEdit(Citizen citizenEdit) {
+        this.citizenEdit = citizenEdit;
     }
 
-    public Citizen getCitizenSelected() {
-        return citizenSelected;
-    }
-
-    public void setCitizenSelected(Citizen citizenSelected) {
-        this.citizenSelected = citizenSelected;
-    }
-
-    public Citizen getNewCitizen() {
-        return newCitizen;
-    }
-
-    public void setNewCitizen(Citizen newCitizen) {
-        this.newCitizen = newCitizen;
-    }
-    
-    public void onCitizenEdit(RowEditEvent event){
-        Citizen c = (Citizen)event.getObject();
+    public void onCitizenEdit(RowEditEvent event) {
+        Citizen c = (Citizen) event.getObject();
         c.citizenUpdate();
     }
-    public void onCitizenEditCancel(RowEditEvent event){
-        
-        
+
+    public void onCitizenEditCancel(RowEditEvent event) {
+
     }
 
-    public List<Citizen> getFilterCitizen() {
-        return filterCitizen;
-    }
-
-    public void setFilterCitizen(List<Citizen> filterCitizen) {
-        this.filterCitizen = filterCitizen;
-    }
-
-    
-    
 }

@@ -160,4 +160,26 @@ public class GetDB_Eman {
     }
      
      
+     public static Citizen GetCitizenById(String param) {
+           Citizen cit = new Citizen();
+        try {
+            DB db = new DB();
+            
+            String sql = "SELECT * FROM oss.citizen where Cit_ID ="+param+";";
+            System.out.println(sql);
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                 cit = new Citizen(r.getInt(1), r.getString(2), r.getString(3), r.getString(4), r.getString(5), r.getString(6), r.getInt(7), r.getString(8), 
+                         r.getString(9), r.getString(10), r.getString(11), r.getString(12), r.getString(13),
+                         r.getString(14), r.getString(15), r.getString(16), r.getString(17), r.getString(19), r.getString(19),
+                         r.getString(20), r.getString(21));
+                
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return cit;
+        
+    }
+     
 }
