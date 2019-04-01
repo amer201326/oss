@@ -133,6 +133,9 @@
                                                     <br/>
                                                     <hr style="border: 2px solid orange;"/>
 
+
+
+
                                                     <p:dialog id="diallogDelete" resizable="false"  widgetVar="deleteD" dir="rtl">
                                                         <h:panelGrid columns="2" cellpadding="5" >
 
@@ -269,19 +272,28 @@
 
                                                     </p:dataTable>
 
-<p:dialog resizable="false" header=" إضافة مرفقات" widgetVar="dlg1" dir="rtl">
-                                                <h:panelGrid columns="2" cellpadding="5">
 
-                                                    <h:outputLabel for="name1" value="إضافة:" />
-                                                    <p:inputText id="name1" label="name" value="#{serviceAttachemntManage.newService.name}" required="true"/>
+                                                    <p:dialog resizable="false" header=" إضافة مرفقات" widgetVar="dlg1" dir="rtl">
+                                                        <h:panelGrid columns="2" cellpadding="5">
 
-                                                 <!--   <h:outputLabel for="nameD" value="الملاحظات:" />
-                                                    <p:inputTextarea id="nameD" rows="6" cols="33" style="min-width: 223px;"/> -->
+                                                            <h:outputLabel for="name" value="إضافة:" />
+                                                            <p:inputText id="name" label="name" value="#{serviceAttachemntManage.newService.name}" required="true"/>
 
-                                                    <p:commandButton value="اضافة" actionListener="#{serviceAttachemntManage.addAttachment()}" update="formAttach" oncomplete="PF('dlg1').hide();"/>
+                                                            <h:outputLabel for="name" value="الملاحظات:" />
+                                                            <p:inputTextarea rows="6" cols="33" style="min-width: 223px;"/> 
+                                                            
+                                                            <br/><p:separator/> <br/>
+                                                            
+                                                            <p:fileUpload  fileUploadListener="#{uploadManage.handleFileUpload}" mode="advanced" required="true"
+                                                                           uploadLabel="تحميل" cancelLabel="إلغاء" label="أختر" dragDropSupport="true" update="messages" 
+                                                                           sizeLimit="10000000" allowTypes="/(\.|\/)(doc|docx|xls|xlsx|pdf|jpe?g)$/" />
 
-                                                </h:panelGrid>
-                                            </p:dialog> 
+                                                            <p:growl id="messages"  showDetail="false" showSummary="false"/>
+
+                                                            <p:commandButton value="اضافة" actionListener="#{serviceAttachemntManage.addAttachment()}" update="formAttach" oncomplete="PF('dlg1').hide();"/>
+
+                                                        </h:panelGrid>
+                                                    </p:dialog> 
 
 
 
@@ -299,16 +311,7 @@
 
                                                 </h:form>
 
-                                                <h:form>
-                                                   
-                                                    <br/><p:separator/> <br/>
-                                                    <p:fileUpload  fileUploadListener="#{uploadManage.handleFileUpload}" mode="advanced" required="true"
-                                                                  uploadLabel="تحميل" cancelLabel="إلغاء" label="أختر" dragDropSupport="true" update="messages" 
-                                                                  sizeLimit="10000000" allowTypes="/(\.|\/)(doc|docx|xls|xlsx|pdf|jpe?g)$/" />
 
-                                                    <p:growl id="messages"  showDetail="false" showSummary="false"/>
-
-                                                </h:form>
 
                                                 <br/>
                                                 <hr style="border: 2px solid orange;"/>
@@ -328,7 +331,7 @@
 
                                         </div>
 
-                                      
+
                                     </div>
                                 </div>
 
