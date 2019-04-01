@@ -12,6 +12,7 @@ import Data.GetFromDB;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -26,18 +27,20 @@ import org.primefaces.event.RowEditEvent;
 public class EditCitizenManage implements Serializable{
 
     Citizen citizenEdit;
-
+    
     public EditCitizenManage() {
         Map<String, String> parameterMap = (Map<String, String>) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         String id = parameterMap.get("id");
 
         citizenEdit = GetDB_Eman.GetCitizenById(id);
+        
 
     }
 
     public void editCitizen() {
 
         citizenEdit.updateCitizen();
+        
     }
 
     public Citizen getCitizenEdit() {

@@ -93,7 +93,7 @@
                                                 <h:form id="formSection">
                                                     <h:head id="msgs"/>
 
-                                                    <p:dataTable id="singleDT" var="attach" value="#{serviceAttachemntManage.allServicesAttach}"  
+                                                    <p:dataTable id="singleDT" var="attach" value="#{serviceAttachemntManage.allServicesAttachwithoutFile}"  
                                                                  editable="true" style="margin-bottom:20px; text-align: center;" rowKey="#{attach.id}" selectionMode="single" 
                                                                  selection="#{serviceAttachemntManage.serv}" rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                                                  rowsPerPageTemplate="5,10,15" >
@@ -228,7 +228,7 @@
 
 
 
-                                                    <p:dataTable id="singleDTattach" var="attachment" value="#{serviceAttachemntManage.allServicesAttach}"  
+                                                    <p:dataTable id="singleDTattach" var="attachment" value="#{serviceAttachemntManage.allServicesAttachwithFile}"  
                                                                  editable="true" style="margin-bottom:20px; text-align: center;" rowKey="#{attachment.id}" selectionMode="single" 
                                                                  selection="#{serviceAttachemntManage.serv}" rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                                                  rowsPerPageTemplate="5,10,15" >

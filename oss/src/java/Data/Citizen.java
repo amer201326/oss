@@ -317,7 +317,7 @@ public class Citizen implements Serializable {
         }
     }
 
-    public void updateCitizen() {
+    public String updateCitizen() {
         String q = "UPDATE citizen SET Cit_FirstName = '" + FirstName + "',Cit_FatherName = '" + FatherName
                 + "', Cit_GrandfatherName = '" + GrandFatherName + "',Cit_LastName = '" + LastName
                 + "', Cit_Gender = '" + Gender + "',Cit_FamilyMembers = '" + familyMember
@@ -331,13 +331,14 @@ public class Citizen implements Serializable {
             DB data = new DB();
 
             data.write(q);
-            account.updateCit();
+            
+            
 
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(Citizen.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Citizen.class.getName()).log(Level.SEVERE, null, ex);
+            return "يوجد مشكلة في  بيانات المستخدم";
         }
+        return account.updateCit();
 
     }
 

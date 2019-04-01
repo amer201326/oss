@@ -8,6 +8,7 @@ package Beans;
 import Data.GetDB_Eman;
 import Data.ServiceAttachmentName;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -25,12 +26,23 @@ public class ServiceAttachemntManage implements Serializable{
     
   
     List<ServiceAttachmentName> allServicesAttach;
+    List<ServiceAttachmentName> allServicesAttachwithFile;
+    List<ServiceAttachmentName> allServicesAttachwithoutFile;
     public ServiceAttachmentName serv;
 
     ServiceAttachmentName newService;
     
     public ServiceAttachemntManage() {
         allServicesAttach = GetDB_Eman.getAllAttachment();
+        allServicesAttachwithoutFile = new ArrayList<>();
+        allServicesAttachwithFile = new ArrayList<>();
+        for (int i = 0; i < allServicesAttach.size(); i++) {
+            ServiceAttachmentName get = allServicesAttach.get(i);
+            if(get.getSrcFile()==null)
+                allServicesAttachwithoutFile.add(get);
+            else
+                allServicesAttachwithFile.add(get);
+        }
         newService = new ServiceAttachmentName();
     }
 
@@ -84,6 +96,22 @@ public class ServiceAttachemntManage implements Serializable{
         newService = new ServiceAttachmentName();
         allServicesAttach = GetDB_Eman.getAllAttachment();
 
+    }
+
+    public List<ServiceAttachmentName> getAllServicesAttachwithFile() {
+        return allServicesAttachwithFile;
+    }
+
+    public void setAllServicesAttachwithFile(List<ServiceAttachmentName> allServicesAttachwithFile) {
+        this.allServicesAttachwithFile = allServicesAttachwithFile;
+    }
+
+    public List<ServiceAttachmentName> getAllServicesAttachwithoutFile() {
+        return allServicesAttachwithoutFile;
+    }
+
+    public void setAllServicesAttachwithoutFile(List<ServiceAttachmentName> allServicesAttachwithoutFile) {
+        this.allServicesAttachwithoutFile = allServicesAttachwithoutFile;
     }
      
      

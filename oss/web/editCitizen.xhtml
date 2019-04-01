@@ -123,14 +123,15 @@
                                                                             <h6 class="m-0 font-weight-bold text-primary">تعديل</h6>
                                                                         </div>
                                                                         <div class="card-body">
+                                                                             
                                                                             <h:panelGrid columns="2" dir="rtl" style="display: flex; justify-content: flex-start;">
 
-
+                                                                               
                                                                                 <p:outputLabel for="us" class="label" value="اسم المستخدم"/>
                                                                                 <p:inputText id="us" value="#{editCitizenManage.citizenEdit.account.userName}"
                                                                                              class="form-control form-control-user" style="text-align:right;"
-                                                                                             type="text" required="true"/>
-
+                                                                                             type="text" required="true" disabled="true"/>
+ 
                                                                                 <p:outputLabel for="password" class="label" value="كلمة المرور"/>
                                                                                 <p:password value="#{editCitizenManage.citizenEdit.account.password}" class="form-control" style="text-align:right;" id="password" 
                                                                                             feedback="true" inline="true" required="true"/> 
@@ -248,13 +249,13 @@
 
                                                     </div>
                                                     <br/><hr style="border: 2px solid orange; margin-left: 10px; margin-right: 10px;"/>
-
+                                                    
                                                     <div style="display: flex; justify-content: center;"  class="col-sm-12">                                                
-                                                        <p:commandButton value=" إعادة تعيين" immediate="true" ajax="false" class="myButtonB" style="margin-right:20px;" >
+                                                        <p:commandButton  value=" إعادة تعيين" immediate="true" ajax="false" class="myButtonB" style="margin-right:20px;" >
                                                             <p:resetInput target="@form formAddCitizen" />
                                                             <f:ajax />
                                                         </p:commandButton>
-                                                        <p:commandButton value=" تعديل مواطن" class="myButtonO" actionListener="#{editCitizenManage.editCitizen()}"
+                                                        <p:commandButton  value=" تعديل مواطن" class="myButtonO" actionListener="#{editCitizenManage.editCitizen()}"
                                                                          update="@form " />   &nbsp; &nbsp; &nbsp;
 
                                                     </div> <br/>
