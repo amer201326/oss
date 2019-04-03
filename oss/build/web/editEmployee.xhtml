@@ -79,7 +79,7 @@
                                                                     <p:outputLabel for="us" class="label" value="اسم المستخدم"/>
                                                                     <p:inputText id="us" value="#{editEmployeeManager.employeeEdit.account.userName}"
                                                                                  class="form-control form-control-user" style="text-align:right;"
-                                                                                 type="text" required="true"/>
+                                                                                 type="text" required="true" disabled="true"/>
 
                                                                     <p:outputLabel for="password" class="label" value="كلمة المرور"/>
                                                                     <p:password id="password" value="#{editEmployeeManager.employeeEdit.account.password}" class="form-control" style="text-align:right;" feedback="true" inline="true" required="true"/> 
@@ -209,7 +209,7 @@
 
                                                                     <h:outputLabel  for="dep_id" class="label" value="دائرة"/>
                                                                     <p:selectOneMenu id="dep_id" value="#{editEmployeeManager.employeeEdit.dep_id}"  
-                                                                                     class="pading000 form-control" style="text-align:right; min-width: 223px;" required="true">
+                                                                                     class="pading000 form-control" style="text-align:right; min-width: 223px;" required="true" disabled="true">
                                                                         <f:selectItems value="#{employeeManage.allDepartments}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}" />
                                                                         <p:ajax process="@this"  update="sec_id job_id" event="itemSelect" />
                                                                     </p:selectOneMenu>
@@ -217,14 +217,14 @@
 
                                                                     <h:outputLabel  for="sec_id" class="label" value="القسم"/>
                                                                     <p:selectOneMenu id="sec_id" value="#{editEmployeeManager.employeeEdit.sec_id}"
-                                                                                     class="pading000 form-control" style="text-align:right; min-width: 223px;" required="true" >
+                                                                                     class="pading000 form-control" style="text-align:right; min-width: 223px;" required="true" disabled="true" >
                                                                         <f:selectItems value="#{employeeManage.filterSections()}" var="s" itemLabel="#{s.name}" itemValue="#{s.id}" />
                                                                         <p:ajax process="@this"  update="job_id" event="itemSelect" />
                                                                     </p:selectOneMenu>   
 
                                                                     <h:outputLabel  for="job_id" class="label" value="المسمى الوظيفة" />
                                                                     <p:selectOneMenu id="job_id" value="#{editEmployeeManager.employeeEdit.job_id}" 
-                                                                                     class="pading000 form-control" style="text-align:right; min-width: 223px;" required="true" label="Job ID" >
+                                                                                     class="pading000 form-control" style="text-align:right; min-width: 223px;" required="true" label="Job ID" disabled="true" >
                                                                         <f:selectItems value="#{employeeManage.filterJob()}" var="j" itemLabel="#{j.name}" itemValue="#{j.idJob}" />
                                                                     </p:selectOneMenu>
 
@@ -261,7 +261,7 @@
                                                     <f:ajax />
                                                 </p:commandButton> &nbsp; &nbsp; &nbsp;
 
-                                                <p:commandButton actionListener="#{employeeManage.addEmployee()}" value="تعديل" id="add_emp"  update="@form"  class="myButtonC" />
+                                                <p:commandButton actionListener="#{editEmployeeManager.editEmployee()}" value="تعديل" id="edit_emp"  update="@form"  class="myButtonC" />
 
                                             </div>
 

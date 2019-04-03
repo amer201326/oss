@@ -43,7 +43,11 @@ public class EditEmployeeManager {
     }
     
     
-    
+    public void editEmployee() {
+
+        employeeEdit.updateEmployee();
+        
+    }
     
    
     

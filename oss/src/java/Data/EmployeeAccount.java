@@ -57,4 +57,23 @@ public class EmployeeAccount implements Serializable{
         }
 
     }
+        
+        
+        public String updateEmp(){
+        String q  =" UPDATE employeeaccount SET Password = '" + Password + "' WHERE `Emp_ID` = " + Emp_ID + ";" ;
+        try {
+            DB data = new DB();
+            data.write(q);
+            
+            
+        } catch (Exception ex) {
+            
+            Logger.getLogger(CitizenAccount.class.getName()).log(Level.SEVERE, null, ex);
+            return "اسم المستخدم موجود , ادخل اسم اخر";
+        }
+        return "1";
+        
+    }
+        
+        
 }
