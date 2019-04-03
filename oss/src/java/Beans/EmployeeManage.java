@@ -56,7 +56,9 @@ public class EmployeeManage implements Serializable {
     Employee employeeSelected;
 
     public EmployeeManage() {
-
+       
+        
+        
         allDepartments = GetFromDB.getDepartments();
         allSections = GetFromDB.getSection();
        
@@ -87,7 +89,7 @@ public class EmployeeManage implements Serializable {
         
         allemployees = GetDB_Eman.getEmployee();
         employeeSelected = new Employee();
-
+        
        
     }
     public List<JobOfSection> filterJob() {
