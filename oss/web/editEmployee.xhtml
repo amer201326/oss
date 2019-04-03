@@ -97,56 +97,28 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="card shadow mb-4" style="text-align: right;">
+                                                <div class="card shadow mb-4">
                                                     <div class="card-header py-3">
-                                                        <h6 class="m-0 font-weight-bold text-primary">تحديد القسم</h6>
+                                                        <h6 class="m-0 font-weight-bold text-primary">صلاحيات</h6>
                                                     </div>
-                                                    <div class="card-body">
-
-                                                        <div class="form-group row">
-                                                            <div class="col-sm-12 mb-3 mb-sm-0">
-
-                                                                <h:panelGrid columns="2" dir="rtl" style="display: flex; justify-content: flex-start;">
 
 
+                                                    <div class="my-2"></div>
 
-                                                                    <h:outputLabel  for="dep_id" class="label" value="دائرة"/>
-                                                                    <p:selectOneMenu id="dep_id" value="#{editEmployeeManager.employeeEdit.dep_id}"  
-                                                                                     class="pading000 form-control" style="text-align:right; min-width: 223px;" required="true">
-                                                                        <f:selectItems value="#{employeeManage.allDepartments}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}" />
-                                                                        <p:ajax process="@this"  update="sec_id job_id" event="itemSelect" />
-                                                                    </p:selectOneMenu>
+                                                    <div class="form-group row" style="display:flex; 
+                                                         justify-content: flex-start; width: 220px; margin: 0 40px 0 40px;">
 
 
-                                                                    <h:outputLabel  for="sec_id" class="label" value="القسم"/>
-                                                                    <p:selectOneMenu id="sec_id" value="#{editEmployeeManager.employeeEdit.sec_id}"
-                                                                                     class="pading000 form-control" style="text-align:right; min-width: 223px;" required="true" >
-                                                                        <f:selectItems value="#{employeeManage.filterSections()}" var="s" itemLabel="#{s.name}" itemValue="#{s.id}" />
-                                                                        <p:ajax process="@this"  update="job_id" event="itemSelect" />
-                                                                    </p:selectOneMenu>   
-
-                                                                    <h:outputLabel  for="job_id" class="label" value="المسمى الوظيفة" />
-                                                                    <p:selectOneMenu id="job_id" value="#{editEmployeeManager.employeeEdit.job_id}" 
-                                                                                     class="pading000 form-control" style="text-align:right; min-width: 223px;" required="true" label="Job ID" >
-                                                                        <f:selectItems value="#{employeeManage.filterJob()}" var="j" itemLabel="#{j.name}" itemValue="#{j.idJob}" />
-                                                                    </p:selectOneMenu>
-
-
-
-
-                                                                </h:panelGrid>
-
-
-
-
-                                                            </div>
-
-                                                        </div>
-
-
-
+                                                        <p:pickList id="pickList1" value="#{employeeManage.screensNamesAndResaults}" var="sna" class="pick"
+                                                                    itemLabel="#{sna}" itemValue="#{sna}"  showSourceFilter="true" showTargetFilter="true"
+                                                                    style="min-width: 150px; margin: 1% 1% 1% 1%; min-height: 100px; padding-left: 50%;" orientation="vertical">
+                                                            <f:facet name="sourceCaption">كافة المرفقات</f:facet>
+                                                            <f:facet name="targetCaption">المرفقات المختارة</f:facet>
+                                                        </p:pickList>   
 
                                                     </div>
+
+                                                    <div class="my-2"></div>
                                                 </div>
 
                                             </div>
@@ -209,39 +181,70 @@
                                                 </div>
 
 
-                                                <div class="card shadow mb-4">
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                <div class="card shadow mb-4" style="text-align: right;">
                                                     <div class="card-header py-3">
-                                                        <h6 class="m-0 font-weight-bold text-primary">صلاحيات</h6>
+                                                        <h6 class="m-0 font-weight-bold text-primary">تحديد القسم</h6>
                                                     </div>
+                                                    <div class="card-body">
+
+                                                        <div class="form-group row">
+                                                            <div class="col-sm-12 mb-3 mb-sm-0">
+
+                                                                <h:panelGrid columns="2" dir="rtl" style="display: flex; justify-content: flex-start;">
 
 
-                                                    <div class="my-2"></div>
 
-                                                    <div class="form-group row" style="display:flex; 
-                                                         justify-content: flex-start; width: 220px; margin: 0 40px 0 40px;">
+                                                                    <h:outputLabel  for="dep_id" class="label" value="دائرة"/>
+                                                                    <p:selectOneMenu id="dep_id" value="#{editEmployeeManager.employeeEdit.dep_id}"  
+                                                                                     class="pading000 form-control" style="text-align:right; min-width: 223px;" required="true">
+                                                                        <f:selectItems value="#{employeeManage.allDepartments}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}" />
+                                                                        <p:ajax process="@this"  update="sec_id job_id" event="itemSelect" />
+                                                                    </p:selectOneMenu>
 
 
-                                                       <p:pickList id="pickList1" value="#{employeeManage.screensNamesAndResaults}" var="sna" class="pick"
-                                                                    itemLabel="#{sna}" itemValue="#{sna}"  showSourceFilter="true" showTargetFilter="true"
-                                                                    style="display:flex; justify-content: space-between; width: 230px;
-                                                                    margin: 0px 0px 0px 0px; padding-left: 0;"> 
-                                                            <f:facet name="sourceCaption">كافة المرفقات</f:facet>
-                                                            <f:facet name="targetCaption">المرفقات المختارة</f:facet>
-                                                        </p:pickList>   
+                                                                    <h:outputLabel  for="sec_id" class="label" value="القسم"/>
+                                                                    <p:selectOneMenu id="sec_id" value="#{editEmployeeManager.employeeEdit.sec_id}"
+                                                                                     class="pading000 form-control" style="text-align:right; min-width: 223px;" required="true" >
+                                                                        <f:selectItems value="#{employeeManage.filterSections()}" var="s" itemLabel="#{s.name}" itemValue="#{s.id}" />
+                                                                        <p:ajax process="@this"  update="job_id" event="itemSelect" />
+                                                                    </p:selectOneMenu>   
+
+                                                                    <h:outputLabel  for="job_id" class="label" value="المسمى الوظيفة" />
+                                                                    <p:selectOneMenu id="job_id" value="#{editEmployeeManager.employeeEdit.job_id}" 
+                                                                                     class="pading000 form-control" style="text-align:right; min-width: 223px;" required="true" label="Job ID" >
+                                                                        <f:selectItems value="#{employeeManage.filterJob()}" var="j" itemLabel="#{j.name}" itemValue="#{j.idJob}" />
+                                                                    </p:selectOneMenu>
+
+
+
+
+                                                                </h:panelGrid>
+
+
+
+
+                                                            </div>
+
+                                                        </div>
+
+
+
 
                                                     </div>
-
-                                                    <div class="my-2"></div>
                                                 </div>
-
-
-
-
-
-
-
-
-
 
                                             </div>
 

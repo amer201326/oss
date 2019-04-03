@@ -176,14 +176,14 @@
                                                                                         <f:selectItem  itemLabel="أنثى" itemValue="F" />
                                                                                     </p:selectOneRadio>
                                                                                 </h:panelGrid> 
+                                                                                
+                                                                                <p:outputLabel for="birthday1" class="label" value="تاريخ الميلاد"/>
+                                                                                <p:calendar id="birthday1" selectOtherMonths="true" yearRange="c-100:c" class=" form-control-user"
+                                                                                            pattern="yyyy-MM-dd" navigator="true" style="text-align:right;"
+                                                                                            value="#{citizenManage.newCitizen.birthday}" required="true"/>
 
                                                                                 <br/>
                                                                                 <p:separator style="width: 250px;"/> 
-
-                                                                                <p:outputLabel for="birthday" value="تاريخ الميلاد"/>
-                                                                                <p:calendar id="birthday" selectOtherMonths="true" yearRange="c-100:c"
-                                                                                            pattern="yyyy-MM-dd" navigator="true" style="text-align:right; width: 223px;"
-                                                                                            value="#{citizenManage.newCitizen.birthday}" required="true"/>
 
                                                                                 <p:outputLabel for="idCard" value="رقم الهوية" /> 
                                                                                 <p:inputMask id="idCard" class="form-control form-control-user"

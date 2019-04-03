@@ -177,14 +177,16 @@
                                                                                         <f:selectItem  itemLabel="أنثى" itemValue="F" />
                                                                                     </p:selectOneRadio>
                                                                                 </h:panelGrid>  
-                                                                                <br/>
-                                                                                <p:separator style="width: 250px;"/> 
-
-                                                                                <p:outputLabel for="birthday"  value="تاريخ الميلاد"/>
-                                                                                <p:calendar id="birthday" selectOtherMonths="true" yearRange="c-100:c" 
+                                                                                
+                                                                                <p:outputLabel for="birthday" class="label"  value="تاريخ الميلاد"/>
+                                                                                <p:calendar id="birthday" selectOtherMonths="true" yearRange="c-100:c" class=" form-control-user"
                                                                                             pattern="yyyy-MM-dd" navigator="true" style="text-align:right; width: 223px;"
                                                                                             value="#{editCitizenManage.citizenEdit.birthday}" required="true"/>
 
+                                                                                <br/>
+                                                                                <p:separator style="width: 250px;"/> 
+
+                                                                                
                                                                                 <p:outputLabel for="idCard" value="رقم الهوية" /> 
                                                                                 <p:inputMask id="idCard" class="form-control form-control-user"
                                                                                              style="text-align:right;" type="text" mask="9 9999999 9" value="#{editCitizenManage.citizenEdit.idCard}" required="true"/>
