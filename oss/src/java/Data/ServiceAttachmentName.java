@@ -11,13 +11,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import org.primefaces.component.fileupload.FileUpload;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.DefaultUploadedFile;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -29,20 +32,19 @@ public class ServiceAttachmentName implements Serializable {
     int id;
     String name;
     String srcFile;
-    String notes; 
-    UploadedFile  file;
+    String notes;
+    UploadedFile file;
     String requirement;
-    
+
     public ServiceAttachmentName() {
     }
-
-    
 
     public ServiceAttachmentName(int id, String name, String srcFile, String notes) {
         this.id = id;
         this.name = name;
         this.srcFile = srcFile;
         this.notes = notes;
+        file = new DefaultUploadedFile();
     }
 
     public ServiceAttachmentName(int id, String name) {
@@ -55,8 +57,6 @@ public class ServiceAttachmentName implements Serializable {
         this.name = name;
         this.srcFile = srcFile;
     }
-    
-    
 
     public int getId() {
         return id;
@@ -78,8 +78,6 @@ public class ServiceAttachmentName implements Serializable {
         this.requirement = requirement;
     }
 
-    
-    
     public void setName(String name) {
         this.name = name;
     }
@@ -91,7 +89,7 @@ public class ServiceAttachmentName implements Serializable {
     public void setSrcFile(String srcFile) {
         this.srcFile = srcFile;
     }
-    
+
     public String getNotes() {
         return notes;
     }
@@ -101,7 +99,7 @@ public class ServiceAttachmentName implements Serializable {
     }
 
     public void update() {
-        String q = "UPDATE serviceattachmentname SET ServA_Name = '" + name + "',notes = '"+ notes+"' WHERE (ServiceAttachmentName_ID = " + id + ");";
+        String q = "UPDATE serviceattachmentname SET ServA_Name = '" + name + "',notes = '" + notes + "' WHERE (ServiceAttachmentName_ID = " + id + ");";
         System.out.println(q);
         try {
             DB data = new DB();
@@ -122,7 +120,6 @@ public class ServiceAttachmentName implements Serializable {
         try {
             DB data = new DB();
             data.write(q);
-           
 
         } catch (SQLException ex) {
             Logger.getLogger(ServiceAttachmentName.class.getName()).log(Level.SEVERE, null, ex);
@@ -130,14 +127,12 @@ public class ServiceAttachmentName implements Serializable {
             Logger.getLogger(ServiceAttachmentName.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        
     }
 
     public void addAttachToDBWitoutFile() {
-       
-        
-        String q = "INSERT INTO oss.serviceattachmentname (`ServiceAttachmentName_ID`, `ServA_Name`, `notes`, `requirement`)  VALUES (null,'" 
-                + name + "','" + notes + "','"+ requirement +"');";
+
+        String q = "INSERT INTO oss.serviceattachmentname (`ServiceAttachmentName_ID`, `ServA_Name`, `notes`, `requirement`)  VALUES (null,'"
+                + name + "','" + notes + "','" + requirement + "');";
         System.out.println(notes);
         System.out.println(requirement);
 
@@ -150,57 +145,34 @@ public class ServiceAttachmentName implements Serializable {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ServiceAttachmentName.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
 
     }
-        public void addAttachToDBwithFile() {
-       
-        
+
+    public void addAttachToDBwithFile() {
+
         String q = "INSERT INTO serviceattachmentname (`ServiceAttachmentName_ID`, `ServA_Name`, `File_src`, `notes`) VALUES(null,'" + name + "','" + srcFile + "','" + notes + "');";
         System.out.println(notes);
-
+        saveFileInDisk();
+        System.out.println(file.getFileName());
         try {
             DB data = new DB();
-            data.write(q);
+            //data.write(q);
 
         } catch (SQLException ex) {
             Logger.getLogger(ServiceAttachmentName.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ServiceAttachmentName.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
 
     }
-    
-    public void addUploadFile(FileUploadEvent file){
-     try{
-            InputStream in=file.getFile().getInputstream();
-            
-            File f =new File(""+file.getFile().getFileName());
-            f.createNewFile();
-            FileOutputStream out=new FileOutputStream(f);
-            
-            byte[] buffer=new byte[1024];
-            int length;
-            
-            while((length=in.read(buffer))>0){
-                out.write(buffer, 0, length);
-            }
-            srcFile =f.getPath();
-            out.close();
-            in.close();
-            
-            //FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("path", f.getAbsolutePath());
-            
-            //upladed=true;
-            System.out.println("uploaded");
-        }catch(IOException e){
-            System.out.println(e.getMessage());
+
+    public void addUploadFile(FileUploadEvent file) {
+        this.file = file.getFile();
+        if (this.file != null) {
+            System.out.println(this.file.getFileName());
         }
-    
+
     }
-    
-    
 
     public UploadedFile getFile() {
         return file;
@@ -208,8 +180,36 @@ public class ServiceAttachmentName implements Serializable {
 
     public void setFile(UploadedFile file) {
         this.file = file;
+
     }
 
-    
+    private void saveFileInDisk() {
+        
+        try {
+            System.out.println(file.getSize());
+            InputStream in = file.getInputstream();
+            
+            File f = new File("E:/oss/"+file.getFileName());
+            
+            f.createNewFile();
+            FileOutputStream out = new FileOutputStream(f);
+
+            byte[] buffer = new byte[1024];
+            int length;
+
+            while ((length = in.read(buffer)) > 0) {
+                out.write(buffer, 0, length);
+            }
+            srcFile = "files/" + file.getFileName();
+            out.close();
+            in.close();
+
+            
+
+            System.out.println("uploaded pdf");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
 }

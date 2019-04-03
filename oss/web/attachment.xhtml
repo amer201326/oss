@@ -274,8 +274,9 @@
 
                                                 </h:form>
 
-                                                <h:form>
-                                                    <p:dialog resizable="false" header=" إضافة مرفقات" widgetVar="dlg1" dir="rtl">
+
+                                                <p:dialog resizable="false" header=" إضافة مرفقات" widgetVar="dlg1" dir="rtl">
+                                                    <h:form enctype="multipart/form-data">
                                                         <h:panelGrid columns="2" cellpadding="5">
 
                                                             <h:outputLabel for="name2" value="إضافة:" />
@@ -285,20 +286,20 @@
                                                             <p:inputTextarea id="note1" rows="6" cols="33" value="#{serviceAttachemntManage.newService.notes}" style="min-width: 223px;"/> 
 
                                                             <br/><p:separator/> <br/>
-                                                            
+
                                                             <h:outputLabel for="files" value="اختر الملف:" dir="rtl"/>
-                                                            <p:fileUpload  id="files" fileUploadListener="#{uploadManage.handleFileUpload}" mode="simple" required="true"
-                                                                           label="أختر" skinSimple="true" dragDropSupport="true" update="messages" 
-                                                                           sizeLimit="10000000" allowTypes="/(\.|\/)(doc|docx|xls|xlsx|pdf|jpe?g)$/" />
+                                                            <p:fileUpload fileUploadListener="#{serviceAttachemntManage.newService.addUploadFile}" mode="advanced" dragDropSupport="true"
+                                   auto="true" process="@this"/>
 
                                                             <p:growl id="messages"  showDetail="false" showSummary="false"/>
 
                                                             <p:commandButton value="اضافة" actionListener="#{serviceAttachemntManage.addAttachment()}" update="formAttach1" oncomplete="PF('dlg1').hide();"/>
 
                                                         </h:panelGrid>
-                                                    </p:dialog> 
+                                                    </h:form>
+                                                </p:dialog> 
 
-                                                </h:form>
+
 
 
 
