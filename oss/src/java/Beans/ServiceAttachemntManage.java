@@ -13,6 +13,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import static org.primefaces.component.contextmenu.ContextMenu.PropertyKeys.event;
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.event.SelectEvent;
 
@@ -22,28 +23,31 @@ import org.primefaces.event.SelectEvent;
  */
 @ManagedBean
 @ViewScoped
-public class ServiceAttachemntManage implements Serializable{
-    
-  
+public class ServiceAttachemntManage implements Serializable {
+
     List<ServiceAttachmentName> allServicesAttach;
     List<ServiceAttachmentName> allServicesAttachwithFile;
     List<ServiceAttachmentName> allServicesAttachwithoutFile;
-    public ServiceAttachmentName serv;
+    ServiceAttachmentName serv;
 
     ServiceAttachmentName newService;
-    
+
     public ServiceAttachemntManage() {
         allServicesAttach = GetDB_Eman.getAllAttachment();
+        
         allServicesAttachwithoutFile = new ArrayList<>();
         allServicesAttachwithFile = new ArrayList<>();
         for (int i = 0; i < allServicesAttach.size(); i++) {
             ServiceAttachmentName get = allServicesAttach.get(i);
-            if(get.getSrcFile()==null)
+            if (get.getSrcFile() == null) {
                 allServicesAttachwithoutFile.add(get);
-            else
+            } else {
                 allServicesAttachwithFile.add(get);
+            }
         }
+        
         newService = new ServiceAttachmentName();
+        serv = new ServiceAttachmentName();
     }
 
     public ServiceAttachmentName getServ() {
@@ -61,25 +65,29 @@ public class ServiceAttachemntManage implements Serializable{
     public void setAllServicesAttach(List<ServiceAttachmentName> allServicesAttach) {
         this.allServicesAttach = allServicesAttach;
     }
-    
-   public void onAttachEdit(RowEditEvent event) {
+
+    public void onAttachEdit(RowEditEvent event) {
 
         ((ServiceAttachmentName) event.getObject()).update();
 
-    } 
-   
-   public void onAttachCancel(RowEditEvent event) {
+    }
+
+    public void onAttachCancel(RowEditEvent event) {
 
     }
-   
-   public void onAttachSelected(SelectEvent event) {
+
+    public void onAttachSelected(SelectEvent event) {
         System.out.println("form al ajax " + ((ServiceAttachmentName) event.getObject()).getId());
         serv = (ServiceAttachmentName) event.getObject();
+        System.out.println(serv);
+
     }
-   
+
     public void deleteAttachment() {
-        serv.delete();
-        allServicesAttach.remove(serv);
+        serv.deleteFromDB();
+        allServicesAttachwithFile.remove(serv);
+        allServicesAttachwithoutFile.remove(serv);
+        
     }
 
     public ServiceAttachmentName getNewService() {
@@ -89,12 +97,24 @@ public class ServiceAttachemntManage implements Serializable{
     public void setNewService(ServiceAttachmentName newService) {
         this.newService = newService;
     }
-     public void addAttachment() {
+
+    public void addAttachment() {
         System.out.println("11111111111111111111111111111111111111111");
-         newService.addAttachToDB();
+        newService.addAttachToDBwithFile();
         System.out.println("222222222222222222222222222222222222222");
+
         newService = new ServiceAttachmentName();
-       
+
+        allServicesAttach = GetDB_Eman.getAllAttachment();
+
+    }
+
+    public void addAttachmentWitoutFile() {
+        System.out.println("444444444444444444444444444444444444");
+        newService.addAttachToDBWitoutFile();
+        System.out.println("333333333333333333333333333333333");
+        newService = new ServiceAttachmentName();
+
         allServicesAttach = GetDB_Eman.getAllAttachment();
 
     }
@@ -114,6 +134,5 @@ public class ServiceAttachemntManage implements Serializable{
     public void setAllServicesAttachwithoutFile(List<ServiceAttachmentName> allServicesAttachwithoutFile) {
         this.allServicesAttachwithoutFile = allServicesAttachwithoutFile;
     }
-     
-     
+
 }

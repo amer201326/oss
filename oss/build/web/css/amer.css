@@ -596,21 +596,13 @@ hr{
 }
 
 #addnewservice2 .ui-picklist .ui-picklist-list{
-    height: 400px;
+    height: 170px;
     width: 290px;
 }
 
-
-ui-picklist-caption ui-widget-header ui-corner-tl ui-corner-tr{
-    width: 200px;
+.ui-picklist .ui-picklist-list{
+     height: 140px;
 }
-
-
-ui-picklist-caption ui-widget-header ui-corner-tl ui-corner-tr{
-     width: 200px;
-}
-
-
 .flexRow{
     display: flex;
     flex-direction: row;
@@ -649,6 +641,7 @@ ui-picklist-caption ui-widget-header ui-corner-tl ui-corner-tr{
     padding: 0 0 0 0;
     padding-right: 0;
 }
+
 #addnewservice2 label {
     height: 35px;
     min-width: 166px;
