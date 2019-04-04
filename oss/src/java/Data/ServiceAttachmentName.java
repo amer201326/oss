@@ -10,11 +10,13 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.crypto.Cipher;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -187,23 +189,24 @@ public class ServiceAttachmentName implements Serializable {
     private void saveFileInDisk() {
         
         try {
-            System.out.println(file.getSize());
-            InputStream in = file.getInputstream();
+           InputStream initialStream = file.getInputstream();
+            byte[] buffer = new byte[initialStream.available()];
+            initialStream.read(buffer);
+
+            File targetFile = new File("E:/oss/tmep.txt");
+            OutputStream outStream = new FileOutputStream(targetFile);
+            outStream.write(buffer);
             
-            File f = new File("E:/oss/"+file.getFileName());
-            
+            File f = new File("E:/oss/" + file.getFileName());
             f.createNewFile();
-            FileOutputStream out = new FileOutputStream(f);
+            Crypto.fileProcessor(Cipher.ENCRYPT_MODE, "foreanderDowntop", targetFile, f);
+//             File test = new File("E:/oss/decription" + file.getFileName());
+//            test.createNewFile();
+//            Crypto.fileProcessor(Cipher.DECRYPT_MODE, "foreanderDowntop", f, test);
 
-            byte[] buffer = new byte[1024];
-            int length;
-
-            while ((length = in.read(buffer)) > 0) {
-                out.write(buffer, 0, length);
-            }
-            srcFile = "files/" + file.getFileName();
-            out.close();
-            in.close();
+           
+            outStream.close();
+            targetFile.delete();
 
             
 

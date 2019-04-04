@@ -28,31 +28,28 @@ import org.primefaces.model.UploadedFile;
  */
 class Crypto {
 
-    static void fileProcessor(int cipherMode, String key, UploadedFile inputFile, File outputFile) {
-        try {
-            Key secretKey = new SecretKeySpec(key.getBytes(), "AES");
-            Cipher cipher = Cipher.getInstance("AES");
-            cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+    static void fileProcessor(int cipherMode,String key,File inputFile,File outputFile){
+	 try {
+	       Key secretKey = new SecretKeySpec(key.getBytes(), "AES");
+	       Cipher cipher = Cipher.getInstance("AES");
+	       cipher.init(cipherMode, secretKey);
 
-            byte[] outputBytes = cipher.doFinal(inputFile.getContents());
+	       FileInputStream inputStream = new FileInputStream(inputFile);
+	       byte[] inputBytes = new byte[(int) inputFile.length()];
+	       inputStream.read(inputBytes);
 
-            FileOutputStream outputStream = new FileOutputStream(outputFile);
-            outputStream.write(outputBytes);
+	       byte[] outputBytes = cipher.doFinal(inputBytes);
 
-            outputStream.close();
+	       FileOutputStream outputStream = new FileOutputStream(outputFile);
+	       outputStream.write(outputBytes);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(Crypto.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NoSuchPaddingException ex) {
-            Logger.getLogger(Crypto.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InvalidKeyException ex) {
-            Logger.getLogger(Crypto.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalBlockSizeException ex) {
-            Logger.getLogger(Crypto.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (BadPaddingException ex) {
-            Logger.getLogger(Crypto.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+	       inputStream.close();
+	       outputStream.close();
+
+	    } catch (NoSuchPaddingException | NoSuchAlgorithmException 
+                     | InvalidKeyException | BadPaddingException
+	             | IllegalBlockSizeException | IOException e) {
+		e.printStackTrace();
+            }
+     }
 }
