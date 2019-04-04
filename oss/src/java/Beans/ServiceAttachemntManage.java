@@ -99,23 +99,23 @@ public class ServiceAttachemntManage implements Serializable {
     }
 
     public void addAttachment() {
-        System.out.println("11111111111111111111111111111111111111111");
+       
         newService.addAttachToDBwithFile();
-        System.out.println("222222222222222222222222222222222222222");
+        allServicesAttach.add(newService);
 
         newService = new ServiceAttachmentName();
 
-        allServicesAttach = GetDB_Eman.getAllAttachment();
+        
 
     }
 
     public void addAttachmentWitoutFile() {
-        System.out.println("444444444444444444444444444444444444");
+        
         newService.addAttachToDBWitoutFile();
-        System.out.println("333333333333333333333333333333333");
+        allServicesAttach.add(newService);
         newService = new ServiceAttachmentName();
 
-        allServicesAttach = GetDB_Eman.getAllAttachment();
+        
 
     }
 

@@ -285,18 +285,19 @@
                                                             <h:outputLabel for="note1" value="الملاحظات:" />
                                                             <p:inputTextarea id="note1" rows="6" cols="33" value="#{serviceAttachemntManage.newService.notes}" style="min-width: 223px;"/> 
 
-                                                            <br/><p:separator/> <br/>
 
-                                                            <h:outputLabel for="files" value="اختر الملف:" dir="rtl"/>
-                                                            <p:fileUpload fileUploadListener="#{serviceAttachemntManage.newService.addUploadFile}" mode="advanced" dragDropSupport="true"
-                                   auto="true" process="@this"/>
+                                                            
+
+                                                            <p:fileUpload value="#{serviceAttachemntManage.newService.file}" mode="simple" skinSimple="true"/>
+
 
                                                             <p:growl id="messages"  showDetail="false" showSummary="false"/>
-
-                                                            <p:commandButton value="اضافة" actionListener="#{serviceAttachemntManage.addAttachment()}" update="formAttach1" oncomplete="PF('dlg1').hide();"/>
+                                                            <p:commandButton value="اضافة" ajax="false" action="#{serviceAttachemntManage.addAttachment()}" update="formAttach1" oncomplete="PF('dlg1').hide();" />
+                                                            
 
                                                         </h:panelGrid>
                                                     </h:form>
+                                                    
                                                 </p:dialog> 
 
 

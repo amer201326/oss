@@ -149,10 +149,10 @@ public class ServiceAttachmentName implements Serializable {
     }
 
     public void addAttachToDBwithFile() {
-
-        String q = "INSERT INTO serviceattachmentname (`ServiceAttachmentName_ID`, `ServA_Name`, `File_src`, `notes`) VALUES(null,'" + name + "','" + srcFile + "','" + notes + "');";
-        System.out.println(notes);
         saveFileInDisk();
+        String q = "INSERT INTO serviceattachmentname (`ServiceAttachmentName_ID`, `ServA_Name`, `File_src`, `notes`) VALUES(null,'" + name + "','" + srcFile + "','" + notes + "');";
+        System.out.println(q);
+        
         System.out.println(file.getFileName());
         try {
             DB data = new DB();
@@ -179,12 +179,42 @@ public class ServiceAttachmentName implements Serializable {
     }
 
     public void setFile(UploadedFile file) {
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>in set>>>>>>>>>>>>>>>>>>>>>>"+file.getFileName());
         this.file = file;
 
     }
 
     private void saveFileInDisk() {
         
+        try {
+            System.out.println(file.getSize());
+            InputStream in = file.getInputstream();
+            
+            File f = new File("E:/oss/"+file.getFileName());
+            
+            f.createNewFile();
+            FileOutputStream out = new FileOutputStream(f);
+
+            byte[] buffer = new byte[1024];
+            int length;
+
+            while ((length = in.read(buffer)) > 0) {
+                out.write(buffer, 0, length);
+            }
+            srcFile = "files/" + file.getFileName();
+            out.close();
+            in.close();
+
+            
+
+            System.out.println("uploaded pdf");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    
+    public void uploadFile(){
         try {
             System.out.println(file.getSize());
             InputStream in = file.getInputstream();
