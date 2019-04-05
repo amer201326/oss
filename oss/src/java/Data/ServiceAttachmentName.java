@@ -219,6 +219,7 @@ public class ServiceAttachmentName implements Serializable {
     
     public void uploadFile(){
         try {
+            System.out.println(">>??>>" + new java.io.File(".").getCanonicalPath());
             System.out.println(file.getSize());
             InputStream in = file.getInputstream();
             
