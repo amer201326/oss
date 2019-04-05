@@ -561,6 +561,88 @@ public class GetFromDB {
         return s;
     }
 
+    public static List<Department> getDepartmentsWithNService() {
+        Department d = new Department();
+        
+        List<Department> departments = new ArrayList<Department>();
+        try {
+            DB db = new DB();
+            String sql = "select d.* , (select count(s.Services_Provided_ID)  from services_provided as s where s.DepartmentID =d.Dep_ID) from department as d;";
+            
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                d = new Department(r.getInt(1),r.getString(2),r.getString(3));
+                d.numberService = r.getInt(4);
+                departments.add(d);
+                
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return departments;
+    }
+
+    public static List<Service> geServicesInDepartment(int idDep) {
+
+        Service s = new Service();
+
+        List<Service> services = new ArrayList<Service>();
+        try {
+            DB db = new DB();
+
+            String sql = "select Services_Provided_ID ,Serv_Name,Serv_Cost,Serv_Days,Serv_Case,note  from services_provided where DepartmentID = "+idDep+" ;";
+
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                s = new Service(r.getInt(1), r.getString(2),r.getDouble(3),r.getInt(4),r.getString(5),r.getString(6));
+             
+                services.add(s);
+            }
+            
+            
+        } catch (Exception e) {
+        }
+        return services;
+    }
+    public static Service getServiceByID2(String id) {
+        Service s = new Service();
+
+       
+        try {
+            DB db = new DB();
+            String sql = "select Services_Provided_ID ,Serv_Name,Serv_Cost,Serv_Days,Serv_Case,d.*,s.*,note from services_provided  inner join department as d on services_provided.DepartmentID = d.Dep_ID inner join section as s on services_provided.sectionID = s.Sec_ID where Services_Provided_ID="+id+";";
+            System.out.println(sql);
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                s = new Service(r.getInt(1), r.getString(2),r.getDouble(3),r.getInt(4),r.getString(5)
+                        ,new Department(r.getInt(6), r.getString(7),r.getString(8)),
+                        new Section(r.getInt(9), r.getInt(10), r.getString(11), r.getString(7)),r.getString(12));
+            
+            }
+            
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return s;
+    }
+    public static List<ServiceAttachmentName> getAttavhmentByserviceById(int id) {
+        List<ServiceAttachmentName> name = new ArrayList<>();
+        try {
+            DB db = new DB();
+            ServiceAttachmentName a ;
+            String sql =  "SELECT a.ServiceAttachmentName_ID,a.ServA_Name,a.File_src FROM have_serviceattachment as s inner join  serviceattachmentname as a where s.ServiceAttachmentName_ID = a.ServiceAttachmentName_ID and s.Services_Provided_ID = "+id+";";
+            System.out.println(sql);
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                a = new ServiceAttachmentName(r.getInt(1),r.getString(2),r.getString(3));
+                name.add(a);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return name;
+    }
 //    public static Citizen getCitizenById(String id) {
 //        Citizen cit = new Citizen();
 //        

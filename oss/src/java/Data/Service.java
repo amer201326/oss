@@ -47,7 +47,14 @@ public class Service implements Serializable {
         this.section = section;
         this.note = note;
     }
-
+public Service(int id, String name, double cost, int days, String status, String note) {
+        this.id = id;
+        this.name = name;
+        this.cost = cost;
+        this.days = days;
+        this.status = status;
+        this.note = note;
+    }
     public void fillPath() {
         path = GetFromDB.getPahtForService(id);
     }
@@ -264,5 +271,7 @@ public class Service implements Serializable {
     public void setNote(String note) {
         this.note = note;
     }
-
+public boolean cheakIsValid(){
+        return "valid".equals(this.status);
+    }
 }

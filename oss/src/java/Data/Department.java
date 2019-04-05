@@ -22,7 +22,7 @@ public class Department implements Serializable {
     public int id;
     public String nameA;
     public String image;
-    
+     public int numberService;
 
     public Department() {
         
@@ -100,6 +100,14 @@ public class Department implements Serializable {
     @Override
     public String toString() {
         return "Department{" + "id=" + id + ", nameA=" + nameA + ", image=" + image + '}';
+    }
+
+    public int getNumberService() {
+        return numberService;
+    }
+
+    public void setNumberService(int numberService) {
+        this.numberService = numberService;
     }
 
     
