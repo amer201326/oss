@@ -172,6 +172,7 @@ public class ServiceAttachmentName implements Serializable {
         this.file = file.getFile();
         if (this.file != null) {
             System.out.println(this.file.getFileName());
+            
         }
 
     }
