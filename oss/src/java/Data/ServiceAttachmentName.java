@@ -154,12 +154,12 @@ public class ServiceAttachmentName implements Serializable {
         saveFileInDisk();
         String q = "INSERT INTO serviceattachmentname (`ServiceAttachmentName_ID`, `ServA_Name`, `File_src`, `notes`) VALUES(null,'" + name + "','" + srcFile + "','" + notes + "');";
         System.out.println(q);
-        
+        System.out.println(System.getProperty("user.dir"));
         System.out.println(file.getFileName());
         try {
             DB data = new DB();
             //data.write(q);
-
+            
         } catch (SQLException ex) {
             Logger.getLogger(ServiceAttachmentName.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
