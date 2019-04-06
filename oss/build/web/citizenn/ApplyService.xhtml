@@ -85,14 +85,14 @@
                                         <br/><hr style="border: 2px solid orange; margin-left: 10px; margin-right: 10px;"/><br/>
                                         <div>
                                             <h2 class="section-heading inLineB" style="padding: 10px">: متطلبات الخدمة</h2>
-                                            #{applyServiceManager.attavhmentByserviceById()}
-                                            <ui:repeat value="#{applyServiceManager.attachment}" var="attachment" id="fadeEffectImages">
+                                            
+                                            <ui:repeat value="#{applyServiceManager.attachment}" var="attachment" >
 
                                                 <li  style=" direction: rtl; margin-right: 40px" ><h6>#{attachment.name}</h6></li>
 
-                                                <p:fileUpload value="#{applyServiceManager.file}" mode="simple" skinSimple="true"/>
+                                                
 
-                                                #{applyServiceManager.setThisAttachment(attachment)} 
+                                                
 
 
                                             </ui:repeat>
@@ -103,12 +103,12 @@
                                         <br/><hr style="border: 2px solid orange; margin-left: 10px; margin-right: 10px;"/><br/>
                                         <div>
                                             <h2 class="section-heading inLineB" style="padding: 10px">: مرفقات الخدمة</h2>
-                                            <ui:repeat value="#{applyServiceManager.attwhithFile}" var="attachment" id="fadeEffectImages2">
+                                            <ui:repeat value="#{applyServiceManager.attwhithFile}" varStatus="index" var="attachment" >
                                                 <h6>#{attachment.name}</h6>
-                                                <p:commandButton value="تنزيل"  onclick="PrimeFaces.monitorDownload(start, stop);" icon="fa fa-arrow-down" >
-                                                    <p:fileDownload value="#{attachment.srcFile}" />
+                                                <p:commandButton value="تنزيل" ajax="false" actionListener="#{applyServiceManager.putFileForDownload(index.index)}" icon="fa fa-arrow-down" >
+                                                    <p:fileDownload value="#{attachment.fileDownload}" />
                                                 </p:commandButton>  
-                                                <p:fileUpload value="#{applyServiceManager.file}" mode="simple" skinSimple="true"/>
+                                                
                                             </ui:repeat>
                                         </div>
                                         <br/><hr style="border: 2px solid orange; margin-left: 10px; margin-right: 10px;"/><br/>
@@ -117,7 +117,7 @@
                                         <br/><br/>
                                             <div class="form-group row">
                                                 <div class="col-sm-12 py-2">
-                                                    <p:inputTextarea value="" rows="5" cols="100" dir="rtl" style="margin-right: 40px"/> 
+                                                    <p:inputTextarea  rows="5" cols="100" dir="rtl" style="margin-right: 40px"/> 
                                                 </div>
                                             </div>
 

@@ -374,7 +374,7 @@ public class GetFromDB {
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
-                d = new ServiceAttachmentName(r.getInt(1),r.getString(2),r.getString(4),r.getString(5),r.getBlob(3));
+                d = new ServiceAttachmentName(r.getInt(1),r.getString(2),r.getString(4),r.getString(5),r.getBinaryStream(3),r.getString(6));
                 attach.add(d);
             }
         } catch (Exception e) {
@@ -635,11 +635,13 @@ public class GetFromDB {
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
-                a = new ServiceAttachmentName(r.getInt(1),r.getString(2),r.getString(4),r.getString(5),r.getBlob(3));
+                a = new ServiceAttachmentName(r.getInt(1),r.getString(2),r.getString(4),r.getString(5),r.getBinaryStream(3),r.getString(6));
                 name.add(a);
             }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (SQLException ex) { 
+            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         return name;
     }
@@ -663,4 +665,22 @@ public class GetFromDB {
 //        }
 //        return c;
 //    }
+
+    static int getLastIdOfAttatchment() {
+        int id = 0;
+        try {
+            DB db = new DB();
+            
+            String sql = "SELECT MAX(ServiceAttachmentName_ID) FROM serviceattachmentname  ;";
+            System.out.println(sql);
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                id = r.getInt(1);
+                
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return id;
+    }
 }
