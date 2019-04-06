@@ -106,7 +106,7 @@ public class GetDB_Eman {
 
             ResultSet r = db.read(sql);
             while (r.next()) {
-                serviceAttch = new ServiceAttachmentName(r.getInt(1), r.getString(2), r.getString(3), r.getString(4));
+                serviceAttch = new ServiceAttachmentName(r.getInt(1),r.getString(2),r.getString(4),r.getString(5),r.getBlob(3));
                 serviceAttachment.add(serviceAttch);
             }
         } catch (Exception e) {

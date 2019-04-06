@@ -6,13 +6,16 @@
 package Data;
 
 import DB.DB;
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.nio.file.Paths;
+import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,32 +36,33 @@ public class ServiceAttachmentName implements Serializable {
 
     int id;
     String name;
-    String srcFile;
+    
     String notes;
     UploadedFile file;
     String requirement;
+    Blob fileBlob;
 
     public ServiceAttachmentName() {
     }
 
-    public ServiceAttachmentName(int id, String name, String srcFile, String notes) {
+    public ServiceAttachmentName(int id, String name, String notes, String requirement, Blob fileBlob) {
         this.id = id;
         this.name = name;
-        this.srcFile = srcFile;
         this.notes = notes;
-        file = new DefaultUploadedFile();
+        this.requirement = requirement;
+        this.fileBlob = fileBlob;
     }
+
+   
+
+    
 
     public ServiceAttachmentName(int id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public ServiceAttachmentName(int id, String name, String srcFile) {
-        this.id = id;
-        this.name = name;
-        this.srcFile = srcFile;
-    }
+    
 
     public int getId() {
         return id;
@@ -84,14 +88,7 @@ public class ServiceAttachmentName implements Serializable {
         this.name = name;
     }
 
-    public String getSrcFile() {
-        return srcFile;
-    }
-
-    public void setSrcFile(String srcFile) {
-        this.srcFile = srcFile;
-    }
-
+   
     public String getNotes() {
         return notes;
     }
@@ -151,15 +148,16 @@ public class ServiceAttachmentName implements Serializable {
     }
 
     public void addAttachToDBwithFile() {
-        saveFileInDisk();
-        String q = "INSERT INTO serviceattachmentname (`ServiceAttachmentName_ID`, `ServA_Name`, `File_src`, `notes`) VALUES(null,'" + name + "','" + srcFile + "','" + notes + "');";
-        System.out.println(q);
         System.out.println(System.getProperty("user.dir"));
+//        saveFileInDisk();
+        String q = "INSERT INTO serviceattachmentname (`ServiceAttachmentName_ID`, `ServA_Name`, `File, `notes`) VALUES(null,'" + name + "','" + saveFileInDisk() + "','" + notes + "');";
+        System.out.println(q);
+
         System.out.println(file.getFileName());
         try {
             DB data = new DB();
             //data.write(q);
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(ServiceAttachmentName.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -172,7 +170,7 @@ public class ServiceAttachmentName implements Serializable {
         this.file = file.getFile();
         if (this.file != null) {
             System.out.println(this.file.getFileName());
-            
+
         }
 
     }
@@ -182,69 +180,97 @@ public class ServiceAttachmentName implements Serializable {
     }
 
     public void setFile(UploadedFile file) {
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>in set>>>>>>>>>>>>>>>>>>>>>>"+file.getFileName());
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>in set>>>>>>>>>>>>>>>>>>>>>>" + file.getFileName());
         this.file = file;
 
     }
 
-    private void saveFileInDisk() {
-        
-        try {
-           InputStream initialStream = file.getInputstream();
-            byte[] buffer = new byte[initialStream.available()];
-            initialStream.read(buffer);
+    public Blob getFileBlob() {
+        return fileBlob;
+    }
 
-            File targetFile = new File("E:/oss/tmep.txt");
-            OutputStream outStream = new FileOutputStream(targetFile);
-            outStream.write(buffer);
-            
-            File f = new File("E:/oss/" + file.getFileName());
-            f.createNewFile();
-            Crypto.fileProcessor(Cipher.ENCRYPT_MODE, "foreanderDowntop", targetFile, f);
-//             File test = new File("E:/oss/decription" + file.getFileName());
-//            test.createNewFile();
-//            Crypto.fileProcessor(Cipher.DECRYPT_MODE, "foreanderDowntop", f, test);
-
-           
-            outStream.close();
-            targetFile.delete();
-
-            
-
-            System.out.println("uploaded pdf");
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
+    public void setFileBlob(Blob fileBlob) {
+        this.fileBlob = fileBlob;
     }
     
-    
-    public void uploadFile(){
+
+    private InputStream saveFileInDisk() {
         try {
-            System.out.println(">>??>>" + new java.io.File(".").getCanonicalPath());
-            System.out.println(file.getSize());
-            InputStream in = file.getInputstream();
+            InputStream inp = file.getInputstream();
             
-            File f = new File("E:/oss/"+file.getFileName());
+            byte[] inputByte = new byte[inp.available()];
             
-            f.createNewFile();
-            FileOutputStream out = new FileOutputStream(f);
-
-            byte[] buffer = new byte[1024];
-            int length;
-
-            while ((length = in.read(buffer)) > 0) {
-                out.write(buffer, 0, length);
+            inp.read(inputByte);
+            System.out.println("-------------------------------------");
+            for (int i = 0; i < inputByte.length; i++) {
+                byte b = inputByte[i];
+                System.out.print(b);
             }
-            srcFile = "files/" + file.getFileName();
-            out.close();
-            in.close();
-
+            System.out.println("");
+            byte[] outputCipher = Crypto.dec(Cipher.ENCRYPT_MODE, "foreanderDowntop", inputByte);
+//            byte[] outputfinal = Crypto.dec(Cipher.DECRYPT_MODE, "foreanderDowntop", outputCipher);
+//            System.out.println("-------------------------------------");
+//            for (int i = 0; i < outputfinal.length; i++) {
+//                byte b = outputfinal[i];
+//                System.out.print(b);
+//            }
+//            System.out.println("");
+            InputStream inputForData = new ByteArrayInputStream(outputCipher);
+//            String q = "UPDATE serviceattachmentname SET File = ? WHERE (ServiceAttachmentName_ID = 11);";
+//            try {
+//                DB d = new DB();
+//                if(outputCipher!=null)
+//                d.writeFile(q, inputForData);
+//                else
+//                    System.out.println("output is null");
+//                
+//                
+//                
+//                
+//                
+//            } catch (SQLException ex) {
+//                Logger.getLogger(ServiceAttachmentName.class.getName()).log(Level.SEVERE, null, ex);
+//            } catch (ClassNotFoundException ex) {
+//                Logger.getLogger(ServiceAttachmentName.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+               return inputForData;
             
-
-            System.out.println("uploaded pdf");
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
+            
+            
+        } catch (IOException ex) {
+            Logger.getLogger(ServiceAttachmentName.class.getName()).log(Level.SEVERE, null, ex);
         }
+//        try {
+//           InputStream initialStream = file.getInputstream();
+//            byte[] buffer = new byte[initialStream.available()];
+//            initialStream.read(buffer);
+//            File test = new File(System.getProperty("user.dir")+"/oss");
+//            if(!test.isDirectory()){
+//                test.mkdir();
+//            }
+//            File targetFile = new File(System.getProperty("user.dir")+"/oss/tmep.txt");
+//            
+//            OutputStream outStream = new FileOutputStream(targetFile);
+//            outStream.write(buffer);
+//            
+//            File f = new File(System.getProperty("user.dir")+"/" + file.getFileName());
+//            f.createNewFile();
+//            Crypto.fileProcessor(Cipher.ENCRYPT_MODE, "foreanderDowntop", targetFile, f);
+////             File test = new File("E:/oss/decription" + file.getFileName());
+////            test.createNewFile();
+////            Crypto.fileProcessor(Cipher.DECRYPT_MODE, "foreanderDowntop", f, test);
+//
+//           
+//            outStream.close();
+//            targetFile.delete();
+//
+//
+//
+//            System.out.println("uploaded pdf");
+//        } catch (IOException e) {
+//            System.out.println(e.getMessage());
+//        }
+        return null;
     }
 
 }

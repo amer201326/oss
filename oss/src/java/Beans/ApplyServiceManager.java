@@ -35,6 +35,7 @@ public class ApplyServiceManager implements Serializable{
         Map<String, String> parameterMap = (Map<String, String>) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
           String param = parameterMap.get("id");
           thisService = GetFromDB.getServiceByID2(param);
+          
     }
 
     public Service getThisService() {
@@ -48,7 +49,7 @@ public class ApplyServiceManager implements Serializable{
      public void attavhmentByserviceById() {
           List<ServiceAttachmentName> allAttachment = GetFromDB.getAttavhmentByserviceById(thisService.getId());
          for (ServiceAttachmentName serviceAttachmentName :  allAttachment) {
-             if(serviceAttachmentName.getSrcFile() != null)
+             if(serviceAttachmentName.getFileBlob() != null)
                  attwhithFile.add(serviceAttachmentName);
             else
                  attachment.add(serviceAttachmentName);
@@ -73,27 +74,27 @@ public class ApplyServiceManager implements Serializable{
         this.attwhithFile = attwhithFile;
     }
     
-    public UploadedFile file ;
-     ServiceAttachmentName thisAttachment = new ServiceAttachmentName();
-
-    public ServiceAttachmentName getThisAttachment() {
-        return thisAttachment;
-    }
-
-    public void setThisAttachment(ServiceAttachmentName thisAttachment) {
-        this.thisAttachment = thisAttachment;
-        if(file != null){System.out.println("bbbbbbbbb");
-        this.thisAttachment.setSrcFile(file.getFileName());}
-       
-    }
-     
-    public UploadedFile getFile() {
-        return file;
-    }
- 
-    public void setFile(UploadedFile file) {
-        this.file = file;
-    }
+//    public UploadedFile file ;
+//     ServiceAttachmentName thisAttachment = new ServiceAttachmentName();
+//
+//    public ServiceAttachmentName getThisAttachment() {
+//        return thisAttachment;
+//    }
+//
+//    public void setThisAttachment(ServiceAttachmentName thisAttachment) {
+//        this.thisAttachment = thisAttachment;
+//        if(file != null){System.out.println("bbbbbbbbb");
+//        this.thisAttachment.setSrcFile(file.getFileName());}
+//       
+//    }
+//     
+//    public UploadedFile getFile() {
+//        return file;
+//    }
+// 
+//    public void setFile(UploadedFile file) {
+//        this.file = file;
+//    }
      
 //    public void upload() {
 //        if(file != null) {
@@ -107,7 +108,7 @@ public class ApplyServiceManager implements Serializable{
 //        FacesContext.getCurrentInstance().addMessage(null, msg);
 //    }  
     
-    public void submit(){
-        System.out.println("jjjjj"+thisAttachment.getSrcFile()+"lll"+thisAttachment.getName()+file);
-    }
+//    public void submit(){
+//        System.out.println("jjjjj"+thisAttachment.getSrcFile()+"lll"+thisAttachment.getName()+file);
+//    }
 }

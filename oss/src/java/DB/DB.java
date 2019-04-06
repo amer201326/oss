@@ -1,10 +1,15 @@
 package DB;
 
+
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DB {
 
@@ -41,6 +46,20 @@ public class DB {
         connection.close();
         connection = null;
         return x;
+    }
+
+    PreparedStatement myStmt = null;
+
+    public void writeFile(String sql, InputStream input) {
+        try {
+            myStmt = connection.prepareStatement(sql);
+            myStmt.setBinaryStream(1, input);
+
+            myStmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
 }

@@ -244,10 +244,10 @@
                                                             <p:rowEditor />
                                                         </p:column>
                                                         <p:column headerText="الملف" >
-                                                            <p:cellEditor disabled="true">
-                                                                <f:facet name="output"><h:outputText value="#{attachment.srcFile}" /></f:facet>
-                                                                <f:facet name="input"><p:inputText  value="#{attachment.srcFile}" style="width:100%"/></f:facet>
-                                                            </p:cellEditor>
+                                                            
+                                                              <h:outputText value="#{attachment.fileBlob}" />
+                                                                
+                                                           
                                                         </p:column>
                                                         <p:ajax event="rowSelect" process="@this" update="formAttach1" listener="#{serviceAttachemntManage.onAttachSelected}"/>
                                                         <p:column headerText="الاسم">

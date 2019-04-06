@@ -29,7 +29,7 @@ public class ServiceAttachemntManage implements Serializable {
     List<ServiceAttachmentName> allServicesAttachwithFile;
     List<ServiceAttachmentName> allServicesAttachwithoutFile;
     ServiceAttachmentName serv;
-
+    
     ServiceAttachmentName newService;
 
     public ServiceAttachemntManage() {
@@ -39,7 +39,7 @@ public class ServiceAttachemntManage implements Serializable {
         allServicesAttachwithFile = new ArrayList<>();
         for (int i = 0; i < allServicesAttach.size(); i++) {
             ServiceAttachmentName get = allServicesAttach.get(i);
-            if (get.getSrcFile() == null) {
+            if (get.getFileBlob() == null) {
                 allServicesAttachwithoutFile.add(get);
             } else {
                 allServicesAttachwithFile.add(get);

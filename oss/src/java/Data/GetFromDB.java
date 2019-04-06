@@ -374,7 +374,7 @@ public class GetFromDB {
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
-                d = new ServiceAttachmentName(r.getInt(1), r.getString(2),r.getString(3));
+                d = new ServiceAttachmentName(r.getInt(1),r.getString(2),r.getString(4),r.getString(5),r.getBlob(3));
                 attach.add(d);
             }
         } catch (Exception e) {
@@ -631,11 +631,11 @@ public class GetFromDB {
         try {
             DB db = new DB();
             ServiceAttachmentName a ;
-            String sql =  "SELECT a.ServiceAttachmentName_ID,a.ServA_Name,a.File_src FROM have_serviceattachment as s inner join  serviceattachmentname as a where s.ServiceAttachmentName_ID = a.ServiceAttachmentName_ID and s.Services_Provided_ID = "+id+";";
+            String sql = "select * from serviceattachmentname where ServiceAttachmentName_ID in (select ServiceAttachmentName_ID from have_serviceattachment where Services_Provided_ID = "+id+");";
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
-                a = new ServiceAttachmentName(r.getInt(1),r.getString(2),r.getString(3));
+                a = new ServiceAttachmentName(r.getInt(1),r.getString(2),r.getString(4),r.getString(5),r.getBlob(3));
                 name.add(a);
             }
         } catch (Exception e) {

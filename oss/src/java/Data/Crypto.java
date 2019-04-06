@@ -52,4 +52,21 @@ class Crypto {
 		e.printStackTrace();
             }
      }
+    static byte[] dec(int cipherMode,String key,byte []inputBytes){
+	 try {
+	       Key secretKey = new SecretKeySpec(key.getBytes(), "AES");
+	       Cipher cipher = Cipher.getInstance("AES");
+	       cipher.init(cipherMode, secretKey);
+
+	       
+
+	       byte[] outputBytes = cipher.doFinal(inputBytes);
+               return outputBytes;
+
+	    } catch (
+                     Exception e) {
+		e.printStackTrace();
+            }
+         return null;
+     }
 }
