@@ -50,16 +50,15 @@ public class DB {
 
     PreparedStatement myStmt = null;
 
-    public void writeFile(String sql, InputStream input) {
+    public PreparedStatement prepareStatement(String sql) {
+        
         try {
             myStmt = connection.prepareStatement(sql);
-            myStmt.setBinaryStream(1, input);
-
-            myStmt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+            return myStmt;
+        
     }
 
 }

@@ -16,7 +16,9 @@ import java.io.OutputStream;
 import java.io.Serializable;
 import java.nio.file.Paths;
 import java.sql.Blob;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.crypto.Cipher;
@@ -25,7 +27,9 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.component.fileupload.FileUpload;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.DefaultUploadedFile;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -36,33 +40,41 @@ public class ServiceAttachmentName implements Serializable {
 
     int id;
     String name;
-    
     String notes;
     UploadedFile file;
     String requirement;
-    Blob fileBlob;
+    String nameFile;
+    private StreamedContent fileDownload;
 
     public ServiceAttachmentName() {
     }
 
-    public ServiceAttachmentName(int id, String name, String notes, String requirement, Blob fileBlob) {
-        this.id = id;
-        this.name = name;
-        this.notes = notes;
-        this.requirement = requirement;
-        this.fileBlob = fileBlob;
+    public ServiceAttachmentName(int id, String name, String notes, String requirement, InputStream inputStream ,String nameFile) {
+        try {
+            this.id = id;
+            this.name = name;
+            this.notes = notes;
+            this.requirement = requirement;
+            this.nameFile = nameFile;
+            if (inputStream != null) {
+               System.out.println(id);
+                byte[] inputByte = new byte[inputStream.available()];
+                inputStream.read(inputByte);
+                byte[] outputfinal = Crypto.dec(Cipher.DECRYPT_MODE, "foreanderDowntop",inputByte );
+                InputStream inputForData = new ByteArrayInputStream(outputfinal);
+                System.out.println(nameFile);
+                fileDownload = new DefaultStreamedContent(inputForData,"file",nameFile);
+                
+            }
+        }catch (IOException ex) {
+            Logger.getLogger(ServiceAttachmentName.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-
-   
-
-    
 
     public ServiceAttachmentName(int id, String name) {
         this.id = id;
         this.name = name;
     }
-
-    
 
     public int getId() {
         return id;
@@ -88,13 +100,20 @@ public class ServiceAttachmentName implements Serializable {
         this.name = name;
     }
 
-   
     public String getNotes() {
         return notes;
     }
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    public StreamedContent getFileDownload() {
+        return fileDownload;
+    }
+
+    public void setFileDownload(StreamedContent fileDownload) {
+        this.fileDownload = fileDownload;
     }
 
     public void update() {
@@ -150,14 +169,18 @@ public class ServiceAttachmentName implements Serializable {
     public void addAttachToDBwithFile() {
         System.out.println(System.getProperty("user.dir"));
 //        saveFileInDisk();
-        String q = "INSERT INTO serviceattachmentname (`ServiceAttachmentName_ID`, `ServA_Name`, `File, `notes`) VALUES(null,'" + name + "','" + saveFileInDisk() + "','" + notes + "');";
+        String q = "INSERT INTO serviceattachmentname VALUES(null,?,?,?,?);";
         System.out.println(q);
 
-        System.out.println(file.getFileName());
+        nameFile = file.getFileName();
         try {
             DB data = new DB();
-            //data.write(q);
-
+            PreparedStatement s = data.prepareStatement(q);
+            s.setString(1, name);
+            s.setBinaryStream(2, saveFileInDisk());
+            s.setString(3, notes);
+            s.setString(4,nameFile);
+            s.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(ServiceAttachmentName.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -185,21 +208,13 @@ public class ServiceAttachmentName implements Serializable {
 
     }
 
-    public Blob getFileBlob() {
-        return fileBlob;
-    }
-
-    public void setFileBlob(Blob fileBlob) {
-        this.fileBlob = fileBlob;
-    }
     
-
     private InputStream saveFileInDisk() {
         try {
             InputStream inp = file.getInputstream();
-            
+
             byte[] inputByte = new byte[inp.available()];
-            
+
             inp.read(inputByte);
             System.out.println("-------------------------------------");
             for (int i = 0; i < inputByte.length; i++) {
@@ -233,10 +248,8 @@ public class ServiceAttachmentName implements Serializable {
 //            } catch (ClassNotFoundException ex) {
 //                Logger.getLogger(ServiceAttachmentName.class.getName()).log(Level.SEVERE, null, ex);
 //            }
-               return inputForData;
-            
-            
-            
+            return inputForData;
+
         } catch (IOException ex) {
             Logger.getLogger(ServiceAttachmentName.class.getName()).log(Level.SEVERE, null, ex);
         }

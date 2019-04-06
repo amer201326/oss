@@ -17,6 +17,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -30,14 +31,25 @@ public class ApplyServiceManager implements Serializable{
     Service thisService = new Service();
     List<ServiceAttachmentName> attachment= new ArrayList<ServiceAttachmentName>();
     List<ServiceAttachmentName> attwhithFile=new ArrayList<ServiceAttachmentName>();
+    StreamedContent fileDownload;
     
     public ApplyServiceManager() {
         Map<String, String> parameterMap = (Map<String, String>) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
           String param = parameterMap.get("id");
           thisService = GetFromDB.getServiceByID2(param);
+          attavhmentByserviceById();
           
     }
+    
+    public StreamedContent getFileDownload() {
+        return fileDownload;
+    }
 
+    public void setFileDownload(StreamedContent fileDownload) {
+        this.fileDownload = fileDownload;
+    }
+    
+    
     public Service getThisService() {
         return thisService;
     }
@@ -46,10 +58,10 @@ public class ApplyServiceManager implements Serializable{
         this.thisService = thisService;
     }
     
-     public void attavhmentByserviceById() {
+     private void attavhmentByserviceById() {
           List<ServiceAttachmentName> allAttachment = GetFromDB.getAttavhmentByserviceById(thisService.getId());
          for (ServiceAttachmentName serviceAttachmentName :  allAttachment) {
-             if(serviceAttachmentName.getFileBlob() != null)
+             if(serviceAttachmentName.getFileDownload() != null)
                  attwhithFile.add(serviceAttachmentName);
             else
                  attachment.add(serviceAttachmentName);
@@ -72,6 +84,11 @@ public class ApplyServiceManager implements Serializable{
 
     public void setAttwhithFile(List<ServiceAttachmentName> attwhithFile) {
         this.attwhithFile = attwhithFile;
+    }
+    
+    public void putFileForDownload(int i){
+        System.out.println("index "+i);
+        fileDownload = attwhithFile.get(i).getFileDownload();
     }
     
 //    public UploadedFile file ;

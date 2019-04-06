@@ -26,7 +26,7 @@ import org.primefaces.model.UploadedFile;
  *
  * @author Amer$_$
  */
-class Crypto {
+public class Crypto {
 
     static void fileProcessor(int cipherMode,String key,File inputFile,File outputFile){
 	 try {
@@ -54,7 +54,9 @@ class Crypto {
      }
     static byte[] dec(int cipherMode,String key,byte []inputBytes){
 	 try {
+             System.out.println("key lingth is "+key.length());
 	       Key secretKey = new SecretKeySpec(key.getBytes(), "AES");
+               
 	       Cipher cipher = Cipher.getInstance("AES");
 	       cipher.init(cipherMode, secretKey);
 
