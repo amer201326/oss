@@ -24,12 +24,26 @@ public class DepartmentPaths implements Serializable {
     public String nameA;
     public String image;
     public Integer order;
+    public String importantComment;
     public List<SectionPath> sections;
 
     public DepartmentPaths() {
         sections = new ArrayList<>();
         
         
+    }
+
+    public DepartmentPaths(int id, String nameA, Integer order) {
+        this.id = id;
+        this.nameA = nameA;
+        this.order = order;
+    }
+
+    public DepartmentPaths(int id, String nameA, Integer order, String importantComment) {
+        this.id = id;
+        this.nameA = nameA;
+        this.order = order;
+        this.importantComment = importantComment;
     }
     
     public int getId() {
@@ -136,6 +150,14 @@ public class DepartmentPaths implements Serializable {
     @Override
     public String toString() {
         return "DepartmentPaths{" + "id=" + id + ", nameA=" + nameA + ", image=" + image + ", order=" + order + ", sections=" + sections + '}';
+    }
+
+    public String getImportantComment() {
+        return importantComment;
+    }
+
+    public void setImportantComment(String importantComment) {
+        this.importantComment = importantComment;
     }
 
     
