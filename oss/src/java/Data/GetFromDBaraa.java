@@ -81,22 +81,38 @@ public class GetFromDBaraa {
         return departments;
     }
 
-    public static ArrayList<SectionPath> sectionPath(int id) {
+    public static ArrayList<SectionPath> sectionPath(int idservice) {
         ArrayList<SectionPath> sections = new ArrayList<>();
         try {
             DB db = new DB();
             SectionPath s;
-            String sql ="SELECT * FROM steps_section as ss  inner join section as s on ss.Sec_ID = s.Sec_ID where ss.Services_Provided_ID = "+id+" ;";
-                    //"SELECT * FROM steps_section as ss  inner join section as s on ss.Sec_ID = s.Sec_ID where ss.Services_Provided_ID = 1 and ss.Dep_ID=1 and ss.Order_Departmant=1 order by ss.Order_Section;";
+            String sql ="SELECT * FROM steps_section as ss  inner join section as s on ss.Sec_ID = s.Sec_ID where ss.Services_Provided_ID = "+idservice+" ;";
             ResultSet r = db.read(sql);
             while (r.next()) {
-                s = new SectionPath();
+                s = new SectionPath(r.getInt(1), r.getInt(4), r.getInt(2), r.getString(8), r.getInt(5));
                 sections.add(s);
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        System.out.println(sections.size());
         return sections;
     }
 
+    public static ArrayList<JobPath> jobPath(int idservice) {
+        ArrayList<JobPath> jobs = new ArrayList<>();
+        try {
+            DB db = new DB();
+            JobPath j;
+            String sql ="SELECT * FROM steps_job as sj  inner join jobtitle as j on sj.Job_ID = j.Job_ID where sj.Services_Provided_ID = 1 ;";
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                j = new JobPath(r.getInt(1), r.getInt(2), r.getInt(3), r.getString(9), r.getInt(5), r.getInt(6), r.getInt(7));
+                jobs.add(j);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return jobs;
+    }
 }

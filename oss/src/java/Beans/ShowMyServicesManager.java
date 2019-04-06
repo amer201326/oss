@@ -25,34 +25,47 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 @ViewScoped
-public class ShowMyServicesManager implements Serializable{
+public class ShowMyServicesManager implements Serializable {
+    
     Service thisService = new Service();
-
+    
     public ShowMyServicesManager() {
-         Map<String, String> parameterMap = (Map<String, String>) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-          String param = parameterMap.get("id");
-          thisService = GetFromDB.getServiceByID2(param);
+        Map<String, String> parameterMap = (Map<String, String>) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        String param = parameterMap.get("id");
+        thisService = GetFromDB.getServiceByID2(param);
+        thisService.setPath2(servicePath(thisService.getId()));
     }
     
     public Service getThisService() {
         return thisService;
     }
-
+    
     public void setThisService(Service thisService) {
         this.thisService = thisService;
     }
-    
-    public ArrayList<DepartmentPaths> departmentPath() {
-        return GetFromDBaraa.departmentPath(thisService.getId());
+ 
+    private  List<DepartmentPaths> servicePath(int idSer) {
+        List<DepartmentPaths> departments = GetFromDBaraa.departmentPath(idSer);
+        List<SectionPath> sections = GetFromDBaraa.sectionPath(idSer);
+        List<JobPath> jobs = GetFromDBaraa.jobPath(idSer);
+        for (DepartmentPaths department : departments) {
+            for (SectionPath section : sections) {
+                if (department.id == section.getDepartmentId() && department.order == section.getOrderDepartment()) {
+                  System.out.println("ggggg"+department.toString());
+                    department.sections.add(section);
+                 
+                    for (JobPath job : jobs) {
+                        if(section.getId() == job.getSectionID() && section.getOrder() == job.getsOrder()){
+                            section.jobs.add(job);
+                        }
+                            
+                    }
+                }
+            }
+            
+        }
         
-     }
-     public ArrayList<DepartmentPaths> getPath() {
-         List<DepartmentPaths> departments = GetFromDBaraa.departmentPath(thisService.getId());
-         ArrayList<SectionPath> sections = new ArrayList<>();
-         ArrayList<JobPath> jobs = new ArrayList<>();
-         for (DepartmentPaths department : departments) {
-             
-         }
-         
-     }
+        return departments;
+    }
+    
 }

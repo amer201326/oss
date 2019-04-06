@@ -45,8 +45,19 @@ public class JobPath implements Serializable{
         this.order = order;
         idMarge = id+"-"+sectionID;
     }
+
+    public JobPath(int DepId, int sectionID, int id, String name, int dOrder, int sOrder, int order) {
+        this.DepId = DepId;
+        this.sectionID = sectionID;
+        this.id = id;
+        this.name = name;
+        this.dOrder = dOrder;
+        this.sOrder = sOrder;
+        this.order = order;
+    }
     
 
+    
     public int getSectionID() {
         return sectionID;
     }

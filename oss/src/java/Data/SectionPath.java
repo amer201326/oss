@@ -17,14 +17,15 @@ import java.util.List;
  */
 public class SectionPath implements Serializable {
     int departmentId;
+    int orderDepartment;
     int id;
     String name;
     Integer order;
     
-    public List<JobPath> jobs;
+    public List<JobPath> jobs = new ArrayList<JobPath>();
 
     public SectionPath() {
-        jobs = new ArrayList<JobPath>();
+      
     }
 
     public SectionPath(int departmentId, int id, String name, List<JobPath> jobs) {
@@ -34,6 +35,15 @@ public class SectionPath implements Serializable {
         this.jobs = jobs;
     }
 
+    public SectionPath(int departmentId, int orderDepartment, int id, String name, Integer order) {
+        this.departmentId = departmentId;
+        this.orderDepartment = orderDepartment;
+        this.id = id;
+        this.name = name;
+        this.order = order;
+    }
+
+    
     public int getId() {
         return id;
     }
@@ -74,6 +84,15 @@ public class SectionPath implements Serializable {
         this.departmentId = departmentId;
     }
 
+    public int getOrderDepartment() {
+        return orderDepartment;
+    }
+
+    public void setOrderDepartment(int orderDepartment) {
+        this.orderDepartment = orderDepartment;
+    }
+ 
+    
     @Override
     public String toString() {
         return "SectionPath{" + "departmentId=" + departmentId + ", id=" + id + ", name=" + name + ", order=" + order + ", jobs=" + jobs + '}';

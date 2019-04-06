@@ -25,12 +25,11 @@ public class DepartmentPaths implements Serializable {
     public String image;
     public Integer order;
     public String importantComment;
-    public List<SectionPath> sections;
+    public List<SectionPath> sections = new ArrayList<>();
 
     public DepartmentPaths() {
         sections = new ArrayList<>();
-        
-        
+           
     }
 
     public DepartmentPaths(int id, String nameA, Integer order) {

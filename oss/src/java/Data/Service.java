@@ -30,6 +30,7 @@ public class Service implements Serializable {
 
     String note;
     List<JobPath> path;
+    List<DepartmentPaths> path2;
     List<ServiceAttachmentName> attachmentNames;
 
     public Service() {
@@ -47,7 +48,8 @@ public class Service implements Serializable {
         this.section = section;
         this.note = note;
     }
-public Service(int id, String name, double cost, int days, String status, String note) {
+
+    public Service(int id, String name, double cost, int days, String status, String note) {
         this.id = id;
         this.name = name;
         this.cost = cost;
@@ -55,6 +57,7 @@ public Service(int id, String name, double cost, int days, String status, String
         this.status = status;
         this.note = note;
     }
+
     public void fillPath() {
         path = GetFromDB.getPahtForService(id);
     }
@@ -120,15 +123,15 @@ public Service(int id, String name, double cost, int days, String status, String
             DB data = new DB();
             String q = "start transaction;";
             data.write(q);
-            q = "UPDATE services_provided SET Serv_Name = '" + name + "',Serv_Cost = '" + cost + "', Serv_Days = '" + days + "',Serv_Case = '" + status + "' , note = '"+note+"' WHERE (Services_Provided_ID = " + id + ");";
+            q = "UPDATE services_provided SET Serv_Name = '" + name + "',Serv_Cost = '" + cost + "', Serv_Days = '" + days + "',Serv_Case = '" + status + "' , note = '" + note + "' WHERE (Services_Provided_ID = " + id + ");";
             System.out.println(q);
 
             data.write(q);
             q = "DELETE FROM have_serviceattachment WHERE Services_Provided_ID = " + id + ";";
             System.out.println(q);
             data.write(q);
-             q = "DELETE FROM steps_job WHERE Services_Provided_ID =  " + id + ";";
-             System.out.println(q);
+            q = "DELETE FROM steps_job WHERE Services_Provided_ID =  " + id + ";";
+            System.out.println(q);
             data.write(q);
             for (int k = 0; k < path.size(); k++) {
                 JobPath get2 = path.get(k);
@@ -213,6 +216,16 @@ public Service(int id, String name, double cost, int days, String status, String
 
     }
 
+    public List<DepartmentPaths> getPath2() {
+        return path2;
+    }
+
+    public void setPath2(List<DepartmentPaths> path2) {
+        this.path2 = path2;
+    }
+    
+    
+
     public List<ServiceAttachmentName> getAttachmentNames() {
         return attachmentNames;
     }
@@ -271,7 +284,9 @@ public Service(int id, String name, double cost, int days, String status, String
     public void setNote(String note) {
         this.note = note;
     }
-public boolean cheakIsValid(){
+
+    public boolean cheakIsValid() {
         return "valid".equals(this.status);
     }
+
 }
