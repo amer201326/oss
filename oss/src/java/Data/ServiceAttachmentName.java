@@ -216,12 +216,8 @@ public class ServiceAttachmentName implements Serializable {
             byte[] inputByte = new byte[inp.available()];
 
             inp.read(inputByte);
-            System.out.println("-------------------------------------");
-            for (int i = 0; i < inputByte.length; i++) {
-                byte b = inputByte[i];
-                System.out.print(b);
-            }
-            System.out.println("");
+            
+           
             byte[] outputCipher = Crypto.dec(Cipher.ENCRYPT_MODE, "foreanderDowntop", inputByte);
 //            byte[] outputfinal = Crypto.dec(Cipher.DECRYPT_MODE, "foreanderDowntop", outputCipher);
 //            System.out.println("-------------------------------------");
