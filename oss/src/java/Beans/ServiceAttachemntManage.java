@@ -102,8 +102,8 @@ public class ServiceAttachemntManage implements Serializable {
     public void addAttachment() {
        
         newService.addAttachToDBwithFile();
-        allServicesAttach.add(newService);
-
+       
+        allServicesAttachwithFile.add(newService);
         newService = new ServiceAttachmentName();
 
         
@@ -113,7 +113,9 @@ public class ServiceAttachemntManage implements Serializable {
     public void addAttachmentWitoutFile() {
         
         newService.addAttachToDBWitoutFile();
-        allServicesAttach.add(newService);
+      
+        allServicesAttachwithoutFile.add(newService);
+        
         newService = new ServiceAttachmentName();
 
         
