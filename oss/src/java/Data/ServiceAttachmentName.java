@@ -169,7 +169,7 @@ public class ServiceAttachmentName implements Serializable {
     public void addAttachToDBwithFile() {
         System.out.println(System.getProperty("user.dir"));
 //        saveFileInDisk();
-        String q = "INSERT INTO serviceattachmentname VALUES(null,?,?,?,?);";
+        String q = "INSERT INTO serviceattachmentname VALUES(null,?,?,?,?,?);";
         System.out.println(q);
 
         nameFile = file.getFileName();
@@ -179,7 +179,8 @@ public class ServiceAttachmentName implements Serializable {
             s.setString(1, name);
             s.setBinaryStream(2, saveFileInDisk());
             s.setString(3, notes);
-            s.setString(4,nameFile);
+            s.setString(4,requirement);
+            s.setString(5,nameFile);
             s.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(ServiceAttachmentName.class.getName()).log(Level.SEVERE, null, ex);
