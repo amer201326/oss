@@ -29,6 +29,7 @@ public class ShowMyServicesManager implements Serializable {
     
     Service thisService = new Service();
     
+    
     public ShowMyServicesManager() {
         Map<String, String> parameterMap = (Map<String, String>) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         String param = parameterMap.get("id");
