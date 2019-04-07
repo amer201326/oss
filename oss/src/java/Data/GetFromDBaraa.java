@@ -22,15 +22,14 @@ public class GetFromDBaraa {
             DB db = new DB();
             CitizenService cs;
             Service s;
-            String sql = "SELECT sc.Services_Provided_ID,Serv_Name,sc.Date FROM service_citizen as sc inner join services_provided as sp where sc.status = 'done' and Cit_ID=" + idcitizen + " and sc.Services_Provided_ID=sp.Services_Provided_ID;";
+            String sql = "SELECT sc.Services_Provided_ID,Serv_Name,sc.Date,sc.Service_Citizen_ID FROM service_citizen as sc inner join services_provided as sp where sc.status = 'done' and Cit_ID=" + idcitizen + " and sc.Services_Provided_ID=sp.Services_Provided_ID;";
             ResultSet r = db.read(sql);
             while (r.next()) {
                 s = new Service();
                 s.id = r.getInt(1);
                 s.name = r.getString(2);
-                cs = new CitizenService();
-                cs.providServicee = s;
-                cs.date = r.getString(3);
+                cs = new CitizenService(r.getInt(4), s, r.getString(3));
+              
                 services.add(cs);
             }
         } catch (Exception e) {
@@ -46,15 +45,14 @@ public class GetFromDBaraa {
             DB db = new DB();
             CitizenService cs;
             Service s;
-            String sql = "SELECT sc.Services_Provided_ID,Serv_Name,sc.Date FROM service_citizen as sc inner join services_provided as sp where sc.status = 'notdone' and Cit_ID=" + idcitizen + " and sc.Services_Provided_ID=sp.Services_Provided_ID;";
+            String sql = "SELECT sc.Services_Provided_ID,Serv_Name,sc.Date,sc.Service_Citizen_ID  FROM service_citizen as sc inner join services_provided as sp where sc.status = 'notdone' and Cit_ID=" + idcitizen + " and sc.Services_Provided_ID=sp.Services_Provided_ID;";
             ResultSet r = db.read(sql);
             while (r.next()) {
                 s = new Service();
                 s.id = r.getInt(1);
                 s.name = r.getString(2);
-                cs = new CitizenService();
-                cs.providServicee = s;
-                cs.date = r.getString(3);
+                cs = new CitizenService(r.getInt(4), s, r.getString(3));
+                
                 services.add(cs);
             }
         } catch (Exception e) {

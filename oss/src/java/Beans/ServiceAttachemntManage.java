@@ -6,6 +6,7 @@
 package Beans;
 
 import Data.GetDB_Eman;
+import Data.GetFromDB;
 import Data.ServiceAttachmentName;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -33,13 +34,13 @@ public class ServiceAttachemntManage implements Serializable {
     ServiceAttachmentName newService;
 
     public ServiceAttachemntManage() {
-        allServicesAttach = GetDB_Eman.getAllAttachment();
+        allServicesAttach = GetFromDB.getServiceAttachmentName();
         
         allServicesAttachwithoutFile = new ArrayList<>();
         allServicesAttachwithFile = new ArrayList<>();
         for (int i = 0; i < allServicesAttach.size(); i++) {
             ServiceAttachmentName get = allServicesAttach.get(i);
-            if (get.getFileBlob() == null) {
+            if (get.getFileDownload() == null) {
                 allServicesAttachwithoutFile.add(get);
             } else {
                 allServicesAttachwithFile.add(get);

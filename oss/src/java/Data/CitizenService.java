@@ -15,6 +15,15 @@ public class CitizenService {
     String date;
     String status;
 
+    public CitizenService() {
+    }
+
+    public CitizenService(int id, Service providServicee, String date) {
+        this.id = id;
+        this.providServicee = providServicee;
+        this.date = date;
+    }
+
     
     
     public int getId() {
