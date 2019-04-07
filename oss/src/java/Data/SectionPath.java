@@ -3,8 +3,11 @@ package Data;
 import DB.DB;
 import java.io.Serializable;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -17,10 +20,13 @@ import java.util.List;
  */
 public class SectionPath implements Serializable {
     int departmentId;
-    int orderDepartment;
+    
     int id;
+    int idService;
     String name;
+    int orderDepartment;
     Integer order;
+    
     
     public List<JobPath> jobs = new ArrayList<JobPath>();
 
@@ -28,12 +34,23 @@ public class SectionPath implements Serializable {
       
     }
 
-    public SectionPath(int departmentId, int id, String name, List<JobPath> jobs) {
+    public SectionPath(int departmentId, int id, int idService, int orderDepartment, Integer order) {
         this.departmentId = departmentId;
         this.id = id;
-        this.name = name;
-        this.jobs = jobs;
+        this.idService = idService;
+        this.orderDepartment = orderDepartment;
+        this.order = order;
     }
+    
+    public int getIdService() {
+        return idService;
+    }
+
+    public void setIdService(int idService) {
+        this.idService = idService;
+    }
+    
+   
 
     public SectionPath(int departmentId, int orderDepartment, int id, String name, Integer order) {
         this.departmentId = departmentId;
@@ -98,5 +115,20 @@ public class SectionPath implements Serializable {
         return "SectionPath{" + "departmentId=" + departmentId + ", id=" + id + ", name=" + name + ", order=" + order + ", jobs=" + jobs + '}';
     }
 
-   
+    public boolean addToDataBase(int idService) {
+        try {
+            DB d = new DB();
+            String q = "INSERT INTO steps_section VALUES ("+departmentId+","+id+","+idService+","+orderDepartment+","+order+");";
+            System.out.println(q);
+            d.write(q);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DepartmentPaths.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DepartmentPaths.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+        return false;
+    }
+
 }

@@ -152,25 +152,8 @@ public class AddServiceManager {
             }
         }
         newService.setAttachmentNames(l);
-        List<JobPath> path = new ArrayList<>();
         
-        for (int i = 0; i < departmentsInPath.size(); i++) {
-                DepartmentPaths get = departmentsInPath.get(i);
-                for (int j = 0; j < get.getSections().size(); j++) {
-                    SectionPath get1 = get.getSections().get(j);
-                    for (int k = 0; k < get1.getJobs().size(); k++) {
-                        JobPath get2 = get1.getJobs().get(k);
-                        get2.setDepId(get.id);
-                        get2.setdOrder(get.order);
-                        get2.setSectionID(get1.getId());
-                        get2.setsOrder(get1.getOrder());
-                        path.add(get2);
-
-                    }
-
-                }
-            }
-        newService.setPath(path);
+        newService.setPath(departmentsInPath);
         newService.addServiceToDB();
 
     }

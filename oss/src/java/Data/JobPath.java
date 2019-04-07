@@ -8,6 +8,9 @@ package Data;
 import DB.DB;
 import java.io.Serializable;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,6 +21,7 @@ public class JobPath implements Serializable{
     int sectionID;
     
     int id;
+    int idService;
     String name;
     int dOrder;
     int sOrder;
@@ -114,6 +118,21 @@ public class JobPath implements Serializable{
     @Override
     public String toString() {
         return "JobPath{" + "sectionID=" + sectionID + ", id=" + id + ", name=" + name + ", order=" + order + '}';
+    }
+public boolean addToDataBase(int  idService) {
+        try {
+            DB d = new DB();
+            String q = "INSERT INTO steps_job VALUES(" + DepId + "," + sectionID + "," + id + "," + idService + "," + dOrder + "," + sOrder + "," + order + ");";
+            System.out.println(q);
+            d.write(q);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DepartmentPaths.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DepartmentPaths.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+        return false;
     }
 
     public int getdOrder() {

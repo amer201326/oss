@@ -64,7 +64,7 @@ public class EditServiceManager implements Serializable{
     public EditServiceManager() {
         Map<String, String> parameterMap = (Map<String, String>) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         String id = parameterMap.get("id");
-
+        System.out.println(id);
         attachmentNames = GetFromDB.getServiceAttachmentName();
         List<Integer> attachmentIds = GetFromDB.getAttavhmentForserviceById(id);
         attachmentNamesAndResaults = new DualListModel<>();
@@ -113,11 +113,12 @@ public class EditServiceManager implements Serializable{
             Department get = departments.get(i);
             if (departmentPaths.id == get.id) {
                 departmentPaths.nameA = get.nameA;
+                
                 break;
             }
         }
         departmentsInPath.add(departmentPaths);
-        System.out.println("Beans.ServiceManager.addPathDepartment()" + departmentsInPath.size());
+        
         departmentPaths = new DepartmentPaths();
     }
 
@@ -149,7 +150,7 @@ public class EditServiceManager implements Serializable{
             }
 
         }
-        System.out.println(jobPath.toString());
+        
 
         selectSectionPath.getJobs().add(jobPath);
         jobPath = new JobPath();
@@ -169,26 +170,9 @@ public class EditServiceManager implements Serializable{
             }
         }
         newService.setAttachmentNames(l);
-        List<JobPath> path = new ArrayList<>();
+       
+        newService.setPath(departmentsInPath);
         
-        for (int i = 0; i < departmentsInPath.size(); i++) {
-                DepartmentPaths get = departmentsInPath.get(i);
-                for (int j = 0; j < get.getSections().size(); j++) {
-                    SectionPath get1 = get.getSections().get(j);
-                    for (int k = 0; k < get1.getJobs().size(); k++) {
-                        JobPath get2 = get1.getJobs().get(k);
-                        get2.setDepId(get.id);
-                        get2.setdOrder(get.order);
-                        get2.setSectionID(get1.getId());
-                        get2.setsOrder(get1.getOrder());
-                        path.add(get2);
-
-                    }
-
-                }
-            }
-        newService.setPath(path);
-        System.out.println(newService.getNote());
         newService.update();
 
     }
@@ -233,7 +217,7 @@ public class EditServiceManager implements Serializable{
         List<SectionPath> list = new ArrayList<>();
         for (int i = 0; i < selectDepartmentPath.getSections().size(); i++) {
             SectionPath get = selectDepartmentPath.getSections().get(i);
-            System.out.println("----------"+get);
+            
             if (selectDepartmentPath.id == get.getDepartmentId()) {
                 list.add(get);
             }
@@ -247,8 +231,7 @@ public class EditServiceManager implements Serializable{
         for (int i = 0; i < selectSectionPath.getJobs().size(); i++) {
             JobPath get = selectSectionPath.getJobs().get(i);
 
-            System.out.println(get + "   " + selectSectionPath);
-            if (selectSectionPath.getId() == get.getSectionID()) {
+                        if (selectSectionPath.getId() == get.getSectionID()) {
                 list.add(get);
             }
 
@@ -257,7 +240,7 @@ public class EditServiceManager implements Serializable{
     }
 
     public void onRowSelectFromDepartment(SelectEvent event) {
-        System.out.println((DepartmentPaths) event.getObject());
+        
         boolSection = true;
         pleaseSelectDepartment = false;
         boolJob = false;

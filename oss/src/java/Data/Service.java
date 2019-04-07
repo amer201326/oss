@@ -29,8 +29,8 @@ public class Service implements Serializable {
     Section section;
 
     String note;
-    List<JobPath> path;
-    List<DepartmentPaths> path2;
+
+    List<DepartmentPaths> path;
     List<ServiceAttachmentName> attachmentNames;
 
     public Service() {
@@ -58,9 +58,7 @@ public class Service implements Serializable {
         this.note = note;
     }
 
-    public void fillPath() {
-        path = GetFromDB.getPahtForService(id);
-    }
+    
 
     public int getId() {
         return id;
@@ -114,6 +112,14 @@ public class Service implements Serializable {
         return section;
     }
 
+    public List<DepartmentPaths> getPath() {
+        return path;
+    }
+
+    public void setPath(List<DepartmentPaths> path) {
+        this.path = path;
+    }
+
     public void setSection(Section section) {
         this.section = section;
     }
@@ -133,13 +139,14 @@ public class Service implements Serializable {
             q = "DELETE FROM steps_job WHERE Services_Provided_ID =  " + id + ";";
             System.out.println(q);
             data.write(q);
-            for (int k = 0; k < path.size(); k++) {
-                JobPath get2 = path.get(k);
-
-                q = "INSERT INTO steps_job VALUES(" + get2.DepId + "," + get2.sectionID + "," + get2.id + "," + id + "," + get2.dOrder + "," + get2.sOrder + "," + get2.order + ");";
-                data.write(q);
-                System.out.println(q);
-
+             for (DepartmentPaths departmentPaths : path) {
+                departmentPaths.addToDataBase(id);
+                for (SectionPath section1 : departmentPaths.sections) {
+                    section1.addToDataBase(id);
+                    for (JobPath job : section1.jobs) {
+                        job.addToDataBase(id);
+                    }
+                }
             }
 
             for (int i = 0; i < attachmentNames.size(); i++) {
@@ -180,15 +187,16 @@ public class Service implements Serializable {
             q = "INSERT INTO services_provided VALUES ('" + id + "','" + name + "','" + cost + "','" + days + "','" + status + "','" + department.id + "','" + section.id + "','" + note + "');";
             data.write(q);
             System.out.println(q);
-
-            for (int k = 0; k < path.size(); k++) {
-                JobPath get2 = path.get(k);
-
-                q = "INSERT INTO steps_job VALUES(" + get2.DepId + "," + get2.sectionID + "," + get2.id + "," + id + "," + get2.dOrder + "," + get2.sOrder + "," + get2.order + ");";
-                data.write(q);
-                System.out.println(q);
-
+            for (DepartmentPaths departmentPaths : path) {
+                departmentPaths.addToDataBase(id);
+                for (SectionPath section1 : departmentPaths.sections) {
+                    section1.addToDataBase(id);
+                    for (JobPath job : section1.jobs) {
+                        job.addToDataBase(id);
+                    }
+                }
             }
+            
 
             for (int i = 0; i < attachmentNames.size(); i++) {
                 ServiceAttachmentName get = attachmentNames.get(i);
@@ -215,16 +223,6 @@ public class Service implements Serializable {
         }
 
     }
-
-    public List<DepartmentPaths> getPath2() {
-        return path2;
-    }
-
-    public void setPath2(List<DepartmentPaths> path2) {
-        this.path2 = path2;
-    }
-    
-    
 
     public List<ServiceAttachmentName> getAttachmentNames() {
         return attachmentNames;
@@ -267,14 +265,6 @@ public class Service implements Serializable {
         int hash = 7;
         hash = 73 * hash + this.id;
         return hash;
-    }
-
-    public List<JobPath> getPath() {
-        return path;
-    }
-
-    public void setPath(List<JobPath> path) {
-        this.path = path;
     }
 
     public String getNote() {

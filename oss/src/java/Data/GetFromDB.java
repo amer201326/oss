@@ -543,7 +543,7 @@ public class GetFromDB {
        
         try {
             DB db = new DB();
-            String sql = "select Services_Provided_ID ,Serv_Name,Serv_Cost,Serv_Days,Serv_Case,d.*,s.*,note from services_provided  inner join department as d on services_provided.DepartmentID = d.Dep_ID inner join section as s on services_provided.sectionID = s.Sec_ID;";
+            String sql = "select Services_Provided_ID ,Serv_Name,Serv_Cost,Serv_Days,Serv_Case,d.*,s.*,note from services_provided  inner join department as d on services_provided.DepartmentID = d.Dep_ID inner join section as s on services_provided.sectionID = s.Sec_ID where Services_Provided_ID = "+id+";";
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {

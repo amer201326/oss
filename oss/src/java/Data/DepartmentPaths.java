@@ -23,6 +23,7 @@ public class DepartmentPaths implements Serializable {
     public int id;
     public String nameA;
     public String image;
+    public int idService;
     public Integer order;
     public String importantComment;
     public List<SectionPath> sections = new ArrayList<>();
@@ -32,11 +33,16 @@ public class DepartmentPaths implements Serializable {
            
     }
 
-    public DepartmentPaths(int id, String nameA, Integer order) {
+    public DepartmentPaths(int id, String nameA, String image, int idService, Integer order, String importantComment) {
         this.id = id;
         this.nameA = nameA;
+        this.image = image;
+        this.idService = idService;
         this.order = order;
+        this.importantComment = importantComment;
     }
+    
+    
 
     public DepartmentPaths(int id, String nameA, Integer order, String importantComment) {
         this.id = id;
@@ -95,49 +101,24 @@ public class DepartmentPaths implements Serializable {
     
  
 
-    public boolean addToDataBase() {
-        System.out.println(nameA);
-        DB db;
-        
+    public boolean addToDataBase(int idService) {
         try {
-            db = new DB();
-            //db.write(q);
-            String q = "INSERT INTO department(Dep_ID,Dep_Name,image)VALUES(null,'" + nameA +"','"+image+"');";
+            DB d = new DB();
+            String q = "INSERT INTO steps_department VALUES ("+id+","+idService+","+order+",'"+importantComment+"');";
             System.out.println(q);
-            try {
-                db.write(q);
-                return true;
-            } catch (SQLException ex) {
-                Logger.getLogger(Department.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            d.write(q);
+            
         } catch (SQLException ex) {
-            Logger.getLogger(Department.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DepartmentPaths.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Department.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DepartmentPaths.class.getName()).log(Level.SEVERE, null, ex);
         }
+       
         return false;
     }
 
   
-    public void getNameFromDataBase() {
-      
-        try {
-            DB db = new DB();
-         String sql = "SELECT Dep_Name FROM department where Dep_ID = "+this.id+";";
-
-            ResultSet r = db.read(sql);
-            while (r.next()) {
-               this.nameA = r.getString(1);
-              
-            }
-        } catch (Exception e) {
-            
-        }
-        
-       
-        
-    }
-
+    
     public List<SectionPath> getSections() {
         return sections;
     }

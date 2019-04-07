@@ -75,7 +75,7 @@
                                                     <div class="text-center">
 
                                                         <div class="row">
-                                                              <div class="col-lg-6" style="text-align: right; float: right;">
+                                                            <div class="col-lg-6" style="text-align: right; float: right;">
                                                                 <div class="card shadow mb-">
                                                                     <div class="card-header py-3">
                                                                         <h6 class="m-0 font-weight-bold text-primary">معلومات الخدمة </h6>
@@ -169,7 +169,7 @@
                                                                 </div>
 
                                                             </div>
-                                                          
+
 
 
                                                         </div>
@@ -235,7 +235,7 @@
                                                                     <div class="card-body">
                                                                         <div class="form-group row">
                                                                             <div class="col-sm-12">
-                                                                                <p:inputTextarea value="#{addServiceManager.newService.note}" rows="6" cols="50" dir="rtl" style="width: 100%;"/> 
+                                                                                <p:inputTextarea id="noteForService" value="#{addServiceManager.newService.note}" rows="6" cols="50" dir="rtl" style="width: 100%;"/> 
 
                                                                             </div>
 
@@ -351,6 +351,12 @@
 
                                                                                 <h:outputLabel for="name1" value="الرقم:" /> 
                                                                                 <p:inputNumber id="name1" label="name" required="true" value="#{addServiceManager.departmentPaths.order}"/>
+
+                                                                                <h:outputLabel for="name1" value="قرار الدائرة" /> 
+                                                                                <p:selectOneRadio id="desction" value="#{addServiceManager.departmentPaths.importantComment}" id="requirement" required="true">
+                                                                                    <f:selectItem  itemLabel="اساسي " itemValue="yes" />
+                                                                                    <f:selectItem  itemLabel="غير اساسي" itemValue="no" />
+                                                                                </p:selectOneRadio>
 
                                                                                 <p:spacer/>
                                                                                 <p:commandButton value="إضافة" actionListener="#{addServiceManager.addDepartmentToPath()}" update="DNewSection singleDT"
@@ -688,11 +694,11 @@
 
                                                                     <h:panelGrid columns="2" cellpadding="5">
 
-                                                                        <h:outputLabel for="nameA" value="اضافة الخدمة جديدة" /> <br/>
+                                                                        <h:outputLabel  value="اضافة الخدمة جديدة" /> <br/>
 
                                                                         <p:commandButton actionListener="#{addServiceManager.addService()}" value="اضافة الخدمة" 
                                                                                          id="add_service" oncomplete="PF('dlgAddSer').hide();" 
-                                                                                         process="@this pickList ServiceName DaysService Cost states dep_id sec_id"  
+                                                                                         process="@this pickList ServiceName DaysService Cost states dep_id sec_id noteForService"  
                                                                                          update="@form"  style="margin-right:20px;" styleClass="ui-priority-primary"/>
 
                                                                     </h:panelGrid>
