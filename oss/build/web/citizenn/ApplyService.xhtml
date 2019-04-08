@@ -73,7 +73,7 @@
 
                                         <div style="margin-right: 40px">
 
-                                         
+
                                             <h6 class="m-2  text-primary" >#{applyServiceManager.thisService.days} : عدد ايام الاستجابة</h6>
                                             <h6 class="m-2  text-primary" >#{applyServiceManager.thisService.cost} : الرسوم </h6> 
                                             <h6 class="m-2  text-primary" >#{applyServiceManager.thisService.department.nameA} : الدائرة </h6> 
@@ -85,15 +85,13 @@
                                         <br/><hr style="border: 2px solid orange; margin-left: 10px; margin-right: 10px;"/><br/>
                                         <div>
                                             <h2 class="section-heading inLineB" style="padding: 10px">: متطلبات الخدمة</h2>
-                                            
+
                                             <ui:repeat value="#{applyServiceManager.attachment}" var="attachment" >
-
+                                                <div class="row " align="right" style="text-align: right">
+                                                   
+                                                    <p:fileUpload value="#{applyServiceManager.thisService}" mode="simple" skinSimple="true" />
                                                 <li  style=" direction: rtl; margin-right: 40px" ><h6>#{attachment.name}</h6></li>
-
-                                                
-
-                                                
-
+                                                </div>
 
                                             </ui:repeat>
 
@@ -108,28 +106,28 @@
                                                 <p:commandButton value="تنزيل" ajax="false" actionListener="#{applyServiceManager.putFileForDownload(index.index)}" icon="fa fa-arrow-down" >
                                                     <p:fileDownload value="#{attachment.fileDownload}" />
                                                 </p:commandButton>  
-                                                
+
                                             </ui:repeat>
                                         </div>
                                         <br/><hr style="border: 2px solid orange; margin-left: 10px; margin-right: 10px;"/><br/>
-                                       
+
                                         <h2 class="section-heading inLineB" style="padding: 10px">:  ملاحظات</h2>
                                         <br/><br/>
-                                            <div class="form-group row">
-                                                <div class="col-sm-12 py-2">
-                                                    <p:inputTextarea  rows="5" cols="100" dir="rtl" style="margin-right: 40px"/> 
-                                                </div>
+                                        <div class="form-group row">
+                                            <div class="col-sm-12 py-2">
+                                                <p:inputTextarea  rows="5" cols="100" dir="rtl" style="margin-right: 40px"/> 
                                             </div>
+                                        </div>
 
                                         <br/><hr style="border: 2px solid orange; margin-left: 10px; margin-right: 10px;"/><br/>
 
 
                                     </div>
                                     <div class="text-center">
-                                           <p:commandButton actionListener="#{applyServiceManager.submit()}" value="تقديم "   class="myButtonB"/>
+                                        <p:commandButton actionListener="#{applyServiceManager.submit()}" value="تقديم "   class="myButtonB"/>
 
                                     </div>
-                       
+
                                 </div>
 
 

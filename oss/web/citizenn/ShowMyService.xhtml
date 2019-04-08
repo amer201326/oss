@@ -59,37 +59,65 @@
                             </div>
 
 
-                            
+
                             <br/><hr style="border: 2px solid orange; margin-left: 10px; margin-right: 10px;"/><br/>
                         </div>
                     </div>
 
 
-                    <div class="col-lg-12 mb-4">
-                        <ui:repeat value="#{showMyServicesManager.thisService.path2}" var="departmentPath" >
+                 
 
-                            <div class="card shadow mb-4">
-                                <div class="card-body">
-                                    <div>
-                                        <h4>#{departmentPath.nameA}</h4>
-                                        <ui:repeat value="#{departmentPath.sections}" var="sectionPath" >
-                                            <h5>#{sectionPath.name}</h5>
-                                            <ui:repeat value="#{sectionPath.jobs}" var="jobPath" >
-                                                <h6>#{jobPath.name}</h6>
-                                            </ui:repeat>
-                                        </ui:repeat>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </ui:repeat>
-
-
-
-
-                    </div>
 
                 </div>
+
+
+
+                <div class="col-lg-12 mb-4">
+                    <ui:repeat value="#{showMyServicesManager.path}" var="p" >
+
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Accordion -->
+                            <a href="#collapseCardExample#{p.departmentPaths.id}#{p.departmentPaths.order}" class="d-block card-header py-3 collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseCardExample#{p.departmentPaths.id}#{p.departmentPaths.order}" style="text-align: left">
+                                <h6 class="m-0 font-weight-bold text-primary">#{p.departmentPaths.nameA}</h6>
+                            </a>
+                            <!-- Card Content - Collapse -->
+                            <div class="collapse" id="collapseCardExample#{p.departmentPaths.id}#{p.departmentPaths.order}" style="text-align: left">
+                                <div class="card-body">
+                                    <h6>#{p.decisionsDepartment.externalMessage}</h6>
+                                    <h6>#{p.decisionsDepartment.status}</h6>
+                                    <ui:repeat value="#{p.sections}" var="s" >
+
+                                        <div class="card shadow mb-4" style="text-align: left;">
+                                            <div class="card-header py-3">
+                                                <h6 class="m-0 font-weight-bold text-primary"> #{s.section.name}</h6>
+                                            </div>
+                                            <div class="card-body">
+
+                                                <ui:repeat value="#{s.job}" var="j" >
+
+                                                    <div class="card mb-4 py-3 border-bottom-warning border-left-warning">
+                                                        <div class="card-body">
+                                                            <h6>#{j.jobPath.name}</h6>
+                                                            <h6>#{j.decisionsJob.externalMessage}</h6>
+                                                        </div>
+                                                    </div>
+
+                                                </ui:repeat>
+                                            </div>
+
+                                        </div>
+
+                                    </ui:repeat>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </ui:repeat>  
+
+                </div>
+
+
 
                 <br/><br/>
                 <!-- End of Main Content -->

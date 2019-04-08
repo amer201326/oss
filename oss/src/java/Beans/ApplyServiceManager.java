@@ -125,7 +125,7 @@ public class ApplyServiceManager implements Serializable{
 //        FacesContext.getCurrentInstance().addMessage(null, msg);
 //    }  
     
-//    public void submit(){
-//        System.out.println("jjjjj"+thisAttachment.getSrcFile()+"lll"+thisAttachment.getName()+file);
-//    }
+    public void submit(){
+        
+    }
 }
