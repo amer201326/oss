@@ -58,7 +58,13 @@ public class SectionPath implements Serializable {
         this.orderDepartment = orderDepartment;
         this.order = order;
     }
-    
+    public SectionPath(int departmentId,int orderDepartment,int id,String name, Integer order) {
+        this.departmentId = departmentId;
+        this.id = id;
+        this.name = name;
+        this.orderDepartment = orderDepartment;
+        this.order = order;
+    }
    
 
     
