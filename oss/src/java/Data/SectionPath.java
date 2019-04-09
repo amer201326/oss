@@ -25,7 +25,7 @@ public class SectionPath implements Serializable {
     int idService;
     String name;
     int orderDepartment;
-    Integer order;
+    int order;
     
     
     public List<JobPath> jobs = new ArrayList<JobPath>();
@@ -49,16 +49,19 @@ public class SectionPath implements Serializable {
     public void setIdService(int idService) {
         this.idService = idService;
     }
+
+    public SectionPath(int departmentId, int id, int idService, String name, int orderDepartment, Integer order) {
+        this.departmentId = departmentId;
+        this.id = id;
+        this.idService = idService;
+        this.name = name;
+        this.orderDepartment = orderDepartment;
+        this.order = order;
+    }
     
    
 
-    public SectionPath(int departmentId, int orderDepartment, int id, String name, Integer order) {
-        this.departmentId = departmentId;
-        this.orderDepartment = orderDepartment;
-        this.id = id;
-        this.name = name;
-        this.order = order;
-    }
+    
 
     
     public int getId() {
@@ -85,11 +88,11 @@ public class SectionPath implements Serializable {
         this.jobs = jobs;
     }
 
-    public Integer getOrder() {
+    public int getOrder() {
         return order;
     }
 
-    public void setOrder(Integer order) {
+    public void setOrder(int order) {
         this.order = order;
     }
 
