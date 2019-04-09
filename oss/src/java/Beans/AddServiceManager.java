@@ -91,16 +91,27 @@ public class AddServiceManager {
         this.departmentPaths = departmentPaths;
     }
 
-    public void addDepartmentToPath() {
+   public void addDepartmentToPath() {
         for (int i = 0; i < departments.size(); i++) {
             Department get = departments.get(i);
             if (departmentPaths.id == get.id) {
                 departmentPaths.nameA = get.nameA;
+
                 break;
             }
         }
-        departmentsInPath.add(departmentPaths);
-        System.out.println("Beans.ServiceManager.addPathDepartment()" + departmentsInPath.size());
+        boolean isexist = false;
+        for (DepartmentPaths departmentPaths1 : departmentsInPath) {
+            if (departmentPaths1.id == departmentPaths.id && departmentPaths1.order == departmentPaths.order) {
+                isexist = true;
+            }
+
+        }
+        if (!isexist) {
+            departmentsInPath.add(departmentPaths);
+        } else {
+
+        }
         departmentPaths = new DepartmentPaths();
     }
 
@@ -109,13 +120,29 @@ public class AddServiceManager {
             Section get = sections.get(i);
             if (sectionPath_new.getId() == Integer.parseInt(get.getId())) {
                 sectionPath_new.setName(get.getName());
-                sectionPath_new.setDepartmentId(Integer.parseInt(get.getDepartmentId()));
+                sectionPath_new.setDepartmentId(selectDepartmentPath.id);
+                sectionPath_new.setOrderDepartment(selectDepartmentPath.order);
                 break;
             }
 
         }
-        
-        selectDepartmentPath.getSections().add(sectionPath_new);
+        boolean isexist = false;
+        for (SectionPath sectionPath : selectDepartmentPath.getSections()) {
+            if (sectionPath.getDepartmentId() == sectionPath_new.getDepartmentId()
+                    && sectionPath.getOrderDepartment() == sectionPath_new.getOrderDepartment()
+                    && sectionPath.getId() == sectionPath_new.getId()
+                    && sectionPath.getOrder() == sectionPath_new.getOrder()) {
+                isexist = true;
+            }
+
+        }
+        if (!isexist) {
+            System.out.println("not exist");
+            selectDepartmentPath.getSections().add(sectionPath_new);
+        } else {
+            System.out.println(" exist");
+        }
+
         sectionPath_new = new SectionPath();
 
     }
@@ -126,15 +153,31 @@ public class AddServiceManager {
             if (jobPath.getId() == get.getIdJob()) {
                 jobPath.setName(get.getName());
                 jobPath.setDepId(selectDepartmentPath.id);
+                jobPath.setdOrder(selectDepartmentPath.order);
                 jobPath.setSectionID(selectSectionPath.getId());
+                jobPath.setsOrder(selectSectionPath.getOrder());
                 jobPath.idMarge();
                 break;
             }
 
         }
-        System.out.println(jobPath.toString());
-        
-        selectSectionPath.getJobs().add(jobPath);
+
+        boolean isexist = false;
+        for (JobPath job : selectSectionPath.getJobs()) {
+            if (job.getDepId() == jobPath.getDepId() && jobPath.getdOrder() == job.getdOrder()
+                    && jobPath.getSectionID() == job.getSectionID()
+                    && jobPath.getsOrder() == job.getsOrder()
+                    && jobPath.getId() == job.getId()
+                    && jobPath.getOrder() == job.getdOrder()) {
+                isexist = true;
+            }
+        }
+        if (!isexist) {
+            selectSectionPath.getJobs().add(jobPath);
+        } else {
+
+        }
+
         jobPath = new JobPath();
     }
 
@@ -196,30 +239,15 @@ public class AddServiceManager {
     }
 
     public List<SectionPath> filterSectionPath() {
-        List<SectionPath> list = new ArrayList<>();
-        for (int i = 0; i < selectDepartmentPath.getSections().size(); i++) {
-            SectionPath get = selectDepartmentPath.getSections().get(i);
-            if (selectDepartmentPath.id == get.getDepartmentId()) {
-                list.add(get);
-            }
 
-        }
-        return list;
+        return selectDepartmentPath.sections;
     }
 
     public List<JobPath> filterJopPath() {
-        List<JobPath> list = new ArrayList<>();
-        for (int i = 0; i < selectSectionPath.getJobs().size(); i++) {
-            JobPath get = selectSectionPath.getJobs().get(i);
 
-            System.out.println(get + "   " + selectSectionPath);
-            if (selectSectionPath.getId() == get.getSectionID()) {
-                list.add(get);
-            }
-
-        }
-        return list;
+        return selectSectionPath.jobs;
     }
+
 
     public void onRowSelectFromDepartment(SelectEvent event) {
         System.out.println((DepartmentPaths) event.getObject());

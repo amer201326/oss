@@ -35,7 +35,7 @@ import org.primefaces.model.DualListModel;
  */
 @ManagedBean
 @ViewScoped
-public class EditServiceManager implements Serializable{
+public class EditServiceManager implements Serializable {
 
     Boolean boolSection = false;
     Boolean boolJob = false;
@@ -71,12 +71,12 @@ public class EditServiceManager implements Serializable{
 
         for (int i = 0; i < attachmentNames.size(); i++) {
             ServiceAttachmentName get = attachmentNames.get(i);
-            
+
             boolean b = false;
             for (int j = 0; j < attachmentIds.size(); j++) {
                 Integer idat = attachmentIds.get(j);
                 if (get.getId() == idat) {
-                    
+
                     attachmentNamesAndResaults.getTarget().add(get.getName());
                     b = true;
                 }
@@ -113,12 +113,22 @@ public class EditServiceManager implements Serializable{
             Department get = departments.get(i);
             if (departmentPaths.id == get.id) {
                 departmentPaths.nameA = get.nameA;
-                
+
                 break;
             }
         }
-        departmentsInPath.add(departmentPaths);
-        
+        boolean isexist = false;
+        for (DepartmentPaths departmentPaths1 : departmentsInPath) {
+            if (departmentPaths1.id == departmentPaths.id && departmentPaths1.order == departmentPaths.order) {
+                isexist = true;
+            }
+
+        }
+        if (!isexist) {
+            departmentsInPath.add(departmentPaths);
+        } else {
+
+        }
         departmentPaths = new DepartmentPaths();
     }
 
@@ -127,13 +137,29 @@ public class EditServiceManager implements Serializable{
             Section get = sections.get(i);
             if (sectionPath_new.getId() == Integer.parseInt(get.getId())) {
                 sectionPath_new.setName(get.getName());
-                sectionPath_new.setDepartmentId(Integer.parseInt(get.getDepartmentId()));
+                sectionPath_new.setDepartmentId(selectDepartmentPath.id);
+                sectionPath_new.setOrderDepartment(selectDepartmentPath.order);
                 break;
             }
 
         }
+        boolean isexist = false;
+        for (SectionPath sectionPath : selectDepartmentPath.getSections()) {
+            if (sectionPath.getDepartmentId() == sectionPath_new.getDepartmentId()
+                    && sectionPath.getOrderDepartment() == sectionPath_new.getOrderDepartment()
+                    && sectionPath.getId() == sectionPath_new.getId()
+                    && sectionPath.getOrder() == sectionPath_new.getOrder()) {
+                isexist = true;
+            }
 
-        selectDepartmentPath.getSections().add(sectionPath_new);
+        }
+        if (!isexist) {
+            System.out.println("not exist");
+            selectDepartmentPath.getSections().add(sectionPath_new);
+        } else {
+            System.out.println(" exist");
+        }
+
         sectionPath_new = new SectionPath();
 
     }
@@ -144,15 +170,31 @@ public class EditServiceManager implements Serializable{
             if (jobPath.getId() == get.getIdJob()) {
                 jobPath.setName(get.getName());
                 jobPath.setDepId(selectDepartmentPath.id);
+                jobPath.setdOrder(selectDepartmentPath.order);
                 jobPath.setSectionID(selectSectionPath.getId());
+                jobPath.setsOrder(selectSectionPath.getOrder());
                 jobPath.idMarge();
                 break;
             }
 
         }
-        
 
-        selectSectionPath.getJobs().add(jobPath);
+        boolean isexist = false;
+        for (JobPath job : selectSectionPath.getJobs()) {
+            if (job.getDepId() == jobPath.getDepId() && jobPath.getdOrder() == job.getdOrder()
+                    && jobPath.getSectionID() == job.getSectionID()
+                    && jobPath.getsOrder() == job.getsOrder()
+                    && jobPath.getId() == job.getId()
+                    && jobPath.getOrder() == job.getdOrder()) {
+                isexist = true;
+            }
+        }
+        if (!isexist) {
+            selectSectionPath.getJobs().add(jobPath);
+        } else {
+
+        }
+
         jobPath = new JobPath();
     }
 
@@ -163,16 +205,16 @@ public class EditServiceManager implements Serializable{
             String get = attachmentNamesAndResaults.getTarget().get(i);
             for (int j = 0; j < attachmentNames.size(); j++) {
                 ServiceAttachmentName get1 = attachmentNames.get(j);
-                if(get.equals(get1.getName())){
+                if (get.equals(get1.getName())) {
                     l.add(get1);
                 }
-                
+
             }
         }
         newService.setAttachmentNames(l);
-       
+
         newService.setPath(departmentsInPath);
-        
+
         newService.update();
 
     }
@@ -214,33 +256,17 @@ public class EditServiceManager implements Serializable{
     }
 
     public List<SectionPath> filterSectionPath() {
-        List<SectionPath> list = new ArrayList<>();
-        for (int i = 0; i < selectDepartmentPath.getSections().size(); i++) {
-            SectionPath get = selectDepartmentPath.getSections().get(i);
-            
-            if (selectDepartmentPath.id == get.getDepartmentId()) {
-                list.add(get);
-            }
 
-        }
-        return list;
+        return selectDepartmentPath.sections;
     }
 
     public List<JobPath> filterJopPath() {
-        List<JobPath> list = new ArrayList<>();
-        for (int i = 0; i < selectSectionPath.getJobs().size(); i++) {
-            JobPath get = selectSectionPath.getJobs().get(i);
 
-                        if (selectSectionPath.getId() == get.getSectionID()) {
-                list.add(get);
-            }
-
-        }
-        return list;
+        return selectSectionPath.jobs;
     }
 
     public void onRowSelectFromDepartment(SelectEvent event) {
-        
+
         boolSection = true;
         pleaseSelectDepartment = false;
         boolJob = false;
@@ -459,63 +485,30 @@ public class EditServiceManager implements Serializable{
     }
 
     private List<DepartmentPaths> getPathASDep() {
-        List<DepartmentPaths> debp = new ArrayList<>();
-        List<JobPath> jobs = GetFromDB.getPahtForService(newService.getId());
-        for (int i = 0; i < jobs.size(); i++) {
-            JobPath jp = jobs.get(i);
-            boolean dbol = false;
-            for (int j = 0; j < debp.size(); j++) {
-                DepartmentPaths d = debp.get(j);
-                if (d.id == jp.getDepId() && d.order == jp.getdOrder()) {
-                    dbol = true;
-                    boolean sbol = false;
-                    for (int k = 0; k < d.sections.size(); k++) {
-                        SectionPath sec = d.sections.get(k);
-                        if (sec.getId() == jp.getSectionID() && sec.getOrder() == jp.getsOrder()) {
-                            sbol = true;
-                            JobPath jpath = new JobPath(d.id, sec.getId(), jp.getId(), d.order, sec.getOrder(), jp.getOrder());
-                            jpath.setName(getJobName(jp.getId()));
-                            sec.getJobs().add(jpath);
-
-                            break;
+        List<DepartmentPaths> debp = GetFromDB.getDepartmentsPath(newService.getId());
+        List<SectionPath> secp = GetFromDB.getSectionPath(newService.getId());
+        List<JobPath> jobp = GetFromDB.getPahtForService(newService.getId());
+        for (DepartmentPaths departmentPaths1 : debp) {
+            for (SectionPath sectionPath : secp) {
+                System.out.println("-----------------");
+                System.out.println(sectionPath.toString());
+                System.out.println(departmentPaths1.toString());
+                System.out.println(sectionPath.getDepartmentId() +"  "+departmentPaths1.id +"  "+ sectionPath.getOrderDepartment() +"  "+departmentPaths1.order);
+                System.out.println("-----------------");
+                if (sectionPath.getDepartmentId() == departmentPaths1.id && sectionPath.getOrderDepartment() == departmentPaths1.order) {
+                    departmentPaths1.sections.add(sectionPath);
+                    System.out.println("name of sec = "+sectionPath.getName());
+                    for (JobPath jobPath1 : jobp) {
+                        if (jobPath1.getDepId() == sectionPath.getDepartmentId() && sectionPath.getOrderDepartment() == jobPath1.getdOrder() && sectionPath.getId() == jobPath1.getSectionID() && sectionPath.getOrder() == jobPath1.getsOrder()) {
+                            sectionPath.jobs.add(jobPath1);
                         }
                     }
-                    if (!sbol) {
-
-                        SectionPath spath = new SectionPath();
-                        spath.setId(jp.getSectionID());
-                        spath.setOrder(jp.getsOrder());
-                        spath.setName(getnameForSection(spath.getId()));
-                        spath.setDepartmentId( d.id);
-                        JobPath jpath = new JobPath(d.id, spath.getId(), jp.getId(), d.order, spath.getOrder(), jp.getOrder());
-                        jpath.setName(getJobName(jp.getId()));
-                        spath.getJobs().add(jpath);
-                        d.sections.add(spath);
-
-                    }
-                    break;
                 }
+
             }
-            if (!dbol) {
-                DepartmentPaths dpath = new DepartmentPaths();
-                dpath.id = jp.getDepId();
-                dpath.order = jp.getdOrder();
-                dpath.nameA = getNameDep(dpath.id);
-                SectionPath spath = new SectionPath();
-                spath.setId(jp.getSectionID());
-                spath.setOrder(jp.getsOrder());
-                spath.setName(getnameForSection(spath.getId()));
-                spath.setDepartmentId( dpath.id);
-                JobPath jpath = new JobPath(dpath.id, spath.getId(), jp.getId(), dpath.order, spath.getOrder(), jp.getOrder());
-                jpath.setName(getJobName(jp.getId()));
-                spath.getJobs().add(jpath);
-                dpath.sections.add(spath);
-                debp.add(dpath);
-                System.out.println(dpath.sections.size());
-            }
-            
         }
-        return  debp;
+
+        return debp;
     }
 
     private String getNameDep(int id) {
@@ -541,8 +534,8 @@ public class EditServiceManager implements Serializable{
     private String getJobName(int id) {
         for (int i = 0; i < jobsOfSections.size(); i++) {
             JobOfSection get = jobsOfSections.get(i);
-            if(get.getIdJob() == id){
-                return  get.getName();
+            if (get.getIdJob() == id) {
+                return get.getName();
             }
         }
         return "";

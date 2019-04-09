@@ -20,10 +20,10 @@ public class JobPath implements Serializable{
     int DepId;
     int sectionID;
     
-    int id;
+    Integer id;
     int idService;
     String name;
-    int dOrder;
+    Integer dOrder;
     int sOrder;
     int order;
     
@@ -59,6 +59,19 @@ public class JobPath implements Serializable{
         this.sOrder = sOrder;
         this.order = order;
     }
+
+    public JobPath(int DepId, int sectionID, Integer id, int idService, String name, Integer dOrder, int sOrder, int order) {
+        this.DepId = DepId;
+        this.sectionID = sectionID;
+        this.id = id;
+        this.idService = idService;
+        this.name = name;
+        this.dOrder = dOrder;
+        this.sOrder = sOrder;
+        this.order = order;
+    }
+
+    
     
 
     
@@ -70,11 +83,11 @@ public class JobPath implements Serializable{
         this.sectionID = sectionID;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -86,11 +99,11 @@ public class JobPath implements Serializable{
         this.name = name;
     }
 
-    public int getOrder() {
+    public Integer getOrder() {
         return order;
     }
 
-    public void setOrder(int order) {
+    public void setOrder(Integer order) {
         this.order = order;
     }
 

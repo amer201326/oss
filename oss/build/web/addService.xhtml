@@ -352,15 +352,15 @@
                                                                                 <h:outputLabel for="name1" value="الرقم:" /> 
                                                                                 <p:inputNumber id="name1" label="name" required="true" value="#{addServiceManager.departmentPaths.order}"/>
 
-                                                                                <h:outputLabel for="name1" value="قرار الدائرة" /> 
-                                                                                <p:selectOneRadio id="desction" value="#{addServiceManager.departmentPaths.importantComment}" id="requirement" required="true">
-                                                                                    <f:selectItem  itemLabel="اساسي " itemValue="yes" />
+                                                                                <h:outputLabel for="desction" value="قرار الدائرة" /> 
+                                                                                <p:selectOneRadio id="desction" value="#{addServiceManager.departmentPaths.importantComment}"  required="true">
+                                                                                    <f:selectItem   itemLabel="اساسي " itemValue="yes" />
                                                                                     <f:selectItem  itemLabel="غير اساسي" itemValue="no" />
                                                                                 </p:selectOneRadio>
 
                                                                                 <p:spacer/>
                                                                                 <p:commandButton value="إضافة" actionListener="#{addServiceManager.addDepartmentToPath()}" update="DNewSection singleDT"
-                                                                                                 process="@this departments name1" oncomplete="PF('dlg').hide();"/>
+                                                                                                 process="@this departments name1 desction" oncomplete="PF('dlg').hide();"/>
 
 
                                                                             </h:panelGrid>
@@ -698,7 +698,7 @@
 
                                                                         <p:commandButton actionListener="#{addServiceManager.addService()}" value="اضافة الخدمة" 
                                                                                          id="add_service" oncomplete="PF('dlgAddSer').hide();" 
-                                                                                         process="@this pickList ServiceName DaysService Cost states dep_id sec_id noteForService"  
+                                                                                         process="@this pickList ServiceName DaysService Cost states dep_id  sec_id noteForService"  
                                                                                          update="@form"  style="margin-right:20px;" styleClass="ui-priority-primary"/>
 
                                                                     </h:panelGrid>

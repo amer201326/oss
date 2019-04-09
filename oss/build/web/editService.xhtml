@@ -365,7 +365,7 @@
 
                                                                         <p:dataTable id="singleDT" var="department" value="#{editServiceManager.departmentsInPath}"
                                                                                      style="margin-bottom:20px" emptyMessage="لا يوجد دوائر "  selectionMode="single"
-                                                                                     selection="#{editServiceManager.selectDepartmentPath}" rowKey="#{department.id}" >
+                                                                                     selection="#{editServiceManager.selectDepartmentPath}" rowKey="#{department.id}-#{department.order}" >
 
                                                                             <f:facet name="header">
 
@@ -481,7 +481,7 @@
                                                                             <p:dataTable id="singleDT1" var="section"  emptyMessage="لا توجد سجلات" 
                                                                                          rendered="#{editServiceManager.boolSection}" value="#{editServiceManager.filterSectionPath()}"
                                                                                          style="margin-bottom:20px"  selectionMode="single" selection="#{editServiceManager.selectSectionPath}"
-                                                                                         rowKey="#{section.id}">
+                                                                                         rowKey="#{section.id}-#{section.order}">
 
                                                                                 <!--  <f:facet name="header">
                                                                                       الاقسام
@@ -602,7 +602,7 @@
                                                                             <p:dataTable id="singleDT2" var="job"  emptyMessage="لا توجد سجلات" 
                                                                                          rendered="#{editServiceManager.boolJob}" value="#{editServiceManager.filterJopPath()}"
                                                                                          style="margin-bottom:20px"  selectionMode="single" selection="#{editServiceManager.selectedJobPath}"
-                                                                                         rowKey="#{job.idMarge}">
+                                                                                         rowKey="#{job.id}-#{job.order}">
 
 
                                                                                 <!-- <f:facet name="header">
