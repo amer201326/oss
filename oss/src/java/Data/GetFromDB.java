@@ -375,6 +375,7 @@ public class GetFromDB {
             ResultSet r = db.read(sql);
             while (r.next()) {
                 d = new ServiceAttachmentName(r.getInt(1),r.getString(2),r.getString(4),r.getString(5),r.getBinaryStream(3),r.getString(6));
+               
                 attach.add(d);
             }
         } catch (Exception e) {
@@ -636,6 +637,10 @@ public class GetFromDB {
             ResultSet r = db.read(sql);
             while (r.next()) {
                 a = new ServiceAttachmentName(r.getInt(1),r.getString(2),r.getString(4),r.getString(5),r.getBinaryStream(3),r.getString(6));
+                if(r.getString(7) == "yes")
+                   a.haveFile = true;
+               else
+                   a.haveFile = false;
                 name.add(a);
             }
         } catch (SQLException ex) { 

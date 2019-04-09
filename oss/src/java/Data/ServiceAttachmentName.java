@@ -45,7 +45,8 @@ public class ServiceAttachmentName implements Serializable {
     String requirement;
     String nameFile;
     private StreamedContent fileDownload;
-
+    Boolean haveFile;
+    
     public ServiceAttachmentName() {
     }
 
@@ -207,6 +208,14 @@ public class ServiceAttachmentName implements Serializable {
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>in set>>>>>>>>>>>>>>>>>>>>>>" + file.getFileName());
         this.file = file;
 
+    }
+
+    public Boolean getHaveFile() {
+        return haveFile;
+    }
+
+    public void setHaveFile(Boolean haveFile) {
+        this.haveFile = haveFile;
     }
 
     
