@@ -27,6 +27,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.component.fileupload.FileUpload;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.ByteArrayContent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.DefaultUploadedFile;
 import org.primefaces.model.StreamedContent;
@@ -50,7 +51,7 @@ public class ServiceAttachmentName implements Serializable {
     public ServiceAttachmentName() {
     }
 
-    public ServiceAttachmentName(int id, String name, String notes, String requirement, InputStream inputStream ,String nameFile) {
+    public ServiceAttachmentName(int id, String name, String notes, String requirement, InputStream inputStream ,String nameFile ) {
         try {
             this.id = id;
             this.name = name;
@@ -66,6 +67,10 @@ public class ServiceAttachmentName implements Serializable {
                 System.out.println(nameFile);
                 fileDownload = new DefaultStreamedContent(inputForData,"file",nameFile);
                 
+            }else{
+                System.out.println(name);
+                fileDownload = new ByteArrayContent();
+                System.out.println("no file no file no file no file ");
             }
         }catch (IOException ex) {
             Logger.getLogger(ServiceAttachmentName.class.getName()).log(Level.SEVERE, null, ex);

@@ -353,9 +353,13 @@ public class GetFromDB {
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
-                d = new ServiceAttachmentName(r.getInt(1),r.getString(2),r.getString(4),r.getString(5),r.getBinaryStream(3),r.getString(6));
+                
                
                 d = new ServiceAttachmentName(r.getInt(1), r.getString(2), r.getString(4), r.getString(5), r.getBinaryStream(3), r.getString(6));
+                if("yes".equals(r.getString(7))){
+                   d.setHaveFile(true);
+                }else
+                   d.setHaveFile(false);
                 attach.add(d);
             }
         } catch (Exception e) {
