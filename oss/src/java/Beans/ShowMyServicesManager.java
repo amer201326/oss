@@ -55,7 +55,7 @@ public class ShowMyServicesManager implements Serializable {
         this.thisService = thisService;
     }
 
-    private List<DepartmentPaths> servicePath(int idSer) { //stips
+    private List<DepartmentPaths> servicePath(int idSer) { 
         List<DepartmentPaths> departments = GetFromDBaraa.departmentPath(idSer);
         List<SectionPath> sections = GetFromDBaraa.sectionPath(idSer);
         List<JobPath> jobs = GetFromDBaraa.jobPath(idSer);

@@ -88,9 +88,9 @@
 
                                             <ui:repeat value="#{applyServiceManager.attachment}" var="attachment" >
                                                 <div class="row " align="right" style="text-align: right" >
-                                                   
                                                     <p:fileUpload value="#{attachment.file}" mode="simple" skinSimple="true" rendered="#{attachment.haveFile}" />
                                                 <li  style=" direction: rtl; margin-right: 40px" ><h6>#{attachment.name}</h6></li>
+                                                <h6>#{attachment.notes}</h6>
                                                 </div>
 
                                             </ui:repeat>

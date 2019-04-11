@@ -45,7 +45,7 @@ public class ServiceAttachmentName implements Serializable {
     String requirement;
     String nameFile;
     private StreamedContent fileDownload;
-    Boolean haveFile;
+    boolean haveFile;
     
     public ServiceAttachmentName() {
     }
@@ -210,11 +210,11 @@ public class ServiceAttachmentName implements Serializable {
 
     }
 
-    public Boolean getHaveFile() {
+    public boolean getHaveFile() {
         return haveFile;
     }
 
-    public void setHaveFile(Boolean haveFile) {
+    public void setHaveFile(boolean haveFile) {
         this.haveFile = haveFile;
     }
 
