@@ -37,6 +37,8 @@ public class ApplyServiceManager implements Serializable{
     List<ServiceAttachmentName> attwhithFile=new ArrayList<ServiceAttachmentName>();
     StreamedContent fileDownload;
     int idCitizen ;
+    String note = "";
+    
     public ApplyServiceManager() {
          idCitizen = 1;
         Map<String, String> parameterMap = (Map<String, String>) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
@@ -66,10 +68,12 @@ public class ApplyServiceManager implements Serializable{
      private void attavhmentByserviceById() {
          allAttachment = GetFromDB.getAttavhmentByserviceById(thisService.getId());
          for (ServiceAttachmentName serviceAttachmentName :  allAttachment) {
-             if(serviceAttachmentName.getFileDownload() != null)
-                 attwhithFile.add(serviceAttachmentName);
-            else
+            
+             if(serviceAttachmentName.getFileDownload() == null)
                  attachment.add(serviceAttachmentName);
+            else
+                 attwhithFile.add(serviceAttachmentName);
+                 
          }
 
          
@@ -140,6 +144,15 @@ public class ApplyServiceManager implements Serializable{
     
     
     public void submit(){
-        GetFromDBaraa.ApplyService(idCitizen, thisService.getId(), allAttachment);
+        GetFromDBaraa.ApplyService(idCitizen, thisService.getId(), allAttachment,note);
     }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+    
 }

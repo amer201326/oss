@@ -224,7 +224,7 @@ public class GetFromDBaraa {
 
     }
 
-    public static void ApplyService(int Cit_ID, int Services_Provided_ID, List<ServiceAttachmentName> allAttachment) {
+    public static void ApplyService(int Cit_ID, int Services_Provided_ID, List<ServiceAttachmentName> allAttachment,String note) {
 
         List<StepsAndDecsions> pathD;
         List<StepsAndDecsionsJob> pathJ;
@@ -239,15 +239,18 @@ public class GetFromDBaraa {
             DB data = new DB();
             String q = "start transaction;";
 
-            q = "INSERT INTO service_citizen (`Service_Citizen_ID`, `Services_Provided_ID`, `Cit_ID`, `Date`, `status`) VALUES ('" + idMaxSC + "', '" + Services_Provided_ID + "', '" + Cit_ID + "', '1', 'notdone');";
+            q = "INSERT INTO service_citizen (`Service_Citizen_ID`, `Services_Provided_ID`, `Cit_ID`, `Date`, `status`, `note`) VALUES ('" + idMaxSC + "', '" + Services_Provided_ID + "', '" + Cit_ID + "', '1', 'notdone' , '"+note+"');";
             data.write(q);
-
+            System.out.println(q);
+            
             for (ServiceAttachmentName a : allAttachment) {
 
-                q = "INSERT INTO attachment_archive_citizen (`Atta_ArchiveC_ID`, `Cit_ID`, `ServiceAttachmentName_ID`) VALUES ('" + idMaxAAC + "', '" + Cit_ID + "', '" + a.id + "');";
+                q = "INSERT INTO attachment_archive_citizen (`Atta_ArchiveC_ID`, `Cit_ID`, `ServiceAttachmentName_ID`,`file`) VALUES ('" + idMaxAAC + "', '" + Cit_ID + "', '" + a.id +"', '"+ a.file+"');";
                 data.write(q);
+                idMaxAAC++;
                 q = "INSERT INTO attachment_service_citizen (`Atta_ArchiveC_ID`, `Service_Citizen_ID`, `Services_Provided_ID`, `Cit_ID`) VALUES ('" + idMaxAAC + "', '" + idMaxSC + "', '" + Services_Provided_ID + "', '" + Cit_ID + "');";
                 data.write(q);
+                idMaxAAC++;
 
             }
 

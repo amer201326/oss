@@ -69,7 +69,7 @@ public class ServiceAttachmentName implements Serializable {
                 
             }else{
                 System.out.println(name);
-                fileDownload = new ByteArrayContent();
+                
                 System.out.println("no file no file no file no file ");
             }
         }catch (IOException ex) {
