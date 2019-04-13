@@ -10,12 +10,14 @@ package Data;
  * @author baraakali
  */
 public class ServiceCitizen {
+    
     int Service_Citizen_ID;
     int Services_Provided_ID;
     int Cit_ID;
     String Date;
     String status;
     String note;
+    
     
     
 }
