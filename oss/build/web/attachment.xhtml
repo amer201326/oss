@@ -160,13 +160,13 @@
                                                             <h:outputLabel for="notes" value="الملاحظات:" />
                                                             <p:inputTextarea id="notes" value="#{serviceAttachemntManage.newService.notes}" rows="6" cols="33" dir="rtl" style="width: 70%;" /> 
 
-                                                            <!--<p:outputLabel for="requirement" value="الارفاق" />
+                                                            <p:outputLabel for="requirement" value="مطلوب ارفاق ملف ؟" />
                                                             <h:panelGrid  columns="2" cellpadding="5" class="mytable">
-                                                                <p:selectOneRadio value="{serviceAttachemntManage.newService.requirement}" id="requirement" class="label1" required="true">
-                                                                    <f:selectItem itemLabel="اجباري " itemValue="required" />
-                                                                    <f:selectItem  itemLabel="غيبر اجباري" itemValue="notrequired" />
+                                                                <p:selectOneRadio value="#{serviceAttachemntManage.newService.haveFile}" id="requirement" class="label1" required="true">
+                                                                    <f:selectItem  itemLabel="نعم" itemValue="yes" />
+                                                                    <f:selectItem  itemLabel="لا" itemValue="no" />
                                                                 </p:selectOneRadio>
-                                                            </h:panelGrid>-->
+                                                            </h:panelGrid>
 
                                                             <p:commandButton  id="add" value="اضافة" actionListener="#{serviceAttachemntManage.addAttachmentWitoutFile()}" 
                                                                               update="@form :formAttachment" process="@parent" oncomplete="PF('dlgAdd').hide();"/>
@@ -242,9 +242,9 @@
                                                             <p:rowEditor />
                                                         </p:column>
                                                         <p:column headerText="الملف" >
-                                                            <p:cellEditor disabled="true">
-                                                                <h:outputText value="#{attachment.fileDownload}" />
-                                                            </p:cellEditor>
+                                                           
+                                                            <h:outputText value="#{attachment.nameFile}" />
+                                                            
 
                                                         </p:column>
                                                         <p:ajax event="rowSelect" process="@this" update="formAttach1" listener="#{serviceAttachemntManage.onAttachSelected}"/>
@@ -279,6 +279,14 @@
                                                             <h:outputLabel for="note1" value="الملاحظات:" />
                                                             <p:inputTextarea id="note1" rows="6" cols="33" value="#{serviceAttachemntManage.newService.notes}" style="width: 70%"/> 
 
+                                                            <p:outputLabel for="requirement" value="مطلوب ارفاق ملف ؟" />
+                                                            <h:panelGrid  columns="2" cellpadding="5" class="mytable">
+                                                                <p:selectOneRadio value="#{serviceAttachemntManage.newService.haveFile}" id="requirement" class="label1" required="true">
+                                                                    <f:selectItem  itemLabel="نعم" itemValue="yes" />
+                                                                    <f:selectItem  itemLabel="لا" itemValue="no" />
+                                                                </p:selectOneRadio>
+                                                            </h:panelGrid>
+                                                            
                                                             <h:outputLabel for="file1" value="اختر المرفق:"/> 
                                                             <p:fileUpload id="file1" value="#{serviceAttachemntManage.newService.file}" mode="simple" label="استعراض" 
                                                                           skinSimple="true" style="display:flex; justify-content: flex-end; width: 100%"/>

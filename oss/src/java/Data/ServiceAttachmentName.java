@@ -43,36 +43,37 @@ public class ServiceAttachmentName implements Serializable {
     String name;
     String notes;
     UploadedFile file;
-    String requirement;
+
     String nameFile;
-    private StreamedContent fileDownload;
-    boolean haveFile;
-    
+    StreamedContent fileDownload;
+    String haveFile;
+
     public ServiceAttachmentName() {
     }
 
-    public ServiceAttachmentName(int id, String name, String notes, String requirement, InputStream inputStream ,String nameFile ) {
+    public ServiceAttachmentName(int id, String name, String notes, InputStream inputStream, String nameFile, String haveFile) {
         try {
             this.id = id;
             this.name = name;
             this.notes = notes;
-            this.requirement = requirement;
+
             this.nameFile = nameFile;
             if (inputStream != null) {
-               System.out.println(id);
+                System.out.println(id);
                 byte[] inputByte = new byte[inputStream.available()];
                 inputStream.read(inputByte);
-                byte[] outputfinal = Crypto.dec(Cipher.DECRYPT_MODE, "foreanderDowntop",inputByte );
+                byte[] outputfinal = Crypto.dec(Cipher.DECRYPT_MODE, "foreanderDowntop", inputByte);
                 InputStream inputForData = new ByteArrayInputStream(outputfinal);
                 System.out.println(nameFile);
-                fileDownload = new DefaultStreamedContent(inputForData,"file",nameFile);
-                
-            }else{
+                fileDownload = new DefaultStreamedContent(inputForData, "file", nameFile);
+
+            } else {
                 System.out.println(name);
-                
+
                 System.out.println("no file no file no file no file ");
             }
-        }catch (IOException ex) {
+        } catch (IOException ex) {
+            System.out.println("null null ServiceAttachmentName ");
             Logger.getLogger(ServiceAttachmentName.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -92,14 +93,6 @@ public class ServiceAttachmentName implements Serializable {
 
     public String getName() {
         return name;
-    }
-
-    public String getRequirement() {
-        return requirement;
-    }
-
-    public void setRequirement(String requirement) {
-        this.requirement = requirement;
     }
 
     public void setName(String name) {
@@ -154,11 +147,9 @@ public class ServiceAttachmentName implements Serializable {
     }
 
     public void addAttachToDBWitoutFile() {
-
-        String q = "INSERT INTO oss.serviceattachmentname (`ServiceAttachmentName_ID`, `ServA_Name`, `notes`, `requirement`)  VALUES (null,'"
-                + name + "','" + notes + "','" + requirement + "');";
-        System.out.println(notes);
-        System.out.println(requirement);
+        
+        String q = "INSERT INTO oss.serviceattachmentname (`ServiceAttachmentName_ID`, `ServA_Name`, `notes`, `haveFile`)  VALUES (null,'"
+                + name + "','" + notes + "','" + haveFile + "');";
 
         try {
             DB data = new DB();
@@ -173,8 +164,7 @@ public class ServiceAttachmentName implements Serializable {
     }
 
     public void addAttachToDBwithFile() {
-        System.out.println(System.getProperty("user.dir"));
-//        saveFileInDisk();
+        
         String q = "INSERT INTO serviceattachmentname VALUES(null,?,?,?,?,?);";
         System.out.println(q);
 
@@ -185,8 +175,11 @@ public class ServiceAttachmentName implements Serializable {
             s.setString(1, name);
             s.setBinaryStream(2, saveFileInDisk());
             s.setString(3, notes);
-            s.setString(4,requirement);
-            s.setString(5,nameFile);
+
+            s.setString(4, nameFile);
+            
+            
+            s.setString(5, haveFile);
             s.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(ServiceAttachmentName.class.getName()).log(Level.SEVERE, null, ex);
@@ -215,15 +208,24 @@ public class ServiceAttachmentName implements Serializable {
 
     }
 
-    public boolean getHaveFile() {
+    public String getNameFile() {
+        return nameFile;
+    }
+
+    public void setNameFile(String nameFile) {
+        this.nameFile = nameFile;
+    }
+
+    public String getHaveFile() {
         return haveFile;
     }
 
-    public void setHaveFile(boolean haveFile) {
+    public void setHaveFile(String haveFile) {
         this.haveFile = haveFile;
     }
 
     
+
     private InputStream saveFileInDisk() {
         try {
             InputStream inp = file.getInputstream();
@@ -231,8 +233,7 @@ public class ServiceAttachmentName implements Serializable {
             byte[] inputByte = new byte[inp.available()];
 
             inp.read(inputByte);
-            
-           
+
             byte[] outputCipher = Crypto.dec(Cipher.ENCRYPT_MODE, "foreanderDowntop", inputByte);
 //            byte[] outputfinal = Crypto.dec(Cipher.DECRYPT_MODE, "foreanderDowntop", outputCipher);
 //            System.out.println("-------------------------------------");
