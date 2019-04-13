@@ -5,11 +5,17 @@
  */
 package Data;
 
+import DB.DB;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author baraakali
  */
 public class DecisionsJob {
+
     JobPath job;
     Employee employee;
     String status;
@@ -19,7 +25,7 @@ public class DecisionsJob {
     public String externalMessage;
     String date;
 
-    public DecisionsJob(JobPath job, String status, String runing, String cost,String externalMessage) {
+    public DecisionsJob(JobPath job, String status, String runing, String cost, String externalMessage) {
         this.job = job;
         this.status = status;
         this.runing = runing;
@@ -33,6 +39,9 @@ public class DecisionsJob {
         this.cost = cost;
         this.internalMessage = internalMessage;
         this.externalMessage = externalMessage;
+    }
+
+    public DecisionsJob() {
     }
 
     
@@ -99,7 +108,18 @@ public class DecisionsJob {
     public void setDate(String date) {
         this.date = date;
     }
-    
-    
-            
+
+    public void addToDB(int Services_Provided_ID, int Cit_ID, int Service_Citizen_ID) {
+        try {
+            DB data = new DB();
+            String q = "INSERT INTO decisions_job (`Dep_ID`, `Sec_ID`, `Job_ID`, `Services_Provided_ID`, `Order_Departmant`, `Order_Section`, `Order_Job`, `Cit_ID`, `Service_Citizen_ID`, `Emp_ID`, `Status`, `Cost`) VALUES ('" + job.DepId + "', '" + job.sectionID + "', '" + job.id + "', '" + Services_Provided_ID + "', '" + job.dOrder + "', '" + job.sOrder + "', '" + job.order + "', '" + Cit_ID + "', '" + Service_Citizen_ID + "', '" + employee.emp_id + "', 'notdone', '0');";
+            data.write(q);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DecisionsJob.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DecisionsJob.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }

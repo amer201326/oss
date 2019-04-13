@@ -5,14 +5,21 @@
  */
 package Data;
 
+import DB.DB;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author baraakali
  */
 public class DecisionsDepartment {
+
+
+
     String internalMessage;
     String externalMessage;
     String status;
@@ -21,7 +28,7 @@ public class DecisionsDepartment {
     int depId;
     int depOrder;
     String depName;
-    List<DecisionsJob> jobs =new ArrayList<DecisionsJob>();
+    List<DecisionsJob> jobs = new ArrayList<DecisionsJob>();
 
     public DecisionsDepartment(String internalMessage, String externalMessage, String status, String cost, int depId, int depOrder, String depName) {
         this.internalMessage = internalMessage;
@@ -31,6 +38,14 @@ public class DecisionsDepartment {
         this.depId = depId;
         this.depOrder = depOrder;
         this.depName = depName;
+    }
+
+    public DecisionsDepartment(String status, String cost, int depId, int depOrder) {
+        this.status = status;
+        this.cost = cost;
+        this.date = date;
+        this.depId = depId;
+        this.depOrder = depOrder;
     }
 
     
@@ -106,8 +121,18 @@ public class DecisionsDepartment {
         this.jobs = jobs;
     }
 
-    
-    
-    
-    
+    public void addToDB(int Services_Provided_ID , int Cit_ID, int Service_Citizen_ID) {
+        try {
+            DB data = new DB();
+            String q = "INSERT INTO decisions_department (`Dep_ID`, `Order_Departmant`, `Services_Provided_ID`, `Cit_ID`, `Service_Citizen_ID`, `Status`, `Cost`) VALUES ('" + depId + "', '" + depOrder + "', '" + Services_Provided_ID + "', '" + Cit_ID + "', '" + Service_Citizen_ID + "', '"+status+"', '"+cost+"');";
+            data.write(q);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DecisionsDepartment.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DecisionsDepartment.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+
 }

@@ -9,6 +9,7 @@ import Data.GetFromDB;
 import Data.GetFromDBaraa;
 import Data.Service;
 import Data.ServiceAttachmentName;
+import Data.ServiceCitizen;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,10 +29,14 @@ import org.primefaces.model.UploadedFile;
 @ManagedBean
 @ViewScoped
 public class ApplyServiceManager implements Serializable{
+    
+    
+    ServiceCitizen serviceCitizen ;
+    
 
     List<ServiceAttachmentName> allAttachment;
     
-    Service thisService = new Service();
+    //Service thisService = new Service();
     
     List<ServiceAttachmentName> attachment= new ArrayList<ServiceAttachmentName>();
     List<ServiceAttachmentName> attwhithFile=new ArrayList<ServiceAttachmentName>();
@@ -43,9 +48,22 @@ public class ApplyServiceManager implements Serializable{
          idCitizen = 1;
         Map<String, String> parameterMap = (Map<String, String>) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
           String param = parameterMap.get("id");
-          thisService = GetFromDB.getServiceByID2(param);
-          attavhmentByserviceById();
+            serviceCitizen = new ServiceCitizen();
+            serviceCitizen.thisService = GetFromDB.getServiceByID2(param);
           
+            allAttachment = GetFromDB.getAttavhmentByserviceById(serviceCitizen.thisService.getId());
+            System.out.println("Bdddddd"+allAttachment.size());
+            for (ServiceAttachmentName serviceAttachmentName :  allAttachment) {
+            
+             if(serviceAttachmentName.getFileDownload() == null)
+                 serviceCitizen.attachment.add(serviceAttachmentName);
+            else
+                 serviceCitizen.attwhithFile.add(serviceAttachmentName);
+                 
+         }
+             attachment = serviceCitizen.attachment;
+            attwhithFile = serviceCitizen.attwhithFile;  
+              
     }
     
     public StreamedContent getFileDownload() {
@@ -57,28 +75,28 @@ public class ApplyServiceManager implements Serializable{
     }
     
     
-    public Service getThisService() {
-        return thisService;
-    }
-
-    public void setThisService(Service thisService) {
-        this.thisService = thisService;
-    }
-    
-     private void attavhmentByserviceById() {
-         allAttachment = GetFromDB.getAttavhmentByserviceById(thisService.getId());
-         for (ServiceAttachmentName serviceAttachmentName :  allAttachment) {
-            
-             if(serviceAttachmentName.getFileDownload() == null)
-                 attachment.add(serviceAttachmentName);
-            else
-                 attwhithFile.add(serviceAttachmentName);
-                 
-         }
-
-         
-     }
-
+//    public Service getThisService() {
+//        return thisService;
+//    }
+//
+//    public void setThisService(Service thisService) {
+//        this.thisService = thisService;
+//    }
+//    
+//     private void attavhmentByserviceById() {
+//         allAttachment = GetFromDB.getAttavhmentByserviceById(thisService.getId());
+//         for (ServiceAttachmentName serviceAttachmentName :  allAttachment) {
+//            
+//             if(serviceAttachmentName.getFileDownload() == null)
+//                 attachment.add(serviceAttachmentName);
+//            else
+//                 attwhithFile.add(serviceAttachmentName);
+//                 
+//         }
+//
+//         
+//     }
+//
     public List<ServiceAttachmentName> getAttachment() {
         return attachment;
     }
@@ -94,12 +112,12 @@ public class ApplyServiceManager implements Serializable{
     public void setAttwhithFile(List<ServiceAttachmentName> attwhithFile) {
         this.attwhithFile = attwhithFile;
     }
-    
-    public void putFileForDownload(int i){
-        System.out.println("index "+i);
-        fileDownload = attwhithFile.get(i).getFileDownload();
-    }
-    
+//    
+//    public void putFileForDownload(int i){
+//        System.out.println("index "+i);
+//        fileDownload = attwhithFile.get(i).getFileDownload();
+//    }
+//    
 //    public UploadedFile file ;
 //     ServiceAttachmentName thisAttachment = new ServiceAttachmentName();
 //
@@ -133,18 +151,21 @@ public class ApplyServiceManager implements Serializable{
 //        FacesMessage msg = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
 //        FacesContext.getCurrentInstance().addMessage(null, msg);
 //    }  
-
-    public List<ServiceAttachmentName> getAllAttachment() {
-        return allAttachment;
-    }
-
-    public void setAllAttachment(List<ServiceAttachmentName> allAttachment) {
-        this.allAttachment = allAttachment;
-    }
+//
+//    public List<ServiceAttachmentName> getAllAttachment() {
+//        return allAttachment;
+//    }
+//
+//    public void setAllAttachment(List<ServiceAttachmentName> allAttachment) {
+//        this.allAttachment = allAttachment;
+//    }
     
     
     public void submit(){
-        GetFromDBaraa.ApplyService(idCitizen, thisService.getId(), allAttachment,note);
+        
+        serviceCitizen.addToDataBase();
+        
+        //GetFromDBaraa.ApplyService(idCitizen, thisService.getId(), allAttachment,note);
     }
 
     public String getNote() {

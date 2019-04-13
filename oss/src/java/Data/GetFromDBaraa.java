@@ -224,68 +224,70 @@ public class GetFromDBaraa {
 
     }
 
-    public static void ApplyService(int Cit_ID, int Services_Provided_ID, List<ServiceAttachmentName> allAttachment,String note) {
-
-        List<StepsAndDecsions> pathD;
-        List<StepsAndDecsionsJob> pathJ;
-
-        int idMaxAAC = getMaxId_attachment_archive_citizen();
-        idMaxAAC++;
-
-        int idMaxSC = getMaxId_service_citizen();
-        idMaxSC++;
-
-        try {
-            DB data = new DB();
-            String q = "start transaction;";
-
-            q = "INSERT INTO service_citizen (`Service_Citizen_ID`, `Services_Provided_ID`, `Cit_ID`, `Date`, `status`, `note`) VALUES ('" + idMaxSC + "', '" + Services_Provided_ID + "', '" + Cit_ID + "', '1', 'notdone' , '"+note+"');";
-            data.write(q);
-            System.out.println(q);
-            
-            for (ServiceAttachmentName a : allAttachment) {
-
-                q = "INSERT INTO attachment_archive_citizen (`Atta_ArchiveC_ID`, `Cit_ID`, `ServiceAttachmentName_ID`,`file`) VALUES ('" + idMaxAAC + "', '" + Cit_ID + "', '" + a.id +"', '"+ a.file+"');";
-                data.write(q);
-                idMaxAAC++;
-                q = "INSERT INTO attachment_service_citizen (`Atta_ArchiveC_ID`, `Service_Citizen_ID`, `Services_Provided_ID`, `Cit_ID`) VALUES ('" + idMaxAAC + "', '" + idMaxSC + "', '" + Services_Provided_ID + "', '" + Cit_ID + "');";
-                data.write(q);
-                idMaxAAC++;
-
-            }
-
-            pathD = stepAndDecDep(Cit_ID, Services_Provided_ID);
-            for (StepsAndDecsions d : pathD) {
-                q = "INSERT INTO decisions_department (`Dep_ID`, `Order_Departmant`, `Services_Provided_ID`, `Cit_ID`, `Service_Citizen_ID`, `Status`, `Cost`, `Date`) VALUES ('"+d.departmentPaths.id+"', '"+d.departmentPaths.order+"', '"+Services_Provided_ID+"', '"+Cit_ID +"', '"+idMaxSC+"', 'notdone', '0', '1');";
-
-            }
-            
-            pathJ = stepAndDecJop(Cit_ID, Services_Provided_ID);
-            for (StepsAndDecsionsJob j : pathJ) {
-                q = "INSERT INTO decisions_job (`Dep_ID`, `Sec_ID`, `Job_ID`, `Services_Provided_ID`, `Order_Departmant`, `Order_Section`, `Order_Job`, `Cit_ID`, `Service_Citizen_ID`, `Emp_ID`, `Status`, `Cost`, `Date`) VALUES ('"+j.jobPath.DepId+"', '"+j.jobPath.sectionID+"', '"+j.jobPath.id+"', '"+Services_Provided_ID +"', '"+j.jobPath.dOrder+"', '"+j.jobPath.sOrder+"', '"+j.jobPath.order+"', '"+Cit_ID+"', '"+idMaxSC+"', '"+j.decisionsJob.employee.emp_id+"', 'notdone', '0', '1');";
-
-            }
-
-
-            q = "commit;";
-            data.write(q);
-
-        } catch (SQLException | ClassNotFoundException ex) {
-            DB data;
-            try {
-                data = new DB();
-                String q = "rollback;";
-                data.write(q);
-            } catch (SQLException ex1) {
-                Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex1);
-            } catch (ClassNotFoundException ex1) {
-                Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex1);
-            }
-
-            Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
+//    public static void ApplyService(int Cit_ID, int Services_Provided_ID, List<ServiceAttachmentName> allAttachment,String note) {
+//
+//        List<StepsAndDecsions> pathD;
+//        List<StepsAndDecsionsJob> pathJ;
+//
+//        int idMaxAAC = getMaxId_attachment_archive_citizen();
+//        idMaxAAC++;
+//
+//        int idMaxSC = getMaxId_service_citizen();
+//        idMaxSC++;
+//
+//        try {
+//            DB data = new DB();
+//            String q = "start transaction;";
+//
+//            
+//            
+//            q = "INSERT INTO service_citizen (`Service_Citizen_ID`, `Services_Provided_ID`, `Cit_ID`, `Date`, `status`, `note`) VALUES ('" + idMaxSC + "', '" + Services_Provided_ID + "', '" + Cit_ID + "', '1', 'notdone' , '"+note+"');";
+//            data.write(q);
+//            System.out.println(q);
+//            
+//            for (ServiceAttachmentName a : allAttachment) {
+//
+//                q = "INSERT INTO attachment_archive_citizen (`Atta_ArchiveC_ID`, `Cit_ID`, `ServiceAttachmentName_ID`,`file`) VALUES ('" + idMaxAAC + "', '" + Cit_ID + "', '" + a.id +"', '"+ a.file+"');";
+//                data.write(q);
+//                idMaxAAC++;
+//                q = "INSERT INTO attachment_service_citizen (`Atta_ArchiveC_ID`, `Service_Citizen_ID`, `Services_Provided_ID`, `Cit_ID`) VALUES ('" + idMaxAAC + "', '" + idMaxSC + "', '" + Services_Provided_ID + "', '" + Cit_ID + "');";
+//                data.write(q);
+//                idMaxAAC++;
+//
+//            }
+//
+//            pathD = stepAndDecDep(Cit_ID, Services_Provided_ID);
+//            for (StepsAndDecsions d : pathD) {
+//                q = "INSERT INTO decisions_department (`Dep_ID`, `Order_Departmant`, `Services_Provided_ID`, `Cit_ID`, `Service_Citizen_ID`, `Status`, `Cost`, `Date`) VALUES ('"+d.departmentPaths.id+"', '"+d.departmentPaths.order+"', '"+Services_Provided_ID+"', '"+Cit_ID +"', '"+idMaxSC+"', 'notdone', '0', '1');";
+//
+//            }
+//            
+//            pathJ = stepAndDecJop(Cit_ID, Services_Provided_ID);
+//            for (StepsAndDecsionsJob j : pathJ) {
+//                q = "INSERT INTO decisions_job (`Dep_ID`, `Sec_ID`, `Job_ID`, `Services_Provided_ID`, `Order_Departmant`, `Order_Section`, `Order_Job`, `Cit_ID`, `Service_Citizen_ID`, `Emp_ID`, `Status`, `Cost`, `Date`) VALUES ('"+j.jobPath.DepId+"', '"+j.jobPath.sectionID+"', '"+j.jobPath.id+"', '"+Services_Provided_ID +"', '"+j.jobPath.dOrder+"', '"+j.jobPath.sOrder+"', '"+j.jobPath.order+"', '"+Cit_ID+"', '"+idMaxSC+"', '"+j.decisionsJob.employee.emp_id+"', 'notdone', '0', '1');";
+//
+//            }
+//
+//
+//            q = "commit;";
+//            data.write(q);
+//
+//        } catch (SQLException | ClassNotFoundException ex) {
+//            DB data;
+//            try {
+//                data = new DB();
+//                String q = "rollback;";
+//                data.write(q);
+//            } catch (SQLException ex1) {
+//                Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex1);
+//            } catch (ClassNotFoundException ex1) {
+//                Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex1);
+//            }
+//
+//            Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//    }
 
     public static int getMaxId_attachment_archive_citizen() {
         int id = 0;
