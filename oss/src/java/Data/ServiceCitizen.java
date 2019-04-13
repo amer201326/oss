@@ -34,17 +34,6 @@ public class ServiceCitizen {
 
     public ServiceCitizen() {
         
-//        List<ServiceAttachmentName> allAttachment = GetFromDB.getAttavhmentByserviceById(thisService.getId());
-//        System.out.println("Data.ServiceCitizen.<init>()"+allAttachment.size());
-//        for (ServiceAttachmentName serviceAttachmentName : allAttachment) {
-//
-//            if (serviceAttachmentName.getFileDownload() == null) {
-//                attachment.add(serviceAttachmentName);
-//            } else {
-//                attwhithFile.add(serviceAttachmentName);
-//            }
-//
-//        }
 
     }
 
@@ -61,7 +50,9 @@ public class ServiceCitizen {
 
             DB data = new DB();
             String q = "start transaction;";
+            data.write(q);
             q = "INSERT INTO service_citizen (`Service_Citizen_ID`, `Services_Provided_ID`, `Cit_ID`, `Date`, `status`, `note`) VALUES ('" + idMaxSC + "', '" + Services_Provided_ID + "', '" + Cit_ID + "', '1', 'notdone' , '" + note + "');";
+            System.out.println(q);
             data.write(q);
 
             for (ServiceAttachmentName a : attachment) {
@@ -93,7 +84,8 @@ public class ServiceCitizen {
                 decisionsJob.addToDB(Services_Provided_ID, Cit_ID, Service_Citizen_ID);
 
             }
-
+ q = "commit;";
+            data.write(q);
         } catch (SQLException | ClassNotFoundException ex) {
             DB data;
             try {
@@ -131,4 +123,21 @@ public class ServiceCitizen {
         return id;
     }
 
+    public Service getThisService() {
+        return thisService;
+    }
+
+    public void setThisService(Service thisService) {
+        this.thisService = thisService;
+    }
+
+    public int getCit_ID() {
+        return Cit_ID;
+    }
+
+    public void setCit_ID(int Cit_ID) {
+        this.Cit_ID = Cit_ID;
+    }
+
+    
 }

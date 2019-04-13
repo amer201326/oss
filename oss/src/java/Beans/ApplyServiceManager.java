@@ -50,9 +50,10 @@ public class ApplyServiceManager implements Serializable{
           String param = parameterMap.get("id");
             serviceCitizen = new ServiceCitizen();
             serviceCitizen.thisService = GetFromDB.getServiceByID2(param);
-          
+          serviceCitizen.setCit_ID(1);
             allAttachment = GetFromDB.getAttavhmentByserviceById(serviceCitizen.thisService.getId());
             System.out.println("Bdddddd"+allAttachment.size());
+            
             for (ServiceAttachmentName serviceAttachmentName :  allAttachment) {
             
              if(serviceAttachmentName.getFileDownload() == null)
@@ -174,6 +175,14 @@ public class ApplyServiceManager implements Serializable{
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public ServiceCitizen getServiceCitizen() {
+        return serviceCitizen;
+    }
+
+    public void setServiceCitizen(ServiceCitizen serviceCitizen) {
+        this.serviceCitizen = serviceCitizen;
     }
     
 }
