@@ -116,7 +116,7 @@ public class ServiceAttachmentName implements Serializable {
     }
 
     public void update() {
-        String q = "UPDATE serviceattachmentname SET ServA_Name = '" + name + "',notes = '" + notes + "' WHERE (ServiceAttachmentName_ID = " + id + ");";
+        String q = "UPDATE serviceattachmentname SET ServA_Name = '" + name + "',notes = '" + notes + "',`haveFile` = '" + haveFile + "' WHERE (ServiceAttachmentName_ID = " + id + ");";
         System.out.println(q);
         try {
             DB data = new DB();
@@ -126,6 +126,48 @@ public class ServiceAttachmentName implements Serializable {
             Logger.getLogger(ServiceAttachmentName.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ServiceAttachmentName.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void updatewithFile() {
+
+        if (file.getSize() != 0) {
+            String q = "UPDATE `oss`.`serviceattachmentname` SET `ServA_Name` = ?,`File` = ?,`notes` = ?,`typeFile` = ?,`haveFile` = ? WHERE `ServiceAttachmentName_ID` = " + id + " ;";
+
+            System.out.println(q);
+            try {
+                DB data = new DB();
+                PreparedStatement p = data.prepareStatement(q);
+                p.setString(1, name);
+                p.setBinaryStream(2, saveFileInDisk());
+                p.setString(3, notes);
+                p.setString(4, nameFile);
+                p.setString(5, haveFile);
+                p.executeUpdate();
+            } catch (SQLException ex) {
+                Logger.getLogger(ServiceAttachmentName.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(ServiceAttachmentName.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            String q = "UPDATE `oss`.`serviceattachmentname` SET `ServA_Name` = ?,`notes` = ?,`typeFile` = ?,`haveFile` = ? WHERE `ServiceAttachmentName_ID` = " + id + " ;";
+
+            System.out.println(q);
+            try {
+                DB data = new DB();
+                PreparedStatement p = data.prepareStatement(q);
+                p.setString(1, name);
+                //p.setBinaryStream(1, saveFileInDisk());
+                p.setString(2, notes);
+                p.setString(3, nameFile);
+                p.setString(4, haveFile);
+                p.executeUpdate();
+            } catch (SQLException ex) {
+                Logger.getLogger(ServiceAttachmentName.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(ServiceAttachmentName.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
     }
@@ -147,7 +189,7 @@ public class ServiceAttachmentName implements Serializable {
     }
 
     public void addAttachToDBWitoutFile() {
-        
+
         String q = "INSERT INTO oss.serviceattachmentname (`ServiceAttachmentName_ID`, `ServA_Name`, `notes`, `haveFile`)  VALUES (null,'"
                 + name + "','" + notes + "','" + haveFile + "');";
 
@@ -164,7 +206,7 @@ public class ServiceAttachmentName implements Serializable {
     }
 
     public void addAttachToDBwithFile() {
-        
+
         String q = "INSERT INTO serviceattachmentname VALUES(null,?,?,?,?,?);";
         System.out.println(q);
 
@@ -177,8 +219,7 @@ public class ServiceAttachmentName implements Serializable {
             s.setString(3, notes);
 
             s.setString(4, nameFile);
-            
-            
+
             s.setString(5, haveFile);
             s.executeUpdate();
         } catch (SQLException ex) {
@@ -223,8 +264,6 @@ public class ServiceAttachmentName implements Serializable {
     public void setHaveFile(String haveFile) {
         this.haveFile = haveFile;
     }
-
-    
 
     private InputStream saveFileInDisk() {
         try {
@@ -296,6 +335,10 @@ public class ServiceAttachmentName implements Serializable {
 //            System.out.println(e.getMessage());
 //        }
         return null;
+    }
+
+    public void updatewithoutFile() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

@@ -56,6 +56,7 @@ public class ServiceAttachemntManage implements Serializable {
     }
 
     public void setServ(ServiceAttachmentName serv) {
+        System.out.println(serv+" is set ------------");
         this.serv = serv;
     }
 
@@ -72,6 +73,17 @@ public class ServiceAttachemntManage implements Serializable {
         ((ServiceAttachmentName) event.getObject()).update();
 
     }
+    public void editAttachment(){
+        
+        serv.updatewithFile();
+        //serv = new ServiceAttachmentName();
+    }
+     public void editAttachmentNoFile(){
+        
+        serv.update();
+        //serv = new ServiceAttachmentName();
+    }
+        
 
     public void onAttachCancel(RowEditEvent event) {
 

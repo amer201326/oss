@@ -90,58 +90,83 @@
                                             <div id="form1" class="col-sm-12 mb-3 mb-sm-0">
                                                 <br/>
                                                 <!--Here-->
-                                                
+
                                                 <h:form id="formAttachment">
                                                     <h:head id="msgs"/>
-                                                   
-                                                        <p:dataTable id="tabla" var="attach" value="#{serviceAttachemntManage.allServicesAttachwithoutFile}"  
-                                                                     editable="true" style="margin-bottom:20px; text-align: center;" rowKey="#{attach.id}" selectionMode="single" 
-                                                                     selection="#{serviceAttachemntManage.serv}" rows="10" paginator="true"
-                                                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                                                     rowsPerPageTemplate="5,10,15"   >
+
+                                                    <p:dataTable id="tabla" var="attach" value="#{serviceAttachemntManage.allServicesAttachwithoutFile}"  
+                                                                  style="margin-bottom:20px; text-align: center;" rowKey="#{attach.id}" selectionMode="single" 
+                                                                 selection="#{serviceAttachemntManage.serv}" rows="10" paginator="true"
+                                                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                                 rowsPerPageTemplate="5,10,15"   >
 
 
-                                                            <f:facet name="header">
-                                                                متطلبات
-                                                            </f:facet>
+                                                        <f:facet name="header">
+                                                            متطلبات
+                                                        </f:facet>
 
 
-                                                            <p:ajax event="rowEdit" listener="#{serviceAttachemntManage.onAttachEdit}" update=":formAttachment:msgs" />
-                                                            <p:ajax event="rowEditCancel" listener="#{serviceAttachemntManage.onAttachCancel}" update=":formAttachment:msgs" />
-                                                            <p:ajax event="rowSelect" process="@this"  listener="#{serviceAttachemntManage.onAttachSelected}"/>
+                                                        <p:ajax event="rowSelect" process="@this"  listener="#{serviceAttachemntManage.onAttachSelected}"/>
 
-                                                            <p:column style="width:10%;" headerText="تعديل">
-                                                                <p:rowEditor  />
-                                                            </p:column>
+                                                        <p:column style="width:13%;" headerText="تعديل">
+                                                            <p:commandLink update=" fedi2:editAt"  oncomplete="PF('editAttachmen2').show()" title="View Detail">
+                                                                <h:outputText styleClass="fa fa-fw fa-edit" style="margin:0 auto;"/>
+                                                                <f:setPropertyActionListener value="#{attachment}" target="#{serviceAttachemntManage.serv}" />
+                                                            </p:commandLink>
+                                                        </p:column> 
 
-                                                            <p:column headerText="ملاحظات">
-                                                                <p:cellEditor>
-                                                                    <f:facet name="output"><h:outputText value="#{attach.notes}" /></f:facet>
-                                                                    <f:facet name="input"><p:inputTextarea value="#{attach.notes}" style="width:100%; margin-top: 5px; margin-bottom: 5px;" label="Name"/></f:facet>
-                                                                </p:cellEditor>
-                                                            </p:column>
+                                                        <p:column headerText="ملاحظات">
+                                                            <h:outputText value="#{attach.notes}" />
+                                                           
+                                                        </p:column>
 
-                                                            <p:column headerText="الاسم">
-                                                                <p:cellEditor>
-                                                                    <f:facet name="output"><h:outputText value="#{attach.name}" /></f:facet>
-                                                                    <f:facet name="input"><p:inputText value="#{attach.name}" style="width:100%" /></f:facet>
-                                                                </p:cellEditor>
-                                                            </p:column>
+                                                        <p:column headerText="الاسم">
+                                                            <h:outputText value="#{attach.name}" />
+                                                        </p:column>
 
-                                                            <p:column headerText="الرقم" >
-                                                                <p:cellEditor disabled="true">
-                                                                    <f:facet name="output"><h:outputText value="#{attach.id}" /></f:facet>
-                                                                    <f:facet name="input"><p:inputText id="modelInput" value="#{attach.id}" style="width:100%"/></f:facet>
-                                                                </p:cellEditor>
-                                                            </p:column>
+                                                        <p:column headerText="الرقم" >
+                                                            <h:outputText value="#{attach.id}" />
+                                                        </p:column>
 
-                                                        </p:dataTable>
-                                                        <br/>
-                                                        <hr style="border: 2px solid orange;"/>
+                                                    </p:dataTable>
+                                                    <br/>
+                                                    <hr style="border: 2px solid orange;"/>
 
 
 
                                                 </h:form>
+                                                <p:dialog  resizable="false" header=" تعديل المرفق" widgetVar="editAttachmen2" dir="rtl">
+                                                    <h:form id="fedi2" >
+                                                        <h:panelGrid id="editAt" columns="2" cellpadding="5" style="display: flex; justify-content: center;">
+
+                                                            <h:outputLabel for="name222" value="إضافة:" />
+                                                            <p:inputText id="name222" label="name222" value="#{serviceAttachemntManage.serv.name}" required="true" style="width: 70%"/>
+
+                                                            <h:outputLabel for="note111" value="الملاحظات:" />
+                                                            <p:inputTextarea id="note111" rows="6" cols="33" value="#{serviceAttachemntManage.serv.notes}" style="width: 70%"/> 
+
+                                                            <p:outputLabel for="requirement11" value="مطلوب ارفاق ملف ؟" />
+                                                            <h:panelGrid  columns="2" cellpadding="5" class="mytable">
+                                                                <p:selectOneRadio value="#{serviceAttachemntManage.serv.haveFile}" id="requirement11" class="label1" required="true">
+                                                                    <f:selectItem  itemLabel="نعم" itemValue="yes" />
+                                                                    <f:selectItem  itemLabel="لا" itemValue="no" />
+                                                                </p:selectOneRadio>
+                                                            </h:panelGrid>
+
+                                                           
+
+                                                            <h:outputLabel/>
+                                                            <p:commandButton value="تعديل" ajax="false" action="#{serviceAttachemntManage.editAttachmentNoFile()}" 
+                                                                             update="@form :formAttachment" oncomplete="PF('editAttachmen2').hide();"
+                                                                             style="display: flex; justify-content: center;"/>
+                                                            <p:growl id="messages12"  showDetail="false" showSummary="false"/>
+                                                        </h:panelGrid>
+
+
+
+                                                    </h:form>
+
+                                                </p:dialog>
 
                                                 <div style="display: flex; justify-content: center;"  class="col-sm-12">                                                
                                                     <h:form>
@@ -175,7 +200,7 @@
                                                     </p:dialog> 
 
                                                 </h:form>
- 
+
 
 
                                                 <h:form>
@@ -225,7 +250,7 @@
                                                     <h:head id="msgs1"/>
 
                                                     <p:dataTable id="singleDTattach" var="attachment" value="#{serviceAttachemntManage.allServicesAttachwithFile}"  
-                                                                 editable="true" style="margin-bottom:20px; text-align: center;" rowKey="#{attachment.id}" selectionMode="single" 
+                                                                 style="margin-bottom:20px; text-align: center;" rowKey="#{attachment.id}" selectionMode="single" 
                                                                  selection="#{serviceAttachemntManage.serv}" rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                                                  rowsPerPageTemplate="5,10,15" >
 
@@ -234,32 +259,28 @@
                                                             متطلبات
                                                         </f:facet>
 
-                                                        <p:ajax event="rowEdit" listener="#{serviceAttachemntManage.onAttachEdit}" update=":formAttach1:msgs1" />
-                                                        <p:ajax event="rowEditCancel" listener="#{serviceAttachemntManage.onAttachCancel}" update=":formAttach1:msgs1" />
+
 
 
                                                         <p:column style="width:13%;" headerText="تعديل">
-                                                            <p:rowEditor />
-                                                        </p:column>
+                                                            <p:commandLink update="formEdit" oncomplete="PF('editAttachmen').show()" title="View Detail">
+                                                                <h:outputText styleClass="fa fa-fw fa-edit" style="margin:0 auto;"/>
+                                                                <f:setPropertyActionListener value="#{attachment}" target="#{serviceAttachemntManage.serv}" />
+                                                            </p:commandLink>
+                                                        </p:column> 
                                                         <p:column headerText="الملف" >
-                                                           
+
                                                             <h:outputText value="#{attachment.nameFile}" />
-                                                            
 
                                                         </p:column>
+
                                                         <p:ajax event="rowSelect" process="@this" update="formAttach1" listener="#{serviceAttachemntManage.onAttachSelected}"/>
                                                         <p:column headerText="الاسم">
-                                                            <p:cellEditor>
-                                                                <f:facet name="output"><h:outputText value="#{attachment.name}" /></f:facet>
-                                                                <f:facet name="input"><p:inputText value="#{attachment.name}" style="width:100%" label="Name"/></f:facet>
-                                                            </p:cellEditor>
+                                                            <h:outputText value="#{attachment.name}" />
                                                         </p:column>
 
                                                         <p:column headerText="الرقم" >
-                                                            <p:cellEditor disabled="true">
-                                                                <f:facet name="output"><h:outputText value="#{attachment.id}" /></f:facet>
-                                                                <f:facet name="input"><p:inputText id="modelInput1" value="#{attachment.id}" style="width:100%"/></f:facet>
-                                                            </p:cellEditor>
+                                                            <h:outputText value="#{attachment.id}" />
                                                         </p:column>
 
                                                     </p:dataTable>
@@ -267,7 +288,42 @@
 
 
                                                 </h:form>
+                                                <p:dialog resizable="false" header=" تعديل المرفق" widgetVar="editAttachmen" dir="rtl">
+                                                    <h:form id="formEdit" enctype="multipart/form-data">
+                                                        <h:panelGrid columns="2" cellpadding="5" style="display: flex; justify-content: center;">
 
+                                                            <h:outputLabel for="name22" value="إضافة:" />
+                                                            <p:inputText id="name22" label="name22" value="#{serviceAttachemntManage.serv.name}" required="true" style="width: 70%"/>
+
+                                                            <h:outputLabel for="note11" value="الملاحظات:" />
+                                                            <p:inputTextarea id="note11" rows="6" cols="33" value="#{serviceAttachemntManage.serv.notes}" style="width: 70%"/> 
+
+                                                            <p:outputLabel for="requirement1" value="مطلوب ارفاق ملف ؟" />
+                                                            <h:panelGrid  columns="2" cellpadding="5" class="mytable">
+                                                                <p:selectOneRadio value="#{serviceAttachemntManage.serv.haveFile}" id="requirement1" class="label1" required="true">
+                                                                    <f:selectItem  itemLabel="نعم" itemValue="yes" />
+                                                                    <f:selectItem  itemLabel="لا" itemValue="no" />
+                                                                </p:selectOneRadio>
+                                                            </h:panelGrid>
+
+                                                            <h:outputLabel for="file11" value="اختر المرفق:"/> 
+                                                            <p:fileUpload id="file11" value="#{serviceAttachemntManage.serv.file}" mode="simple" label="استعراض" 
+                                                                          skinSimple="true" style="display:flex; justify-content: flex-end; width: 100%"/>
+
+
+                                                            <h:outputLabel/>
+                                                            <p:commandButton value="تعديل" ajax="false" action="#{serviceAttachemntManage.editAttachment()}" 
+                                                                             update="@form :formAttach1" oncomplete="PF('editAttachmen').hide();"
+                                                                             style="display: flex; justify-content: center;"/>
+                                                            <p:growl id="messages"  showDetail="false" showSummary="false"/>
+                                                        </h:panelGrid>
+
+
+
+                                                    </h:form>
+
+                                                </p:dialog>
+                                                
 
                                                 <p:dialog resizable="false" header=" إضافة مرفقات" widgetVar="dlg1" dir="rtl">
                                                     <h:form enctype="multipart/form-data">
@@ -286,7 +342,7 @@
                                                                     <f:selectItem  itemLabel="لا" itemValue="no" />
                                                                 </p:selectOneRadio>
                                                             </h:panelGrid>
-                                                            
+
                                                             <h:outputLabel for="file1" value="اختر المرفق:"/> 
                                                             <p:fileUpload id="file1" value="#{serviceAttachemntManage.newService.file}" mode="simple" label="استعراض" 
                                                                           skinSimple="true" style="display:flex; justify-content: flex-end; width: 100%"/>
@@ -296,7 +352,7 @@
                                                             <p:commandButton value="اضافة" ajax="false" action="#{serviceAttachemntManage.addAttachment()}" 
                                                                              update="@form :formAttach1" oncomplete="PF('dlg1').hide();"
                                                                              style="display: flex; justify-content: center;"/>
-                                                            <p:growl id="messages"  showDetail="false" showSummary="false"/>
+                                                            <p:growl id="messages2"  showDetail="false" showSummary="false"/>
                                                         </h:panelGrid>
 
 
