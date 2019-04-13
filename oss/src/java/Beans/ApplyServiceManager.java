@@ -6,6 +6,7 @@
 package Beans;
 
 import Data.GetFromDB;
+import Data.GetFromDBaraa;
 import Data.Service;
 import Data.ServiceAttachmentName;
 import java.io.Serializable;
@@ -28,12 +29,16 @@ import org.primefaces.model.UploadedFile;
 @ViewScoped
 public class ApplyServiceManager implements Serializable{
 
+    List<ServiceAttachmentName> allAttachment;
+    
     Service thisService = new Service();
+    
     List<ServiceAttachmentName> attachment= new ArrayList<ServiceAttachmentName>();
     List<ServiceAttachmentName> attwhithFile=new ArrayList<ServiceAttachmentName>();
     StreamedContent fileDownload;
-    
+    int idCitizen ;
     public ApplyServiceManager() {
+         idCitizen = 1;
         Map<String, String> parameterMap = (Map<String, String>) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
           String param = parameterMap.get("id");
           thisService = GetFromDB.getServiceByID2(param);
@@ -59,7 +64,7 @@ public class ApplyServiceManager implements Serializable{
     }
     
      private void attavhmentByserviceById() {
-          List<ServiceAttachmentName> allAttachment = GetFromDB.getAttavhmentByserviceById(thisService.getId());
+         allAttachment = GetFromDB.getAttavhmentByserviceById(thisService.getId());
          for (ServiceAttachmentName serviceAttachmentName :  allAttachment) {
              if(serviceAttachmentName.getFileDownload() != null)
                  attwhithFile.add(serviceAttachmentName);
@@ -124,8 +129,17 @@ public class ApplyServiceManager implements Serializable{
 //        FacesMessage msg = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
 //        FacesContext.getCurrentInstance().addMessage(null, msg);
 //    }  
+
+    public List<ServiceAttachmentName> getAllAttachment() {
+        return allAttachment;
+    }
+
+    public void setAllAttachment(List<ServiceAttachmentName> allAttachment) {
+        this.allAttachment = allAttachment;
+    }
+    
     
     public void submit(){
-        
+        GetFromDBaraa.ApplyService(idCitizen, thisService.getId(), allAttachment);
     }
 }

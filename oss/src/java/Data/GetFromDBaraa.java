@@ -7,8 +7,11 @@ package Data;
 
 import DB.DB;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -188,26 +191,27 @@ public class GetFromDBaraa {
             while (r.next()) {
                 s = new JobPath(r.getInt(1), r.getInt(2), r.getInt(3), r.getString(18), r.getInt(5), r.getInt(6), r.getInt(7));
                 d = new DecisionsJob(r.getString(11), r.getString(12), r.getString(13), r.getString(14), r.getString(15));
+                d.employee.emp_id=r.getInt(10);
                 sdj = new StepsAndDecsionsJob(s, d);
                 Lsdj.add(sdj);
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        System.out.println("size isL"+Lsdj.size());
+        System.out.println("size isL" + Lsdj.size());
         return Lsdj;
     }
-    
+
     public static ArrayList<DecisionSection> sectionsteps(int idservice) {
-         ArrayList<DecisionSection> sections = new ArrayList<>();
+        ArrayList<DecisionSection> sections = new ArrayList<>();
         try {
             DB db = new DB();
             SectionPath sp;
-            DecisionSection s ;
+            DecisionSection s;
             String sql = "SELECT * FROM steps_section as ss  inner join section as s on ss.Sec_ID = s.Sec_ID where ss.Services_Provided_ID = " + idservice + " ;";
             ResultSet r = db.read(sql);
             while (r.next()) {
-                 sp = new SectionPath(r.getInt(1), r.getInt(4), r.getInt(2), r.getString(8), r.getInt(5));
+                sp = new SectionPath(r.getInt(1), r.getInt(4), r.getInt(2), r.getString(8), r.getInt(5));
                 s = new DecisionSection();
                 s.setSection(sp);;
                 sections.add(s);
@@ -217,6 +221,105 @@ public class GetFromDBaraa {
         }
 
         return sections;
-    
+
     }
+
+    public static void ApplyService(int Cit_ID, int Services_Provided_ID, List<ServiceAttachmentName> allAttachment) {
+
+        List<StepsAndDecsions> pathD;
+        List<StepsAndDecsionsJob> pathJ;
+
+        int idMaxAAC = getMaxId_attachment_archive_citizen();
+        idMaxAAC++;
+
+        int idMaxSC = getMaxId_service_citizen();
+        idMaxSC++;
+
+        try {
+            DB data = new DB();
+            String q = "start transaction;";
+
+            q = "INSERT INTO service_citizen (`Service_Citizen_ID`, `Services_Provided_ID`, `Cit_ID`, `Date`, `status`) VALUES ('" + idMaxSC + "', '" + Services_Provided_ID + "', '" + Cit_ID + "', '1', 'notdone');";
+            data.write(q);
+
+            for (ServiceAttachmentName a : allAttachment) {
+
+                q = "INSERT INTO attachment_archive_citizen (`Atta_ArchiveC_ID`, `Cit_ID`, `ServiceAttachmentName_ID`) VALUES ('" + idMaxAAC + "', '" + Cit_ID + "', '" + a.id + "');";
+                data.write(q);
+                q = "INSERT INTO attachment_service_citizen (`Atta_ArchiveC_ID`, `Service_Citizen_ID`, `Services_Provided_ID`, `Cit_ID`) VALUES ('" + idMaxAAC + "', '" + idMaxSC + "', '" + Services_Provided_ID + "', '" + Cit_ID + "');";
+                data.write(q);
+
+            }
+
+            pathD = stepAndDecDep(Cit_ID, Services_Provided_ID);
+            for (StepsAndDecsions d : pathD) {
+                q = "INSERT INTO decisions_department (`Dep_ID`, `Order_Departmant`, `Services_Provided_ID`, `Cit_ID`, `Service_Citizen_ID`, `Status`, `Cost`, `Date`) VALUES ('"+d.departmentPaths.id+"', '"+d.departmentPaths.order+"', '"+Services_Provided_ID+"', '"+Cit_ID +"', '"+idMaxSC+"', 'notdone', '0', '1');";
+
+            }
+            
+            pathJ = stepAndDecJop(Cit_ID, Services_Provided_ID);
+            for (StepsAndDecsionsJob j : pathJ) {
+                q = "INSERT INTO decisions_job (`Dep_ID`, `Sec_ID`, `Job_ID`, `Services_Provided_ID`, `Order_Departmant`, `Order_Section`, `Order_Job`, `Cit_ID`, `Service_Citizen_ID`, `Emp_ID`, `Status`, `Cost`, `Date`) VALUES ('"+j.jobPath.DepId+"', '"+j.jobPath.sectionID+"', '"+j.jobPath.id+"', '"+Services_Provided_ID +"', '"+j.jobPath.dOrder+"', '"+j.jobPath.sOrder+"', '"+j.jobPath.order+"', '"+Cit_ID+"', '"+idMaxSC+"', '"+j.decisionsJob.employee.emp_id+"', 'notdone', '0', '1');";
+
+            }
+
+
+            q = "commit;";
+            data.write(q);
+
+        } catch (SQLException | ClassNotFoundException ex) {
+            DB data;
+            try {
+                data = new DB();
+                String q = "rollback;";
+                data.write(q);
+            } catch (SQLException ex1) {
+                Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex1);
+            } catch (ClassNotFoundException ex1) {
+                Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+
+            Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public static int getMaxId_attachment_archive_citizen() {
+        int id = 0;
+        try {
+            DB db = new DB();
+
+            String sql = "SELECT MAX(Atta_ArchiveC_ID) FROM attachment_service_citizen;";
+
+            System.out.println(sql);
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                id = r.getInt(1);
+                System.out.println(id);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return id;
+    }
+
+    public static int getMaxId_service_citizen() {
+        int id = 0;
+        try {
+            DB db = new DB();
+
+            String sql = "SELECT MAX(Service_Citizen_ID) FROM service_citizen;";
+
+            System.out.println(sql);
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                id = r.getInt(1);
+                System.out.println(id);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return id;
+    }
+
 }
