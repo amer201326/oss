@@ -38,8 +38,9 @@ public class ApplyServiceManager implements Serializable{
     
     //Service thisService = new Service();
     
-    List<ServiceAttachmentName> attachment= new ArrayList<ServiceAttachmentName>();
-    List<ServiceAttachmentName> attwhithFile=new ArrayList<ServiceAttachmentName>();
+//    List<ServiceAttachmentName> attachment= new ArrayList<ServiceAttachmentName>();
+//    List<ServiceAttachmentName> attwhithFile=new ArrayList<ServiceAttachmentName>();
+    
     StreamedContent fileDownload;
     int idCitizen ;
     String note = "";
@@ -62,8 +63,7 @@ public class ApplyServiceManager implements Serializable{
                  serviceCitizen.attwhithFile.add(serviceAttachmentName);
                  
          }
-             attachment = serviceCitizen.attachment;
-            attwhithFile = serviceCitizen.attwhithFile;  
+            
               
     }
     
@@ -98,22 +98,22 @@ public class ApplyServiceManager implements Serializable{
 //         
 //     }
 //
-    public List<ServiceAttachmentName> getAttachment() {
-        return attachment;
-    }
-
-    public void setAttachment(List<ServiceAttachmentName> attachment) {
-        this.attachment = attachment;
-    }
-
-    public List<ServiceAttachmentName> getAttwhithFile() {
-        return attwhithFile;
-    }
-
-    public void setAttwhithFile(List<ServiceAttachmentName> attwhithFile) {
-        this.attwhithFile = attwhithFile;
-    }
-//    
+//    public List<ServiceAttachmentName> getAttachment() {
+//        return attachment;
+//    }
+//
+//    public void setAttachment(List<ServiceAttachmentName> attachment) {
+//        this.attachment = attachment;
+//    }
+//
+//    public List<ServiceAttachmentName> getAttwhithFile() {
+//        return attwhithFile;
+//    }
+//
+//    public void setAttwhithFile(List<ServiceAttachmentName> attwhithFile) {
+//        this.attwhithFile = attwhithFile;
+//    }
+    
 //    public void putFileForDownload(int i){
 //        System.out.println("index "+i);
 //        fileDownload = attwhithFile.get(i).getFileDownload();
@@ -163,8 +163,7 @@ public class ApplyServiceManager implements Serializable{
     
     
     public void submit(){
-        
-        serviceCitizen.addToDataBase();
+         serviceCitizen.addToDataBase();
         
         //GetFromDBaraa.ApplyService(idCitizen, thisService.getId(), allAttachment,note);
     }
@@ -184,5 +183,8 @@ public class ApplyServiceManager implements Serializable{
     public void setServiceCitizen(ServiceCitizen serviceCitizen) {
         this.serviceCitizen = serviceCitizen;
     }
+
+   
+    
     
 }

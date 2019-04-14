@@ -27,13 +27,12 @@ public class ServiceCitizen {
     int Cit_ID;
     String Date;
     String status;
-    String note;
+    String note = "g";
     public List<ServiceAttachmentName> attachment = new ArrayList<ServiceAttachmentName>();
     public List<ServiceAttachmentName> attwhithFile = new ArrayList<ServiceAttachmentName>();
     public Service thisService = new Service();
 
     public ServiceCitizen() {
-        
 
     }
 
@@ -51,40 +50,45 @@ public class ServiceCitizen {
             DB data = new DB();
             String q = "start transaction;";
             data.write(q);
+            
             q = "INSERT INTO service_citizen (`Service_Citizen_ID`, `Services_Provided_ID`, `Cit_ID`, `Date`, `status`, `note`) VALUES ('" + idMaxSC + "', '" + Services_Provided_ID + "', '" + Cit_ID + "', '1', 'notdone' , '" + note + "');";
             System.out.println(q);
             data.write(q);
-
+            System.out.println("12345");
+            
             for (ServiceAttachmentName a : attachment) {
+                System.out.println("filee "+a.file +"   "+a.name);
 
                 AttachmentArchiveCitizen attachmentArchiveCitizen = new AttachmentArchiveCitizen(idMaxAAC, Cit_ID, a.id, a.file);
                 attachmentArchiveCitizen.addToDataBase();
                 idMaxAAC++;
 
             }
-            for (ServiceAttachmentName af : attwhithFile) {
-                AttachmentServiceCitizen attachmentServiceCitizen = new AttachmentServiceCitizen(idMaxAAC, Service_Citizen_ID, Services_Provided_ID, Cit_ID, af.file);
-                attachmentServiceCitizen.addToDataBase();
-                idMaxAAC++;
+            System.out.println("ggggggggg");
 
-            }
-
-            pathD = stepAndDecDep(Cit_ID, Services_Provided_ID);
-            for (StepsAndDecsions d : pathD) {
-                DecisionsDepartment decisionsDepartment = new DecisionsDepartment("notdone", "0", d.departmentPaths.id, d.departmentPaths.order);
-                decisionsDepartment.addToDB(Services_Provided_ID, Cit_ID, Service_Citizen_ID);
-
-            }
-
-            pathJ = stepAndDecJop(Cit_ID, Services_Provided_ID);
-            for (StepsAndDecsionsJob j : pathJ) {
-                DecisionsJob decisionsJob = new DecisionsJob();
-                decisionsJob.job = j.jobPath;
-                decisionsJob.employee = j.decisionsJob.employee;
-                decisionsJob.addToDB(Services_Provided_ID, Cit_ID, Service_Citizen_ID);
-
-            }
- q = "commit;";
+//            for (ServiceAttachmentName af : attwhithFile) {
+//                AttachmentServiceCitizen attachmentServiceCitizen = new AttachmentServiceCitizen(idMaxAAC, Service_Citizen_ID, Services_Provided_ID, Cit_ID, af.file);
+//                attachmentServiceCitizen.addToDataBase();
+//                idMaxAAC++;
+//
+//            }
+//            System.out.println("333333");
+//            pathD = stepAndDecDep(Cit_ID, Services_Provided_ID);
+//            for (StepsAndDecsions d : pathD) {
+//                DecisionsDepartment decisionsDepartment = new DecisionsDepartment("notdone", "0", d.departmentPaths.id, d.departmentPaths.order);
+//                decisionsDepartment.addToDB(Services_Provided_ID, Cit_ID, Service_Citizen_ID);
+//
+//            }
+//
+//            pathJ = stepAndDecJop(Cit_ID, Services_Provided_ID);
+//            for (StepsAndDecsionsJob j : pathJ) {
+//                DecisionsJob decisionsJob = new DecisionsJob();
+//                decisionsJob.job = j.jobPath;
+//                decisionsJob.employee = j.decisionsJob.employee;
+//                decisionsJob.addToDB(Services_Provided_ID, Cit_ID, Service_Citizen_ID);
+//
+//            }
+            q = "commit;";
             data.write(q);
         } catch (SQLException | ClassNotFoundException ex) {
             DB data;
@@ -100,7 +104,7 @@ public class ServiceCitizen {
 
             Logger.getLogger(ServiceCitizen.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        System.out.println("eennd");
         return false;
     }
 
@@ -137,6 +141,62 @@ public class ServiceCitizen {
 
     public void setCit_ID(int Cit_ID) {
         this.Cit_ID = Cit_ID;
+    }
+
+    public List<ServiceAttachmentName> getAttachment() {
+        return attachment;
+    }
+
+    public void setAttachment(List<ServiceAttachmentName> attachment) {
+        this.attachment = attachment;
+    }
+
+    public List<ServiceAttachmentName> getAttwhithFile() {
+        return attwhithFile;
+    }
+
+    public void setAttwhithFile(List<ServiceAttachmentName> attwhithFile) {
+        this.attwhithFile = attwhithFile;
+    }
+
+    public int getService_Citizen_ID() {
+        return Service_Citizen_ID;
+    }
+
+    public void setService_Citizen_ID(int Service_Citizen_ID) {
+        this.Service_Citizen_ID = Service_Citizen_ID;
+    }
+
+    public int getServices_Provided_ID() {
+        return Services_Provided_ID;
+    }
+
+    public void setServices_Provided_ID(int Services_Provided_ID) {
+        this.Services_Provided_ID = Services_Provided_ID;
+    }
+
+    public String getDate() {
+        return Date;
+    }
+
+    public void setDate(String Date) {
+        this.Date = Date;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 
     

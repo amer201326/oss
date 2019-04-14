@@ -55,7 +55,7 @@ public class AttachmentServiceCitizen {
             s.setInt(2, Service_Citizen_ID);
             s.setInt(3,Services_Provided_ID);
             s.setInt(4,Cit_ID);
-            s.setBinaryStream(5, saveFileInDisk());
+            //s.setBinaryStream(5, saveFileInDisk());
             s.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(AttachmentServiceCitizen.class.getName()).log(Level.SEVERE, null, ex);

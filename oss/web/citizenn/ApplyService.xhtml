@@ -61,7 +61,7 @@
 
 
                     </div>
-                    <h:form id="applycervce">
+                    <h:form id="applycervce" enctype="multipart/form-data">
                         <div class="col-lg-12 mb-4">
 
                             <div class="card shadow mb-4">
@@ -86,11 +86,12 @@
                                         <div>
                                             <h2 class="section-heading inLineB" style="padding: 10px">: متطلبات الخدمة</h2>
 
-                                            <ui:repeat value="#{applyServiceManager.attachment}" var="attachment" >
+                                            
+                                            <ui:repeat value="#{applyServiceManager.serviceCitizen.attachment}" var="att" >
                                                 <div class="row " align="right" style="text-align: right" >
-                                                    <p:fileUpload value="#{attachment.file}" mode="simple" skinSimple="true" rendered="#{attachment.haveFile}" />
-                                                <li  style=" direction: rtl; margin-right: 40px" ><h6>#{attachment.name}</h6></li>
-                                                <h6>#{attachment.notes}</h6>
+                                                    <p:fileUpload value="#{att.file}" mode="simple" skinSimple="true"  />
+                                                    <li  style=" direction: rtl; margin-right: 40px" ><h6>#{att.name}</h6></li>
+                                                    <h6>#{att.notes}</h6>
                                                 </div>
 
                                             </ui:repeat>
@@ -101,9 +102,9 @@
                                         <br/><hr style="border: 2px solid orange; margin-left: 10px; margin-right: 10px;"/><br/>
                                         <div>
                                             <h2 class="section-heading inLineB" style="padding: 10px">: مرفقات الخدمة</h2>
-                                            <ui:repeat value="#{applyServiceManager.attwhithFile}" varStatus="index" var="attachment" >
+                                            <ui:repeat value="#{applyServiceManager.serviceCitizen.attwhithFile}" varStatus="index" var="attachment" >
                                                 <h6>#{attachment.name}</h6>
-                                                <p:commandButton value="تنزيل" ajax="false" actionListener="#{applyServiceManager.putFileForDownload(index.index)}" icon="fa fa-arrow-down" >
+                                                <p:commandButton value="تنزيل" ajax="false"  icon="fa fa-arrow-down" >
                                                     <p:fileDownload value="#{attachment.fileDownload}" />
                                                 </p:commandButton>  
                                                     <p:fileUpload value="#{attachment.file}" mode="simple" skinSimple="true"  />
@@ -124,7 +125,7 @@
 
                                     </div>
                                     <div class="text-center">
-                                        <p:commandButton actionListener="#{applyServiceManager.submit()}" value="تقديم "   class="myButtonB"/>
+                                        <p:commandButton actionListener="#{applyServiceManager.submit()}" value="تقديم "   class="myButtonB" ajax="false"/>
 
                                     </div>
 

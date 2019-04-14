@@ -34,36 +34,31 @@ public class AttachmentArchiveCitizen {
         this.file = file;
     }
 
+    public void addToDataBase() {
 
-    
+        String q = "INSERT INTO attachment_archive_citizen (`Atta_ArchiveC_ID`, `Cit_ID`, `ServiceAttachmentName_ID`) VALUES (null,null,null);";
+       
+        System.out.println("data is   > < " + Atta_ArchiveC_ID + "  " + Cit_ID + "  " + ServiceAttachmentName_ID);
 
-    public boolean addToDataBase() {
-
-        
-        String q = "INSERT INTO attachment_archive_citizen (`Atta_ArchiveC_ID`, `Cit_ID`, `ServiceAttachmentName_ID`,`file`) VALUES"
-                + " (?,?,?,?);";
-        System.out.println(q);
-
-        
         try {
             DB data = new DB();
             PreparedStatement s = data.prepareStatement(q);
+
             s.setInt(1, Atta_ArchiveC_ID);
-            
             s.setInt(2, Cit_ID);
-            s.setInt(3,ServiceAttachmentName_ID);
-            s.setBinaryStream(4, saveFileInDisk());
+            s.setInt(3, ServiceAttachmentName_ID);
+            
+            //s.setBinaryStream(2, saveFileInDisk());
+            
+            System.out.println(q);
             s.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(AttachmentArchiveCitizen.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+            
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(AttachmentArchiveCitizen.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        return false;
+     
     }
 
-    
     private InputStream saveFileInDisk() {
         try {
             InputStream inp = file.getInputstream();
@@ -71,8 +66,7 @@ public class AttachmentArchiveCitizen {
             byte[] inputByte = new byte[inp.available()];
 
             inp.read(inputByte);
-            
-           
+
             byte[] outputCipher = Crypto.dec(Cipher.ENCRYPT_MODE, "foreanderDowntop", inputByte);
 
             InputStream inputForData = new ByteArrayInputStream(outputCipher);
@@ -85,6 +79,5 @@ public class AttachmentArchiveCitizen {
 
         return null;
     }
-
 
 }
