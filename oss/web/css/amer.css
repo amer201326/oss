@@ -594,6 +594,11 @@ hr{
     display: flex;
     flex-direction: row-reverse;
 }
+.flexjustify-content{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}
 
 #addnewservice2 .ui-picklist .ui-picklist-list{
     height: 170px;
@@ -665,4 +670,104 @@ table{
 .ui-selectonemenu-label .ui-inputfield .ui-corner-all{
     text-align: center;
     float: right;
+}
+
+#dre span{
+    display: flex;
+    justify-content:center;
+   
+}
+
+
+
+
+span[id*='j_idt8'] .ui-button{
+    
+        
+    color: #f1e5e6;
+    background-color: #d3394c;
+    border: none;
+    
+  
+ 
+  font-size: 20px;
+  font-weight: bold;
+}
+
+span[id*='j_idt14'] .ui-button{
+    
+        
+    color: #f1e5e6;
+    background-color: #d3394c;
+    border: none;
+    
+  
+ 
+  font-size: 20px;
+  font-weight: bold;
+}
+
+span[id*='j_idt14'] {
+   
+    color: #f1e5e6;
+    background-color: #d3394c;
+    
+}
+span[id*='j_idt8'] {
+   
+    color: #f1e5e6;
+    background-color: #d3394c;
+    
+}
+span[id*='uploadAm']{
+   
+    display: flex;
+    justify-content: center;
+    
+}
+span[id*='uploadAm'] .ui-fileupload-filename{
+   margin: 0.2em;
+   margin-right: 10px;
+    
+}
+
+.flexColomn{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    
+}
+span[id*='j_idt16'] .ui-button{
+    
+        
+    color: #f1e5e6;
+    background-color: #d3394c;
+    border: none;
+    
+  
+ 
+  font-size: 20px;
+  font-weight: bold;
+}
+
+button[id*='downloadAT']{
+   
+    display: flex;
+    justify-content: center;
+    color: #f1e5e6;
+    background: #d3394c 50% 50% ; 
+    border: none;
+    width: 209px;
+    border-radius: 0px;
+    
+  font-size: 20px;
+  font-weight: bold;
+    
+}
+button[id*='downloadAT'] .ui-button{
+   background-color: #d3394c;
+}
+
+#divDown button .ui-button{
+    background-color: #d3394c;
 }

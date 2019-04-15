@@ -56,7 +56,7 @@ public class ServiceAttachmentName implements Serializable {
             this.id = id;
             this.name = name;
             this.notes = notes;
-
+            this.haveFile = haveFile;
             this.nameFile = nameFile;
             if (inputStream != null) {
                 System.out.println(id);
@@ -150,7 +150,7 @@ public class ServiceAttachmentName implements Serializable {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(ServiceAttachmentName.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }else{
+        } else {
             String q = "UPDATE `oss`.`serviceattachmentname` SET `ServA_Name` = ?,`notes` = ?,`typeFile` = ?,`haveFile` = ? WHERE `ServiceAttachmentName_ID` = " + id + " ;";
 
             System.out.println(q);
@@ -335,6 +335,24 @@ public class ServiceAttachmentName implements Serializable {
 //            System.out.println(e.getMessage());
 //        }
         return null;
+    }
+
+    @Override
+    public String toString() {
+        return "ServiceAttachmentName{" + "id=" + id + ", name=" + name + ", notes=" + notes + ", file=" + file + ", nameFile=" + nameFile + ", fileDownload=" + fileDownload + ", haveFile=" + haveFile + '}';
+    }
+
+    public boolean haveFileToupload() {
+        if (haveFile != null) {
+            return haveFile.compareTo("yes")==0;
+        }
+        return false;
+    }
+    public String color(){
+        if(haveFileToupload())
+            return "danger";
+        else
+            return "primary";
     }
 
     public void updatewithoutFile() {

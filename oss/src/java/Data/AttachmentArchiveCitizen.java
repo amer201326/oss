@@ -36,8 +36,8 @@ public class AttachmentArchiveCitizen {
 
     public void addToDataBase() {
 
-        String q = "INSERT INTO attachment_archive_citizen (`Atta_ArchiveC_ID`, `Cit_ID`, `ServiceAttachmentName_ID`) VALUES (null,null,null);";
-       
+        String q = "INSERT INTO attachment_archive_citizen (`Atta_ArchiveC_ID`, `Cit_ID`,`ServiceAttachmentName_ID`,`file`) VALUES (?,?,?,?);";
+
         System.out.println("data is   > < " + Atta_ArchiveC_ID + "  " + Cit_ID + "  " + ServiceAttachmentName_ID);
 
         try {
@@ -47,16 +47,20 @@ public class AttachmentArchiveCitizen {
             s.setInt(1, Atta_ArchiveC_ID);
             s.setInt(2, Cit_ID);
             s.setInt(3, ServiceAttachmentName_ID);
-            
-            //s.setBinaryStream(2, saveFileInDisk());
-            
+
+            if (file.getSize() > 0) {
+                s.setBinaryStream(4, saveFileInDisk());
+            } else {
+                s.setBinaryStream(4, null);
+            }
+
             System.out.println(q);
             s.executeUpdate();
-            
+
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(AttachmentArchiveCitizen.class.getName()).log(Level.SEVERE, null, ex);
         }
-     
+
     }
 
     private InputStream saveFileInDisk() {

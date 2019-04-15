@@ -44,10 +44,10 @@ public class ServiceCitizen {
         idMaxSC++;
         int idMaxAAC = getMaxId_attachment_archive_citizen();
         idMaxAAC++;
-
+        DB data;
         try {
 
-            DB data = new DB();
+            data = new DB();
             String q = "start transaction;";
             data.write(q);
             
@@ -57,7 +57,7 @@ public class ServiceCitizen {
             System.out.println("12345");
             
             for (ServiceAttachmentName a : attachment) {
-                System.out.println("filee "+a.file +"   "+a.name);
+                
 
                 AttachmentArchiveCitizen attachmentArchiveCitizen = new AttachmentArchiveCitizen(idMaxAAC, Cit_ID, a.id, a.file);
                 attachmentArchiveCitizen.addToDataBase();
@@ -66,42 +66,46 @@ public class ServiceCitizen {
             }
             System.out.println("ggggggggg");
 
-//            for (ServiceAttachmentName af : attwhithFile) {
-//                AttachmentServiceCitizen attachmentServiceCitizen = new AttachmentServiceCitizen(idMaxAAC, Service_Citizen_ID, Services_Provided_ID, Cit_ID, af.file);
-//                attachmentServiceCitizen.addToDataBase();
-//                idMaxAAC++;
-//
-//            }
-//            System.out.println("333333");
-//            pathD = stepAndDecDep(Cit_ID, Services_Provided_ID);
-//            for (StepsAndDecsions d : pathD) {
-//                DecisionsDepartment decisionsDepartment = new DecisionsDepartment("notdone", "0", d.departmentPaths.id, d.departmentPaths.order);
-//                decisionsDepartment.addToDB(Services_Provided_ID, Cit_ID, Service_Citizen_ID);
-//
-//            }
-//
-//            pathJ = stepAndDecJop(Cit_ID, Services_Provided_ID);
-//            for (StepsAndDecsionsJob j : pathJ) {
-//                DecisionsJob decisionsJob = new DecisionsJob();
-//                decisionsJob.job = j.jobPath;
-//                decisionsJob.employee = j.decisionsJob.employee;
-//                decisionsJob.addToDB(Services_Provided_ID, Cit_ID, Service_Citizen_ID);
-//
-//            }
+            for (ServiceAttachmentName af : attwhithFile) {
+                AttachmentServiceCitizen attachmentServiceCitizen = new AttachmentServiceCitizen(idMaxAAC, Service_Citizen_ID, Services_Provided_ID, Cit_ID, af.file);
+                attachmentServiceCitizen.addToDataBase();
+                idMaxAAC++;
+
+            }
+            System.out.println("333333");
+            pathD = stepAndDecDep(Cit_ID, Services_Provided_ID);
+            for (StepsAndDecsions d : pathD) {
+                DecisionsDepartment decisionsDepartment = new DecisionsDepartment("notdone", "0", d.departmentPaths.id, d.departmentPaths.order);
+                decisionsDepartment.addToDB(Services_Provided_ID, Cit_ID, Service_Citizen_ID);
+
+            }
+
+            pathJ = stepAndDecJop(Cit_ID, Services_Provided_ID);
+            for (StepsAndDecsionsJob j : pathJ) {
+                DecisionsJob decisionsJob = new DecisionsJob();
+                decisionsJob.job = j.jobPath;
+                decisionsJob.employee = j.decisionsJob.employee;
+                decisionsJob.addToDB(Services_Provided_ID, Cit_ID, Service_Citizen_ID);
+
+            }
             q = "commit;";
+            System.out.println(q);
             data.write(q);
-        } catch (SQLException | ClassNotFoundException ex) {
-            DB data;
+        } catch (SQLException ex) { 
             try {
                 data = new DB();
                 String q = "rollback;";
+                System.out.println(q);
                 data.write(q);
+                
+                
+                Logger.getLogger(ServiceCitizen.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex1) {
                 Logger.getLogger(ServiceCitizen.class.getName()).log(Level.SEVERE, null, ex1);
             } catch (ClassNotFoundException ex1) {
                 Logger.getLogger(ServiceCitizen.class.getName()).log(Level.SEVERE, null, ex1);
             }
-
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(ServiceCitizen.class.getName()).log(Level.SEVERE, null, ex);
         }
         System.out.println("eennd");

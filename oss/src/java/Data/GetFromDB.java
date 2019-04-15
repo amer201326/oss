@@ -610,7 +610,7 @@ public class GetFromDB {
             ResultSet r = db.read(sql);
             while (r.next()) {
                 a = new ServiceAttachmentName(r.getInt(1),r.getString(2),r.getString(4),r.getBinaryStream(3),r.getString(5),r.getString(6));
-                
+                System.out.println(a+"   "+r.getString(6));
                 name.add(a);
             }
         } catch (SQLException ex) {

@@ -63,54 +63,175 @@
                     </div>
                     <h:form id="applycervce" enctype="multipart/form-data">
                         <div class="col-lg-12 mb-4">
+                            <div class="col-lg-12" style="text-align: right; min-width:700px ">
+
+                                <div class="card shadow mb-xl-4">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">معلومات الخدمة</h6>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <div class="row-space flexAm">
+                                            <div class="col-xl-6 col-md-6 mb-4">
+
+                                                <div class="card border-left-primary shadow h-100 py-2">
+                                                    <div class="card-body">
+
+                                                        <div class="row no-gutters align-items-center">
+                                                            <div class="col-auto">
+                                                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                                            </div>
+                                                            <div class="col mr-2" style="text-align: right">
+                                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" >رسوم طلب الخدمة</div>
+                                                                <div class="h5 mb-0 font-weight-bold text-gray-800">#{applyServiceManager.serviceCitizen.thisService.cost}</div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Earnings (Monthly) Card Example -->
+                                            <div class="col-xl-6 col-md-6 mb-4">
+                                                <div class="card border-left-success shadow h-100 py-2">
+                                                    <div class="card-body">
+                                                        <div class="row no-gutters align-items-center">
+
+                                                            <div class="col-auto">
+
+                                                                <i class="fa fa-thumbs-up fa-2x text-gray-300"></i>
+                                                            </div>
+                                                            <div class="col mr-2" style="text-align: right">
+                                                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">عدد ايام الاستجابة</div>
+                                                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                                    <div style="display: inline;margin-right: 5px">يوم  </div>
+                                                                    <div style="display: inline ;float: right"> #{applyServiceManager.serviceCitizen.thisService.days}</div> 
+
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Earnings (Monthly) Card Example -->
+
+
+                                        </div>
+                                        <div class="flexAm row-space" style="margin-right: 14px">
+                                            <div class="px-3 mb-2 py-5 bg-gradient-warning  text-white border-bottom-warning ">ملاحظات</div>
+                                            <div class=" col-xl-11 col-md-6 px-3  mb-2 py-4  border-bottom-warning ">
+                                                <div class="card-body">
+                                                    #{applyServiceManager.serviceCitizen.thisService.note}
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+
+
+                                    </div>
+                                </div>
+                                <div class="card shadow mb-xl-4">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary"> متطلبات الخدمة</h6>
+                                    </div>
+
+                                    <div class="card-body">
+                                        
+                                        <ui:repeat value="#{applyServiceManager.serviceCitizen.attachment}" var="att" varStatus="in" >
+                                            <div class="flexAm row-space " style="margin-right: 14px">
+
+                                                <div class="px-3 mb-2 py-5 bg-gradient-#{att.color()} text-white border-bottom-#{att.color()}">مطلوب #{in.index+1}</div>
+                                                <div class="col-sm-11 px-5  mb-2 py-4  border-bottom-#{att.color()} ">
+                                                    <div class="flexjustify-content row-space" style="margin-right: 14px">
+                                                        <dir>
+                                                            <div class="text-xs font-weight-bold text-xs text-success mb-1" style="font-size: 1.4em">#{att.name}</div>
+
+                                                            <div class="text-xs font-weight-bold text-gray-800 text-uppercase mb-1" style="font-size: 0.8em ; margin-right: 20px;">#{att.notes}</div>
+
+                                                        </dir>
+                                                        <div>
+                                                            
+                                                            <p:fileUpload id="uploadAm" label="اختار ملف" value="#{att.file}" mode="simple" skinSimple="true"  />
+                                                            
+                                                            <p:outputLabel rendered="#{att.haveFileToupload()}" >
+                                                                <div class=" font-weight-bold redcolor" style="font-size: 0.8em ; margin-right: 20px;">يجب ارفاق المتطلب</div>
+                                                            </p:outputLabel>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </ui:repeat>
+
+
+
+
+
+                                    </div>
+                                </div>
+                                <div class="card shadow mb-xl-4">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary"> مرفقات الخدمة</h6>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <ui:repeat value="#{applyServiceManager.serviceCitizen.attwhithFile}" var="att" varStatus="in" >
+                                            <div class="flexAm row-space " style="margin-right: 14px">
+
+                                                <div class="px-3 mb-2 py-5 bg-gradient-#{att.color()} text-white border-bottom-#{att.color()}">مطلوب #{in.index+1}</div>
+                                                <div class="col-sm-11 px-5  mb-2 py-4  border-bottom-#{att.color()} ">
+                                                    <div class="flexjustify-content row-space" style="margin-right: 14px">
+                                                        <dir>
+                                                            <div class="text-xs font-weight-bold text-xs text-success mb-1" style="font-size: 1.4em">#{att.name}</div>
+
+                                                            <div class="text-xs font-weight-bold text-gray-800 text-uppercase mb-1" style="font-size: 0.8em ; margin-right: 20px;">#{att.notes}</div>
+
+                                                        </dir>
+                                                        <div id="divDown" class="flexColomn ">
+                                                            <p:commandButton id="downloadAT"  value="تنزيل" ajax="false"  icon="fa fa-arrow-down" >
+                                                                <p:fileDownload value="#{att.fileDownload}" />
+                                                            </p:commandButton>  
+                                                            <p:fileUpload id="uploadAm" label="اختار ملف" value="#{att.file}" mode="simple" skinSimple="true" rendered="true" />
+                                                            <p:message for="uploadAm" />
+                                                            <p:outputLabel rendered="#{att.haveFileToupload()}" >
+                                                                <div class=" font-weight-bold redcolor" style="font-size: 0.8em ; margin-right: 20px;">يجب ارفاق المتطلب</div>
+                                                            </p:outputLabel>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </ui:repeat>
+
+
+
+
+
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="card shadow mb-4">
 
                                 <div class="card-body">
 
+
+
+
+
+
                                     <div style="text-align: right">
-                                        <h2 class="section-heading inLineB" style="padding: 10px">: معلومات الخدمة</h2>
-
-                                        <div style="margin-right: 40px">
-
-
-                                            <h6 class="m-2  text-primary" >#{applyServiceManager.serviceCitizen.thisService.days} : عدد ايام الاستجابة</h6>
-                                            <h6 class="m-2  text-primary" >#{applyServiceManager.serviceCitizen.thisService.cost} : الرسوم </h6> 
-                                            <h6 class="m-2  text-primary" >#{applyServiceManager.serviceCitizen.thisService.department.nameA} : الدائرة </h6> 
-                                            <h6 class="m-2  text-primary" >#{applyServiceManager.serviceCitizen.thisService.section.name} : القسم </h6> 
-                                            <h6 class="m-2  text-primary" >#{applyServiceManager.serviceCitizen.thisService.note} : الملاحظات </h6> 
-
-
-                                        </div>
-                                        <br/><hr style="border: 2px solid orange; margin-left: 10px; margin-right: 10px;"/><br/>
-                                        <div>
-                                            <h2 class="section-heading inLineB" style="padding: 10px">: متطلبات الخدمة</h2>
-
-                                            
-                                            <ui:repeat value="#{applyServiceManager.serviceCitizen.attachment}" var="att" >
-                                                <div class="row " align="right" style="text-align: right" >
-                                                    <p:fileUpload value="#{att.file}" mode="simple" skinSimple="true"  />
-                                                    <li  style=" direction: rtl; margin-right: 40px" ><h6>#{att.name}</h6></li>
-                                                    <h6>#{att.notes}</h6>
-                                                </div>
-
-                                            </ui:repeat>
 
 
 
-                                        </div>
-                                        <br/><hr style="border: 2px solid orange; margin-left: 10px; margin-right: 10px;"/><br/>
-                                        <div>
-                                            <h2 class="section-heading inLineB" style="padding: 10px">: مرفقات الخدمة</h2>
-                                            <ui:repeat value="#{applyServiceManager.serviceCitizen.attwhithFile}" varStatus="index" var="attachment" >
-                                                <h6>#{attachment.name}</h6>
-                                                <p:commandButton value="تنزيل" ajax="false"  icon="fa fa-arrow-down" >
-                                                    <p:fileDownload value="#{attachment.fileDownload}" />
-                                                </p:commandButton>  
-                                                    <p:fileUpload value="#{attachment.file}" mode="simple" skinSimple="true"  />
-                                            </ui:repeat>
-                                        </div>
-                                        <br/><hr style="border: 2px solid orange; margin-left: 10px; margin-right: 10px;"/><br/>
+
 
                                         <h2 class="section-heading inLineB" style="padding: 10px">:  ملاحظات</h2>
                                         <br/><br/>
@@ -125,7 +246,8 @@
 
                                     </div>
                                     <div class="text-center">
-                                        <p:commandButton actionListener="#{applyServiceManager.submit()}" value="تقديم "   class="myButtonB" ajax="false"/>
+                                        <p:commandButton id="sub" actionListener="#{applyServiceManager.submit()}" value="تقديم "   class="myButtonB" ajax="false"/>
+                                        
 
                                     </div>
 

@@ -39,12 +39,12 @@ public class DB {
     }
 
     public int write(String sql) throws SQLException {
-        startConnection();
+//        startConnection();
         Statement statement = connection.createStatement();
 
         int x = statement.executeUpdate(sql);
-        connection.close();
-        connection = null;
+//        connection.close();
+//        connection = null;
         return x;
     }
 
@@ -53,6 +53,7 @@ public class DB {
     public PreparedStatement prepareStatement(String sql) {
         
         try {
+            
             myStmt = connection.prepareStatement(sql);
         } catch (SQLException ex) {
             Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
