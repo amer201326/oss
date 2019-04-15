@@ -60,8 +60,7 @@ public class AddServiceManager {
     List<JobOfSection> filterJobsOfSections;
 
     DualListModel<String> attachmentNamesAndResaults;
-    @ManagedProperty(value = "#{sessionLists}")
-    SessionLists sessionLists;
+    
 
     public AddServiceManager() {
         attachmentNames = GetFromDB.getServiceAttachmentName();
@@ -471,13 +470,7 @@ public class AddServiceManager {
         this.attachmentNamesAndResaults = attachmentNamesAndResaults;
     }
 
-    public SessionLists getSessionLists() {
-        return sessionLists;
-    }
-
-    public void setSessionLists(SessionLists sessionLists) {
-        this.sessionLists = sessionLists;
-    }
+    
     
     
 }

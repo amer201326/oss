@@ -41,8 +41,7 @@ public class DepartmentsManage implements Serializable {
     int indexDep = 0;
     List<ServiceCount> servicesCount;
     Department department;
-    @ManagedProperty(value = "#{sessionLists}")
-    SessionLists sessionLists;
+   
     
     List<String> departmentNames;
     Section sectionSelected;
@@ -110,7 +109,7 @@ public class DepartmentsManage implements Serializable {
 
     public void showDepartment(Department d) throws IOException {
         System.out.println("go");
-        sessionLists.departmentSelected = d;
+        
         FacesContext.getCurrentInstance().getExternalContext().redirect("department.xhtml?id="+d.id );
     }
 
@@ -139,17 +138,11 @@ public class DepartmentsManage implements Serializable {
     }
 
     public void deleteSection() {
-        sessionLists.sectionSelected.deleteFromDB();
-        fiterdSections.remove(sessionLists.sectionSelected);
+        sectionSelected.deleteFromDB();
+        fiterdSections.remove(sectionSelected);
     }
 
-    public SessionLists getSessionLists() {
-        return sessionLists;
-    }
-
-    public void setSessionLists(SessionLists sessionLists) {
-        this.sessionLists = sessionLists;
-    }
+   
 
     public Department getDepartment() {
         return department;
@@ -235,7 +228,7 @@ public class DepartmentsManage implements Serializable {
 
     public void onSectionSelected(SelectEvent event) {
         System.out.println("form al ajax " + ((Section) event.getObject()).getId());
-        sessionLists.sectionSelected = (Section) event.getObject();
+        sectionSelected = (Section) event.getObject();
     }
 
     public void onJobSelected(SelectEvent event) {
@@ -371,7 +364,7 @@ public class DepartmentsManage implements Serializable {
         
         try {
 
-            FacesContext.getCurrentInstance().getExternalContext().redirect("section.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("section.xhtml?id="+sectionSelected.getId());
         } catch (IOException ex) {
             Logger.getLogger(DepartmentsManage.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -26,8 +26,7 @@ import org.primefaces.model.OrganigramNode;
 @ViewScoped
 public class OrganigramView implements Serializable {
 
-    @ManagedProperty(value = "#{sessionLists}")
-    SessionLists sessionLists;
+    
 
     private OrganigramNode rootNode;
     private OrganigramNode selection;
@@ -36,13 +35,14 @@ public class OrganigramView implements Serializable {
     private String style = "width: 800px";
     private int leafNodeConnectorHeight = 0;
     private boolean autoScrollToSelection = false;
-
+    Department d;
     private String employeeName;
 
     @PostConstruct
     public void init() {
-
-        Department d = sessionLists.departmentSelected;
+        Map<String, String> parameterMap = (Map<String, String>) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        String id = parameterMap.get("id");
+        d = GetFromDB.getDepartmentById(id);
         selection = new DefaultOrganigramNode(null, "Ridvan Agar", null);
 
         rootNode = new DefaultOrganigramNode("department", "دائرة : " + d.nameA, null);
@@ -86,10 +86,7 @@ public class OrganigramView implements Serializable {
 
     }
 
-    public List<Section> sectionsByID() {
-        
-        return GetFromDB.getFsection(sessionLists.departmentSelected.id);
-    }
+    
 
     protected OrganigramNode addDivision(OrganigramNode parent, String name, String... employees) {
         OrganigramNode divisionNode = new DefaultOrganigramNode("division", name, parent);
@@ -222,12 +219,5 @@ public class OrganigramView implements Serializable {
         this.autoScrollToSelection = autoScrollToSelection;
     }
 
-    public SessionLists getSessionLists() {
-        return sessionLists;
-    }
-
-    public void setSessionLists(SessionLists sessionLists) {
-        this.sessionLists = sessionLists;
-    }
-
+   
 }

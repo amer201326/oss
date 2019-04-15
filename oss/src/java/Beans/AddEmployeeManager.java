@@ -20,16 +20,7 @@ import javax.faces.context.FacesContext;
 @ManagedBean
 @ViewScoped
 public class AddEmployeeManager {
-    @ManagedProperty(value = "#{sessionLists}")
-     SessionLists sessionLists;
-
-    public SessionLists getSessionLists() {
-        return sessionLists;
-    }
-
-    public void setSessionLists(SessionLists sessionLists) {
-        this.sessionLists = sessionLists;
-    }
+    
     
     
     

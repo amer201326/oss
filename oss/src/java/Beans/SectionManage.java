@@ -10,6 +10,7 @@ import Data.JobOfSection;
 import Data.JobTitel;
 import Data.Section;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -32,16 +33,17 @@ public class SectionManage {
     JobOfSection jobOfSectionSelected;
     List<JobTitel> allJob;
     JobOfSection newJobOfsection;
-    @ManagedProperty(value = "#{sessionLists}")
-    SessionLists sessionLists;
+    String  idsection;
     
     public SectionManage() {
-        
-
+        Map<String, String> parameterMap = (Map<String, String>) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        String id = parameterMap.get("id");
+       idsection =id;
     }
      @PostConstruct
     public void init() {
-       jobOfSection = GetFromDB.getJobTittle(sessionLists.sectionSelected.getId());
+            
+       jobOfSection = GetFromDB.getJobTittle(idsection);
        allJob = GetFromDB.getJobTittle();
 
         newJobOfsection = new JobOfSection();
@@ -59,13 +61,7 @@ public class SectionManage {
         this.jobOfSection = jobOfSection;
     }
 
-    public SessionLists getSessionLists() {
-        return sessionLists;
-    }
-
-    public void setSessionLists(SessionLists sessionLists) {
-        this.sessionLists = sessionLists;
-    }
+    
 
     public JobTitel getJobSelected() {
         return jobSelected;
@@ -76,16 +72,16 @@ public class SectionManage {
     }
 
     public void onRowSelect(SelectEvent event) {
-        sessionLists.jobSelected = (JobTitel) event.getObject();
+        jobSelected = (JobTitel) event.getObject();
     }
 
     public void onRowUnselect(UnselectEvent event) {
-        sessionLists.jobSelected = new JobTitel();
+        jobSelected = new JobTitel();
 
     }
 
     public void deleteJobFromSection() {
-        jobOfSectionSelected = new JobOfSection(Integer.parseInt(sessionLists.jobSelected.getId()),Integer.parseInt(sessionLists.sectionSelected.getId()));
+        jobOfSectionSelected = new JobOfSection(Integer.parseInt(jobSelected.getId()),Integer.parseInt(idsection));
         jobOfSectionSelected.delete();
     }
 
@@ -106,7 +102,7 @@ public class SectionManage {
     }
 
     public void addJobForSec() {
-        newJobOfsection.setIdSEction(Integer.parseInt(sessionLists.sectionSelected.getId()));
+        newJobOfsection.setIdSEction(Integer.parseInt(idsection));
         if(!newJobOfsection.addToDB()){
             //FacesContext.getCurrentInstance().addMessage("formSection:eventsDT", new FacesMessage( "Warning!", "لا يمكن اضافة نفس الوظيفة مرتين"));
             FacesContext.getCurrentInstance().addMessage("formSection:eventsDT", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "لا يمكن اضافة نفس الوظيفة مرتين"));

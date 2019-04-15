@@ -697,4 +697,11 @@ public class GetFromDB {
         System.out.println("size is "+sections.size());
         return sections;
     }
+
+    public static Manager getManagerAccount(String username, String passWord) {
+        
+        
+        
+        return null;
+    }
 }
