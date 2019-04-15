@@ -34,10 +34,10 @@ public class GetDB_Eman {
         }
         return screen;
     }
-  
+
     public static List<Employee> getEmployee() {
         Employee em = new Employee();
-        
+
         List<Employee> emp = new ArrayList<Employee>();
         try {
             DB db = new DB();
@@ -49,11 +49,11 @@ public class GetDB_Eman {
                 emp.add(em);
             }
         } catch (Exception e) {
-            System.out.println("bb"+e.getMessage());
+            System.out.println("bb" + e.getMessage());
         }
         return emp;
     }
-    
+
     public static List<Employee> getTableEmployee() {
         Employee em = new Employee();
 
@@ -72,17 +72,17 @@ public class GetDB_Eman {
         }
         return emp;
     }
-    
-     public static List<Employee> getFEmployee(int id) {
+
+    public static List<Employee> getFEmployee(int id) {
         List<Employee> l = new ArrayList<>();
-        Employee s ;
+        Employee s;
         try {
             DB db = new DB();
-            String sql = "select Emp_ID_Card, Emp_ID, Emp_Name, Emp_Mobile, Emp_Email from employees where Dep_ID =" + id +"; ";
-            
+            String sql = "select Emp_ID_Card, Emp_ID, Emp_Name, Emp_Mobile, Emp_Email from employees where Dep_ID =" + id + "; ";
+
             ResultSet r = db.read(sql);
             while (r.next()) {
-                s = new Employee(r.getString(1),r.getInt(2),r.getString(3),r.getString(4), r.getString(5));
+                s = new Employee(r.getString(1), r.getInt(2), r.getString(3), r.getString(4), r.getString(5));
                 l.add(s);
             }
         } catch (Exception e) {
@@ -91,11 +91,6 @@ public class GetDB_Eman {
         return l;
     }
 
-     
-     
-     
-     
-     
 //     public static List<ServiceAttachmentName> getAllAttachment() {
 //        ServiceAttachmentName serviceAttch = new ServiceAttachmentName();
 //        
@@ -114,32 +109,27 @@ public class GetDB_Eman {
 //        }
 //        return serviceAttachment;
 //    }
-     
-     
-     
-     
-     static int getMaxIdCitizen() {
+    static int getMaxIdCitizen() {
         int id = 0;
         try {
             DB db = new DB();
-            
+
             String sql = "SELECT Cit_ID FROM citizen WHERE Cit_ID = ( SELECT MAX(Cit_ID) FROM citizen ) ;";
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
                 id = r.getInt(1);
-                
+
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return id;
     }
-     
-     
-     public static List<Citizen> getallCitizen() {
+
+    public static List<Citizen> getallCitizen() {
         Citizen cit = new Citizen();
-        
+
         List<Citizen> c = new ArrayList<Citizen>();
         try {
             DB db = new DB();
@@ -149,38 +139,60 @@ public class GetDB_Eman {
 
             ResultSet r = db.read(sql);
             while (r.next()) {
-                cit = new Citizen(r.getInt(1), r.getString(2), r.getString(3), r.getString(4), r.getString(5), 
+                cit = new Citizen(r.getInt(1), r.getString(2), r.getString(3), r.getString(4), r.getString(5),
                         r.getString(6), r.getString(7), r.getString(8), r.getString(9));
                 c.add(cit);
             }
         } catch (Exception e) {
-            System.out.println("bb"+e.getMessage());
+            System.out.println("bb" + e.getMessage());
         }
         return c;
     }
-     
-     
-     public static Citizen GetCitizenById(String param) {
-           Citizen cit = new Citizen();
+
+    public static Citizen GetCitizenById(String param) {
+        Citizen cit = new Citizen();
         try {
             DB db = new DB();
-            
-            String sql = "SELECT c.*,ca.* FROM oss.citizen as c inner join  citizenaccount as ca on c.Cit_ID=ca.Cit_ID where c.Cit_ID ="+param+";";
+
+            String sql = "SELECT c.*,ca.* FROM oss.citizen as c inner join  citizenaccount as ca on c.Cit_ID=ca.Cit_ID where c.Cit_ID =" + param + ";";
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
-                 cit = new Citizen(r.getInt(1), r.getString(2), r.getString(3), r.getString(4), r.getString(5), r.getString(6), r.getInt(7), r.getString(8), 
-                         r.getString(9), r.getString(10), r.getString(11), r.getString(12), r.getString(13),
-                         r.getString(14), r.getString(15), r.getString(16), r.getString(17), r.getString(18), r.getString(19),
-                         r.getString(20), r.getString(21));
-                 cit.setAccount(new CitizenAccount(r.getInt(22), r.getString(23), r.getString(24)));
-                
+                cit = new Citizen(r.getInt(1), r.getString(2), r.getString(3), r.getString(4), r.getString(5), r.getString(6), r.getInt(7), r.getString(8),
+                        r.getString(9), r.getString(10), r.getString(11), r.getString(12), r.getString(13),
+                        r.getString(14), r.getString(15), r.getString(16), r.getString(17), r.getString(18), r.getString(19),
+                        r.getString(20), r.getString(21));
+                cit.setAccount(new CitizenAccount(r.getInt(22), r.getString(23), r.getString(24)));
+
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return cit;
-        
+
     }
-     
+
+    public static List<ServiceCitizen_1> getAllRequestService() {
+        ServiceCitizen_1 cit = new ServiceCitizen_1();
+
+        List<ServiceCitizen_1> c = new ArrayList<ServiceCitizen_1>();
+        try {
+            DB db = new DB();
+            String sql = "select c.Cit_ID, c.Cit_FirstName, c.Cit_LastName, s.Service_Citizen_ID, "
+                    + "s.Services_Provided_ID, s.Date, s.status, se.Serv_Name from citizen as c inner "
+                    + "join service_citizen as s on   c.Cit_ID = s.Cit_ID inner join services_provided "
+                    + "as se on s.Services_Provided_ID = se.Services_Provided_ID ;";
+
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                cit = new ServiceCitizen_1(r.getInt(1), r.getString(2), r.getString(3), r.getInt(4), r.getInt(5),
+                        r.getString(6), r.getString(7), r.getString(8));
+                c.add(cit);
+            }
+        } catch (Exception e) {
+            System.out.println("cccccc" + e.getMessage());
+        }
+        return c;
+    }
+
 }
