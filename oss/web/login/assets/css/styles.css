@@ -15,8 +15,11 @@ body {
     background-size: cover;
 }
 
+.form-group{
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+}
 .login-form {
-
     margin: 100px auto;
     max-width: 400px;
     min-width: 399px;
@@ -47,7 +50,7 @@ form[role=login] > div {
 .form-links {
     text-align: center;
     margin-top: 1em;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
 }
 .form-links a {
     color: #fff;
@@ -61,7 +64,7 @@ img{
 .input-group-addon .input-group{
     border: 0 #f2f2f2;
     background-color: #f2f2f2;
-    padding: 2% 2% 2% 2%;
+    padding: 0% 0% 0% 0%;
     font-size: 151%;
 
 }
@@ -72,7 +75,6 @@ img{
     font-size: 153%;
     top: 1.2%;
 }
-
 
 .buttonLog{
     width: 50%;
