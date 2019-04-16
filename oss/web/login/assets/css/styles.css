@@ -16,7 +16,7 @@ body {
 }
 
 .login-form {
-    
+
     margin: 100px auto;
     max-width: 400px;
     min-width: 399px;
@@ -58,13 +58,21 @@ img{
     height: 33%;
 }
 
-.input-group-addon{
+.input-group-addon .input-group{
     border: 0 #f2f2f2;
     background-color: #f2f2f2;
     padding: 2% 2% 2% 2%;
-    font-size: 15%;
-    min-width: 10%;
+    font-size: 151%;
+
 }
+
+.input-group-addon{
+    border: transparent;
+    background-color: transparent;
+    font-size: 153%;
+    top: 1.2%;
+}
+
 
 .buttonLog{
     width: 50%;
@@ -79,9 +87,5 @@ img{
 
 .input-group{
     width: 100%;
-}
-
-.icon1{
-    
 }
 
