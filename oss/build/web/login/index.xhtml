@@ -22,16 +22,44 @@
     </h:head>
     <h:body>
 
-        <section class="container">
+        <section class="loginBox">
             <section class="login-form">
-                <h:form role="login">
-                    <img src="assets/images/muni.png" class="img-responsive" alt="" />
-                    <p:inputText id="user" value="#{msession.username}" placeholder="اسم المستخدم" required="true"  class="form-control input-lg " dir="rtl" />
-                    <p:password id="pass" value="#{msession.passWord}" placeholder="كلمة المرور" required="true"  class="form-control input-lg" dir="rtl"/>
-                    <p:commandButton update="@form" actionListener="#{msession.login()}" onclick="" value="تسجيل الدخول" class="btn btn-lg btn-primary btn-block"/>
-                    
-                                <div class="ui-grid-col-3"><i class="fa fa-fw fa-user"></i>fa-user</div>
-                           
+                <h:form role="login" id="log" class="minimal">
+
+                    <img src="assets/images/muni.png" class="img-responsive" alt="Municipality Login" />
+
+                    <h:panelGrid columns="2" dir="rtl">
+                        <div class="form-group ">
+                            <div class="input-group">
+                                <!-- <p:outputLabel for="username" value="اسم المستخدم" /> -->
+                                 <img src="assets/images/user.png" class="img-responsive icon1" />
+                                <p:inputText id="username" value="#{msession.username}" required="true"  
+                                             label="Username"  class="input-lg" dir="rtl">
+                                    <f:validateLength minimum="2" />
+                                </p:inputText>
+                                <div class="input-group-addon">
+                                    <i class="fa-user"></i> 
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group ">
+                            <div class="input-group">
+                                <!--<p:outputLabel for="password1" value="كلمة المرور" />-->
+                                
+                                  <img src="assets/images/lock.png" class="img-responsive icon1" />
+                                <p:password id="password1" value="#{msession.passWord}" required="true" 
+                                            label="Password" class=" input-lg" dir="rtl"/>
+                                <div class="input-group-addon">
+                                    <i class="fa-lock"></i> 
+                                </div>
+                            </div>
+                        </div>
+                    </h:panelGrid>
+                    <div>
+                    <p:commandButton id="loginButton" value="تسجيل الدخول" update="@parent" 
+                                     action="#{msession.login()}" class="btn btn-primary btn-group-lg btn-minimal buttonLog" />
+                    </div>
                     <div>
                         <a href="#">Create account</a> or <a href="#">reset password</a>
                     </div>
@@ -40,8 +68,9 @@
             </section>
         </section>
 
-        
-        
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+
     </h:body>
-    
+
 </html>
