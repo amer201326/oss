@@ -760,12 +760,39 @@ public class GetFromDB {
             ResultSet r = db.read(sql);
             while (r.next()) {
                 s = new AttachmentArchiveCitizen(r.getInt(1), r.getInt(2), r.getInt(3),r.getBinaryStream(4),r.getString(5),r.getString(6));
+                
                 at.add(s);
             }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (SQLException ex) {
+            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        return at;
+    }
+
+    public static List<AttachmentArchiveCitizen> getAttachmantsArchiveJustFile(int CitID) {
+         
+        AttachmentArchiveCitizen s;
+
+        List<AttachmentArchiveCitizen> at = new ArrayList<>();
+        try {
+            DB db = new DB();
+            String sql = "SELECT ac.*,an.ServA_Name FROM attachment_archive_citizen as ac inner join serviceattachmentname as an on ac.ServiceAttachmentName_ID = an.ServiceAttachmentName_ID where Cit_ID =   " + CitID + " order by ServiceAttachmentName_ID ;";
+            System.out.println(sql);
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                s = new AttachmentArchiveCitizen(r.getInt(1), r.getInt(2), r.getInt(3),r.getBinaryStream(4),r.getString(5),r.getString(6));
+                if(s.fileDownload !=null)
+                    at.add(s);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("size is "+at.size());
         return at;
     }
 }

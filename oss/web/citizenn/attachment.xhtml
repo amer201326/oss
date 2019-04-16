@@ -77,17 +77,24 @@
 
                                         <div class="card-body">
 
-                                            <ui:repeat value="#{}"  var="att" varStatus="in" >
-                                            <div class="flexAm row-space " style="margin-right: 14px">
-                                                <div class="card mb-4 py-3 border-left-success border-right-success">
-                                                    <div class="card-body">
-                                                        .border-left-success
+                                            <ui:repeat value="#{archiveCitizen.filterAtta(att.serviceAttachmentName_ID)}"  var="arvhive" varStatus="in" >
+                                                <div class="flexAm row-space " style="margin-right: 14px">
+                                                    <div class="col-sm-12 card mb-4 py-3 border-left-success border-right-success flexjustify-content">
+
+                                                        <div class="card-body">
+                                                            #{arvhive.nameFile}
+                                                        </div>
+                                                        <div>
+                                                           
+                                                            <p:commandButton id="downloadAT"  value="تنزيل" ajax="false"  icon="fa fa-arrow-down" >
+                                                                <p:fileDownload value="#{arvhive.fileDownload}" />
+                                                            </p:commandButton> 
+                                                        </div>
                                                     </div>
+
+
+
                                                 </div>
-
-
-
-                                            </div>
                                             </ui:repeat>
 
 
@@ -100,6 +107,7 @@
 
                             </div>
 
+                           
 
 
 

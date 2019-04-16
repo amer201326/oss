@@ -7,6 +7,7 @@ package Beans;
 
 import Data.AttachmentArchiveCitizen;
 import Data.GetFromDB;
+import java.io.ByteArrayInputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import org.primefaces.model.DefaultStreamedContent;
 
 /**
  *
@@ -23,10 +25,11 @@ import javax.faces.bean.ViewScoped;
 @ViewScoped
 public class ArchiveCitizen implements Serializable {
 
+    AttachmentArchiveCitizen selected;
     List<AttachmentArchiveCitizen> archivesCitizens = new ArrayList<>();
-
+    DefaultStreamedContent image;
     public ArchiveCitizen() {
-
+        image = new DefaultStreamedContent();
     }
 
     @ManagedProperty(value = "#{msession}")
@@ -35,7 +38,8 @@ public class ArchiveCitizen implements Serializable {
     @PostConstruct
     public void init() {
         if (session.citizen != null) {
-            archivesCitizens = GetFromDB.getAttachmantsArchive(session.citizen.getId());
+            archivesCitizens = GetFromDB.getAttachmantsArchiveJustFile(session.citizen.getId());
+            
         }
     }
 
@@ -63,32 +67,50 @@ public class ArchiveCitizen implements Serializable {
             id = ar.getServiceAttachmentName_ID();
             a.add(ar);
             for (AttachmentArchiveCitizen archivesCitizen : archivesCitizens) {
-                if(archivesCitizen.getServiceAttachmentName_ID() !=id){
-                    System.out.println("id is  ?>>> "+id);
+                if (archivesCitizen.getServiceAttachmentName_ID() != id) {
+                    System.out.println("id is  ?>>> " + id);
                     a.add(archivesCitizen);
                     id = archivesCitizen.getServiceAttachmentName_ID();
                 }
             }
         }
-        
-        
-        return a;
-    }
-    
-    public List<AttachmentArchiveCitizen> filterAtta(int id) {
-        List<AttachmentArchiveCitizen> a = new ArrayList<>();
-      
-        
-            for (AttachmentArchiveCitizen archivesCitizen : archivesCitizens) {
-                if(archivesCitizen.getServiceAttachmentName_ID() !=id){
-                    a.add(archivesCitizen);
-                    id = archivesCitizen.getServiceAttachmentName_ID();
-                }
-            }
-        
-        
-        
+
         return a;
     }
 
+    public List<AttachmentArchiveCitizen> filterAtta(int id) {
+        List<AttachmentArchiveCitizen> a = new ArrayList<>();
+
+        for (AttachmentArchiveCitizen archivesCitizen : archivesCitizens) {
+            System.out.println(archivesCitizen.getNameFile());
+            
+            if (archivesCitizen.getServiceAttachmentName_ID() == id) {
+                a.add(archivesCitizen);
+                
+            }
+        }
+
+        return a;
+    }
+
+    public AttachmentArchiveCitizen getSelected() {
+        return selected;
+    }
+
+    public void setSelected(AttachmentArchiveCitizen selected) {
+        image = new DefaultStreamedContent(selected.getFileDownload().getStream());
+        this.selected = selected;
+        System.out.println("set arr");
+    }
+
+    
+
+    public DefaultStreamedContent getImage() {
+        return image;
+    }
+
+    public void setImage(DefaultStreamedContent image) {
+        this.image = image;
+    }
+    
 }

@@ -9,6 +9,7 @@ import DB.DB;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -22,7 +23,7 @@ import org.primefaces.model.UploadedFile;
  *
  * @author baraakali
  */
-public class AttachmentArchiveCitizen {
+public class AttachmentArchiveCitizen implements Serializable{
 
     int Atta_ArchiveC_ID;
     int Cit_ID;
@@ -37,6 +38,7 @@ public class AttachmentArchiveCitizen {
         this.Cit_ID = Cit_ID;
         this.ServiceAttachmentName_ID = ServiceAttachmentName_ID;
         this.nameAtt = nameAtt;
+        this.nameFile = nameFile;
         if (inputStream != null) {
                try{
                 byte[] inputByte = new byte[inputStream.available()];
@@ -160,6 +162,13 @@ public class AttachmentArchiveCitizen {
     public void setNameAtt(String nameAtt) {
         this.nameAtt = nameAtt;
     }
+
+    @Override
+    public String toString() {
+        return "AttachmentArchiveCitizen{" + "Atta_ArchiveC_ID=" + Atta_ArchiveC_ID + ", Cit_ID=" + Cit_ID + ", ServiceAttachmentName_ID=" + ServiceAttachmentName_ID + ", file=" + file + ", fileDownload=" + fileDownload + ", nameFile=" + nameFile + ", nameAtt=" + nameAtt + '}';
+    }
+    
+    
     
     
 }
