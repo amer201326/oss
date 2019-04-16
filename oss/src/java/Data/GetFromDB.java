@@ -746,4 +746,26 @@ public class GetFromDB {
         return null;
         
     }
+
+    public static List<AttachmentArchiveCitizen> getAttachmantsArchive(int CitID) {
+        
+        
+        AttachmentArchiveCitizen s;
+
+        List<AttachmentArchiveCitizen> at = new ArrayList<>();
+        try {
+            DB db = new DB();
+            String sql = "SELECT * FROM oss.attachment_archive_citizen where Cit_ID =  " + CitID + ";";
+            System.out.println(sql);
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                s = new AttachmentArchiveCitizen(r.getInt(1), r.getInt(2), r.getInt(3),r.getBinaryStream(4),r.getString(5));
+                at.add(s);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return at;
+    }
 }

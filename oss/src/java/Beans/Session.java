@@ -48,6 +48,7 @@ public class Session implements Serializable{
     
     public void login(){
         System.out.println("login");
+        if(username !=null)
         if(username.startsWith("a-")){
             Manager m = GetFromDB.getManagerAccount(username,passWord);
             if(m != null){
