@@ -31,11 +31,12 @@ public class AttachmentArchiveCitizen {
     UploadedFile file;
     StreamedContent fileDownload;
     String nameFile;
-
-    public AttachmentArchiveCitizen(int Atta_ArchiveC_ID, int Cit_ID, int ServiceAttachmentName_ID, InputStream inputStream,String nameFile) {
+    String nameAtt;
+    public AttachmentArchiveCitizen(int Atta_ArchiveC_ID, int Cit_ID, int ServiceAttachmentName_ID, InputStream inputStream,String nameFile,String nameAtt) {
         this.Atta_ArchiveC_ID = Atta_ArchiveC_ID;
         this.Cit_ID = Cit_ID;
         this.ServiceAttachmentName_ID = ServiceAttachmentName_ID;
+        this.nameAtt = nameAtt;
         if (inputStream != null) {
                try{
                 byte[] inputByte = new byte[inputStream.available()];
@@ -142,6 +143,22 @@ public class AttachmentArchiveCitizen {
 
     public void setFileDownload(StreamedContent fileDownload) {
         this.fileDownload = fileDownload;
+    }
+
+    public String getNameFile() {
+        return nameFile;
+    }
+
+    public void setNameFile(String nameFile) {
+        this.nameFile = nameFile;
+    }
+
+    public String getNameAtt() {
+        return nameAtt;
+    }
+
+    public void setNameAtt(String nameAtt) {
+        this.nameAtt = nameAtt;
     }
     
     

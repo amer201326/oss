@@ -25,10 +25,13 @@
         <section class="container">
             <section class="login-form">
                 <h:form role="login">
-                    <img src="assets/images/logo.png" class="img-responsive" alt="" />
+                    <img src="assets/images/muni.png" class="img-responsive" alt="" />
                     <p:inputText id="user" value="#{msession.username}" placeholder="اسم المستخدم" required="true"  class="form-control input-lg " dir="rtl" />
                     <p:password id="pass" value="#{msession.passWord}" placeholder="كلمة المرور" required="true"  class="form-control input-lg" dir="rtl"/>
                     <p:commandButton update="@form" actionListener="#{msession.login()}" onclick="" value="تسجيل الدخول" class="btn btn-lg btn-primary btn-block"/>
+                    
+                                <div class="ui-grid-col-3"><i class="fa fa-fw fa-user"></i>fa-user</div>
+                           
                     <div>
                         <a href="#">Create account</a> or <a href="#">reset password</a>
                     </div>
@@ -37,8 +40,7 @@
             </section>
         </section>
 
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+        
         
     </h:body>
     

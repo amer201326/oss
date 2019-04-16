@@ -8756,11 +8756,20 @@ opacity:1
 .border-left-success {
 	border-left: .25rem solid #1cc88a!important
 }
-.border-left-info {
+.border-right-success {
+	border-right: .25rem solid #1cc88a!important
+}
+.border-right-info {
 	border-left: .25rem solid #36b9cc!important
+}
+.border-right-info {
+	border-right: .25rem solid #36b9cc!important
 }
 .border-left-warning {
 	border-left: .25rem solid #f6c23e!important
+}
+.border-right-warning {
+	border-right: .25rem solid #f6c23e!important
 }
 .border-left-danger {
 	border-left: .25rem solid #e74a3b!important

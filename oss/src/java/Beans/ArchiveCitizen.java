@@ -39,4 +39,56 @@ public class ArchiveCitizen implements Serializable {
         }
     }
 
+    public List<AttachmentArchiveCitizen> getArchivesCitizens() {
+        return archivesCitizens;
+    }
+
+    public void setArchivesCitizens(List<AttachmentArchiveCitizen> archivesCitizens) {
+        this.archivesCitizens = archivesCitizens;
+    }
+
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
+
+    public List<AttachmentArchiveCitizen> filterAtta() {
+        List<AttachmentArchiveCitizen> a = new ArrayList<>();
+        int id = 0;
+        if (!archivesCitizens.isEmpty()) {
+            AttachmentArchiveCitizen ar = archivesCitizens.get(0);
+            id = ar.getServiceAttachmentName_ID();
+            a.add(ar);
+            for (AttachmentArchiveCitizen archivesCitizen : archivesCitizens) {
+                if(archivesCitizen.getServiceAttachmentName_ID() !=id){
+                    System.out.println("id is  ?>>> "+id);
+                    a.add(archivesCitizen);
+                    id = archivesCitizen.getServiceAttachmentName_ID();
+                }
+            }
+        }
+        
+        
+        return a;
+    }
+    
+    public List<AttachmentArchiveCitizen> filterAtta(int id) {
+        List<AttachmentArchiveCitizen> a = new ArrayList<>();
+      
+        
+            for (AttachmentArchiveCitizen archivesCitizen : archivesCitizens) {
+                if(archivesCitizen.getServiceAttachmentName_ID() !=id){
+                    a.add(archivesCitizen);
+                    id = archivesCitizen.getServiceAttachmentName_ID();
+                }
+            }
+        
+        
+        
+        return a;
+    }
+
 }
