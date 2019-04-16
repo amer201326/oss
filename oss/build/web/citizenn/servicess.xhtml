@@ -83,11 +83,11 @@
                                                 <ui:repeat value="#{departmentOfServicesManager.departmentsWithNService}" var="department" id="fadeEffectImages">
 
                                                     <br/>
-
+  <a href="departmentservicess.xhtml?id=#{department.id}" style="margin-right:20px;">
                                                     <div class="container hoverDiv" style="text-align: right;">
                                                         <br/>
                                             
-                                                        <a href="departmentservicess.xhtml?id=#{department.id}" style="margin-right:20px;">
+                                                      
                                                             <div style="text-align: right; display: -webkit-inline-box">
                                                                 <div class="col-xs-6">
                                                                     <br/>
@@ -110,10 +110,10 @@
 
 
                                                             </div>
-                                                        </a>
+                                                     
                                                         <br/>
                                                         <br/>
-                                                    </div>
+                                                    </div>   </a>
                                                     <hr style="border: 2px solid orange; margin-left: 10px; margin-right: 10px;"/>
 
                                                 </ui:repeat>
