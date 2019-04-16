@@ -14,8 +14,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.FileUploadEvent;
@@ -38,14 +40,21 @@ public class ApplyServiceManager implements Serializable {
     int idCitizen;
     String note = "";
 
-    public ApplyServiceManager() {
-        idCitizen = 1;
-        Map<String, String> parameterMap = (Map<String, String>) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+     @ManagedProperty(value = "#{msession}")
+    Session session;
+     
+      @PostConstruct
+    public void init() {
+     if(session.citizen != null){
+            idCitizen = session.citizen.getId();
+
+            Map<String, String> parameterMap = (Map<String, String>) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         String param = parameterMap.get("id");
         System.out.println(param +"===================================================================");
         serviceCitizen = new ServiceCitizen();
         serviceCitizen.thisService = GetFromDB.getServiceByID2(param);
-        serviceCitizen.setCit_ID(1);
+        serviceCitizen.setCit_ID(idCitizen);
+        
         allAttachment = GetFromDB.getAttavhmentByserviceById(serviceCitizen.thisService.getId());
         System.out.println("Bdddddd" + allAttachment.size());
 
@@ -58,6 +67,11 @@ public class ApplyServiceManager implements Serializable {
             }
 
         }
+            
+        }
+ }
+    public ApplyServiceManager() {
+      
 
     }
 
@@ -106,4 +120,21 @@ public class ApplyServiceManager implements Serializable {
         this.serviceCitizen = serviceCitizen;
     }
 
+    public int getIdCitizen() {
+        return idCitizen;
+    }
+
+    public void setIdCitizen(int idCitizen) {
+        this.idCitizen = idCitizen;
+    }
+
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
+
+    
 }

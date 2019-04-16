@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -38,25 +39,27 @@ import org.primefaces.event.SelectEvent;
 @ManagedBean
 @ViewScoped
 public class DepartmentsManage implements Serializable {
+
     int indexDep = 0;
     List<ServiceCount> servicesCount;
     Department department;
-   
-    
+
+    @ManagedProperty(value = "#{msession}")
+    Session session;
+
     List<String> departmentNames;
     Section sectionSelected;
     List<Section> fiterdSections;
     List<JobTitel> jobTitels;
 
-    List<String> im ;
-        
+    List<String> im;
+
     Section newSection;
     String imageD;
 
     JobTitel newJob;
 
     List<Employee> employeeList;
-  
 
     List<Screen> screen;
     Screen newScreen;
@@ -71,25 +74,41 @@ public class DepartmentsManage implements Serializable {
 
     public DepartmentsManage() {
 
-        servicesCount = GetFromDB.getMore5ServiceRequest();
-        department = new Department();
-        
-        sectionSelected = new Section();
-        fiterdSections = GetFromDB.getSection();
-        newSection = new Section();
-        im = GetFromDB.getImageDepartment();
-        
-        department.image = im.get(indexDep);
-        servicePerMonth = GetFromDB.getNumberOfServicePerMonth();
-        newJob = new JobTitel();
-        jobTitels = GetFromDB.getJobTittle();
-        departmentEdit = new Department();
-        j = new JobTitel();
+    }
 
-        allParameter = GetFromDB.getALLNumber();
-        Map<String, String> parameterMap = (Map<String, String>) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        String param = parameterMap.get("n");
-        System.out.println("__________+_+_++___________  + "+param);
+    @PostConstruct
+    public void init() {
+
+        if (!session.login) { 
+            
+           
+        } else {
+            if (session.typeAccount.compareTo("manager") != 0) {
+                 System.out.println("!manager");
+
+            } else {
+                servicesCount = GetFromDB.getMore5ServiceRequest();
+                department = new Department();
+
+                sectionSelected = new Section();
+                fiterdSections = GetFromDB.getSection();
+                newSection = new Section();
+                im = GetFromDB.getImageDepartment();
+
+                department.image = im.get(indexDep);
+                servicePerMonth = GetFromDB.getNumberOfServicePerMonth();
+                newJob = new JobTitel();
+                jobTitels = GetFromDB.getJobTittle();
+                departmentEdit = new Department();
+                j = new JobTitel();
+
+                allParameter = GetFromDB.getALLNumber();
+                Map<String, String> parameterMap = (Map<String, String>) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+                String param = parameterMap.get("n");
+                System.out.println("__________+_+_++___________  + " + param);
+            }
+        }
+
     }
 
     public void addDepartment() {
@@ -97,8 +116,6 @@ public class DepartmentsManage implements Serializable {
         department = new Department();
 
     }
-
-    
 
     public void addJobTitle() {
         newJob.addJobToDB();
@@ -109,8 +126,8 @@ public class DepartmentsManage implements Serializable {
 
     public void showDepartment(Department d) throws IOException {
         System.out.println("go");
-        
-        FacesContext.getCurrentInstance().getExternalContext().redirect("department.xhtml?id="+d.id );
+
+        FacesContext.getCurrentInstance().getExternalContext().redirect("department.xhtml?id=" + d.id);
     }
 
     public JobTitel getNewJob() {
@@ -141,8 +158,6 @@ public class DepartmentsManage implements Serializable {
         sectionSelected.deleteFromDB();
         fiterdSections.remove(sectionSelected);
     }
-
-   
 
     public Department getDepartment() {
         return department;
@@ -265,8 +280,6 @@ public class DepartmentsManage implements Serializable {
         this.employeeList = employeeList;
     }
 
-    
-
     public void setJobTitels(List<JobTitel> jobTitels) {
         this.jobTitels = jobTitels;
 
@@ -361,27 +374,37 @@ public class DepartmentsManage implements Serializable {
     }
 
     public void gotToSection() {
-        
+
         try {
 
-            FacesContext.getCurrentInstance().getExternalContext().redirect("section.xhtml?id="+sectionSelected.getId());
+            FacesContext.getCurrentInstance().getExternalContext().redirect("section.xhtml?id=" + sectionSelected.getId());
         } catch (IOException ex) {
             Logger.getLogger(DepartmentsManage.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void nextIconDep(){
+
+    public void nextIconDep() {
         indexDep++;
-        if(indexDep>im.size()-1)
+        if (indexDep > im.size() - 1) {
             indexDep--;
+        }
         department.image = im.get(indexDep);
     }
-    
-    public void backIconDep(){
+
+    public void backIconDep() {
         indexDep--;
-        if(indexDep<0)
-            indexDep=0;
+        if (indexDep < 0) {
+            indexDep = 0;
+        }
         department.image = im.get(indexDep);
+    }
+
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
     }
 
 }

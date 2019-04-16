@@ -30,7 +30,7 @@ import org.primefaces.model.UploadedFile;
  */
 public class Crypto {
     public static void main(String[] args) {
-        String s = encPas("foreanderDowntop", "admin");
+        String s = encPas("foreanderDowntop", "baraa");
         System.out.println(s);
         System.out.println(decPas("foreanderDowntop", s));
         

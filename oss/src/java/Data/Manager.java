@@ -29,31 +29,34 @@ public class Manager implements Serializable {
     String emp_idCard;
     String emp_email;
     String emp_tel;
-    String emp_mobile;
-    String emp_gender;
+    
     String emp_birth;
-    Date birthDate;
+    
     String emp_StartDate;
     String emp_EndDate;
+    String emp_mobile;
+    String emp_gender;
     
     
     public Manager() {
     }
 
-    public Manager(String username, String password, String emp_name, String emp_idCard, String emp_email, String emp_tel, String emp_mobile, String emp_gender, String emp_birth, Date birthDate, String emp_StartDate, String emp_EndDate) {
+    public Manager(String username, String password, String emp_name, String emp_idCard, String emp_email, String emp_tel, String emp_birth, String emp_StartDate, String emp_EndDate, String emp_mobile, String emp_gender) {
         this.username = username;
         this.password = password;
         this.emp_name = emp_name;
         this.emp_idCard = emp_idCard;
         this.emp_email = emp_email;
         this.emp_tel = emp_tel;
-        this.emp_mobile = emp_mobile;
-        this.emp_gender = emp_gender;
         this.emp_birth = emp_birth;
-        this.birthDate = birthDate;
+        
         this.emp_StartDate = emp_StartDate;
         this.emp_EndDate = emp_EndDate;
+        this.emp_mobile = emp_mobile;
+        this.emp_gender = emp_gender;
     }
+
+    
 
     public String getUsername() {
         return username;
@@ -171,12 +174,14 @@ public class Manager implements Serializable {
 //        }
 
     }
+    
+    
 
+    
 
     
     
-    
-    
+
 //     public String updateEmployee() {
 //        String q = "UPDATE employees SET Emp_Name = '" + emp_name + "',Emp_ID_Card = '" + emp_idCard
 //                + "', Emp_Email = '" + emp_email + "',Emp_Telephone = '" + emp_tel
@@ -187,8 +192,8 @@ public class Manager implements Serializable {
 //            DB data = new DB();
 //
 //            data.write(q);
-//            
-//            
+//
+//
 //
 //        } catch (Exception ex) {
 //            Logger.getLogger(Citizen.class.getName()).log(Level.SEVERE, null, ex);
@@ -198,20 +203,11 @@ public class Manager implements Serializable {
 //
 //    }
     
-    
-
-    
-
-    public Date getBirthDate() {
-        return birthDate;
-    }
 
     public void setBirthDate(Date birthDate) throws ParseException {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-
+        
         String dateString = format.format(birthDate);
-        this.emp_birth = dateString;
-        this.birthDate = birthDate;
     }
 
    

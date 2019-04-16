@@ -15,10 +15,14 @@ import Data.Section;
 import Data.SectionPath;
 import Data.Service;
 import Data.ServiceErr;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -33,16 +37,57 @@ public class Session implements Serializable{
     
     String username;
     String passWord;
+    
+    Manager manager ;
+    Citizen citizen;
     public Session() {
         login = false;
         typeAccount = "";
         
-    }
+    } 
     
     public void login(){
         System.out.println("login");
         if(username.startsWith("a-")){
             Manager m = GetFromDB.getManagerAccount(username,passWord);
+            if(m != null){
+                try {
+                    login = true;
+                    typeAccount = "manager";
+                    manager = m;
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("../manager/");
+                } catch (IOException ex) {
+                    Logger.getLogger(Session.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else{
+                //error message
+            }
+                
+        }else if(username.startsWith("u-")){
+            Citizen c = GetFromDB.getCitizenAccount(username,passWord);
+            if(c != null){
+                try {
+                    login = true;
+                    typeAccount = "citizen";
+                    citizen = c;
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("../citizenn/");
+                } catch (IOException ex) {
+                    Logger.getLogger(Session.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else{
+                //error message
+            }
+        }
+    }
+    
+    public void logout(){
+        System.out.println("out");
+        try {
+            login = false;
+            typeAccount = "";
+            FacesContext.getCurrentInstance().getExternalContext().redirect("../login/");
+        } catch (IOException ex) {
+            Logger.getLogger(Session.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -1,0 +1,290 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>الاقسام</title>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <meta name="description" content=""/>
+        <meta name="author" content=""/>
+
+        <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"/>
+
+        <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+
+        <!-- Custom styles for this template-->
+        <link href="../css/sb-admin-2.min.css" rel="stylesheet"/>
+        <link href="../css/amer.css" rel="stylesheet"/>
+        <style type="text/css">
+
+
+            .ui-button-text-only .ui-button-text {
+                padding: 0.3em 0.4em;
+            }
+
+            .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-chkbox {
+                visibility: hidden;
+            }
+
+            .ui-filter-column .ui-column-customfilter .custom-filter {
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .year-spinner input {
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .ui-row-editor .ui-row-editor-pencil {
+                margin-left:8px;
+            }
+        </style>
+
+    </h:head>
+    <h:body id="page-top">
+        <div id="wrapper">
+
+
+            <div id="content-wrapper" class="d-flex flex-column">
+
+                <div id="content">
+
+                    <!-- Topbar -->
+                    <ui:include src="../pages/heder.xhtml"/>
+                    <!-- End of Topbar -->
+                    <p:column id="contentPage">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-lg-12 text-center">
+
+                                    <div class=" col-md-12 ">
+                                        <div class="card border-left-warning border-right-0 shadow h-100 py-2">
+                                            <div class="card-body">
+                                                <div class="row no-gutters textC">
+                                                    <div class="col mr-2">
+                                                        <h2 class="section-heading text-uppercase">الاقسام</h2>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <br/><hr style="border: 2px solid orange;"/><br/>
+                                </div>
+                            </div>  
+                            <div class="row text-center" > 
+                                <div class="float-lg-right float-right text#{$infix}-right" style="width: 100%;margin-bottom: 30px">
+
+                                    <div class="card shadow mb-4" style="text-align: right;">
+                                        <div class="card-body">
+                                            <div class="form-group row">
+                                                <div class="col-sm-12 mb-3 mb-sm-0">
+
+
+
+                                                    <h:form id="formSelectD">
+                                                        <!-- Style Addemployee form Bussectionlo-->
+                                                        <p:selectOneMenu id="departments" value="#{departmentsManage.department.id}" class="pading000"
+                                                                         dynamic="true" style="min-width: 223px;">
+
+                                                            <f:selectItem  noSelectionOption="false" itemLabel="كل الدوائر" itemValue="-1" />
+                                                            <f:selectItems value="#{departmentsManage.allDepartment()}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}"/>
+                                                            <p:ajax update=":formSection" event="itemSelect" listener="#{departmentsManage.fSection}" />
+
+                                                        </p:selectOneMenu>
+
+                                                        <p:outputLabel for="departments" style="font-size: 28px; margin-left: 4%" value="الدوائر " />
+
+                                                    </h:form>
+                                                    <hr/>
+                                                </div>
+                                                <h:form id="formSection">
+                                                    <h:head id="msgs"/>
+                                                    <p:dataTable id="singleDT" var="section" value="#{departmentsManage.fiterdSections}"  editable="true"  style="margin-bottom:20px; text-align:center;"
+                                                                 selectionMode="single"  selection="#{departmentsManage.sectionSelected}" rowKey="#{section.id}" rows="10"
+                                                                 paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                                 rowsPerPageTemplate="5,10,15">
+
+                                                        <f:facet name="header" class="tableHeader">
+                                                            الاقسام
+                                                        </f:facet>
+
+                                                        <p:ajax event="rowEdit" listener="#{departmentsManage.onSectionEdit}" update=":formSection:msgs" />
+                                                        <p:ajax event="rowEditCancel" listener="#{departmentsManage.onSectionCancel}" update=":formSection:msgs" />
+
+
+                                                        <p:ajax event="rowSelect" process="@this" update="formSection:diallogDelete" listener="#{departmentsManage.onSectionSelected}"/>
+
+
+
+                                                        <p:column style="width:10%;" headerText="تعديل">
+                                                            <p:rowEditor />
+                                                        </p:column>
+
+
+                                                        <p:column headerText="اسم القسم">
+                                                            <p:cellEditor>
+                                                                <f:facet name="output"><h:outputText value="#{section.name}" /></f:facet>
+                                                                <f:facet name="input"><p:inputText value="#{section.name}" style="width:100%" label="Year"/></f:facet>
+                                                            </p:cellEditor>
+                                                        </p:column>
+
+                                                        <p:column headerText="اسم الدارة">
+                                                            <p:cellEditor>
+                                                                <f:facet name="output"><h:outputText value="#{section.departmentNmae}" /></f:facet>
+                                                                <f:facet name="input">
+                                                                    <h:selectOneMenu value="#{section.departmentId}" style="min-width: 223px;" class="pading000">
+                                                                        <f:selectItems value="#{departmentsManage.allDepartment()}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}" />
+                                                                    </h:selectOneMenu>
+                                                                </f:facet>
+                                                            </p:cellEditor>
+                                                        </p:column>
+
+
+
+                                                        <p:column headerText="الرقم">
+                                                            <p:cellEditor disabled="true">
+                                                                <f:facet name="output"><h:outputText value="#{section.id}" /></f:facet>
+                                                                <f:facet name="input"><p:inputText id="modelInput" value="#{section.id}" style="width:100%"/></f:facet>
+                                                            </p:cellEditor>
+                                                        </p:column>
+
+
+
+
+                                                    </p:dataTable>
+                                                    <br/>
+                                                    <hr style="border: 2px solid orange;"/>
+
+
+
+                                                    <p:dialog id="diallogDelete" resizable="false" widgetVar="deleteD" dir="rtl">
+                                                        <h:panelGrid columns="2" cellpadding="5">
+
+                                                            <h:outputLabel for="del" value="هل انت متأكد من حذف #{departmentsManage.sectionSelected.name}" />
+                                                            <br/>
+
+                                                            <p:commandButton id="del" value="حذف" action="#{departmentsManage.deleteSection()}" update=":formSection" oncomplete="PF('deleteD').hide();"/>
+
+                                                        </h:panelGrid>
+                                                    </p:dialog>  
+                                                    <!--  <p:commandButton value="فتح" actionListener=""  />-->
+                                                    
+                                                    <div style="display: flex; justify-content: center;"  class="col-sm-12">                                                
+                                                  
+
+
+                                                        <button onclick="PF('deleteD').show();" class="myButtonD" type="button"> حذف قسم </button> &nbsp; &nbsp; &nbsp; &nbsp;
+                                                     
+                                                          <p:commandButton value=" فتح قسم" class="myButtonB" actionListener="#{departmentsManage.gotToSection()}"
+                                                                         update="@form " />   &nbsp; &nbsp; &nbsp; &nbsp;
+                                                          
+
+
+                                                        <button onclick="PF('dlg').show();" class="myButtonC" type="button">اضافة قسم</button> &nbsp; &nbsp; &nbsp;
+
+
+                                                   
+                                                </div>
+
+                                                </h:form >
+                                                
+
+                                          <!-- <div class="text#{$infix}-left col-md-6">
+                                               <button onclick="PF('deleteD').show();" class="myButtonD" type="button">حذف</button>
+                                           </div>
+                                           <div class="text#{$infix}-right col-md-6" style="width: 100%;">
+
+                                               <button onclick="PF('dlg').show();" class="myButtonC" type="button">اضافة قسم</button>
+                                                
+                                               <p:spacer width="30px"/>
+                                           </div>-->
+                                                <h:form id="dialog">
+
+                                                    <p:dialog id="DNewSection" resizable="false" header="اضافة قسم" widgetVar="dlg" dir="rtl" >
+
+                                                        <h:panelGrid columns="2" cellpadding="5">
+                                                            <h:outputLabel for="deid" value="القسم:" />
+                                                            <p:selectOneMenu id="departments" value="#{departmentsManage.newSection.departmentId}" 
+                                                                             dynamic="true" style="min-width: 223px; margin: 0 0 0 0; padding: 0 0 0 0;" class="pading000">
+                                                                <f:selectItems value="#{departmentsManage.allDepartment()}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}"/>
+                                                            </p:selectOneMenu>
+
+                                                            <h:outputLabel for="name" value="اسم القسم:" />
+                                                            <p:inputText id="name" label="name" value="#{departmentsManage.newSection.name}" size="16" style="min-width: 223px;"/>
+
+                                                            <p:commandButton value="اضافة" actionListener="#{departmentsManage.addSection()}" update="@form :formSection :formSelectD" oncomplete="PF('dlg').hide();"/>
+
+
+                                                        </h:panelGrid>
+                                                    </p:dialog>  
+
+                                               
+
+                                                </h:form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                        <!-- /.container-fluid -->
+                    </p:column>
+
+                </div>
+
+                <br/><br/>
+                <!-- End of Main Content -->
+
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright © Your Website 2019</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End of Footer -->
+
+            </div>
+
+
+            <ui:include src="../pages/sidebar.xhtml"/>
+
+        </div>
+
+
+
+
+
+
+
+
+
+        <!-- Bootstrap core JavaScript-->
+        <!--<script src="../vendor/jquery/jquery.min.js"></script>-->
+        <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Core plugin JavaScript-->
+        <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+
+        <!-- Custom scripts for all pages-->
+        <script src="../js/sb-admin-2.min.js"></script>
+
+        <!-- Page level plugins -->
+
+        <script src="../js/js.js" type="text/javascript"></script>
+
+    </h:body>
+</html>
+

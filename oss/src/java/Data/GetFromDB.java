@@ -697,11 +697,53 @@ public class GetFromDB {
         System.out.println("size is "+sections.size());
         return sections;
     }
-
+    public static String k = "foreanderDowntop";
     public static Manager getManagerAccount(String username, String passWord) {
-        
-        
+        Manager m ;
+        passWord = Crypto.encPas(k, passWord);
+        String q = "SELECT * FROM manager where username = '"+username+"' and password = '"+passWord+"';";
+        try {
+            DB db = new DB();
+            
+            System.out.println(q);
+            ResultSet r = db.read(q);
+            while (r.next()) {
+                m = new Manager(r.getString(1), r.getString(2), r.getString(3), r.getString(4), r.getString(5), r.getString(6), r.getString(7),
+                        r.getString(8), r.getString(9), r.getString(10), r.getString(11));
+                return m;
+            }
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         
         return null;
+    }
+
+    public static Citizen getCitizenAccount(String username, String passWord) {
+        
+         Citizen c ;
+        passWord = Crypto.encPas(k, passWord);
+        String q = "SELECT * FROM citizen as c inner join citizenaccount as ca on c.Cit_ID = ca.Cit_ID where ca.Username =  '"+username+"' and ca.Password = '"+passWord+"';";
+        try {
+            DB db = new DB();
+            
+            System.out.println(q);
+            ResultSet r = db.read(q);
+            while (r.next()) {
+                c = new Citizen(r.getInt(1), r.getString(2), r.getString(3), r.getString(4), r.getString(5), r.getString(6), r.getInt(7), r.getString(8),
+                        r.getString(9), r.getString(10), r.getString(11), r.getString(12), r.getString(13),
+                        r.getString(14), r.getString(15), r.getString(16), r.getString(17), r.getString(18), r.getString(19),
+                        r.getString(20), r.getString(21));
+                c.setAccount(new CitizenAccount(r.getInt(22), r.getString(23), r.getString(24)));
+                return c;
+            }
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return null;
+        
     }
 }

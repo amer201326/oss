@@ -9,7 +9,10 @@ import Data.CitizenService;
 import Data.GetFromDBaraa;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 /**
@@ -20,7 +23,37 @@ import javax.faces.bean.ViewScoped;
 @ViewScoped
 public class NotDoneCiticenServiceManeger implements Serializable{
     
-    public ArrayList<CitizenService> NotDoneCitizenServices(int idCitizen){
-          return GetFromDBaraa.notDoneCitizenServices(idCitizen);
-     }
+    @ManagedProperty(value = "#{msession}")
+    Session session;
+    
+    List<CitizenService> NotDoneCitizenServices;
+    int idCitizen;
+    
+            @PostConstruct
+    public void init() {
+     if(session.citizen != null){
+            idCitizen = session.citizen.getId();
+          NotDoneCitizenServices = GetFromDBaraa.notDoneCitizenServices(idCitizen);
+        }
+ }
+
+    public NotDoneCiticenServiceManeger() {
+    }
+
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
+
+    public List<CitizenService> getNotDoneCitizenServices() {
+        return NotDoneCitizenServices;
+    }
+
+    public void setNotDoneCitizenServices(List<CitizenService> NotDoneCitizenServices) {
+        this.NotDoneCitizenServices = NotDoneCitizenServices;
+    }
+    
 }

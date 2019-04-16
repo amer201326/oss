@@ -37,6 +37,8 @@ public class ServiceCitizen {
     }
 
     public boolean addToDataBase() {
+        
+        Services_Provided_ID = thisService.id;
         List<StepsAndDecsions> pathD;
         List<StepsAndDecsionsJob> pathJ;
 
