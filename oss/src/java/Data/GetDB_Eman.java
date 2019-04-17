@@ -172,7 +172,7 @@ public class GetDB_Eman {
 
     }
 
-    public static List<ServiceCitizen_1> getAllRequestService() {
+    public static List<ServiceCitizen_1> getAllRequestService(int idjob) {
         ServiceCitizen_1 cit = new ServiceCitizen_1();
 
         List<ServiceCitizen_1> c = new ArrayList<ServiceCitizen_1>();

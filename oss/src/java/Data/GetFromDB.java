@@ -353,10 +353,9 @@ public class GetFromDB {
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
-                
-               
-                d = new ServiceAttachmentName(r.getInt(1),r.getString(2),r.getString(4),r.getBinaryStream(3),r.getString(5),r.getString(6));
-               
+
+                d = new ServiceAttachmentName(r.getInt(1), r.getString(2), r.getString(4), r.getBinaryStream(3), r.getString(5), r.getString(6));
+
                 attach.add(d);
             }
         } catch (Exception e) {
@@ -395,7 +394,7 @@ public class GetFromDB {
             ResultSet r = db.read(sql);
             while (r.next()) {
                 s = new Service(r.getInt(1), r.getString(2), r.getDouble(3), r.getInt(4), r.getString(5),
-                         new Department(r.getInt(6), r.getString(7), r.getString(8)),
+                        new Department(r.getInt(6), r.getString(7), r.getString(8)),
                         new Section(r.getInt(9), r.getInt(10), r.getString(11), r.getString(7)), r.getString(12));
 
                 services.add(s);
@@ -525,7 +524,7 @@ public class GetFromDB {
             ResultSet r = db.read(sql);
             while (r.next()) {
                 s = new Service(r.getInt(1), r.getString(2), r.getDouble(3), r.getInt(4), r.getString(5),
-                         new Department(r.getInt(6), r.getString(7), r.getString(8)),
+                        new Department(r.getInt(6), r.getString(7), r.getString(8)),
                         new Section(r.getInt(9), r.getInt(10), r.getString(11), r.getString(7)), r.getString(12));
 
             }
@@ -589,7 +588,7 @@ public class GetFromDB {
             ResultSet r = db.read(sql);
             while (r.next()) {
                 s = new Service(r.getInt(1), r.getString(2), r.getDouble(3), r.getInt(4), r.getString(5),
-                         new Department(r.getInt(6), r.getString(7), r.getString(8)),
+                        new Department(r.getInt(6), r.getString(7), r.getString(8)),
                         new Section(r.getInt(9), r.getInt(10), r.getString(11), r.getString(7)), r.getString(12));
 
             }
@@ -609,8 +608,8 @@ public class GetFromDB {
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
-                a = new ServiceAttachmentName(r.getInt(1),r.getString(2),r.getString(4),r.getBinaryStream(3),r.getString(5),r.getString(6));
-                System.out.println(a+"   "+r.getString(6));
+                a = new ServiceAttachmentName(r.getInt(1), r.getString(2), r.getString(4), r.getBinaryStream(3), r.getString(5), r.getString(6));
+                System.out.println(a + "   " + r.getString(6));
                 name.add(a);
             }
         } catch (SQLException ex) {
@@ -688,23 +687,24 @@ public class GetFromDB {
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
-                s = new SectionPath(r.getInt(1), r.getInt(2), r.getInt(3),r.getString(8), r.getInt(4), r.getInt(5));
+                s = new SectionPath(r.getInt(1), r.getInt(2), r.getInt(3), r.getString(8), r.getInt(4), r.getInt(5));
                 sections.add(s);
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        System.out.println("size is "+sections.size());
+        System.out.println("size is " + sections.size());
         return sections;
     }
     public static String k = "foreanderDowntop";
+
     public static Manager getManagerAccount(String username, String passWord) {
-        Manager m ;
+        Manager m;
         passWord = Crypto.encPas(k, passWord);
-        String q = "SELECT * FROM manager where username = '"+username+"' and password = '"+passWord+"';";
+        String q = "SELECT * FROM manager where username = '" + username + "' and password = '" + passWord + "';";
         try {
             DB db = new DB();
-            
+
             System.out.println(q);
             ResultSet r = db.read(q);
             while (r.next()) {
@@ -712,22 +712,22 @@ public class GetFromDB {
                         r.getString(8), r.getString(9), r.getString(10), r.getString(11));
                 return m;
             }
-            
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        
+
         return null;
     }
 
     public static Citizen getCitizenAccount(String username, String passWord) {
-        
-         Citizen c ;
+
+        Citizen c;
         passWord = Crypto.encPas(k, passWord);
-        String q = "SELECT * FROM citizen as c inner join citizenaccount as ca on c.Cit_ID = ca.Cit_ID where ca.Username =  '"+username+"' and ca.Password = '"+passWord+"';";
+        String q = "SELECT * FROM citizen as c inner join citizenaccount as ca on c.Cit_ID = ca.Cit_ID where ca.Username =  '" + username + "' and ca.Password = '" + passWord + "';";
         try {
             DB db = new DB();
-            
+
             System.out.println(q);
             ResultSet r = db.read(q);
             while (r.next()) {
@@ -738,18 +738,17 @@ public class GetFromDB {
                 c.setAccount(new CitizenAccount(r.getInt(22), r.getString(23), r.getString(24)));
                 return c;
             }
-            
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        
+
         return null;
-        
+
     }
 
     public static List<AttachmentArchiveCitizen> getAttachmantsArchive(int CitID) {
-        
-        
+
         AttachmentArchiveCitizen s;
 
         List<AttachmentArchiveCitizen> at = new ArrayList<>();
@@ -759,8 +758,8 @@ public class GetFromDB {
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
-                s = new AttachmentArchiveCitizen(r.getInt(1), r.getInt(2), r.getInt(3),r.getBinaryStream(4),r.getString(5),r.getString(6));
-                
+                s = new AttachmentArchiveCitizen(r.getInt(1), r.getInt(2), r.getInt(3), r.getBinaryStream(4), r.getString(5), r.getString(6));
+
                 at.add(s);
             }
         } catch (SQLException ex) {
@@ -768,12 +767,12 @@ public class GetFromDB {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return at;
     }
 
     public static List<AttachmentArchiveCitizen> getAttachmantsArchiveJustFile(int CitID) {
-         
+
         AttachmentArchiveCitizen s;
 
         List<AttachmentArchiveCitizen> at = new ArrayList<>();
@@ -783,16 +782,39 @@ public class GetFromDB {
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
-                s = new AttachmentArchiveCitizen(r.getInt(1), r.getInt(2), r.getInt(3),r.getBinaryStream(4),r.getString(5),r.getString(6));
-                if(s.fileDownload !=null)
+                s = new AttachmentArchiveCitizen(r.getInt(1), r.getInt(2), r.getInt(3), r.getBinaryStream(4), r.getString(5), r.getString(6));
+                if (s.fileDownload != null) {
                     at.add(s);
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("size is "+at.size());
+        System.out.println("size is " + at.size());
         return at;
+    }
+
+    public static Employee getEmployeeAccount(String username, String passWord) {
+        Employee em;
+        passWord = Crypto.encPas(k, passWord);
+        String q = "SELECT * FROM employees as e inner join employeeaccount as ea on e.Emp_ID= ea.Emp_ID where ea.UserName =  '" + username + "' and ea.Password = '" + passWord + "';";
+        try {
+            DB db = new DB();
+
+            System.out.println(q);
+            ResultSet r = db.read(q);
+            while (r.next()) {
+                em = new Employee(r.getInt(1), r.getInt(2), r.getInt(3), r.getInt(4), r.getString(5), r.getString(6), r.getString(7), r.getString(8), r.getString(9), r.getString(10), r.getString(11), r.getString(12), r.getString(13));
+                em.account = new EmployeeAccount(r.getString(15),r.getString(16));
+                return em;
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return null;
     }
 }

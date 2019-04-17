@@ -21,6 +21,7 @@
         <filter-name>LoginFilter</filter-name>
         <url-pattern>/manager/*</url-pattern>
          <url-pattern>/citizenn/*</url-pattern>
+          <url-pattern>/employeePages/*</url-pattern>
     </filter-mapping>
     <session-config>
         <session-timeout>

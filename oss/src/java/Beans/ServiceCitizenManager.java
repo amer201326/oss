@@ -9,11 +9,17 @@ import Data.GetDB_Eman;
 import Data.Service;
 import Data.ServiceCitizen;
 import Data.ServiceCitizen_1;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import org.primefaces.event.SelectEvent;
 
 /**
@@ -30,26 +36,42 @@ public class ServiceCitizenManager implements Serializable {
 
     ServiceCitizen_1 serviceSelected;
 
+    @ManagedProperty(value = "#{msession}")
+    Session session;
+
     public ServiceCitizenManager() {
-        
-        allRequestService = GetDB_Eman.getAllRequestService();
-        
-        allRequestServiceView = new ArrayList<>();
-        allRequestServiceNotView = new ArrayList<>();
-        
-        for (int i = 0; i < allRequestService.size(); i++) {
-            ServiceCitizen_1 get = allRequestService.get(i);
-            if (get.getStatus().compareTo("done")==0) {
-                allRequestServiceView.add(get);
-            } else {
-                allRequestServiceNotView.add(get);
+
+        serviceSelected = new ServiceCitizen_1();
+    }
+
+    @PostConstruct
+    public void init() {
+        if (session.employee != null) {
+            allRequestService = GetDB_Eman.getAllRequestService(session.employee.getJob_id());
+
+            allRequestServiceView = new ArrayList<>();
+            allRequestServiceNotView = new ArrayList<>();
+
+            for (int i = 0; i < allRequestService.size(); i++) {
+                ServiceCitizen_1 get = allRequestService.get(i);
+                if (get.getStatus().compareTo("done") == 0) {
+                    allRequestServiceView.add(get);
+                } else {
+                    allRequestServiceNotView.add(get);
+                }
             }
         }
-        
-        System.out.println(allRequestServiceNotView);
-        System.out.println(allRequestServiceView);
-        System.out.println(allRequestService + "dddddddddddddddddddddddddddd");
+
         serviceSelected = new ServiceCitizen_1();
+    }
+
+    public void showServise(String serviceCid, String servicePid) {
+        try {
+
+            FacesContext.getCurrentInstance().getExternalContext().redirect("ShowService.xhtml?Cid=" + serviceCid + "&SCid" + servicePid);
+        } catch (IOException ex) {
+            Logger.getLogger(ServiceCitizenManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public List<ServiceCitizen_1> getAllRequestServiceView() {
@@ -75,7 +97,6 @@ public class ServiceCitizenManager implements Serializable {
     public void setAllRequestService(List<ServiceCitizen_1> allRequestService) {
         this.allRequestService = allRequestService;
     }
-    
 
     public ServiceCitizen_1 getServiceSelected() {
         return serviceSelected;
@@ -88,4 +109,13 @@ public class ServiceCitizenManager implements Serializable {
     public void onServiceSelect(SelectEvent event) {
         serviceSelected = (ServiceCitizen_1) event.getObject();
     }
+
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
+
 }

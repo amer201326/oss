@@ -42,7 +42,7 @@
                     <div class="row">
                         <div class="col-lg-12 text-center">
 
-
+ 
                             <div class=" col-md-12 ">
                                 <div class="card border-left-warning border-right-0 shadow h-100 py-2">
                                     <div class="card-body">
@@ -137,7 +137,7 @@
                                                             <p:ajax event="rowSelect" process="@this"  listener="#{serviceCitizenManager.onServiceSelect}"/>
 
                                                             <p:column  style="width:90px;text-align: center">
-                                                                <p:commandLink title="View Detail">
+                                                                <p:commandLink title="View Detail" actionListener="#{serviceCitizenManager.showServise(service.service_Citizen_ID,service.services_Provided_ID)}">
                                                                     <h:outputText styleClass="fa fa-list-ul" style="margin:0 auto;" />
 
                                                                 </p:commandLink>

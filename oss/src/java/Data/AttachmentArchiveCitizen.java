@@ -57,6 +57,16 @@ public class AttachmentArchiveCitizen implements Serializable{
             }
     }
 
+    public AttachmentArchiveCitizen(int Atta_ArchiveC_ID, int Cit_ID, int ServiceAttachmentName_ID, UploadedFile file, String nameFile, String nameAtt) {
+        this.Atta_ArchiveC_ID = Atta_ArchiveC_ID;
+        this.Cit_ID = Cit_ID;
+        this.ServiceAttachmentName_ID = ServiceAttachmentName_ID;
+        this.file = file;
+        this.nameFile = nameFile;
+        this.nameAtt = nameAtt;
+    }
+    
+
     public void addToDataBase() {
 
         String q = "INSERT INTO attachment_archive_citizen (`Atta_ArchiveC_ID`, `Cit_ID`,`ServiceAttachmentName_ID`,`file`) VALUES (?,?,?,?);";

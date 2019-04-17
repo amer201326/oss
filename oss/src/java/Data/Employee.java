@@ -40,6 +40,7 @@ public class Employee implements Serializable {
     String emp_EndDate;
     List<Screen> screens;
     EmployeeAccount account;
+    
     public Employee() {
     }
 
@@ -57,7 +58,7 @@ public class Employee implements Serializable {
         this.emp_EndDate = emp_EndDate;
         this.emp_mobile = emp_mobile;
         this.emp_gender = emp_gender;
-account = new  EmployeeAccount();
+
     }
 
     public Employee(int dep_id, int emp_id, String emp_name, String emp_email, String emp_mobile) {

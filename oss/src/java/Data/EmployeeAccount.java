@@ -21,6 +21,15 @@ public class EmployeeAccount implements Serializable{
     String UserName;
     String Password;
 
+    public EmployeeAccount(String UserName, String Password) {
+        this.UserName = UserName;
+        this.Password = Password;
+    }
+
+    public EmployeeAccount() {
+    }
+
+    
     public int getEmp_ID() {
         return Emp_ID;
     }

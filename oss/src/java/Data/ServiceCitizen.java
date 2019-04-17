@@ -61,7 +61,7 @@ public class ServiceCitizen {
             for (ServiceAttachmentName a : attachment) {
                 
 
-                AttachmentArchiveCitizen attachmentArchiveCitizen = new AttachmentArchiveCitizen(idMaxAAC, Cit_ID, a.id, a.file);
+                AttachmentArchiveCitizen attachmentArchiveCitizen = new AttachmentArchiveCitizen(idMaxAAC, Cit_ID, a.id, a.file,a.nameFile,a.name);
                 attachmentArchiveCitizen.addToDataBase();
                 idMaxAAC++;
 

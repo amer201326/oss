@@ -40,6 +40,8 @@ public class Session implements Serializable{
     
     Manager manager ;
     Citizen citizen;
+    Employee employee;
+    
     public Session() {
         login = false;
         typeAccount = "";
@@ -72,6 +74,20 @@ public class Session implements Serializable{
                     typeAccount = "citizen";
                     citizen = c;
                     FacesContext.getCurrentInstance().getExternalContext().redirect("../citizenn/");
+                } catch (IOException ex) {
+                    Logger.getLogger(Session.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else{
+                //error message
+            }
+        }else if(username.startsWith("e-")){
+            Employee e = GetFromDB.getEmployeeAccount(username,passWord);
+            if(e != null){
+                try {
+                    login = true;
+                    typeAccount = "employee";
+                    employee = e;
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("../employeePages/");
                 } catch (IOException ex) {
                     Logger.getLogger(Session.class.getName()).log(Level.SEVERE, null, ex);
                 }
