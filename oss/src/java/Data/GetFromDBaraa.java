@@ -176,6 +176,7 @@ public class GetFromDBaraa {
         return deps;
     }
 
+    
     public static ArrayList<StepsAndDecsionsJob> stepAndDecJop(int idcitizen, int idSerCit) {
         ArrayList<StepsAndDecsionsJob> Lsdj = new ArrayList<>();
         try {

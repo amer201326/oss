@@ -42,7 +42,7 @@ public class AttachmentServiceCitizen {
     public boolean addToDataBase() {
         
      String  q = "INSERT INTO attachment_service_citizen (`Atta_ArchiveC_ID`, `Service_Citizen_ID`, `Services_Provided_ID`, `Cit_ID`) VALUES "
-               + " (?,?,?,?);";
+               + " (?,?,?,?,?,?);";
 
         System.out.println(q);
 
@@ -55,7 +55,8 @@ public class AttachmentServiceCitizen {
             s.setInt(2, Service_Citizen_ID);
             s.setInt(3,Services_Provided_ID);
             s.setInt(4,Cit_ID);
-           
+            
+           s.setString(6, "form");
             s.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(AttachmentServiceCitizen.class.getName()).log(Level.SEVERE, null, ex);

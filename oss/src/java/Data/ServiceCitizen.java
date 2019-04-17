@@ -40,7 +40,9 @@ public class ServiceCitizen {
         
         Services_Provided_ID = thisService.id;
         List<StepsAndDecsions> pathD;
+        List<DecisionSection> pathS;
         List<StepsAndDecsionsJob> pathJ;
+        
 
         int idMaxSC = getMaxId_service_citizen();
         idMaxSC++;
@@ -59,13 +61,11 @@ public class ServiceCitizen {
             System.out.println("12345");
             
             for (ServiceAttachmentName a : attachment) {
-                
-
                 AttachmentArchiveCitizen attachmentArchiveCitizen = new AttachmentArchiveCitizen(idMaxAAC, Cit_ID, a.id, a.file,a.nameFile,a.name);
                 attachmentArchiveCitizen.addToDataBase();
                 idMaxAAC++;
-
             }
+            
             System.out.println("ggggggggg");
 
             for (ServiceAttachmentName af : attwhithFile) {
@@ -74,6 +74,9 @@ public class ServiceCitizen {
                 idMaxAAC++;
 
             }
+            
+            
+            
             System.out.println("333333");
             pathD = stepAndDecDep(Cit_ID, Services_Provided_ID);
             for (StepsAndDecsions d : pathD) {
@@ -82,6 +85,13 @@ public class ServiceCitizen {
 
             }
 
+            pathS = GetFromDBaraa.sectionsteps(Cit_ID);
+            for (DecisionSection s : pathS) {
+                DecisionSection decisionSection = new DecisionSection();
+                decisionSection.section = s.section;
+                decisionSection.addToDB(Services_Provided_ID, Cit_ID, Service_Citizen_ID);
+            }
+            
             pathJ = stepAndDecJop(Cit_ID, Services_Provided_ID);
             for (StepsAndDecsionsJob j : pathJ) {
                 DecisionsJob decisionsJob = new DecisionsJob();
