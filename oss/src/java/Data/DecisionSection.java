@@ -20,10 +20,20 @@ public class DecisionSection {
 
     SectionPath section;
      int Cit_ID; int Service_Citizen_ID;
+     int Services_Provided_ID;
+     
     List<StepsAndDecsionsJob> job = new ArrayList<>();
     String Status;
     List<DecisionsJob> jobs = new ArrayList<DecisionsJob>();
     public DecisionSection() {
+    }
+
+    public DecisionSection(SectionPath section, int Cit_ID, int Service_Citizen_ID, int Services_Provided_ID, String Status) {
+        this.section = section;
+        this.Cit_ID = Cit_ID;
+        this.Service_Citizen_ID = Service_Citizen_ID;
+        this.Services_Provided_ID = Services_Provided_ID;
+        this.Status = Status;
     }
     
     
@@ -91,18 +101,22 @@ public class DecisionSection {
         this.Status = Status;
     }
 
+    public int getServices_Provided_ID() {
+        return Services_Provided_ID;
+    }
+
+    public void setServices_Provided_ID(int Services_Provided_ID) {
+        this.Services_Provided_ID = Services_Provided_ID;
+    }
+
     
-    public void addToDB(int Services_Provided_ID, int Cit_ID, int Service_Citizen_ID) {
-        try {
+    public void addToDB() throws SQLException, ClassNotFoundException {
+      
             DB data = new DB();
-            String q = "INSERT INTO dicisions_section (`Dep_ID`, `Sec_ID`, `Services_Provided_ID`, `Order_Departmant`, `Order_Section`, `Cit_ID`, `Status`, `Service_Citizen_ID`) VALUES ('"+section.departmentId+"', '"+section.id+"', '"+Services_Provided_ID+"', '"+section.orderDepartment+"', '"+section.order+"', '"+section.departmentId+"', 'notdone'"+"', '"+Service_Citizen_ID+");";
+            String q = "INSERT INTO dicisions_section (`Dep_ID`, `Sec_ID`, `Services_Provided_ID`, `Order_Departmant`, `Order_Section`, `Cit_ID`, `Status`, `Service_Citizen_ID`) VALUES ('"+section.departmentId+"', '"+section.id+"', '"+Services_Provided_ID+"', '"+section.orderDepartment+"', '"+section.order+"', '"+section.departmentId+"', '"+Status+"', "+Service_Citizen_ID+");";
+            System.out.println("qs="+q);
             data.write(q);
 
-        } catch (SQLException ex) {
-            Logger.getLogger(DecisionSection.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DecisionSection.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
 }

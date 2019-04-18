@@ -25,7 +25,7 @@ public class DecisionsDepartment {
     int Service_Citizen_ID;
 
     String status;
-    String cost;
+    double cost;
 
     String internalMessage;
     String externalMessage;
@@ -34,7 +34,7 @@ public class DecisionsDepartment {
     
     List<DecisionSection> section = new ArrayList<>();
 
-    public DecisionsDepartment(int depId, int depOrder, int Services_Provided_ID, int Cit_ID, int Service_Citizen_ID, String status, String cost, String internalMessage, String externalMessage, String date) {
+    public DecisionsDepartment(int depId, int depOrder, int Services_Provided_ID, int Cit_ID, int Service_Citizen_ID, String status, double cost, String internalMessage, String externalMessage, String date) {
         this.depId = depId;
         this.depOrder = depOrder;
         this.Services_Provided_ID = Services_Provided_ID;
@@ -47,7 +47,7 @@ public class DecisionsDepartment {
         this.date = date;
     }
 
-    public DecisionsDepartment(String internalMessage, String externalMessage, String status, String cost, int depId, int depOrder, String depName) {
+    public DecisionsDepartment(String internalMessage, String externalMessage, String status, double cost, int depId, int depOrder, String depName) {
         this.internalMessage = internalMessage;
         this.externalMessage = externalMessage;
         this.status = status;
@@ -57,7 +57,7 @@ public class DecisionsDepartment {
         this.depName = depName;
     }
 
-    public DecisionsDepartment(String status, String cost, int depId, int depOrder) {
+    public DecisionsDepartment(String status, double cost, int depId, int depOrder) {
         this.status = status;
         this.cost = cost;
         this.date = date;
@@ -89,13 +89,15 @@ public class DecisionsDepartment {
         this.status = status;
     }
 
-    public String getCost() {
+    public double getCost() {
         return cost;
     }
 
-    public void setCost(String cost) {
+    public void setCost(double cost) {
         this.cost = cost;
     }
+
+   
 
     public String getDate() {
         return date;
@@ -130,17 +132,14 @@ public class DecisionsDepartment {
     }
 
    
-    public void addToDB(int Services_Provided_ID, int Cit_ID, int Service_Citizen_ID) {
-        try {
+    public void addToDB() throws SQLException, ClassNotFoundException {
+      
             DB data = new DB();
             String q = "INSERT INTO decisions_department (`Dep_ID`, `Order_Departmant`, `Services_Provided_ID`, `Cit_ID`, `Service_Citizen_ID`, `Status`, `Cost`) VALUES ('" + depId + "', '" + depOrder + "', '" + Services_Provided_ID + "', '" + Cit_ID + "', '" + Service_Citizen_ID + "', '" + status + "', '" + cost + "');";
+            System.out.println("q d "+q);
             data.write(q);
 
-        } catch (SQLException ex) {
-            Logger.getLogger(DecisionsDepartment.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DecisionsDepartment.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
     }
 
     public int getServices_Provided_ID() {

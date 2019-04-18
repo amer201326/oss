@@ -26,6 +26,10 @@ public class DecisionsJob {
     String externalMessage;
     String date;
 
+    int Services_Provided_ID;
+    int Cit_ID;
+    int Service_Citizen_ID;
+    
     public DecisionsJob(JobPath job, int idEmployee, String status, String runing, String cost, String internalMessage, String externalMessage, String date) {
         this.job = job;
         this.idEmployee = idEmployee;
@@ -58,6 +62,13 @@ public class DecisionsJob {
     public DecisionsJob() {
     }
 
+    public DecisionsJob(int Services_Provided_ID, int Cit_ID, int Service_Citizen_ID) {
+        this.Services_Provided_ID = Services_Provided_ID;
+        this.Cit_ID = Cit_ID;
+        this.Service_Citizen_ID = Service_Citizen_ID;
+    }
+
+    
     
     public JobPath getJob() {
         return job;
@@ -117,17 +128,46 @@ public class DecisionsJob {
         this.date = date;
     }
 
-    public void addToDB(int Services_Provided_ID, int Cit_ID, int Service_Citizen_ID) {
-        try {
+    public int getIdEmployee() {
+        return idEmployee;
+    }
+
+    public void setIdEmployee(int idEmployee) {
+        this.idEmployee = idEmployee;
+    }
+
+    public int getServices_Provided_ID() {
+        return Services_Provided_ID;
+    }
+
+    public void setServices_Provided_ID(int Services_Provided_ID) {
+        this.Services_Provided_ID = Services_Provided_ID;
+    }
+
+    public int getCit_ID() {
+        return Cit_ID;
+    }
+
+    public void setCit_ID(int Cit_ID) {
+        this.Cit_ID = Cit_ID;
+    }
+
+    public int getService_Citizen_ID() {
+        return Service_Citizen_ID;
+    }
+
+    public void setService_Citizen_ID(int Service_Citizen_ID) {
+        this.Service_Citizen_ID = Service_Citizen_ID;
+    }
+
+    public void addToDB() throws SQLException, ClassNotFoundException {
+      
             DB data = new DB();
             String q = "INSERT INTO decisions_job (`Dep_ID`, `Sec_ID`, `Job_ID`, `Services_Provided_ID`, `Order_Departmant`, `Order_Section`, `Order_Job`, `Cit_ID`, `Service_Citizen_ID`, `Emp_ID`, `Status`, `Cost`) VALUES ('" + job.DepId + "', '" + job.sectionID + "', '" + job.id + "', '" + Services_Provided_ID + "', '" + job.dOrder + "', '" + job.sOrder + "', '" + job.order + "', '" + Cit_ID + "', '" + Service_Citizen_ID + "', '" + idEmployee + "', 'notdone', '0');";
+            System.out.println("q  =  "+q);
             data.write(q);
 
-        } catch (SQLException ex) {
-            Logger.getLogger(DecisionsJob.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DecisionsJob.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       
     }
     
 }

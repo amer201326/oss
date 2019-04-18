@@ -39,13 +39,12 @@ public class ServiceCitizen {
     public boolean addToDataBase() {
         
         Services_Provided_ID = thisService.id;
-        List<StepsAndDecsions> pathD;
-        List<DecisionSection> pathS;
-        List<StepsAndDecsionsJob> pathJ;
+        
         
 
-        int idMaxSC = getMaxId_service_citizen();
+        int idMaxSC = getMaxId_service_citizen(Cit_ID);
         idMaxSC++;
+        
         int idMaxAAC = getMaxId_attachment_archive_citizen();
         idMaxAAC++;
         DB data;
@@ -61,45 +60,69 @@ public class ServiceCitizen {
             System.out.println("12345");
             
             for (ServiceAttachmentName a : attachment) {
-                AttachmentArchiveCitizen attachmentArchiveCitizen = new AttachmentArchiveCitizen(idMaxAAC, Cit_ID, a.id, a.file,a.nameFile,a.name);
+                AttachmentArchiveCitizen attachmentArchiveCitizen = new AttachmentArchiveCitizen(idMaxAAC, Cit_ID, a.id, a.file,a.nameFile,a.name,"no");
                 attachmentArchiveCitizen.addToDataBase();
                 idMaxAAC++;
+
+
             }
             
             System.out.println("ggggggggg");
 
             for (ServiceAttachmentName af : attwhithFile) {
-                AttachmentServiceCitizen attachmentServiceCitizen = new AttachmentServiceCitizen(idMaxAAC, Service_Citizen_ID, Services_Provided_ID, Cit_ID, af.file);
-                attachmentServiceCitizen.addToDataBase();
+                AttachmentArchiveCitizen attachmentArchiveCitizen = new AttachmentArchiveCitizen(idMaxAAC, Cit_ID, af.id, af.file,af.nameFile,af.name,"yes");
+                attachmentArchiveCitizen.addToDataBase();
                 idMaxAAC++;
+                
 
             }
             
-            
-            
-            System.out.println("333333");
-            pathD = stepAndDecDep(Cit_ID, Services_Provided_ID);
-            for (StepsAndDecsions d : pathD) {
-                DecisionsDepartment decisionsDepartment = new DecisionsDepartment("notdone", "0", d.departmentPaths.id, d.departmentPaths.order);
-                decisionsDepartment.addToDB(Services_Provided_ID, Cit_ID, Service_Citizen_ID);
-
+             List<DepartmentPaths> departments = GetFromDBaraa.departmentPath(Services_Provided_ID);
+        List<SectionPath> sections = GetFromDBaraa.sectionPath(Services_Provided_ID);
+        List<JobPath> jobs = GetFromDBaraa.jobPath(Services_Provided_ID);
+        
+            for (DepartmentPaths d : departments) {
+                DecisionsDepartment decisionsDepartment = new DecisionsDepartment(d.id,
+                        d.order, Services_Provided_ID, Cit_ID,
+                        idMaxSC, status, 0, "", "", Date);
+                decisionsDepartment.addToDB();
             }
-
-            pathS = GetFromDBaraa.sectionsteps(Cit_ID);
-            for (DecisionSection s : pathS) {
-                DecisionSection decisionSection = new DecisionSection();
-                decisionSection.section = s.section;
-                decisionSection.addToDB(Services_Provided_ID, Cit_ID, Service_Citizen_ID);
+            for (SectionPath s : sections) {
+                DecisionSection decisionSection = new DecisionSection(s, Cit_ID, idMaxSC, Services_Provided_ID, "notdone");           
+                decisionSection.addToDB();
             }
-            
-            pathJ = stepAndDecJop(Cit_ID, Services_Provided_ID);
-            for (StepsAndDecsionsJob j : pathJ) {
-                DecisionsJob decisionsJob = new DecisionsJob();
-                decisionsJob.job = j.jobPath;
-                decisionsJob.idEmployee = j.decisionsJob.idEmployee;
-                decisionsJob.addToDB(Services_Provided_ID, Cit_ID, Service_Citizen_ID);
-
+            for (JobPath j : jobs) {
+                DecisionsJob decisionsJob = new DecisionsJob(Services_Provided_ID, Cit_ID, idMaxSC);
+                decisionsJob.job = j;
+                decisionsJob.addToDB();
             }
+//            System.out.println("333333");
+//            pathD = stepAndDecDep(Cit_ID, Services_Provided_ID);
+//            for (StepsAndDecsions d : pathD) {
+//                System.out.println("  =  "+d.departmentPaths.id+"  bb   "+ d.departmentPaths.order);
+//                DecisionsDepartment decisionsDepartment = new DecisionsDepartment(d.departmentPaths.id,
+//                        d.departmentPaths.order, Services_Provided_ID, Cit_ID,
+//                        idMaxSC, status, 0, "", "", Date);
+//                decisionsDepartment.addToDB();
+//                
+//
+//            }
+//
+//            pathS = GetFromDBaraa.sectionsteps(Cit_ID);
+//            for (DecisionSection s : pathS) {
+//                DecisionSection decisionSection = new DecisionSection();
+//                decisionSection.section = s.section;
+//                decisionSection.addToDB(Services_Provided_ID, Cit_ID, Service_Citizen_ID);
+//            }
+//            
+//            pathJ = stepAndDecJop(Cit_ID, Services_Provided_ID);
+//            for (StepsAndDecsionsJob j : pathJ) {
+//                DecisionsJob decisionsJob = new DecisionsJob(Services_Provided_ID, Cit_ID, idMaxSC);
+//                decisionsJob.job = j.jobPath;
+//                decisionsJob.idEmployee = j.decisionsJob.idEmployee;
+//                decisionsJob.addToDB();
+//
+//            }
             q = "commit;";
             System.out.println(q);
             data.write(q);
@@ -124,12 +147,12 @@ public class ServiceCitizen {
         return false;
     }
 
-    public static int getMaxId_service_citizen() {
+    public static int getMaxId_service_citizen(int cid) {
         int id = 0;
         try {
             DB db = new DB();
 
-            String sql = "SELECT MAX(Service_Citizen_ID) FROM service_citizen;";
+            String sql = "SELECT MAX(Service_Citizen_ID) FROM service_citizen where Cit_ID = "+cid+";";
 
             System.out.println(sql);
             ResultSet r = db.read(sql);

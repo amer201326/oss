@@ -125,7 +125,7 @@ public class GetFromDBaraa {
             String sql = "SELECT dd.*,d.Dep_Name FROM decisions_department as dd inner join department as d on dd.Dep_ID = d.Dep_ID where Cit_ID = " + idcitizen + " and Service_Citizen_ID = " + idSerCit + " and Services_Provided_ID = " + idservice + ";";
             ResultSet r = db.read(sql);
             while (r.next()) {
-                d = new DecisionsDepartment(r.getString(8), r.getString(9), r.getString(6), r.getString(7), r.getInt(1), r.getInt(2), r.getString(11));
+                d = new DecisionsDepartment(r.getString(8), r.getString(9), r.getString(6), r.getDouble(7), r.getInt(1), r.getInt(2), r.getString(11));
                 departments.add(d);
             }
         } catch (Exception e) {
@@ -166,7 +166,7 @@ public class GetFromDBaraa {
             ResultSet r = db.read(sql);
             while (r.next()) {
                 s = new DepartmentPaths(r.getInt(1), r.getString(15), r.getInt(2), r.getString(15));
-                d = new DecisionsDepartment(r.getString(8), r.getString(9), r.getString(6), r.getString(7), r.getInt(1), r.getInt(2), r.getString(15));
+                d = new DecisionsDepartment(r.getString(8), r.getString(9), r.getString(6), r.getDouble(7), r.getInt(1), r.getInt(2), r.getString(15));
                 sd = new StepsAndDecsions(s, d);
                 deps.add(sd);
             }
@@ -295,7 +295,7 @@ public class GetFromDBaraa {
         try {
             DB db = new DB();
 
-            String sql = "SELECT MAX(Atta_ArchiveC_ID) FROM attachment_service_citizen;";
+            String sql = "SELECT max(Atta_ArchiveC_ID) FROM attachment_archive_citizen;";
 
             System.out.println(sql);
             ResultSet r = db.read(sql);
