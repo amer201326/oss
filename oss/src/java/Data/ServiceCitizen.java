@@ -27,7 +27,7 @@ public class ServiceCitizen {
     int Cit_ID;
     String Date;
     String status;
-    String note = "g";
+    String note ;
     public List<ServiceAttachmentName> attachment = new ArrayList<ServiceAttachmentName>();
     public List<ServiceAttachmentName> attwhithFile = new ArrayList<ServiceAttachmentName>();
     public Service thisService = new Service();
@@ -54,7 +54,8 @@ public class ServiceCitizen {
             String q = "start transaction;";
             data.write(q);
             
-            q = "INSERT INTO service_citizen (`Service_Citizen_ID`, `Services_Provided_ID`, `Cit_ID`, `Date`, `status`, `note`) VALUES ('" + idMaxSC + "', '" + Services_Provided_ID + "', '" + Cit_ID + "', '1', 'notdone' , '" + note + "');";
+            q = "INSERT INTO service_citizen (`Service_Citizen_ID`, `Services_Provided_ID`, `Cit_ID`, `Date`, `status`, `note`) VALUES ('" +
+                    idMaxSC + "', '" + Services_Provided_ID + "', '" + Cit_ID + "', '1', 'notdone' , '" + note + "');";
             System.out.println(q);
             data.write(q);
             System.out.println("12345");
@@ -84,7 +85,7 @@ public class ServiceCitizen {
             for (DepartmentPaths d : departments) {
                 DecisionsDepartment decisionsDepartment = new DecisionsDepartment(d.id,
                         d.order, Services_Provided_ID, Cit_ID,
-                        idMaxSC, status, 0, "", "", Date);
+                        idMaxSC, "notdone", 0, "", "", Date);
                 decisionsDepartment.addToDB();
             }
             for (SectionPath s : sections) {
@@ -96,33 +97,7 @@ public class ServiceCitizen {
                 decisionsJob.job = j;
                 decisionsJob.addToDB();
             }
-//            System.out.println("333333");
-//            pathD = stepAndDecDep(Cit_ID, Services_Provided_ID);
-//            for (StepsAndDecsions d : pathD) {
-//                System.out.println("  =  "+d.departmentPaths.id+"  bb   "+ d.departmentPaths.order);
-//                DecisionsDepartment decisionsDepartment = new DecisionsDepartment(d.departmentPaths.id,
-//                        d.departmentPaths.order, Services_Provided_ID, Cit_ID,
-//                        idMaxSC, status, 0, "", "", Date);
-//                decisionsDepartment.addToDB();
-//                
-//
-//            }
-//
-//            pathS = GetFromDBaraa.sectionsteps(Cit_ID);
-//            for (DecisionSection s : pathS) {
-//                DecisionSection decisionSection = new DecisionSection();
-//                decisionSection.section = s.section;
-//                decisionSection.addToDB(Services_Provided_ID, Cit_ID, Service_Citizen_ID);
-//            }
-//            
-//            pathJ = stepAndDecJop(Cit_ID, Services_Provided_ID);
-//            for (StepsAndDecsionsJob j : pathJ) {
-//                DecisionsJob decisionsJob = new DecisionsJob(Services_Provided_ID, Cit_ID, idMaxSC);
-//                decisionsJob.job = j.jobPath;
-//                decisionsJob.idEmployee = j.decisionsJob.idEmployee;
-//                decisionsJob.addToDB();
-//
-//            }
+
             q = "commit;";
             System.out.println(q);
             data.write(q);

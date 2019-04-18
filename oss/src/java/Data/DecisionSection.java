@@ -119,4 +119,9 @@ public class DecisionSection {
 
     }
 
+    @Override
+    public String toString() {
+        return "DecisionSection{" + "section=" + section + ", Cit_ID=" + Cit_ID + ", Service_Citizen_ID=" + Service_Citizen_ID + ", Services_Provided_ID=" + Services_Provided_ID + ", job=" + job + ", Status=" + Status + ", jobs=" + jobs + '}';
+    }
+    
 }

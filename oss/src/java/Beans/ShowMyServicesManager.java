@@ -55,7 +55,7 @@ public class ShowMyServicesManager implements Serializable {
         this.thisService = thisService;
     }
 
-    private List<DepartmentPaths> servicePath(int idSer) { 
+    private List<DepartmentPaths> servicePath(int idSer) {
         List<DepartmentPaths> departments = GetFromDBaraa.departmentPath(idSer);
         List<SectionPath> sections = GetFromDBaraa.sectionPath(idSer);
         List<JobPath> jobs = GetFromDBaraa.jobPath(idSer);
@@ -95,7 +95,7 @@ public class ShowMyServicesManager implements Serializable {
         List<StepsAndDecsions> pathD = GetFromDBaraa.stepAndDecDep(idcitizen, idSerCit);
         List<DecisionSection> pathS = GetFromDBaraa.sectionsteps(thisService.getId());
         List<StepsAndDecsionsJob> pathJ = GetFromDBaraa.stepAndDecJop(idcitizen, idSerCit);
-System.out.println("lllll"+pathJ.size());
+        System.out.println("lllll" + pathJ.size());
         for (StepsAndDecsions d : pathD) {
             for (DecisionSection s : pathS) {
                 if (d.getDepartmentPaths().id == s.getSection().getDepartmentId() && d.getDepartmentPaths().order == s.getSection().getOrderDepartment()) {

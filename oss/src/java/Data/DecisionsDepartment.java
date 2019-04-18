@@ -135,7 +135,9 @@ public class DecisionsDepartment {
     public void addToDB() throws SQLException, ClassNotFoundException {
       
             DB data = new DB();
-            String q = "INSERT INTO decisions_department (`Dep_ID`, `Order_Departmant`, `Services_Provided_ID`, `Cit_ID`, `Service_Citizen_ID`, `Status`, `Cost`) VALUES ('" + depId + "', '" + depOrder + "', '" + Services_Provided_ID + "', '" + Cit_ID + "', '" + Service_Citizen_ID + "', '" + status + "', '" + cost + "');";
+            String q = "INSERT INTO decisions_department (`Dep_ID`, `Order_Departmant`, `Services_Provided_ID`, `Cit_ID`,"
+                    + " `Service_Citizen_ID`, `Status`, `Cost`) VALUES ('" + depId + "', '" + depOrder + "', '" + Services_Provided_ID + "',"
+                    + " '" + Cit_ID + "', '" + Service_Citizen_ID + "', '" + status + "', '" + cost + "');";
             System.out.println("q d "+q);
             data.write(q);
 
@@ -172,6 +174,11 @@ public class DecisionsDepartment {
 
     public void setSection(List<DecisionSection> section) {
         this.section = section;
+    }
+
+    @Override
+    public String toString() {
+        return "DecisionsDepartment{" + "depId=" + depId + ", depOrder=" + depOrder + ", Services_Provided_ID=" + Services_Provided_ID + ", Cit_ID=" + Cit_ID + ", Service_Citizen_ID=" + Service_Citizen_ID + ", status=" + status + ", cost=" + cost + ", internalMessage=" + internalMessage + ", externalMessage=" + externalMessage + ", date=" + date + ", depName=" + depName + ", section=" + section + '}';
     }
     
 }

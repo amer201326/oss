@@ -38,7 +38,7 @@ public class ApplyServiceManager implements Serializable {
 
     StreamedContent fileDownload;
     int idCitizen;
-    String note = "";
+    
 
      @ManagedProperty(value = "#{msession}")
     Session session;
@@ -104,13 +104,7 @@ public class ApplyServiceManager implements Serializable {
         }
     }
 
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
-    }
+   
 
     public ServiceCitizen getServiceCitizen() {
         return serviceCitizen;

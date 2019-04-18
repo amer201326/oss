@@ -52,26 +52,51 @@ public class ServiceCitizenManager implements Serializable {
     @PostConstruct
     public void init() {
         if (session.employee != null) {
-            List<DecisionsDepartment> decisionsDepartments = getDecisionsDepartmentsforEmployee(session.employee);
-            
-            allRequestService = GetDB_Eman.getAllRequestService(session.employee.getJob_id());
-            
-            
-            
-            allRequestServiceView = new ArrayList<>();
-            allRequestServiceNotView = new ArrayList<>();
+            allRequestService = new ArrayList<>();
+            DecisionsDepartment decisionsDepartments = getDecisionsDepartmentsforEmployee(session.employee);
 
-            for (int i = 0; i < allRequestService.size(); i++) {
-                ServiceCitizen_1 get = allRequestService.get(i);
-                if (get.getStatus().compareTo("done") == 0) {
-                    allRequestServiceView.add(get);
-                } else {
-                    allRequestServiceNotView.add(get);
+            List<ServiceCitizen_1> temp = GetDB_Eman.getAllRequestService(session.employee.getJob_id());
+            for (ServiceCitizen_1 serviceCitizen_1 : temp) {
+                if (serviceCitizen_1.getCit_ID() == decisionsDepartments.getCit_ID() && serviceCitizen_1.getService_Citizen_ID() == decisionsDepartments.getService_Citizen_ID()) {
+                    if (!decisionsDepartments.getSection().isEmpty()) {
+
+                        for (DecisionSection decisionSection : decisionsDepartments.getSection()) {
+                            if (serviceCitizen_1.getCit_ID() == decisionSection.getCit_ID()
+                                    && serviceCitizen_1.getService_Citizen_ID() == decisionSection.getService_Citizen_ID()) {
+//                                if (!decisionSection.getJobs().isEmpty()) {
+//
+//                                    for (DecisionsJob job : decisionSection.getJobs()) {
+//                                        if (job.getCit_ID() == decisionSection.getCit_ID()
+//                                                && serviceCitizen_1.getService_Citizen_ID() == job.getService_Citizen_ID()) {
+//                                            allRequestService.add(serviceCitizen_1);
+//                                        }
+//                                    }
+//                                } else {
+//                                    allRequestService.add(serviceCitizen_1);
+//                                }
+                                allRequestService.add(serviceCitizen_1);
+                            }
+                        }
+
+                    } else {
+                        allRequestService.add(serviceCitizen_1);
+                    }
+                }
+                allRequestServiceView = new ArrayList<>();
+                allRequestServiceNotView = new ArrayList<>();
+
+                for (int i = 0; i < allRequestService.size(); i++) {
+                    ServiceCitizen_1 get = allRequestService.get(i);
+                    if (get.getStatus().compareTo("done") == 0) {
+                        allRequestServiceView.add(get);
+                    } else {
+                        allRequestServiceNotView.add(get);
+                    }
                 }
             }
-        }
 
-        serviceSelected = new ServiceCitizen_1();
+            serviceSelected = new ServiceCitizen_1();
+        }
     }
 
     public void showServise(String serviceCid, String servicePid) {
@@ -127,29 +152,16 @@ public class ServiceCitizenManager implements Serializable {
         this.session = session;
     }
 
-    private List<DecisionsDepartment> getDecisionsDepartmentsforEmployee(Employee employee) {
-        List<DecisionsDepartment> dds = GetFromDB.getDecisionsDepartment(employee);
-        List<DecisionSection> dses = GetFromDB.getDecisionsSection(employee);
-        List<DecisionsJob> djs = GetFromDB.getDecisionsJob(employee);
+    private DecisionsDepartment getDecisionsDepartmentsforEmployee(Employee employee) {
+        DecisionsDepartment dds = GetFromDB.getDecisionsDepartment(employee);
+        System.out.println(dds);
+        DecisionSection dses = GetFromDB.getDecisionsSection(employee, dds);
+        System.out.println(dses);
+        DecisionsJob djs = GetFromDB.getDecisionsJob(employee, dses);
+        System.out.println(djs);
+        dses.getJobs().add(djs);
 
-        for (DecisionsDepartment dd : dds) {
-
-            for (DecisionSection ds : dses) {
-                if (dd.getDepId() == ds.getSection().getDepartmentId()) {
-                    dd.getSection().add(ds);
-
-                    for (DecisionsJob dj : djs) {
-                        if (dj.getJob().getSectionID() == ds.getSection().getId()) {
-                            ds.getJobs().add(dj);
-
-                        }
-                    }
-
-                }
-
-            }
-
-        }
+        dds.getSection().add(dses);
 
         return dds;
     }
