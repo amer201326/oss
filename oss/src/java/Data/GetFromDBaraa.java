@@ -192,7 +192,7 @@ public class GetFromDBaraa {
             while (r.next()) {
                 s = new JobPath(r.getInt(1), r.getInt(2), r.getInt(3), r.getString(18), r.getInt(5), r.getInt(6), r.getInt(7));
                 d = new DecisionsJob(r.getString(11), r.getString(12), r.getString(13), r.getString(14), r.getString(15));
-                d.employee.emp_id=r.getInt(10);
+                d.idEmployee=r.getInt(10);
                 sdj = new StepsAndDecsionsJob(s, d);
                 Lsdj.add(sdj);
             }

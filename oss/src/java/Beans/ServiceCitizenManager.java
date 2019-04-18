@@ -5,7 +5,12 @@
  */
 package Beans;
 
+import Data.DecisionSection;
+import Data.DecisionsDepartment;
+import Data.DecisionsJob;
+import Data.Employee;
 import Data.GetDB_Eman;
+import Data.GetFromDB;
 import Data.Service;
 import Data.ServiceCitizen;
 import Data.ServiceCitizen_1;
@@ -47,8 +52,12 @@ public class ServiceCitizenManager implements Serializable {
     @PostConstruct
     public void init() {
         if (session.employee != null) {
+            List<DecisionsDepartment> decisionsDepartments = getDecisionsDepartmentsforEmployee(session.employee);
+            
             allRequestService = GetDB_Eman.getAllRequestService(session.employee.getJob_id());
-
+            
+            
+            
             allRequestServiceView = new ArrayList<>();
             allRequestServiceNotView = new ArrayList<>();
 
@@ -116,6 +125,33 @@ public class ServiceCitizenManager implements Serializable {
 
     public void setSession(Session session) {
         this.session = session;
+    }
+
+    private List<DecisionsDepartment> getDecisionsDepartmentsforEmployee(Employee employee) {
+        List<DecisionsDepartment> dds = GetFromDB.getDecisionsDepartment(employee);
+        List<DecisionSection> dses = GetFromDB.getDecisionsSection(employee);
+        List<DecisionsJob> djs = GetFromDB.getDecisionsJob(employee);
+
+        for (DecisionsDepartment dd : dds) {
+
+            for (DecisionSection ds : dses) {
+                if (dd.getDepId() == ds.getSection().getDepartmentId()) {
+                    dd.getSection().add(ds);
+
+                    for (DecisionsJob dj : djs) {
+                        if (dj.getJob().getSectionID() == ds.getSection().getId()) {
+                            ds.getJobs().add(dj);
+
+                        }
+                    }
+
+                }
+
+            }
+
+        }
+
+        return dds;
     }
 
 }

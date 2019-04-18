@@ -96,7 +96,7 @@ public class ServiceCitizen {
             for (StepsAndDecsionsJob j : pathJ) {
                 DecisionsJob decisionsJob = new DecisionsJob();
                 decisionsJob.job = j.jobPath;
-                decisionsJob.employee = j.decisionsJob.employee;
+                decisionsJob.idEmployee = j.decisionsJob.idEmployee;
                 decisionsJob.addToDB(Services_Provided_ID, Cit_ID, Service_Citizen_ID);
 
             }

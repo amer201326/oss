@@ -18,17 +18,34 @@ import java.util.logging.Logger;
  */
 public class DecisionsDepartment {
 
+    int depId;
+    int depOrder;
+    int Services_Provided_ID;
+    int Cit_ID;
+    int Service_Citizen_ID;
 
+    String status;
+    String cost;
 
     String internalMessage;
     String externalMessage;
-    String status;
-    String cost;
     String date;
-    int depId;
-    int depOrder;
     String depName;
-    List<DecisionsJob> jobs = new ArrayList<DecisionsJob>();
+    
+    List<DecisionSection> section = new ArrayList<>();
+
+    public DecisionsDepartment(int depId, int depOrder, int Services_Provided_ID, int Cit_ID, int Service_Citizen_ID, String status, String cost, String internalMessage, String externalMessage, String date) {
+        this.depId = depId;
+        this.depOrder = depOrder;
+        this.Services_Provided_ID = Services_Provided_ID;
+        this.Cit_ID = Cit_ID;
+        this.Service_Citizen_ID = Service_Citizen_ID;
+        this.status = status;
+        this.cost = cost;
+        this.internalMessage = internalMessage;
+        this.externalMessage = externalMessage;
+        this.date = date;
+    }
 
     public DecisionsDepartment(String internalMessage, String externalMessage, String status, String cost, int depId, int depOrder, String depName) {
         this.internalMessage = internalMessage;
@@ -48,7 +65,6 @@ public class DecisionsDepartment {
         this.depOrder = depOrder;
     }
 
-    
     public String getInternalMessage() {
         return internalMessage;
     }
@@ -113,18 +129,11 @@ public class DecisionsDepartment {
         this.depName = depName;
     }
 
-    public List<DecisionsJob> getJobs() {
-        return jobs;
-    }
-
-    public void setJobs(List<DecisionsJob> jobs) {
-        this.jobs = jobs;
-    }
-
-    public void addToDB(int Services_Provided_ID , int Cit_ID, int Service_Citizen_ID) {
+   
+    public void addToDB(int Services_Provided_ID, int Cit_ID, int Service_Citizen_ID) {
         try {
             DB data = new DB();
-            String q = "INSERT INTO decisions_department (`Dep_ID`, `Order_Departmant`, `Services_Provided_ID`, `Cit_ID`, `Service_Citizen_ID`, `Status`, `Cost`) VALUES ('" + depId + "', '" + depOrder + "', '" + Services_Provided_ID + "', '" + Cit_ID + "', '" + Service_Citizen_ID + "', '"+status+"', '"+cost+"');";
+            String q = "INSERT INTO decisions_department (`Dep_ID`, `Order_Departmant`, `Services_Provided_ID`, `Cit_ID`, `Service_Citizen_ID`, `Status`, `Cost`) VALUES ('" + depId + "', '" + depOrder + "', '" + Services_Provided_ID + "', '" + Cit_ID + "', '" + Service_Citizen_ID + "', '" + status + "', '" + cost + "');";
             data.write(q);
 
         } catch (SQLException ex) {
@@ -134,5 +143,36 @@ public class DecisionsDepartment {
         }
     }
 
+    public int getServices_Provided_ID() {
+        return Services_Provided_ID;
+    }
 
+    public void setServices_Provided_ID(int Services_Provided_ID) {
+        this.Services_Provided_ID = Services_Provided_ID;
+    }
+
+    public int getCit_ID() {
+        return Cit_ID;
+    }
+
+    public void setCit_ID(int Cit_ID) {
+        this.Cit_ID = Cit_ID;
+    }
+
+    public int getService_Citizen_ID() {
+        return Service_Citizen_ID;
+    }
+
+    public void setService_Citizen_ID(int Service_Citizen_ID) {
+        this.Service_Citizen_ID = Service_Citizen_ID;
+    }
+
+    public List<DecisionSection> getSection() {
+        return section;
+    }
+
+    public void setSection(List<DecisionSection> section) {
+        this.section = section;
+    }
+    
 }

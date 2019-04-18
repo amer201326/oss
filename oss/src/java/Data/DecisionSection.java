@@ -19,9 +19,54 @@ import java.util.logging.Logger;
 public class DecisionSection {
 
     SectionPath section;
+     int Cit_ID; int Service_Citizen_ID;
     List<StepsAndDecsionsJob> job = new ArrayList<>();
     String Status;
+    List<DecisionsJob> jobs = new ArrayList<DecisionsJob>();
+    public DecisionSection() {
+    }
+    
+    
+    
+    public DecisionSection(SectionPath section, String Status) {
+        this.section = section;
+        this.Status = Status;
+    }
 
+    public DecisionSection(SectionPath section, int Cit_ID, int Service_Citizen_ID, String Status) {
+        this.section = section;
+        
+        this.Cit_ID = Cit_ID;
+        this.Service_Citizen_ID = Service_Citizen_ID;
+        this.Status = Status;
+    }
+
+    public int getCit_ID() {
+        return Cit_ID;
+    }
+
+    public void setCit_ID(int Cit_ID) {
+        this.Cit_ID = Cit_ID;
+    }
+
+    public int getService_Citizen_ID() {
+        return Service_Citizen_ID;
+    }
+
+    public void setService_Citizen_ID(int Service_Citizen_ID) {
+        this.Service_Citizen_ID = Service_Citizen_ID;
+    }
+
+    public List<DecisionsJob> getJobs() {
+        return jobs;
+    }
+
+    public void setJobs(List<DecisionsJob> jobs) {
+        this.jobs = jobs;
+    }
+    
+    
+    
     public SectionPath getSection() {
         return section;
     }

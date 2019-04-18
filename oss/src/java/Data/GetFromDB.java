@@ -817,4 +817,65 @@ public class GetFromDB {
 
         return null;
     }
+
+    public static List<DecisionsDepartment> getDecisionsDepartment(Employee employee) {
+        List<DecisionsDepartment> dds = new ArrayList<>();
+        try {
+            DB db = new DB();
+            String sql = "SELECT * FROM oss.decisions_department  where Dep_ID = "+employee.getDep_id()+";";
+            System.out.println(sql);
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                dds.add(new DecisionsDepartment(r.getInt(1), r.getInt(2), r.getInt(3), r.getInt(4), r.getInt(5), r.getString(6), r.getString(7), r.getString(8), r.getString(9), r.getString(10)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        return dds;
+    }
+
+    public static List<DecisionSection> getDecisionsSection(Employee employee) {
+        List<DecisionSection> dss = new ArrayList<>();
+        try {
+            DB db = new DB();
+            String sql = "SELECT * FROM oss.dicisions_section  where Sec_ID = "+employee.getSec_id()+";";
+            System.out.println(sql);
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                dss.add(new DecisionSection(new SectionPath(r.getInt(1), r.getInt(2), r.getInt(3), r.getInt(4), r.getInt(5)),r.getInt(6) ,r.getInt(8), r.getString(7)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        return dss;
+    }
+
+    public static List<DecisionsJob> getDecisionsJob(Employee employee) {
+        List<DecisionsJob> djs = new ArrayList<>();
+        try {
+            DB db = new DB();
+            String sql = "SELECT * FROM oss.decisions_job where Job_ID = "+employee.getJob_id()+"and Sec_ID= "+employee.getSec_id() + ";";
+            System.out.println(sql);
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                djs.add(new DecisionsJob(new JobPath(r.getInt(1),r.getInt(2) , r.getInt(3),r.getInt(4),null, r.getInt(5), r.getInt(6), r.getInt(7)), r.getInt(10),
+                        r.getString(11),  r.getString(12),  r.getString(13),  r.getString(14),  r.getString(15),  r.getString(16)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        return djs;
+    }
 }
