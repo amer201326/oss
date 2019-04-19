@@ -180,7 +180,7 @@ ui-selectonemenu-trigger.myButton {
 }
 .myButtonC:active {
     position:relative;
-    top:1px;
+    top:1%;
 }
 
 .myButtonB {
@@ -221,7 +221,7 @@ ui-selectonemenu-trigger.myButton {
 }
 .myButtonB:active {
     position:relative;
-    top:1px;
+    top:1%;
 }
 
 
@@ -770,4 +770,17 @@ button[id*='downloadAT'] .ui-button{
 
 #divDown button .ui-button{
     background-color: #d3394c;
+}
+
+.sidebar .nav-item .collapse .collapse-inner, .sidebar .nav-item .collapsing .collapse-inner{
+    min-width: 5rem;
+}
+
+.sidebar .nav-item .collapse{
+    position: initial;
+}
+
+.sidebar .nav-item .collapse .collapse-inner .collapse-item, 
+.sidebar .nav-item .collapsing .collapse-inner .collapse-item{
+    padding: .5rem .1rem;
 }

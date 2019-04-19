@@ -16,20 +16,26 @@ import java.util.logging.Logger;
  *
  * @author me
  */
-public class JobPath implements Serializable{
+public class JobPath implements Serializable {
+
     int DepId;
     int sectionID;
-    
+
     Integer id;
     int idService;
     String name;
     Integer dOrder;
     int sOrder;
     int order;
-    
-    
+
     String idMarge;
+
     public JobPath() {
+    }
+
+    public JobPath(Integer id, int order) {
+        this.id = id;
+        this.order = order;
     }
 
     public JobPath(int sectionID, int id, String name, int order) {
@@ -37,7 +43,7 @@ public class JobPath implements Serializable{
         this.id = id;
         this.name = name;
         this.order = order;
-        idMarge = id+"-"+sectionID;
+        idMarge = id + "-" + sectionID;
     }
 
     public JobPath(int DepId, int sectionID, int id, int dOrder, int sOrder, int order) {
@@ -47,7 +53,7 @@ public class JobPath implements Serializable{
         this.dOrder = dOrder;
         this.sOrder = sOrder;
         this.order = order;
-        idMarge = id+"-"+sectionID;
+        idMarge = id + "-" + sectionID;
     }
 
     public JobPath(int DepId, int sectionID, int id, String name, int dOrder, int sOrder, int order) {
@@ -71,10 +77,6 @@ public class JobPath implements Serializable{
         this.order = order;
     }
 
-    
-    
-
-    
     public int getSectionID() {
         return sectionID;
     }
@@ -114,9 +116,9 @@ public class JobPath implements Serializable{
     public void setIdMarge(String idMarge) {
         this.idMarge = idMarge;
     }
-    
-    public void idMarge(){
-        idMarge = id+"-"+sectionID;
+
+    public void idMarge() {
+        idMarge = id + "-" + sectionID;
     }
 
     public int getDepId() {
@@ -126,25 +128,25 @@ public class JobPath implements Serializable{
     public void setDepId(int DepId) {
         this.DepId = DepId;
     }
-    
 
     @Override
     public String toString() {
         return "JobPath{" + "sectionID=" + sectionID + ", id=" + id + ", name=" + name + ", order=" + order + '}';
     }
-public boolean addToDataBase(int  idService) {
+
+    public boolean addToDataBase(int idService) {
         try {
             DB d = new DB();
             String q = "INSERT INTO steps_job VALUES(" + DepId + "," + sectionID + "," + id + "," + idService + "," + dOrder + "," + sOrder + "," + order + ");";
             System.out.println(q);
             d.write(q);
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(DepartmentPaths.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DepartmentPaths.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
+
         return false;
     }
 
@@ -163,6 +165,5 @@ public boolean addToDataBase(int  idService) {
     public void setsOrder(int sOrder) {
         this.sOrder = sOrder;
     }
-    
-    
+
 }
