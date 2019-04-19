@@ -720,7 +720,7 @@ button[id*='downloadAT'] {
     color: #f1e5e6;
     background: #e74a3b 50% 50%;
     border: none;
-    width: 209px;
+    width: 100%;
     border-radius: 0px;
     font-size: 20px;
     font-weight: bold;
