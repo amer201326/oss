@@ -354,6 +354,15 @@ public class ServiceAttachmentName implements Serializable {
         else
             return "primary";
     }
+    
+    public String colorButton(){
+        if(haveFileToupload())
+            return "#e74a3b";
+        else
+            return "#4e73df";
+    }
+   
+   
 
     public void updatewithoutFile() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

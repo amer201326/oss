@@ -148,18 +148,22 @@
                                                 <div class="px-3 mb-2 py-5 bg-gradient-#{att.color()} text-white border-bottom-#{att.color()}">مطلوب #{in.index+1}</div>
                                                 <div class="col-sm-11 px-5  mb-2 py-4  border-bottom-#{att.color()} ">
                                                     <div class="flexjustify-content row-space" style="margin-right: 14px">
-                                                        <dir>
+                                                        <div>
                                                             <div class="text-xs font-weight-bold text-xs text-success mb-1" style="font-size: 1.4em">#{att.name}</div>
 
                                                             <div class="text-xs font-weight-bold text-gray-800 text-uppercase mb-1" style="font-size: 0.8em ; margin-right: 20px;">#{att.notes}</div>
 
-                                                        </dir>
-                                                        <div>
+                                                        </div>
+                                                        
+                                                        <div id="divDown" class="flexColomn ">
                                                             
-                                                            <p:fileUpload id="uploadAm" label="اختار ملف" value="#{att.file}" mode="simple" skinSimple="true"  />
+                                                            <p:fileUpload id="uploadAm" label="اختار ملف" value="#{att.file}" mode="simple" skinSimple="true" required="true" 
+                                                                          class="bg-#{att.color()} text-white transparent_btn" rendered="true"
+                                                                           style="border-color: none;"/>
                                                             
                                                             <p:outputLabel rendered="#{att.haveFileToupload()}" >
-                                                                <div class=" font-weight-bold redcolor" style="font-size: 0.8em ; margin-right: 20px;">يجب ارفاق المتطلب</div>
+                                                                <div class=" font-weight-bold redcolor" style="font-size: 0.8em ; text-align: center;
+                                                                    margin-top: 4%; ">يجب ارفاق المتطلب</div>
                                                             </p:outputLabel>
                                                         </div>
                                                     </div>
@@ -194,13 +198,20 @@
 
                                                         </dir>
                                                         <div id="divDown" class="flexColomn ">
-                                                            <p:commandButton id="downloadAT"  value="تنزيل" ajax="false"  icon="fa fa-arrow-down" >
-                                                                <p:fileDownload value="#{att.fileDownload}" />
+                                                            <p:commandButton id="downloadAT"  value="تنزيل" ajax="false" icon="fa fa-arrow-down" class="bg-#{att.color()}" 
+                                                                             style="color: white;">
+                                                                <p:fileDownload value="#{att.fileDownload}"/>
                                                             </p:commandButton>  
-                                                            <p:fileUpload id="uploadAm" label="اختار ملف" value="#{att.file}" mode="simple" skinSimple="true" rendered="true" />
+                                                            <br/>
+                                                            
+                                                            <p:fileUpload required="true" id="uploadAm" label="اختار ملف" value="#{att.file}" mode="simple" 
+                                                                          skinSimple="true" rendered="true" style="border-color: none; height: 40%;"
+                                                                          class="bg-#{att.color()} text-white transparent_btn1"/>
+                                                            
                                                             <p:message for="uploadAm" />
-                                                            <p:outputLabel rendered="#{att.haveFileToupload()}" >
-                                                                <div class=" font-weight-bold redcolor" style="font-size: 0.8em ; margin-right: 20px;">يجب ارفاق المتطلب</div>
+                                                            <p:outputLabel rendered="#{att.haveFileToupload()}">
+                                                                <div class=" font-weight-bold redcolor" 
+                                                                     style="font-size: 0.8em ; margin-right: 20px; text-align: center; border-color: transparent;">يجب ارفاق المتطلب</div>
                                                             </p:outputLabel>
                                                         </div>
                                                     </div>
@@ -237,7 +248,7 @@
                                         <br/><br/>
                                         <div class="form-group row">
                                             <div class="col-sm-12 py-2">
-                                                <p:inputTextarea value="#{applyServiceManager.serviceCitizen.note}" rows="5" cols="100" dir="rtl" style="margin-right: 40px"/> 
+                                                <p:inputTextarea value="#{applyServiceManager.serviceCitizen.note}" rows="5" cols="100" dir="rtl" style="width: 100%;"/> 
                                             </div>
                                         </div>
 
