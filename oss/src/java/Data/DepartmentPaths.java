@@ -28,6 +28,7 @@ public class DepartmentPaths implements Serializable {
     public String importantComment;
     public List<SectionPath> sections = new ArrayList<>();
 
+    
     public DepartmentPaths() {
         sections = new ArrayList<>();
            
@@ -50,6 +51,13 @@ public class DepartmentPaths implements Serializable {
         this.order = order;
         this.importantComment = importantComment;
     }
+
+    public DepartmentPaths(int id, Integer order ) {
+        this.id = id;
+        this.order = order;
+    }
+
+    
     
     public int getId() {
         return id;
