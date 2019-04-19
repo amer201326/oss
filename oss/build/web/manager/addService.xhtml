@@ -260,17 +260,34 @@
 
 
                                                                     <div class="card-body">
+                                                                        <p:growl id="msg" showDetail="false" escape="false" showSummary="false" sticky="true" />
                                                                         <div class="form-group row">
                                                                             <div class="col-sm-12">
                                                                                 <div style="display: flex; justify-content: center; min-width: 70px;"  class="col-sm-12" >
                                                                                     <p:pickList id="pickList" value="#{addServiceManager.attachmentNamesAndResaults}" var="sna" 
                                                                                                 itemLabel="#{sna}" itemValue="#{sna}"  showSourceFilter="true" showTargetFilter="true"
-                                                                                                style="position: center; min-height: 100px;" orientation="vertical">
-                                                                                        <f:facet name="sourceCaption">كافة المرفقات</f:facet>
+                                                                                                style="position: center; min-height: 100px;" orientation="vertical"  >
+                                                                                        <f:facet name="sourceCaption" >كافة المرفقات</f:facet>
                                                                                         <f:facet name="targetCaption">المرفقات المختارة</f:facet>
+                                                                                        <p:ajax event="select" listener="#{addServiceManager.onSelect}" update="msg"/>
+
                                                                                     </p:pickList>  
                                                                                 </div>
 
+
+                                                                                <p:dialog id="Picklist" resizable="false" header="إضافة دائرة" widgetVar="dlgPick" dir="rtl">
+
+                                                                                    <h:panelGrid columns="2" cellpadding="5">
+
+                                                                                        <h:outputLabel for="departments1" value="دائرة:" />
+                                                                                        <p:selectOneMenu id="departments1" value="#{addServiceManager.departmentPaths.id}"  class="pading000"
+                                                                                                         required="true" dynamic="true"  style="width:200px; height:100%; min-width: 223px;">
+                                                                                            <f:selectItem noSelectionOption="true" itemLabel="اختار دائرة"/>
+                                                                                            <f:selectItems value="#{addServiceManager.departments}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}"/>
+                                                                                        </p:selectOneMenu>
+
+                                                                                    </h:panelGrid>
+                                                                                </p:dialog>  
                                                                             </div>
 
 
@@ -365,6 +382,13 @@
 
                                                                             </h:panelGrid>
                                                                         </p:dialog>  
+
+
+
+
+
+
+
 
                                                                         <h:head id="msgs1"/>
 

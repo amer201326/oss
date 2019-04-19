@@ -370,8 +370,10 @@ public class ServiceAttachmentName implements Serializable {
     public void error() {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Upload All the Files needed"));
 
-      //  FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Please upload files");
+      //  FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Error!", "Please upload files");
       //  PrimeFaces.current().dialog().showMessageDynamic(message);
+      
+   
     }
 
     public void updatewithoutFile() {

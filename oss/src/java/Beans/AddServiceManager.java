@@ -19,12 +19,15 @@ import Data.ServiceAttachmentName;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import org.primefaces.PrimeFaces;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
 import org.primefaces.model.DualListModel;
@@ -60,7 +63,6 @@ public class AddServiceManager {
     List<JobOfSection> filterJobsOfSections;
 
     DualListModel<String> attachmentNamesAndResaults;
-    
 
     public AddServiceManager() {
         attachmentNames = GetFromDB.getServiceAttachmentName();
@@ -90,7 +92,7 @@ public class AddServiceManager {
         this.departmentPaths = departmentPaths;
     }
 
-   public void addDepartmentToPath() {
+    public void addDepartmentToPath() {
         for (int i = 0; i < departments.size(); i++) {
             Department get = departments.get(i);
             if (departmentPaths.id == get.id) {
@@ -181,25 +183,24 @@ public class AddServiceManager {
     }
 
     public void addService() {
-        
+
         List<ServiceAttachmentName> l = new ArrayList<>();
         for (int i = 0; i < attachmentNamesAndResaults.getTarget().size(); i++) {
             String get = attachmentNamesAndResaults.getTarget().get(i);
             for (int j = 0; j < attachmentNames.size(); j++) {
                 ServiceAttachmentName get1 = attachmentNames.get(j);
-                if(get.equals(get1.getName())){
+                if (get.equals(get1.getName())) {
                     l.add(get1);
                 }
-                
+
             }
         }
         newService.setAttachmentNames(l);
-        
+
         newService.setPath(departmentsInPath);
         newService.addServiceToDB();
 
     }
-    
 
     public List<Section> filterSections() {
         List<Section> list = new ArrayList<>();
@@ -247,7 +248,6 @@ public class AddServiceManager {
         return selectSectionPath.jobs;
     }
 
-
     public void onRowSelectFromDepartment(SelectEvent event) {
         System.out.println((DepartmentPaths) event.getObject());
         boolSection = true;
@@ -288,7 +288,7 @@ public class AddServiceManager {
     public void deleteJobPath() {
         System.out.println("delete job");
         System.out.println(selectedJobPath);
-        
+
         selectSectionPath.getJobs().remove(selectedJobPath);
         selectedJobPath = new JobPath();
     }
@@ -298,7 +298,7 @@ public class AddServiceManager {
         System.out.println(selectedJobPath);
 
         departmentsInPath.remove(selectDepartmentPath);
-        
+
         boolSection = false;
         pleaseSelectDepartment = true;
         boolJob = false;
@@ -314,7 +314,6 @@ public class AddServiceManager {
         System.out.println(selectedJobPath);
 
         selectDepartmentPath.getSections().remove(selectSectionPath);
-        
 
         boolJob = false;
         pleaseSelectsection = true;
@@ -412,8 +411,6 @@ public class AddServiceManager {
         this.departmentsInPath = departmentsInPath;
     }
 
-  
-
     public DepartmentPaths getSelectDepartmentPath() {
         return selectDepartmentPath;
     }
@@ -470,7 +467,10 @@ public class AddServiceManager {
         this.attachmentNamesAndResaults = attachmentNamesAndResaults;
     }
 
-    
-    
-    
+    public void onSelect(SelectEvent event) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Echoes in eternity.");
+        PrimeFaces.current().dialog().showMessageDynamic(message);
+       
+    }
+
 }
