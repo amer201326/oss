@@ -21,7 +21,7 @@ public class ServiceCitizen_1 implements Serializable {
     String firstName;
     String lastName;
     String serviceName;
-
+JobPath job;
     public ServiceCitizen_1() {
     }
 
@@ -100,6 +100,14 @@ public class ServiceCitizen_1 implements Serializable {
 
     public void setServiceName(String serviceName) {
         this.serviceName = serviceName;
+    }
+
+    public JobPath getJob() {
+        return job;
+    }
+
+    public void setJob(JobPath job) {
+        this.job = job;
     }
     
     

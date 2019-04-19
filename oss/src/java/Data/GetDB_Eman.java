@@ -182,7 +182,7 @@ public class GetDB_Eman {
                     + "s.Services_Provided_ID, s.Date, s.status, se.Serv_Name from citizen as c inner "
                     + "join service_citizen as s on   c.Cit_ID = s.Cit_ID inner join services_provided "
                     + "as se on s.Services_Provided_ID = se.Services_Provided_ID ;";
-
+            System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
                 cit = new ServiceCitizen_1(r.getInt(1), r.getString(2), r.getString(3), r.getInt(4), r.getInt(5),

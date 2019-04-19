@@ -113,7 +113,7 @@ public class DecisionSection {
     public void addToDB() throws SQLException, ClassNotFoundException {
       
             DB data = new DB();
-            String q = "INSERT INTO dicisions_section (`Dep_ID`, `Sec_ID`, `Services_Provided_ID`, `Order_Departmant`, `Order_Section`, `Cit_ID`, `Status`, `Service_Citizen_ID`) VALUES ('"+section.departmentId+"', '"+section.id+"', '"+Services_Provided_ID+"', '"+section.orderDepartment+"', '"+section.order+"', '"+section.departmentId+"', '"+Status+"', "+Service_Citizen_ID+");";
+            String q = "INSERT INTO dicisions_section (`Dep_ID`, `Sec_ID`, `Services_Provided_ID`, `Order_Departmant`, `Order_Section`, `Cit_ID`, `Status`, `Service_Citizen_ID`) VALUES ('"+section.departmentId+"', '"+section.id+"', '"+Services_Provided_ID+"', '"+section.orderDepartment+"', '"+section.order+"', '"+Cit_ID+"', '"+Status+"', "+Service_Citizen_ID+");";
             System.out.println("qs="+q);
             data.write(q);
 

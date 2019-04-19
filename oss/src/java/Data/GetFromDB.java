@@ -818,15 +818,15 @@ public class GetFromDB {
         return null;
     }
 
-    public static DecisionsDepartment getDecisionsDepartment(Employee employee) {
-        DecisionsDepartment dds = null;
+    public static List<DecisionsDepartment> getDecisionsDepartment(Employee employee) {
+        List<DecisionsDepartment> dds = new ArrayList<>();
         try {
             DB db = new DB();
-            String sql = "SELECT * FROM oss.decisions_department  where Dep_ID = "+employee.getDep_id()+" ;";
+            String sql = "SELECT * FROM oss.decisions_department  where Dep_ID = "+employee.getDep_id()+";";
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
-                dds= new DecisionsDepartment(r.getInt(1), r.getInt(2), r.getInt(3), r.getInt(4), r.getInt(5), r.getString(6), r.getDouble(7), r.getString(8), r.getString(9), r.getString(10));
+                dds.add(new DecisionsDepartment(r.getInt(1), r.getInt(2), r.getInt(3), r.getInt(4), r.getInt(5), r.getString(6), r.getDouble(7), r.getString(8), r.getString(9), r.getString(10)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
@@ -838,15 +838,16 @@ public class GetFromDB {
         return dds;
     }
 
-    public static DecisionSection getDecisionsSection(Employee employee,DecisionsDepartment d) {
-        DecisionSection dss = null;
+    public static List<DecisionSection> getDecisionsSection(Employee employee,DecisionsDepartment d) {
+        List<DecisionSection> dss = new ArrayList<>();
         try {
             DB db = new DB();
-            String sql = "SELECT * FROM oss.dicisions_section  where Sec_ID = "+employee.sec_id+" and Dep_ID = "+d.depId+" and Order_Departmant = "+d.depOrder+"; ";
+            String sql = "SELECT * FROM oss.dicisions_section  where Sec_ID = "+employee.sec_id+" and Dep_ID = "
+                    +d.depId+" and Order_Departmant = "+d.depOrder+" and Cit_ID = "+d.Cit_ID+" and Service_Citizen_ID = "+d.Service_Citizen_ID+"; ";
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
-                dss=(new DecisionSection(new SectionPath(r.getInt(1), r.getInt(2), r.getInt(3), r.getInt(4), r.getInt(5)),r.getInt(6) ,r.getInt(8), r.getString(7)));
+                dss.add(new DecisionSection(new SectionPath(r.getInt(1), r.getInt(2), r.getInt(3), r.getInt(4), r.getInt(5)),r.getInt(6) ,r.getInt(8), r.getString(7)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
@@ -858,16 +859,16 @@ public class GetFromDB {
         return dss;
     }
 
-    public static DecisionsJob getDecisionsJob(Employee employee ,DecisionSection s) {
-        DecisionsJob djs = null;
+    public static List<DecisionsJob> getDecisionsJob(Employee employee ,DecisionSection s) {
+        List<DecisionsJob> djs = new ArrayList<>();
         try {
             DB db = new DB();
             String sql = "SELECT * FROM oss.decisions_job where Job_ID = "+employee.job_id+" and Dep_ID = "+s.section.departmentId+" and  Sec_ID = "+s.section.id+" and Order_Departmant = "+
-                    s.section.orderDepartment+" and Order_Section = "+s.section.order+";";
+                    s.section.orderDepartment+" and Order_Section = "+s.section.order+" and Cit_ID = "+s.Cit_ID+" and Service_Citizen_ID = "+s.Service_Citizen_ID+";";
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
-                djs=(new DecisionsJob(new JobPath(r.getInt(1),r.getInt(2) , r.getInt(3),r.getInt(4),null, r.getInt(5), r.getInt(6), r.getInt(7)), r.getInt(10),
+                djs.add(new DecisionsJob(new JobPath(r.getInt(1),r.getInt(2) , r.getInt(3),r.getInt(4),null, r.getInt(5), r.getInt(6), r.getInt(7)), r.getInt(10),
                         r.getString(11),  r.getString(12),  r.getString(13),  r.getString(14),  r.getString(15),  r.getString(16)));
             }
         } catch (SQLException ex) {

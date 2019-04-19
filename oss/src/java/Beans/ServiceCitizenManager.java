@@ -53,50 +53,70 @@ public class ServiceCitizenManager implements Serializable {
     public void init() {
         if (session.employee != null) {
             allRequestService = new ArrayList<>();
-            DecisionsDepartment decisionsDepartments = getDecisionsDepartmentsforEmployee(session.employee);
+            List<DecisionsDepartment> decisionsDepartments = getDecisionsDepartmentsforEmployee(session.employee);
 
             List<ServiceCitizen_1> temp = GetDB_Eman.getAllRequestService(session.employee.getJob_id());
             for (ServiceCitizen_1 serviceCitizen_1 : temp) {
-                if (serviceCitizen_1.getCit_ID() == decisionsDepartments.getCit_ID() && serviceCitizen_1.getService_Citizen_ID() == decisionsDepartments.getService_Citizen_ID()) {
-                    if (!decisionsDepartments.getSection().isEmpty()) {
+                for (DecisionsDepartment decisionsDepartment : decisionsDepartments) {
+                    if (serviceCitizen_1.getJob().getDepId() == decisionsDepartment.getDepId() && serviceCitizen_1.getJob().getdOrder() == decisionsDepartment.getDepOrder()) {
 
-                        for (DecisionSection decisionSection : decisionsDepartments.getSection()) {
-                            if (serviceCitizen_1.getCit_ID() == decisionSection.getCit_ID()
-                                    && serviceCitizen_1.getService_Citizen_ID() == decisionSection.getService_Citizen_ID()) {
-//                                if (!decisionSection.getJobs().isEmpty()) {
-//
-//                                    for (DecisionsJob job : decisionSection.getJobs()) {
-//                                        if (job.getCit_ID() == decisionSection.getCit_ID()
-//                                                && serviceCitizen_1.getService_Citizen_ID() == job.getService_Citizen_ID()) {
-//                                            allRequestService.add(serviceCitizen_1);
-//                                        }
-//                                    }
-//                                } else {
-//                                    allRequestService.add(serviceCitizen_1);
-//                                }
-                                allRequestService.add(serviceCitizen_1);
-                            }
-                        }
-
-                    } else {
                         allRequestService.add(serviceCitizen_1);
                     }
                 }
-                allRequestServiceView = new ArrayList<>();
-                allRequestServiceNotView = new ArrayList<>();
+                
+               // int maxd = Integer.MAX_VALUE;
+               // for (DecisionsDepartment decisionsDepartment : decisionsDepartments) {
+                //    
+                  //  if (serviceCitizen_1.getCit_ID() == decisionsDepartment.getCit_ID() && serviceCitizen_1.getService_Citizen_ID() == decisionsDepartment.getService_Citizen_ID()) {
+//
+  //                      allRequestService.add(serviceCitizen_1);
+    //                }
+      //          }
+            }
+            
+            
+            
+            
+            
+            
+            
+            
+            //                        if (!decisionsDepartment.getSection().isEmpty()) {
+//
+//                            for (DecisionSection decisionSection : decisionsDepartment.getSection()) {
+//                                if (serviceCitizen_1.getCit_ID() == decisionSection.getCit_ID()
+//                                        && serviceCitizen_1.getService_Citizen_ID() == decisionSection.getService_Citizen_ID()) {
+//                                    if (!decisionSection.getJobs().isEmpty()) {
+//
+//                                        for (DecisionsJob job : decisionSection.getJobs()) {
+//                                            if (job.getCit_ID() == decisionSection.getCit_ID()
+//                                                    && serviceCitizen_1.getService_Citizen_ID() == job.getService_Citizen_ID()) {
+//                                                allRequestService.add(serviceCitizen_1);
+//                                            }
+//                                        }
+//                                    } else {
+//                                        allRequestService.add(serviceCitizen_1);
+//                                    }
+//                                }
+//                            }
+//
+//                        } else {
+//                            allRequestService.add(serviceCitizen_1);
+//                        }
+            allRequestServiceView = new ArrayList<>();
+            allRequestServiceNotView = new ArrayList<>();
 
-                for (int i = 0; i < allRequestService.size(); i++) {
-                    ServiceCitizen_1 get = allRequestService.get(i);
-                    if (get.getStatus().compareTo("done") == 0) {
-                        allRequestServiceView.add(get);
-                    } else {
-                        allRequestServiceNotView.add(get);
-                    }
+            for (int i = 0; i < allRequestService.size(); i++) {
+                ServiceCitizen_1 get = allRequestService.get(i);
+                if (get.getStatus().compareTo("done") == 0) {
+                    allRequestServiceView.add(get);
+                } else {
+                    allRequestServiceNotView.add(get);
                 }
             }
-
-            serviceSelected = new ServiceCitizen_1();
         }
+
+        serviceSelected = new ServiceCitizen_1();
     }
 
     public void showServise(String serviceCid, String servicePid) {
@@ -152,16 +172,19 @@ public class ServiceCitizenManager implements Serializable {
         this.session = session;
     }
 
-    private DecisionsDepartment getDecisionsDepartmentsforEmployee(Employee employee) {
-        DecisionsDepartment dds = GetFromDB.getDecisionsDepartment(employee);
-        System.out.println(dds);
-        DecisionSection dses = GetFromDB.getDecisionsSection(employee, dds);
-        System.out.println(dses);
-        DecisionsJob djs = GetFromDB.getDecisionsJob(employee, dses);
-        System.out.println(djs);
-        dses.getJobs().add(djs);
+    private List<DecisionsDepartment> getDecisionsDepartmentsforEmployee(Employee employee) {
+        List<DecisionsDepartment> dds = GetFromDB.getDecisionsDepartment(employee);
 
-        dds.getSection().add(dses);
+        for (DecisionsDepartment dd : dds) {
+            List<DecisionSection> dses = GetFromDB.getDecisionsSection(employee, dd);
+            dd.setSection(dses);
+            for (DecisionSection ds : dses) {
+                List<DecisionsJob> djs = GetFromDB.getDecisionsJob(employee, ds);
+                ds.setJobs(djs);
+
+            }
+
+        }
 
         return dds;
     }
