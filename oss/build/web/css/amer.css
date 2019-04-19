@@ -731,7 +731,7 @@ span[id*='uploadAm']{
     justify-content: center;
     color: white;
     border: 0 white;
-    width: 209px;
+    width: 100%;
     border-radius: 0px;
     font-size: 20px;
     font-weight: bold;
@@ -758,7 +758,7 @@ span[id*='uploadAm']{
 span[id*='j_idt14'] .ui-button{
     color: white;
     opacity: 1;
-    font-size: 100%;
+    font-size: 30%;
     border: 0;
 }
 
@@ -768,7 +768,7 @@ span[id*='j_idt14'] .ui-button{
 	color: #FFF;
 	border: none;
 	text-decoration: none;
-	font-size: 14px;
+	font-size: 10px;
 	line-height: 120%;
 	background-color: rgba(255,255,255, 0);
 	-webkit-border-radius: 4px;
@@ -805,7 +805,7 @@ span[id*='j_idt14'] .ui-button{
 	color: #FFF;
 	border: none;
 	text-decoration: none;
-	font-size: 14px;
+	font-size: 10px;
 	line-height: 120%;
 	background-color: rgba(255,255,255, 0);
 	-webkit-border-radius: 4px;
@@ -824,3 +824,4 @@ span[id*='j_idt14'] .ui-button{
 .ui-widget .ui-icon.fa, .ui-icon.fa{
     font-size: 90%;
 }
+

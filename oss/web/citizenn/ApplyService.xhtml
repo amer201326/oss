@@ -141,7 +141,7 @@
                                     </div>
 
                                     <div class="card-body">
-                                        
+
                                         <ui:repeat value="#{applyServiceManager.serviceCitizen.attachment}" var="att" varStatus="in" >
                                             <div class="flexAm row-space " style="margin-right: 14px">
 
@@ -154,16 +154,17 @@
                                                             <div class="text-xs font-weight-bold text-gray-800 text-uppercase mb-1" style="font-size: 0.8em ; margin-right: 20px;">#{att.notes}</div>
 
                                                         </div>
-                                                        
+
                                                         <div id="divDown" class="flexColomn ">
-                                                            
+
                                                             <p:fileUpload id="uploadAm" label="اختار ملف" value="#{att.file}" mode="simple" skinSimple="true" required="true" 
                                                                           class="bg-#{att.color()} text-white transparent_btn" rendered="true"
-                                                                           style="border-color: none;"/>
+                                                                          style="border-color: none;"/>
+                                                            <p:message for="uploadAm" display="tooltip" />
                                                             
                                                             <p:outputLabel rendered="#{att.haveFileToupload()}" >
                                                                 <div class=" font-weight-bold redcolor" style="font-size: 0.8em ; text-align: center;
-                                                                    margin-top: 4%; ">يجب ارفاق المتطلب</div>
+                                                                     margin-top: 4%; ">يجب ارفاق المتطلب</div>
                                                             </p:outputLabel>
                                                         </div>
                                                     </div>
@@ -203,15 +204,17 @@
                                                                 <p:fileDownload value="#{att.fileDownload}"/>
                                                             </p:commandButton>  
                                                             <br/>
-                                                            
+
                                                             <p:fileUpload required="true" id="uploadAm" label="اختار ملف" value="#{att.file}" mode="simple" 
                                                                           skinSimple="true" rendered="true" style="border-color: none; height: 40%;"
                                                                           class="bg-#{att.color()} text-white transparent_btn1"/>
+
+                                                            <p:message for="uploadAm" display="tooltip"/>
                                                             
-                                                            <p:message for="uploadAm" />
                                                             <p:outputLabel rendered="#{att.haveFileToupload()}">
                                                                 <div class=" font-weight-bold redcolor" 
-                                                                     style="font-size: 0.8em ; margin-right: 20px; text-align: center; border-color: transparent;">يجب ارفاق المتطلب</div>
+                                                                     style="font-size: 0.8em ; margin-right: 20px; text-align: center; 
+                                                                             margin-top: 4%; border-color: transparent;">يجب ارفاق المتطلب</div>
                                                             </p:outputLabel>
                                                         </div>
                                                     </div>
@@ -221,10 +224,6 @@
                                             </div>
                                         </ui:repeat>
 
-
-
-
-
                                     </div>
                                 </div>
                             </div>
@@ -233,16 +232,7 @@
 
                                 <div class="card-body">
 
-
-
-
-
-
                                     <div style="text-align: right">
-
-
-
-
 
                                         <h2 class="section-heading inLineB" style="padding: 10px">:  ملاحظات</h2>
                                         <br/><br/>
@@ -257,8 +247,12 @@
 
                                     </div>
                                     <div class="text-center">
-                                        <p:commandButton id="sub" actionListener="#{applyServiceManager.submit()}" value="تقديم "   class="myButtonB" ajax="false"/>
-                                        
+                                        <p:messages id="messages" showDetail="true" closable="true" for="sub" >
+                                            <p:autoUpdate  />
+                                        </p:messages>
+                                        <p:commandButton id="sub" actionListener="#{applyServiceManager.submit()}" value="تقديم "
+                                                         class="myButtonB" ajax="false" action="#{att.error()}" />
+
 
                                     </div>
 

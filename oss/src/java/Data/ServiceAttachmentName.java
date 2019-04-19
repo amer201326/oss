@@ -22,9 +22,11 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.crypto.Cipher;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import org.primefaces.PrimeFaces;
 import org.primefaces.component.fileupload.FileUpload;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.ByteArrayContent;
@@ -344,25 +346,33 @@ public class ServiceAttachmentName implements Serializable {
 
     public boolean haveFileToupload() {
         if (haveFile != null) {
-            return haveFile.compareTo("yes")==0;
+            return haveFile.compareTo("yes") == 0;
         }
         return false;
     }
-    public String color(){
-        if(haveFileToupload())
+
+    public String color() {
+        if (haveFileToupload()) {
             return "danger";
-        else
+        } else {
             return "primary";
+        }
     }
-    
-    public String colorButton(){
-        if(haveFileToupload())
+
+    public String colorButton() {
+        if (haveFileToupload()) {
             return "#e74a3b";
-        else
+        } else {
             return "#4e73df";
+        }
     }
-   
-   
+
+    public void error() {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Upload All the Files needed"));
+
+      //  FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Please upload files");
+      //  PrimeFaces.current().dialog().showMessageDynamic(message);
+    }
 
     public void updatewithoutFile() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
