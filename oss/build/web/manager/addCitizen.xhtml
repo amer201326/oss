@@ -79,83 +79,24 @@
                                                         <br/>
                                                     </div>
 
-                                                    <div class="card-body" >
+                                                    <div class="card-body" dir="rtl" style="min-width: 100%;">
 
-                                                        <div class="text-center">
+                                                       
 
                                                             <div class="row">
-                                                                <div class="col-lg-6" style="text-align: right; float: right;">
-                                                                    <div class="card shadow mb-4" style="text-align: right;">
-                                                                        <div class="card-header py-3">
-                                                                            <h6 class="m-0 font-weight-bold text-primary">العنوان </h6>
-                                                                        </div>
-                                                                        <div class="card-body">
-                                                                            <h:panelGrid columns="2" dir="rtl" style="display: flex; justify-content: flex-start;">
-
-                                                                                <p:outputLabel for="address" value="العنوان"/>
-                                                                                <p:inputText id="address" value="#{citizenManage.newCitizen.address}" 
-                                                                                             class="form-control form-control-user" style="text-align:right;" type="text"/>
-                                                                                <p:outputLabel for="quarter" value="الحي" />
-                                                                                <p:inputText id="quarter" value="#{citizenManage.newCitizen.quarter}"  
-                                                                                             class="form-control form-control-user" style="text-align:right;" type="text"/>
-
-                                                                                <p:outputLabel for="street" value="الشارع" />
-                                                                                <p:inputText id="street" value="#{citizenManage.newCitizen.street}" required="true" 
-                                                                                             class="form-control form-control-user" style="text-align:right;" type="text"/>
-
-                                                                                <p:outputLabel for="region" value="المنطقة" />
-                                                                                <p:inputText id="region" value="#{citizenManage.newCitizen.region}" required="true" 
-                                                                                             class="form-control form-control-user" style="text-align:right;" type="text"/>
-
-
-
-                                                                            </h:panelGrid>
-                                                                        </div>
-
-                                                                    </div>
-
-
-
-
-
-                                                                    <div class="card shadow mb-4" style="text-align: right;">
-                                                                        <div class="card-header py-3">
-                                                                            <h6 class="m-0 font-weight-bold text-primary">حساب البلدية</h6>
-                                                                        </div>
-                                                                        <div class="card-body">
-                                                                            <h:panelGrid columns="2" dir="rtl" style="display: flex; justify-content: flex-start;">
-
-
-                                                                                <p:outputLabel for="us" class="label" value="اسم المستخدم"/>
-                                                                                <p:inputText id="us" value="#{citizenManage.newCitizen.account.userName}"
-                                                                                             class="form-control form-control-user" style="text-align:right;"
-                                                                                             type="text" required="true"/>
-
-                                                                                <p:outputLabel for="password" class="label" value="كلمة المرور"/>
-                                                                                <p:password value="#{citizenManage.newCitizen.account.password}" class="form-control" style="text-align:right;" id="password" 
-                                                                                            feedback="true" inline="true" required="true"/> 
-
-
-
-                                                                            </h:panelGrid>
-                                                                        </div>
-
-                                                                    </div>
-
-                                                                </div>
-
-                                                                <div class="col-lg-6" style="text-align: right; float: right; ">
-                                                                    <div class="card shadow mb-">
+                                                                <div class="col-lg-6">
+                                                                    <div class="card shadow mb-4">
                                                                         <div class="card-header py-3">
                                                                             <h6 class="m-0 font-weight-bold text-primary">المعلومات الشخصية </h6>
                                                                         </div>
                                                                         <div class="card-body">
 
+
                                                                             <h:panelGrid columns="2" dir="rtl" style="display: flex; justify-content: flex-start;">
 
                                                                                 <p:outputLabel for="firstName" value="الاسم الاول" />
                                                                                 <p:inputText id="firstName" value="#{citizenManage.newCitizen.firstName}" required="true" 
-                                                                                             class="form-control form-control-user" style="text-align:right;" type="text"/>
+                                                                                             class="form-control form-control" style="text-align:right;" type="text"/>
 
                                                                                 <p:outputLabel for="fatherName" value="اسم الاب" />
                                                                                 <p:inputText id="fatherName" value="#{citizenManage.newCitizen.fatherName}" required="true" 
@@ -176,7 +117,7 @@
                                                                                         <f:selectItem  itemLabel="أنثى" itemValue="F" />
                                                                                     </p:selectOneRadio>
                                                                                 </h:panelGrid> 
-                                                                                
+
                                                                                 <p:outputLabel for="birthday1" class="label" value="تاريخ الميلاد"/>
                                                                                 <p:calendar id="birthday1" selectOtherMonths="true" yearRange="c-100:c" class=" form-control-user"
                                                                                             pattern="yyyy-MM-dd" navigator="true" style="text-align:right;"
@@ -239,20 +180,86 @@
 
                                                                             </h:panelGrid>
                                                                         </div>
+
+                                                                        
                                                                     </div>
+                                                              
+                                                                </div>
+  <!--33333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333-->
+
+                                                                
+                                                                
+                                                                
+                                                                <div class="col-lg-6">
+                                                                    <div class="card shadow mb-4">
+                                                                        <div class="card-header py-3">
+                                                                            <h6 class="m-0 font-weight-bold text-primary">العنوان </h6>
+                                                                        </div>
+                                                                        <div class="card-body">
+                                                                            <h:panelGrid columns="2" dir="rtl" style="display: flex; justify-content: flex-start;">
+
+                                                                                <p:outputLabel for="address" value="العنوان"/>
+                                                                                <p:inputText id="address" value="#{citizenManage.newCitizen.address}" 
+                                                                                             class="form-control form-control-user" style="text-align:right;" type="text"/>
+                                                                                <p:outputLabel for="quarter" value="الحي" />
+                                                                                <p:inputText id="quarter" value="#{citizenManage.newCitizen.quarter}"  
+                                                                                             class="form-control form-control-user" style="text-align:right;" type="text"/>
+
+                                                                                <p:outputLabel for="street" value="الشارع" />
+                                                                                <p:inputText id="street" value="#{citizenManage.newCitizen.street}" required="true" 
+                                                                                             class="form-control form-control-user" style="text-align:right;" type="text"/>
+
+                                                                                <p:outputLabel for="region" value="المنطقة" />
+                                                                                <p:inputText id="region" value="#{citizenManage.newCitizen.region}" required="true" 
+                                                                                             class="form-control form-control-user" style="text-align:right;" type="text"/>
+
+
+
+                                                                            </h:panelGrid>
+                                                                        </div>
+
+                                                                    </div>
+
+
+                                                                    <div class="card shadow mb-4">
+                                                                        <div class="card-header py-3">
+                                                                            <h6 class="m-0 font-weight-bold text-primary">حساب البلدية</h6>
+                                                                        </div>
+                                                                        <div class="card-body">
+                                                                            <h:panelGrid columns="2" dir="rtl" style="display: flex; justify-content: flex-start;">
+
+
+                                                                                <p:outputLabel for="us" class="label" value="اسم المستخدم"/>
+                                                                                <p:inputText id="us" value="#{citizenManage.newCitizen.account.userName}"
+                                                                                             class="form-control form-control-user" style="text-align:right;"
+                                                                                             type="text" required="true"/>
+
+                                                                                <p:outputLabel for="password" class="label" value="كلمة المرور"/>
+                                                                                <p:password value="#{citizenManage.newCitizen.account.password}" class="form-control" style="text-align:right;" id="password" 
+                                                                                            feedback="true" inline="true" required="true"/> 
+
+
+
+                                                                            </h:panelGrid>
+                                                                        </div>
+
+                                                                    </div>
+
                                                                 </div>
 
 
+
+
                                                             </div>
-                                                        </div>
+                                                       
 
 
                                                     </div>
 
-                                                    <br/><hr style="border: 2px solid orange; margin-left: 10px; margin-right: 10px;"/><br/>
+                                                    <br/><hr style="border: 1% solid orange; margin-left: 5%; margin-right: 5%;"/><br/>
                                                     <div style="display: flex; justify-content: center;"  class="col-sm-12">                                                
 
-                                                        <p:commandButton value=" إعادة تعيين" immediate="true" ajax="false" class="myButtonB" style="margin-right:20px;" >
+                                                        <p:commandButton value=" إعادة تعيين" immediate="true" ajax="false" class="myButtonB" style="margin-right:5%;" >
                                                             <p:resetInput target="@form formAddCitizen" />
                                                             <f:ajax />
                                                         </p:commandButton>
