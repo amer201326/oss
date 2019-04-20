@@ -915,8 +915,12 @@ public class GetFromDB {
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
-                cit = new ServiceCitizen_1(r.getInt(11), r.getString(16), r.getString(19), r.getInt(9), r.getInt(1),
-                        r.getString(12), r.getString(45), r.getString(2));
+                Service s= new Service(r.getInt(1), r.getString(2), r.getDouble(3),r.getInt(4), r.getString(5), r.getString(8));
+                Citizen c1 = new Citizen(r.getInt(15),  r.getString(16), r.getString(17), r.getString(18), r.getString(19), r.getString(20), r.getInt(21),
+                        r.getString(22), r.getString(23), r.getString(24), r.getString(25), r.getString(26), r.getString(27), r.getString(28), r.getString(29), r.getString(30)
+                        , r.getString(31), r.getString(32), r.getString(33), r.getString(34), r.getString(35));
+                Service_Job service_Job = new Service_Job(r.getInt(36), r.getInt(37), r.getInt(38), r.getInt(39), r.getInt(40), r.getInt(41), r.getInt(42), r.getInt(43), r.getInt(44),r.getString(45));    
+                cit = new ServiceCitizen_1(s, r.getInt(9),r.getInt(10), r.getInt(11),  r.getString(12), r.getString(13), r.getString(14), c1, service_Job);
                 c.add(cit);
             }
         } catch (Exception e) {

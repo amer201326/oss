@@ -172,27 +172,6 @@ public class GetDB_Eman {
 
     }
 
-    public static List<ServiceCitizen_1> getAllRequestService(int idjob) {
-        ServiceCitizen_1 cit = new ServiceCitizen_1();
-
-        List<ServiceCitizen_1> c = new ArrayList<ServiceCitizen_1>();
-        try {
-            DB db = new DB();
-            String sql = "select c.Cit_ID, c.Cit_FirstName, c.Cit_LastName, s.Service_Citizen_ID, "
-                    + "s.Services_Provided_ID, s.Date, s.status, se.Serv_Name from citizen as c inner "
-                    + "join service_citizen as s on   c.Cit_ID = s.Cit_ID inner join services_provided "
-                    + "as se on s.Services_Provided_ID = se.Services_Provided_ID ;";
-            System.out.println(sql);
-            ResultSet r = db.read(sql);
-            while (r.next()) {
-                cit = new ServiceCitizen_1(r.getInt(1), r.getString(2), r.getString(3), r.getInt(4), r.getInt(5),
-                        r.getString(6), r.getString(7), r.getString(8));
-                c.add(cit);
-            }
-        } catch (Exception e) {
-            System.out.println("cccccc" + e.getMessage());
-        }
-        return c;
-    }
+    
 
 }

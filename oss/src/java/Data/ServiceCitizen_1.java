@@ -12,31 +12,38 @@ import java.io.Serializable;
  * @author Eman
  */
 public class ServiceCitizen_1 implements Serializable {
-
+    Service service;
     int Service_Citizen_ID;
     int Services_Provided_ID;
     int Cit_ID;
     String Date;
     String status;
-    String firstName;
-    String lastName;
-    String serviceName;
-    JobPath job;
+    String note;
+    Citizen citizen;
+    Service_Job service_Job;
 
     public ServiceCitizen_1() {
     }
 
-    public ServiceCitizen_1(int Cit_ID, String firstName, String lastName, int Service_Citizen_ID, int Services_Provided_ID,
-            String Date, String status, String serviceName) {
-        this.Cit_ID = Cit_ID;
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public ServiceCitizen_1(Service service, int Service_Citizen_ID, int Services_Provided_ID, int Cit_ID, String Date, String status, String note, Citizen citizen, Service_Job service_Job) {
+        this.service = service;
         this.Service_Citizen_ID = Service_Citizen_ID;
         this.Services_Provided_ID = Services_Provided_ID;
+        this.Cit_ID = Cit_ID;
         this.Date = Date;
         this.status = status;
-        this.serviceName = serviceName;
+        
+        this.note = note;
+        this.citizen = citizen;
+        this.service_Job = service_Job;
+    }
 
+    public Service getService() {
+        return service;
+    }
+
+    public void setService(Service service) {
+        this.service = service;
     }
 
     public int getService_Citizen_ID() {
@@ -79,36 +86,32 @@ public class ServiceCitizen_1 implements Serializable {
         this.status = status;
     }
 
-    public String getFirstName() {
-        return firstName;
+    
+
+    public String getNote() {
+        return note;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setNote(String note) {
+        this.note = note;
     }
 
-    public String getLastName() {
-        return lastName;
+    public Citizen getCitizen() {
+        return citizen;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setCitizen(Citizen citizen) {
+        this.citizen = citizen;
     }
 
-    public String getServiceName() {
-        return serviceName;
+    public Service_Job getService_Job() {
+        return service_Job;
     }
 
-    public void setServiceName(String serviceName) {
-        this.serviceName = serviceName;
+    public void setService_Job(Service_Job service_Job) {
+        this.service_Job = service_Job;
     }
-
-    public JobPath getJob() {
-        return job;
-    }
-
-    public void setJob(JobPath job) {
-        this.job = job;
-    }
+    
+   
 
 }

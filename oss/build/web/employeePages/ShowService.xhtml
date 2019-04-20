@@ -48,7 +48,7 @@
                                     <div class="card-body">
                                         <div class="row no-gutters textC">
                                             <div class="col mr-2">
-                                                <h2 class="section-heading text-uppercase">#{shoeServiceCitizemEmpManeger.serviseCitizen.serviceName}</h2>
+                                                <h2 class="section-heading text-uppercase">#{shoeServiceCitizemEmpManeger.serviseCitizen.service.name}</h2>
                                             </div>
                                         </div>
                                     </div>
@@ -57,11 +57,25 @@
 
 
                             <br/><hr style="border: 2px solid orange; margin-left: 10px; margin-right: 10px;"/><br/>
+                            <h:panelGrid rendered="#{shoeServiceCitizemEmpManeger.haveService}">
+                                <div>amer</div>
+                            </h:panelGrid>
+                            <h:panelGrid rendered="#{!shoeServiceCitizemEmpManeger.haveService}">
+                                <div class="card-body">
+                                    <div class="row no-gutters textC">
+                                        <div class="col mr-2 ">
+                                            <h2 class="section-heading text-uppercase text-center">الرجاء اختيار خدمة</h2>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </h:panelGrid>
+
                         </div>
 
 
                     </div>
-                   
+
                     <!-- Begin Page Content -->
 
                 </div>

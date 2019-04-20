@@ -25,11 +25,12 @@ public class Service_Job {
     int Order_Departmant;
     int Order_Section;
     int Order_Job;
+    String status;
 
     public Service_Job() {
     }
 
-    public Service_Job(int Service_Citizen_ID, int Services_Provided_ID, int Cit_ID, int Dep_ID, int Sec_ID, int Job_ID, int Order_Departmant, int Order_Section, int Order_Job) {
+    public Service_Job(int Service_Citizen_ID, int Services_Provided_ID, int Cit_ID, int Dep_ID, int Sec_ID, int Job_ID, int Order_Departmant, int Order_Section, int Order_Job, String status) {
         this.Service_Citizen_ID = Service_Citizen_ID;
         this.Services_Provided_ID = Services_Provided_ID;
         this.Cit_ID = Cit_ID;
@@ -39,6 +40,7 @@ public class Service_Job {
         this.Order_Departmant = Order_Departmant;
         this.Order_Section = Order_Section;
         this.Order_Job = Order_Job;
+        this.status = status;
     }
 
     public int getService_Citizen_ID() {
@@ -121,13 +123,23 @@ public class Service_Job {
     public void addToDataBase() throws SQLException, ClassNotFoundException {
 
         DB d = new DB();
-        String q = "INSERT INTO service_jobs (`Service_Citizen_ID`, `Services_Provided_ID`, `Cit_ID`, `Dep_ID`, `Sec_ID`, `Job_ID`, `Order_Departmant`, `Order_Section`, `Order_Job`)"
-                + " VALUES (" + Service_Citizen_ID + ", " + Services_Provided_ID + ", " + Cit_ID + ", " + Dep_ID + ", " + Sec_ID + ", " + Job_ID + ", " + Order_Departmant + ", " + Order_Section + ", " + Order_Job + ");";
+        String q = "INSERT INTO service_jobs (`Service_Citizen_ID`, `Services_Provided_ID`, `Cit_ID`, `Dep_ID`, `Sec_ID`, `Job_ID`, `Order_Departmant`, `Order_Section`, `Order_Job`,`status`)"
+                + " VALUES (" + Service_Citizen_ID + ", " + Services_Provided_ID + ", " + Cit_ID +
+                ", " + Dep_ID + ", " + Sec_ID + ", " + Job_ID + ", " + Order_Departmant + ", " + Order_Section + ", " + Order_Job + ",'"+status+"');";
 
         System.out.println("servic job "+q);
         
         d.write(q);
 
     }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    
 
 }

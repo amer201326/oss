@@ -25,10 +25,14 @@ public class ShoeServiceCitizemEmpManeger {
             
     @ManagedProperty(value = "#{msession}")
     Session session;
-
+    
+    boolean haveService = false;
     @PostConstruct
     public void init() {
          serviseCitizen = session.serviceCitizen;
+         if(serviseCitizen!=null){
+             haveService = true;
+         }
         
     }
 
@@ -46,6 +50,14 @@ public class ShoeServiceCitizemEmpManeger {
 
     public void setSession(Session session) {
         this.session = session;
+    }
+
+    public boolean isHaveService() {
+        return haveService;
+    }
+
+    public void setHaveService(boolean haveService) {
+        this.haveService = haveService;
     }
     
     

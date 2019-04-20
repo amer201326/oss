@@ -479,7 +479,7 @@ public class ServiceCitizen {
 
             for (DecisionsJob decisionsJob : minDecjob) {
                 System.out.println(decisionsJob);
-                Service_Job servicejob = new Service_Job(idMaxSC, Services_Provided_ID, Cit_ID, decisionsJob.job.DepId, decisionsJob.job.sectionID, decisionsJob.job.id, decisionsJob.job.dOrder, decisionsJob.job.sOrder, decisionsJob.job.order);
+                Service_Job servicejob = new Service_Job(idMaxSC, Services_Provided_ID, Cit_ID, decisionsJob.job.DepId, decisionsJob.job.sectionID, decisionsJob.job.id, decisionsJob.job.dOrder, decisionsJob.job.sOrder, decisionsJob.job.order , "notdone");
 
                 servicejob.addToDataBase();
             }
