@@ -34,12 +34,11 @@ public class AttachmentServiceCitizen {
     String nameFile;
     String nameAtt;
 
-    public AttachmentServiceCitizen(int Atta_ArchiveC_ID, int Service_Citizen_ID, int Services_Provided_ID, int Cit_ID, UploadedFile file) {
+    public AttachmentServiceCitizen(int Atta_ArchiveC_ID, int Service_Citizen_ID, int Services_Provided_ID, int Cit_ID) {
         this.Atta_ArchiveC_ID = Atta_ArchiveC_ID;
         this.Service_Citizen_ID = Service_Citizen_ID;
         this.Services_Provided_ID = Services_Provided_ID;
         this.Cit_ID = Cit_ID;
-        this.file = file;
     }
 
     public AttachmentServiceCitizen(int Atta_ArchiveC_ID, int Service_Citizen_ID, int Services_Provided_ID, int Cit_ID, InputStream inputStream, String nameFile, String nameAtt) {
@@ -67,35 +66,14 @@ public class AttachmentServiceCitizen {
         }
     }
 
-    public boolean addToDataBase() {
+    public boolean addToDataBase() throws SQLException, ClassNotFoundException {
 
         String q = "INSERT INTO attachment_service_citizen (`Atta_ArchiveC_ID`, `Service_Citizen_ID`, `Services_Provided_ID`, `Cit_ID`) VALUES "
-                + " (?,?,?,?,?,?);";
+                + "(" + Atta_ArchiveC_ID + " , " + Service_Citizen_ID + " , " + Services_Provided_ID + " , " + Cit_ID + ");";
 
         System.out.println(q);
-
-        try {
-            DB data = new DB();
-            PreparedStatement s = data.prepareStatement(q);
-
-            s.setInt(1, Atta_ArchiveC_ID);
-            s.setInt(2, Service_Citizen_ID);
-            s.setInt(3, Services_Provided_ID);
-            s.setInt(4, Cit_ID);
-            if (file.getSize() > 0) {
-                s.setBinaryStream(5, saveFileInDisk());
-            } else {
-                s.setBinaryStream(5, null);
-            }
-            s.setString(6, "form");
-            s.executeUpdate();
-            
-            System.out.println(q);
-        } catch (SQLException ex) {
-            Logger.getLogger(AttachmentServiceCitizen.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AttachmentServiceCitizen.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        DB data = new DB();
+        data.write(q);
 
         return false;
     }

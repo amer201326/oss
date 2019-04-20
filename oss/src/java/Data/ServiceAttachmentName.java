@@ -49,17 +49,19 @@ public class ServiceAttachmentName implements Serializable {
     String nameFile;
     StreamedContent fileDownload;
     String haveFile;
+    String form;
 
     public ServiceAttachmentName() {
     }
 
-    public ServiceAttachmentName(int id, String name, String notes, InputStream inputStream, String nameFile, String haveFile) {
+    public ServiceAttachmentName(int id, String name, String notes, InputStream inputStream, String nameFile, String haveFile,String form) {
         try {
             this.id = id;
             this.name = name;
             this.notes = notes;
             this.haveFile = haveFile;
             this.nameFile = nameFile;
+            this.form = form;
             if (inputStream != null) {
                 System.out.println(id);
                 byte[] inputByte = new byte[inputStream.available()];
@@ -380,4 +382,13 @@ public class ServiceAttachmentName implements Serializable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public String getForm() {
+        return form;
+    }
+
+    public void setForm(String form) {
+        this.form = form;
+    }
+
+    
 }

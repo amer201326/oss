@@ -64,8 +64,10 @@ public class ServiceCitizen {
             for (ServiceAttachmentName a : attachment) {
                 AttachmentArchiveCitizen attachmentArchiveCitizen = new AttachmentArchiveCitizen(idMaxAAC, Cit_ID, a.id, a.file, a.nameFile, a.name, "no");
                 attachmentArchiveCitizen.addToDataBase();
+               
+                AttachmentServiceCitizen attachmentServiceCitizen = new AttachmentServiceCitizen(idMaxAAC, idMaxSC, Services_Provided_ID, Cit_ID);
+                 attachmentServiceCitizen.addToDataBase();
                 idMaxAAC++;
-
             }
 
             System.out.println("ggggggggg");
@@ -73,6 +75,9 @@ public class ServiceCitizen {
             for (ServiceAttachmentName af : attwhithFile) {
                 AttachmentArchiveCitizen attachmentArchiveCitizen = new AttachmentArchiveCitizen(idMaxAAC, Cit_ID, af.id, af.file, af.nameFile, af.name, "yes");
                 attachmentArchiveCitizen.addToDataBase();
+                
+                AttachmentServiceCitizen attachmentServiceCitizen = new AttachmentServiceCitizen(idMaxAAC, idMaxSC, Services_Provided_ID, Cit_ID);
+                 attachmentServiceCitizen.addToDataBase();
                 idMaxAAC++;
 
             }

@@ -6,12 +6,15 @@
 package Data;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Eman
  */
 public class ServiceCitizen_1 implements Serializable {
+
     Service service;
     int Service_Citizen_ID;
     int Services_Provided_ID;
@@ -21,6 +24,13 @@ public class ServiceCitizen_1 implements Serializable {
     String note;
     Citizen citizen;
     Service_Job service_Job;
+
+    String externalMessage;
+    String internalMessage;
+    
+    public List<ServiceAttachmentName> att = new ArrayList<ServiceAttachmentName>();
+    public List<ServiceAttachmentName> attform = new ArrayList<ServiceAttachmentName>();
+
 
     public ServiceCitizen_1() {
     }
@@ -32,7 +42,7 @@ public class ServiceCitizen_1 implements Serializable {
         this.Cit_ID = Cit_ID;
         this.Date = Date;
         this.status = status;
-        
+
         this.note = note;
         this.citizen = citizen;
         this.service_Job = service_Job;
@@ -86,8 +96,6 @@ public class ServiceCitizen_1 implements Serializable {
         this.status = status;
     }
 
-    
-
     public String getNote() {
         return note;
     }
@@ -111,7 +119,38 @@ public class ServiceCitizen_1 implements Serializable {
     public void setService_Job(Service_Job service_Job) {
         this.service_Job = service_Job;
     }
-    
-   
+
+    public String getExternalMessage() {
+        return externalMessage;
+    }
+
+    public void setExternalMessage(String externalMessage) {
+        this.externalMessage = externalMessage;
+    }
+
+    public String getInternalMessage() {
+        return internalMessage;
+    }
+
+    public void setInternalMessage(String internalMessage) {
+        this.internalMessage = internalMessage;
+    }
+
+    public List<ServiceAttachmentName> getAtt() {
+        return att;
+    }
+
+    public void setAtt(List<ServiceAttachmentName> att) {
+        this.att = att;
+    }
+
+    public List<ServiceAttachmentName> getAttform() {
+        return attform;
+    }
+
+    public void setAttform(List<ServiceAttachmentName> attform) {
+        this.attform = attform;
+    }
+
 
 }

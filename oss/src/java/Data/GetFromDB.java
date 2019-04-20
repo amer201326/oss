@@ -356,7 +356,7 @@ public class GetFromDB {
             ResultSet r = db.read(sql);
             while (r.next()) {
 
-                d = new ServiceAttachmentName(r.getInt(1), r.getString(2), r.getString(4), r.getBinaryStream(3), r.getString(5), r.getString(6));
+                d = new ServiceAttachmentName(r.getInt(1), r.getString(2), r.getString(4), r.getBinaryStream(3), r.getString(5), r.getString(6), "");
 
                 attach.add(d);
             }
@@ -610,7 +610,7 @@ public class GetFromDB {
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
-                a = new ServiceAttachmentName(r.getInt(1), r.getString(2), r.getString(4), r.getBinaryStream(3), r.getString(5), r.getString(6));
+                a = new ServiceAttachmentName(r.getInt(1), r.getString(2), r.getString(4), r.getBinaryStream(3), r.getString(5), r.getString(6), "");
                 System.out.println(a + "   " + r.getString(6));
                 name.add(a);
             }
@@ -809,7 +809,7 @@ public class GetFromDB {
             ResultSet r = db.read(q);
             while (r.next()) {
                 em = new Employee(r.getInt(1), r.getInt(2), r.getInt(3), r.getInt(4), r.getString(5), r.getString(6), r.getString(7), r.getString(8), r.getString(9), r.getString(10), r.getString(11), r.getString(12), r.getString(13));
-                em.account = new EmployeeAccount(r.getString(15),r.getString(16));
+                em.account = new EmployeeAccount(r.getString(15), r.getString(16));
                 return em;
             }
 
@@ -824,7 +824,7 @@ public class GetFromDB {
         List<DecisionsDepartment> dds = new ArrayList<>();
         try {
             DB db = new DB();
-            String sql = "SELECT * FROM oss.decisions_department  where Dep_ID = "+employee.getDep_id()+";";
+            String sql = "SELECT * FROM oss.decisions_department  where Dep_ID = " + employee.getDep_id() + ";";
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
@@ -835,51 +835,48 @@ public class GetFromDB {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
         return dds;
     }
 
-    public static List<DecisionSection> getDecisionsSection(Employee employee,DecisionsDepartment d) {
+    public static List<DecisionSection> getDecisionsSection(Employee employee, DecisionsDepartment d) {
         List<DecisionSection> dss = new ArrayList<>();
         try {
             DB db = new DB();
-            String sql = "SELECT * FROM oss.dicisions_section  where Sec_ID = "+employee.sec_id+" and Dep_ID = "
-                    +d.depId+" and Order_Departmant = "+d.depOrder+" and Cit_ID = "+d.Cit_ID+" and Service_Citizen_ID = "+d.Service_Citizen_ID+"; ";
+            String sql = "SELECT * FROM oss.dicisions_section  where Sec_ID = " + employee.sec_id + " and Dep_ID = "
+                    + d.depId + " and Order_Departmant = " + d.depOrder + " and Cit_ID = " + d.Cit_ID + " and Service_Citizen_ID = " + d.Service_Citizen_ID + "; ";
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
-                dss.add(new DecisionSection(new SectionPath(r.getInt(1), r.getInt(2), r.getInt(3), r.getInt(4), r.getInt(5)),r.getInt(6) ,r.getInt(8), r.getString(7)));
+                dss.add(new DecisionSection(new SectionPath(r.getInt(1), r.getInt(2), r.getInt(3), r.getInt(4), r.getInt(5)), r.getInt(6), r.getInt(8), r.getString(7)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
         return dss;
     }
 
-    public static List<DecisionsJob> getDecisionsJob(Employee employee ,DecisionSection s) {
+    public static List<DecisionsJob> getDecisionsJob(Employee employee, DecisionSection s) {
         List<DecisionsJob> djs = new ArrayList<>();
         try {
             DB db = new DB();
-            String sql = "SELECT * FROM oss.decisions_job where Job_ID = "+employee.job_id+" and Dep_ID = "+s.section.departmentId+" and  Sec_ID = "+s.section.id+" and Order_Departmant = "+
-                    s.section.orderDepartment+" and Order_Section = "+s.section.order+" and Cit_ID = "+s.Cit_ID+" and Service_Citizen_ID = "+s.Service_Citizen_ID+";";
+            String sql = "SELECT * FROM oss.decisions_job where Job_ID = " + employee.job_id + " and Dep_ID = " + s.section.departmentId + " and  Sec_ID = " + s.section.id + " and Order_Departmant = "
+                    + s.section.orderDepartment + " and Order_Section = " + s.section.order + " and Cit_ID = " + s.Cit_ID + " and Service_Citizen_ID = " + s.Service_Citizen_ID + ";";
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
-                djs.add(new DecisionsJob(new JobPath(r.getInt(1),r.getInt(2) , r.getInt(3),r.getInt(4),null, r.getInt(5), r.getInt(6), r.getInt(7)), r.getInt(10),
-                        r.getString(11),  r.getString(12),  r.getDouble(13),  r.getString(14),  r.getString(15),  r.getString(16)));
+                djs.add(new DecisionsJob(new JobPath(r.getInt(1), r.getInt(2), r.getInt(3), r.getInt(4), null, r.getInt(5), r.getInt(6), r.getInt(7)), r.getInt(10),
+                        r.getString(11), r.getString(12), r.getDouble(13), r.getString(14), r.getString(15), r.getString(16)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
         return djs;
     }
 
@@ -888,7 +885,7 @@ public class GetFromDB {
         Section s;
         try {
             DB db = new DB();
-            String sql = "select s.Dep_ID ,s.Sec_ID,s.Sec_Name ,d.Dep_Name from section as s inner join department as d on s.Dep_ID = d.Dep_ID where s.Dep_ID = "+depId+";";
+            String sql = "select s.Dep_ID ,s.Sec_ID,s.Sec_Name ,d.Dep_Name from section as s inner join department as d on s.Dep_ID = d.Dep_ID where s.Dep_ID = " + depId + ";";
 
             ResultSet r = db.read(sql);
             while (r.next()) {
@@ -900,9 +897,7 @@ public class GetFromDB {
         }
         return l;
     }
-    
-    
-    
+
     public static List<ServiceCitizen_1> getAllRequestService(Employee emp) {
         ServiceCitizen_1 cit = new ServiceCitizen_1();
 
@@ -911,16 +906,16 @@ public class GetFromDB {
             DB db = new DB();
             String sql = "SELECT * FROM services_provided as sp inner join service_citizen as sc on sc.Services_Provided_ID = sp.Services_Provided_ID "
                     + " inner join citizen as cit on sc.Cit_ID = cit.Cit_ID inner join service_jobs as sj  on sc.Service_Citizen_ID = sj.Service_Citizen_ID and  sc.Cit_ID = sj.Cit_ID  "
-                    + "  where sj.Job_ID = "+emp.job_id+" and  sj.Sec_ID = "+emp.sec_id+" and sj.Dep_ID = "+emp.dep_id+";";
+                    + "  where sj.Job_ID = " + emp.job_id + " and  sj.Sec_ID = " + emp.sec_id + " and sj.Dep_ID = " + emp.dep_id + ";";
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
-                Service s= new Service(r.getInt(1), r.getString(2), r.getDouble(3),r.getInt(4), r.getString(5), r.getString(8));
-                Citizen c1 = new Citizen(r.getInt(15),  r.getString(16), r.getString(17), r.getString(18), r.getString(19), r.getString(20), r.getInt(21),
-                        r.getString(22), r.getString(23), r.getString(24), r.getString(25), r.getString(26), r.getString(27), r.getString(28), r.getString(29), r.getString(30)
-                        , r.getString(31), r.getString(32), r.getString(33), r.getString(34), r.getString(35));
-                Service_Job service_Job = new Service_Job(r.getInt(36), r.getInt(37), r.getInt(38), r.getInt(39), r.getInt(40), r.getInt(41), r.getInt(42), r.getInt(43), r.getInt(44),r.getString(45));    
-                cit = new ServiceCitizen_1(s, r.getInt(9),r.getInt(10), r.getInt(11),  r.getString(12), r.getString(13), r.getString(14), c1, service_Job);
+                Service s = new Service(r.getInt(1), r.getString(2), r.getDouble(3), r.getInt(4), r.getString(5), r.getString(8));
+                Citizen c1 = new Citizen(r.getInt(15), r.getString(16), r.getString(17), r.getString(18), r.getString(19), r.getString(20), r.getInt(21),
+                        r.getString(22), r.getString(23), r.getString(24), r.getString(25), r.getString(26), r.getString(27), r.getString(28), r.getString(29), r.getString(30),
+                        r.getString(31), r.getString(32), r.getString(33), r.getString(34), r.getString(35));
+                Service_Job service_Job = new Service_Job(r.getInt(36), r.getInt(37), r.getInt(38), r.getInt(39), r.getInt(40), r.getInt(41), r.getInt(42), r.getInt(43), r.getInt(44), r.getString(45));
+                cit = new ServiceCitizen_1(s, r.getInt(9), r.getInt(10), r.getInt(11), r.getString(12), r.getString(13), r.getString(14), c1, service_Job);
                 c.add(cit);
             }
         } catch (Exception e) {
@@ -928,8 +923,30 @@ public class GetFromDB {
         }
         return c;
     }
-    
-    
-}
 
-    
+    public static List<ServiceAttachmentName> getAttachmentByserviceCitizen(int idServise, int idCitizen) {
+        List<ServiceAttachmentName> name = new ArrayList<>();
+        try {
+            DB db = new DB();
+            ServiceAttachmentName a;
+
+            String sql = "SELECT * FROM attachment_service_citizen as ac inner join attachment_archive_citizen as aac"
+                    + " on ac.Atta_ArchiveC_ID = aac.Atta_ArchiveC_ID inner join serviceattachmentname as sa "
+                    + "on aac.ServiceAttachmentName_ID = sa.ServiceAttachmentName_ID where  Services_Provided_ID ="+idServise+" and ac.Cit_ID ="+idCitizen+";";
+
+            System.out.println(sql);
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                a = new ServiceAttachmentName(r.getInt(7), r.getString(12), r.getString(14), r.getBinaryStream(8), r.getString(16), "", r.getString(10));
+                System.out.println(a + "   " + r.getString(6));
+                name.add(a);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return name;
+    }
+
+}
