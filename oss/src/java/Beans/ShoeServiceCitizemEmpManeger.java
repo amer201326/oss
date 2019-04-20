@@ -9,6 +9,46 @@ package Beans;
  *
  * @author Amer
  */
+import Data.ServiceCitizen_1;
+import java.util.Map;
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+
+@ManagedBean
+@ViewScoped
 public class ShoeServiceCitizemEmpManeger {
+
+    ServiceCitizen_1 serviseCitizen ;
+            
+    @ManagedProperty(value = "#{msession}")
+    Session session;
+
+    @PostConstruct
+    public void init() {
+         serviseCitizen = session.serviceCitizen;
+        
+    }
+
+    public ServiceCitizen_1 getServiseCitizen() {
+        return serviseCitizen;
+    }
+
+    public void setServiseCitizen(ServiceCitizen_1 serviseCitizen) {
+        this.serviseCitizen = serviseCitizen;
+    }
+
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
     
+    
+    
+
 }

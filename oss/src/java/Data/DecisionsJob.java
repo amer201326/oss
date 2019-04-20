@@ -21,7 +21,7 @@ public class DecisionsJob {
     
     String status;
     String runing;
-    String cost;
+    double cost;
     String internalMessage;
     String externalMessage;
     String date;
@@ -30,7 +30,7 @@ public class DecisionsJob {
     int Cit_ID;
     int Service_Citizen_ID;
     
-    public DecisionsJob(JobPath job, int idEmployee, String status, String runing, String cost, String internalMessage, String externalMessage, String date) {
+    public DecisionsJob(JobPath job, int idEmployee, String status, String runing, double cost, String internalMessage, String externalMessage, String date) {
         this.job = job;
         this.idEmployee = idEmployee;
         this.status = status;
@@ -43,7 +43,7 @@ public class DecisionsJob {
     
     
     
-    public DecisionsJob(JobPath job, String status, String runing, String cost, String externalMessage) {
+    public DecisionsJob(JobPath job, String status, String runing, double cost, String externalMessage) {
         this.job = job;
         this.status = status;
         this.runing = runing;
@@ -51,7 +51,7 @@ public class DecisionsJob {
         this.externalMessage = externalMessage;
     }
 
-    public DecisionsJob(String status, String runing, String cost, String internalMessage, String externalMessage) {
+    public DecisionsJob(String status, String runing, double cost, String internalMessage, String externalMessage) {
         this.status = status;
         this.runing = runing;
         this.cost = cost;
@@ -96,13 +96,15 @@ public class DecisionsJob {
         this.runing = runing;
     }
 
-    public String getCost() {
+    public double getCost() {
         return cost;
     }
 
-    public void setCost(String cost) {
+    public void setCost(double cost) {
         this.cost = cost;
     }
+
+    
 
     public String getInternalMessage() {
         return internalMessage;

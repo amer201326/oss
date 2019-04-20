@@ -14,6 +14,7 @@ import Data.Manager;
 import Data.Section;
 import Data.SectionPath;
 import Data.Service;
+import Data.ServiceCitizen_1;
 import Data.ServiceErr;
 import java.io.IOException;
 import java.io.Serializable;
@@ -41,6 +42,7 @@ public class Session implements Serializable{
     Manager manager ;
     Citizen citizen;
     Employee employee;
+    ServiceCitizen_1 serviceCitizen;
     
     public Session() {
         login = false;
@@ -139,19 +141,15 @@ public class Session implements Serializable{
     public void setPassWord(String passWord) {
         this.passWord = passWord;
     }
-    
-    
-    
 
-   
+    public ServiceCitizen_1 getServiceCitizen() {
+        return serviceCitizen;
+    }
 
+    public void setServiceCitizen(ServiceCitizen_1 serviceCitizen) {
+        this.serviceCitizen = serviceCitizen;
+    }
     
-    
-   
-
-   
-
-   
     
     
  

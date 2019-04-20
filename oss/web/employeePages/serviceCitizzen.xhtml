@@ -137,9 +137,9 @@
                                                             <p:ajax event="rowSelect" process="@this"  listener="#{serviceCitizenManager.onServiceSelect}"/>
 
                                                             <p:column  style="width:90px;text-align: center">
-                                                                <p:commandLink title="View Detail" actionListener="#{serviceCitizenManager.showServise(service.service_Citizen_ID,service.services_Provided_ID)}">
+                                                                <p:commandLink title="View Detail" actionListener="#{serviceCitizenManager.showServise()}">
                                                                     <h:outputText styleClass="fa fa-list-ul" style="margin:0 auto;" />
-
+                                                                    <f:setPropertyActionListener value="#{service}" target="#{serviceCitizenManager.serviceSelected}" />
                                                                 </p:commandLink>
                                                             </p:column>
 

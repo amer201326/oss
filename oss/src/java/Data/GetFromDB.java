@@ -8,8 +8,10 @@ package Data;
 import DB.DB;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -869,7 +871,7 @@ public class GetFromDB {
             ResultSet r = db.read(sql);
             while (r.next()) {
                 djs.add(new DecisionsJob(new JobPath(r.getInt(1),r.getInt(2) , r.getInt(3),r.getInt(4),null, r.getInt(5), r.getInt(6), r.getInt(7)), r.getInt(10),
-                        r.getString(11),  r.getString(12),  r.getString(13),  r.getString(14),  r.getString(15),  r.getString(16)));
+                        r.getString(11),  r.getString(12),  r.getDouble(13),  r.getString(14),  r.getString(15),  r.getString(16)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
@@ -880,4 +882,50 @@ public class GetFromDB {
         
         return djs;
     }
+
+    static List<Section> getSection(int depId) {
+        List<Section> l = new ArrayList<>();
+        Section s;
+        try {
+            DB db = new DB();
+            String sql = "select s.Dep_ID ,s.Sec_ID,s.Sec_Name ,d.Dep_Name from section as s inner join department as d on s.Dep_ID = d.Dep_ID where s.Dep_ID = "+depId+";";
+
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                s = new Section(r.getInt(1), r.getInt(2), r.getString(3), r.getString(4));
+                l.add(s);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return l;
+    }
+    
+    
+    
+    public static List<ServiceCitizen_1> getAllRequestService(Employee emp) {
+        ServiceCitizen_1 cit = new ServiceCitizen_1();
+
+        List<ServiceCitizen_1> c = new ArrayList<ServiceCitizen_1>();
+        try {
+            DB db = new DB();
+            String sql = "SELECT * FROM services_provided as sp inner join service_citizen as sc on sc.Services_Provided_ID = sp.Services_Provided_ID "
+                    + " inner join citizen as cit on sc.Cit_ID = cit.Cit_ID inner join service_jobs as sj  on sc.Service_Citizen_ID = sj.Service_Citizen_ID and  sc.Cit_ID = sj.Cit_ID  "
+                    + "  where sj.Job_ID = "+emp.job_id+" and  sj.Sec_ID = "+emp.sec_id+" and sj.Dep_ID = "+emp.dep_id+";";
+            System.out.println(sql);
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                cit = new ServiceCitizen_1(r.getInt(11), r.getString(16), r.getString(19), r.getInt(9), r.getInt(1),
+                        r.getString(12), r.getString(45), r.getString(2));
+                c.add(cit);
+            }
+        } catch (Exception e) {
+            System.out.println("cccccc" + e.getMessage());
+        }
+        return c;
+    }
+    
+    
 }
+
+    

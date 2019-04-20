@@ -144,7 +144,7 @@ public class GetFromDBaraa {
             while (r.next()) {
                 JobPath j = new JobPath(r.getInt(1), r.getInt(2), r.getInt(3), "", r.getInt(5), r.getInt(6), r.getInt(5));
                 j.name = r.getString(18);
-                d = new DecisionsJob(j, r.getString(11), r.getString(12), r.getString(13), r.getString(15));
+                d = new DecisionsJob(j, r.getString(11), r.getString(12), r.getDouble(13), r.getString(15));
                 jobs.add(d);
             }
         } catch (Exception e) {
@@ -191,7 +191,7 @@ public class GetFromDBaraa {
             ResultSet r = db.read(sql);
             while (r.next()) {
                 s = new JobPath(r.getInt(1), r.getInt(2), r.getInt(3), r.getString(18), r.getInt(5), r.getInt(6), r.getInt(7));
-                d = new DecisionsJob(r.getString(11), r.getString(12), r.getString(13), r.getString(14), r.getString(15));
+                d = new DecisionsJob(r.getString(11), r.getString(12), r.getDouble(13), r.getString(14), r.getString(15));
                 d.idEmployee=r.getInt(10);
                 sdj = new StepsAndDecsionsJob(s, d);
                 Lsdj.add(sdj);

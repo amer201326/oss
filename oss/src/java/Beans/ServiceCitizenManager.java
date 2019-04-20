@@ -35,6 +35,8 @@ import org.primefaces.event.SelectEvent;
 @ViewScoped
 public class ServiceCitizenManager implements Serializable {
 
+    
+    
     List<ServiceCitizen_1> allRequestService;
     List<ServiceCitizen_1> allRequestServiceView;
     List<ServiceCitizen_1> allRequestServiceNotView;
@@ -53,56 +55,7 @@ public class ServiceCitizenManager implements Serializable {
     public void init() {
         if (session.employee != null) {
             allRequestService = new ArrayList<>();
-            List<DecisionsDepartment> decisionsDepartments = getDecisionsDepartmentsforEmployee(session.employee);
-
-            List<ServiceCitizen_1> temp = GetDB_Eman.getAllRequestService(session.employee.getJob_id());
-            for (ServiceCitizen_1 serviceCitizen_1 : temp) {
-                for (DecisionsDepartment decisionsDepartment : decisionsDepartments) {
-                    if (serviceCitizen_1.getJob().getDepId() == decisionsDepartment.getDepId() && serviceCitizen_1.getJob().getdOrder() == decisionsDepartment.getDepOrder()) {
-
-                        allRequestService.add(serviceCitizen_1);
-                    }
-                }
-                
-               // int maxd = Integer.MAX_VALUE;
-               // for (DecisionsDepartment decisionsDepartment : decisionsDepartments) {
-                //    
-                  //  if (serviceCitizen_1.getCit_ID() == decisionsDepartment.getCit_ID() && serviceCitizen_1.getService_Citizen_ID() == decisionsDepartment.getService_Citizen_ID()) {
-//
-  //                      allRequestService.add(serviceCitizen_1);
-    //                }
-      //          }
-            }
-            
-            
-            
-            
-            
-            
-            
-            
-            //                        if (!decisionsDepartment.getSection().isEmpty()) {
-//
-//                            for (DecisionSection decisionSection : decisionsDepartment.getSection()) {
-//                                if (serviceCitizen_1.getCit_ID() == decisionSection.getCit_ID()
-//                                        && serviceCitizen_1.getService_Citizen_ID() == decisionSection.getService_Citizen_ID()) {
-//                                    if (!decisionSection.getJobs().isEmpty()) {
-//
-//                                        for (DecisionsJob job : decisionSection.getJobs()) {
-//                                            if (job.getCit_ID() == decisionSection.getCit_ID()
-//                                                    && serviceCitizen_1.getService_Citizen_ID() == job.getService_Citizen_ID()) {
-//                                                allRequestService.add(serviceCitizen_1);
-//                                            }
-//                                        }
-//                                    } else {
-//                                        allRequestService.add(serviceCitizen_1);
-//                                    }
-//                                }
-//                            }
-//
-//                        } else {
-//                            allRequestService.add(serviceCitizen_1);
-//                        }
+           allRequestService = GetFromDB.getAllRequestService(session.employee);
             allRequestServiceView = new ArrayList<>();
             allRequestServiceNotView = new ArrayList<>();
 
@@ -119,10 +72,11 @@ public class ServiceCitizenManager implements Serializable {
         serviceSelected = new ServiceCitizen_1();
     }
 
-    public void showServise(String serviceCid, String servicePid) {
+    public void showServise() {
         try {
-
-            FacesContext.getCurrentInstance().getExternalContext().redirect("ShowService.xhtml?Cid=" + serviceCid + "&SCid" + servicePid);
+            session.serviceCitizen = serviceSelected;            
+            FacesContext.getCurrentInstance().getExternalContext().redirect("ShowService.xhtml");
+            
         } catch (IOException ex) {
             Logger.getLogger(ServiceCitizenManager.class.getName()).log(Level.SEVERE, null, ex);
         }
