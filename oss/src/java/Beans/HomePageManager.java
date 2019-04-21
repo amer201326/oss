@@ -21,9 +21,14 @@ import javax.faces.bean.ViewScoped;
 public class HomePageManager implements Serializable{
     
     String[] allDetails; 
-
+    int[] allParameters; 
+    List<HomePage> serviceDep; 
+    
     public HomePageManager() {
         allDetails = GetDB_Eman.getHomePageDetails();
+        allParameters = GetDB_Eman.getAllParameters();
+        serviceDep = GetDB_Eman.getServicesByDep();
+        
     }
 
     public String[] getAllDetails() {
@@ -34,8 +39,22 @@ public class HomePageManager implements Serializable{
         this.allDetails = allDetails;
     }
 
-    
-    
+    public int[] getAllParameters() {
+        return allParameters;
+    }
+
+    public void setAllParameters(int[] allParameters) {
+        this.allParameters = allParameters;
+    }
+
+    public List<HomePage> getServiceDep() {
+        return serviceDep;
+    }
+
+    public void setServiceDep(List<HomePage> serviceDep) {
+        this.serviceDep = serviceDep;
+    }
+
     
     
 }

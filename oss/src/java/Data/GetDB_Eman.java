@@ -174,13 +174,13 @@ public class GetDB_Eman {
         return cit;
 
     }
-    
+
     public static String[] getHomePageDetails() {
-      
+
         String[] all = new String[7];
         try {
             DB db = new DB();
-           String sql = "SELECT homepage_ID, images, address, telephone, fax, email, description FROM oss.homepage_data;"; 
+            String sql = "SELECT homepage_ID, images, address, telephone, fax, email, description FROM oss.homepage_data;";
             ResultSet r = db.read(sql);
 
             while (r.next()) {
@@ -191,7 +191,6 @@ public class GetDB_Eman {
                 all[4] = r.getString(5);
                 all[5] = r.getString(6);
                 all[6] = r.getString(7);
-               
 
             }
 
@@ -200,11 +199,52 @@ public class GetDB_Eman {
         }
 
         return all;
-        
-        
-        
+
     }
 
-    
+    public static int[] getAllParameters() {
+
+        int[] all = new int[4];
+        try {
+            DB db = new DB();
+            String sql = "SELECT count(*),(select count(*) from oss.citizenaccount), (select count(*) from oss.employeeaccount), ((select count(Service_Citizen_ID) from oss.service_citizen where Status = 'done')) FROM oss.services_provided;";
+            ResultSet r = db.read(sql);
+
+            while (r.next()) {
+                all[0] = r.getInt(1);
+                all[1] = r.getInt(2);
+                all[2] = r.getInt(3);
+                all[3] = r.getInt(4);
+System.out.println(all[2]);
+            }
+            
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(GetDB_Eman.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return all;
+
+    }
+
+    public static List<HomePage> getServicesByDep() {
+
+        HomePage cit = new HomePage();
+
+        List<HomePage> c = new ArrayList<HomePage>();
+        try {
+            DB db = new DB();
+            String sql = "select d.Dep_Name, s.Serv_Name from oss.department as d inner join oss.services_provided as s where d.Dep_ID = s.DepartmentID; ";
+
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                cit = new HomePage(r.getString(1), r.getString(2));
+                c.add(cit);
+            }
+        } catch (Exception e) {
+            System.out.println("bb" + e.getMessage());
+        }
+        return c;
+
+    }
 
 }

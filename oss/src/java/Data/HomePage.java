@@ -20,6 +20,13 @@ public class HomePage implements Serializable {
     String fax;
     String email;
     String description;
+    String servName;
+    String depName;
+    int serviceCount;
+    int citizenCount;
+    int employeeCount;
+    int doneCount;
+    
 
     public HomePage(String homepage_ID, String images, String address, String telephone, String fax, String email, String description) {
         this.homepage_ID = homepage_ID;
@@ -30,6 +37,20 @@ public class HomePage implements Serializable {
         this.email = email;
         this.description = description;
     }
+
+    public HomePage(int serviceCount, int citizenCount, int employeeCount, int doneCount) {
+        this.serviceCount = serviceCount;
+        this.citizenCount = citizenCount;
+        this.employeeCount = employeeCount;
+        this.doneCount = doneCount;
+    }
+
+    public HomePage(String servName, String depName) {
+        this.servName = servName;
+        this.depName = depName;
+    }
+    
+    
 
     public HomePage() {
     }
@@ -92,6 +113,52 @@ public class HomePage implements Serializable {
         this.description = description;
     }
 
-  
+    public int getServiceCount() {
+        return serviceCount;
+    }
+
+    public void setServiceCount(int serviceCount) {
+        this.serviceCount = serviceCount;
+    }
+
+    public int getCitizenCount() {
+        return citizenCount;
+    }
+
+    public void setCitizenCount(int citizenCount) {
+        this.citizenCount = citizenCount;
+    }
+
+    public int getEmployeeCount() {
+        return employeeCount;
+    }
+
+    public void setEmployeeCount(int employeeCount) {
+        this.employeeCount = employeeCount;
+    }
+
+    public String getServName() {
+        return servName;
+    }
+
+    public void setServName(String servName) {
+        this.servName = servName;
+    }
+
+    public String getDepName() {
+        return depName;
+    }
+
+    public void setDepName(String depName) {
+        this.depName = depName;
+    }
+
+    public int getDoneCount() {
+        return doneCount;
+    }
+
+    public void setDoneCount(int doneCount) {
+        this.doneCount = doneCount;
+    }
     
 }

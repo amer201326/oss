@@ -159,7 +159,7 @@ public class GetFromDB {
         int[] all = new int[10];
         try {
             DB db = new DB();
-            String sql = "select count(Service_Citizen_ID) ,(select count(Service_Citizen_ID) from service_citizen where Status = 'done'),(select count(Service_Citizen_ID) from service_citizen where Status = 'view'),(select count(Service_Citizen_ID) from service_citizen where Status = 'notview'),(select count(Dep_ID) from department ),(select count(Sec_ID) from section ),(select count(Services_Provided_ID) from services_provided),(select count(Cit_ID) from citizen ),(select count(Service_Citizen_ID) from service_citizen),(select count(Emp_ID) from employees ) from service_citizen where Status = 'done' ;";
+            String sql = "select count(Service_Citizen_ID) ,(select count(Service_Citizen_ID) from oss.service_citizen where Status = 'done'),(select count(Service_Citizen_ID) from oss.service_citizen where Status = 'view'),(select count(Service_Citizen_ID) from oss.service_citizen where Status = 'notview'),(select count(Dep_ID) from oss.department ),(select count(Sec_ID) from oss.section ),(select count(Services_Provided_ID) from oss.services_provided),(select count(Cit_ID) from oss.citizen ),(select count(Service_Citizen_ID) from oss.service_citizen),(select count(Emp_ID) from oss.employees ) from oss.service_citizen where Status = 'done' ;";
             ResultSet r = db.read(sql);
 
             while (r.next()) {

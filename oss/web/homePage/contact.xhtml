@@ -90,27 +90,14 @@
         </div>
         <!-- End Breadcrumb -->
 
-
-
         <!-- Start main content -->
         <main>
-
-
             <!-- Start About -->
             <section id="mu-about">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="mu-about-area">
-                                <!-- Title -->
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="mu-title">
-                                            <h2>Who we are</h2>
-                                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa cum sociis.</p>
-                                        </div>
-                                    </div>
-                                </div>
                                 <!-- Start Feature Content -->
                                 <div class="row">
                                     <div class="col-md-6">
@@ -118,55 +105,73 @@
                                             <img class="" src="assets/image/image4.png" alt=""/>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="mu-about-right">
-                                            <ul>
-                                                <li>
-                                                    <h3>Our Mission</h3>
-                                                    <p>#{homePageManager.allDetails[6]}</p>
-                                                </li>
-                                                <br/><br/> <br/><br/><br/>
-                                                <li>
+                                    <!-- Start Service Content -->
 
-                                                    <span class="fa fa-home"></span>
-                                                    <h3></h3>
-                                                    <div class="media-body">
-
-                                                        <p>#{homePageManager.allDetails[2]}</p>
+                                    <div class="col-md-6" dir="rtl">
+                                        <div class="mu-service-content">
+                                            <div class="row">
+                                                <!-- Title -->
+                                                <div class="row">
+                                                    <div class="col-md-12" dir="rtl">
+                                                        <h2>البلدية</h2>
+                                                        <p>#{homePageManager.allDetails[6]}</p>
                                                     </div>
-                                                </li>
-                                                <br/><br/> <br/><br/>
-                                                <li>
-                                                    <span class="fa fa-phone"></span>
-                                                    <h3></h3>
-                                                    <div class="media-body">
+                                                </div>
+                                                <!-- Start single service -->
+                                                <div class="col-md-5" style="display: flex; justify-content: flex-end;" dir="rtl">
 
-                                                        <p>#{homePageManager.allDetails[3]}</p>
-                                                    </div>    
-                                                </li>
-                                                <br/><br/> <br/><br/>
-                                                <li>
-                                                    <span class="fa fa-fax"></span>
-                                                    <h3></h3>
-                                                    <div class="media-body">
+                                                    <div class="mu-single-service" dir="rtl" >
+                                                        <div class="mu-single-service-icon"><i class="fa fa-phone" aria-hidden="true"></i></div>
+                                                        <div class="mu-single-service-content">
+                                                            <p:separator/>
+                                                            <h3>#{homePageManager.allDetails[3]}</h3>
 
-                                                        <p>#{homePageManager.allDetails[4]}</p>
-                                                    </div>    
-                                                </li>
-                                                <br/><br/> <br/><br/>
-                                                <li>
-                                                    <span class="fa fa-envelope"></span>
-                                                    <h3></h3>
-                                                    <div class="media-body">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                              
+                                                <div class="col-md-5">
+                                                    <div class="mu-single-service" dir="rtl" >
+                                                        <div class="mu-single-service-icon"><i class="fa fa-home" aria-hidden="true"></i></div>
+                                                        <div class="mu-single-service-content">
+                                                            <p:separator/>
+                                                            <h3>#{homePageManager.allDetails[2]}</h3>
 
-                                                        <p>#{homePageManager.allDetails[5]}</p>
-                                                    </div>    
-                                                </li>
-                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                               
+                                                <div class="col-md-5">
+                                                    <div class="mu-single-service" dir="rtl" >
+                                                        <div class="mu-single-service-icon"><i class="fa fa-fax" aria-hidden="true"></i></div>
+                                                        <div class="mu-single-service-content">
+                                                            <p:separator/>
+                                                            <h3>#{homePageManager.allDetails[4]}</h3>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                              
+                                                <div class="col-md-5">
+                                                    <div class="mu-single-service" dir="rtl" >
+                                                        <div class="mu-single-service-icon"><i class="fa fa-envelope" aria-hidden="true"></i></div>
+                                                        <div class="mu-single-service-content">
+                                                            <p:separator/>
+                                                            <h3>#{homePageManager.allDetails[5]}</h3>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-5">
+
+                                                </div>
+                                                
+                                            </div>
                                         </div>
                                     </div>
+
                                 </div>
-                                <!-- End Feature Content -->
+                               
                             </div>
                         </div>
                     </div>
@@ -174,6 +179,71 @@
             </section>
             <!-- End About -->
         </main>
+          <!-- Start Counter -->
+        <section id="mu-counter">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="mu-counter-area">
+
+                            <div class="mu-counter-block">
+                                <div class="row">
+
+                                    <!-- Start Single Counter -->
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="mu-single-counter">
+                                            <span class="fa fa-suitcase"></span>
+                                            <div class="mu-single-counter-content">
+                                                <div class="counter-value">#{homePageManager.allParameters[0]}</div>
+                                                <h5 class="mu-counter-name">الخدمات</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- / Single Counter -->
+
+                                    <!-- Start Single Counter -->
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="mu-single-counter">
+                                            <span class="fa fa-group"></span>
+                                            <div class="mu-single-counter-content">
+                                                <div class="counter-value">#{homePageManager.allParameters[1]}</div>
+                                                <h5 class="mu-counter-name">المواطنبن</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- / Single Counter -->
+
+                                    <!-- Start Single Counter -->
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="mu-single-counter">
+                                            <span class="fa fa-user"></span>
+                                            <div class="mu-single-counter-content">
+                                                <div class="counter-value" >#{homePageManager.allParameters[2]}</div>
+                                                <h5 class="mu-counter-name">الموظفون</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- / Single Counter -->
+
+                                    <!-- Start Single Counter -->
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="mu-single-counter">
+                                            <span class="fa fa-thumbs-up"></span>
+                                            <div class="mu-single-counter-content">
+                                                <div class="counter-value">#{homePageManager.allParameters[3]}</div>
+                                                <h5 class="mu-counter-name">الخدمات المنجزة</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- / Single Counter -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Counter -->
 
 
         <!-- JavaScript -->
