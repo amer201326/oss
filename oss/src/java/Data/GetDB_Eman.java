@@ -7,8 +7,11 @@ package Data;
 
 import DB.DB;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -170,6 +173,36 @@ public class GetDB_Eman {
         }
         return cit;
 
+    }
+    
+    public static String[] getHomePageDetails() {
+      
+        String[] all = new String[7];
+        try {
+            DB db = new DB();
+           String sql = "SELECT homepage_ID, images, address, telephone, fax, email, description FROM oss.homepage_data;"; 
+            ResultSet r = db.read(sql);
+
+            while (r.next()) {
+                all[0] = r.getString(1);
+                all[1] = r.getString(2);
+                all[2] = r.getString(3);
+                all[3] = r.getString(4);
+                all[4] = r.getString(5);
+                all[5] = r.getString(6);
+                all[6] = r.getString(7);
+               
+
+            }
+
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(GetDB_Eman.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return all;
+        
+        
+        
     }
 
     

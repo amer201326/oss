@@ -63,7 +63,7 @@
                                 <h:form id="formSection">
                                    
                                     <h:head id="msgs"/>
-                                    <p:dataTable id="singleDT" var="employee" value="#{employeeManage.allemployees}"  editable="true" style="margin-bottom:20px" selectionMode="single" selection="#{employeeManage.newEmployee}" rowKey="#{employee.emp_id}">
+                                    <p:dataTable id="singleDT" var="employee" value="#{homePageManager.allDetails}"  editable="true" style="margin-bottom:20px" selectionMode="single" selection="#{employeeManage.newEmployee}" rowKey="#{employee.emp_id}">
 
                                         <f:facet name="header">
                                             عرض جميع الموظفين
@@ -82,46 +82,11 @@
 
                                         <p:column headerText="البريد الإلكتروني">
                                             <p:cellEditor disabled="false">
-                                                <f:facet name="output"><h:outputText value="#{employee.emp_email}" /></f:facet>
-                                                <f:facet name="input"><p:inputText id="modelInput" value="#{employee.emp_email}" style="width:100%"/></f:facet>
+                                                <f:facet name="output"><h:outputText value="#{employee.address}" /></f:facet>
+                                                <f:facet name="input"><p:inputText id="modelInput" value="#{employee.address}" style="width:100%"/></f:facet>
                                             </p:cellEditor>
                                         </p:column>
 
-
-                                        <p:column headerText="الجوال">
-                                            <p:cellEditor>
-                                                <f:facet name="output"><h:outputText value="#{employee.emp_mobile}" /></f:facet>
-                                                <f:facet name="input"><p:inputText value="#{employee.emp_mobile}" style="width:100%" /></f:facet>
-                                            </p:cellEditor>
-                                        </p:column>
-
-
-
-                                        <p:column headerText="الاسم الكامل">
-
-                                            <p:cellEditor >
-                                                <f:facet name="output"><h:outputText value="#{employee.emp_name}" /></f:facet>
-                                                <f:facet name="input"><p:inputText value="#{employee.emp_name}" style="width:100%"/></f:facet>
-                                            </p:cellEditor>
-                                        </p:column> 
-
-
-                                        <p:column headerText="رقم تعريف الموظف">
-                                            <p:cellEditor disabled="true" >
-                                                <f:facet name="output"><h:outputText value="#{employee.emp_id}" /></f:facet>
-                                                <f:facet name="input"><p:inputText value="#{employee.emp_id}" style="width:30%" /></f:facet>
-                                            </p:cellEditor>
-                                        </p:column>
-
-
-
-
-                                        <p:column headerText="رقم هوية الموظف">
-                                            <p:cellEditor disabled="true" >
-                                                <f:facet name="output"><h:outputText value="#{employee.emp_idCard}"  /></f:facet>
-                                                <f:facet name="input"><p:inputText value="#{employee.emp_idCard}" style="width:30%" /></f:facet>
-                                            </p:cellEditor>
-                                        </p:column>
 
                                        
 
