@@ -24,6 +24,8 @@ public class HomePage implements Serializable {
     String depName;
     String munName;
     String munCity;
+    String munQuarter;
+    String munStreet;
     int serviceCount;
     int citizenCount;
     int employeeCount;
@@ -178,8 +180,24 @@ public class HomePage implements Serializable {
         return munCity;
     }
 
+    public String getMunQuarter() {
+        return munQuarter;
+    }
+
+    public void setMunQuarter(String munQuarter) {
+        this.munQuarter = munQuarter;
+    }
+
     public void setMunCity(String munCity) {
         this.munCity = munCity;
+    }
+
+    public String getMunStreet() {
+        return munStreet;
+    }
+
+    public void setMunStreet(String munStreet) {
+        this.munStreet = munStreet;
     }
     
     

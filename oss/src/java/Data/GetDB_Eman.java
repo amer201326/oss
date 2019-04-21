@@ -177,10 +177,10 @@ public class GetDB_Eman {
 
     public static String[] getHomePageDetails() {
 
-        String[] all = new String[10];
+        String[] all = new String[15];
         try {
             DB db = new DB();
-            String sql = "SELECT homepage_ID, images, address, telephone, fax, email, description, munName, munCity FROM oss.homepage_data;";
+            String sql = "SELECT homepage_ID, images, address, telephone, fax, email, description, munName, munCity, munQuarter, munStreet FROM oss.homepage_data;";
             ResultSet r = db.read(sql);
 
             while (r.next()) {
@@ -193,6 +193,8 @@ public class GetDB_Eman {
                 all[6] = r.getString(7);
                 all[7] = r.getString(8);
                 all[8] = r.getString(9);
+                all[9] = r.getString(10);
+                all[10] = r.getString(11);
 
             }
 
@@ -217,7 +219,7 @@ public class GetDB_Eman {
                 all[1] = r.getInt(2);
                 all[2] = r.getInt(3);
                 all[3] = r.getInt(4);
-System.out.println(all[2]);
+
             }
             
         } catch (SQLException | ClassNotFoundException ex) {

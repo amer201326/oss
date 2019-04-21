@@ -38,7 +38,7 @@
                 <div id="content">
 
                     <!-- Topbar -->
-                    
+
                     <ui:include src="heder.xhtml"/>
                     <!-- End of Topbar -->
 
@@ -289,27 +289,30 @@
                                         <div class="text-center">
                                             <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="../img/undraw_posting_photo.svg" alt=""/>
                                         </div>
-                                        <p style="text-align: right">
-                                            الحي<br/>
-                                            الشارع<br/>
-                                            البريد الالكتروني<br/>
-                                            رقم الهاتف<br/>
-                                            رقم الفاكساسم البلدية<br/>
-                                            المدينة<br/>
-                                            الحي<br/>
-                                            الشارع<br/>
-                                            البريد الالكتروني<br/>
-                                            رقم الهاتف<br/>
-                                            رقم الفاكس </p>
 
                                         <h:panelGrid columns="2" dir="rtl" style="display: flex; justify-content: flex-start;">
-                                            <p:outputLabel for="munName" value="اسم البلدية: "/>
-                                            <p:outputLabel id="munName" value="#{homePageManager.allDetails[7]}" style="text-align:right;" class="form-control"/>
+
+                                            <p:outputLabel for="munName" value="اسم البلدية: " /> 
+                                            <p:outputLabel id="munName" value="#{homePageManager.allDetails[7]}" style="text-align:right;" class="form-control-user"/>
+
 
                                             <p:outputLabel for="munCity" value="المدينة: "/>
-                                            <p:outputLabel id="munCity" value="#{homePageManager.allDetails[8]}" style="text-align:right;"/>
+                                            <p:outputLabel id="munCity" value="#{homePageManager.allDetails[8]}" style="text-align:right;" class="form-control-user"/>
 
+                                            <p:outputLabel for="munQuarter" value="الحي: "/>
+                                            <p:outputLabel id="munQuarter" value="#{homePageManager.allDetails[9]}" style="text-align:right;" class="form-control-user"/>
 
+                                            <p:outputLabel for="munStreet" value="الشارع: "/>
+                                            <p:outputLabel id="munStreet" value="#{homePageManager.allDetails[10]}" style="text-align:right;" class="form-control-user"/>
+
+                                            <p:outputLabel for="munEmail" value="البريد الالكتروني: "/>
+                                            <p:outputLabel id="munEmail" value="#{homePageManager.allDetails[5]}" style="text-align:right;" class="form-control-user"/>
+
+                                            <p:outputLabel for="munTel" value="رقم الهاتف: "/>
+                                            <p:outputLabel id="munTel" value="#{homePageManager.allDetails[3]}" style="text-align:right;" class="form-control-user"/>
+
+                                            <p:outputLabel for="munFax" value="رقم الفاكس: "/>
+                                            <p:outputLabel id="munFax" value="#{homePageManager.allDetails[4]}" style="text-align:right;" class="form-control-user"/>
                                         </h:panelGrid>
 
                                     </div>
