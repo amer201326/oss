@@ -369,6 +369,14 @@ public class ServiceAttachmentName implements Serializable {
         }
     }
 
+        public String colorHaveFile() {
+        if (haveFileToupload()) {
+            return "danger";
+        } else {
+            return "success";
+        }
+    }
+        
     public void error() {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Upload All the Files needed"));
 
