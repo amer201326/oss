@@ -177,10 +177,10 @@ public class GetDB_Eman {
 
     public static String[] getHomePageDetails() {
 
-        String[] all = new String[7];
+        String[] all = new String[10];
         try {
             DB db = new DB();
-            String sql = "SELECT homepage_ID, images, address, telephone, fax, email, description FROM oss.homepage_data;";
+            String sql = "SELECT homepage_ID, images, address, telephone, fax, email, description, munName, munCity FROM oss.homepage_data;";
             ResultSet r = db.read(sql);
 
             while (r.next()) {
@@ -191,6 +191,8 @@ public class GetDB_Eman {
                 all[4] = r.getString(5);
                 all[5] = r.getString(6);
                 all[6] = r.getString(7);
+                all[7] = r.getString(8);
+                all[8] = r.getString(9);
 
             }
 

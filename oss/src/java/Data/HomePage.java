@@ -22,13 +22,16 @@ public class HomePage implements Serializable {
     String description;
     String servName;
     String depName;
+    String munName;
+    String munCity;
     int serviceCount;
     int citizenCount;
     int employeeCount;
     int doneCount;
     
 
-    public HomePage(String homepage_ID, String images, String address, String telephone, String fax, String email, String description) {
+    public HomePage(String homepage_ID, String images, String address, String telephone, String fax, 
+            String email, String description, String munName, String munCity) {
         this.homepage_ID = homepage_ID;
         this.images = images;
         this.address = address;
@@ -36,6 +39,8 @@ public class HomePage implements Serializable {
         this.fax = fax;
         this.email = email;
         this.description = description;
+        this.munName = munName;
+        this.munCity = munCity;
     }
 
     public HomePage(int serviceCount, int citizenCount, int employeeCount, int doneCount) {
@@ -160,5 +165,23 @@ public class HomePage implements Serializable {
     public void setDoneCount(int doneCount) {
         this.doneCount = doneCount;
     }
+
+    public String getMunName() {
+        return munName;
+    }
+
+    public void setMunName(String munName) {
+        this.munName = munName;
+    }
+
+    public String getMunCity() {
+        return munCity;
+    }
+
+    public void setMunCity(String munCity) {
+        this.munCity = munCity;
+    }
+    
+    
     
 }
