@@ -10,6 +10,7 @@ import Data.GetDB_Eman;
 import java.io.Serializable;
 import java.util.Map;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
@@ -23,12 +24,13 @@ public class CitizenProfileManager implements Serializable{
     
     CitizenProfile updateProfile;
 
-    
+    @ManagedProperty(value = "#{msession}")
+    Session session;
     public CitizenProfileManager() {
-         Map<String, String> parameterMap = (Map<String, String>) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        String id = parameterMap.get("id");
-
-        updateProfile = GetDB_Eman.GetCitizenProfileById(id);
+       
+        
+                updateProfile = new CitizenProfile(session.citizen.getId(), FirstName, FatherName, GrandFatherName, LastName, Gender, 0, idCard, telephone, mobile, email, fax, birthday, placeOfBirth, region, quarter, street, address, citizenJob, passportNumber, passportType)
+         
     }
     
      public void updateCitizen() {
@@ -44,6 +46,14 @@ public class CitizenProfileManager implements Serializable{
 
         public void setUpdateProfile(CitizenProfile updateProfile) {
         this.updateProfile = updateProfile;
+    }
+
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
     }
     
     
