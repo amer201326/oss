@@ -64,7 +64,7 @@
                             </li>
                             <li class="nav-item"><a href="services.xhtml" style="font-size: 16px;">الخدمات</a></li>
                             <li class="nav-item"><a href="contact.xhtml" style="font-size: 16px;">اتصل بنا</a></li>
-
+                            <li class="nav-item"><a href="../login/index.xhtml" style="font-size: 16px;">اتصل بنا</a></li>
                         </ul>
                     </div>
                 </nav>
@@ -111,22 +111,22 @@
                                         <div class="row">
                                             <!-- Start single service -->
                                             <ui:repeat value="#{homePageManager.serviceDep}" var="serDep" >
-                                            <div class="col-md-4"> 
-                                                <div class="mu-single-service">
-                                                    
-                                                    <div class="mu-single-service-content">
-                                                        <h3>اسم الخدمة: &nbsp; #{serDep.depName} &nbsp;</h3>
-                                                        <p>الدائرة: &nbsp; #{serDep.servName} &nbsp;</p>
+                                                <div class="col-md-4"> 
+                                                    <div class="mu-single-service">
+
+                                                        <div class="mu-single-service-content">
+                                                            <h3>اسم الخدمة: &nbsp; #{serDep.depName} &nbsp;</h3>
+                                                            <p>الدائرة: &nbsp; #{serDep.servName} &nbsp;</p>
+                                                        </div>
+
+                                                        <div class="mu-single-service-icon"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div>
                                                     </div>
-                                                   
-                                                     <div class="mu-single-service-icon"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div>
                                                 </div>
-                                            </div>
                                             </ui:repeat>
                                             <!-- End single service -->
-                                          <div class="card-body">
-                                        
-                                    </div>
+                                            <div class="card-body">
+
+                                            </div>
 
                                         </div>
                                     </div>
