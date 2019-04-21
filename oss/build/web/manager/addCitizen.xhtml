@@ -230,9 +230,9 @@
 
 
                                                                                 <p:outputLabel for="us" class="label" value="اسم المستخدم"/>
-                                                                                <p:inputText id="us" value="#{citizenManage.newCitizen.account.userName}"
+                                                                                <p:inputMask id="us" value="#{citizenManage.newCitizen.account.userName}"
                                                                                              class="form-control form-control-user" style="text-align:right;"
-                                                                                             type="text" required="true"/>
+                                                                                             type="text" mask="u-******" required="true"/>
 
                                                                                 <p:outputLabel for="password" class="label" value="كلمة المرور"/>
                                                                                 <p:password value="#{citizenManage.newCitizen.account.password}" class="form-control" style="text-align:right;" id="password" 

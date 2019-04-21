@@ -77,9 +77,9 @@
                                                             <div class="col-sm-12 mb-3 mb-sm-0">
                                                                 <h:panelGrid columns="2" dir="rtl" style="display: flex; justify-content: flex-start;">
                                                                     <p:outputLabel for="us" class="label" value="اسم المستخدم"/>
-                                                                    <p:inputText id="us" value="#{employeeManage.newEmployeeAccount.userName}"
+                                                                    <p:inputMask id="us" value="#{employeeManage.newEmployeeAccount.userName}"
                                                                                  class="form-control form-control-user" style="text-align:right;"
-                                                                                 type="text" required="true"/>
+                                                                                 type="text" mask="e-******" required="true"/>
 
                                                                     <p:outputLabel for="password" class="label" value="كلمة المرور"/>
                                                                     <p:password id="password" value="#{employeeManage.newEmployeeAccount.password}" class="form-control" style="text-align:right;" feedback="true" inline="true" required="true"/> 
