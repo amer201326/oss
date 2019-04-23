@@ -109,18 +109,14 @@ public class DepartmentPaths implements Serializable {
     
  
 
-    public boolean addToDataBase(int idService) {
-        try {
+    public boolean addToDataBase(int idService) throws SQLException, ClassNotFoundException {
+   
             DB d = new DB();
             String q = "INSERT INTO steps_department VALUES ("+id+","+idService+","+order+",'"+importantComment+"');";
             System.out.println(q);
             d.write(q);
             
-        } catch (SQLException ex) {
-            Logger.getLogger(DepartmentPaths.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DepartmentPaths.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
        
         return false;
     }

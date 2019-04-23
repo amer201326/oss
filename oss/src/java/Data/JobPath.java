@@ -65,7 +65,12 @@ public class JobPath implements Serializable {
         this.sOrder = sOrder;
         this.order = order;
     }
-
+  public JobPath(int DepId, int sectionID, int id, String name) {
+        this.DepId = DepId;
+        this.sectionID = sectionID;
+        this.id = id;
+        this.name = name;
+    }
     public JobPath(int DepId, int sectionID, Integer id, int idService, String name, Integer dOrder, int sOrder, int order) {
         this.DepId = DepId;
         this.sectionID = sectionID;
@@ -134,18 +139,14 @@ public class JobPath implements Serializable {
         return "JobPath{" + "sectionID=" + sectionID + ", id=" + id + ", name=" + name + ", order=" + order + '}';
     }
 
-    public boolean addToDataBase(int idService) {
-        try {
+    public boolean addToDataBase(int idService) throws SQLException, ClassNotFoundException {
+   
             DB d = new DB();
             String q = "INSERT INTO steps_job VALUES(" + DepId + "," + sectionID + "," + id + "," + idService + "," + dOrder + "," + sOrder + "," + order + ");";
             System.out.println(q);
             d.write(q);
 
-        } catch (SQLException ex) {
-            Logger.getLogger(DepartmentPaths.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DepartmentPaths.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
 
         return false;
     }
@@ -164,6 +165,9 @@ public class JobPath implements Serializable {
 
     public void setsOrder(int sOrder) {
         this.sOrder = sOrder;
+    }
+    public String kes(){
+        return this.DepId+"-"+this.sectionID+"-"+this.id;
     }
 
 }

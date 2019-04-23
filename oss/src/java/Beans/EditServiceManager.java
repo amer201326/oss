@@ -8,6 +8,7 @@ package Beans;
 import Data.Department;
 import Data.DepartmentPaths;
 import Data.GetFromDB;
+import Data.HaveServiceAttachment;
 import Data.JobOfSection;
 import Data.JobPath;
 import Data.JobTitel;
@@ -16,6 +17,7 @@ import Data.Section;
 import Data.SectionPath;
 import Data.Service;
 import Data.ServiceAttachmentName;
+import Data.ViewerAttachment;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +27,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
+import javax.faces.model.SelectItemGroup;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
 import org.primefaces.model.DualListModel;
@@ -59,33 +63,44 @@ public class EditServiceManager implements Serializable {
     List<JobOfSection> jobsOfSections;
     List<JobOfSection> filterJobsOfSections;
 
-    DualListModel<String> attachmentNamesAndResaults;
+    //DualListModel<String> attachmentNamesAndResaults;
 
+    HaveServiceAttachment haveServiceAttachment;
+    List<ServiceAttachmentName> Newattachment = new ArrayList<ServiceAttachmentName>();
+    List<ServiceAttachmentName> allattachment;
+    
+     List<JobPath> stringToJop;
+    ServiceAttachmentName selectAttachment;
+    ServiceAttachmentName newSelectAttachment;
+
+    List<SelectItem> viewerJob;
+    private String[] selectedAtts;
+    
     public EditServiceManager() {
         Map<String, String> parameterMap = (Map<String, String>) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         String id = parameterMap.get("id");
         System.out.println(id);
         attachmentNames = GetFromDB.getServiceAttachmentName();
-        List<Integer> attachmentIds = GetFromDB.getAttavhmentForserviceById(id);
-        attachmentNamesAndResaults = new DualListModel<>();
-
-        for (int i = 0; i < attachmentNames.size(); i++) {
-            ServiceAttachmentName get = attachmentNames.get(i);
-
-            boolean b = false;
-            for (int j = 0; j < attachmentIds.size(); j++) {
-                Integer idat = attachmentIds.get(j);
-                if (get.getId() == idat) {
-
-                    attachmentNamesAndResaults.getTarget().add(get.getName());
-                    b = true;
-                }
-
-            }
-            if (!b) {
-                attachmentNamesAndResaults.getSource().add(get.getName());
-            }
-        }
+//        List<Integer> attachmentIds = GetFromDB.getAttavhmentForserviceById(id);
+//        attachmentNamesAndResaults = new DualListModel<>();
+//
+//        for (int i = 0; i < attachmentNames.size(); i++) {
+//            ServiceAttachmentName get = attachmentNames.get(i);
+//
+//            boolean b = false;
+//            for (int j = 0; j < attachmentIds.size(); j++) {
+//                Integer idat = attachmentIds.get(j);
+//                if (get.getId() == idat) {
+//
+//                    attachmentNamesAndResaults.getTarget().add(get.getName());
+//                    b = true;
+//                }
+//
+//            }
+//            if (!b) {
+//                attachmentNamesAndResaults.getSource().add(get.getName());
+//            }
+//        }
 
         departments = GetFromDB.getDepartments();
         sections = GetFromDB.getSection();
@@ -97,7 +112,37 @@ public class EditServiceManager implements Serializable {
         departmentPaths = new DepartmentPaths();
         jobPath = new JobPath();
         selectedJobPath = new JobPath();
+        
         departmentsInPath = getPathASDep();
+        allattachment = GetFromDB.getServiceAttachmentName();
+
+
+        
+     
+        selectedJobPath = new JobPath();
+        
+          newSelectAttachment = new ServiceAttachmentName();
+        haveServiceAttachment = new HaveServiceAttachment();
+        stringToJop = new ArrayList<>();
+        viewerJob = new ArrayList<SelectItem>();
+        
+        
+              //  Newattachment = GetFromDB.getAttavhmentByserviceById(Integer.parseInt(id));
+       
+        Newattachment = new ArrayList<ServiceAttachmentName>();
+        
+        List<ViewerAttachment> ald =  GetFromDB.getAttatchmentByserviceById(Integer.parseInt(id));
+        for (ViewerAttachment vald : ald) {
+            Newattachment.add(new ServiceAttachmentName(vald.getServiceAttachmentName_ID(), vald.getNameAtt()));
+            
+            haveServiceAttachment.setServiceAttachmentName_ID(vald.getServiceAttachmentName_ID());
+            JobPath j = new JobPath(vald.getDep_ID(), vald.getSec_ID(), vald.getJob_ID(), vald.getNameAtt());
+            haveServiceAttachment.getJobs().add(j);
+            
+        }
+        newService.getHaveServiceAttachments().add(haveServiceAttachment);
+       
+
     }
 
     public DepartmentPaths getDepartmentPaths() {
@@ -200,18 +245,18 @@ public class EditServiceManager implements Serializable {
 
     public void editService() {
 
-        List<ServiceAttachmentName> l = new ArrayList<>();
-        for (int i = 0; i < attachmentNamesAndResaults.getTarget().size(); i++) {
-            String get = attachmentNamesAndResaults.getTarget().get(i);
-            for (int j = 0; j < attachmentNames.size(); j++) {
-                ServiceAttachmentName get1 = attachmentNames.get(j);
-                if (get.equals(get1.getName())) {
-                    l.add(get1);
-                }
-
-            }
-        }
-        newService.setAttachmentNames(l);
+//        List<ServiceAttachmentName> l = new ArrayList<>();
+//        for (int i = 0; i < attachmentNamesAndResaults.getTarget().size(); i++) {
+//            String get = attachmentNamesAndResaults.getTarget().get(i);
+//            for (int j = 0; j < attachmentNames.size(); j++) {
+//                ServiceAttachmentName get1 = attachmentNames.get(j);
+//                if (get.equals(get1.getName())) {
+//                    l.add(get1);
+//                }
+//
+//            }
+//        }
+//        newService.setAttachmentNames(l);
 
         newService.setPath(departmentsInPath);
 
@@ -476,13 +521,13 @@ public class EditServiceManager implements Serializable {
         this.attachmentNames = attachmentNames;
     }
 
-    public DualListModel<String> getAttachmentNamesAndResaults() {
-        return attachmentNamesAndResaults;
-    }
-
-    public void setAttachmentNamesAndResaults(DualListModel<String> attachmentNamesAndResaults) {
-        this.attachmentNamesAndResaults = attachmentNamesAndResaults;
-    }
+//    public DualListModel<String> getAttachmentNamesAndResaults() {
+//        return attachmentNamesAndResaults;
+//    }
+//
+//    public void setAttachmentNamesAndResaults(DualListModel<String> attachmentNamesAndResaults) {
+//        this.attachmentNamesAndResaults = attachmentNamesAndResaults;
+//    }
 
     private List<DepartmentPaths> getPathASDep() {
         List<DepartmentPaths> debp = GetFromDB.getDepartmentsPath(newService.getId());
@@ -493,11 +538,11 @@ public class EditServiceManager implements Serializable {
                 System.out.println("-----------------");
                 System.out.println(sectionPath.toString());
                 System.out.println(departmentPaths1.toString());
-                System.out.println(sectionPath.getDepartmentId() +"  "+departmentPaths1.id +"  "+ sectionPath.getOrderDepartment() +"  "+departmentPaths1.order);
+                System.out.println(sectionPath.getDepartmentId() + "  " + departmentPaths1.id + "  " + sectionPath.getOrderDepartment() + "  " + departmentPaths1.order);
                 System.out.println("-----------------");
                 if (sectionPath.getDepartmentId() == departmentPaths1.id && sectionPath.getOrderDepartment() == departmentPaths1.order) {
                     departmentPaths1.sections.add(sectionPath);
-                    System.out.println("name of sec = "+sectionPath.getName());
+                    System.out.println("name of sec = " + sectionPath.getName());
                     for (JobPath jobPath1 : jobp) {
                         if (jobPath1.getDepId() == sectionPath.getDepartmentId() && sectionPath.getOrderDepartment() == jobPath1.getdOrder() && sectionPath.getId() == jobPath1.getSectionID() && sectionPath.getOrder() == jobPath1.getsOrder()) {
                             sectionPath.jobs.add(jobPath1);
@@ -541,4 +586,195 @@ public class EditServiceManager implements Serializable {
         return "";
     }
 
+    public void onRowSelectFromAtt(SelectEvent event) {
+        
+    }
+    
+    public void onRowUnselectFromAtt(UnselectEvent event) {
+        
+    }
+    public void deleteSelectedAtt() {
+        System.out.println("delete Att");
+        System.out.println(selectAttachment);
+        Newattachment.remove(selectAttachment);
+        
+        haveServiceAttachment.setServiceAttachmentName_ID(selectAttachment.getId());
+        newService.getHaveServiceAttachments().remove(haveServiceAttachment);
+        
+        selectAttachment = new ServiceAttachmentName();
+    }
+    
+
+
+    public HaveServiceAttachment getHaveServiceAttachment() {
+        return haveServiceAttachment;
+    }
+
+    public void setHaveServiceAttachment(HaveServiceAttachment haveServiceAttachment) {
+        this.haveServiceAttachment = haveServiceAttachment;
+    }
+
+    public List<ServiceAttachmentName> getNewattachment() {
+        return Newattachment;
+    }
+
+    public void setNewattachment(List<ServiceAttachmentName> Newattachment) {
+        this.Newattachment = Newattachment;
+    }
+
+    public List<ServiceAttachmentName> getAllattachment() {
+        return allattachment;
+    }
+
+    public void setAllattachment(List<ServiceAttachmentName> allattachment) {
+        this.allattachment = allattachment;
+    }
+
+    public List<JobPath> getStringToJop() {
+        return stringToJop;
+    }
+
+    public void setStringToJop(List<JobPath> stringToJop) {
+        this.stringToJop = stringToJop;
+    }
+
+    public ServiceAttachmentName getSelectAttachment() {
+        return selectAttachment;
+    }
+
+    public void setSelectAttachment(ServiceAttachmentName selectAttachment) {
+        this.selectAttachment = selectAttachment;
+    }
+
+    public ServiceAttachmentName getNewSelectAttachment() {
+        return newSelectAttachment;
+    }
+
+    public void setNewSelectAttachment(ServiceAttachmentName newSelectAttachment) {
+        this.newSelectAttachment = newSelectAttachment;
+    }
+
+    public String[] getSelectedAtts() {
+        return selectedAtts;
+    }
+
+    public void setSelectedAtts(String[] selectedAtts) {
+        this.selectedAtts = selectedAtts;
+    }
+
+   
+
+       public List<SelectItem> jobShowThisService() {
+//
+//        List<JobPath> job = new ArrayList<JobPath>();
+        List<SelectItem> ds = new ArrayList<SelectItem>();
+
+        System.out.println("selecttttt");
+        if (!departmentsInPath.isEmpty()) {
+            for (DepartmentPaths d : departmentsInPath) {
+                if (d.sections.isEmpty()) {
+
+                    for (Section section : sections) {
+
+                        if (section.getDepartmentId().compareTo(d.id + "") == 0) {
+                            SelectItemGroup sec = new SelectItemGroup(section.getName());
+                            List<JobPath> jobs = new ArrayList<>();
+                            for (JobOfSection jobsOfSection : jobsOfSections) {
+                                if (jobsOfSection.getIdSEction() == Integer.parseInt(section.getId())) {
+                                    jobs.add(new JobPath(d.id, Integer.parseInt(section.getId()),
+                                            jobsOfSection.getIdJob(), jobsOfSection.getName()));
+
+                                }
+                            }
+                            SelectItem[] jobarray = new SelectItem[jobs.size()];
+                            for (int i = 0; i < jobs.size(); i++) {
+                                JobPath get = jobs.get(i);
+                                jobarray[i] = new SelectItem(get.kes(), get.getName(), d.nameA);
+
+                            }
+
+                            sec.setSelectItems(jobarray);
+                            ds.add(sec);
+                        }
+                    }
+
+                } else {
+                    for (SectionPath section : d.sections) {
+                        if (section.jobs.isEmpty()) {
+                            SelectItemGroup sec = new SelectItemGroup(section.getName());
+                            List<JobPath> jobs = new ArrayList<>();
+                            for (JobOfSection jobsOfSection : jobsOfSections) {
+                                if (jobsOfSection.getIdSEction() == section.getId()) {
+
+                                    jobs.add(new JobPath(d.id, section.getId(), jobsOfSection.getIdJob(), jobsOfSection.getName()));
+
+                                }
+                            }
+                            SelectItem[] jobarray = new SelectItem[jobs.size()];
+                            for (int i = 0; i < jobs.size(); i++) {
+                                JobPath get = jobs.get(i);
+                                jobarray[i] = new SelectItem(get.kes(), get.getName(), d.nameA);
+
+                            }
+
+                            sec.setSelectItems(jobarray);
+                            ds.add(sec);
+                        } else {
+                            SelectItemGroup sec = new SelectItemGroup(section.getName());
+                            SelectItem[] jobarray = new SelectItem[section.jobs.size()];
+
+                            for (int i = 0; i < section.jobs.size(); i++) {
+                                JobPath get = section.jobs.get(i);
+                                jobarray[i] = new SelectItem(get.kes(), get.getName(), d.nameA);
+
+                            }
+
+                            sec.setSelectItems(jobarray);
+                            ds.add(sec);
+                        }
+                    }
+                }
+
+            }
+        }
+        viewerJob = ds;
+        return ds;
+
+    }
+
+    public void addJobViewerToServise() {
+        System.out.println("Beans.EditServiceManager.addJobViewerToServise()"+allattachment.size());
+                System.out.println("Beans.EditServiceManager.addJobViewerToServise()"+newSelectAttachment.getId());
+
+        for (ServiceAttachmentName at : allattachment) {
+            if(newSelectAttachment.getId() == at.getId()){
+                Newattachment.add(at);
+            }
+        }
+        
+        
+        System.out.println("----------------");
+        haveServiceAttachment.setServiceAttachmentName_ID(newSelectAttachment.getId());
+        for (int i = 0; i < selectedAtts.length; i++) {
+
+            System.out.println("-- here job --" + selectedAtts[i]);
+            String[] split = selectedAtts[i].split("-");
+            JobPath j = new JobPath(Integer.parseInt(split[0]), Integer.parseInt(split[1]), Integer.parseInt(split[2]), "");
+            haveServiceAttachment.getJobs().add(j);
+
+        }
+                System.out.println("----------------"+ haveServiceAttachment.getJobs().size());
+
+        newService.getHaveServiceAttachments().add(haveServiceAttachment);
+        newSelectAttachment = new ServiceAttachmentName();
+
+    }
+
+    public List<SelectItem> getViewerJob() {
+        return viewerJob;
+    }
+
+    public void setViewerJob(List<SelectItem> viewerJob) {
+        this.viewerJob = viewerJob;
+    }
 }

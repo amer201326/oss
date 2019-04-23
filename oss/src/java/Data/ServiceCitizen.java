@@ -54,9 +54,9 @@ public class ServiceCitizen {
             data = new DB();
             String q = "start transaction;";
             data.write(q);
-            
+
             q = "INSERT INTO service_citizen (`Service_Citizen_ID`, `Services_Provided_ID`, `Cit_ID`, `Date`, `status`, `note`) VALUES ("
-                    + idMaxSC + ", " + Services_Provided_ID + ", " + Cit_ID + ", '"+LocalDate.now()+"', 'notdone' , '" + note + "');";
+                    + idMaxSC + ", " + Services_Provided_ID + ", " + Cit_ID + ", '" + LocalDate.now() + "', 'notdone' , '" + note + "');";
             System.out.println(q);
             data.write(q);
             System.out.println("  size _>" + attachment.size());
@@ -64,9 +64,9 @@ public class ServiceCitizen {
             for (ServiceAttachmentName a : attachment) {
                 AttachmentArchiveCitizen attachmentArchiveCitizen = new AttachmentArchiveCitizen(idMaxAAC, Cit_ID, a.id, a.file, a.nameFile, a.name, "no");
                 attachmentArchiveCitizen.addToDataBase();
-               
+
                 AttachmentServiceCitizen attachmentServiceCitizen = new AttachmentServiceCitizen(idMaxAAC, idMaxSC, Services_Provided_ID, Cit_ID);
-                 attachmentServiceCitizen.addToDataBase();
+                attachmentServiceCitizen.addToDataBase();
                 idMaxAAC++;
             }
 
@@ -75,9 +75,9 @@ public class ServiceCitizen {
             for (ServiceAttachmentName af : attwhithFile) {
                 AttachmentArchiveCitizen attachmentArchiveCitizen = new AttachmentArchiveCitizen(idMaxAAC, Cit_ID, af.id, af.file, af.nameFile, af.name, "yes");
                 attachmentArchiveCitizen.addToDataBase();
-                
+
                 AttachmentServiceCitizen attachmentServiceCitizen = new AttachmentServiceCitizen(idMaxAAC, idMaxSC, Services_Provided_ID, Cit_ID);
-                 attachmentServiceCitizen.addToDataBase();
+                attachmentServiceCitizen.addToDataBase();
                 idMaxAAC++;
 
             }
@@ -484,12 +484,31 @@ public class ServiceCitizen {
 
             for (DecisionsJob decisionsJob : minDecjob) {
                 System.out.println(decisionsJob);
-                Service_Job servicejob = new Service_Job(idMaxSC, Services_Provided_ID, Cit_ID, decisionsJob.job.DepId, decisionsJob.job.sectionID, decisionsJob.job.id, decisionsJob.job.dOrder, decisionsJob.job.sOrder, decisionsJob.job.order , "notdone");
+                Service_Job servicejob = new Service_Job(idMaxSC, Services_Provided_ID, Cit_ID, decisionsJob.job.DepId, decisionsJob.job.sectionID, decisionsJob.job.id, decisionsJob.job.dOrder, decisionsJob.job.sOrder, decisionsJob.job.order, "notdone");
 
                 servicejob.addToDataBase();
             }
 
         }
     }
+///////////////////////////////employee
 
+    public void ContineuInPath(Service_Job j,int Cit_ID, int Service_Citizen_ID) {
+
+        List<DecisionsDepartment> departments = GetFromDB.getDecisionsDepartment(Cit_ID, Service_Citizen_ID);
+        List<DecisionSection> sections = GetFromDB.getDecisionsSection(Cit_ID, Service_Citizen_ID);
+        List<DecisionsJob> jobs = GetFromDB.getDecisionsJob(Cit_ID, Service_Citizen_ID);
+
+        
+        List<Service_Job> service_Jobs = GetFromDB.getAllService_Jobs(j);
+        for (Service_Job sj : service_Jobs) {
+            if (sj.Order_Section == 0) {
+
+            } else {
+
+            }
+
+        }
+
+    }
 }

@@ -76,47 +76,6 @@
 
                                                         <div class="row">
                                                             <div class="col-lg-6" style="text-align: right; float: right;">
-                                                                <div class="card shadow mb-4" style="text-align: right;">
-
-                                                                    <div class="card-header py-3">
-                                                                        <h6 class="m-0 font-weight-bold text-primary">تتبع الخدمة الى </h6>
-                                                                    </div>
-                                                                    <div class="card-body">
-                                                                        <div class="form-group row">
-                                                                            <div class="col-sm-6">
-                                                                                <p:selectOneMenu id="dep_id" value="#{editServiceManager.newService.department.id}"
-                                                                                                 class="pading000" style="text-align:right; min-width: 223px;"   required="true" label="Dep ID">
-                                                                                    <f:selectItem itemLabel="الدائرة" noSelectionOption="true"/>
-
-                                                                                    <f:selectItems value="#{editServiceManager.departments}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}" />
-                                                                                    <p:ajax update="sec_id" process="@this" event="itemSelect" />
-                                                                                </p:selectOneMenu>
-                                                                            </div>
-
-                                                                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                                                                <h:outputLabel  for="dep_id" class="label" value="الدائرة"/>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group row">
-                                                                            <div class="col-sm-6 mb-3 mb-sm-0"> 
-                                                                                <p:selectOneMenu id="sec_id"  value="#{editServiceManager.newService.section.id}"
-                                                                                                 class="pading000" style="text-align:right; min-width: 223px;" required="true" label="Sec ID" >
-                                                                                    <f:selectItem itemLabel="القسم" noSelectionOption="true" />
-                                                                                    <f:selectItems value="#{editServiceManager.filterSectionsForSer()}" var="s" itemLabel="#{s.name}" itemValue="#{s.id}" />
-                                                                                </p:selectOneMenu>                                            
-                                                                            </div>
-                                                                            <div class="col-sm-6">
-                                                                                <h:outputLabel  for="sec_id" class="label" value="القسم"/>
-                                                                            </div>
-                                                                        </div>
-
-
-                                                                    </div>
-
-                                                                </div>
-
-                                                            </div>
-                                                            <div class="col-lg-6" style="text-align: right; float: right;">
                                                                 <div class="card shadow mb-">
                                                                     <div class="card-header py-3">
                                                                         <h6 class="m-0 font-weight-bold text-primary">معلومات الخدمة </h6>
@@ -170,6 +129,48 @@
                                                                 </div>
                                                             </div>
 
+                                                            <div class="col-lg-6" style="text-align: right; float: right;">
+                                                                <div class="card shadow mb-4" style="text-align: right;">
+
+                                                                    <div class="card-header py-3">
+                                                                        <h6 class="m-0 font-weight-bold text-primary">تتبع الخدمة الى </h6>
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <div class="form-group row">
+                                                                            <div class="col-sm-6">
+                                                                                <p:selectOneMenu id="dep_id" value="#{editServiceManager.newService.department.id}"
+                                                                                                 class="pading000" style="text-align:right; min-width: 223px;"   required="true" label="Dep ID">
+                                                                                    <f:selectItem itemLabel="الدائرة" noSelectionOption="true"/>
+
+                                                                                    <f:selectItems value="#{editServiceManager.departments}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}" />
+                                                                                    <p:ajax update="sec_id" process="@this" event="itemSelect" />
+                                                                                </p:selectOneMenu>
+                                                                            </div>
+
+                                                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                                                                <h:outputLabel  for="dep_id" class="label" value="الدائرة"/>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <div class="col-sm-6 mb-3 mb-sm-0"> 
+                                                                                <p:selectOneMenu id="sec_id"  value="#{editServiceManager.newService.section.id}"
+                                                                                                 class="pading000" style="text-align:right; min-width: 223px;" required="true" label="Sec ID" >
+                                                                                    <f:selectItem itemLabel="القسم" noSelectionOption="true" />
+                                                                                    <f:selectItems value="#{editServiceManager.filterSectionsForSer()}" var="s" itemLabel="#{s.name}" itemValue="#{s.id}" />
+                                                                                </p:selectOneMenu>                                            
+                                                                            </div>
+                                                                            <div class="col-sm-6">
+                                                                                <h:outputLabel  for="sec_id" class="label" value="القسم"/>
+                                                                            </div>
+                                                                        </div>
+
+
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </div>
+
 
                                                         </div>
                                                     </div>
@@ -210,7 +211,7 @@
                                             <div class="card shadow mb-4">
                                                 <div class="card-header py-3">
                                                     <div class="ui-grid-col-3 floatR">
-                                                        <h2 class="section-heading  inLineB" style="padding: 10px"><i class="fa fa-fw fa-chevron-left inLineB" ></i>المرفقات والملاحظات</h2>
+                                                        <h2 class="section-heading  inLineB" style="padding: 10px"><i class="fa fa-fw fa-chevron-left inLineB" ></i>  الملاحظات</h2>
 
                                                     </div>
 
@@ -221,69 +222,33 @@
 
                                                     <div class="text-center">
 
-                                                        <div class="row">
 
-                                                            <div class="col-lg-6" style="text-align: right; float: right;">
-                                                                <div class="card shadow mb-4" style="text-align: right;">
+                                                        <div >
+                                                            <div class="card shadow mb-4" style="text-align: right;">
 
-                                                                    <div class="card-header py-3">
-                                                                        <h6 class="m-0 font-weight-bold text-primary">ملاحظات</h6>
-                                                                    </div>
+                                                                <div class="card-header py-3">
+                                                                    <h6 class="m-0 font-weight-bold text-primary">ملاحظات</h6>
+                                                                </div>
 
 
-                                                                    <div class="card-body">
-                                                                        <div class="form-group row">
-                                                                            <div class="col-sm-12">
-                                                                                <p:inputTextarea id="note" value="#{editServiceManager.newService.note}" rows="6" cols="50" dir="rtl"/> 
-
-                                                                            </div>
-
+                                                                <div class="card-body">
+                                                                    <div class="form-group row">
+                                                                        <div class="col-sm-12">
+                                                                            <p:inputTextarea id="note" value="#{editServiceManager.newService.note}" rows="6" cols="50" dir="rtl" style="width: 100%;"/> 
 
                                                                         </div>
+
 
                                                                     </div>
 
                                                                 </div>
 
                                                             </div>
-
-
-
-
-                                                            <div class="col-lg-6" style="text-align: right; float: right;">
-                                                                <div class="card shadow mb-4" style="text-align: right;">
-
-                                                                    <div class="card-header py-3">
-                                                                        <h6 class="m-0 font-weight-bold text-primary">المرفقات</h6>
-                                                                    </div>
-
-
-                                                                    <div class="card-body">
-                                                                        <div class="form-group row">
-                                                                            <div class="col-sm-12">
-                                                                                <div style="display: flex; justify-content: center; min-width: 70px;"  class="col-sm-12" >
-                                                                                    <p:pickList id="pickList" value="#{editServiceManager.attachmentNamesAndResaults}" var="sna" 
-                                                                                                itemLabel="#{sna}" itemValue="#{sna}"  showSourceFilter="true" showTargetFilter="true"
-                                                                                                style="position: center;">
-                                                                                        <f:facet name="sourceCaption">كافة المرفقات</f:facet>
-                                                                                        <f:facet name="targetCaption">المرفقات المختارة</f:facet>
-                                                                                    </p:pickList>  
-                                                                                </div>
-
-                                                                            </div>
-
-
-                                                                        </div>
-
-                                                                    </div>
-
-                                                                </div>
-
-                                                            </div>
-
-
 
                                                         </div>
+
+
+
 
                                                     </div>
 
@@ -349,11 +314,13 @@
                                                                                 </p:selectOneMenu>
 
                                                                                 <h:outputLabel for="name1" value="الرقم:" /> 
-                                                                                <p:inputNumber id="name1" label="name" required="true" value="#{editServiceManager.departmentPaths.order}"/>
+                                                                                <p:inputNumber id="name1" label="name" required="true" value="#{editServiceManager.departmentPaths.order}" minValue="1" maxValue="100">
+                                                                                    <p:ajax update="name1" />  
+                                                                                </p:inputNumber> 
 
                                                                                 <p:spacer/>
-                                                                                <p:commandButton value="إضافة" actionListener="#{editServiceManager.addDepartmentToPath()}" update="DNewSection singleDT"
-                                                                                                 process="@this departments name1" oncomplete="PF('dlg').hide();"/>
+                                                                                <p:commandButton value="إضافة" actionListener="#{editServiceManager.addDepartmentToPath()}" update="DNewSection singleDT NewAttachment"
+                                                                                                 process="@this departments name1 " oncomplete="PF('dlg').hide();"/>
 
 
                                                                             </h:panelGrid>
@@ -452,10 +419,12 @@
 
 
                                                                                 <h:outputLabel for="name2" value="الرقم:" />
-                                                                                <p:inputNumber id="name2" required="true" label="name" value="#{editServiceManager.sectionPath_new.order}"/>
+                                                                                <p:inputNumber id="name2" required="true" label="name" value="#{editServiceManager.sectionPath_new.order}" minValue="1" maxValue="100">
+                                                                                    <p:ajax update="name2" />  
+                                                                                </p:inputNumber> 
 
                                                                                 <p:commandButton value="إضافة" actionListener="#{editServiceManager.addSectionToPath()}"
-                                                                                                 update="NewSection singleDT1 " process="@this sections name2"  oncomplete="PF('dlg2').hide();"/>
+                                                                                                 update="NewSection singleDT1 NewAttachment" process="@this sections name2"  oncomplete="PF('dlg2').hide();"/>
 
                                                                             </h:panelGrid>
                                                                         </p:dialog>  
@@ -566,16 +535,18 @@
 
                                                                                 <h:outputLabel for="jobs" value="وظيفة: " />
                                                                                 <p:selectOneMenu id="jobs" required="true" value="#{editServiceManager.jobPath.id}" 
-                                                                                                class="pading000" dynamic="true" style="min-width: 223px;">
+                                                                                                 class="pading000" dynamic="true" style="min-width: 223px;">
                                                                                     <f:selectItem noSelectionOption="true" itemLabel="اختار وظيفة" />
                                                                                     <f:selectItems value="#{editServiceManager.filterJop()}" var="j" itemLabel="#{j.name}" itemValue="#{j.idJob}"/>
                                                                                 </p:selectOneMenu>
 
                                                                                 <h:outputLabel for="name3" value="الرقم:" />
-                                                                                <p:inputNumber id="name3" required="true" label="name" value="#{editServiceManager.jobPath.order}"/>
+                                                                                <p:inputNumber id="name3" required="true" label="name" value="#{editServiceManager.jobPath.order}" minValue="1" maxValue="100">
+                                                                                    <p:ajax update="name3" />  
+                                                                                </p:inputNumber> 
 
                                                                                 <p:commandButton value="إضافة" actionListener="#{editServiceManager.addJobToPath()}"
-                                                                                                 update="newjob  singleDT2 " process="@this jobs name3" oncomplete="PF('dlg3').hide();"/>
+                                                                                                 update="newjob  singleDT2 NewAttachment" process="@this jobs name3" oncomplete="PF('dlg3').hide();"/>
 
                                                                             </h:panelGrid>
                                                                         </p:dialog>  
@@ -670,6 +641,179 @@
 
                                                         </div>
 
+
+
+
+                                                        <div id="conts">
+                                                            <div class="row">
+                                                                <div class="col-lg-12 text-center">
+
+                                                                    <!--NO ESCRIBIR ARRIBA-->
+
+
+                                                                    <div class="col-lg-12 mb-4">
+
+                                                                        <div class="card shadow mb-4">
+                                                                            <div class="card-header py-3">
+                                                                                <div class="ui-grid-col-3 floatR">
+                                                                                    <h2 class="section-heading  inLineB" style="padding: 10px"><i class="fa fa-fw fa-chevron-left inLineB" ></i> المرفقات</h2>
+
+                                                                                </div>
+
+                                                                                <br/>
+                                                                            </div>
+
+                                                                            <div class="card-body">
+
+                                                                                <div class="text-center">
+
+                                                                                    <div class="row">
+
+                                                                                        <div class="col-lg-12" style="text-align: right; float: right;">
+
+
+
+
+                                                                                            <div class="card-body">
+
+                                                                                                <div class="my-2 " ></div> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                <h:head id="msgs4"/>
+
+                                                                                                <div id="depTaq" />
+
+                                                                                                <p:dataTable id="singleAT" var="attachment" value="#{editServiceManager.newattachment}"
+                                                                                                             style="margin-bottom:20px" emptyMessage="لا يوجد مرفقات "  selectionMode="single" selection="#{editServiceManager.selectAttachment}"
+                                                                                                             rowKey="#{attachment.id}">
+
+                                                                                                    <f:facet name="header">
+
+                                                                                                    </f:facet>
+
+                                                                                                    <f:facet name="header" >
+                                                                                                        <div style="float: right;">
+                                                                                                            <p class="tableHeader">  المرفقات</p>
+                                                                                                            <!--AQUI ESTABA EL BUTTON-->
+                                                                                                        </div>
+                                                                                                        <div id="buttonDiv" style="display:flex; flex-direction: row; ">
+                                                                                                            <!--   <p:commandButton title="إضافة قسم" class="myButton" onclick="PF('dlg').show();" type="button"/>&nbsp;-->
+
+                                                                                                            <a onclick="PF('dlga').show();" class="btn btn-danger btn-circle marginBuDel">
+                                                                                                                <i class="fas fa-trash"></i>
+                                                                                                            </a>
+                                                                                                            &nbsp;
+                                                                                                            <a onclick="PF('dlgA').show();" class="btn btn-success btn-circle marginBuAdd">
+                                                                                                                <i class="fas fa-plus"></i>
+                                                                                                            </a>
+
+                                                                                                        </div>
+                                                                                                    </f:facet>
+
+                                                                                                    <p:ajax event="rowSelect" listener="#{editServiceManager.onRowSelectFromAtt}"
+                                                                                                            process="@this" />
+                                                                                                    <p:ajax event="rowUnselect" listener="#{editServiceManager.onRowUnselectFromAtt}"
+                                                                                                            process="@this" />
+
+
+                                                                                                    <p:column headerText="اسم المرفق ">
+
+                                                                                                        <h:outputText value="#{attachment.name}" />
+
+
+                                                                                                    </p:column>
+
+
+                                                                                                </p:dataTable>
+
+                                                                                                <p:dialog id="Aeldepartment" resizable="false" header="حذف المرفق" widgetVar="dlga" dir="rtl">
+
+                                                                                                    <h:panelGrid columns="2" cellpadding="5">
+
+                                                                                                        <h:outputLabel for="delete" value="هل انت متأكد من الحذف؟ " />
+                                                                                                        <br/> <br/>
+                                                                                                        <p:commandButton id="delete4"  value="حذف"
+                                                                                                                         actionListener="#{editServiceManager.deleteSelectedAtt()}"
+                                                                                                                         process="@this"  oncomplete="PF('dlga').hide();"/>
+                                                                                                    </h:panelGrid>
+                                                                                                </p:dialog>  
+
+
+
+                                                                                                <p:dialog id="NewAttachment" resizable="false" header="إضافة مرفق" widgetVar="dlgA" dir="rtl">
+
+                                                                                                    <h:panelGrid columns="2" cellpadding="5">
+
+                                                                                                        <h:outputLabel for="attachments" value="المرفق:" />                                                                             
+                                                                                                        <p:selectOneMenu id="attachments" value="#{editServiceManager.newSelectAttachment.id }"  class="pading000"
+                                                                                                                         required="true" dynamic="true"  style="width:200px; height:100%; min-width: 223px;">
+                                                                                                            <f:selectItem noSelectionOption="true" itemLabel="اختار مرفق"/>
+                                                                                                            <f:selectItems value="#{editServiceManager.allattachment}" var="a" itemLabel="#{a.name}" itemValue="#{a.id}"/>
+                                                                                                        </p:selectOneMenu>
+
+                                                                                                        <h:outputLabel for="desction" value="ارفاق المرفق " /> 
+                                                                                                        <p:selectOneRadio id="important" value="#{editServiceManager.departmentPaths.importantComment}"  required="true">
+                                                                                                            <f:selectItem   itemLabel="ضروري " itemValue="yes" />
+                                                                                                            <f:selectItem  itemLabel="غير ضروري" itemValue="no" />
+                                                                                                        </p:selectOneRadio>
+
+
+                                                                                                        <h:outputLabel for="attachments2" value="المسمى الوظيفي الذي يسمح له برؤية المرفق:" /> 
+
+                                                                                                        <p:selectCheckboxMenu id="attachments2" value="#{editServiceManager.selectedAtts}" label="Cars" multiple="true"
+                                                                                                                              filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
+                                                                                                            <f:selectItems value="#{editServiceManager.jobShowThisService()}" var="jop" />
+                                                                                                        </p:selectCheckboxMenu>
+
+                                                                                                        <p:spacer/>
+                                                                                                        <p:commandButton id="addAtt"  value="اضافة"
+                                                                                                                         actionListener="#{editServiceManager.addJobViewerToServise()}"
+                                                                                                                         process="@this attachments important attachments2 " update="singleAT" oncomplete="PF('dlgA').hide();"/>
+
+                                                                                                    </h:panelGrid>
+                                                                                                </p:dialog>  
+
+
+                                                                                            </div>
+
+
+
+
+
+                                                                                        </div>
+
+                                                                                    </div>
+
+
+                                                                                </div>
+
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+
+
+                                                                <!--NO ESCRIBIR DESPUES DE AQUI-->
+                                                            </div>
+                                                        </div>
+
+
+
+
+
                                                         <div class="row">
                                                             <div class="col-lg-12 text-center">
                                                                 <h:outputLink id="openDialogLink" value="javascript:void(0)" onclick="PF('dlgAddSer').show();">
@@ -691,7 +835,7 @@
 
                                                                         <p:commandButton actionListener="#{editServiceManager.editService()}" value="تعديل الخدمة" 
                                                                                          id="add_service" oncomplete="PF('dlgAddSer').hide();" 
-                                                                                         process="@this pickList note ServiceName DaysService Cost states dep_id sec_id"  
+                                                                                         process="@this  note ServiceName DaysService Cost states dep_id sec_id"  
                                                                                          update="@form"  style="margin-right:20px;" styleClass="ui-priority-primary"/>
 
                                                                     </h:panelGrid>
@@ -716,6 +860,10 @@
                                     <!--NO ESCRIBIR DESPUES DE AQUI-->
                                 </div>
                             </div>
+
+
+
+
 
                         </h:form>
 

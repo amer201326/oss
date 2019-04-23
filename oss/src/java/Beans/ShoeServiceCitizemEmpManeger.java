@@ -9,12 +9,17 @@ package Beans;
  *
  * @author Amer
  */
+import DB.DB;
 import Data.GetFromDB;
 import Data.ServiceAttachmentName;
 import Data.ServiceCitizen_1;
+import Data.Service_Job;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -34,6 +39,7 @@ public class ShoeServiceCitizemEmpManeger {
     @PostConstruct
     public void init() {
         serviseCitizen = session.serviceCitizen;
+
         if (serviseCitizen != null) {
             haveService = true;
             filterFormOrNot();
@@ -53,7 +59,7 @@ public class ShoeServiceCitizemEmpManeger {
                 att.add(serviceAttachmentName);
             }
         }
-        
+
         serviseCitizen.att = att;
         serviseCitizen.attform = attform;
     }
@@ -82,8 +88,25 @@ public class ShoeServiceCitizemEmpManeger {
         this.haveService = haveService;
     }
 
-    public void submit() {
-        
+    public void submit() throws SQLException {
+        Service_Job sj = serviseCitizen.getService_Job();
+        DB db;
+        try {
+            db = new DB();
+            if (sj.getOrder_Job() != 0) {
+
+                serviseCitizen.getService_Job().updateDataBase();
+                String q = "UPDATE service_jobs SET status = 'done' WHERE (`Dep_ID` = " + sj.getDep_ID() + ") and (`Cit_ID` = " + sj.getCit_ID() + ") and (`Sec_ID` = " + sj.getSec_ID() + ") and (`Job_ID` = " + sj.getJob_ID() + ") and (`Order_Departmant` = " + sj.getOrder_Departmant() + ") and (`Order_Section` = " + sj.getOrder_Section() + ") and (`Order_Job` = " + sj.getOrder_Job() + ") and (`Services_Provided_ID` = " + sj.getServices_Provided_ID() + ") and (`Service_Citizen_ID` = " + sj.getService_Citizen_ID() + ");";
+                db.write(q);
+            } else {
+                String q = "UPDATE service_jobs SET status = 'done' WHERE (`Dep_ID` = " + sj.getDep_ID() + ") and (`Cit_ID` = " + sj.getCit_ID() + ") and (`Sec_ID` = " + sj.getSec_ID() + ") and (`Job_ID` = " + sj.getJob_ID() + ") and (`Order_Departmant` = " + sj.getOrder_Departmant() + ") and (`Order_Section` = " + sj.getOrder_Section() + ") and (`Order_Job` = " + sj.getOrder_Job() + ") and (`Sec_ID` = " + sj.getSec_ID() + ") and (`Order_Departmant` = " + sj.getOrder_Departmant() + ") and (`Order_Section` = " + sj.getOrder_Section() + ") and (`Services_Provided_ID` = " + sj.getServices_Provided_ID() + ") and (`Service_Citizen_ID` = " + sj.getService_Citizen_ID() + ");";
+                db.write(q);
+            }
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ShoeServiceCitizemEmpManeger.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
 }

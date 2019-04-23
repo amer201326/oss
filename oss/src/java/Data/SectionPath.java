@@ -130,18 +130,14 @@ public class SectionPath implements Serializable {
         return "SectionPath{" + "departmentId=" + departmentId + ", id=" + id + ", name=" + name + ", order=" + order + ", jobs=" + jobs + '}';
     }
 
-    public boolean addToDataBase(int idService) {
-        try {
+    public boolean addToDataBase(int idService) throws SQLException, ClassNotFoundException {
+   
             DB d = new DB();
             String q = "INSERT INTO steps_section VALUES ("+departmentId+","+id+","+idService+","+orderDepartment+","+order+");";
             System.out.println(q);
             d.write(q);
             
-        } catch (SQLException ex) {
-            Logger.getLogger(DepartmentPaths.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DepartmentPaths.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
        
         return false;
     }

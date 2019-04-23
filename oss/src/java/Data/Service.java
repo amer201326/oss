@@ -4,6 +4,7 @@ import DB.DB;
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,10 +33,12 @@ public class Service implements Serializable {
 
     List<DepartmentPaths> path;
     List<ServiceAttachmentName> attachmentNames;
+    List<HaveServiceAttachment> haveServiceAttachments;
 
     public Service() {
         this.department = new Department();
         this.section = new Section();
+        haveServiceAttachments = new ArrayList<HaveServiceAttachment>();
     }
 
     public Service(int id, String name, double cost, int days, String status, Department department, Section section, String note) {
@@ -47,6 +50,8 @@ public class Service implements Serializable {
         this.department = department;
         this.section = section;
         this.note = note;
+        haveServiceAttachments = new ArrayList<HaveServiceAttachment>();
+
     }
 
     public Service(int id, String name, double cost, int days, String status, String note) {
@@ -56,9 +61,9 @@ public class Service implements Serializable {
         this.days = days;
         this.status = status;
         this.note = note;
-    }
+        haveServiceAttachments = new ArrayList<HaveServiceAttachment>();
 
-    
+    }
 
     public int getId() {
         return id;
@@ -124,6 +129,14 @@ public class Service implements Serializable {
         this.section = section;
     }
 
+    public List<HaveServiceAttachment> getHaveServiceAttachments() {
+        return haveServiceAttachments;
+    }
+
+    public void setHaveServiceAttachments(List<HaveServiceAttachment> haveServiceAttachments) {
+        this.haveServiceAttachments = haveServiceAttachments;
+    }
+
     public void update() {
         try {
             DB data = new DB();
@@ -136,10 +149,20 @@ public class Service implements Serializable {
             q = "DELETE FROM have_serviceattachment WHERE Services_Provided_ID = " + id + ";";
             System.out.println(q);
             data.write(q);
+
             q = "DELETE FROM steps_job WHERE Services_Provided_ID =  " + id + ";";
             System.out.println(q);
             data.write(q);
-             for (DepartmentPaths departmentPaths : path) {
+
+             q = "DELETE FROM steps_section WHERE Services_Provided_ID =  " + id + ";";
+            System.out.println(q);
+            data.write(q);
+            q = "DELETE FROM steps_department WHERE Services_Provided_ID =  " + id + ";";
+            System.out.println(q);
+            data.write(q);
+           
+
+            for (DepartmentPaths departmentPaths : path) {
                 departmentPaths.addToDataBase(id);
                 for (SectionPath section1 : departmentPaths.sections) {
                     section1.addToDataBase(id);
@@ -149,13 +172,27 @@ public class Service implements Serializable {
                 }
             }
 
-            for (int i = 0; i < attachmentNames.size(); i++) {
-                ServiceAttachmentName get = attachmentNames.get(i);
-                q = "INSERT INTO have_serviceattachment VALUES (" + id + ", " + get.id + ");";
-                data.write(q);
-                System.out.println(q);
+
+//            for (int i = 0; i < attachmentNames.size(); i++) {
+//                ServiceAttachmentName get = attachmentNames.get(i);
+//                q = "INSERT INTO have_serviceattachment VALUES (" + id + ", " + get.id + ");";
+//                data.write(q);
+//                System.out.println(q);
+//            }
+
+            System.out.println("before att");
+            q = "DELETE FROM viewer_attachment WHERE Services_Provided_ID =  " + id + ";";
+            System.out.println(q);
+            data.write(q);
+
+            for (HaveServiceAttachment have : haveServiceAttachments) {
+                have.setServices_Provided_ID(id);
+                have.addToDB();
             }
-            q = "commit;";
+
+            //q = "commit;";
+            q = "rollback;";
+            System.out.println(q);
             data.write(q);
 
         } catch (SQLException | ClassNotFoundException ex) {
@@ -177,7 +214,7 @@ public class Service implements Serializable {
     public void addServiceToDB() {
         int idMax = GetFromDB.getMaxIdService();
         this.id = idMax + 1;
-
+        System.out.println(idMax);
         try {
             DB data = new DB();
             String q = "start transaction;";
@@ -185,8 +222,9 @@ public class Service implements Serializable {
 
             System.out.println(q);
             q = "INSERT INTO services_provided VALUES ('" + id + "','" + name + "','" + cost + "','" + days + "','" + status + "','" + department.id + "','" + section.id + "','" + note + "');";
-            data.write(q);
             System.out.println(q);
+            data.write(q);
+
             for (DepartmentPaths departmentPaths : path) {
                 departmentPaths.addToDataBase(id);
                 for (SectionPath section1 : departmentPaths.sections) {
@@ -196,15 +234,21 @@ public class Service implements Serializable {
                     }
                 }
             }
-            
 
-            for (int i = 0; i < attachmentNames.size(); i++) {
-                ServiceAttachmentName get = attachmentNames.get(i);
-                q = "INSERT INTO have_serviceattachment VALUES (" + id + ", " + get.id + ");";
-                data.write(q);
-                System.out.println(q);
+//            for (int i = 0; i < attachmentNames.size(); i++) {
+//                ServiceAttachmentName get = attachmentNames.get(i);
+//                q = "INSERT INTO have_serviceattachment VALUES (" + id + ", " + get.id + ");";
+//                data.write(q);
+//                System.out.println(q);
+//            }
+            for (HaveServiceAttachment have : haveServiceAttachments) {
+                have.setServices_Provided_ID(id);
+                have.addToDB();
             }
-            q = "commit;";
+
+            //q = "commit;";
+            q = "rollback;";
+            System.out.println(q + "end");
             data.write(q);
 
         } catch (SQLException | ClassNotFoundException ex) {

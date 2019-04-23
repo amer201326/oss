@@ -133,6 +133,30 @@ public class Service_Job {
 
     }
 
+    public void deleteFromDataBase() throws SQLException, ClassNotFoundException {
+
+        DB d = new DB();
+        String q="DELETE FROM service_jobs WHERE (`Dep_ID` = " + Dep_ID + ") and (`Cit_ID` = " + Cit_ID + ") and (`Sec_ID` = " + Sec_ID + ") and (`Job_ID` = " + Job_ID + ") and (`Order_Departmant` = " + Order_Departmant + ") and (`Order_Section` = " + Order_Section + ") and (`Order_Job` = " + Order_Job + ") and (`Services_Provided_ID` = " +Services_Provided_ID  + ") and (`Service_Citizen_ID` = " + Service_Citizen_ID + ")";
+
+        System.out.println("servic job "+q);
+        
+        d.write(q);
+
+    }
+    public void updateDataBase()  {
+
+        try {
+            DB d = new DB();
+            String q="UPDATE service_jobs SET status = 'done' WHERE (`Dep_ID` = "+Dep_ID+") and (`Cit_ID` = "+Cit_ID+") and (`Sec_ID` = "+Sec_ID+") and (`Job_ID` = "+Job_ID+") and (`Order_Departmant` = "+Order_Departmant+") and (`Order_Section` = "+Order_Section+") and (`Order_Job` = "+Order_Job+") and (`Services_Provided_ID` = "+Services_Provided_ID+") and (`Service_Citizen_ID` = "+Service_Citizen_ID+");";
+            System.out.println(q);
+            
+            d.write(q);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(Service_Job.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
     public String getStatus() {
         return status;
     }
