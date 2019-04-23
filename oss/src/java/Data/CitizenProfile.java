@@ -48,7 +48,10 @@ public class CitizenProfile implements Serializable {
     
     
 
-    public CitizenProfile(int id, String FirstName, String FatherName, String GrandFatherName, String LastName, String Gender, int familyMember, String idCard, String telephone, String mobile, String email, String fax, String birthday, String placeOfBirth, String region, String quarter, String street, String address, String citizenJob, String passportNumber, String passportType) {
+    public CitizenProfile(int id, String FirstName, String FatherName, String GrandFatherName, String LastName, 
+            String Gender, int familyMember, String idCard, String telephone, String mobile, String email, 
+            String fax, String birthday, String placeOfBirth, String region, String quarter, String street,
+            String address, String citizenJob, String passportNumber, String passportType) {
         this.id = id;
         this.FirstName = FirstName;
         this.FatherName = FatherName;
