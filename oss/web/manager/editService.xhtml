@@ -694,9 +694,9 @@
 
                                                                                                 <div id="depTaq" />
 
-                                                                                                <p:dataTable id="singleAT" var="attachment" value="#{editServiceManager.newattachment}"
-                                                                                                             style="margin-bottom:20px" emptyMessage="لا يوجد مرفقات "  selectionMode="single" selection="#{editServiceManager.selectAttachment}"
-                                                                                                             rowKey="#{attachment.id}">
+                                                                                                <p:dataTable id="singleAT" var="havAtt" value="#{editServiceManager.newService.haveServiceAttachments}"
+                                                                                                             style="margin-bottom:20px" emptyMessage="لا يوجد مرفقات "  selectionMode="single" selection="#{editServiceManager.selectHavServAttachment}"
+                                                                                                             rowKey="#{havAtt.serviceAttachmentName_ID}-#{havAtt.services_Provided_ID}">
 
                                                                                                     <f:facet name="header">
 
@@ -708,8 +708,7 @@
                                                                                                             <!--AQUI ESTABA EL BUTTON-->
                                                                                                         </div>
                                                                                                         <div id="buttonDiv" style="display:flex; flex-direction: row; ">
-                                                                                                            <!--   <p:commandButton title="إضافة قسم" class="myButton" onclick="PF('dlg').show();" type="button"/>&nbsp;-->
-
+                                                                                                            
                                                                                                             <a onclick="PF('dlga').show();" class="btn btn-danger btn-circle marginBuDel">
                                                                                                                 <i class="fas fa-trash"></i>
                                                                                                             </a>
@@ -729,7 +728,13 @@
 
                                                                                                     <p:column headerText="اسم المرفق ">
 
-                                                                                                        <h:outputText value="#{attachment.name}" />
+                                                                                                        <h:outputText value="#{havAtt.name}" />
+
+
+                                                                                                    </p:column>
+                                                                                                    <p:column headerText="الارفاق">
+
+                                                                                                        <h:outputText value="#{havAtt.importantASString()}" />
 
 
                                                                                                     </p:column>
@@ -745,7 +750,7 @@
                                                                                                         <br/> <br/>
                                                                                                         <p:commandButton id="delete4"  value="حذف"
                                                                                                                          actionListener="#{editServiceManager.deleteSelectedAtt()}"
-                                                                                                                         process="@this"  oncomplete="PF('dlga').hide();"/>
+                                                                                                                         process="@this"  update="singleAT" oncomplete="PF('dlga').hide();"/>
                                                                                                     </h:panelGrid>
                                                                                                 </p:dialog>  
 
@@ -756,14 +761,14 @@
                                                                                                     <h:panelGrid columns="2" cellpadding="5">
 
                                                                                                         <h:outputLabel for="attachments" value="المرفق:" />                                                                             
-                                                                                                        <p:selectOneMenu id="attachments" value="#{editServiceManager.newSelectAttachment.id }"  class="pading000"
+                                                                                                        <p:selectOneMenu id="attachments" value="#{editServiceManager.newSelectAttachment.serviceAttachmentName_ID}"  class="pading000"
                                                                                                                          required="true" dynamic="true"  style="width:200px; height:100%; min-width: 223px;">
                                                                                                             <f:selectItem noSelectionOption="true" itemLabel="اختار مرفق"/>
                                                                                                             <f:selectItems value="#{editServiceManager.allattachment}" var="a" itemLabel="#{a.name}" itemValue="#{a.id}"/>
                                                                                                         </p:selectOneMenu>
 
-                                                                                                        <h:outputLabel for="desction" value="ارفاق المرفق " /> 
-                                                                                                        <p:selectOneRadio id="important" value="#{editServiceManager.departmentPaths.importantComment}"  required="true">
+                                                                                                        <h:outputLabel for="important" value="ارفاق المرفق " /> 
+                                                                                                        <p:selectOneRadio id="important" value="#{editServiceManager.newSelectAttachment.important}"  required="true">
                                                                                                             <f:selectItem   itemLabel="ضروري " itemValue="yes" />
                                                                                                             <f:selectItem  itemLabel="غير ضروري" itemValue="no" />
                                                                                                         </p:selectOneRadio>

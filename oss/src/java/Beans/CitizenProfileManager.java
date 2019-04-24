@@ -5,6 +5,7 @@
  */
 package Beans;
 
+import Data.Citizen;
 import Data.CitizenProfile;
 import Data.GetDB_Eman;
 import java.io.Serializable;
@@ -23,7 +24,7 @@ import javax.faces.context.FacesContext;
 @ViewScoped
 public class CitizenProfileManager implements Serializable {
 
-    CitizenProfile updateProfile;
+    Citizen updateProfile;
 
     @ManagedProperty(value = "#{msession}")
     Session session;
@@ -31,31 +32,43 @@ public class CitizenProfileManager implements Serializable {
 
     public CitizenProfileManager() {
        
-
-            updateProfile = new CitizenProfile(session.citizen.getId(), session.citizen.getFirstName(), session.citizen.getFatherName(),
-                    session.citizen.getGrandFatherName(), session.citizen.getLastName(), session.citizen.getGender(), session.citizen.getFamilyMember(),
-                    session.citizen.getIdCard(), session.citizen.getTelephone(), session.citizen.getMobile(), session.citizen.getEmail(),
-                    session.citizen.getFax(), session.citizen.getBirthday(), session.citizen.getPlaceOfBirth(), session.citizen.getRegion(),
-                    session.citizen.getQuarter(), session.citizen.getStreet(), session.citizen.getAddress(), session.citizen.getCitizenJob(),
-                    session.citizen.getPassportNumber(), session.citizen.getPassportType());
-
-         //   updateProfile = GetDB_Eman.GetCitizenProfileById();
         
+
+      
+        
+    }
+      @PostConstruct
+    public void init() {
+        if(session.citizen!=null){
+            updateProfile = session.citizen;
+            updateProfile.getAccount().setPassword("");
+        }
+            
     }
 
     public void updateCitizen() {
 
-        updateProfile.updateCitizenProfile();
+        updateProfile.updateCitizen();
 
     }
 
-    public CitizenProfile getUpdateProfile() {
+    public Citizen getUpdateProfile() {
         return updateProfile;
     }
 
-    public void setUpdateProfile(CitizenProfile updateProfile) {
+    public void setUpdateProfile(Citizen updateProfile) {
         this.updateProfile = updateProfile;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+   
 
     public Session getSession() {
         return session;

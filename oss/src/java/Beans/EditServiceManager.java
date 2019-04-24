@@ -64,84 +64,49 @@ public class EditServiceManager implements Serializable {
     List<JobOfSection> filterJobsOfSections;
 
     //DualListModel<String> attachmentNamesAndResaults;
-
     HaveServiceAttachment haveServiceAttachment;
+    HaveServiceAttachment selectHavServAttachment;
     List<ServiceAttachmentName> Newattachment = new ArrayList<ServiceAttachmentName>();
     List<ServiceAttachmentName> allattachment;
-    
-     List<JobPath> stringToJop;
+
+    List<JobPath> stringToJop;
     ServiceAttachmentName selectAttachment;
-    ServiceAttachmentName newSelectAttachment;
+    HaveServiceAttachment newSelectAttachment;
 
     List<SelectItem> viewerJob;
     private String[] selectedAtts;
-    
+
     public EditServiceManager() {
         Map<String, String> parameterMap = (Map<String, String>) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         String id = parameterMap.get("id");
         System.out.println(id);
-        attachmentNames = GetFromDB.getServiceAttachmentName();
-//        List<Integer> attachmentIds = GetFromDB.getAttavhmentForserviceById(id);
-//        attachmentNamesAndResaults = new DualListModel<>();
-//
-//        for (int i = 0; i < attachmentNames.size(); i++) {
-//            ServiceAttachmentName get = attachmentNames.get(i);
-//
-//            boolean b = false;
-//            for (int j = 0; j < attachmentIds.size(); j++) {
-//                Integer idat = attachmentIds.get(j);
-//                if (get.getId() == idat) {
-//
-//                    attachmentNamesAndResaults.getTarget().add(get.getName());
-//                    b = true;
-//                }
-//
-//            }
-//            if (!b) {
-//                attachmentNamesAndResaults.getSource().add(get.getName());
-//            }
-//        }
 
         departments = GetFromDB.getDepartments();
         sections = GetFromDB.getSection();
         jobsOfSections = GetFromDB.getJobOfSectio();
         sectionPath_new = new SectionPath();
         selectSectionPath = new SectionPath();
-        newService = GetFromDB.getServiceByID(id);
+        selectedJobPath = new JobPath();
+
+        newSelectAttachment = new HaveServiceAttachment();
+        haveServiceAttachment = new HaveServiceAttachment();
+        selectHavServAttachment = new HaveServiceAttachment();
         selectDepartmentPath = new DepartmentPaths();
         departmentPaths = new DepartmentPaths();
         jobPath = new JobPath();
         selectedJobPath = new JobPath();
+
         
+        allattachment = GetFromDB.getServiceAttachmentNamewhithoutfile();
+        newService = GetFromDB.getServiceByID(id);
+        if (newService != null) {
+            newService.setHaveServiceAttachments(GetFromDB.getHaveAttNameForServ(newService.getId()));
+        }
         departmentsInPath = getPathASDep();
-        allattachment = GetFromDB.getServiceAttachmentName();
-
-
-        
-     
-        selectedJobPath = new JobPath();
-        
-          newSelectAttachment = new ServiceAttachmentName();
-        haveServiceAttachment = new HaveServiceAttachment();
         stringToJop = new ArrayList<>();
         viewerJob = new ArrayList<SelectItem>();
-        
-        
-              //  Newattachment = GetFromDB.getAttavhmentByserviceById(Integer.parseInt(id));
-       
+
         Newattachment = new ArrayList<ServiceAttachmentName>();
-        
-        List<ViewerAttachment> ald =  GetFromDB.getAttatchmentByserviceById(Integer.parseInt(id));
-        for (ViewerAttachment vald : ald) {
-            Newattachment.add(new ServiceAttachmentName(vald.getServiceAttachmentName_ID(), vald.getNameAtt()));
-            
-            haveServiceAttachment.setServiceAttachmentName_ID(vald.getServiceAttachmentName_ID());
-            JobPath j = new JobPath(vald.getDep_ID(), vald.getSec_ID(), vald.getJob_ID(), vald.getNameAtt());
-            haveServiceAttachment.getJobs().add(j);
-            
-        }
-        newService.getHaveServiceAttachments().add(haveServiceAttachment);
-       
 
     }
 
@@ -257,7 +222,6 @@ public class EditServiceManager implements Serializable {
 //            }
 //        }
 //        newService.setAttachmentNames(l);
-
         newService.setPath(departmentsInPath);
 
         newService.update();
@@ -473,6 +437,14 @@ public class EditServiceManager implements Serializable {
         this.departmentsInPath = departmentsInPath;
     }
 
+    public HaveServiceAttachment getSelectHavServAttachment() {
+        return selectHavServAttachment;
+    }
+
+    public void setSelectHavServAttachment(HaveServiceAttachment selectHavServAttachment) {
+        this.selectHavServAttachment = selectHavServAttachment;
+    }
+
     public DepartmentPaths getSelectDepartmentPath() {
         return selectDepartmentPath;
     }
@@ -528,18 +500,13 @@ public class EditServiceManager implements Serializable {
 //    public void setAttachmentNamesAndResaults(DualListModel<String> attachmentNamesAndResaults) {
 //        this.attachmentNamesAndResaults = attachmentNamesAndResaults;
 //    }
-
     private List<DepartmentPaths> getPathASDep() {
         List<DepartmentPaths> debp = GetFromDB.getDepartmentsPath(newService.getId());
         List<SectionPath> secp = GetFromDB.getSectionPath(newService.getId());
         List<JobPath> jobp = GetFromDB.getPahtForService(newService.getId());
         for (DepartmentPaths departmentPaths1 : debp) {
             for (SectionPath sectionPath : secp) {
-                System.out.println("-----------------");
-                System.out.println(sectionPath.toString());
-                System.out.println(departmentPaths1.toString());
-                System.out.println(sectionPath.getDepartmentId() + "  " + departmentPaths1.id + "  " + sectionPath.getOrderDepartment() + "  " + departmentPaths1.order);
-                System.out.println("-----------------");
+
                 if (sectionPath.getDepartmentId() == departmentPaths1.id && sectionPath.getOrderDepartment() == departmentPaths1.order) {
                     departmentPaths1.sections.add(sectionPath);
                     System.out.println("name of sec = " + sectionPath.getName());
@@ -587,24 +554,23 @@ public class EditServiceManager implements Serializable {
     }
 
     public void onRowSelectFromAtt(SelectEvent event) {
-        
+        selectHavServAttachment = (HaveServiceAttachment)event.getObject();
     }
-    
-    public void onRowUnselectFromAtt(UnselectEvent event) {
-        
-    }
-    public void deleteSelectedAtt() {
-        System.out.println("delete Att");
-        System.out.println(selectAttachment);
-        Newattachment.remove(selectAttachment);
-        
-        haveServiceAttachment.setServiceAttachmentName_ID(selectAttachment.getId());
-        newService.getHaveServiceAttachments().remove(haveServiceAttachment);
-        
-        selectAttachment = new ServiceAttachmentName();
-    }
-    
 
+    public void onRowUnselectFromAtt(UnselectEvent event) {
+
+    }
+
+    public void deleteSelectedAtt() {
+        
+        
+        System.out.println("delete Att");
+        System.out.println(selectHavServAttachment);
+        
+        newService.getHaveServiceAttachments().remove(selectHavServAttachment);
+
+        
+    }
 
     public HaveServiceAttachment getHaveServiceAttachment() {
         return haveServiceAttachment;
@@ -646,13 +612,15 @@ public class EditServiceManager implements Serializable {
         this.selectAttachment = selectAttachment;
     }
 
-    public ServiceAttachmentName getNewSelectAttachment() {
+    public HaveServiceAttachment getNewSelectAttachment() {
         return newSelectAttachment;
     }
 
-    public void setNewSelectAttachment(ServiceAttachmentName newSelectAttachment) {
+    public void setNewSelectAttachment(HaveServiceAttachment newSelectAttachment) {
         this.newSelectAttachment = newSelectAttachment;
     }
+
+    
 
     public String[] getSelectedAtts() {
         return selectedAtts;
@@ -662,9 +630,7 @@ public class EditServiceManager implements Serializable {
         this.selectedAtts = selectedAtts;
     }
 
-   
-
-       public List<SelectItem> jobShowThisService() {
+    public List<SelectItem> jobShowThisService() {
 //
 //        List<JobPath> job = new ArrayList<JobPath>();
         List<SelectItem> ds = new ArrayList<SelectItem>();
@@ -743,30 +709,24 @@ public class EditServiceManager implements Serializable {
     }
 
     public void addJobViewerToServise() {
-        System.out.println("Beans.EditServiceManager.addJobViewerToServise()"+allattachment.size());
-                System.out.println("Beans.EditServiceManager.addJobViewerToServise()"+newSelectAttachment.getId());
-
-        for (ServiceAttachmentName at : allattachment) {
-            if(newSelectAttachment.getId() == at.getId()){
-                Newattachment.add(at);
-            }
-        }
-        
-        
-        System.out.println("----------------");
-        haveServiceAttachment.setServiceAttachmentName_ID(newSelectAttachment.getId());
+       
+                
         for (int i = 0; i < selectedAtts.length; i++) {
 
             System.out.println("-- here job --" + selectedAtts[i]);
             String[] split = selectedAtts[i].split("-");
             JobPath j = new JobPath(Integer.parseInt(split[0]), Integer.parseInt(split[1]), Integer.parseInt(split[2]), "");
-            haveServiceAttachment.getJobs().add(j);
+            newSelectAttachment.getJobs().add(j);
 
         }
-                System.out.println("----------------"+ haveServiceAttachment.getJobs().size());
-
-        newService.getHaveServiceAttachments().add(haveServiceAttachment);
-        newSelectAttachment = new ServiceAttachmentName();
+        for (ServiceAttachmentName nn : allattachment) {
+            if(nn.getId() == newSelectAttachment.getServiceAttachmentName_ID()){
+                newSelectAttachment.setName(nn.getName());
+                break;
+            }
+        }
+        newService.getHaveServiceAttachments().add(newSelectAttachment);
+        newSelectAttachment = new HaveServiceAttachment();
 
     }
 
@@ -777,4 +737,5 @@ public class EditServiceManager implements Serializable {
     public void setViewerJob(List<SelectItem> viewerJob) {
         this.viewerJob = viewerJob;
     }
+
 }

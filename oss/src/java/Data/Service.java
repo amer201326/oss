@@ -32,7 +32,7 @@ public class Service implements Serializable {
     String note;
 
     List<DepartmentPaths> path;
-    List<ServiceAttachmentName> attachmentNames;
+    
     List<HaveServiceAttachment> haveServiceAttachments;
 
     public Service() {
@@ -173,12 +173,7 @@ public class Service implements Serializable {
             }
 
 
-//            for (int i = 0; i < attachmentNames.size(); i++) {
-//                ServiceAttachmentName get = attachmentNames.get(i);
-//                q = "INSERT INTO have_serviceattachment VALUES (" + id + ", " + get.id + ");";
-//                data.write(q);
-//                System.out.println(q);
-//            }
+
 
             System.out.println("before att");
             q = "DELETE FROM viewer_attachment WHERE Services_Provided_ID =  " + id + ";";
@@ -190,8 +185,8 @@ public class Service implements Serializable {
                 have.addToDB();
             }
 
-            //q = "commit;";
-            q = "rollback;";
+            q = "commit;";
+            //q = "rollback;";
             System.out.println(q);
             data.write(q);
 
@@ -235,19 +230,14 @@ public class Service implements Serializable {
                 }
             }
 
-//            for (int i = 0; i < attachmentNames.size(); i++) {
-//                ServiceAttachmentName get = attachmentNames.get(i);
-//                q = "INSERT INTO have_serviceattachment VALUES (" + id + ", " + get.id + ");";
-//                data.write(q);
-//                System.out.println(q);
-//            }
+
             for (HaveServiceAttachment have : haveServiceAttachments) {
                 have.setServices_Provided_ID(id);
                 have.addToDB();
             }
 
-            //q = "commit;";
-            q = "rollback;";
+            q = "commit;";
+            //q = "rollback;";
             System.out.println(q + "end");
             data.write(q);
 
@@ -268,13 +258,7 @@ public class Service implements Serializable {
 
     }
 
-    public List<ServiceAttachmentName> getAttachmentNames() {
-        return attachmentNames;
-    }
-
-    public void setAttachmentNames(List<ServiceAttachmentName> attachmentNames) {
-        this.attachmentNames = attachmentNames;
-    }
+    
 
     public void simpleUpdate() {
         try {

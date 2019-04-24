@@ -198,28 +198,16 @@
 
                                             </h:form> 
                                         </div>
-
-
-
-
-
                                         <h:form id="dialog">
-
                                             <p:dialog id="DNewSection" resizable="false" header="اضافة قسم" widgetVar="dlg" dir="rtl">
-
                                                 <h:panelGrid columns="2" cellpadding="5">
-
                                                     <h:outputLabel for="name" value="الاسم:" />
                                                     <p:inputText id="name" label="name" value="#{departmentManager.newSection.name}"/>
-
                                                     <p:commandButton value="إضافة القسم" actionListener="#{departmentManager.addSection()}"
                                                                      update="@form :formSection :formOrganigram" oncomplete="PF('dlg').hide();"/>
-
                                                 </h:panelGrid>
                                             </p:dialog>  
-
                                         </h:form>
-
                                     </div>
                                 </div>
                                 <div class="card shadow mb-4">
@@ -254,6 +242,7 @@
                                                 </p:column>
 
                                             </p:dataTable>
+                                            <p:message  for="tableJob" />
                                             <br/>
                                             <hr style="border: 2px solid orange;"/>
 
@@ -264,7 +253,7 @@
 
                                                     <br/>
 
-                                                    <p:commandButton id="del" value="حذف" action="#{departmentManager.deleteJopTitle()}" update="formJob" oncomplete="PF('deleteD').hide();"/>
+                                                    <p:commandButton id="del" value="حذف" action="#{departmentManager.deleteJopTitle()}" update="formJob :formOrganigram" oncomplete="PF('deleteD').hide();"/>
 
                                                 </h:panelGrid>
                                             </p:dialog>  
@@ -282,11 +271,16 @@
                                                 <p:dialog id="jobAddDep" resizable="false" header="اضافة وظيفة" widgetVar="jobAddDep" dir="rtl">
 
                                                     <h:panelGrid columns="2" cellpadding="5">
-
+                                                        <h:outputLabel for="sec" value="اختر القسم" />
+                                                        <p:selectOneMenu id="sec" value="#{departmentManager.newJobOfsection.idSEction}" rendered="true" dynamic="true" style="min-width:223px;" class="pading000">
+                                                            <f:selectItems value="#{departmentManager.sections}" var="s" itemLabel="#{s.name}" itemValue="#{s.id}"/>
+                                                        </p:selectOneMenu>
                                                         <h:outputLabel for="job" value="اختر وظيفة" />
-                                                        <p:selectOneMenu id="job" value="#{departmentManager.newJobOfsection.idJob}" dynamic="true" style="min-width:223px;" class="pading000">
+                                                        <p:selectOneMenu id="job" value="#{departmentManager.newJobOfsection.idJob}" dynamic="true" rendered="true" style="min-width:223px;" class="pading000">
                                                             <f:selectItems value="#{departmentManager.jobTitels}" var="d" itemLabel="#{d.name}" itemValue="#{d.id}"/>
                                                         </p:selectOneMenu>
+                                                        
+                                                        
 
 
                                                     </h:panelGrid>
@@ -295,7 +289,7 @@
                                                         <i class="fas fa-hand-point-left">&nbsp;لاضافة وظائف اخرى اضغط هنا</i>
                                                     </h:link>
                                                     <p:separator/>
-                                                    <p:commandButton value="اضافة" actionListener="#{departmentManager.addJobForSec()}" update="@form :formJob" oncomplete="PF('jobAddDep').hide();"/>
+                                                    <p:commandButton value="اضافة" actionListener="#{departmentManager.addJobForSec()}" update="@form formJob formJob:tableJob :formOrganigram" oncomplete="PF('jobAddDep').hide();"/>
                                                 </p:dialog>  
 
                                             </h:form>

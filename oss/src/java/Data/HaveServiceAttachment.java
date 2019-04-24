@@ -23,8 +23,19 @@ public class HaveServiceAttachment implements Serializable{
     int Services_Provided_ID;
     int ServiceAttachmentName_ID;
     String  important;
+    String name;
 
     List<JobPath> jobs = new ArrayList<>();
+
+    public HaveServiceAttachment() {
+    }
+
+    public HaveServiceAttachment(int Services_Provided_ID, int ServiceAttachmentName_ID, String important, String name) {
+        this.Services_Provided_ID = Services_Provided_ID;
+        this.ServiceAttachmentName_ID = ServiceAttachmentName_ID;
+        this.important = important;
+        this.name = name;
+    }
     
     public int getServices_Provided_ID() {
         return Services_Provided_ID;
@@ -45,6 +56,15 @@ public class HaveServiceAttachment implements Serializable{
     public String getImportant() {
         return important;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
 
     public void setImportant(String important) {
         this.important = important;
@@ -81,6 +101,13 @@ public class HaveServiceAttachment implements Serializable{
             }
 
         }
+    public String importantASString(){
+        if(important.compareTo("yes")==0){
+            return "اجباري";
+        }else
+            return "غير اجباري";
+    }
+    
 
     
     

@@ -54,6 +54,12 @@ public class ServiceAttachmentName implements Serializable {
     public ServiceAttachmentName() {
     }
 
+    public ServiceAttachmentName(int id, String name, String notes) {
+        this.id = id;
+        this.name = name;
+        this.notes = notes;
+    }
+    
     public ServiceAttachmentName(int id, String name, String notes, InputStream inputStream, String nameFile, String haveFile,String form) {
         try {
             this.id = id;

@@ -85,13 +85,25 @@ public class DepartmentManager implements Serializable{
      public void addJobForSec() {
         
         if(!newJobOfsection.addToDB()){
-            //FacesContext.getCurrentInstance().addMessage("formSection:eventsDT", new FacesMessage( "Warning!", "لا يمكن اضافة نفس الوظيفة مرتين"));
-            FacesContext.getCurrentInstance().addMessage("formSection:eventsDT", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "لا يمكن اضافة نفس الوظيفة مرتين"));
-        }else
+           
+            FacesContext.getCurrentInstance().addMessage("formJob:tableJob", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "لا يمكن اضافة نفس الوظيفة مرتين"));
+        }else{
             creatOrganic();
+            newJobOfsection.setName(getJobName(newJobOfsection.getIdJob()));
+            newJobOfsection.setSEctionName(getSecName(newJobOfsection.getIdSEction()));
+             jobsOfSections.add(newJobOfsection);
+            newJobOfsection = new JobOfSection();
+        }
     }
 
-   
+   public String getJobName(int id){
+       for (JobTitel jobTitel : jobTitels) {
+           if(jobTitel.getId().compareTo(id+"")==0){
+               return jobTitel.getName();
+           }
+       }
+       return "refreash";
+   }
 
     public void onSectionSelected(SelectEvent event) {
         System.out.println("form al ajax " + ((Section) event.getObject()).getId());
@@ -112,7 +124,8 @@ public class DepartmentManager implements Serializable{
     public void addSection() {
         newSection.setDepartmentId(thisDepartment.id+"");
         newSection.addToDB();
-        sections.add(newSection);
+        
+        sections = GetFromDB.getFsection(thisDepartment.id);
         creatOrganic();
         newSection = new Section();
 
@@ -298,6 +311,15 @@ public class DepartmentManager implements Serializable{
             }
 
         }
+    }
+
+    private String getSecName(int idSEction) {
+        for (Section section : sections) {
+            if(section.getId().compareTo(idSEction+"")==0){
+                return section.getName();
+            }
+        }
+        return "refresh";
     }
     
 

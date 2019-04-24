@@ -365,6 +365,28 @@ public class GetFromDB {
         }
         return attach;
     }
+    public static List<ServiceAttachmentName> getServiceAttachmentNamewhithoutfile() {
+
+        ServiceAttachmentName d = new ServiceAttachmentName();
+
+        List<ServiceAttachmentName> attach = new ArrayList<ServiceAttachmentName>();
+        try {
+            DB db = new DB();
+
+            String sql = "SELECT * FROM oss.serviceattachmentname;";
+            System.out.println(sql);
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+
+                d = new ServiceAttachmentName(r.getInt(1), r.getString(2), r.getString(4));
+
+                attach.add(d);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return attach;
+    }
 
     public static int getMaxIdService() {
         int id = 0;
@@ -517,7 +539,7 @@ public class GetFromDB {
     }
 
     public static Service getServiceByID(String id) {
-        Service s = new Service();
+        Service s = null;
 
         try {
             DB db = new DB();
@@ -530,6 +552,7 @@ public class GetFromDB {
                         new Section(r.getInt(9), r.getInt(10), r.getString(11), r.getString(7)), r.getString(12));
 
             }
+            
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -1087,25 +1110,27 @@ public static List<JobPath> getJobTittleInDeparment(int idDep) {
         }
         return attach;
     }    
-    
-    public static List<ViewerAttachment> getJobviewerByserviceById(int id){ 
-        List<ViewerAttachment> name = new ArrayList<>();
+
+    public static List<HaveServiceAttachment> getHaveAttNameForServ(int id) {
+        
+        
+
+        List<HaveServiceAttachment> haveAtt = new ArrayList<>();
         try {
             DB db = new DB();
-            ViewerAttachment a;
-            String sql = "SELECT * FROM viewer_attachment where Services_Provided_ID = "+id+";";
+
+            String sql = "SELECT ha.*,sa.ServA_Name FROM have_serviceattachment as ha inner join serviceattachmentname as sa on ha.ServiceAttachmentName_ID = sa.ServiceAttachmentName_ID where Services_Provided_ID ="+id+";";
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
-                a = new ViewerAttachment(r.getInt(1), r.getInt(2), r.getInt(3),r.getInt(4),id);
-                name.add(a);
+
+                haveAtt.add(new HaveServiceAttachment(r.getInt(1), r.getInt(2), r.getString(3), r.getString(4)));
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
-        return name;
+        return haveAtt;
+        
     }
-    
+            
 }
