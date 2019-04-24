@@ -8,7 +8,7 @@
     outline: none;
 }
 body {
-    background: url(../images/bg.png) no-repeat center center fixed;
+    
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -26,9 +26,9 @@ body {
 }
 
 form[role=login] {
-    color: #5d5d5d;
-    background: #f2f2f2;
-    padding: 26px;
+    color: #0091ea;
+    background: #d8d4d4;
+    padding: 16%;
     border-radius: 10px;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
@@ -78,14 +78,15 @@ img{
 
 .buttonLog{
     width: 50%;
-    background-color: #10809b;
-    border: #10809b;
+    background-color: #0091ea;
+    border: #0091ea;
 }
 
 .buttonLog:hover{
-    background-color: #555555;
-    border: #555555;
+    background-color: #b5b3b3;
+    border: #b5b3b3;
 }
+
 
 .input-group{
     width: 100%;
