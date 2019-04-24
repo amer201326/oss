@@ -106,7 +106,7 @@ public class Session implements Serializable{
         try {
             login = false;
             typeAccount = "";
-            FacesContext.getCurrentInstance().getExternalContext().redirect("../login/");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("../index.xhtml");
         } catch (IOException ex) {
             Logger.getLogger(Session.class.getName()).log(Level.SEVERE, null, ex);
         }
