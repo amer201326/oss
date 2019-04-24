@@ -6,6 +6,7 @@
 package Beans;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
@@ -19,7 +20,7 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 @ViewScoped
-public class AddEmployeeManager {
+public class AddEmployeeManager implements Serializable{
     
     
     
