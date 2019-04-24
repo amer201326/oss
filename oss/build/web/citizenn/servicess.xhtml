@@ -24,7 +24,7 @@
     </h:head> 
     <h:body id="page-top">
         <style type="text/css"> 
-           .hoverDiv:hover {background: #f5f5f5;}
+            .hoverDiv:hover {background: #f5f5f5;}
         </style>
 
 
@@ -75,47 +75,40 @@
                                     <h:form>
                                         <p:outputPanel >
                                             <p:autoUpdate/>
-                                            <div style="text-align: right;">
+                                            <div class="row text-center">
+
 
 
 
                                                 <br/>
                                                 <ui:repeat value="#{departmentOfServicesManager.departmentsWithNService}" var="department" id="fadeEffectImages">
-
-                                                    <br/>
-  <a href="departmentservicess.xhtml?id=#{department.id}" style="margin-right:20px;">
-                                                    <div class="container hoverDiv" style="text-align: right;">
+                                                    <div class="col-md-4">
                                                         <br/>
-                                            
-                                                      
-                                                            <div style="text-align: right; display: -webkit-inline-box">
-                                                                <div class="col-xs-6">
-                                                                    <br/>
-                                                                    <div class="flexRow">
-                                                                        <h4 class="service-headin56g">#{department.nameA}</h4> 
-                                                                    <h4 class="service-headin56g"> :اسم الدائرة   </h4> 
-                                                                    
-                                                                </div>
-                                                                    <div class="flexRow">
-                                                                        <h4 class="service-headin56g">#{department.numberService}</h4>
-                                                                        <h4 class="service-headin56g"> :عدد الخدمات   </h4> 
-                                                                    </div>
-                                                                   
-                                                               
-                                                                </div>
+                                                        <a href="departmentservicess.xhtml?id=#{department.id}" style="margin-right:20px;">
+                                                            <div class="container hoverDiv" style="text-align: right;">
+                                                                <br/>
+
+                                                                <div style="text-align: center">
                                                                 <span class="fa-stack fa-4x" >
                                                                     <i class="fas fa-circle fa-stack-2x text-primary"></i>
                                                                     <i class="fas #{department.image} fa-stack-1x fa-inverse"></i>
                                                                 </span>
+</div>
+
+                                                                <br/> 
+                                                                <div style="text-align: center">
+                                                                        <h4 class="service-headin56g">#{department.nameA}  :اسم الدائرة  </h4> 
+                         
+                                                                        <h4 class="service-headin56g">#{department.numberService} :عدد الخدمات   </h4>
+                                                                      
+                                                              </div>
 
 
-                                                            </div>
-                                                     
-                                                        <br/>
-                                                        <br/>
-                                                    </div>   </a>
-                                                    <hr style="border: 2px solid orange; margin-left: 10px; margin-right: 10px;"/>
-
+                                                                <br/>
+                                                                <br/>
+                                                            </div>   </a>
+                                                        <hr style="border: 2px solid orange; margin-left: 10px; margin-right: 10px;"/>
+                                                    </div>
                                                 </ui:repeat>
 
 

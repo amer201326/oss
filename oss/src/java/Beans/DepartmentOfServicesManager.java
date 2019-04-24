@@ -9,6 +9,7 @@ import Data.Department;
 import Data.GetFromDB;
 import Data.Service;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -20,14 +21,26 @@ import javax.faces.bean.ViewScoped;
 @ManagedBean
 @ViewScoped
 public class DepartmentOfServicesManager implements Serializable{
+    
+     
 
     public DepartmentOfServicesManager() {
-       
     }
     
-    public List<Department> getDepartmentsWithNService() {
-        return GetFromDB.getDepartmentsWithNService();
+    public  List<Department> getDepartmentsWithNService() {
+        List<Department> department = GetFromDB.getDepartmentsWithNService();
+        
+        List<Department> departments = new ArrayList<>() ;
+        
+        for (Department d : department) {
+            if(d.getNumberService() > 0){
+                departments.add(d);
+            }
+        }
+        return departments;
     }
+
+ 
 
     
 
