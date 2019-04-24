@@ -365,6 +365,7 @@ public class GetFromDB {
         }
         return attach;
     }
+
     public static List<ServiceAttachmentName> getServiceAttachmentNamewhithoutfile() {
 
         ServiceAttachmentName d = new ServiceAttachmentName();
@@ -552,7 +553,6 @@ public class GetFromDB {
                         new Section(r.getInt(9), r.getInt(10), r.getString(11), r.getString(7)), r.getString(12));
 
             }
-            
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -644,12 +644,13 @@ public class GetFromDB {
         }
         return name;
     }
-            public static List<ViewerAttachment> getAttatchmentByserviceById(int id){ 
+
+    public static List<ViewerAttachment> getAttatchmentByserviceById(int id) {
         List<ViewerAttachment> name = new ArrayList<>();
         try {
             DB db = new DB();
             ViewerAttachment a;
-            String sql = "SELECT v.*,s.ServA_Name FROM viewer_attachment as v inner join serviceattachmentname as s on v.ServiceAttachmentName_ID = s.ServiceAttachmentName_ID where Services_Provided_ID = "+id+";";
+            String sql = "SELECT v.*,s.ServA_Name FROM viewer_attachment as v inner join serviceattachmentname as s on v.ServiceAttachmentName_ID = s.ServiceAttachmentName_ID where Services_Provided_ID = " + id + ";";
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
@@ -975,7 +976,7 @@ public class GetFromDB {
 
             String sql = "SELECT * FROM attachment_service_citizen as ac inner join attachment_archive_citizen as aac"
                     + " on ac.Atta_ArchiveC_ID = aac.Atta_ArchiveC_ID inner join serviceattachmentname as sa "
-                    + "on aac.ServiceAttachmentName_ID = sa.ServiceAttachmentName_ID where  Services_Provided_ID ="+idServise+" and ac.Cit_ID ="+idCitizen+";";
+                    + "on aac.ServiceAttachmentName_ID = sa.ServiceAttachmentName_ID where  Services_Provided_ID =" + idServise + " and ac.Cit_ID =" + idCitizen + ";";
 
             System.out.println(sql);
             ResultSet r = db.read(sql);
@@ -991,12 +992,13 @@ public class GetFromDB {
         }
         return name;
     }
-public static List<JobPath> getJobTittleInDeparment(int idDep) {
+
+    public static List<JobPath> getJobTittleInDeparment(int idDep) {
         JobPath d = new JobPath();
         List<JobPath> job = new ArrayList<JobPath>();
         try {
             DB db = new DB();
-            String sql = "SELECT s.Dep_ID,s.Sec_ID,j.Job_ID,n.Job_name FROM department as d inner join section as s on d.Dep_ID = s.Dep_ID inner join job_of_section as j on s.Sec_ID = j.Sec_ID inner join jobtitle as n on j.Job_ID = n.Job_ID where d.Dep_ID = "+idDep+";";
+            String sql = "SELECT s.Dep_ID,s.Sec_ID,j.Job_ID,n.Job_name FROM department as d inner join section as s on d.Dep_ID = s.Dep_ID inner join job_of_section as j on s.Sec_ID = j.Sec_ID inner join jobtitle as n on j.Job_ID = n.Job_ID where d.Dep_ID = " + idDep + ";";
 
             ResultSet r = db.read(sql);
             while (r.next()) {
@@ -1008,13 +1010,13 @@ public static List<JobPath> getJobTittleInDeparment(int idDep) {
         }
         return job;
     }
-        
-        public static List<Service_Job> getAllService_Jobs(Service_Job j) {
+
+    public static List<Service_Job> getAllService_Jobs(Service_Job j) {
         Service_Job d = new Service_Job();
         List<Service_Job> job = new ArrayList<Service_Job>();
         try {
-            DB db = new DB(); 
-            String sql = "SELECT * FROM service_jobs where Cit_ID ="+j.Cit_ID+" and Service_Citizen_ID="+j.Service_Citizen_ID+" and Services_Provided_ID="+j.Services_Provided_ID+" and Dep_ID ="+j.Dep_ID+" and Order_Departmant="+j.Order_Departmant+";";
+            DB db = new DB();
+            String sql = "SELECT * FROM service_jobs where Cit_ID =" + j.Cit_ID + " and Service_Citizen_ID=" + j.Service_Citizen_ID + " and Services_Provided_ID=" + j.Services_Provided_ID + " and Dep_ID =" + j.Dep_ID + " and Order_Departmant=" + j.Order_Departmant + ";";
 
             ResultSet r = db.read(sql);
             while (r.next()) {
@@ -1026,13 +1028,12 @@ public static List<JobPath> getJobTittleInDeparment(int idDep) {
         }
         return job;
     }
-        
-    
-    public static List<DecisionsDepartment> getDecisionsDepartment(int Cit_ID ,int Service_Citizen_ID) {
+
+    public static List<DecisionsDepartment> getDecisionsDepartment(int Cit_ID, int Service_Citizen_ID) {
         List<DecisionsDepartment> dds = new ArrayList<>();
         try {
             DB db = new DB();
-            String sql = "SELECT * FROM oss.decisions_department  where Cit_ID = " + Cit_ID +" and Service_Citizen_ID = "+Service_Citizen_ID+ ";";
+            String sql = "SELECT * FROM oss.decisions_department  where Cit_ID = " + Cit_ID + " and Service_Citizen_ID = " + Service_Citizen_ID + ";";
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
@@ -1047,12 +1048,12 @@ public static List<JobPath> getJobTittleInDeparment(int idDep) {
         return dds;
     }
 
-    public static List<DecisionSection> getDecisionsSection(int Cit_ID ,int Service_Citizen_ID) {
+    public static List<DecisionSection> getDecisionsSection(int Cit_ID, int Service_Citizen_ID) {
         List<DecisionSection> dss = new ArrayList<>();
         try {
             DB db = new DB();
             String sql = "SELECT * FROM oss.dicisions_section  where Cit_ID = " + Cit_ID + " and Service_Citizen_ID = "
-                    + Service_Citizen_ID + ";" ;
+                    + Service_Citizen_ID + ";";
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
@@ -1067,7 +1068,7 @@ public static List<JobPath> getJobTittleInDeparment(int idDep) {
         return dss;
     }
 
-    public static List<DecisionsJob> getDecisionsJob(int Cit_ID ,int Service_Citizen_ID) {
+    public static List<DecisionsJob> getDecisionsJob(int Cit_ID, int Service_Citizen_ID) {
         List<DecisionsJob> djs = new ArrayList<>();
         try {
             DB db = new DB();
@@ -1086,7 +1087,6 @@ public static List<JobPath> getJobTittleInDeparment(int idDep) {
 
         return djs;
     }
-    
 
     public static List<ServiceAttachmentName> getServiceAttachmentNamewithoutfile() {
 
@@ -1109,17 +1109,15 @@ public static List<JobPath> getJobTittleInDeparment(int idDep) {
             System.out.println(e.getMessage());
         }
         return attach;
-    }    
+    }
 
     public static List<HaveServiceAttachment> getHaveAttNameForServ(int id) {
-        
-        
 
         List<HaveServiceAttachment> haveAtt = new ArrayList<>();
         try {
             DB db = new DB();
 
-            String sql = "SELECT ha.*,sa.ServA_Name FROM have_serviceattachment as ha inner join serviceattachmentname as sa on ha.ServiceAttachmentName_ID = sa.ServiceAttachmentName_ID where Services_Provided_ID ="+id+";";
+            String sql = "SELECT ha.*,sa.ServA_Name FROM have_serviceattachment as ha inner join serviceattachmentname as sa on ha.ServiceAttachmentName_ID = sa.ServiceAttachmentName_ID where Services_Provided_ID =" + id + ";";
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
@@ -1130,7 +1128,26 @@ public static List<JobPath> getJobTittleInDeparment(int idDep) {
             System.out.println(e.getMessage());
         }
         return haveAtt;
-        
+
     }
-            
+
+    public static List<ViewerAttachment> getJobviewerByserviceById(int services_Provided_ID) {
+        List<ViewerAttachment> viewerAttachments = new ArrayList<>();
+        ViewerAttachment v;
+        try {
+            DB db = new DB();
+
+            String sql = "SELECT * FROM viewer_attachment where Services_Provided_ID = "+services_Provided_ID+";";
+            System.out.println(sql);
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                v = new ViewerAttachment(r.getInt(1), r.getInt(2), r.getInt(3), r.getInt(4), services_Provided_ID);
+                viewerAttachments.add(v);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return viewerAttachments;
+    }
+
 }

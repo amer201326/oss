@@ -1,0 +1,395 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough" class="rest">
+    <h:head>
+        <title>تقديم خدمة</title>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <meta name="description" content=""/>
+        <meta name="author" content=""/>
+        <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"/>
+
+        <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+
+        <!-- Custom styles for this template-->
+        <link href="../css/sb-admin-2.min.css" rel="stylesheet"/>
+        <link href="../css/amer.css" rel="stylesheet"/>
+
+    </h:head>
+    <h:body id="page-top">
+
+
+
+        <!-- Page Wrapper -->
+        <div id="wrapper">
+            <!-- Sidebar -->
+
+            <div id="content-wrapper" class="d-flex flex-column">
+
+
+                <!-- Main Content -->
+                <div id="content">
+
+                    <!-- Topbar -->
+                    <ui:include src="heder.xhtml"/>
+                    <!-- End of Topbar -->
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+
+
+                            <div class=" col-md-12 ">
+                                <div class="card border-left-warning border-right-0 shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters textC">
+                                            <div class="col mr-2">
+                                                <h2 class="section-heading text-uppercase">#{shoeServiceCitizemDoneEmpManeger.serviseCitizen.service.name}</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <br/><hr style="border: 2px solid orange; margin-left: 10px; margin-right: 10px;"/><br/>
+                            <h:panelGrid rendered="#{shoeServiceCitizemDoneEmpManeger.haveService}">
+                                <div class="col-lg-12 mb-4">
+                                    <div class="col-lg-12" style="text-align: right; min-width:1200px ">
+                                        <div class="card shadow mb-xl-4">
+                                            <div class="card-header py-3">
+                                                <h6 class="m-0 font-weight-bold text-primary">معلومات الخدمة</h6>
+                                            </div>
+
+                                            <div class="card-body">
+
+                                                <div class="row-space flexAm">
+                                                    <div class="col-xl-6 col-md-6 mb-3">
+
+                                                        <div class="card border-right-warning shadow h-100 py-2">
+                                                            <div class="card-body">
+
+                                                                <div class="row no-gutters align-items-center">
+                                                                    <div class="col-auto">
+                                                                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                                                    </div>
+                                                                    <div class="col mr-2" style="text-align: right">
+                                                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" >رسوم طلب الخدمة</div>
+                                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">#{shoeServiceCitizemDoneEmpManeger.serviseCitizen.service.cost}</div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Earnings (Monthly) Card Example -->
+                                                    <div class="col-xl-6 col-md-6 mb-3">
+                                                        <div class="card border-right-warning shadow h-100 py-2">
+                                                            <div class="card-body">
+                                                                <div class="row no-gutters align-items-center">
+
+                                                                    <div class="col-auto">
+
+                                                                        <i class="fa fa-thumbs-up fa-2x text-gray-300"></i>
+                                                                    </div>
+                                                                    <div class="col mr-2" style="text-align: right">
+                                                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">عدد ايام الاستجابة</div>
+                                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                                            <div style="display: inline;margin-right: 5px">يوم  </div>
+                                                                            <div style="display: inline ;float: right"> #{shoeServiceCitizemDoneEmpManeger.serviseCitizen.service.days}</div> 
+
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Earnings (Monthly) Card Example -->
+                                                <div class="col-xl-12  mb-4">
+
+                                                    <div class="card border-right-warning shadow h-100 py-2 border-bottom-warning">
+                                                        <div class="card-body">
+
+                                                            <div class="row no-gutters align-items-center">
+
+                                                                <div class="col mr-2" style="text-align: right">
+                                                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1 " > الملاحظات  </div>
+                                                                    <div class="h5 mb-0 font-weight-normal text-gray-800"> #{shoeServiceCitizemDoneEmpManeger.serviseCitizen.service.note}</div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+
+
+
+
+
+
+
+                                        </div>
+                                    </div>
+                                </div> 
+
+                                <div class="col-lg-12 mb-4">
+                                    <div class="col-lg-12" style="text-align: right; min-width:900px ">
+                                        <div class="card shadow mb-xl-4">
+                                            <div class="card-header py-3">
+                                                <h6 class="m-0 font-weight-bold text-primary">معلومات المواطن </h6>
+                                            </div>
+                                            <div class="card-body">
+
+                                                <div class="mb-3 ">
+
+                                                    <div class="card border-right-warning shadow h-100 py-2">
+                                                        <div class="card-body">
+
+                                                            <div class="row no-gutters align-items-center">
+
+                                                                <div class="col mr-2" style="text-align: right">
+                                                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" > اسم المواطن </div>
+                                                                    <div class="h5 mb-0 font-weight-normal text-gray-800">#{shoeServiceCitizemDoneEmpManeger.serviseCitizen.citizen.firstName}
+                                                                        #{shoeServiceCitizemDoneEmpManeger.serviseCitizen.citizen.fatherName}
+                                                                        #{shoeServiceCitizemDoneEmpManeger.serviseCitizen.citizen.grandFatherName}
+                                                                        #{shoeServiceCitizemDoneEmpManeger.serviseCitizen.citizen.lastName}
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-3 ">
+
+                                                    <div class="card border-right-warning shadow h-100 py-2">
+                                                        <div class="card-body">
+
+                                                            <div class="row no-gutters align-items-center">
+
+                                                                <div class="col mr-2" style="text-align: right">
+                                                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" > العنوان  </div>
+                                                                    <div class="h5 mb-0 font-weight-normal text-gray-800"> #{shoeServiceCitizemDoneEmpManeger.serviseCitizen.citizen.address}</div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div> 
+                                </div>
+
+
+                            </h:panelGrid>
+
+                            <div class="col-lg-12 mb-4">
+                                <div class="col-lg-12" style="text-align: right; min-width:900px ">
+                                    <div class="card shadow mb-xl-4">
+                                        <div class="card-header py-3">
+                                            <h6 class="m-0 font-weight-bold text-primary">  مرفقات المواطن </h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <ui:repeat value="#{shoeServiceCitizemDoneEmpManeger.serviseCitizen.attform}" var="att" varStatus="in" >
+                                                <div class="flexAm row-space " style="margin-right: 14px">
+                                                    <div class="px-3 mb-2 py-5 bg-gradient-#{att.colorHaveFile()} text-white border-bottom-#{att.colorHaveFile()}">مرفق  #{in.index+1}</div>
+                                                    <div class="col-sm-11 px-5  mb-2 py-4  border-bottom-#{att.colorHaveFile()} ">
+                                                        <div class="flexjustify-content row-space" style="margin-right: 14px">
+                                                            <dir>
+                                                                <div class="text-xs font-weight-bold text-xs text-warning mb-1" style="font-size: 1.4em">#{att.name}</div>
+
+                                                                <div class="text-xs font-weight-bold text-gray-800 text-uppercase mb-1" style="font-size: 0.8em ; margin-right: 20px;">#{att.notes}</div>
+
+                                                            </dir>
+                                                            <div id="divDown" class="flexColomn ">
+                                                                <p:commandButton id="downloadAT"  value="تنزيل"  icon="fa fa-arrow-down" class="bg-#{att.colorHaveFile()}" 
+                                                                             style="color: white;">
+                                                                    <p:fileDownload value="#{att.fileDownload}"/>
+                                                                </p:commandButton>  
+                                                                <br/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ui:repeat>
+
+                                        </div>
+
+                                    </div>
+                                </div> 
+                            </div>
+
+                            <div class="col-lg-12 mb-4">
+                                <div class="col-lg-12" style="text-align: right; min-width:900px ">
+                                    <div class="card shadow mb-xl-4">
+                                        <div class="card-header py-3">
+                                            <h6 class="m-0 font-weight-bold text-primary"> متطلبات الخدمة </h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <ui:repeat value="#{shoeServiceCitizemDoneEmpManeger.serviseCitizen.att}" var="att2"  varStatus="inn">
+                                                <div class="flexAm row-space " style="margin-right: 14px">
+                                                    <div class="px-3 mb-2 py-5 bg-gradient-#{att2.colorHaveFile()} text-white border-bottom-#{att2.colorHaveFile()}">نموذج  #{inn.index+1}</div>
+                                                    <div class="col-sm-11 px-5  mb-2 py-4  border-bottom-#{att2.colorHaveFile()} ">
+                                                        <div class="flexjustify-content row-space" style="margin-right: 14px">
+                                                            <dir>
+                                                                <div class="text-xs font-weight-bold text-xs text-warning mb-1" style="font-size: 1.4em">#{att2.name}</div>
+
+                                                                <div class="text-xs font-weight-bold text-gray-800 text-uppercase mb-1" style="font-size: 0.8em ; margin-right: 20px;">#{att2.notes}</div>
+
+                                                            </dir>
+                                                            <div id="divDown" class="flexColomn ">
+                                                                <p:commandButton id="downloadAT"  value="تنزيل"  icon="fa fa-arrow-down" class="bg-#{att2.colorHaveFile()}" 
+                                                                             style="color: white;">
+                                                                    <p:fileDownload value="#{att.fileDownload}"/>
+                                                                </p:commandButton>  
+                                                                <br/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ui:repeat>
+
+                                        </div>
+
+                                    </div>
+                                </div> 
+                            </div>
+
+                            <div class="card shadow mb-4">
+
+                                <div class="card-body">
+
+                                    <div style="text-align: right">
+
+                                        <h2 class="section-heading inLineB" style="padding: 10px">:  التعليقات</h2>
+                                        <br/><br/>
+                                        <div class="mb-1 ">
+
+                                            <div class="card border-right-warning border-bottom-warning shadow h-100 py-2">
+                                                <div class="card-body">
+
+                                                    <div class="row no-gutters align-items-center">
+
+                                                        <div class="col mr-2" style="text-align: right">
+                                                            <div class="text-s font-weight-bold text-primary text-uppercase mb-1" > ملاحظات المواطن  </div>
+                                                            <div class="h5 mb-0 font-weight-normal text-gray-800"> #{shoeServiceCitizemDoneEmpManeger.serviseCitizen.note} </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <div class="col-sm-12 py-2">
+                                                <br/>
+                                                : التعليقات الخارجيه (يمكن للمواطن ان يرها ) 
+                                                <p:inputTextarea value="#{shoeServiceCitizemDoneEmpManeger.serviseCitizen.externalMessage}" rows="5" cols="100" dir="rtl" style="width: 100%;" disabled="true"/> 
+                                            </div>
+                                            <div class="col-sm-12 py-2">
+                                                <br/>
+                                                : التعليقات الداخلية (لا يمكن للمواطن ان يرها ) 
+                                                <p:inputTextarea value="#{shoeServiceCitizemDoneEmpManeger.serviseCitizen.internalMessage}" rows="5" cols="100" dir="rtl" style="width: 100%;" disabled="true"/> 
+                                            </div>
+                                        </div>
+
+                                        <br/><hr style="border: 2px solid orange; margin-left: 10px; margin-right: 10px;"/><br/>
+
+
+                                    </div>
+                      
+
+                                </div>
+
+
+
+
+                            </div>
+
+                            <h:panelGrid rendered="#{!shoeServiceCitizemDoneEmpManeger.haveService}">
+                                <div class="card-body">
+                                    <div class="row no-gutters textC">
+                                        <div class="col mr-2 ">
+                                            <h2 class="section-heading text-uppercase text-center">الرجاء اختيار خدمة</h2>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </h:panelGrid>
+
+                        </div>
+
+
+                    </div>
+
+                    <!-- Begin Page Content -->
+
+                </div>
+
+                <br/><br/>
+                <!-- End of Main Content -->
+
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright © Your Website 2019</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End of Footer -->
+
+            </div>
+
+
+            <ui:include src="sidebar.xhtml"/>
+
+
+        </div>
+        <script type="text/javascript">
+            //<![CDATA[
+            function start() {
+                PF('statusDialog').show();
+            }
+
+            function stop() {
+                PF('statusDialog').hide();
+            }
+            //]]>
+        </script>    
+        <!-- Bootstrap core JavaScript-->
+        <script src="../vendor/jquery/jquery.min.js"></script>
+        <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Core plugin JavaScript-->
+        <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+
+        <!-- Custom scripts for all pages-->
+        <script src="../js/sb-admin-2.min.js"></script>
+
+        <!-- Page level plugins -->
+        <script src="../vendor/chart.js/Chart.min.js"></script>
+
+        <!-- Page level custom scripts -->
+
+        <script src="../js/js.js" type="text/javascript"></script>
+
+    </h:body>
+</html>
+
