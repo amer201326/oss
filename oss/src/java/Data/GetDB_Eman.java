@@ -273,5 +273,29 @@ public class GetDB_Eman {
         return cit;
 
     }
+    
+    public static int[] getAllParametersCitizenDashboard() {
+
+        int[] all = new int[4];
+        try {
+            DB db = new DB();
+            String sql = "SELECT count(*),(select count(*) from oss.citizenaccount), (select count(*) from oss.employeeaccount), ((select count(Service_Citizen_ID) from oss.service_citizen where Status = 'done')) FROM oss.services_provided;";
+            ResultSet r = db.read(sql);
+
+            while (r.next()) {
+                all[0] = r.getInt(1);
+                all[1] = r.getInt(2);
+                all[2] = r.getInt(3);
+                all[3] = r.getInt(4);
+
+            }
+            
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(GetDB_Eman.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return all;
+
+    }
 
 }

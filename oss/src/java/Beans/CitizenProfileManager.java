@@ -25,17 +25,16 @@ import javax.faces.context.FacesContext;
 public class CitizenProfileManager implements Serializable {
 
     Citizen updateProfile;
-
+    
+    int[] allParameters; 
     @ManagedProperty(value = "#{msession}")
     Session session;
     int id;
 
     public CitizenProfileManager() {
        
-        
-
-      
-        
+        allParameters = GetDB_Eman.getAllParametersCitizenDashboard();
+  
     }
       @PostConstruct
     public void init() {
@@ -77,5 +76,15 @@ public class CitizenProfileManager implements Serializable {
     public void setSession(Session session) {
         this.session = session;
     }
+
+    public int[] getAllParameters() {
+        return allParameters;
+    }
+
+    public void setAllParameters(int[] allParameters) {
+        this.allParameters = allParameters;
+    }
+    
+    
 
 }

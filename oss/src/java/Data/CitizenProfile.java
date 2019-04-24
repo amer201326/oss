@@ -7,6 +7,8 @@ package Data;
 
 import DB.DB;
 import java.io.Serializable;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -277,6 +279,8 @@ public class CitizenProfile implements Serializable {
         return account.updateCit();
 
     }
+     
+    
     
     
 }
