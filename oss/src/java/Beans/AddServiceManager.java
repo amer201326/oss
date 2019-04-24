@@ -67,34 +67,42 @@ public class AddServiceManager implements Serializable {
     List<JobOfSection> filterJobsOfSections;
 
     HaveServiceAttachment haveServiceAttachment;
+    HaveServiceAttachment selectHavServAttachment;
+
     List<ServiceAttachmentName> Newattachment = new ArrayList<ServiceAttachmentName>();
     List<ServiceAttachmentName> allattachment;
 
     List<JobPath> stringToJop;
     ServiceAttachmentName selectAttachment;
-    ServiceAttachmentName newSelectAttachment;
+    HaveServiceAttachment newSelectAttachment;
 
     List<SelectItem> viewerJob;
     private String[] selectedAtts;
 
     public AddServiceManager() {
 
-        allattachment = GetFromDB.getServiceAttachmentNamewithoutfile();
+         newService = new Service();
         departments = GetFromDB.getDepartments();
         sections = GetFromDB.getSection();
         jobsOfSections = GetFromDB.getJobOfSectio();
-
         sectionPath_new = new SectionPath();
         selectSectionPath = new SectionPath();
-        newService = new Service();
+        selectDepartmentPath = new DepartmentPaths();
+        
+        newSelectAttachment = new HaveServiceAttachment();
+        haveServiceAttachment = new HaveServiceAttachment();
+        selectHavServAttachment = new HaveServiceAttachment();
         selectDepartmentPath = new DepartmentPaths();
         departmentPaths = new DepartmentPaths();
         jobPath = new JobPath();
         selectedJobPath = new JobPath();
-        newSelectAttachment = new ServiceAttachmentName();
-        haveServiceAttachment = new HaveServiceAttachment();
+        allattachment = GetFromDB.getServiceAttachmentNamewhithoutfile();
         stringToJop = new ArrayList<>();
         viewerJob = new ArrayList<SelectItem>();
+
+        Newattachment = new ArrayList<ServiceAttachmentName>();
+
+                
     }
 
     public String[] getSelectedAtts() {
@@ -294,6 +302,7 @@ public class AddServiceManager implements Serializable {
     }
 
     public void onRowSelectFromAtt(SelectEvent event) {
+        selectHavServAttachment = (HaveServiceAttachment)event.getObject();
 
     }
 
@@ -302,14 +311,12 @@ public class AddServiceManager implements Serializable {
     }
 
     public void deleteSelectedAtt() {
+      
         System.out.println("delete Att");
-        System.out.println(selectAttachment);
-        Newattachment.remove(selectAttachment);
+        System.out.println(selectHavServAttachment);
+        
+        newService.getHaveServiceAttachments().remove(selectHavServAttachment);
 
-        haveServiceAttachment.setServiceAttachmentName_ID(selectAttachment.getId());
-        newService.getHaveServiceAttachments().remove(haveServiceAttachment);
-
-        selectAttachment = new ServiceAttachmentName();
     }
 
     public void deleteJobPath() {
@@ -532,13 +539,23 @@ public class AddServiceManager implements Serializable {
         this.selectAttachment = selectAttachment;
     }
 
-    public ServiceAttachmentName getNewSelectAttachment() {
+    public HaveServiceAttachment getSelectHavServAttachment() {
+        return selectHavServAttachment;
+    }
+
+    public void setSelectHavServAttachment(HaveServiceAttachment selectHavServAttachment) {
+        this.selectHavServAttachment = selectHavServAttachment;
+    }
+
+    public HaveServiceAttachment getNewSelectAttachment() {
         return newSelectAttachment;
     }
 
-    public void setNewSelectAttachment(ServiceAttachmentName newSelectAttachment) {
+    public void setNewSelectAttachment(HaveServiceAttachment newSelectAttachment) {
         this.newSelectAttachment = newSelectAttachment;
     }
+
+   
 
     public List<SelectItem> jobShowThisService() {
 //
@@ -620,25 +637,23 @@ public class AddServiceManager implements Serializable {
 
     public void addJobViewerToServise() {
         
-        for (ServiceAttachmentName at : allattachment) {
-            if(newSelectAttachment.getId() == at.getId()){
-                Newattachment.add(at);
-            }
-        }
-        
-        
-        System.out.println("----------------");
-        haveServiceAttachment.setServiceAttachmentName_ID(newSelectAttachment.getId());
+               
         for (int i = 0; i < selectedAtts.length; i++) {
 
             System.out.println("-- here job --" + selectedAtts[i]);
             String[] split = selectedAtts[i].split("-");
             JobPath j = new JobPath(Integer.parseInt(split[0]), Integer.parseInt(split[1]), Integer.parseInt(split[2]), "");
-            haveServiceAttachment.getJobs().add(j);
+            newSelectAttachment.getJobs().add(j);
 
         }
-        newService.getHaveServiceAttachments().add(haveServiceAttachment);
-        newSelectAttachment = new ServiceAttachmentName();
+        for (ServiceAttachmentName nn : allattachment) {
+            if(nn.getId() == newSelectAttachment.getServiceAttachmentName_ID()){
+                newSelectAttachment.setName(nn.getName());
+                break;
+            }
+        }
+        newService.getHaveServiceAttachments().add(newSelectAttachment);
+        newSelectAttachment = new HaveServiceAttachment();
 
     }
 
