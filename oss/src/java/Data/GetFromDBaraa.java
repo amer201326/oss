@@ -42,21 +42,18 @@ public class GetFromDBaraa {
 
     }
 
-    public static ArrayList<CitizenService> notDoneCitizenServices(int idcitizen) {
-        ArrayList<CitizenService> services = new ArrayList<>();
+    public static ArrayList<ServiceCitizen> notDoneCitizenServices(int idcitizen) {
+        ArrayList<ServiceCitizen> services = new ArrayList<>();
         try {
             DB db = new DB();
-            CitizenService cs;
+            ServiceCitizen sc;
             Service s;
-            String sql = "SELECT sc.Services_Provided_ID,Serv_Name,sc.Date,sc.Service_Citizen_ID  FROM service_citizen as sc inner join services_provided as sp where sc.status = 'notdone' and Cit_ID=" + idcitizen + " and sc.Services_Provided_ID=sp.Services_Provided_ID;";
+            String sql = "SELECT *  FROM service_citizen as sc inner join services_provided as sp where sc.status = 'notdone' and Cit_ID=" + idcitizen + " and sc.Services_Provided_ID=sp.Services_Provided_ID;";
             ResultSet r = db.read(sql);
             while (r.next()) {
-                s = new Service();
-                s.id = r.getInt(1);
-                s.name = r.getString(2);
-                cs = new CitizenService(r.getInt(4), s, r.getString(3));
-
-                services.add(cs);
+                sc= new ServiceCitizen(r.getInt(1), r.getInt(2),r.getInt(3), r.getString(4), r.getString(5), r.getString(6));
+                sc.thisService = new Service(r.getInt(7), r.getString(8), r.getInt(9), r.getInt(10), r.getString(11), new Department(r.getInt(12)), new Section(r.getInt(13)), r.getString(14));
+                services.add(sc);
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -176,7 +173,6 @@ public class GetFromDBaraa {
         return deps;
     }
 
-    
     public static ArrayList<StepsAndDecsionsJob> stepAndDecJop(int idcitizen, int idSerCit) {
         ArrayList<StepsAndDecsionsJob> Lsdj = new ArrayList<>();
         try {
@@ -192,7 +188,7 @@ public class GetFromDBaraa {
             while (r.next()) {
                 s = new JobPath(r.getInt(1), r.getInt(2), r.getInt(3), r.getString(18), r.getInt(5), r.getInt(6), r.getInt(7));
                 d = new DecisionsJob(r.getString(11), r.getString(12), r.getDouble(13), r.getString(14), r.getString(15));
-                d.idEmployee=r.getInt(10);
+                d.idEmployee = r.getInt(10);
                 sdj = new StepsAndDecsionsJob(s, d);
                 Lsdj.add(sdj);
             }
@@ -289,7 +285,6 @@ public class GetFromDBaraa {
 //        }
 //
 //    }
-
     public static int getMaxId_attachment_archive_citizen() {
         int id = 0;
         try {

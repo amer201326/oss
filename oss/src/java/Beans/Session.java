@@ -14,6 +14,7 @@ import Data.Manager;
 import Data.Section;
 import Data.SectionPath;
 import Data.Service;
+import Data.ServiceCitizen;
 import Data.ServiceCitizen_1;
 import Data.ServiceErr;
 import java.io.IOException;
@@ -43,6 +44,7 @@ public class Session implements Serializable{
     Citizen citizen;
     Employee employee;
     ServiceCitizen_1 serviceCitizen;
+    ServiceCitizen serviceCitizenShow;
     
     public Session() {
         login = false;
@@ -148,6 +150,38 @@ public class Session implements Serializable{
 
     public void setServiceCitizen(ServiceCitizen_1 serviceCitizen) {
         this.serviceCitizen = serviceCitizen;
+    }
+
+    public Manager getManager() {
+        return manager;
+    }
+
+    public void setManager(Manager manager) {
+        this.manager = manager;
+    }
+
+    public Citizen getCitizen() {
+        return citizen;
+    }
+
+    public void setCitizen(Citizen citizen) {
+        this.citizen = citizen;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public ServiceCitizen getServiceCitizenShow() {
+        return serviceCitizenShow;
+    }
+
+    public void setServiceCitizenShow(ServiceCitizen serviceCitizenShow) {
+        this.serviceCitizenShow = serviceCitizenShow;
     }
     
     

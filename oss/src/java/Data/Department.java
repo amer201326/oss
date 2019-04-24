@@ -28,6 +28,10 @@ public class Department implements Serializable {
         
         
     }
+
+    public Department(int id) {
+        this.id = id;
+    }
     
     public int getId() {
         return id;

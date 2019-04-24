@@ -7,13 +7,17 @@ package Beans;
 
 import Data.CitizenService;
 import Data.GetFromDBaraa;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -55,5 +59,12 @@ public class NotDoneCiticenServiceManeger implements Serializable{
     public void setNotDoneCitizenServices(List<CitizenService> NotDoneCitizenServices) {
         this.NotDoneCitizenServices = NotDoneCitizenServices;
     }
-    
+    public void showServiceCitizen(int idServiceCitizen) {
+        
+           for (CitizenService service : NotDoneCitizenServices) {
+            if(service.getId() == idServiceCitizen){
+                session.serviceCitizenShow = service; 
+            }
+           } 
+    }
 }

@@ -28,6 +28,10 @@ public class Section implements Serializable{
     public Section() {
     }
 
+    public Section(String id) {
+        this.id = id;
+    }
+
     public Section(int departmentId, int id, String name, String departmentNmae) {
         this.departmentId = departmentId+"";
         this.id = id+"";

@@ -15,12 +15,15 @@ import Data.JobPath;
 import Data.StepsAndDecsions;
 import Data.SectionPath;
 import Data.Service;
+import Data.ServiceCitizen;
 import Data.StepsAndDecsionsJob;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
@@ -32,69 +35,54 @@ import javax.faces.context.FacesContext;
 @ViewScoped
 public class ShowMyServicesManager implements Serializable {
 
-    Service thisService = new Service();
-    List<DecisionsDepartment> MyServicedepartmentPath;
-
-    List<StepsAndDecsions> path;
-
+    ServiceCitizen thisServiceCitizen;
+    List<StepsAndDecsions> stepsAndDecsions;
     public ShowMyServicesManager() {
-        Map<String, String> parameterMap = (Map<String, String>) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        String param = parameterMap.get("id");
-        thisService = GetFromDB.getServiceByID2(param);
-        thisService.setPath(servicePath(thisService.getId()));
-        //MyServicedepartmentPath = MyServicedepartmentPath(thisService.getId(), 1, 1);
-
-        path = paths(1, 1);
+       
     }
-
-    public Service getThisService() {
-        return thisService;
-    }
-
-    public void setThisService(Service thisService) {
-        this.thisService = thisService;
-    }
-
-    private List<DepartmentPaths> servicePath(int idSer) {
-        List<DepartmentPaths> departments = GetFromDBaraa.departmentPath(idSer);
-        List<SectionPath> sections = GetFromDBaraa.sectionPath(idSer);
-        List<JobPath> jobs = GetFromDBaraa.jobPath(idSer);
-        for (DepartmentPaths department : departments) {
-            for (SectionPath section : sections) {
-                if (department.id == section.getDepartmentId() && department.order == section.getOrderDepartment()) {
-                    System.out.println("ggggg" + department.toString());
-                    department.sections.add(section);
-
-                    for (JobPath job : jobs) {
-                        if (section.getId() == job.getSectionID() && section.getOrder() == job.getsOrder()) {
-                            section.jobs.add(job);
-                        }
-
-                    }
-                }
-            }
-
+    @ManagedProperty(value = "#{msession}")
+    Session session;
+     
+      @PostConstruct
+    public void init() {
+        if(session.serviceCitizenShow != null){
+            this.thisServiceCitizen = session.serviceCitizenShow;
+            this.stepsAndDecsions = StepsAndDesion(thisServiceCitizen.getCit_ID(), thisServiceCitizen.getService_Citizen_ID(),thisServiceCitizen.getServices_Provided_ID());
         }
-
-        return departments;
+        
     }
 
-//    public List<DecisionsDepartment> MyServicedepartmentPath(int idservice, int idcitizen, int idSerCit) {
-//        List<DecisionsDepartment> dd = GetFromDBaraa.MyServicedepartmentPath(idservice, idcitizen, idSerCit);
-//        List<DecisionsJob> dj = GetFromDBaraa.MyServiceJobPath(idservice, idcitizen, idSerCit);
-//        for (DecisionsDepartment d : dd) {
+    
+//    private List<DepartmentPaths> servicePath(int idSer) {
+//        List<DepartmentPaths> departments = GetFromDBaraa.departmentPath(idSer);
+//        List<SectionPath> sections = GetFromDBaraa.sectionPath(idSer);
+//        List<JobPath> jobs = GetFromDBaraa.jobPath(idSer);
+//        
+//        for (DepartmentPaths department : departments) {
+//            for (SectionPath section : sections) {
+//                if (department.id == section.getDepartmentId() && department.order == section.getOrderDepartment()) {
+//                    department.sections.add(section);
 //
-//            if (d.getDepId() == j.getJob().getDepId() && d.getDepOrder() == j.getJob().getdOrder()) {
-//                d.getJobs().add(j);
+//                    for (JobPath job : jobs) {
+//                        if (section.getId() == job.getSectionID() && section.getOrder() == job.getsOrder()) {
+//                            section.jobs.add(job);
+//                        }
+//
+//                    }
+//                }
 //            }
 //
 //        }
-//        return dd;
+//
+//        return departments;
 //    }
-    public List<StepsAndDecsions> paths(int idcitizen, int idSerCit) {
+
+
+    public List<StepsAndDecsions> StepsAndDesion(int idcitizen, int idSerCit,int idService) {
         List<StepsAndDecsions> pathD = GetFromDBaraa.stepAndDecDep(idcitizen, idSerCit);
-        List<DecisionSection> pathS = GetFromDBaraa.sectionsteps(thisService.getId());
+        List<DecisionSection> pathS = GetFromDBaraa.sectionsteps(idService);
         List<StepsAndDecsionsJob> pathJ = GetFromDBaraa.stepAndDecJop(idcitizen, idSerCit);
+        
         System.out.println("lllll" + pathJ.size());
         for (StepsAndDecsions d : pathD) {
             for (DecisionSection s : pathS) {
@@ -111,20 +99,21 @@ public class ShowMyServicesManager implements Serializable {
         return pathD;
     }
 
-    public List<DecisionsDepartment> getMyServicedepartmentPath() {
-        return MyServicedepartmentPath;
+    public ServiceCitizen getThisServiceCitizen() {
+        return thisServiceCitizen;
     }
 
-    public void setMyServicedepartmentPath(List<DecisionsDepartment> MyServicedepartmentPath) {
-        this.MyServicedepartmentPath = MyServicedepartmentPath;
+    public void setThisServiceCitizen(ServiceCitizen thisServiceCitizen) {
+        this.thisServiceCitizen = thisServiceCitizen;
     }
 
-    public List<StepsAndDecsions> getPath() {
-        return path;
+    public Session getSession() {
+        return session;
     }
 
-    public void setPath(List<StepsAndDecsions> path) {
-        this.path = path;
+    public void setSession(Session session) {
+        this.session = session;
     }
-
+    
+    
 }

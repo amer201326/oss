@@ -38,7 +38,18 @@ public class ServiceCitizen {
     public ServiceCitizen() {
 
     }
+    
+    public ServiceCitizen( int Service_Citizen_ID, int Services_Provided_ID, int Cit_ID, String Date, String status, String note) {
+       
+        this.Service_Citizen_ID = Service_Citizen_ID;
+        this.Services_Provided_ID = Services_Provided_ID;
+        this.Cit_ID = Cit_ID;
+        this.Date = Date;
+        this.status = status;
+        this.note = note;
+    }
 
+    
     public boolean addToDataBase() {
 
         Services_Provided_ID = thisService.id;

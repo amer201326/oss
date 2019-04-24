@@ -68,18 +68,21 @@
                     <div class="col-lg-12" align="right">
                         <ui:repeat value="#{notDoneCiticenServiceManeger.notDoneCitizenServices}" var="service" id="fadeEffectImages">
                             <div class="card mb-4 border-bottom-warning hoverDiv">
-                                 <div class="d-flex justify-content-between" >
-                               
-                                     <div style="margin: 50px">
-                                         <a href="ShowMyService.xhtml?id=#{service.providServicee.id}" class="btn btn-warning btn-circle">
-                                        <i class="fas fa-arrow-left"></i>
-                                    </a> 
+                                <div class="d-flex justify-content-between" >
+
+                                    <div style="margin: 50px">
+
+                                        <p:commandLink class="btn btn-warning btn-circle"  actionListener="#{notDoneCiticenServiceManeger.showServiceCitizen(service.providServicee.id)}">
+                                            <h:outputText styleClass="fas fa-arrow-left" style="margin:0 auto;" />
+                                            <f:setPropertyActionListener value="#{service}" target="#{msession.serviceCitizen}" />
+
+                                        </p:commandLink>
+                                    </div>
+                                    <div class="card-body ">
+                                        <h4>#{service.providServicee.name}</h4>
+                                        <h5>#{service.date}</h5>
+                                    </div>
                                 </div>
-                                      <div class="card-body ">
-                                          <h4>#{service.providServicee.name}</h4>
-                                          <h5>#{service.date}</h5>
-                                </div>
-                            </div>
                             </div>
                         </ui:repeat>
                     </div>
