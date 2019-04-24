@@ -1087,5 +1087,25 @@ public static List<JobPath> getJobTittleInDeparment(int idDep) {
         }
         return attach;
     }    
-            
+    
+    public static List<ViewerAttachment> getJobviewerByserviceById(int id){ 
+        List<ViewerAttachment> name = new ArrayList<>();
+        try {
+            DB db = new DB();
+            ViewerAttachment a;
+            String sql = "SELECT * FROM viewer_attachment where Services_Provided_ID = "+id+";";
+            System.out.println(sql);
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                a = new ViewerAttachment(r.getInt(1), r.getInt(2), r.getInt(3),r.getInt(4),id);
+                name.add(a);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return name;
+    }
+    
 }

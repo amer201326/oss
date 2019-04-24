@@ -10,10 +10,12 @@ package Beans;
  * @author Amer
  */
 import DB.DB;
+import Data.Employee;
 import Data.GetFromDB;
 import Data.ServiceAttachmentName;
 import Data.ServiceCitizen_1;
 import Data.Service_Job;
+import Data.ViewerAttachment;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +32,8 @@ import javax.faces.context.FacesContext;
 public class ShoeServiceCitizemEmpManeger {
 
     ServiceCitizen_1 serviseCitizen;
-
+    Employee employee;
+    
     @ManagedProperty(value = "#{msession}")
     Session session;
 
@@ -39,7 +42,8 @@ public class ShoeServiceCitizemEmpManeger {
     @PostConstruct
     public void init() {
         serviseCitizen = session.serviceCitizen;
-
+        employee =  session.employee;
+        
         if (serviseCitizen != null) {
             haveService = true;
             filterFormOrNot();
@@ -52,11 +56,20 @@ public class ShoeServiceCitizemEmpManeger {
         List<ServiceAttachmentName> att = new ArrayList<ServiceAttachmentName>();
         List<ServiceAttachmentName> attform = new ArrayList<ServiceAttachmentName>();
 
+        List<ViewerAttachment> jobViewer = GetFromDB.getJobviewerByserviceById(serviseCitizen.getServices_Provided_ID());
+
         for (ServiceAttachmentName serviceAttachmentName : allAtt) {
-            if ("yes".equals(serviceAttachmentName.getForm())) {
-                attform.add(serviceAttachmentName);
-            } else {
-                att.add(serviceAttachmentName);
+            for (ViewerAttachment viewer : jobViewer) {
+                if (serviceAttachmentName.getId() == viewer.getServiceAttachmentName_ID() && 
+                       employee.getDep_id()==viewer.getDep_ID()&& employee.getSec_id()==viewer.getSec_ID() &&employee.getJob_id()==viewer.getJob_ID()) {
+                    
+                    if ("yes".equals(serviceAttachmentName.getForm())) {
+                        attform.add(serviceAttachmentName);
+                    } else {
+                        att.add(serviceAttachmentName);
+                    }
+                    
+                }
             }
         }
 
