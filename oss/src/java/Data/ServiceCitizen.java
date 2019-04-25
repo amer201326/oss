@@ -35,7 +35,7 @@ public class ServiceCitizen {
     public List<ServiceAttachmentName> attachment = new ArrayList<ServiceAttachmentName>();
     public List<ServiceAttachmentName> attwhithFile = new ArrayList<ServiceAttachmentName>();
 
-    Service service;
+    public Service service;
     DecisionsJob decisionsJob = new DecisionsJob();
     Service_Job service_Job;
     Citizen citizen;

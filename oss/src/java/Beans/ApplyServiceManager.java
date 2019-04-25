@@ -55,10 +55,10 @@ public class ApplyServiceManager implements Serializable {
         String param = parameterMap.get("id");
         System.out.println(param +"===================================================================");
         serviceCitizen = new ServiceCitizen();
-        serviceCitizen.thisService = GetFromDB.getServiceByID2(param);
+        serviceCitizen.service = GetFromDB.getServiceByID2(param);
         serviceCitizen.setCit_ID(idCitizen);
         
-        allAttachment = GetFromDB.getAttavhmentByserviceById(serviceCitizen.thisService.getId());
+        allAttachment = GetFromDB.getAttavhmentByserviceById(serviceCitizen.service.getId());
         System.out.println("Bdddddd" + allAttachment.size());
 
         for (ServiceAttachmentName serviceAttachmentName : allAttachment) {
