@@ -59,22 +59,6 @@
     filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=0,OffY=1,Color=#ccffffff,Positive=true);
 }
 
-.button.orange {
-    background: #FF7F00;
-}
-
-.button.purple {
-    background: #8e44ad;
-}
-
-.button.turquoise {
-    background: #1abc9c;
-}
-
-.button.red {
-    background: #e74c3c;
-}      
-
 /* BUTTONS */
 ui-selectonemenu-trigger.myButton {
     -moz-box-shadow:inset 0px 1px 0px 0px #d9fbbe;
