@@ -5,12 +5,14 @@
  */
 package Beans;
 
+import Data.AttachmentServiceEmployee;
 import Data.DecisionSection;
 import Data.DecisionsDepartment;
 import Data.DecisionsJob;
 import Data.DepartmentPaths;
 import Data.GetFromDB;
 import Data.GetFromDBaraa;
+import static Data.GetFromDBaraa.AttachmentServiceEmployee;
 import Data.JobPath;
 import Data.StepsAndDecsions;
 import Data.SectionPath;
@@ -37,52 +39,29 @@ public class ShowMyServicesManager implements Serializable {
 
     ServiceCitizen thisServiceCitizen;
     List<StepsAndDecsions> stepsAndDecsions;
+    List<AttachmentServiceEmployee> attachmentServiceEmployee;
+
     public ShowMyServicesManager() {
-       
+
     }
     @ManagedProperty(value = "#{msession}")
     Session session;
-     
-      @PostConstruct
+
+    @PostConstruct
     public void init() {
-        if(session.serviceCitizenShow != null){
+        if (session.serviceCitizenShow != null) {
             this.thisServiceCitizen = session.serviceCitizenShow;
-            this.stepsAndDecsions = StepsAndDesion(thisServiceCitizen.getCit_ID(), thisServiceCitizen.getService_Citizen_ID(),thisServiceCitizen.getServices_Provided_ID());
+            attachmentServiceEmployee = GetFromDBaraa.AttachmentServiceEmployee(thisServiceCitizen.getCit_ID(), thisServiceCitizen.getService_Citizen_ID(), thisServiceCitizen.getServices_Provided_ID());
+            this.stepsAndDecsions = StepsAndDesion(thisServiceCitizen.getCit_ID(), thisServiceCitizen.getService_Citizen_ID(), thisServiceCitizen.getServices_Provided_ID());
         }
-        
+
     }
 
-    
-//    private List<DepartmentPaths> servicePath(int idSer) {
-//        List<DepartmentPaths> departments = GetFromDBaraa.departmentPath(idSer);
-//        List<SectionPath> sections = GetFromDBaraa.sectionPath(idSer);
-//        List<JobPath> jobs = GetFromDBaraa.jobPath(idSer);
-//        
-//        for (DepartmentPaths department : departments) {
-//            for (SectionPath section : sections) {
-//                if (department.id == section.getDepartmentId() && department.order == section.getOrderDepartment()) {
-//                    department.sections.add(section);
-//
-//                    for (JobPath job : jobs) {
-//                        if (section.getId() == job.getSectionID() && section.getOrder() == job.getsOrder()) {
-//                            section.jobs.add(job);
-//                        }
-//
-//                    }
-//                }
-//            }
-//
-//        }
-//
-//        return departments;
-//    }
-
-
-    public List<StepsAndDecsions> StepsAndDesion(int idcitizen, int idSerCit,int idService) {
+    public List<StepsAndDecsions> StepsAndDesion(int idcitizen, int idSerCit, int idService) {
         List<StepsAndDecsions> pathD = GetFromDBaraa.stepAndDecDep(idcitizen, idSerCit);
         List<DecisionSection> pathS = GetFromDBaraa.sectionsteps(idService);
         List<StepsAndDecsionsJob> pathJ = GetFromDBaraa.stepAndDecJop(idcitizen, idSerCit);
-        
+
         System.out.println("lllll" + pathJ.size());
         for (StepsAndDecsions d : pathD) {
             for (DecisionSection s : pathS) {
@@ -91,6 +70,12 @@ public class ShowMyServicesManager implements Serializable {
                     for (StepsAndDecsionsJob j : pathJ) {
                         if (s.getSection().getId() == j.getJobPath().getSectionID() && s.getSection().getOrder() == j.getJobPath().getsOrder()) {
                             s.getJob().add(j);
+                            for (AttachmentServiceEmployee att : attachmentServiceEmployee) {
+                                if (att.getEmp_ID() == j.decisionsJob.getIdEmployee()) {
+                                    j.setAttachmentServiceEmployee(att);
+                                }
+                            }
+
                         }
                     }
                 }
@@ -122,6 +107,13 @@ public class ShowMyServicesManager implements Serializable {
     public void setStepsAndDecsions(List<StepsAndDecsions> stepsAndDecsions) {
         this.stepsAndDecsions = stepsAndDecsions;
     }
-    
-    
+
+    public List<AttachmentServiceEmployee> getAttachmentServiceEmployee() {
+        return attachmentServiceEmployee;
+    }
+
+    public void setAttachmentServiceEmployee(List<AttachmentServiceEmployee> attachmentServiceEmployee) {
+        this.attachmentServiceEmployee = attachmentServiceEmployee;
+    }
+
 }

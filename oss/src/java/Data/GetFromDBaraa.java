@@ -323,4 +323,29 @@ public class GetFromDBaraa {
         return id;
     }
 
+    public static List<AttachmentServiceEmployee> AttachmentServiceEmployee(int Cit_ID , int Service_Citizen_ID, int Services_Provided_ID) {
+                    System.out.println("AAAtt");
+
+        ArrayList<AttachmentServiceEmployee> attachments = new ArrayList<AttachmentServiceEmployee>();
+        try {
+            DB db = new DB();
+            AttachmentServiceEmployee att;
+            
+            String sql = "SELECT * FROM attachment_service_employee where Cit_ID="+Cit_ID+" and Service_Citizen_ID="+Service_Citizen_ID+" and  Services_Provided_ID="+Services_Provided_ID+" ;";
+           System.out.println(sql);
+            ResultSet r = db.read(sql);
+            System.out.println(sql);
+            while (r.next()) {
+                att = new AttachmentServiceEmployee(r.getInt(1), r.getInt(2), r.getInt(3), r.getInt(4), r.getInt(5),r.getString(6) ,r.getBinaryStream(7),r.getString(8));
+               attachments.add(att);
+            }
+            
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(GetFromDBaraa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return attachments;
+
+    }
+    
 }

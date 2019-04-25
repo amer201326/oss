@@ -44,7 +44,7 @@ public class Crypto {
 
     }
 
-    static void fileProcessor(int cipherMode, String key, File inputFile, File outputFile) {
+    public static void fileProcessor(int cipherMode, String key, File inputFile, File outputFile) {
         try {
             Key secretKey = new SecretKeySpec(key.getBytes(), "AES");
             Cipher cipher = Cipher.getInstance("AES");
@@ -69,7 +69,7 @@ public class Crypto {
         }
     }
 
-    static byte[] dec(int cipherMode, String key, byte[] inputBytes) {
+    public static byte[] dec(int cipherMode, String key, byte[] inputBytes) {
         try {
             System.out.println("key lingth is " + key.length());
             Key secretKey = new SecretKeySpec(key.getBytes(), "AES");
@@ -86,7 +86,7 @@ public class Crypto {
         return null;
     }
 
-    static String encPas(String key, String text) {
+    public static String encPas(String key, String text) {
         try {
             Key secretKey = new SecretKeySpec(key.getBytes(), "AES");
             Cipher cipher = Cipher.getInstance("AES");
@@ -110,7 +110,7 @@ public class Crypto {
         return null;
     }
 
-    static String decPas(String key, String text) {
+    public static String decPas(String key, String text) {
         try {
             Key secretKey = new SecretKeySpec(key.getBytes(), "AES");
             Cipher cipher = Cipher.getInstance("AES");

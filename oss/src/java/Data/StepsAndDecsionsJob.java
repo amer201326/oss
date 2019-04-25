@@ -12,7 +12,7 @@ package Data;
 public class StepsAndDecsionsJob {
     public JobPath jobPath;
     public DecisionsJob decisionsJob;
-
+    AttachmentServiceEmployee attachmentServiceEmployee;
     public StepsAndDecsionsJob(JobPath jobPath, DecisionsJob decisionsJob) {
         this.jobPath = jobPath;
         this.decisionsJob = decisionsJob;
@@ -32,6 +32,14 @@ public class StepsAndDecsionsJob {
 
     public void setDecisionsJob(DecisionsJob decisionsJob) {
         this.decisionsJob = decisionsJob;
+    }
+
+    public AttachmentServiceEmployee getAttachmentServiceEmployee() {
+        return attachmentServiceEmployee;
+    }
+
+    public void setAttachmentServiceEmployee(AttachmentServiceEmployee attachmentServiceEmployee) {
+        this.attachmentServiceEmployee = attachmentServiceEmployee;
     }
     
     
