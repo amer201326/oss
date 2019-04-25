@@ -7,6 +7,7 @@ package Beans;
 
 import Data.CitizenService;
 import Data.GetFromDBaraa;
+import Data.ServiceCitizen;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -25,21 +26,21 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 @ViewScoped
-public class NotDoneCiticenServiceManeger implements Serializable{
-    
+public class NotDoneCiticenServiceManeger implements Serializable {
+
     @ManagedProperty(value = "#{msession}")
     Session session;
-    
-    List<CitizenService> NotDoneCitizenServices;
+
+    List<ServiceCitizen> NotDoneCitizenServices;
     int idCitizen;
-    
-            @PostConstruct
+
+    @PostConstruct
     public void init() {
-     if(session.citizen != null){
+        if (session.citizen != null) {
             idCitizen = session.citizen.getId();
-          NotDoneCitizenServices = GetFromDBaraa.notDoneCitizenServices(idCitizen);
+            NotDoneCitizenServices = GetFromDBaraa.notDoneCitizenServices(idCitizen);
         }
- }
+    }
 
     public NotDoneCiticenServiceManeger() {
     }
@@ -52,19 +53,39 @@ public class NotDoneCiticenServiceManeger implements Serializable{
         this.session = session;
     }
 
-    public List<CitizenService> getNotDoneCitizenServices() {
+    public List<ServiceCitizen> getNotDoneCitizenServices() {
         return NotDoneCitizenServices;
     }
 
-    public void setNotDoneCitizenServices(List<CitizenService> NotDoneCitizenServices) {
+    public void setNotDoneCitizenServices(List<ServiceCitizen> NotDoneCitizenServices) {
         this.NotDoneCitizenServices = NotDoneCitizenServices;
     }
+
+    public int getIdCitizen() {
+        return idCitizen;
+    }
+
+    public void setIdCitizen(int idCitizen) {
+        this.idCitizen = idCitizen;
+    }
+
     public void showServiceCitizen(int idServiceCitizen) {
         
-           for (CitizenService service : NotDoneCitizenServices) {
-            if(service.getId() == idServiceCitizen){
-                session.serviceCitizenShow = service; 
+        System.out.println("Bbbbbvvv");
+        try {
+             for (ServiceCitizen service : NotDoneCitizenServices) {
+            if (service.getService_Citizen_ID() == idServiceCitizen) {
+                session.serviceCitizenShow = service;
             }
-           } 
+        }
+         
+             FacesContext.getCurrentInstance().getExternalContext().redirect("ShowMyService.xhtml");
+
+        } catch (IOException ex) {
+            Logger.getLogger(NotDoneCiticenServiceManeger.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        
+       
     }
 }

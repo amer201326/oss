@@ -31,7 +31,8 @@ public class DecisionsDepartment {
     String externalMessage;
     String date;
     String depName;
-    
+
+    String decision;
     List<DecisionSection> section = new ArrayList<>();
 
     public DecisionsDepartment(int depId, int depOrder, int Services_Provided_ID, int Cit_ID, int Service_Citizen_ID, String status, double cost, String internalMessage, String externalMessage, String date) {
@@ -47,7 +48,7 @@ public class DecisionsDepartment {
         this.date = date;
     }
 
-    public DecisionsDepartment(String internalMessage, String externalMessage, String status, double cost, int depId, int depOrder, String depName) {
+    public DecisionsDepartment(String internalMessage, String externalMessage, String status, double cost, int depId, int depOrder, String depName, String decision) {
         this.internalMessage = internalMessage;
         this.externalMessage = externalMessage;
         this.status = status;
@@ -55,6 +56,7 @@ public class DecisionsDepartment {
         this.depId = depId;
         this.depOrder = depOrder;
         this.depName = depName;
+        this.decision = decision;
     }
 
     public DecisionsDepartment(String status, double cost, int depId, int depOrder) {
@@ -89,6 +91,21 @@ public class DecisionsDepartment {
         this.status = status;
     }
 
+    public String nameStatus() {
+        if (status == "done") {
+            return "جاهزه";
+        }
+        return "قيد التنفيذ";
+    }
+
+    public String nameDecision() {
+        if (status == "yse") {
+            return "تم القبول";
+        }else if(status == "no")
+        return "تم الرفض ";
+       return "لم يتحدد  "; 
+    }
+
     public double getCost() {
         return cost;
     }
@@ -96,8 +113,6 @@ public class DecisionsDepartment {
     public void setCost(double cost) {
         this.cost = cost;
     }
-
-   
 
     public String getDate() {
         return date;
@@ -131,17 +146,15 @@ public class DecisionsDepartment {
         this.depName = depName;
     }
 
-   
     public void addToDB() throws SQLException, ClassNotFoundException {
-      
-            DB data = new DB();
-            String q = "INSERT INTO decisions_department (`Dep_ID`, `Order_Departmant`, `Services_Provided_ID`, `Cit_ID`,"
-                    + " `Service_Citizen_ID`, `Status`, `Cost`) VALUES ('" + depId + "', '" + depOrder + "', '" + Services_Provided_ID + "',"
-                    + " '" + Cit_ID + "', '" + Service_Citizen_ID + "', '" + status + "', '" + cost + "');";
-            System.out.println("q d "+q);
-            data.write(q);
 
-        
+        DB data = new DB();
+        String q = "INSERT INTO decisions_department (`Dep_ID`, `Order_Departmant`, `Services_Provided_ID`, `Cit_ID`,"
+                + " `Service_Citizen_ID`, `Status`, `Cost`) VALUES ('" + depId + "', '" + depOrder + "', '" + Services_Provided_ID + "',"
+                + " '" + Cit_ID + "', '" + Service_Citizen_ID + "', '" + status + "', '" + cost + "');";
+        System.out.println("q d " + q);
+        data.write(q);
+
     }
 
     public int getServices_Provided_ID() {
@@ -176,9 +189,17 @@ public class DecisionsDepartment {
         this.section = section;
     }
 
+    public String getDecision() {
+        return decision;
+    }
+
+    public void setDecision(String decision) {
+        this.decision = decision;
+    }
+
     @Override
     public String toString() {
         return "DecisionsDepartment{" + "depId=" + depId + ", depOrder=" + depOrder + ", Services_Provided_ID=" + Services_Provided_ID + ", Cit_ID=" + Cit_ID + ", Service_Citizen_ID=" + Service_Citizen_ID + ", status=" + status + ", cost=" + cost + ", internalMessage=" + internalMessage + ", externalMessage=" + externalMessage + ", date=" + date + ", depName=" + depName + ", section=" + section + '}';
     }
-    
+
 }

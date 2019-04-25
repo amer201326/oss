@@ -52,7 +52,7 @@ public class GetFromDBaraa {
             ResultSet r = db.read(sql);
             while (r.next()) {
                 sc= new ServiceCitizen(r.getInt(1), r.getInt(2),r.getInt(3), r.getString(4), r.getString(5), r.getString(6));
-                sc.thisService = new Service(r.getInt(7), r.getString(8), r.getInt(9), r.getInt(10), r.getString(11), new Department(r.getInt(12)), new Section(r.getInt(13)), r.getString(14));
+                sc.thisService = new Service(r.getInt(7), r.getString(8), r.getInt(9), r.getInt(10), r.getString(11), new Department(r.getInt(12)), new Section(r.getString(13)), r.getString(14));
                 services.add(sc);
             }
         } catch (Exception e) {
@@ -114,22 +114,22 @@ public class GetFromDBaraa {
         return jobs;
     }
 
-    public static ArrayList<DecisionsDepartment> MyServicedepartmentPath(int idservice, int idcitizen, int idSerCit) {
-        ArrayList<DecisionsDepartment> departments = new ArrayList<>();
-        try {
-            DB db = new DB();
-            DecisionsDepartment d;
-            String sql = "SELECT dd.*,d.Dep_Name FROM decisions_department as dd inner join department as d on dd.Dep_ID = d.Dep_ID where Cit_ID = " + idcitizen + " and Service_Citizen_ID = " + idSerCit + " and Services_Provided_ID = " + idservice + ";";
-            ResultSet r = db.read(sql);
-            while (r.next()) {
-                d = new DecisionsDepartment(r.getString(8), r.getString(9), r.getString(6), r.getDouble(7), r.getInt(1), r.getInt(2), r.getString(11));
-                departments.add(d);
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        return departments;
-    }
+//    public static ArrayList<DecisionsDepartment> MyServicedepartmentPath(int idservice, int idcitizen, int idSerCit) {
+//        ArrayList<DecisionsDepartment> departments = new ArrayList<>();
+//        try {
+//            DB db = new DB();
+//            DecisionsDepartment d;
+//            String sql = "SELECT dd.*,d.Dep_Name FROM decisions_department as dd inner join department as d on dd.Dep_ID = d.Dep_ID where Cit_ID = " + idcitizen + " and Service_Citizen_ID = " + idSerCit + " and Services_Provided_ID = " + idservice + ";";
+//            ResultSet r = db.read(sql);
+//            while (r.next()) {
+//                d = new DecisionsDepartment(r.getString(8), r.getString(9), r.getString(6), r.getDouble(7), r.getInt(1), r.getInt(2), r.getString(11));
+//                departments.add(d);
+//            }
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//        return departments;
+//    }
 
     public static ArrayList<DecisionsJob> MyServiceJobPath(int idservice, int idcitizen, int idSerCit) {
         ArrayList<DecisionsJob> jobs = new ArrayList<>();
@@ -163,7 +163,7 @@ public class GetFromDBaraa {
             ResultSet r = db.read(sql);
             while (r.next()) {
                 s = new DepartmentPaths(r.getInt(1), r.getString(15), r.getInt(2), r.getString(15));
-                d = new DecisionsDepartment(r.getString(8), r.getString(9), r.getString(6), r.getDouble(7), r.getInt(1), r.getInt(2), r.getString(15));
+                d = new DecisionsDepartment(r.getString(8), r.getString(9), r.getString(6), r.getDouble(7), r.getInt(1), r.getInt(2), r.getString(15),r.getString(11));
                 sd = new StepsAndDecsions(s, d);
                 deps.add(sd);
             }

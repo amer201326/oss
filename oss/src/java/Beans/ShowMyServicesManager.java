@@ -114,6 +114,14 @@ public class ShowMyServicesManager implements Serializable {
     public void setSession(Session session) {
         this.session = session;
     }
+
+    public List<StepsAndDecsions> getStepsAndDecsions() {
+        return stepsAndDecsions;
+    }
+
+    public void setStepsAndDecsions(List<StepsAndDecsions> stepsAndDecsions) {
+        this.stepsAndDecsions = stepsAndDecsions;
+    }
     
     
 }
