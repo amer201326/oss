@@ -74,12 +74,12 @@
 
                                             <p:commandLink class="btn btn-warning btn-circle"  actionListener="#{notDoneCiticenServiceManeger.showServiceCitizen(service.service_Citizen_ID)}">
                                                 <h:outputText styleClass="fas fa-arrow-left" style="margin:0 auto;" />
-                                                <f:setPropertyActionListener value="#{service}" target="#{msession.serviceCitizen}" />
+                                                <f:setPropertyActionListener value="#{service}" target="#{msession.serviceCitizenShow}" />
                                             </p:commandLink>
 
                                         </div>
                                         <div class="card-body ">
-                                            <h4>#{service.thisService.name}</h4>
+                                            <h4>#{service.service.name}</h4>
                                             <h5>#{service.date}</h5>
                                         </div>
                                     </div>

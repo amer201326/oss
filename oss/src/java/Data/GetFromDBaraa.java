@@ -26,6 +26,7 @@ public class GetFromDBaraa {
             CitizenService cs;
             Service s;
             String sql = "SELECT sc.Services_Provided_ID,Serv_Name,sc.Date,sc.Service_Citizen_ID FROM service_citizen as sc inner join services_provided as sp where sc.status = 'done' and Cit_ID=" + idcitizen + " and sc.Services_Provided_ID=sp.Services_Provided_ID;";
+            System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
                 s = new Service();
@@ -52,7 +53,7 @@ public class GetFromDBaraa {
             ResultSet r = db.read(sql);
             while (r.next()) {
                 sc= new ServiceCitizen(r.getInt(1), r.getInt(2),r.getInt(3), r.getString(4), r.getString(5), r.getString(6));
-                sc.thisService = new Service(r.getInt(7), r.getString(8), r.getInt(9), r.getInt(10), r.getString(11), new Department(r.getInt(12)), new Section(r.getString(13)), r.getString(14));
+                sc.service = new Service(r.getInt(7), r.getString(8), r.getInt(9), r.getInt(10), r.getString(11), new Department(r.getInt(12)), new Section(r.getString(13)), r.getString(14));
                 services.add(sc);
             }
         } catch (Exception e) {
