@@ -13,6 +13,7 @@ import DB.DB;
 import Data.Employee;
 import Data.GetFromDB;
 import Data.ServiceAttachmentName;
+import Data.ServiceCitizen;
 import Data.ServiceCitizen_1;
 import Data.Service_Job;
 import Data.ViewerAttachment;
@@ -31,7 +32,7 @@ import javax.faces.context.FacesContext;
 @ManagedBean
 public class ShoeServiceCitizemDoneEmpManeger {
 
-    ServiceCitizen_1 serviseCitizen;
+    ServiceCitizen serviseCitizen;
     Employee employee;
     
     @ManagedProperty(value = "#{msession}")
@@ -41,7 +42,7 @@ public class ShoeServiceCitizemDoneEmpManeger {
 
     @PostConstruct
     public void init() {
-        serviseCitizen = session.serviceCitizen;
+        serviseCitizen = session.serviceCitizenShow;
         employee =  session.employee;
         
         if (serviseCitizen != null) {
@@ -73,20 +74,29 @@ public class ShoeServiceCitizemDoneEmpManeger {
             }
         }
 
-        serviseCitizen.att = att;
-        serviseCitizen.attform = attform;
+        serviseCitizen.attachment = att;
+        serviseCitizen.attwhithFile= attform;
         
-        serviseCitizen.messages(employee);
+        
     }
 
-    public ServiceCitizen_1 getServiseCitizen() {
+    public ServiceCitizen getServiseCitizen() {
         return serviseCitizen;
     }
 
-    public void setServiseCitizen(ServiceCitizen_1 serviseCitizen) {
+    public void setServiseCitizen(ServiceCitizen serviseCitizen) {
         this.serviseCitizen = serviseCitizen;
     }
 
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    
     public Session getSession() {
         return session;
     }
