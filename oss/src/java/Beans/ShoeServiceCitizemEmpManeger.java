@@ -13,6 +13,7 @@ import DB.DB;
 import Data.Employee;
 import Data.GetFromDB;
 import Data.ServiceAttachmentName;
+import Data.ServiceCitizen;
 import Data.ServiceCitizen_1;
 import Data.Service_Job;
 import Data.ViewerAttachment;
@@ -23,25 +24,28 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
 
 @ManagedBean
 public class ShoeServiceCitizemEmpManeger {
 
-    ServiceCitizen_1 serviseCitizen;
+    ServiceCitizen serviseCitizen;
     Employee employee;
     
     @ManagedProperty(value = "#{msession}")
     Session session;
-
+    
     boolean haveService = false;
-
+    List<UploadedFile> allFileEmployee;
     @PostConstruct
     public void init() {
-        serviseCitizen = session.serviceCitizen;
+        serviseCitizen = session.serviceCitizenShow;
         employee =  session.employee;
         
         if (serviseCitizen != null) {
@@ -73,17 +77,19 @@ public class ShoeServiceCitizemEmpManeger {
             }
         }
 
-        serviseCitizen.att = att;
-        serviseCitizen.attform = attform;
+        serviseCitizen.attachment = att;
+        serviseCitizen.attwhithFile = attform;
     }
 
-    public ServiceCitizen_1 getServiseCitizen() {
+    public ServiceCitizen getServiseCitizen() {
         return serviseCitizen;
     }
 
-    public void setServiseCitizen(ServiceCitizen_1 serviseCitizen) {
+    public void setServiseCitizen(ServiceCitizen serviseCitizen) {
         this.serviseCitizen = serviseCitizen;
     }
+
+   
 
     public Session getSession() {
         return session;
@@ -102,24 +108,32 @@ public class ShoeServiceCitizemEmpManeger {
     }
 
     public void submit() throws SQLException {
-        Service_Job sj = serviseCitizen.getService_Job();
-        DB db;
-        try {
-            db = new DB();
-            if (sj.getOrder_Job() != 0) {
+        serviseCitizen.ContineuInPath(employee.getEmp_id());
+        
 
-                serviseCitizen.getService_Job().updateDataBase();
-                String q = "UPDATE service_jobs SET status = 'done' WHERE (`Dep_ID` = " + sj.getDep_ID() + ") and (`Cit_ID` = " + sj.getCit_ID() + ") and (`Sec_ID` = " + sj.getSec_ID() + ") and (`Job_ID` = " + sj.getJob_ID() + ") and (`Order_Departmant` = " + sj.getOrder_Departmant() + ") and (`Order_Section` = " + sj.getOrder_Section() + ") and (`Order_Job` = " + sj.getOrder_Job() + ") and (`Services_Provided_ID` = " + sj.getServices_Provided_ID() + ") and (`Service_Citizen_ID` = " + sj.getService_Citizen_ID() + ");";
-                db.write(q);
-            } else {
-                String q = "UPDATE service_jobs SET status = 'done' WHERE (`Dep_ID` = " + sj.getDep_ID() + ") and (`Cit_ID` = " + sj.getCit_ID() + ") and (`Sec_ID` = " + sj.getSec_ID() + ") and (`Job_ID` = " + sj.getJob_ID() + ") and (`Order_Departmant` = " + sj.getOrder_Departmant() + ") and (`Order_Section` = " + sj.getOrder_Section() + ") and (`Order_Job` = " + sj.getOrder_Job() + ") and (`Sec_ID` = " + sj.getSec_ID() + ") and (`Order_Departmant` = " + sj.getOrder_Departmant() + ") and (`Order_Section` = " + sj.getOrder_Section() + ") and (`Services_Provided_ID` = " + sj.getServices_Provided_ID() + ") and (`Service_Citizen_ID` = " + sj.getService_Citizen_ID() + ");";
-                db.write(q);
-            }
+    }
 
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ShoeServiceCitizemEmpManeger.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public Employee getEmployee() {
+        return employee;
+    }
 
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public List<UploadedFile> getAllFileEmployee() {
+        return allFileEmployee;
+    }
+
+    public void setAllFileEmployee(List<UploadedFile> allFileEmployee) {
+        this.allFileEmployee = allFileEmployee;
+    }
+    
+    
+    public void handleFileUpload(FileUploadEvent event) {
+        
+        allFileEmployee.add(event.getFile());
+        System.out.println("upload file");
     }
 
 }

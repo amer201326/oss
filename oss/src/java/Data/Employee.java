@@ -185,7 +185,7 @@ public class Employee implements Serializable {
 
     public void addEmployeeToDB() {
         
-        last += 1;
+        
         String q = "INSERT INTO employees (`Dep_ID`, `Sec_ID`, `Job_ID`, `Emp_ID`, `Emp_Name`, `Emp_ID_Card`, `Emp_Email`, `Emp_Telephone`, `Emp_Birthday`, `Emp_StartDate`, `Emp_Mobile`,`Emp_Gender`) \n"
                 + "VALUES (" + dep_id + "," + sec_id + "," + job_id + "," + emp_id + ",'" + emp_name + "','" + emp_idCard + "','" + emp_email + "','"
                 + emp_tel + "','" + emp_birth + "','" + LocalDate.now() + "','" + emp_mobile + "','" + emp_gender + "');";
@@ -194,6 +194,7 @@ public class Employee implements Serializable {
             DB data = new DB();
             System.out.println(q);
             data.write(q);
+            account.addEmpAccountToDB();
 //            for (int i = 0; i < screens.size(); i++) {
 //                Screen get = screens.get(i);
 //                

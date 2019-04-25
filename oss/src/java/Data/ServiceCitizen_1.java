@@ -157,22 +157,22 @@ public class ServiceCitizen_1 implements Serializable {
         this.attform = attform;
     }
 
-    public void messages(Employee e ) {
-        
-        try {
-            DB db = new DB();
-
-            String sql ="SELECT Com_ExternalMessage, Com_InternalMessage FROM decisions_job where Dep_ID= "+e.dep_id+" and Sec_ID= "+e.sec_id+" and Job_ID="+e.job_id+" and Cit_ID="+Cit_ID+" and Service_Citizen_ID="+Service_Citizen_ID +" ;";
-            System.out.println(sql);
-            ResultSet r = db.read(sql);
-            while (r.next()) {
-                externalMessage = r.getString(1);
-                internalMessage =  r.getString(2);
-            }
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(ServiceCitizen_1.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
+//    public void messages(Employee e ) {
+//        
+//        try {
+//            DB db = new DB();
+//
+//            String sql ="SELECT Com_ExternalMessage, Com_InternalMessage FROM decisions_job where Dep_ID= "+e.dep_id+" and Sec_ID= "+e.sec_id+" and Job_ID="+e.job_id+" and Cit_ID="+Cit_ID+" and Service_Citizen_ID="+Service_Citizen_ID +" ;";
+//            System.out.println(sql);
+//            ResultSet r = db.read(sql);
+//            while (r.next()) {
+//                externalMessage = r.getString(1);
+//                internalMessage =  r.getString(2);
+//            }
+//        } catch (SQLException | ClassNotFoundException ex) {
+//            Logger.getLogger(ServiceCitizen_1.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        
+//    }
 
 }

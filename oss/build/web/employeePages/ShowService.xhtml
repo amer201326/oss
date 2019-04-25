@@ -40,7 +40,7 @@
                     <ui:include src="heder.xhtml"/>
                     <!-- End of Topbar -->
 
-                    <h:form>
+                    <h:form enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-sm-12 text-center">
 
@@ -225,7 +225,7 @@
                                             </div>
 
                                             <div class="card-body">
-                                                <ui:repeat value="#{shoeServiceCitizemEmpManeger.serviseCitizen.att}" var="att" varStatus="in" >
+                                                <ui:repeat value="#{shoeServiceCitizemEmpManeger.serviseCitizen.attachment}" var="att" varStatus="in" >
                                                     <div class="flexAm row-space " style="margin-right: 14px">
                                                         <div class="px-3 mb-2 py-5 bg-gradient-#{att.colorHaveFile()} text-white border-bottom-#{att.colorHaveFile()}">مرفق  #{in.index+1}</div>
                                                         <div class="col-sm-11 px-5  mb-2 py-4  border-bottom-#{att.colorHaveFile()} ">
@@ -261,7 +261,7 @@
                                                 <h6 class="m-0 font-weight-bold text-primary"> متطلبات الخدمة </h6>
                                             </div>
                                             <div class="card-body">
-                                                <ui:repeat value="#{shoeServiceCitizemEmpManeger.serviseCitizen.attform}" var="att2"  varStatus="inn">
+                                                <ui:repeat value="#{shoeServiceCitizemEmpManeger.serviseCitizen.attwhithFile}" var="att2"  varStatus="inn">
                                                     <div class="flexAm row-space " style="margin-right: 14px">
                                                         <div class="px-3 mb-2 py-5 bg-gradient-#{att2.colorHaveFile()} text-white border-bottom-#{att2.colorHaveFile()}">نموذج  #{inn.index+1}</div>
                                                         <div class="col-sm-11 px-5  mb-2 py-4  border-bottom-#{att2.colorHaveFile()} ">
@@ -289,7 +289,7 @@
                                         </div>
                                     </div> 
                                 </div>
-                                
+
                                 <div class="col-sm-12 mb-4">
                                     <div class="col-sm-12" style="text-align: right; min-width:900px ">
                                         <div class="card shadow mb-xl-4">
@@ -297,7 +297,10 @@
                                                 <h6 class="m-0 font-weight-bold text-primary">ارفاق ملفات</h6>
                                             </div>
                                             <div class="card-body">
-                                                
+                                                <p:fileUpload  fileUploadListener="#{shoeServiceCitizemEmpManeger.handleFileUpload}" mode="advanced"
+                                                               auto="true"  dragDropSupport="true" multiple="true"     />
+
+                                                  
                                             </div>
 
                                         </div>
@@ -319,12 +322,12 @@
                                                             <div class="col-sm-12 py-2">
                                                                 <br/>
                                                                 : التعليقات الخارجيه 
-                                                                <p:inputTextarea value="#{shoeServiceCitizemEmpManeger.serviseCitizen.externalMessage}" rows="5" cols="100" dir="rtl" style="width: 100%;" /> 
+                                                                <p:inputTextarea value="#{shoeServiceCitizemEmpManeger.serviseCitizen.decisionsJob.externalMessage}" rows="5" cols="100" dir="rtl" style="width: 100%;" /> 
                                                             </div>
                                                             <div class="col-sm-12 py-2">
                                                                 <br/>
                                                                 : التعليقات الداخلية (لا يمكن للمواطن ان يرها ) 
-                                                                <p:inputTextarea value="#{shoeServiceCitizemEmpManeger.serviseCitizen.internalMessage}" rows="5" cols="100" dir="rtl" style="width: 100%;"/> 
+                                                                <p:inputTextarea value="#{shoeServiceCitizemEmpManeger.serviseCitizen.decisionsJob.internalMessage}" rows="5" cols="100" dir="rtl" style="width: 100%;"/> 
                                                             </div>
                                                         </div>
 

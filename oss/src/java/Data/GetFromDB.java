@@ -942,10 +942,10 @@ public class GetFromDB {
         return l;
     }
 
-    public static List<ServiceCitizen_1> getAllRequestService(Employee emp) {
-        ServiceCitizen_1 cit = new ServiceCitizen_1();
+    public static List<ServiceCitizen> getAllRequestService(Employee emp) {
+        ServiceCitizen cit = new ServiceCitizen();
 
-        List<ServiceCitizen_1> c = new ArrayList<ServiceCitizen_1>();
+        List<ServiceCitizen> c = new ArrayList<ServiceCitizen>();
         try {
             DB db = new DB();
             String sql = "SELECT * FROM services_provided as sp inner join service_citizen as sc on sc.Services_Provided_ID = sp.Services_Provided_ID "
@@ -959,7 +959,7 @@ public class GetFromDB {
                         r.getString(22), r.getString(23), r.getString(24), r.getString(25), r.getString(26), r.getString(27), r.getString(28), r.getString(29), r.getString(30),
                         r.getString(31), r.getString(32), r.getString(33), r.getString(34), r.getString(35));
                 Service_Job service_Job = new Service_Job(r.getInt(36), r.getInt(37), r.getInt(38), r.getInt(39), r.getInt(40), r.getInt(41), r.getInt(42), r.getInt(43), r.getInt(44), r.getString(45));
-                cit = new ServiceCitizen_1(s, r.getInt(9), r.getInt(10), r.getInt(11), r.getString(12), r.getString(13), r.getString(14), c1, service_Job);
+                cit = new ServiceCitizen(s, r.getInt(9), r.getInt(10), r.getInt(11), r.getString(12), r.getString(13), r.getString(14), c1, service_Job);
                 c.add(cit);
             }
         } catch (Exception e) {

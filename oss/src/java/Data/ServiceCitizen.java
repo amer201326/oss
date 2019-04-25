@@ -5,6 +5,7 @@
  */
 package Data;
 
+import Beans.ShoeServiceCitizemEmpManeger;
 import DB.DB;
 import static Data.GetFromDBaraa.getMaxId_attachment_archive_citizen;
 import static Data.GetFromDBaraa.stepAndDecDep;
@@ -33,14 +34,18 @@ public class ServiceCitizen {
     String note;
     public List<ServiceAttachmentName> attachment = new ArrayList<ServiceAttachmentName>();
     public List<ServiceAttachmentName> attwhithFile = new ArrayList<ServiceAttachmentName>();
-    public Service thisService = new Service();
+
+    Service service;
+    DecisionsJob decisionsJob = new DecisionsJob();
+    Service_Job service_Job;
+    Citizen citizen;
 
     public ServiceCitizen() {
 
     }
-    
-    public ServiceCitizen( int Service_Citizen_ID, int Services_Provided_ID, int Cit_ID, String Date, String status, String note) {
-       
+
+    public ServiceCitizen(int Service_Citizen_ID, int Services_Provided_ID, int Cit_ID, String Date, String status, String note) {
+
         this.Service_Citizen_ID = Service_Citizen_ID;
         this.Services_Provided_ID = Services_Provided_ID;
         this.Cit_ID = Cit_ID;
@@ -49,10 +54,22 @@ public class ServiceCitizen {
         this.note = note;
     }
 
-    
+    public ServiceCitizen(Service service, int Service_Citizen_ID, int Services_Provided_ID, int Cit_ID, String Date, String status, String note, Citizen citizen, Service_Job service_Job) {
+        this.service = service;
+        this.Service_Citizen_ID = Service_Citizen_ID;
+        this.Services_Provided_ID = Services_Provided_ID;
+        this.Cit_ID = Cit_ID;
+        this.Date = Date;
+        this.status = status;
+
+        this.note = note;
+        this.citizen = citizen;
+        this.service_Job = service_Job;
+    }
+
     public boolean addToDataBase() {
 
-        Services_Provided_ID = thisService.id;
+        Services_Provided_ID = service.id;
 
         idMaxSC = getMaxId_service_citizen(Cit_ID);
         idMaxSC++;
@@ -164,14 +181,6 @@ public class ServiceCitizen {
         return id;
     }
 
-    public Service getThisService() {
-        return thisService;
-    }
-
-    public void setThisService(Service thisService) {
-        this.thisService = thisService;
-    }
-
     public int getCit_ID() {
         return Cit_ID;
     }
@@ -228,6 +237,38 @@ public class ServiceCitizen {
         this.status = status;
     }
 
+    public int getIdMaxSC() {
+        return idMaxSC;
+    }
+
+    public void setIdMaxSC(int idMaxSC) {
+        this.idMaxSC = idMaxSC;
+    }
+
+    public Service getService() {
+        return service;
+    }
+
+    public void setService(Service service) {
+        this.service = service;
+    }
+
+    public Service_Job getService_Job() {
+        return service_Job;
+    }
+
+    public void setService_Job(Service_Job service_Job) {
+        this.service_Job = service_Job;
+    }
+
+    public Citizen getCitizen() {
+        return citizen;
+    }
+
+    public void setCitizen(Citizen citizen) {
+        this.citizen = citizen;
+    }
+
     public String getNote() {
         return note;
     }
@@ -257,6 +298,14 @@ public class ServiceCitizen {
             System.out.println(e.getMessage());
         }
         return departments;
+    }
+
+    public DecisionsJob getDecisionsJob() {
+        return decisionsJob;
+    }
+
+    public void setDecisionsJob(DecisionsJob decisionsJob) {
+        this.decisionsJob = decisionsJob;
     }
 
     public ArrayList<SectionPath> firstSecsInDPathOfthisService(int Dep_ID, int Order_Departmant) {
@@ -458,9 +507,9 @@ public class ServiceCitizen {
 
                         for (int j = 0; j < decisionsJobs1.length - 1; j++) {
                             if (decisionsJobs1[j + 1].job.order < decisionsJobs1[j].job.order) {
-                                DecisionsJob tempsj = decisionsJobs1[j + 1];
+                                DecisionsJob tempservice_Job = decisionsJobs1[j + 1];
                                 decisionsJobs1[j + 1] = decisionsJobs1[j];
-                                decisionsJobs1[j] = tempsj;
+                                decisionsJobs1[j] = tempservice_Job;
                             }
 
                         }
@@ -504,22 +553,47 @@ public class ServiceCitizen {
     }
 ///////////////////////////////employee
 
-    public void ContineuInPath(Service_Job j,int Cit_ID, int Service_Citizen_ID) {
+    public void ContineuInPath(int empID) {
 
-        List<DecisionsDepartment> departments = GetFromDB.getDecisionsDepartment(Cit_ID, Service_Citizen_ID);
-        List<DecisionSection> sections = GetFromDB.getDecisionsSection(Cit_ID, Service_Citizen_ID);
-        List<DecisionsJob> jobs = GetFromDB.getDecisionsJob(Cit_ID, Service_Citizen_ID);
+        DB db;
+        try {
+            db = new DB();
 
-        
-        List<Service_Job> service_Jobs = GetFromDB.getAllService_Jobs(j);
-        for (Service_Job sj : service_Jobs) {
-            if (sj.Order_Section == 0) {
+            String q = "start transaction;";
+            db.write(q);
+            service_Job.done();
+            decisionsJob.Cit_ID = Cit_ID;
+            decisionsJob.Service_Citizen_ID = Service_Citizen_ID;
+            decisionsJob.Services_Provided_ID = Services_Provided_ID;
+            decisionsJob.job = new JobPath(service_Job.Dep_ID, service_Job.Sec_ID, service_Job.Job_ID, service_Job.Services_Provided_ID, "",service_Job.Order_Departmant
+                    , service_Job.Order_Section ,service_Job.Order_Job);
+            decisionsJob.date = LocalDate.now().toString();
+            decisionsJob.idEmployee = empID;
+            decisionsJob.status = "done";
+            decisionsJob.updateDone();
+            q = "rollback;";
+            System.out.println(q);
+            db.write(q);
 
-            } else {
-
-            }
-
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ShoeServiceCitizemEmpManeger.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceCitizen.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+//        List<DecisionsDepartment> departments = GetFromDB.getDecisionsDepartment(Cit_ID, Service_Citizen_ID);
+//        List<DecisionSection> sections = GetFromDB.getDecisionsSection(Cit_ID, Service_Citizen_ID);
+//        List<DecisionsJob> jobs = GetFromDB.getDecisionsJob(Cit_ID, Service_Citizen_ID);
+//
+//        
+//        List<Service_Job> service_Jobs = GetFromDB.getAllService_Jobs(service_Job);
+//        for (Service_Job service_Job : service_Jobs) {
+//            if (service_Job.Order_Section == 0) {
+//
+//            } else {
+//
+//            }
+//
+//        }
     }
 }

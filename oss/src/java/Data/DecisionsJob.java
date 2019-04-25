@@ -176,5 +176,17 @@ public class DecisionsJob {
     public String toString() {
         return "DecisionsJob{" + "job=" + job + ", idEmployee=" + idEmployee + ", status=" + status + ", runing=" + runing + ", cost=" + cost + ", internalMessage=" + internalMessage + ", externalMessage=" + externalMessage + ", date=" + date + ", Services_Provided_ID=" + Services_Provided_ID + ", Cit_ID=" + Cit_ID + ", Service_Citizen_ID=" + Service_Citizen_ID + '}';
     }
+
+    void updateDone() throws SQLException, ClassNotFoundException {
+        DB data = new DB();
+            String q = "UPDATE `oss`.`decisions_job` SET `Status` = 'done', `Cost` = "+date +", `Com_InternalMessage` = "+internalMessage+","
+                    + " `Com_ExternalMessage` = "+externalMessage+","
+                    + " `Date` = "+date+" WHERE (`Dep_ID` = "+job.DepId+") and (`Sec_ID` = "+job.DepId+") and (`Job_ID` = "+job.DepId+") "
+                    + "and (`Services_Provided_ID` = "+Services_Provided_ID+") and (`Order_Departmant` = "+job.DepId+") and (`Order_Section` = "+job.DepId+") "
+                    + "and (`Order_Job` = "+job.DepId+") "
+                    + "and (`Cit_ID` = "+Cit_ID+") and (`Service_Citizen_ID` = "+Service_Citizen_ID+") and (`Emp_ID` = "+idEmployee+");";
+            System.out.println("qj  =  "+q);
+            data.write(q);
+    }
     
 }

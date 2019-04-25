@@ -124,11 +124,11 @@ public class Service_Job {
 
         DB d = new DB();
         String q = "INSERT INTO service_jobs (`Service_Citizen_ID`, `Services_Provided_ID`, `Cit_ID`, `Dep_ID`, `Sec_ID`, `Job_ID`, `Order_Departmant`, `Order_Section`, `Order_Job`,`status`)"
-                + " VALUES (" + Service_Citizen_ID + ", " + Services_Provided_ID + ", " + Cit_ID +
-                ", " + Dep_ID + ", " + Sec_ID + ", " + Job_ID + ", " + Order_Departmant + ", " + Order_Section + ", " + Order_Job + ",'"+status+"');";
+                + " VALUES (" + Service_Citizen_ID + ", " + Services_Provided_ID + ", " + Cit_ID
+                + ", " + Dep_ID + ", " + Sec_ID + ", " + Job_ID + ", " + Order_Departmant + ", " + Order_Section + ", " + Order_Job + ",'" + status + "');";
 
-        System.out.println("servic job "+q);
-        
+        System.out.println("servic job " + q);
+
         d.write(q);
 
     }
@@ -136,27 +136,28 @@ public class Service_Job {
     public void deleteFromDataBase() throws SQLException, ClassNotFoundException {
 
         DB d = new DB();
-        String q="DELETE FROM service_jobs WHERE (`Dep_ID` = " + Dep_ID + ") and (`Cit_ID` = " + Cit_ID + ") and (`Sec_ID` = " + Sec_ID + ") and (`Job_ID` = " + Job_ID + ") and (`Order_Departmant` = " + Order_Departmant + ") and (`Order_Section` = " + Order_Section + ") and (`Order_Job` = " + Order_Job + ") and (`Services_Provided_ID` = " +Services_Provided_ID  + ") and (`Service_Citizen_ID` = " + Service_Citizen_ID + ")";
+        String q = "DELETE FROM service_jobs WHERE (`Dep_ID` = " + Dep_ID + ") and (`Cit_ID` = " + Cit_ID + ") and (`Sec_ID` = " + Sec_ID + ") and (`Job_ID` = " + Job_ID + ") and (`Order_Departmant` = " + Order_Departmant + ") and (`Order_Section` = " + Order_Section + ") and (`Order_Job` = " + Order_Job + ") and (`Services_Provided_ID` = " + Services_Provided_ID + ") and (`Service_Citizen_ID` = " + Service_Citizen_ID + ")";
 
-        System.out.println("servic job "+q);
-        
+        System.out.println("servic job " + q);
+
         d.write(q);
 
     }
-    public void updateDataBase()  {
+
+    public void updateDataBase() {
 
         try {
             DB d = new DB();
-            String q="UPDATE service_jobs SET status = 'done' WHERE (`Dep_ID` = "+Dep_ID+") and (`Cit_ID` = "+Cit_ID+") and (`Sec_ID` = "+Sec_ID+") and (`Job_ID` = "+Job_ID+") and (`Order_Departmant` = "+Order_Departmant+") and (`Order_Section` = "+Order_Section+") and (`Order_Job` = "+Order_Job+") and (`Services_Provided_ID` = "+Services_Provided_ID+") and (`Service_Citizen_ID` = "+Service_Citizen_ID+");";
+            String q = "UPDATE service_jobs SET status = 'done' WHERE (`Dep_ID` = " + Dep_ID + ") and (`Cit_ID` = " + Cit_ID + ") and (`Sec_ID` = " + Sec_ID + ") and (`Job_ID` = " + Job_ID + ") and (`Order_Departmant` = " + Order_Departmant + ") and (`Order_Section` = " + Order_Section + ") and (`Order_Job` = " + Order_Job + ") and (`Services_Provided_ID` = " + Services_Provided_ID + ") and (`Service_Citizen_ID` = " + Service_Citizen_ID + ");";
             System.out.println(q);
-            
+
             d.write(q);
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(Service_Job.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
-    
+
     public String getStatus() {
         return status;
     }
@@ -164,6 +165,37 @@ public class Service_Job {
     public void setStatus(String status) {
         this.status = status;
     }
-    
+
+    public void done() throws SQLException, ClassNotFoundException {
+        DB db;
+
+        db = new DB();
+        String q = "";
+        if (Order_Job != 0) {
+
+            q = "UPDATE `oss`.`service_jobs` SET `status` = 'done' WHERE (`Service_Citizen_ID` = " + Service_Citizen_ID + ")"
+                    + " and (`Services_Provided_ID` = " + Services_Provided_ID + ") and (`Cit_ID` = " + Cit_ID + ") and (`Dep_ID` = " + getDep_ID() + ")"
+                    + " and (`Sec_ID` = " + Sec_ID + ") and (`Job_ID` = " + Job_ID + ") and (`Order_Departmant` = " + Order_Departmant + ") and"
+                    + " (`Order_Section` = " + Order_Section + ") and (`Order_Job` = " + Order_Job + ");";
+
+            System.out.println(q);
+            db.write(q);
+        } else if (Order_Section != 0) {
+            q = "UPDATE `oss`.`service_jobs` SET `status` = 'done' WHERE (`Service_Citizen_ID` = " + Service_Citizen_ID + ")"
+                    + " and (`Services_Provided_ID` = " + Services_Provided_ID + ") and (`Cit_ID` = " + Cit_ID + ") and (`Dep_ID` = " + getDep_ID() + ")"
+                    + " and (`Sec_ID` = " + Sec_ID + ")  and (`Order_Departmant` = " + Order_Departmant + ") and"
+                    + " (`Order_Section` = " + Order_Section + ") ;";
+            System.out.println(q);
+            db.write(q);
+        } else {
+            q = "UPDATE `oss`.`service_jobs` SET `status` = 'done' WHERE (`Service_Citizen_ID` = " + Service_Citizen_ID + ")"
+                    + " and (`Services_Provided_ID` = " + Services_Provided_ID + ") and (`Cit_ID` = " + Cit_ID + ")"
+                    + " and (`Dep_ID` = " + getDep_ID() + ")"
+                    + "   and (`Order_Departmant` = " + Order_Departmant + ")  ;";
+            System.out.println(q);
+            db.write(q);
+        }
+
+    }
 
 }

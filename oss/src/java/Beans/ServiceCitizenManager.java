@@ -37,18 +37,18 @@ public class ServiceCitizenManager implements Serializable {
 
     
     
-    List<ServiceCitizen_1> allRequestService;
-    List<ServiceCitizen_1> allRequestServiceView;
-    List<ServiceCitizen_1> allRequestServiceNotView;
+    List<ServiceCitizen> allRequestService;
+    List<ServiceCitizen> allRequestServiceView;
+    List<ServiceCitizen> allRequestServiceNotView;
 
-    ServiceCitizen_1 serviceSelected;
+    ServiceCitizen serviceSelected;
 
     @ManagedProperty(value = "#{msession}")
     Session session;
 
     public ServiceCitizenManager() {
 
-        serviceSelected = new ServiceCitizen_1();
+        serviceSelected = new ServiceCitizen();
     }
 
     @PostConstruct
@@ -60,7 +60,7 @@ public class ServiceCitizenManager implements Serializable {
             allRequestServiceNotView = new ArrayList<>();
 
             for (int i = 0; i < allRequestService.size(); i++) {
-                ServiceCitizen_1 get = allRequestService.get(i);
+                ServiceCitizen get = allRequestService.get(i);
                 if (get.getStatus().compareTo("done") == 0) {
                     allRequestServiceView.add(get);
                 } else {
@@ -69,12 +69,12 @@ public class ServiceCitizenManager implements Serializable {
             }
         }
 
-        serviceSelected = new ServiceCitizen_1();
+        serviceSelected = new ServiceCitizen();
     }
 
     public void showServise() {
         try {
-            session.serviceCitizen = serviceSelected;            
+            session.serviceCitizenShow = serviceSelected;            
             FacesContext.getCurrentInstance().getExternalContext().redirect("ShowService.xhtml");
             
         } catch (IOException ex) {
@@ -83,7 +83,7 @@ public class ServiceCitizenManager implements Serializable {
     }
     public void showDoneServise() {
         try {
-            session.serviceCitizen = serviceSelected;            
+            session.serviceCitizenShow = serviceSelected;            
             FacesContext.getCurrentInstance().getExternalContext().redirect("ShowServiceDone.xhtml");
             
         } catch (IOException ex) {
@@ -91,41 +91,39 @@ public class ServiceCitizenManager implements Serializable {
         }
     }
 
-    public List<ServiceCitizen_1> getAllRequestServiceView() {
-        return allRequestServiceView;
-    }
-
-    public void setAllRequestServiceView(List<ServiceCitizen_1> allRequestServiceView) {
-        this.allRequestServiceView = allRequestServiceView;
-    }
-
-    public List<ServiceCitizen_1> getAllRequestServiceNotView() {
-        return allRequestServiceNotView;
-    }
-
-    public void setAllRequestServiceNotView(List<ServiceCitizen_1> allRequestServiceNotView) {
-        this.allRequestServiceNotView = allRequestServiceNotView;
-    }
-
-    public List<ServiceCitizen_1> getAllRequestService() {
+    public List<ServiceCitizen> getAllRequestService() {
         return allRequestService;
     }
 
-    public void setAllRequestService(List<ServiceCitizen_1> allRequestService) {
+    public void setAllRequestService(List<ServiceCitizen> allRequestService) {
         this.allRequestService = allRequestService;
     }
 
-    public ServiceCitizen_1 getServiceSelected() {
+    public List<ServiceCitizen> getAllRequestServiceView() {
+        return allRequestServiceView;
+    }
+
+    public void setAllRequestServiceView(List<ServiceCitizen> allRequestServiceView) {
+        this.allRequestServiceView = allRequestServiceView;
+    }
+
+    public List<ServiceCitizen> getAllRequestServiceNotView() {
+        return allRequestServiceNotView;
+    }
+
+    public void setAllRequestServiceNotView(List<ServiceCitizen> allRequestServiceNotView) {
+        this.allRequestServiceNotView = allRequestServiceNotView;
+    }
+
+    public ServiceCitizen getServiceSelected() {
         return serviceSelected;
     }
 
-    public void setServiceSelected(ServiceCitizen_1 serviceSelected) {
+    public void setServiceSelected(ServiceCitizen serviceSelected) {
         this.serviceSelected = serviceSelected;
     }
 
-    public void onServiceSelect(SelectEvent event) {
-        serviceSelected = (ServiceCitizen_1) event.getObject();
-    }
+    
 
     public Session getSession() {
         return session;

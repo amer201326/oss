@@ -43,7 +43,7 @@ public class Session implements Serializable{
     Manager manager ;
     Citizen citizen;
     Employee employee;
-    ServiceCitizen_1 serviceCitizen;
+    
     ServiceCitizen serviceCitizenShow;
     
     public Session() {
@@ -144,13 +144,7 @@ public class Session implements Serializable{
         this.passWord = passWord;
     }
 
-    public ServiceCitizen_1 getServiceCitizen() {
-        return serviceCitizen;
-    }
-
-    public void setServiceCitizen(ServiceCitizen_1 serviceCitizen) {
-        this.serviceCitizen = serviceCitizen;
-    }
+    
 
     public Manager getManager() {
         return manager;
