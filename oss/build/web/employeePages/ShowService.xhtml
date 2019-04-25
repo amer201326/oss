@@ -39,27 +39,28 @@
                     <!-- Topbar -->
                     <ui:include src="heder.xhtml"/>
                     <!-- End of Topbar -->
-                    <div class="row">
-                        <div class="col-lg-12 text-center">
+
+                    <h:form>
+                        <div class="row">
+                            <div class="col-sm-12 text-center">
 
 
-                            <div class=" col-md-12 ">
-                                <div class="card border-left-warning border-right-0 shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters textC">
-                                            <div class="col mr-2">
-                                                <h2 class="section-heading text-uppercase">#{shoeServiceCitizemEmpManeger.serviseCitizen.service.name}</h2>
+                                <div class=" col-md-12 ">
+                                    <div class="card border-left-warning border-right-0 shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters textC">
+                                                <div class="col mr-2">
+                                                    <h2 class="section-heading text-uppercase">#{shoeServiceCitizemEmpManeger.serviseCitizen.service.name}</h2>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
 
-                            <br/><hr style="border: 2px solid orange; margin-left: 10px; margin-right: 10px;"/><br/>
-                            <h:panelGrid rendered="#{shoeServiceCitizemEmpManeger.haveService}">
-                                <div class="col-lg-12 mb-4">
-                                    <div class="col-lg-12" style="text-align: right; min-width:1200px ">
+                                <br/><hr style="border: 2px solid orange; margin-left: 10px; margin-right: 10px;"/><br/>
+                                <div class="col-sm-12 mb-4">
+                                    <div class="col-sm-12" style="text-align: right; min-width:900px ">
                                         <div class="card shadow mb-xl-4">
                                             <div class="card-header py-3">
                                                 <h6 class="m-0 font-weight-bold text-primary">معلومات الخدمة</h6>
@@ -68,7 +69,7 @@
                                             <div class="card-body">
 
                                                 <div class="row-space flexAm">
-                                                    <div class="col-xl-6 col-md-6 mb-3">
+                                                    <div class="col-sm-6  mb-3">
 
                                                         <div class="card border-right-warning shadow h-100 py-2">
                                                             <div class="card-body">
@@ -88,7 +89,7 @@
                                                     </div>
 
                                                     <!-- Earnings (Monthly) Card Example -->
-                                                    <div class="col-xl-6 col-md-6 mb-3">
+                                                    <div class="col-sm-6 col-md-6 mb-3">
                                                         <div class="card border-right-warning shadow h-100 py-2">
                                                             <div class="card-body">
                                                                 <div class="row no-gutters align-items-center">
@@ -113,7 +114,7 @@
                                                 </div>
 
                                                 <!-- Earnings (Monthly) Card Example -->
-                                                <div class="col-xl-12  mb-4">
+                                                <div class="col-sm-12  mb-4">
 
                                                     <div class="card border-right-warning shadow h-100 py-2 border-bottom-warning">
                                                         <div class="card-body">
@@ -141,11 +142,12 @@
 
 
                                         </div>
-                                    </div>
-                                </div> 
+                                    </div> 
+                                </div>
 
-                                <div class="col-lg-12 mb-4">
-                                    <div class="col-lg-12" style="text-align: right; min-width:900px ">
+
+                                <div class="col-sm-12 mb-4">
+                                    <div class="col-sm-12" style="text-align: right; min-width:900px ">
                                         <div class="card shadow mb-xl-4">
                                             <div class="card-header py-3">
                                                 <h6 class="m-0 font-weight-bold text-primary">معلومات المواطن </h6>
@@ -189,6 +191,22 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="mb-1 ">
+
+                                                    <div class="card border-right-warning border-bottom-warning shadow h-100 py-2">
+                                                        <div class="card-body">
+
+                                                            <div class="row no-gutters align-items-center">
+
+                                                                <div class="col mr-2" style="text-align: right">
+                                                                    <div class="text-s font-weight-bold text-primary text-uppercase mb-1" > ملاحظات المواطن  </div>
+                                                                    <div class="h5 mb-0 font-weight-normal text-gray-800"> #{shoeServiceCitizemEmpManeger.serviseCitizen.note} </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
                                             </div>
 
@@ -197,152 +215,151 @@
                                 </div>
 
 
-                            </h:panelGrid>
 
-                            <div class="col-lg-12 mb-4">
-                                <div class="col-lg-12" style="text-align: right; min-width:900px ">
-                                    <div class="card shadow mb-xl-4">
-                                        <div class="card-header py-3">
-                                            <h6 class="m-0 font-weight-bold text-primary">  مرفقات المواطن </h6>
-                                        </div>
-                                        <div class="card-body">
-                                            <ui:repeat value="#{shoeServiceCitizemEmpManeger.serviseCitizen.attform}" var="att" varStatus="in" >
-                                                <div class="flexAm row-space " style="margin-right: 14px">
-                                                    <div class="px-3 mb-2 py-5 bg-gradient-#{att.colorHaveFile()} text-white border-bottom-#{att.colorHaveFile()}">مرفق  #{in.index+1}</div>
-                                                    <div class="col-sm-11 px-5  mb-2 py-4  border-bottom-#{att.colorHaveFile()} ">
-                                                        <div class="flexjustify-content row-space" style="margin-right: 14px">
-                                                            <dir>
-                                                                <div class="text-xs font-weight-bold text-xs text-warning mb-1" style="font-size: 1.4em">#{att.name}</div>
 
-                                                                <div class="text-xs font-weight-bold text-gray-800 text-uppercase mb-1" style="font-size: 0.8em ; margin-right: 20px;">#{att.notes}</div>
+                                <div class="col-sm-12 mb-4">
+                                    <div class="col-sm-12" style="text-align: right; min-width:900px ">
+                                        <div class="card shadow mb-xl-4">
+                                            <div class="card-header py-3">
+                                                <h6 class="m-0 font-weight-bold text-primary">  مرفقات المواطن </h6>
+                                            </div>
 
-                                                            </dir>
-                                                            <div id="divDown" class="flexColomn ">
-                                                                <p:commandButton id="downloadAT"  value="تنزيل"  icon="fa fa-arrow-down" class="bg-#{att.colorHaveFile()}" 
-                                                                             style="color: white;">
-                                                                    <p:fileDownload value="#{att.fileDownload}"/>
-                                                                </p:commandButton>  
-                                                                <br/>
+                                            <div class="card-body">
+                                                <ui:repeat value="#{shoeServiceCitizemEmpManeger.serviseCitizen.att}" var="att" varStatus="in" >
+                                                    <div class="flexAm row-space " style="margin-right: 14px">
+                                                        <div class="px-3 mb-2 py-5 bg-gradient-#{att.colorHaveFile()} text-white border-bottom-#{att.colorHaveFile()}">مرفق  #{in.index+1}</div>
+                                                        <div class="col-sm-11 px-5  mb-2 py-4  border-bottom-#{att.colorHaveFile()} ">
+                                                            <div class="flexjustify-content row-space" style="margin-right: 14px">
+                                                                <dir>
+                                                                    <div class="text-xs font-weight-bold text-xs text-warning mb-1" style="font-size: 1.4em">#{att.name}</div>
+
+                                                                    <div class="text-xs font-weight-bold text-gray-800 text-uppercase mb-1" style="font-size: 0.8em ; margin-right: 20px;">#{att.notes}</div>
+
+                                                                </dir>
+                                                                <div id="divDown" class="flexColomn ">
+                                                                    <p:commandButton id="downloadAT"  value="تنزيل" ajax="false"  icon="fa fa-arrow-down" class="bg-#{att.colorHaveFile()}" 
+                                                                                     style="color: white;">
+                                                                        <p:fileDownload value="#{att.fileDownload}"/>
+                                                                    </p:commandButton>  
+                                                                    <br/>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </ui:repeat>
+                                                </ui:repeat>
+
+                                            </div>
 
                                         </div>
+                                    </div> 
+                                </div>
 
-                                    </div>
-                                </div> 
-                            </div>
+                                <div class="col-sm-12 mb-4">
+                                    <div class="col-sm-12" style="text-align: right; min-width:900px ">
+                                        <div class="card shadow mb-xl-4">
+                                            <div class="card-header py-3">
+                                                <h6 class="m-0 font-weight-bold text-primary"> متطلبات الخدمة </h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <ui:repeat value="#{shoeServiceCitizemEmpManeger.serviseCitizen.attform}" var="att2"  varStatus="inn">
+                                                    <div class="flexAm row-space " style="margin-right: 14px">
+                                                        <div class="px-3 mb-2 py-5 bg-gradient-#{att2.colorHaveFile()} text-white border-bottom-#{att2.colorHaveFile()}">نموذج  #{inn.index+1}</div>
+                                                        <div class="col-sm-11 px-5  mb-2 py-4  border-bottom-#{att2.colorHaveFile()} ">
+                                                            <div class="flexjustify-content row-space" style="margin-right: 14px">
+                                                                <dir>
+                                                                    <div class="text-xs font-weight-bold text-xs text-warning mb-1" style="font-size: 1.4em">#{att2.name}</div>
 
-                            <div class="col-lg-12 mb-4">
-                                <div class="col-lg-12" style="text-align: right; min-width:900px ">
-                                    <div class="card shadow mb-xl-4">
-                                        <div class="card-header py-3">
-                                            <h6 class="m-0 font-weight-bold text-primary"> متطلبات الخدمة </h6>
-                                        </div>
-                                        <div class="card-body">
-                                            <ui:repeat value="#{shoeServiceCitizemEmpManeger.serviseCitizen.att}" var="att2"  varStatus="inn">
-                                                <div class="flexAm row-space " style="margin-right: 14px">
-                                                    <div class="px-3 mb-2 py-5 bg-gradient-#{att2.colorHaveFile()} text-white border-bottom-#{att2.colorHaveFile()}">نموذج  #{inn.index+1}</div>
-                                                    <div class="col-sm-11 px-5  mb-2 py-4  border-bottom-#{att2.colorHaveFile()} ">
-                                                        <div class="flexjustify-content row-space" style="margin-right: 14px">
-                                                            <dir>
-                                                                <div class="text-xs font-weight-bold text-xs text-warning mb-1" style="font-size: 1.4em">#{att2.name}</div>
+                                                                    <div class="text-xs font-weight-bold text-gray-800 text-uppercase mb-1" style="font-size: 0.8em ; margin-right: 20px;">#{att2.notes}</div>
 
-                                                                <div class="text-xs font-weight-bold text-gray-800 text-uppercase mb-1" style="font-size: 0.8em ; margin-right: 20px;">#{att2.notes}</div>
-
-                                                            </dir>
-                                                            <div id="divDown" class="flexColomn ">
-                                                                <p:commandButton id="downloadAT"  value="تنزيل"  icon="fa fa-arrow-down" class="bg-#{att2.colorHaveFile()}" 
-                                                                             style="color: white;">
-                                                                    <p:fileDownload value="#{att.fileDownload}"/>
-                                                                </p:commandButton>  
-                                                                <br/>
+                                                                </dir>
+                                                                <div id="divDown2" class="flexColomn ">
+                                                                    <p:commandButton id="downloadAT2"  value="تنزيل" ajax="false"  icon="fa fa-arrow-down" class="bg-#{att2.colorHaveFile()}" 
+                                                                                     style="color: white;">
+                                                                        <p:fileDownload value="#{att2.fileDownload}"/>
+                                                                    </p:commandButton>  
+                                                                    <br/>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </ui:repeat>
+                                                </ui:repeat>
+
+                                            </div>
 
                                         </div>
+                                    </div> 
+                                </div>
+                                <div class="col-sm-12 mb-4">
+                                    <div class="col-sm-12" style="text-align: right; min-width:900px ">
+                                        <div class="card shadow mb-xl-4">
+                                            <div class="card-header py-3">
+                                                <h2 class="section-heading inLineB" style="padding: 10px">:  التعليقات</h2>
+                                            </div>
+                                            <div class="col-sm-12 mb-4">
+                                                <div class="col-sm-12" style="text-align: right; min-width:900px ">
+                                                    <div style="text-align: right">
 
-                                    </div>
-                                </div> 
-                            </div>
 
-                            <div class="card shadow mb-4">
 
-                                <div class="card-body">
-
-                                    <div style="text-align: right">
-
-                                        <h2 class="section-heading inLineB" style="padding: 10px">:  التعليقات</h2>
-                                        <br/><br/>
-                                        <div class="mb-1 ">
-
-                                            <div class="card border-right-warning border-bottom-warning shadow h-100 py-2">
-                                                <div class="card-body">
-
-                                                    <div class="row no-gutters align-items-center">
-
-                                                        <div class="col mr-2" style="text-align: right">
-                                                            <div class="text-s font-weight-bold text-primary text-uppercase mb-1" > ملاحظات المواطن  </div>
-                                                            <div class="h5 mb-0 font-weight-normal text-gray-800"> #{shoeServiceCitizemEmpManeger.serviseCitizen.note} </div>
+                                                        <div class="form-group row">
+                                                            <div class="col-sm-12 py-2">
+                                                                <br/>
+                                                                : التعليقات الخارجيه 
+                                                                <p:inputTextarea value="#{shoeServiceCitizemEmpManeger.serviseCitizen.externalMessage}" rows="5" cols="100" dir="rtl" style="width: 100%;" /> 
+                                                            </div>
+                                                            <div class="col-sm-12 py-2">
+                                                                <br/>
+                                                                : التعليقات الداخلية (لا يمكن للمواطن ان يرها ) 
+                                                                <p:inputTextarea value="#{shoeServiceCitizemEmpManeger.serviseCitizen.internalMessage}" rows="5" cols="100" dir="rtl" style="width: 100%;"/> 
+                                                            </div>
                                                         </div>
 
+                                                        <br/><hr style="border: 2px solid orange; margin-left: 10px; margin-right: 10px;"/><br/>
+
+
                                                     </div>
-                                                </div>
+                                                </div> 
                                             </div>
+
+                                        </div>
+                                    </div> 
+                                </div>
+
+                                <div class="card shadow mb-4">
+
+                                    <div class="card-body">
+
+
+                                        <div class="text-center">
+                                            <p:commandButton id="sub" actionListener="#{shoeServiceCitizemEmpManeger.submit()}" value="ارسال "  class="myButtonB"  />
+
+
+
                                         </div>
 
-                                        <div class="form-group row">
-                                            <div class="col-sm-12 py-2">
-                                                <br/>
-                                                : التعليقات الخارجيه (يمكن للمواطن ان يرها ) 
-                                                <p:inputTextarea value="#{shoeServiceCitizemEmpManeger.serviseCitizen.externalMessage}" rows="5" cols="100" dir="rtl" style="width: 100%;" /> 
-                                            </div>
-                                            <div class="col-sm-12 py-2">
-                                                <br/>
-                                                : التعليقات الداخلية (لا يمكن للمواطن ان يرها ) 
-                                                <p:inputTextarea value="#{shoeServiceCitizemEmpManeger.serviseCitizen.internalMessage}" rows="5" cols="100" dir="rtl" style="width: 100%;"/> 
-                                            </div>
-                                        </div>
-
-                                        <br/><hr style="border: 2px solid orange; margin-left: 10px; margin-right: 10px;"/><br/>
-
-
                                     </div>
-                                    <div class="text-center">
-                                        <p:commandButton id="sub" actionListener="#{shoeServiceCitizemEmpManeger.submit()}" value="ارسال "  class="myButtonB"  />
 
 
 
-                                    </div>
 
                                 </div>
 
+                                <h:panelGrid rendered="#{!shoeServiceCitizemEmpManeger.haveService}">
+                                    <div class="card-body">
+                                        <div class="row no-gutters textC">
+                                            <div class="col mr-2 ">
+                                                <h2 class="section-heading text-uppercase text-center">الرجاء اختيار خدمة</h2>
+                                            </div>
+                                        </div>
+                                    </div>
 
-
+                                </h:panelGrid>
 
                             </div>
 
-                            <h:panelGrid rendered="#{!shoeServiceCitizemEmpManeger.haveService}">
-                                <div class="card-body">
-                                    <div class="row no-gutters textC">
-                                        <div class="col mr-2 ">
-                                            <h2 class="section-heading text-uppercase text-center">الرجاء اختيار خدمة</h2>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </h:panelGrid>
 
                         </div>
-
-
-                    </div>
-
+                    </h:form>
                     <!-- Begin Page Content -->
 
                 </div>
@@ -367,17 +384,7 @@
 
 
         </div>
-        <script type="text/javascript">
-            //<![CDATA[
-            function start() {
-                PF('statusDialog').show();
-            }
 
-            function stop() {
-                PF('statusDialog').hide();
-            }
-            //]]>
-        </script>    
         <!-- Bootstrap core JavaScript-->
         <script src="../vendor/jquery/jquery.min.js"></script>
         <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

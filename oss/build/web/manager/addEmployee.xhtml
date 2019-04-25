@@ -77,12 +77,12 @@
                                                             <div class="col-sm-12 mb-3 mb-sm-0">
                                                                 <h:panelGrid columns="2" dir="rtl" style="display: flex; justify-content: flex-start;">
                                                                     <p:outputLabel for="us" class="label" value="اسم المستخدم"/>
-                                                                    <p:inputMask id="us" value="#{employeeManage.newEmployeeAccount.userName}"
+                                                                    <p:inputMask id="us" dir="ltr" value="#{employeeManage.newEmployeeAccount.userName}"
                                                                                  class="form-control form-control-user" style="text-align:right;"
-                                                                                 type="text" mask="e-******" required="true"/>
+                                                                                 type="text" mask="e-********" required="true" autocomplete="off"/>
 
                                                                     <p:outputLabel for="password" class="label" value="كلمة المرور"/>
-                                                                    <p:password id="password" value="#{employeeManage.newEmployeeAccount.password}" class="form-control" style="text-align:right;" feedback="true" inline="true" required="true"/> 
+                                                                    <p:password dir="ltr" id="password" value="#{employeeManage.newEmployeeAccount.password}" autocomplete="off" class="form-control" style="text-align:right;" feedback="true" inline="true" required="true"/> 
 
                                                                 </h:panelGrid>
 
@@ -139,24 +139,24 @@
                                                                 <h:panelGrid columns="2" dir="rtl" style="display: flex; justify-content: flex-start;">
 
                                                                     <p:outputLabel for="compName" class="label" value="الاسم الكامل"/>
-                                                                    <p:inputText class="form-control form-control-user" style="text-align:right;"
+                                                                    <p:inputText dir="ltr" class="form-control form-control-user" style="text-align:right;"
                                                                                  id="compName" type="text" value="#{employeeManage.newEmployee.emp_name}" 
                                                                                  required="true"/>
 
                                                                     <p:outputLabel for="idCard" class="label" value="رقم الهوية"/>
-                                                                    <p:inputMask id="idCard" class="form-control form-control-user" style="text-align:right;" 
+                                                                    <p:inputMask dir="ltr" id="idCard" class="form-control form-control-user" style="text-align:right;" 
                                                                                  type="text" mask="9 9999999 9" value="#{employeeManage.newEmployee.emp_idCard}" required="true"/>
 
                                                                     <p:outputLabel for="tel" class="label" value="التلفون"/>
-                                                                    <p:inputMask id="tel" class="form-control form-control-user" style="text-align:right;" 
+                                                                    <p:inputMask dir="ltr" id="tel" class="form-control form-control-user" style="text-align:right;" 
                                                                                  type="text" value="#{employeeManage.newEmployee.emp_tel}" mask="99-9999-999"/>
 
                                                                     <p:outputLabel for="mobile" class="label" value="الجوال"/>
-                                                                    <p:inputMask id="mobile" class="form-control form-control-user" style="text-align:right;"
+                                                                    <p:inputMask dir="ltr" id="mobile" class="form-control form-control-user" style="text-align:right;"
                                                                                  type="text" mask="999-999-9999" value="#{employeeManage.newEmployee.emp_mobile}" required="true"/>
 
                                                                     <p:outputLabel for="email1" class="label" value="البريد الإلكتروني"/>
-                                                                    <p:inputText id="email1" class="form-control form-control-user" style="text-align:right;" type="email"
+                                                                    <p:inputText dir="ltr" id="email1" class="form-control form-control-user" style="text-align:right;" type="email"
                                                                                  value="#{employeeManage.newEmployee.emp_email}" required="true"/>
 
 

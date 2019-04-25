@@ -18,8 +18,8 @@ import java.util.logging.Logger;
 public class EmployeeAccount implements Serializable{
 
     public int Emp_ID;
-    String UserName;
-    String Password;
+    String UserName = "";
+    String Password = "";
 
     public EmployeeAccount(String UserName, String Password) {
         this.UserName = UserName;

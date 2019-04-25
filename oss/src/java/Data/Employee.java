@@ -194,11 +194,11 @@ public class Employee implements Serializable {
             DB data = new DB();
             System.out.println(q);
             data.write(q);
-            for (int i = 0; i < screens.size(); i++) {
-                Screen get = screens.get(i);
-                
-                
-            }
+//            for (int i = 0; i < screens.size(); i++) {
+//                Screen get = screens.get(i);
+//                
+//                
+//            }
 
         } catch (SQLException ex) {
             System.out.println("error Add Employee");

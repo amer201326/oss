@@ -20,6 +20,8 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -217,29 +219,34 @@ public class EmployeeManage implements Serializable {
     }
 
     public void addEmployee() {
-      int id = GetFromDB.getMaxIDEmployee();
-        
-        
-        newEmployee.setEmp_id(id+1);
-              
-        newEmployee.addEmployeeToDB();
-        List<Screen> scre = new ArrayList<>();
-        for (int i = 0; i < screensNamesAndResaults.getTarget().size(); i++) {
-            String get = screensNamesAndResaults.getTarget().get(i);
-            for (int j = 0; j < screen.size(); j++) {
-                Screen get1 = screen.get(j);
-                if(get.equals(get1.getScreenName())){
-                    scre.add(get1);
-                }
-            }
+        try {
+            int id = GetFromDB.getMaxIDEmployee();
             
+            
+            newEmployee.setEmp_id(id+1);
+            
+            newEmployee.addEmployeeToDB();
+            List<Screen> scre = new ArrayList<>();
+            for (int i = 0; i < screensNamesAndResaults.getTarget().size(); i++) {
+                String get = screensNamesAndResaults.getTarget().get(i);
+                for (int j = 0; j < screen.size(); j++) {
+                    Screen get1 = screen.get(j);
+                    if(get.equals(get1.getScreenName())){
+                        scre.add(get1);
+                    }
+                }
+                
+            }
+            newEmployee.setScreens(screen);
+            
+            
+            newEmployee = new Employee();
+            newEmployeeAccount = new EmployeeAccount();
+            newEmpScreen = new EmployeeScreen();
+            FacesContext.getCurrentInstance().getExternalContext().redirect("allEmployees.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(EmployeeManage.class.getName()).log(Level.SEVERE, null, ex);
         }
-        newEmployee.setScreens(screen);
-        
-
-        newEmployee = new Employee();
-        newEmployeeAccount = new EmployeeAccount();
-        newEmpScreen = new EmployeeScreen();
     }
 
     public void putDepartmentSelected() {

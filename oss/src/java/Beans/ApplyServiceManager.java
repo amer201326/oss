@@ -10,10 +10,13 @@ import Data.GetFromDBaraa;
 import Data.Service;
 import Data.ServiceAttachmentName;
 import Data.ServiceCitizen;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -96,7 +99,12 @@ public class ApplyServiceManager implements Serializable {
         }
 
         if (!b) {
-            serviceCitizen.addToDataBase();
+            try {
+                serviceCitizen.addToDataBase();
+                FacesContext.getCurrentInstance().getExternalContext().redirect("notDoneCitizenServices.xhtml");
+            } catch (IOException ex) {
+                Logger.getLogger(ApplyServiceManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else //GetFromDBaraa.ApplyService(idCitizen, thisService.getId(), allAttachment,note);
         {
             

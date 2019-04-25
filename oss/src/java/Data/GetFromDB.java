@@ -968,7 +968,7 @@ public class GetFromDB {
         return c;
     }
 
-    public static List<ServiceAttachmentName> getAttachmentByserviceCitizen(int idServise, int idCitizen) {
+    public static List<ServiceAttachmentName> getAttachmentByserviceCitizen(int idServise, int idCitizen,int idSC) {
         List<ServiceAttachmentName> name = new ArrayList<>();
         try {
             DB db = new DB();
@@ -976,12 +976,13 @@ public class GetFromDB {
 
             String sql = "SELECT * FROM attachment_service_citizen as ac inner join attachment_archive_citizen as aac"
                     + " on ac.Atta_ArchiveC_ID = aac.Atta_ArchiveC_ID inner join serviceattachmentname as sa "
-                    + "on aac.ServiceAttachmentName_ID = sa.ServiceAttachmentName_ID where  Services_Provided_ID =" + idServise + " and ac.Cit_ID =" + idCitizen + ";";
+                    + "on aac.ServiceAttachmentName_ID = sa.ServiceAttachmentName_ID where  Services_Provided_ID =" + idServise + " and ac.Cit_ID =" + idCitizen + ""
+                    + " and ac.Service_Citizen_ID =" +idSC+" ;";
 
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
-                a = new ServiceAttachmentName(r.getInt(7), r.getString(12), r.getString(14), r.getBinaryStream(8), r.getString(16), "", r.getString(10));
+                a = new ServiceAttachmentName(r.getInt(7), r.getString(12), r.getString(14), r.getBinaryStream(8), r.getString(9), "", r.getString(10));
                 System.out.println(a + "   " + r.getString(6));
                 name.add(a);
             }

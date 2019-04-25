@@ -213,8 +213,13 @@ public class AddServiceManager implements Serializable {
 
     public void addService() {
 
-        newService.setPath(departmentsInPath);
-        newService.addServiceToDB();
+        try {
+            newService.setPath(departmentsInPath);
+            newService.addServiceToDB();
+            FacesContext.getCurrentInstance().getExternalContext().redirect("allServices.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(AddServiceManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
