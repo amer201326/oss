@@ -27,6 +27,11 @@ public class Employee implements Serializable {
     int sec_id;
     int job_id;
     int emp_id;
+    
+    String dep_name;
+    String sec_name;
+    String job_name;
+    
     int last = 0;
     String emp_name;
     String emp_idCard;
@@ -44,6 +49,25 @@ public class Employee implements Serializable {
     public Employee() {
     }
 
+    public Employee(int emp_id, String dep_name, String sec_name, String job_name, String emp_name, String emp_idCard, String emp_email, String emp_tel, String emp_mobile, String emp_gender, Date birthDate, String emp_StartDate, String emp_EndDate) {
+        
+        this.emp_id = emp_id;
+        this.dep_name = dep_name;
+        this.sec_name = sec_name;
+        this.job_name = job_name;
+        this.emp_name = emp_name;
+        this.emp_idCard = emp_idCard;
+        this.emp_email = emp_email;
+        this.emp_tel = emp_tel;
+        this.emp_mobile = emp_mobile;
+        this.emp_gender = emp_gender;
+        this.birthDate = birthDate;
+        this.emp_StartDate = emp_StartDate;
+        this.emp_EndDate = emp_EndDate;
+    }
+    
+    
+
     public Employee(int dep_id, int sec_id, int job_id, int emp_id, String emp_name, String emp_idCard, String emp_email, String emp_tel, String emp_birth, String emp_StartDate, String emp_EndDate, String emp_mobile, String emp_gender) {
         this.dep_id = dep_id;
         this.sec_id = sec_id;
@@ -60,6 +84,14 @@ public class Employee implements Serializable {
         this.emp_gender = emp_gender;
 
     }
+
+    public Employee(String dep_name, String sec_name, String job_name) {
+        this.dep_name = dep_name;
+        this.sec_name = sec_name;
+        this.job_name = job_name;
+    }
+    
+    
 
     public Employee(int dep_id, int emp_id, String emp_name, String emp_email, String emp_mobile) {
         this.dep_id = dep_id;
@@ -260,6 +292,30 @@ public class Employee implements Serializable {
         }
         return account.updateEmp();
 
+    }
+
+    public String getDep_name() {
+        return dep_name;
+    }
+
+    public void setDep_name(String dep_name) {
+        this.dep_name = dep_name;
+    }
+
+    public String getSec_name() {
+        return sec_name;
+    }
+
+    public void setSec_name(String sec_name) {
+        this.sec_name = sec_name;
+    }
+
+    public String getJob_name() {
+        return job_name;
+    }
+
+    public void setJob_name(String job_name) {
+        this.job_name = job_name;
     }
     
     
