@@ -1050,6 +1050,24 @@ public class GetFromDB {
 
         return dds;
     }
+public static List<DecisionsDepartment> getDecisionsDepartmentNotDone(int Cit_ID, int Service_Citizen_ID) {
+        List<DecisionsDepartment> dds = new ArrayList<>();
+        try {
+            DB db = new DB();
+            String sql = "SELECT * FROM oss.decisions_department  where Cit_ID = " + Cit_ID + " and Service_Citizen_ID = " + Service_Citizen_ID + " and  Status = 'notdone';";
+            System.out.println(sql);
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                dds.add(new DecisionsDepartment(r.getInt(1), r.getInt(2), r.getInt(3), r.getInt(4), r.getInt(5), r.getString(6), r.getDouble(7), r.getString(8), r.getString(9), r.getString(10)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return dds;
+    }
 
     public static List<DecisionSection> getDecisionsSection(int Cit_ID, int Service_Citizen_ID) {
         List<DecisionSection> dss = new ArrayList<>();
@@ -1070,7 +1088,25 @@ public class GetFromDB {
 
         return dss;
     }
+ public static List<DecisionSection> getDecisionsSectionNotDone(int Cit_ID, int Service_Citizen_ID) {
+        List<DecisionSection> dss = new ArrayList<>();
+        try {
+            DB db = new DB();
+            String sql = "SELECT * FROM oss.dicisions_section  where Cit_ID = " + Cit_ID + " and Service_Citizen_ID = "
+                    + Service_Citizen_ID + " and  Status = 'notdone' ;";
+            System.out.println(sql);
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                dss.add(new DecisionSection(new SectionPath(r.getInt(1), r.getInt(2), r.getInt(3), r.getInt(4), r.getInt(5)), r.getInt(6), r.getInt(8), r.getString(7)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
+        return dss;
+    }
     public static List<DecisionsJob> getDecisionsJob(int Cit_ID, int Service_Citizen_ID) {
         List<DecisionsJob> djs = new ArrayList<>();
         try {
@@ -1153,4 +1189,24 @@ public class GetFromDB {
         return viewerAttachments;
     }
 
+    public static List<DecisionsJob> getDecisionsJobNotDone(int Cit_ID, int Service_Citizen_ID) {
+        List<DecisionsJob> djs = new ArrayList<>();
+        try {
+            DB db = new DB();
+            String sql = "SELECT * FROM oss.decisions_job where Cit_ID = " + Cit_ID + " and Service_Citizen_ID = " + Service_Citizen_ID + " and  Status = 'notdone' ;";
+            System.out.println(sql);
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                djs.add(new DecisionsJob(new JobPath(r.getInt(1), r.getInt(2), r.getInt(3), r.getInt(4), null, r.getInt(5), r.getInt(6), r.getInt(7)), r.getInt(10),
+                        r.getString(11), r.getString(12), r.getDouble(13), r.getString(14), r.getString(15), r.getString(16)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return djs;
+    }
+    
 }

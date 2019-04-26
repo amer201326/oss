@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -551,8 +552,8 @@ public class ServiceCitizen {
 
         }
     }
-///////////////////////////////employee
 
+///////////////////////////////employee
     public void ContineuInPath(int empID) {
 
         DB db;
@@ -565,25 +566,79 @@ public class ServiceCitizen {
             decisionsJob.Cit_ID = Cit_ID;
             decisionsJob.Service_Citizen_ID = Service_Citizen_ID;
             decisionsJob.Services_Provided_ID = Services_Provided_ID;
-            decisionsJob.job = new JobPath(service_Job.Dep_ID, service_Job.Sec_ID, service_Job.Job_ID, service_Job.Services_Provided_ID, "",service_Job.Order_Departmant
-                    , service_Job.Order_Section ,service_Job.Order_Job);
+            decisionsJob.job = new JobPath(service_Job.Dep_ID, service_Job.Sec_ID,
+                    service_Job.Job_ID, service_Job.Services_Provided_ID, "", service_Job.Order_Departmant,
+                    service_Job.Order_Section, service_Job.Order_Job);
             decisionsJob.date = LocalDate.now().toString();
             decisionsJob.idEmployee = empID;
             decisionsJob.status = "done";
             decisionsJob.updateDone();
+
+            List<DecisionsJob> jobs = GetFromDB.getDecisionsJobNotDone(Cit_ID, Service_Citizen_ID);
+
+            int jobCount = 0;
+            for (DecisionsJob job : jobs) {
+                if (job.job.DepId == service_Job.Dep_ID && job.job.sectionID == service_Job.Sec_ID
+                        && job.job.dOrder == service_Job.Order_Departmant && job.job.sOrder == service_Job.Order_Section) {
+                    jobCount++;
+                }
+            }
+
+            if (jobCount == 0) {
+                q = "UPDATE `oss`.`dicisions_section` SET `Status` = 'done' WHERE (`Dep_ID` = " + service_Job.Dep_ID + ") "
+                        + "and (`Sec_ID` = " + service_Job.Sec_ID + ") and (`Services_Provided_ID` = " + service_Job.Services_Provided_ID + ") "
+                        + "and (`Order_Departmant` = " + service_Job.Order_Departmant + ") "
+                        + "and (`Order_Section` = " + service_Job.Order_Section + ") and (`Cit_ID` = " + service_Job.Cit_ID + ") and (`Service_Citizen_ID` = " + service_Job.Service_Citizen_ID + ");";
+                System.out.println(q);
+                db.write(q);
+
+            }
+
+            int sectionCounter = 0;
+            List<DecisionSection> sections = GetFromDB.getDecisionsSectionNotDone(Cit_ID, Service_Citizen_ID);
+            for (DecisionSection section : sections) {
+                if (section.section.departmentId == service_Job.Dep_ID && section.section.order == service_Job.Order_Departmant) {
+                    sectionCounter++;
+                }
+            }
+
+            if (sectionCounter == 0) {
+                q = "UPDATE `oss`.`decisions_department` SET `Status` = 'done' WHERE (`Dep_ID` = " + service_Job.Dep_ID + ") and (`Order_Departmant` = " + service_Job.Order_Departmant + ") "
+                        + "and (`Services_Provided_ID` = " + service_Job.Services_Provided_ID + ") "
+                        + "and (`Cit_ID` = " + service_Job.Cit_ID + ") and (`Service_Citizen_ID` = " + service_Job.Cit_ID + ");";
+                System.out.println(q);
+                db.write(q);
+            }
+
+            List<DecisionsDepartment> departments = GetFromDB.getDecisionsDepartmentNotDone(Cit_ID, Service_Citizen_ID);
+
+            nextjobsPathOfthisService(departments,sections, jobs);
+
             q = "rollback;";
             System.out.println(q);
             db.write(q);
 
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ShoeServiceCitizemEmpManeger.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                String q = "rollback;";
+                System.out.println(q);
+                 db = new DB();
+                db.write(q);
+                
+                Logger.getLogger(ShoeServiceCitizemEmpManeger.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex1) {
+                Logger.getLogger(ServiceCitizen.class.getName()).log(Level.SEVERE, null, ex1);
+            } catch (ClassNotFoundException ex1) {
+                Logger.getLogger(ServiceCitizen.class.getName()).log(Level.SEVERE, null, ex1);
+            }
         } catch (SQLException ex) {
-            Logger.getLogger(ServiceCitizen.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-//        List<DecisionsDepartment> departments = GetFromDB.getDecisionsDepartment(Cit_ID, Service_Citizen_ID);
-//        List<DecisionSection> sections = GetFromDB.getDecisionsSection(Cit_ID, Service_Citizen_ID);
-//        List<DecisionsJob> jobs = GetFromDB.getDecisionsJob(Cit_ID, Service_Citizen_ID);
+            try {
+                String q = "rollback;";
+                System.out.println(q);
+                 db = new DB();
+                db.write(q);
+                Logger.getLogger(ServiceCitizen.class.getName()).log(Level.SEVERE, null, ex);
+            }
 //
 //        
 //        List<Service_Job> service_Jobs = GetFromDB.getAllService_Jobs(service_Job);
@@ -595,5 +650,187 @@ public class ServiceCitizen {
 //            }
 //
 //        }
+            catch (SQLException ex1) {
+                Logger.getLogger(ServiceCitizen.class.getName()).log(Level.SEVERE, null, ex1);
+            } catch (ClassNotFoundException ex1) {
+                Logger.getLogger(ServiceCitizen.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        }
+
     }
+
+    private void nextjobsPathOfthisService(List<DecisionsDepartment> decisionsDepartments,List<DecisionSection> decisionSections, List<DecisionsJob> decisionsJobs) throws SQLException, ClassNotFoundException {
+        System.out.println("===================================================================================================");
+
+        DecisionsDepartment[] dds = new DecisionsDepartment[decisionsDepartments.size()];
+        dds = decisionsDepartments.toArray(dds);
+
+        DecisionSection[] dses = new DecisionSection[decisionSections.size()];
+        dses = decisionSections.toArray(dses);
+
+        DecisionsJob[] djs = new DecisionsJob[decisionsJobs.size()];
+        djs = decisionsJobs.toArray(djs);
+
+        List<DecisionsDepartment> midDecDep = new ArrayList<>();
+        List<DecisionSection> minDecSec = new ArrayList<>();
+        List<DecisionsJob> minDecjob = new ArrayList<>();
+
+        int order = Integer.MAX_VALUE;
+        if (dds.length != 0) {
+
+            for (int i = 0; i < dds.length - 1; i++) {
+
+                for (int j = 0; j < dds.length - 1; j++) {
+                    if (dds[j + 1].getDepOrder() < dds[j].getDepOrder()) {
+                        DecisionsDepartment temp = dds[j + 1];
+                        dds[j + 1] = dds[j];
+                        dds[j] = temp;
+                    }
+
+                }
+
+            }
+            int temp = 0;
+            for (int i = 0; i < dds.length; i++) {
+                DecisionsDepartment dd = dds[i];
+                if (i == 0) {
+                    midDecDep.add(dd);
+                    temp = dd.depOrder;
+                } else {
+                    if (dd.depOrder == temp) {
+                        midDecDep.add(dd);
+                    } else {
+                        break;
+                    }
+                }
+
+            }
+            for (DecisionsDepartment decisionsDepartment : midDecDep) {
+                System.out.println(decisionsDepartment);
+            }
+            System.out.println("--- section _________________________________________");
+
+            for (DecisionsDepartment decisionsDepartment : midDecDep) {
+
+                for (int i = 0; i < dses.length; i++) {
+                    DecisionSection ds = dses[i];
+                    if (ds.section.departmentId == decisionsDepartment.depId && ds.section.order == decisionsDepartment.depOrder) {
+                        decisionsDepartment.getSection().add(ds);
+                        for (int j = 0; j < djs.length; j++) {
+                            DecisionsJob dj = djs[j];
+                            if (ds.section.departmentId == dj.job.DepId && ds.section.orderDepartment == dj.job.dOrder
+                                    && ds.section.id == dj.job.sectionID && ds.section.order == dj.job.sOrder) {
+                                ds.getJobs().add(dj);
+                            }
+                        }
+
+                    }
+                }
+            }
+
+            for (DecisionsDepartment decisionsDepartment : midDecDep) {
+                if (!decisionsDepartment.section.isEmpty()) {
+                    DecisionSection[] decisionSections1 = new DecisionSection[decisionsDepartment.section.size()];
+                    decisionSections1 = decisionsDepartment.section.toArray(decisionSections1);
+
+                    for (int i = 0; i < decisionSections1.length - 1; i++) {
+
+                        for (int j = 0; j < decisionSections1.length - 1; j++) {
+                            if (decisionSections1[j + 1].section.order < decisionSections1[j].section.order) {
+                                DecisionSection temps = decisionSections1[j + 1];
+                                decisionSections1[j + 1] = decisionSections1[j];
+                                decisionSections1[j] = temps;
+                            }
+
+                        }
+
+                    }
+                    temp = 0;
+                    for (int i = 0; i < decisionSections1.length; i++) {
+                        DecisionSection dd = decisionSections1[i];
+                        if (i == 0) {
+                            minDecSec.add(dd);
+                            temp = dd.section.order;
+                        } else {
+                            if (dd.section.order == temp) {
+                                minDecSec.add(dd);
+                            } else {
+                                break;
+                            }
+                        }
+
+                    }
+                } else {
+                    List<Section> sections = GetFromDB.getSection(Services_Provided_ID);
+                    for (Section section : sections) {
+                        List<JobTitel> jobTitels = GetFromDB.getJobTittle(section.id + "");
+                        for (JobTitel jobTitel : jobTitels) {
+                            DecisionsJob decJ = new DecisionsJob(new JobPath(decisionsDepartment.depId, Integer.parseInt(section.id), Integer.parseInt(jobTitel.id), Services_Provided_ID, jobTitel.name, decisionsDepartment.depOrder, 0, 0),
+                                    0, "notdone", "no", 0, "", "", "");
+                            minDecjob.add(decJ);
+                        }
+                    }
+                }
+
+            }
+
+            for (DecisionSection decisionSection : minDecSec) {
+                System.out.println(decisionSection);
+            }
+
+            for (DecisionSection decisionSection : minDecSec) {
+                if (!decisionSection.getJobs().isEmpty()) {
+
+                    DecisionsJob[] decisionsJobs1 = new DecisionsJob[decisionSection.jobs.size()];
+                    decisionsJobs1 = decisionSection.jobs.toArray(decisionsJobs1);
+
+                    for (int i = 0; i < decisionsJobs1.length - 1; i++) {
+
+                        for (int j = 0; j < decisionsJobs1.length - 1; j++) {
+                            if (decisionsJobs1[j + 1].job.order < decisionsJobs1[j].job.order) {
+                                DecisionsJob tempservice_Job = decisionsJobs1[j + 1];
+                                decisionsJobs1[j + 1] = decisionsJobs1[j];
+                                decisionsJobs1[j] = tempservice_Job;
+                            }
+
+                        }
+
+                    }
+                    temp = 0;
+                    for (int i = 0; i < decisionsJobs1.length; i++) {
+                        DecisionsJob dd = decisionsJobs1[i];
+                        if (i == 0) {
+                            minDecjob.add(dd);
+                            temp = dd.job.order;
+                        } else {
+                            if (dd.job.order == temp) {
+                                minDecjob.add(dd);
+                            } else {
+                                break;
+                            }
+                        }
+
+                    }
+                } else {
+                    List<JobTitel> jobTitels = GetFromDB.getJobTittle(decisionSection.section.id + "");
+                    for (JobTitel jobTitel : jobTitels) {
+                        DecisionsJob decJ = new DecisionsJob(new JobPath(decisionSection.section.departmentId, decisionSection.section.id, Integer.parseInt(jobTitel.id), Services_Provided_ID, jobTitel.name, decisionSection.section.orderDepartment, decisionSection.section.order, 0),
+                                0, "notdone", "no", 0, "", "", "");
+                        minDecjob.add(decJ);
+                    }
+                }
+            }
+
+            System.out.println("_________   JOB _+_++++++++++++++++++++++++++++++++++++++++++++++");
+
+            for (DecisionsJob decisionsJob : minDecjob) {
+                System.out.println(decisionsJob);
+                Service_Job servicejob = new Service_Job(Service_Citizen_ID, Services_Provided_ID, Cit_ID, decisionsJob.job.DepId, decisionsJob.job.sectionID, decisionsJob.job.id, decisionsJob.job.dOrder, decisionsJob.job.sOrder, decisionsJob.job.order, "notdone");
+
+                servicejob.addToDataBase();
+            }
+
+        }
+    }
+
 }
