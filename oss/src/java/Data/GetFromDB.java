@@ -950,7 +950,7 @@ public class GetFromDB {
             DB db = new DB();
             String sql = "SELECT * FROM services_provided as sp inner join service_citizen as sc on sc.Services_Provided_ID = sp.Services_Provided_ID "
                     + " inner join citizen as cit on sc.Cit_ID = cit.Cit_ID inner join service_jobs as sj  on sc.Service_Citizen_ID = sj.Service_Citizen_ID and  sc.Cit_ID = sj.Cit_ID  "
-                    + "  where sj.Job_ID = " + emp.job_id + " and  sj.Sec_ID = " + emp.sec_id + " and sj.Dep_ID = " + emp.dep_id + ";";
+                    + " inner join decisions_job as dj on dj.Service_Citizen_ID = sc.Service_Citizen_ID and sc.Cit_ID = dj.Cit_ID   where sj.Job_ID = " + emp.job_id + " and  sj.Sec_ID = " + emp.sec_id + " and sj.Dep_ID = " + emp.dep_id + ";";
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
@@ -960,6 +960,8 @@ public class GetFromDB {
                         r.getString(31), r.getString(32), r.getString(33), r.getString(34), r.getString(35));
                 Service_Job service_Job = new Service_Job(r.getInt(36), r.getInt(37), r.getInt(38), r.getInt(39), r.getInt(40), r.getInt(41), r.getInt(42), r.getInt(43), r.getInt(44), r.getString(45));
                 cit = new ServiceCitizen(s, r.getInt(9), r.getInt(10), r.getInt(11), r.getString(12), r.getString(13), r.getString(14), c1, service_Job);
+               cit.decisionsJob.internalMessage = r.getString(59);
+               cit.decisionsJob.externalMessage = r.getString(60);
                 c.add(cit);
             }
         } catch (Exception e) {

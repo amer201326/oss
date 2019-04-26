@@ -206,7 +206,7 @@
                                             <h6 class="m-0 font-weight-bold text-primary">  مرفقات المواطن </h6>
                                         </div>
                                         <div class="card-body">
-                                            <ui:repeat value="#{shoeServiceCitizemDoneEmpManeger.serviseCitizen.attform}" var="att" varStatus="in" >
+                                            <ui:repeat value="#{shoeServiceCitizemDoneEmpManeger.serviseCitizen.attwhithFile}" var="att" varStatus="in" >
                                                 <div class="flexAm row-space " style="margin-right: 14px">
                                                     <div class="px-3 mb-2 py-5 bg-gradient-#{att.colorHaveFile()} text-white border-bottom-#{att.colorHaveFile()}">مرفق  #{in.index+1}</div>
                                                     <div class="col-sm-11 px-5  mb-2 py-4  border-bottom-#{att.colorHaveFile()} ">
@@ -242,7 +242,7 @@
                                             <h6 class="m-0 font-weight-bold text-primary"> متطلبات الخدمة </h6>
                                         </div>
                                         <div class="card-body">
-                                            <ui:repeat value="#{shoeServiceCitizemDoneEmpManeger.serviseCitizen.att}" var="att2"  varStatus="inn">
+                                            <ui:repeat value="#{shoeServiceCitizemDoneEmpManeger.serviseCitizen.attachment}" var="att2"  varStatus="inn">
                                                 <div class="flexAm row-space " style="margin-right: 14px">
                                                     <div class="px-3 mb-2 py-5 bg-gradient-#{att2.colorHaveFile()} text-white border-bottom-#{att2.colorHaveFile()}">نموذج  #{inn.index+1}</div>
                                                     <div class="col-sm-11 px-5  mb-2 py-4  border-bottom-#{att2.colorHaveFile()} ">
@@ -300,12 +300,12 @@
                                             <div class="col-sm-12 py-2">
                                                 <br/>
                                                 : التعليقات الخارجيه (يمكن للمواطن ان يرها ) 
-                                                <p:inputTextarea value="#{shoeServiceCitizemDoneEmpManeger.serviseCitizen.externalMessage}" rows="5" cols="100" dir="rtl" style="width: 100%; opacity: 100;" disabled="true" /> 
+                                                <p:inputTextarea value="#{shoeServiceCitizemDoneEmpManeger.serviseCitizen.decisionsJob.externalMessage}" rows="5" cols="100" dir="rtl" style="width: 100%; opacity: 100;" disabled="true" /> 
                                             </div>
                                             <div class="col-sm-12 py-2">
                                                 <br/>
                                                 : التعليقات الداخلية (لا يمكن للمواطن ان يرها ) 
-                                                <p:inputTextarea value="#{shoeServiceCitizemDoneEmpManeger.serviseCitizen.internalMessage}" rows="5" cols="100" dir="rtl" style="width: 100%; opacity: 100;" disabled="true"/> 
+                                                <p:inputTextarea value="#{shoeServiceCitizemDoneEmpManeger.serviseCitizen.decisionsJob.internalMessage}" rows="5" cols="100" dir="rtl" style="width: 100%; opacity: 100;" disabled="true"/> 
                                             </div>
                                         </div>
 

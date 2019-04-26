@@ -179,8 +179,8 @@ public class DecisionsJob {
 
     void updateDone() throws SQLException, ClassNotFoundException {
         DB data = new DB();
-            String q = "UPDATE `oss`.`decisions_job` SET `Status` = 'done', `Cost` = "+date +", `Com_InternalMessage` = "+internalMessage+","
-                    + " `Com_ExternalMessage` = "+externalMessage+","
+            String q = "UPDATE `oss`.`decisions_job` SET `Status` = 'done', `Cost` = "+date +", `Com_InternalMessage` = '"+internalMessage+"',"
+                    + " `Com_ExternalMessage` = '"+externalMessage+"',"
                     + " `Date` = "+date+" WHERE (`Dep_ID` = "+job.DepId+") and (`Sec_ID` = "+job.DepId+") and (`Job_ID` = "+job.DepId+") "
                     + "and (`Services_Provided_ID` = "+Services_Provided_ID+") and (`Order_Departmant` = "+job.DepId+") and (`Order_Section` = "+job.DepId+") "
                     + "and (`Order_Job` = "+job.DepId+") "
