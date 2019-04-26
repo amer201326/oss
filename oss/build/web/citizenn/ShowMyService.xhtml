@@ -88,11 +88,17 @@
                                             <div class="row-space flexAm">
                                                 <div class="col-xl-6 col-md-6 mb-3">
 
-                                                    <div class="card border-right-warning shadow h-100 py-2">
+                                                    <div class="card border-right-#{d.decisionsDepartment.colorStatus()} shadow h-100 py-2">
                                                         <div class="card-body">
 
                                                             <div class="row no-gutters align-items-center">
 
+                                                                <div class="col-auto" >
+                                                                    <p:link class="fa fa-wrench fa-2x text-gray-300" rendered="#{!d.decisionsDepartment.flagStatus()}"></p:link>
+                                                                </div>
+                                                                <div class="col-auto" >
+                                                                    <p:link class="fa fa-thumbs-up  fa-2x text-gray-300" rendered="#{d.decisionsDepartment.flagStatus()}"></p:link>
+                                                                </div>
                                                                 <div class="col mr-2" style="text-align: right">
                                                                     <div class="text-s font-weight-bold text-primary text-uppercase mb-1" >حالة الخدمة</div>
                                                                     <div class="h5 mb-0 font-weight-bold text-gray-800">#{d.decisionsDepartment.nameStatus()}</div>
@@ -105,9 +111,19 @@
 
                                                 <!-- Earnings (Monthly) Card Example -->
                                                 <div class="col-xl-6 col-md-6 mb-3">
-                                                    <div class="card border-right-warning shadow h-100 py-2">
+                                                    <div class="card border-right-#{d.decisionsDepartment.colorDecision()} shadow h-100 py-2">
                                                         <div class="card-body">
                                                             <div class="row no-gutters align-items-center">
+                                                                
+                                                                
+                                                                
+                                                                <div class="col-auto" >
+                                                                    <p:link class="fa fa-cogs fa-2x text-gray-300" rendered="#{!d.decisionsDepartment.flagDecision()}"></p:link>
+                                                                </div>
+                                                                
+                                                                <div class="col-auto" >
+                                                                    <p:link class="fa fa-thumbs-o-up fa-2x text-gray-300" rendered="#{d.decisionsDepartment.flagDecision()}"></p:link>
+                                                                </div>
 
                                                                 <div class="col mr-2" style="text-align: right">
                                                                     <div class="col mr-2" style="text-align: right">
@@ -174,13 +190,13 @@
 
 
                                                                                         <div></div>
-                                                                                        <div class="col-sm-3 px-5  mb-1 py-2  border-bottom-#{att.color()} ">
-                                                                                        <div id="divDown" class="flexColomn ">
-                                                                                            <p:commandButton id="downloadAT"  value="تنزيل" ajax="false" icon="fa fa-arrow-down" style="color: white;" rendered="#{j.attachmentServiceEmployee.haveFile}" >
-                                                                                                <p:fileDownload value="#{j.attachmentServiceEmployee.fileDownload}"/>
-                                                                                            </p:commandButton>  
-                                                                                            <br/>
-                                                                                        </div>
+                                                                                        <div class="col-sm-3 px-5  mb-1 py-2 ">
+                                                                                            <div id="divDown" class="flexColomn ">
+                                                                                                <p:commandButton id="downloadAT"  value="تنزيل" ajax="false" icon="fa fa-arrow-down" style="color: white;" rendered="#{j.attachmentServiceEmployee.haveFile}" >
+                                                                                                    <p:fileDownload value="#{j.attachmentServiceEmployee.fileDownload}"/>
+                                                                                                </p:commandButton>  
+                                                                                                <br/>
+                                                                                            </div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -215,7 +231,7 @@
 
 
                 </h:form>
-                
+
                 <br/><br/>
                 <!-- End of Main Content -->
 

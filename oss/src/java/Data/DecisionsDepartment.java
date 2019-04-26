@@ -98,14 +98,45 @@ public class DecisionsDepartment {
         return "قيد التنفيذ";
     }
 
-    public String nameDecision() {
-        if (status == "yse") {
-            return "تم القبول";
-        }else if(status == "no")
-        return "تم الرفض ";
-       return "لم يتحدد  "; 
+    public String colorStatus() {
+        if (status == "done") {
+            return "success";
+        }else if(status == "notdone") {
+            return "danger";
+        }
+        return "warning";
+    }
+    
+    public boolean flagStatus() {
+        if (status == "done") {
+            return true;
+        }
+        return false;
     }
 
+    public String nameDecision() {
+        if (decision == "yse") {
+            return "تم القبول";
+        } else if (status == "no") {
+            return "تم الرفض ";
+        }
+        return "لم يتحدد  ";
+    }
+    public String colorDecision() {
+        if (decision == "yse") {
+            return "success";
+        }else if(decision == "no") {
+            return "danger";
+        }
+        return "warning";
+    }
+ public boolean flagDecision() {
+        if (decision == "yse") {
+            return true;
+        }
+            return false;
+        
+    }
     public double getCost() {
         return cost;
     }
