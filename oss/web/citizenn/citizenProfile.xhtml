@@ -170,12 +170,9 @@
                                                                                              class="form-control-user" style="text-align:right;"/>
 
                                                                                 <p:outputLabel for="gender" value="الجنس" />
-                                                                                <h:panelGrid columns="2" cellpadding="5" class="mytable">
-                                                                                    <p:selectOneRadio value="#{citizenProfileManager.updateProfile.gender}" id="gender" class="label1" required="true">
-                                                                                        <f:selectItem itemLabel="ذكر" itemValue="M" />
-                                                                                        <f:selectItem  itemLabel="أنثى" itemValue="F" />
-                                                                                    </p:selectOneRadio>
-                                                                                </h:panelGrid>  
+                                                                                <p:outputLabel id="gender" value="#{citizenProfileManager.updateProfile.gender}"
+                                                                                             class="form-control-user" style="text-align:right;"/>
+                                                                                
                                                                                 
                                                                                 <p:outputLabel for="birthday" class="label"  value="تاريخ الميلاد"/>
                                                                                 <p:calendar id="birthday" selectOtherMonths="true" yearRange="c-100:c" class=" form-control-user"

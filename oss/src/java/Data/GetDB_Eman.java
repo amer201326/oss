@@ -221,7 +221,7 @@ public class GetDB_Eman {
                 all[3] = r.getInt(4);
 
             }
-            
+
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(GetDB_Eman.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -250,7 +250,7 @@ public class GetDB_Eman {
         return c;
 
     }
-    
+
     public static CitizenProfile GetCitizenProfileById(String param) {
         CitizenProfile cit = new CitizenProfile();
         try {
@@ -273,26 +273,52 @@ public class GetDB_Eman {
         return cit;
 
     }
-    
+
     public static int[] getAllParametersCitizenDashboard(int id) {
 
         int[] all = new int[2];
         try {
             DB db = new DB();
-            String sql = "SELECT count(*), (SELECT count(*) FROM oss.service_citizen where Cit_ID = "+ id +" and status='done') FROM oss.service_citizen where Cit_ID = "+ id + " and status='notdone';";
+            String sql = "SELECT count(*), (SELECT count(*) FROM oss.service_citizen where Cit_ID = " + id + " and status='done') FROM oss.service_citizen where Cit_ID = " + id + " and status='notdone';";
             ResultSet r = db.read(sql);
 
             while (r.next()) {
                 all[0] = r.getInt(1);
                 all[1] = r.getInt(2);
-                
+
             }
-           System.out.println(all[0]+"  ===   "+ all[1]);
+            System.out.println(all[0] + "  ===   " + all[1]);
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(GetDB_Eman.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return all;
+
+    }
+
+    public static Employee GetEmployeeData(int id) {
+        Employee emp = new Employee();
+        try {
+            DB db = new DB();
+
+            String sql = "SELECT e.Emp_ID, e.Emp_Name, e.Emp_ID_Card, e.Emp_Email, e. Emp_Telephone, e.Emp_Birthday, e.Emp_StartDate, e.Emp_EndDate, e.Emp_Mobile, e.Emp_Gender, d.Dep_Name, s.Sec_Name, j.Job_Name\n"
+                    + " FROM oss.employees as e\n"
+                    + " inner join oss.department as d on e.Dep_ID=d.Dep_ID\n"
+                    + " inner join oss.section as s on e.Sec_ID = s.Sec_ID\n"
+                    + " inner join oss.jobtitle as j on e.Job_ID = j.Job_ID\n"
+                    + " where e.Emp_ID =" + id + ";";
+            System.out.println(sql);
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                emp = new Employee(r.getInt(1),r.getString(2), r.getString(3), r.getString(4), r.getString(5),
+                        r.getString(6), r.getString(7), r.getString(8), r.getString(9), r.getString(10), r.getDate(11),
+                r.getString(12), r.getString(13));
+
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return emp;
 
     }
 
