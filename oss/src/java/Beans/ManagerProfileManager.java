@@ -5,6 +5,7 @@
  */
 package Beans;
 
+import Data.GetDB_Eman;
 import Data.Manager;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
@@ -34,9 +35,15 @@ public class ManagerProfileManager implements Serializable{
     public void init() {
         if (session.manager != null) {
             updateProfile = session.manager;
-            
+         
            
         }
+
+    }
+    
+     public void updateManager() {
+
+        updateProfile.updateManager();
 
     }
 
