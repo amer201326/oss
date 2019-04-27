@@ -274,7 +274,7 @@ public class Employee implements Serializable {
     
     
      public String updateEmployee() {
-        String q = "UPDATE employees SET Emp_Name = '" + emp_name + "',Emp_ID_Card = '" + emp_idCard
+        String q = "UPDATE oss.employees SET Emp_Name = '" + emp_name + "',Emp_ID_Card = '" + emp_idCard
                 + "', Emp_Email = '" + emp_email + "',Emp_Telephone = '" + emp_tel
                 + "', Emp_Birthday = '" + emp_birth + "',Emp_StartDate = '" + emp_StartDate
                 + "', Emp_EndDate = '" + emp_EndDate + "',Emp_Mobile = '" + emp_mobile + "', Emp_Gender = '"
