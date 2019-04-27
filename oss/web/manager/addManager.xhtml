@@ -53,7 +53,7 @@
                                                 <div class="card-body">
                                                     <div class="row no-gutters textC">
                                                         <div class="col mr-2">
-                                                            <h2 class="section-heading text-uppercase">اضافة موظف جديد</h2>
+                                                            <h2 class="section-heading text-uppercase">اضافة مدير جديد</h2>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -77,12 +77,12 @@
                                                             <div class="col-sm-12 mb-3 mb-sm-0">
                                                                 <h:panelGrid columns="2" dir="rtl" style="display: flex; justify-content: flex-start;">
                                                                     <p:outputLabel for="us" class="label" value="اسم المستخدم"/>
-                                                                    <p:inputMask id="us" dir="ltr" value="#{employeeManage.newEmployeeAccount.userName}"
+                                                                    <p:inputMask id="us" dir="ltr" value="#{addAdminManager.newManager.username}"
                                                                                  class="form-control form-control-user" style="text-align:right;"
-                                                                                 type="text" mask="e-********" required="true" autocomplete="off"/>
+                                                                                 type="text" mask="a-********" required="true" autocomplete="off"/>
 
                                                                     <p:outputLabel for="password" class="label" value="كلمة المرور"/>
-                                                                    <p:password dir="ltr" id="password" value="#{employeeManage.newEmployeeAccount.password}" autocomplete="off" class="form-control" style="text-align:right;" feedback="true" inline="true" required="true"/> 
+                                                                    <p:password dir="ltr" id="password" value="#{addAdminManager.newManager.password}" autocomplete="off" class="form-control" style="text-align:right;" feedback="true" inline="true" required="true"/> 
 
                                                                 </h:panelGrid>
 
@@ -97,30 +97,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="card shadow mb-4">
-                                                    <div class="card-header py-3">
-                                                        <h6 class="m-0 font-weight-bold text-primary">صلاحيات</h6>
-                                                    </div>
-
-
-                                                    <div class="my-2"></div>
-
-                                                    <div class="form-group row" style="display:flex; 
-                                                         justify-content: flex-start; width: 220px; margin: 0 40px 0 40px;">
-
-
-                                                        <p:pickList id="pickList" value="#{employeeManage.screensNamesAndResaults}" var="sna" 
-                                                                    itemLabel="#{sna}" itemValue="#{sna}"  showSourceFilter="true" showTargetFilter="true"
-                                                                    style=" min-width: 150px; margin: 1% 1% 1% 1%; min-height: 100px; padding-left: 50%;" orientation="vertical">
-                                                            <f:facet name="sourceCaption">كافة المرفقات</f:facet>
-                                                            <f:facet name="targetCaption">المرفقات المختارة</f:facet>
-                                                        </p:pickList>  
-
-
-                                                    </div>
-
-                                                    <div class="my-2"></div>
-                                                </div>
+                                                
 
                                             </div>
 
@@ -140,41 +117,37 @@
 
                                                                     <p:outputLabel for="compName" class="label" value="الاسم الكامل"/>
                                                                     <p:inputText dir="ltr" class="form-control form-control-user" style="text-align:right;"
-                                                                                 id="compName" type="text" value="#{employeeManage.newEmployee.emp_name}" 
+                                                                                 id="compName" type="text" value="#{addAdminManager.newManager.emp_name}" 
                                                                                  required="true"/>
 
                                                                     <p:outputLabel for="idCard" class="label" value="رقم الهوية"/>
                                                                     <p:inputMask dir="ltr" id="idCard" class="form-control form-control-user" style="text-align:right;" 
-                                                                                 type="text" mask="9 9999999 9" value="#{employeeManage.newEmployee.emp_idCard}" required="true"/>
+                                                                                 type="text" mask="9 9999999 9" value="#{addAdminManager.newManager.emp_idCard}" required="true"/>
 
                                                                     <p:outputLabel for="tel" class="label" value="التلفون"/>
                                                                     <p:inputMask dir="ltr" id="tel" class="form-control form-control-user" style="text-align:right;" 
-                                                                                 type="text" value="#{employeeManage.newEmployee.emp_tel}" mask="99-9999-999"/>
+                                                                                 type="text" value="#{addAdminManager.newManager.emp_tel}" mask="99-9999-999"/>
 
                                                                     <p:outputLabel for="mobile" class="label" value="الجوال"/>
                                                                     <p:inputMask dir="ltr" id="mobile" class="form-control form-control-user" style="text-align:right;"
-                                                                                 type="text" mask="999-999-9999" value="#{employeeManage.newEmployee.emp_mobile}" required="true"/>
+                                                                                 type="text" mask="999-999-9999" value="#{addAdminManager.newManager.emp_mobile}" required="true"/>
 
                                                                     <p:outputLabel for="email1" class="label" value="البريد الإلكتروني"/>
                                                                     <p:inputText dir="ltr" id="email1" class="form-control form-control-user" style="text-align:right;" type="email"
-                                                                                 value="#{employeeManage.newEmployee.emp_email}" required="true"/>
+                                                                                 value="#{addAdminManager.newManager.emp_email}" required="true"/>
 
 
 
                                                                     <p:outputLabel for="gender" class="label" value="الجنس"/>
-                                                                    <p:selectOneRadio value="#{employeeManage.newEmployee.emp_gender}" id="gender" class="label1" required="true">
+                                                                    <p:selectOneRadio value="#{addAdminManager.newManager.emp_gender}" id="gender" class="label1" required="true">
                                                                         <f:selectItem itemLabel="ذكر" itemValue="M" />
                                                                         <f:selectItem  itemLabel="أنثى" itemValue="F" />
                                                                     </p:selectOneRadio>
 
-                                                             
-                                                                    
                                                                     <p:outputLabel for="barDa" class="label" value="تاريخ الميلاد"/>
                                                                     <p:calendar id="barDa" selectOtherMonths="true" yearRange="c-100:c" class=" form-control-user"
                                                                                 pattern="yyyy-MM-dd" navigator="true" style="text-align:right; width: 223px;"
-                                                                                value="#{employeeManage.newEmployee.birthDate}" required="true"/>
-
-                                                                   
+                                                                                value="#{addAdminManager.newManager.emp_birth}" required="true"/>
                                                                 </h:panelGrid>
 
                                                             </div>
@@ -185,57 +158,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="card shadow mb-4" style="text-align: right;">
-                                                    <div class="card-header py-3">
-                                                        <h6 class="m-0 font-weight-bold text-primary">تحديد القسم</h6>
-                                                    </div>
-                                                    <div class="card-body">
-
-                                                        <div class="form-group row">
-                                                            <div class="col-sm-12 mb-3 mb-sm-0">
-
-                                                                <h:panelGrid columns="2" dir="rtl" style="display: flex; justify-content: flex-start;">
-
-
-
-                                                                    <h:outputLabel  for="dep_id" class="label" value="دائرة"/>
-                                                                    <p:selectOneMenu id="dep_id" value="#{employeeManage.newEmployee.dep_id}"  
-                                                                                     class="pading000 form-control" style="text-align:right; min-width: 223px;" required="true">
-                                                                        <f:selectItems value="#{employeeManage.allDepartments}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}" />
-                                                                        <p:ajax process="@this"  update="sec_id job_id" event="itemSelect" />
-                                                                    </p:selectOneMenu>
-
-
-                                                                    <h:outputLabel  for="sec_id" class="label" value="القسم"/>
-                                                                    <p:selectOneMenu id="sec_id" value="#{employeeManage.newEmployee.sec_id}"
-                                                                                     class="pading000 form-control" style="text-align:right; min-width: 223px;" required="true" >
-                                                                        <f:selectItems value="#{employeeManage.filterSections()}" var="s" itemLabel="#{s.name}" itemValue="#{s.id}" />
-                                                                        <p:ajax process="@this"  update="job_id" event="itemSelect" />
-                                                                    </p:selectOneMenu>   
-
-                                                                    <h:outputLabel  for="job_id" class="label" value="المسمى الوظيفة" />
-                                                                    <p:selectOneMenu id="job_id" value="#{employeeManage.newEmployee.job_id}" 
-                                                                                     class="pading000 form-control" style="text-align:right; min-width: 223px;" required="true" label="Job ID" >
-                                                                        <f:selectItems value="#{employeeManage.filterJob()}" var="j" itemLabel="#{j.name}" itemValue="#{j.idJob}" />
-                                                                    </p:selectOneMenu>
-
-
-
-
-                                                                </h:panelGrid>
-
-
-
-
-                                                            </div>
-
-                                                        </div>
-
-
-
-
-                                                    </div>
-                                                </div>
+                                           
 
                                             </div>
 
@@ -252,7 +175,7 @@
                                                     <f:ajax />
                                                 </p:commandButton> &nbsp; &nbsp; &nbsp;
 
-                                                <p:commandButton actionListener="#{employeeManage.addEmployee()}" value="إضافة موظف" id="add_emp"  update="@form"  class="myButtonC" />
+                                                <p:commandButton actionListener="#{addAdminManager.addManager}" value="إضافة موظف" id="add_emp"  update="@form"  class="myButtonC" />
 
                                             </div>
 

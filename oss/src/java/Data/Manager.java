@@ -211,6 +211,27 @@ public class Manager implements Serializable {
     }
 
    
-    
+    public void addManagerToDB() {
+        
+        
+        String q = "INSERT INTO manager (`username`, `password`, `Emp_Name`, `Emp_ID_Card`, `Emp_Email`, `Emp_Telephone`, `Emp_Birthday`, `Emp_StartDate`, `Emp_Mobile`, `Emp_Gender`) \n"
+                + "VALUES ('" + username + "','" + password + "','" + emp_name + "','" + emp_idCard + "','" + emp_email + "','"
+                + emp_tel + "','" + emp_birth + "','" + LocalDate.now() + "','" + emp_mobile + "','" + emp_gender + "');";
+
+        try {
+            DB data = new DB();
+            System.out.println(q);
+            data.write(q);
+           
+
+        } catch (SQLException ex) {
+            System.out.println("error Add Manager");
+            Logger.getLogger(Manager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            System.out.println("error Add Manager");
+            Logger.getLogger(Manager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 
 }
