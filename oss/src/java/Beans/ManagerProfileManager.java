@@ -41,7 +41,7 @@ public class ManagerProfileManager implements Serializable{
 
     }
     
-     public void updateManager() {
+     public void updateManager1() {
 
         updateProfile.updateManager();
 
@@ -53,6 +53,14 @@ public class ManagerProfileManager implements Serializable{
 
     public void setUpdateProfile(Manager updateProfile) {
         this.updateProfile = updateProfile;
+    }
+
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
     }
     
     

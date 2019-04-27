@@ -252,7 +252,7 @@ public class Manager implements Serializable {
         try {
 
             String q = "UPDATE oss.manager SET Emp_Email = '" + emp_email + "',Emp_Telephone = '" + emp_tel + "', Emp_Mobile = '" + emp_mobile
-                    + "',Emp_Birthday= '" + emp_birth + "' WHERE (username = " + username + ");";
+                    + "',Emp_Birthday= '" + emp_birth + "' WHERE (username = '" + username + "');";
             System.out.println(q);
             DB data = new DB();
             data.write(q);

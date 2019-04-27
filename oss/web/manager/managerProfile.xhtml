@@ -53,7 +53,7 @@
                                                 <div class="card-body">
                                                     <div class="row no-gutters textC">
                                                         <div class="col mr-2">
-                                                            <h2 class="section-heading text-uppercase">حساب المسؤول</h2>
+                                                            <h2 class="section-heading text-uppercase"> #{managerProfileManager.updateProfile.emp_name} حساب  المسؤول </h2>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -78,7 +78,7 @@
                                                                 <h:panelGrid columns="2" dir="rtl" style="display: flex; justify-content: flex-start;">
                                                                     <p:outputLabel for="us" class="label" value="اسم المستخدم"/>
                                                                     <p:outputLabel id="us" dir="ltr" value="#{managerProfileManager.updateProfile.username}"
-                                                                                 class="form-control form-control-user" style="text-align:right;"/>
+                                                                                  style="text-align:right;"/>
 
                                                                     <p:outputLabel for="password" class="label" value="كلمة المرور"/>
                                                                     <p:password dir="ltr" id="password" value="#{managerProfileManager.updateProfile.password}" autocomplete="off" class="form-control" style="text-align:right;" feedback="true" inline="true" required="true"/> 
@@ -115,11 +115,11 @@
                                                                 <h:panelGrid columns="2" dir="rtl" style="display: flex; justify-content: flex-start;">
 
                                                                     <p:outputLabel for="compName" class="label" value="الاسم الكامل"/>
-                                                                    <p:outputLabel dir="ltr" class="form-control form-control-user" style="text-align:right;"
+                                                                    <p:outputLabel dir="ltr"  style="text-align:right;"
                                                                                    id="compName" value="#{managerProfileManager.updateProfile.emp_name}"/>
 
                                                                     <p:outputLabel for="idCard" class="label" value="رقم الهوية"/>
-                                                                    <p:outputLabel dir="ltr" id="idCard" class="form-control form-control-user" style="text-align:right;" 
+                                                                    <p:outputLabel dir="ltr" id="idCard" style="text-align:right;" 
                                                                                    value="#{managerProfileManager.updateProfile.emp_idCard}"/>
 
                                                                     <p:outputLabel for="tel" class="label" value="التلفون"/>
@@ -137,14 +137,13 @@
 
 
                                                                     <p:outputLabel for="gender" class="label" value="الجنس"/>
-                                                                     <p:outputLabel dir="ltr" id="gender" class="form-control form-control-user" style="text-align:right;" 
+                                                                     <p:outputLabel dir="ltr" id="gender" style="text-align:right;" 
                                                                                     value="#{managerProfileManager.updateProfile.emp_gender}"/>
 
 
-                                                                    <p:outputLabel for="barDa" class="label" value="تاريخ الميلاد"/>
-                                                                    <p:calendar id="barDa" selectOtherMonths="true" yearRange="c-100:c" class=" form-control-user"
-                                                                                pattern="yyyy-MM-dd" navigator="true" style="text-align:right; width: 223px;"
-                                                                                value="#{managerProfileManager.updateProfile.emp_birth}" required="true"/>
+                                                                    <p:outputLabel  for="barDa" class="label" value="تاريخ الميلاد"/>
+                                                                    <p:outputLabel id="barDa" style="text-align:right; width: 280px;"
+                                                                                value="#{managerProfileManager.updateProfile.emp_birth}" />
                                                                 </h:panelGrid>
 
                                                             </div>
@@ -172,7 +171,7 @@
                                                     <f:ajax />
                                                 </p:commandButton> &nbsp; &nbsp; &nbsp;
 
-                                                <p:commandButton actionListener="#{managerProfileManager.updateManager()}" value="إضافة مسؤول" id="add_emp"  update="@form"  class="myButtonC" />
+                                                <p:commandButton actionListener="#{managerProfileManager.updateManager1}" value="إضافة مسؤول" id="add_emp"  update="@form"  class="myButtonC" />
 
                                             </div>
 

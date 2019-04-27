@@ -43,6 +43,7 @@ public class Session implements Serializable{
     Manager manager ;
     Citizen citizen;
     Employee employee;
+ 
     
     ServiceCitizen serviceCitizenShow;
     
