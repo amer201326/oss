@@ -10,7 +10,6 @@ import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
@@ -20,18 +19,14 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 @ViewScoped
-public class AddEmployeeManager implements Serializable{
+public class AddManManager implements Serializable{
     
-    
-    
-    
-    public void gotToEdit(String id){
+      public void gotToEdit(String id){
         try {
 
-            FacesContext.getCurrentInstance().getExternalContext().redirect("editEmployee.xhtml?id="+id);
+            FacesContext.getCurrentInstance().getExternalContext().redirect("editManager.xhtml?id="+id);
         } catch (IOException ex) {
-            Logger.getLogger(AddEmployeeManager.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddManManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
 }

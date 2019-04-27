@@ -233,5 +233,19 @@ public class Manager implements Serializable {
         }
 
     }
+    
+    public void update() {
+        String q = "UPDATE manager SET Emp_Email = '" + emp_email + "',Emp_Mobile = '" + emp_mobile + "',Emp_Name = '" + emp_name + "' WHERE username = '" + username + "';";
+        try {
+            DB data = new DB();
+            data.write(q);
+            System.out.println(q);
+        } catch (SQLException ex) {
+            Logger.getLogger(Manager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Manager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 
 }

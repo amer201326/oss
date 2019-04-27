@@ -321,5 +321,26 @@ public class GetDB_Eman {
         return emp;
 
     }
+    
+    
+    public static List<Manager> getAllManagers() {
+        Manager ma = new Manager();
+
+        List<Manager> emp = new ArrayList<Manager>();
+        try {
+            DB db = new DB();
+            String sql = "SELECT * FROM oss.manager ;";
+
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                ma = new Manager(r.getString(1), r.getString(2), r.getString(3), r.getString(4), r.getString(5), r.getString(6), r.getString(7), r.getString(8), r.getString(9), r.getString(10), r.getString(11));
+                emp.add(ma);
+            }
+        } catch (Exception e) {
+            System.out.println("bb" + e.getMessage());
+        }
+        return emp;
+    }
+
 
 }
