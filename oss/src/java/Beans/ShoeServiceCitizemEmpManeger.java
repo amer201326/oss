@@ -108,6 +108,7 @@ public class ShoeServiceCitizemEmpManeger {
     }
 
     public void submit() throws SQLException {
+        System.out.print("cost == -"+serviseCitizen.getDecisionsJob().getCost());
         serviseCitizen.ContineuInPath(employee.getEmp_id());
         
 
