@@ -32,7 +32,7 @@ public class Employee implements Serializable {
     String sec_name;
     String job_name;
     
-    int last = 0;
+   
     String emp_name;
     String emp_idCard;
     String emp_email;
@@ -49,23 +49,7 @@ public class Employee implements Serializable {
     public Employee() {
     }
 
-    public Employee(int emp_id, String dep_name, String sec_name, String job_name, String emp_name, String emp_idCard, String emp_email, String emp_tel, String emp_mobile, String emp_gender, Date birthDate, String emp_StartDate, String emp_EndDate) {
-        
-        this.emp_id = emp_id;
-        this.dep_name = dep_name;
-        this.sec_name = sec_name;
-        this.job_name = job_name;
-        this.emp_name = emp_name;
-        this.emp_idCard = emp_idCard;
-        this.emp_email = emp_email;
-        this.emp_tel = emp_tel;
-        this.emp_mobile = emp_mobile;
-        this.emp_gender = emp_gender;
-        this.birthDate = birthDate;
-        this.emp_StartDate = emp_StartDate;
-        this.emp_EndDate = emp_EndDate;
-    }
-    
+       
     
 
     public Employee(int dep_id, int sec_id, int job_id, int emp_id, String emp_name, String emp_idCard, String emp_email, String emp_tel, String emp_birth, String emp_StartDate, String emp_EndDate, String emp_mobile, String emp_gender) {
@@ -84,12 +68,27 @@ public class Employee implements Serializable {
         this.emp_gender = emp_gender;
 
     }
-
-    public Employee(String dep_name, String sec_name, String job_name) {
+    
+    public Employee(int emp_id, String emp_name, String emp_idCard, String emp_email, String emp_tel, String emp_birth,
+            String emp_StartDate, String emp_EndDate, String emp_mobile, String emp_gender, String dep_name, 
+            String sec_name, String job_name) {
+        this.emp_id = emp_id;
+        this.emp_name = emp_name;
+        this.emp_idCard = emp_idCard;
+        this.emp_email = emp_email;
+        this.emp_tel = emp_tel;
+        this.emp_birth = emp_birth;
+        this.emp_StartDate = emp_StartDate;
+        this.emp_EndDate = emp_EndDate;
+        this.emp_mobile = emp_mobile;
+        this.emp_gender = emp_gender;
         this.dep_name = dep_name;
         this.sec_name = sec_name;
         this.job_name = job_name;
+
     }
+
+    
     
     
 
@@ -322,17 +321,10 @@ public class Employee implements Serializable {
 
     @Override
     public String toString() {
-        return "Employee{" + "dep_id=" + dep_id + ", sec_id=" + sec_id + ", job_id=" + job_id + ", emp_id=" + emp_id + ", last=" + last + ", emp_name=" + emp_name + ", emp_idCard=" + emp_idCard + ", emp_email=" + emp_email + ", emp_tel=" + emp_tel + ", emp_mobile=" + emp_mobile + ", emp_gender=" + emp_gender + ", emp_birth=" + emp_birth + ", birthDate=" + birthDate + ", emp_StartDate=" + emp_StartDate + ", emp_EndDate=" + emp_EndDate + '}';
+        return "Employee{" + "dep_id=" + dep_id + ", sec_id=" + sec_id + ", job_id=" + job_id + ", emp_id=" + emp_id + ", emp_name=" + emp_name + ", emp_idCard=" + emp_idCard + ", emp_email=" + emp_email + ", emp_tel=" + emp_tel + ", emp_mobile=" + emp_mobile + ", emp_gender=" + emp_gender + ", emp_birth=" + emp_birth + ", birthDate=" + birthDate + ", emp_StartDate=" + emp_StartDate + ", emp_EndDate=" + emp_EndDate + '}';
     }
 
-    public int getLast() {
-        return last;
-    }
-
-    public void setLast(int last) {
-        this.last = last;
-    }
-
+    
     public Date getBirthDate() {
         return birthDate;
     }

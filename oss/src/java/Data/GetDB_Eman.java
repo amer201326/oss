@@ -301,19 +301,20 @@ public class GetDB_Eman {
         try {
             DB db = new DB();
 
-            String sql = "SELECT e.Emp_ID, e.Emp_Name, e.Emp_ID_Card, e.Emp_Email, e. Emp_Telephone, e.Emp_Birthday, e.Emp_StartDate, e.Emp_EndDate, e.Emp_Mobile, e.Emp_Gender, d.Dep_Name, s.Sec_Name, j.Job_Name"
+            String sql = "SELECT e.Emp_ID, e.Emp_Name, e.Emp_ID_Card, e.Emp_Email, e.Emp_Telephone, e.Emp_Birthday, e.Emp_StartDate, e.Emp_EndDate, e.Emp_Mobile, e.Emp_Gender, d.Dep_Name, s.Sec_Name, j.Job_Name"
                     + " FROM oss.employees as e"
                     + " inner join oss.department as d on e.Dep_ID=d.Dep_ID"
                     + " inner join oss.section as s on e.Sec_ID = s.Sec_ID"
                     + " inner join oss.jobtitle as j on e.Job_ID = j.Job_ID"
                     + " where e.Emp_ID =" + id + ";";
+            
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
-                emp = new Employee(r.getInt(1),r.getString(11), r.getString(12), r.getString(13), r.getString(3),
-                        r.getString(4), r.getString(5), r.getString(9), r.getString(9), r.getString(10), r.getDate(11),
-                r.getString(12), r.getString(13));
-
+                emp = new Employee(r.getInt(1), r.getString(2), r.getString(3), r.getString(4), r.getString(5), 
+                        r.getString(6), r.getString(7), r.getString(8), r.getString(9), r.getString(10), r.getString(11), 
+                        r.getString(12), r.getString(13));
+                System.out.println(emp);
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -321,8 +322,7 @@ public class GetDB_Eman {
         return emp;
 
     }
-    
-    
+
     public static List<Manager> getAllManagers() {
         Manager ma = new Manager();
 
@@ -341,6 +341,5 @@ public class GetDB_Eman {
         }
         return emp;
     }
-
 
 }
