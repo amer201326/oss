@@ -7,6 +7,7 @@ package Beans;
 
 import Data.Employee;
 import Data.GetDB_Eman;
+import Data.GetFromDB;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -34,7 +35,9 @@ public class EmployeeProfileManager implements Serializable{
          
         if (session.employee != null) {
             
-            updateProfile = session.employee;
+            updateProfile = GetDB_Eman.GetEmployeeData(session.employee.getEmp_id());
+            
+            
             updateProfile.getAccount().setPassword("");
            
            
