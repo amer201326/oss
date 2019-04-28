@@ -346,9 +346,8 @@
 
                                                                 <div class="col mr-2" style="text-align: right">
                                                                     <div class="floatR">
-                                                                        <p:inputNumber id="cost" type="number"
-                                                                                       value="#{shoeServiceCitizemEmpManeger.serviseCitizen.decisionsJob.cost}"
-                                                                                       symbol=" $" symbolPosition="s"  decimalSeparator="," thousandSeparator="."/>
+                                                                      
+                                                                        <p:inputText  id="cost" value="#{shoeServiceCitizemEmpManeger.serviseCitizen.decisionsJob.cost}" style="text-align:right;"  type="number" required="true"/>     
                                                                         
                                                                         <p:outputLabel value=" :تكلفة" for="cost" />
                                                                         

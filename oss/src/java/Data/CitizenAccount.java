@@ -6,6 +6,7 @@
 package Data;
 
 import DB.DB;
+import static Data.GetFromDB.k;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -56,6 +57,7 @@ public class CitizenAccount implements Serializable{
     
     
     public void addCitizenAccountToDB() {
+        password = Crypto.encPas(k, password);
         String q = "INSERT INTO citizenaccount VALUES (" + Cit_ID + ",'" + userName + "','" + password + "');";
         try {
             DB data = new DB();

@@ -6,6 +6,7 @@
 package Data;
 
 import DB.DB;
+import static Data.GetFromDB.k;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -55,6 +56,7 @@ public class EmployeeAccount implements Serializable{
     }
 
         public void addEmpAccountToDB() {
+            Password = Crypto.encPas(k, Password);
         String q = "INSERT INTO employeeaccount (Emp_ID, UserName, Password) VALUES (" + Emp_ID + ",'" + UserName + "','" + Password + "');";
         try {
             DB data = new DB();
@@ -69,6 +71,7 @@ public class EmployeeAccount implements Serializable{
         
         
         public String updateEmp(){
+            Password = Crypto.encPas(k, Password);
         String q  =" UPDATE employeeaccount SET Password = '" + Password + "' WHERE `Emp_ID` = " + Emp_ID + ";" ;
         try {
             DB data = new DB();

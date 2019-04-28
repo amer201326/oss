@@ -38,7 +38,7 @@ public class Crypto {
         String dateInString = new SimpleDateFormat(pattern).format(new Date());
         System.out.println(dateInString);
         System.out.println(LocalDate.now());
-        String s = encPas("foreanderDowntop", "amer");
+        String s = encPas("foreanderDowntop", "yaser");
         System.out.println(s);
         System.out.println(decPas("foreanderDowntop", s));
 

@@ -615,7 +615,7 @@ public class ServiceCitizen {
 
             nextjobsPathOfthisService(departments,sections, jobs);
 
-            q = "rollback;";
+            q = "commit;";
             System.out.println(q);
             db.write(q);
 

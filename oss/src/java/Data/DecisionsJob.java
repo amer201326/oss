@@ -115,6 +115,7 @@ public class DecisionsJob {
     }
 
     public void setCost(double cost) {
+        System.out.println("set cost "+cost);
         this.cost = cost;
     }
 

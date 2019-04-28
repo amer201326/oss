@@ -944,7 +944,6 @@ public class GetFromDB {
 
     public static List<ServiceCitizen> getAllRequestService(Employee emp) {
         ServiceCitizen cit = new ServiceCitizen();
-
         List<ServiceCitizen> c = new ArrayList<ServiceCitizen>();
         try {
             DB db = new DB();
