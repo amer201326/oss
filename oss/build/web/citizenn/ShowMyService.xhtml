@@ -79,7 +79,7 @@
                                 <div class="col-lg-12" style="text-align: right; min-width:1200px ">
                                     <div class="card shadow mb-xl-4">
                                         <div class="card-header py-3">
-                                            <h6 class="m-0 font-weight-bold text-primary">#{d.decisionsDepartment.depName} </h6>
+                                            <h6 class="m-0 font-weight-bold text-primary">#{d.departmentPaths.nameA} </h6>
 
 
                                         </div>
@@ -174,8 +174,6 @@
                                                                 </div>
 
 
-                                                                <ui:repeat value="#{d.sections}" var="s" >
-
                                                                     <ui:repeat value="#{s.job}" var="j" >
 
                                                                         <div class="card border-right-warning border-bottom-warning shadow h-100 py-2 " style="margin: 0 10px">
@@ -206,7 +204,6 @@
 
                                                                     </ui:repeat>
 
-                                                                </ui:repeat>
 
 
                                                             </div>

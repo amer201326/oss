@@ -52,7 +52,7 @@ public class GetFromDBaraa {
             String sql = "SELECT *  FROM service_citizen as sc inner join services_provided as sp where sc.status = 'notdone' and Cit_ID=" + idcitizen + " and sc.Services_Provided_ID=sp.Services_Provided_ID;";
             ResultSet r = db.read(sql);
             while (r.next()) {
-                sc= new ServiceCitizen(r.getInt(1), r.getInt(2),r.getInt(3), r.getString(4), r.getString(5), r.getString(6));
+                sc = new ServiceCitizen(r.getInt(1), r.getInt(2), r.getInt(3), r.getString(4), r.getString(5), r.getString(6));
                 sc.service = new Service(r.getInt(7), r.getString(8), r.getInt(9), r.getInt(10), r.getString(11), new Department(r.getInt(12)), new Section(r.getString(13)), r.getString(14));
                 services.add(sc);
             }
@@ -131,7 +131,6 @@ public class GetFromDBaraa {
 //        }
 //        return departments;
 //    }
-
     public static ArrayList<DecisionsJob> MyServiceJobPath(int idservice, int idcitizen, int idSerCit) {
         ArrayList<DecisionsJob> jobs = new ArrayList<>();
         try {
@@ -163,8 +162,8 @@ public class GetFromDBaraa {
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
-                s = new DepartmentPaths(r.getInt(1), r.getString(15), r.getInt(2), r.getString(15));
-                d = new DecisionsDepartment(r.getString(8), r.getString(9), r.getString(6), r.getDouble(7), r.getInt(1), r.getInt(2), r.getString(15),r.getString(11));
+                s = new DepartmentPaths(r.getInt(1), r.getString(16), r.getInt(2), r.getString(15));
+                d = new DecisionsDepartment(r.getString(8), r.getString(9), r.getString(6), r.getDouble(7), r.getInt(1), r.getInt(2), r.getString(15), r.getString(11));
                 sd = new StepsAndDecsions(s, d);
                 deps.add(sd);
             }
@@ -182,7 +181,7 @@ public class GetFromDBaraa {
             JobPath s;
             DecisionsJob d;
 
-            String sql = "SELECT * FROM decisions_job as dj inner join jobtitle as j on dj.Job_ID = j.Job_ID inner join steps_job as sj on dj.Dep_ID=sj.Dep_ID and dj.Order_Departmant=sj.Order_Departmant and dj.Sec_ID=sj.Sec_ID and dj.Order_Section=sj.Order_Section and dj.Job_ID=sj.Job_ID and dj.Order_Job=sj.Order_Job  where Cit_ID = " + idcitizen + " and dj.Service_Citizen_ID =" + idSerCit + " "
+            String sql = "SELECT * FROM decisions_job as dj inner join jobtitle as j on dj.Job_ID = j.Job_ID inner join steps_job as sj on dj.Dep_ID=sj.Dep_ID and dj.Order_Departmant=sj.Order_Departmant and dj.Sec_ID=sj.Sec_ID and dj.Order_Section=sj.Order_Section and dj.Job_ID=sj.Job_ID and dj.Order_Job=sj.Order_Job  and dj.Services_Provided_ID = sj.Services_Provided_ID  where Cit_ID = " + idcitizen + " and dj.Service_Citizen_ID =" + idSerCit + " "
                     + "order by dj.Order_Job;";
             System.out.println(sql);
             ResultSet r = db.read(sql);
@@ -207,6 +206,7 @@ public class GetFromDBaraa {
             SectionPath sp;
             DecisionSection s;
             String sql = "SELECT * FROM steps_section as ss  inner join section as s on ss.Sec_ID = s.Sec_ID where ss.Services_Provided_ID = " + idservice + " ;";
+            System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
                 sp = new SectionPath(r.getInt(1), r.getInt(4), r.getInt(2), r.getString(8), r.getInt(5));
@@ -324,23 +324,23 @@ public class GetFromDBaraa {
         return id;
     }
 
-    public static List<AttachmentServiceEmployee> AttachmentServiceEmployee(int Cit_ID , int Service_Citizen_ID, int Services_Provided_ID) {
-                    System.out.println("AAAtt");
+    public static List<AttachmentServiceEmployee> AttachmentServiceEmployee(int Cit_ID, int Service_Citizen_ID, int Services_Provided_ID) {
+        System.out.println("AAAtt");
 
         ArrayList<AttachmentServiceEmployee> attachments = new ArrayList<AttachmentServiceEmployee>();
         try {
             DB db = new DB();
             AttachmentServiceEmployee att;
-            
-            String sql = "SELECT * FROM attachment_service_employee where Cit_ID="+Cit_ID+" and Service_Citizen_ID="+Service_Citizen_ID+" and  Services_Provided_ID="+Services_Provided_ID+" ;";
-           System.out.println(sql);
+
+            String sql = "SELECT * FROM attachment_service_employee where Cit_ID=" + Cit_ID + " and Service_Citizen_ID=" + Service_Citizen_ID + " and  Services_Provided_ID=" + Services_Provided_ID + " ;";
+            System.out.println(sql);
             ResultSet r = db.read(sql);
             System.out.println(sql);
             while (r.next()) {
-                att = new AttachmentServiceEmployee(r.getInt(1), r.getInt(2), r.getInt(3), r.getInt(4), r.getInt(5),r.getString(6) ,r.getBinaryStream(7),r.getString(8));
-               attachments.add(att);
+                att = new AttachmentServiceEmployee(r.getInt(1), r.getInt(2), r.getInt(3), r.getInt(4), r.getInt(5), r.getString(6), r.getBinaryStream(7), r.getString(8));
+                attachments.add(att);
             }
-            
+
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(GetFromDBaraa.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -348,5 +348,5 @@ public class GetFromDBaraa {
         return attachments;
 
     }
-    
+
 }

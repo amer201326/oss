@@ -40,6 +40,20 @@ public class DecisionsJob {
         this.externalMessage = externalMessage;
         this.date = date;
     }
+
+    public DecisionsJob(JobPath job, int idEmployee, String status, String runing, double cost, String internalMessage, String externalMessage, String date, int Services_Provided_ID, int Cit_ID, int Service_Citizen_ID) {
+        this.job = job;
+        this.idEmployee = idEmployee;
+        this.status = status;
+        this.runing = runing;
+        this.cost = cost;
+        this.internalMessage = internalMessage;
+        this.externalMessage = externalMessage;
+        this.date = date;
+        this.Services_Provided_ID = Services_Provided_ID;
+        this.Cit_ID = Cit_ID;
+        this.Service_Citizen_ID = Service_Citizen_ID;
+    }
     
     
     
@@ -177,14 +191,21 @@ public class DecisionsJob {
         return "DecisionsJob{" + "job=" + job + ", idEmployee=" + idEmployee + ", status=" + status + ", runing=" + runing + ", cost=" + cost + ", internalMessage=" + internalMessage + ", externalMessage=" + externalMessage + ", date=" + date + ", Services_Provided_ID=" + Services_Provided_ID + ", Cit_ID=" + Cit_ID + ", Service_Citizen_ID=" + Service_Citizen_ID + '}';
     }
 
+    
+
     void updateDone() throws SQLException, ClassNotFoundException {
         DB data = new DB();
-            String q = "UPDATE `oss`.`decisions_job` SET `Status` = 'done', `Cost` = "+date +", `Com_InternalMessage` = '"+internalMessage+"',"
+        
+            String q = "UPDATE `oss`.`decisions_job` SET `Status` = 'done', `Cost` = "+cost +", `Com_InternalMessage` = '"+internalMessage+"',"
                     + " `Com_ExternalMessage` = '"+externalMessage+"',"
-                    + " `Date` = "+date+" WHERE (`Dep_ID` = "+job.DepId+") and (`Sec_ID` = "+job.DepId+") and (`Job_ID` = "+job.DepId+") "
-                    + "and (`Services_Provided_ID` = "+Services_Provided_ID+") and (`Order_Departmant` = "+job.DepId+") and (`Order_Section` = "+job.DepId+") "
-                    + "and (`Order_Job` = "+job.DepId+") "
-                    + "and (`Cit_ID` = "+Cit_ID+") and (`Service_Citizen_ID` = "+Service_Citizen_ID+") and (`Emp_ID` = "+idEmployee+");";
+                    + " `Date` = '"+date+"' , `Emp_ID` = "+idEmployee+" WHERE (`Dep_ID` = "+job.DepId+") and (`Sec_ID` = "+job.sectionID+") and (`Job_ID` = "+job.id+") "
+                    + "and (`Services_Provided_ID` = "+Services_Provided_ID+") and (`Order_Departmant` = "+job.dOrder+") and (`Order_Section` = "+job.sOrder+") "
+                    + "and (`Order_Job` = "+job.order+") "
+                    + "and (`Cit_ID` = "+Cit_ID+") and (`Service_Citizen_ID` = "+Service_Citizen_ID+");";
+            
+            //UPDATE `oss`.`decisions_job` SET `Emp_ID` = "++", `Status` = 'done' WHERE (`Dep_ID` = "++") and (`Sec_ID` = "++") and (`Job_ID` = "++") and (`Services_Provided_ID` = "++") and (`Order_Departmant` = "++") and (`Order_Section` = "++") and (`Order_Job` = "++") and (`Cit_ID` = "++") and (`Service_Citizen_ID` = "++") ;
+
+            
             System.out.println("qj  =  "+q);
             data.write(q);
     }

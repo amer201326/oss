@@ -449,7 +449,7 @@ public class ServiceCitizen {
             }
 
             for (DecisionsDepartment decisionsDepartment : midDecDep) {
-                if (!decisionsDepartment.section.isEmpty()) {
+                if (!decisionsDepartment.section.isEmpty()) {System.out.println("havev Section In Dep");
                     DecisionSection[] decisionSections1 = new DecisionSection[decisionsDepartment.section.size()];
                     decisionSections1 = decisionsDepartment.section.toArray(decisionSections1);
 
@@ -480,8 +480,8 @@ public class ServiceCitizen {
                         }
 
                     }
-                } else {
-                    List<Section> sections = GetFromDB.getSection(Services_Provided_ID);
+                } else {System.out.println("No Section In Dep");
+                    List<Section> sections = GetFromDB.getSection(decisionsDepartment.depId);
                     for (Section section : sections) {
                         List<JobTitel> jobTitels = GetFromDB.getJobTittle(section.id + "");
                         for (JobTitel jobTitel : jobTitels) {
@@ -575,15 +575,16 @@ public class ServiceCitizen {
             decisionsJob.updateDone();
 
             List<DecisionsJob> jobs = GetFromDB.getDecisionsJobNotDone(Cit_ID, Service_Citizen_ID);
-
+            System.out.println("------------- jjjj -00000000000000");
             int jobCount = 0;
             for (DecisionsJob job : jobs) {
+                System.out.println(job);
                 if (job.job.DepId == service_Job.Dep_ID && job.job.sectionID == service_Job.Sec_ID
                         && job.job.dOrder == service_Job.Order_Departmant && job.job.sOrder == service_Job.Order_Section) {
                     jobCount++;
                 }
             }
-
+    System.out.println("------------- jjjj -00000000000000");
             if (jobCount == 0) {
                 q = "UPDATE `oss`.`dicisions_section` SET `Status` = 'done' WHERE (`Dep_ID` = " + service_Job.Dep_ID + ") "
                         + "and (`Sec_ID` = " + service_Job.Sec_ID + ") and (`Services_Provided_ID` = " + service_Job.Services_Provided_ID + ") "
