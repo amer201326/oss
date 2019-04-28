@@ -51,7 +51,7 @@ public class GetFromDB {
 
             ResultSet r = db.read(sql);
             while (r.next()) {
-                d = new JobTitel(r.getInt(1), r.getString(2));
+                d = new JobTitel(r.getInt(1), r.getString(2), r.getString(3));
                 job.add(d);
             }
         } catch (Exception e) {

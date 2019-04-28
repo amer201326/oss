@@ -111,7 +111,15 @@
                                                             <p:rowEditor />
                                                         </p:column>
 
-                                                        <p:ajax event="rowSelect" process="@this" update="formSection:diallogDelete" listener="#{departmentsManage.onJobSelected}"/>
+                                                      
+                                                        <p:column headerText="النوع" >
+                                                            <p:cellEditor disabled="true">
+                                                                <f:facet name="output"><h:outputText value="#{jop.type}" /></f:facet>
+                                                                <f:facet name="input"><p:inputText value="#{jop.type}" style="width:100%"/></f:facet>
+                                                            </p:cellEditor>
+                                                        </p:column>
+                                                        
+                                                         <p:ajax event="rowSelect" process="@this" update="formSection:diallogDelete" listener="#{departmentsManage.onJobSelected}"/>
                                                         <p:column headerText="الوظيفة">
                                                             <p:cellEditor>
                                                                 <f:facet name="output"><h:outputText value="#{jop.name}" /></f:facet>
@@ -176,6 +184,15 @@
 
                                             <h:outputLabel for="name" value="الاسم:" />
                                             <p:inputText id="name" label="name" value="#{departmentsManage.newJob.name}" required="true"/>
+
+                                            <p:outputLabel for="jobtype" class="label" value="النوع"/>
+                                            <p:selectOneMenu value="#{departmentsManage.newJob.type}" id="jobtype"
+                                                             class="pading000" style="text-align:right; min-width: 223px;" required="true">
+                                                <f:selectItem itemLabel="اختر واحدة" itemValue="اختر واحدة" noSelectionOption="true"/>
+                                                <f:selectItem itemLabel="موظف" itemValue="موظف" />
+                                                <f:selectItem  itemLabel="رئيس قسم" itemValue="رئيس قسم" />
+                                                <f:selectItem  itemLabel="رئيس دائرة" itemValue="رئيس دائرة" />
+                                            </p:selectOneMenu>
 
                                             <p:commandButton value="اضافة" actionListener="#{departmentsManage.addJobTitle()}" update="@form :formSection" oncomplete="PF('dlg').hide();"/>
 
