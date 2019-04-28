@@ -44,7 +44,7 @@ public class Employee implements Serializable {
     String emp_StartDate;
     String emp_EndDate;
     List<Screen> screens;
-    EmployeeAccount account;
+    EmployeeAccount account = new EmployeeAccount();
     
     public Employee() {
     }
