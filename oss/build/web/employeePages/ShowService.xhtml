@@ -40,7 +40,7 @@
                     <ui:include src="heder.xhtml"/>
                     <!-- End of Topbar -->
 
-                    <h:form enctype="multipart/form-data">
+                    <h:form id="ShowServiceCitizinForm" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-sm-12 text-center">
 
@@ -297,6 +297,10 @@
                                                 <h6 class="m-0 font-weight-bold text-primary">ارفاق ملفات</h6>
                                             </div>
                                             <div class="card-body">
+                                                 <b>: ملاحظة</b>
+                                                 <div class="text-primary" style="margin-right: 30px;margin-bottom: 10px   ">
+                                                     بعد اختيار الملفات  (upload) الرجاء الضغط على
+                                                </div>
                                                 <p:fileUpload fileUploadListener="#{shoeServiceCitizemEmpManeger.handleFileUpload}" multiple="true" update="messages"  />
                                                 <p:growl id="messages" showDetail="false" showSummary="false"/>    
 
@@ -344,9 +348,12 @@
                                                         <div class="row no-gutters align-items-center">
 
                                                             <div class="col mr-2" style="text-align: right">
+
                                                                 <div class="floatR">
 
-                                                                    <p:inputText  id="cost" value="#{shoeServiceCitizemEmpManeger.serviseCitizen.decisionsJob.cost}" style="text-align:right;"  type="number" required="true"/>     
+                                                                    <p:inputText dir="ltr" id="cost" value="#{shoeServiceCitizemEmpManeger.serviseCitizen.decisionsJob.cost}"
+                                                                                 style="text-align:right;"  type="number" 
+                                                                                 />     
 
                                                                     <p:outputLabel value=" :تكلفة" for="cost" />
 
@@ -423,7 +430,7 @@
         </div>
 
         <!-- Bootstrap core JavaScript-->
-        <script src="../vendor/jquery/jquery.min.js"></script>
+        <!--<script src="../vendor/jquery/jquery.min.js"></script>-->
         <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
         <!-- Core plugin JavaScript-->
@@ -433,7 +440,7 @@
         <script src="../js/sb-admin-2.min.js"></script>
 
         <!-- Page level plugins -->
-        <script src="../vendor/chart.js/Chart.min.js"></script>
+
 
         <!-- Page level custom scripts -->
 
