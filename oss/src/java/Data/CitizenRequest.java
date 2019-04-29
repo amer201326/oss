@@ -5,6 +5,11 @@
  */
 package Data;
 
+import DB.DB;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Eman
@@ -246,6 +251,33 @@ String Cit_Password;
         this.Cit_Password = Cit_Password;
     }
 
+    public void addCitizenToDB() {
+
+       
+        String q = "INSERT INTO citizen (`Cit_ID`, `Cit_FirstName`, `Cit_FatherName`, `Cit_GrandfatherName`, `Cit_LastName`, `Cit_Gender`, "
+                + "`Cit_FamilyMembers`, `Cit_ID_Card`, `Cit_Telephone`, `Cit_Mobile`, `Cit_Email`,`Cit_Fax`, `Cit_Birthday`,`Cit_PlaceOfBirth`, "
+                + "`Cit_Region`,`Cit_Quarter`, `Cit_Street`,`Cit_Address`, `Cit_Job`, `Cit_PassportNumber`,`Cit_PassportType`, `Cit_Username`, `Cit_Password`) \n"
+                + "VALUES (" + Cit_ID + ",'" + Cit_FirstName + "','" + Cit_FatherName + "','" + Cit_GrandfatherName + "','" + Cit_LastName + "','" + Cit_Gender + "',"
+                + Cit_FamilyMembers + ",'" + Cit_ID_Card + "','" + Cit_Telephone + "','" + Cit_Mobile + "','" + Cit_Email
+                + "','" + Cit_Fax + "','" + Cit_Birthday + "','" + Cit_PlaceOfBirth + "','"
+                + Cit_Region + "','" + Cit_Quarter + "','" + Cit_Street + "','" + Cit_Address + "','" + Cit_Job + "','" + Cit_PassportNumber + "','"
+                + Cit_PassportType + "','" + Cit_Username + "','" + Cit_Password + "');";
+
+        try {
+            DB data = new DB();
+
+            System.out.println(q);
+            data.write(q);
+           
+        } catch (SQLException ex) {
+            System.out.println("error Add citizen");
+            Logger.getLogger(CitizenRequest.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            System.out.println("error Add citizen");
+            Logger.getLogger(CitizenRequest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 
 
 
