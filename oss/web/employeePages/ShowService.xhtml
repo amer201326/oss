@@ -297,10 +297,9 @@
                                                 <h6 class="m-0 font-weight-bold text-primary">ارفاق ملفات</h6>
                                             </div>
                                             <div class="card-body">
-                                                <p:fileUpload  fileUploadListener="#{shoeServiceCitizemEmpManeger.handleFileUpload}" mode="advanced"
-                                                               auto="true"  dragDropSupport="true" multiple="true"     />
+                                                <p:fileUpload fileUploadListener="#{shoeServiceCitizemEmpManeger.handleFileUpload}" multiple="true" update="messages"  />
+                                                <p:growl id="messages" showDetail="false" showSummary="false"/>    
 
-                                                  
                                             </div>
 
                                         </div>
@@ -339,25 +338,25 @@
                                             </div>
                                             <div class="col-sm-12  mb-4">
 
-                                                    <div class="card border-right-warning shadow h-100 py-2 border-bottom-warning">
-                                                        <div class="card-body">
+                                                <div class="card border-right-warning shadow h-100 py-2 border-bottom-warning">
+                                                    <div class="card-body">
 
-                                                            <div class="row no-gutters align-items-center">
+                                                        <div class="row no-gutters align-items-center">
 
-                                                                <div class="col mr-2" style="text-align: right">
-                                                                    <div class="floatR">
-                                                                      
-                                                                        <p:inputText  id="cost" value="#{shoeServiceCitizemEmpManeger.serviseCitizen.decisionsJob.cost}" style="text-align:right;"  type="number" required="true"/>     
-                                                                        
-                                                                        <p:outputLabel value=" :تكلفة" for="cost" />
-                                                                        
-                                                                    </div>
+                                                            <div class="col mr-2" style="text-align: right">
+                                                                <div class="floatR">
+
+                                                                    <p:inputText  id="cost" value="#{shoeServiceCitizemEmpManeger.serviseCitizen.decisionsJob.cost}" style="text-align:right;"  type="number" required="true"/>     
+
+                                                                    <p:outputLabel value=" :تكلفة" for="cost" />
+
                                                                 </div>
-
                                                             </div>
+
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
 
                                         </div>
                                     </div> 

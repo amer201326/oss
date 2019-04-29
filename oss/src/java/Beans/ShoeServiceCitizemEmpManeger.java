@@ -43,7 +43,7 @@ public class ShoeServiceCitizemEmpManeger {
     Session session;
 
     boolean haveService = false;
-    List<UploadedFile> allFileEmployee;
+    List<UploadedFile> allFileEmployee = new ArrayList<>();
 
     @PostConstruct
     public void init() {
@@ -131,9 +131,8 @@ public class ShoeServiceCitizemEmpManeger {
     }
 
     public void handleFileUpload(FileUploadEvent event) {
-
+        System.out.println("upload fileeeeeeeeene");
         allFileEmployee.add(event.getFile());
-        System.out.println("upload file");
     }
 
 }
