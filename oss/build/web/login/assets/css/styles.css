@@ -6,19 +6,22 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     outline: none;
+
+
 }
 body {
-    
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    background-image: url("image3.jpg"); 
 }
 
 .form-group{
     margin: 0px 0px 0px 0px;
     padding: 0px 0px 0px 0px;
 }
+
 .login-form {
     margin: 100px auto;
     max-width: 400px;
@@ -27,11 +30,13 @@ body {
 
 form[role=login] {
     color: #0091ea;
-    background: #d8d4d4;
+
     padding: 65px;
     border-radius: 10px;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
+    background: rgb(161,175,186);
+    background: linear-gradient(90deg, rgba(161,175,186,0.7707457983193278) 35%, rgba(218,218,231,0.700717787114846) 100%);
 }
 form[role=login] img {
     display: block;
