@@ -16,6 +16,7 @@ import Data.ServiceCitizen;
 import Data.ServiceCitizen_1;
 import java.io.IOException;
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -35,8 +36,6 @@ import org.primefaces.event.SelectEvent;
 @ViewScoped
 public class ServiceCitizenManager implements Serializable {
 
-    
-    
     List<ServiceCitizen> allRequestService;
     List<ServiceCitizen> allRequestServiceView;
     List<ServiceCitizen> allRequestServiceNotView;
@@ -55,13 +54,14 @@ public class ServiceCitizenManager implements Serializable {
     public void init() {
         if (session.employee != null) {
             allRequestService = new ArrayList<>();
-           allRequestService = GetFromDB.getAllRequestService(session.employee);
+            allRequestService = GetFromDB.getAllRequestService(session.employee);
             allRequestServiceView = new ArrayList<>();
             allRequestServiceNotView = new ArrayList<>();
 
             for (int i = 0; i < allRequestService.size(); i++) {
                 ServiceCitizen get = allRequestService.get(i);
-                if (get.getStatus().compareTo("done") == 0) {
+                if (get.getService_Job().getStatus().compareTo("done") == 0) {
+                    get.messages(session.employee.getEmp_id());
                     allRequestServiceView.add(get);
                 } else {
                     allRequestServiceNotView.add(get);
@@ -74,18 +74,31 @@ public class ServiceCitizenManager implements Serializable {
 
     public void showServise() {
         try {
-            session.serviceCitizenShow = serviceSelected;            
+            session.serviceCitizenShow = serviceSelected;
             FacesContext.getCurrentInstance().getExternalContext().redirect("ShowService.xhtml");
-            
+
         } catch (IOException ex) {
             Logger.getLogger(ServiceCitizenManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     public void showDoneServise() {
         try {
-            session.serviceCitizenShow = serviceSelected;            
+
+            session.serviceCitizenShow = serviceSelected;
             FacesContext.getCurrentInstance().getExternalContext().redirect("ShowServiceDone.xhtml");
-            
+
+        } catch (IOException ex) {
+            Logger.getLogger(ServiceCitizenManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void showMessagesServise() {
+        try {
+
+            session.serviceCitizenShow = serviceSelected;
+            FacesContext.getCurrentInstance().getExternalContext().redirect("MessagesEmployes.xhtml");
+
         } catch (IOException ex) {
             Logger.getLogger(ServiceCitizenManager.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -122,8 +135,6 @@ public class ServiceCitizenManager implements Serializable {
     public void setServiceSelected(ServiceCitizen serviceSelected) {
         this.serviceSelected = serviceSelected;
     }
-
-    
 
     public Session getSession() {
         return session;

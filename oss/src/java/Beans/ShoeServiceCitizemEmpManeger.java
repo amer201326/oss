@@ -17,6 +17,7 @@ import Data.ServiceCitizen;
 import Data.ServiceCitizen_1;
 import Data.Service_Job;
 import Data.ViewerAttachment;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,17 +38,18 @@ public class ShoeServiceCitizemEmpManeger {
 
     ServiceCitizen serviseCitizen;
     Employee employee;
-    
+
     @ManagedProperty(value = "#{msession}")
     Session session;
-    
+
     boolean haveService = false;
     List<UploadedFile> allFileEmployee;
+
     @PostConstruct
     public void init() {
         serviseCitizen = session.serviceCitizenShow;
-        employee =  session.employee;
-        
+        employee = session.employee;
+
         if (serviseCitizen != null) {
             haveService = true;
             filterFormOrNot();
@@ -56,7 +58,7 @@ public class ShoeServiceCitizemEmpManeger {
     }
 
     public void filterFormOrNot() {
-        List<ServiceAttachmentName> allAtt = GetFromDB.getAttachmentByserviceCitizen(serviseCitizen.getServices_Provided_ID(), serviseCitizen.getCit_ID() , serviseCitizen.getService_Citizen_ID());
+        List<ServiceAttachmentName> allAtt = GetFromDB.getAttachmentByserviceCitizen(serviseCitizen.getServices_Provided_ID(), serviseCitizen.getCit_ID(), serviseCitizen.getService_Citizen_ID());
         List<ServiceAttachmentName> att = new ArrayList<ServiceAttachmentName>();
         List<ServiceAttachmentName> attform = new ArrayList<ServiceAttachmentName>();
 
@@ -64,15 +66,15 @@ public class ShoeServiceCitizemEmpManeger {
 
         for (ServiceAttachmentName serviceAttachmentName : allAtt) {
             for (ViewerAttachment viewer : jobViewer) {
-                if (serviceAttachmentName.getId() == viewer.getServiceAttachmentName_ID() && 
-                       employee.getDep_id()==viewer.getDep_ID()&& employee.getSec_id()==viewer.getSec_ID() &&employee.getJob_id()==viewer.getJob_ID()) {
-                    
+                if (serviceAttachmentName.getId() == viewer.getServiceAttachmentName_ID()
+                        && employee.getDep_id() == viewer.getDep_ID() && employee.getSec_id() == viewer.getSec_ID() && employee.getJob_id() == viewer.getJob_ID()) {
+
                     if ("yes".equals(serviceAttachmentName.getForm())) {
                         attform.add(serviceAttachmentName);
                     } else {
                         att.add(serviceAttachmentName);
                     }
-                    
+
                 }
             }
         }
@@ -88,8 +90,6 @@ public class ShoeServiceCitizemEmpManeger {
     public void setServiseCitizen(ServiceCitizen serviseCitizen) {
         this.serviseCitizen = serviseCitizen;
     }
-
-   
 
     public Session getSession() {
         return session;
@@ -107,10 +107,10 @@ public class ShoeServiceCitizemEmpManeger {
         this.haveService = haveService;
     }
 
-    public void submit()  {
-        
+    public void submit() throws IOException {
+
         serviseCitizen.ContineuInPath(employee.getEmp_id());
-        
+        FacesContext.getCurrentInstance().getExternalContext().redirect("serviceCitizzen.xhtml");
 
     }
 
@@ -129,10 +129,9 @@ public class ShoeServiceCitizemEmpManeger {
     public void setAllFileEmployee(List<UploadedFile> allFileEmployee) {
         this.allFileEmployee = allFileEmployee;
     }
-    
-    
+
     public void handleFileUpload(FileUploadEvent event) {
-        
+
         allFileEmployee.add(event.getFile());
         System.out.println("upload file");
     }

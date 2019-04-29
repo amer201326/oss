@@ -606,7 +606,7 @@ public class ServiceCitizen {
             if (sectionCounter == 0) {
                 q = "UPDATE `oss`.`decisions_department` SET `Status` = 'done' WHERE (`Dep_ID` = " + service_Job.Dep_ID + ") and (`Order_Departmant` = " + service_Job.Order_Departmant + ") "
                         + "and (`Services_Provided_ID` = " + service_Job.Services_Provided_ID + ") "
-                        + "and (`Cit_ID` = " + service_Job.Cit_ID + ") and (`Service_Citizen_ID` = " + service_Job.Cit_ID + ");";
+                        + "and (`Cit_ID` = " + service_Job.Cit_ID + ") and (`Service_Citizen_ID` = " + service_Job.Service_Citizen_ID + ");";
                 System.out.println(q);
                 db.write(q);
             }
@@ -834,4 +834,23 @@ public class ServiceCitizen {
         }
     }
 
+
+   public void messages(int idEmp){
+             try {
+            DB db = new DB();
+            String q = "SELECT Com_ExternalMessage,Com_InternalMessage FROM oss.decisions_job where Dep_ID = "+service_Job.Dep_ID +" and Sec_ID = "+service_Job.Sec_ID+" and Job_ID = "+service_Job.Job_ID+" and Services_Provided_ID = "+service.id+" and Order_Departmant = "+service_Job.Order_Departmant+" and Order_Section = "+service_Job.Order_Section+" and Order_Job = "+service_Job.Order_Job+" and Cit_ID = "+Cit_ID+" and Service_Citizen_ID = "+Service_Citizen_ID+" and Emp_ID = "+idEmp+" ;";
+            System.out.println(q);
+            ResultSet r = db.read(q);
+            while (r.next()) {
+                decisionsJob.externalMessage = r.getString(1);
+                decisionsJob.internalMessage = r.getString(2);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceCitizen.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ServiceCitizen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+   } 
+
+   
 }
