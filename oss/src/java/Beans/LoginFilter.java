@@ -39,6 +39,8 @@ public class LoginFilter implements Filter {
         if (loginBean == null || !loginBean.login) {
             String contextPath = ((HttpServletRequest)request).getContextPath();
             ((HttpServletResponse)response).sendRedirect(contextPath + "/login/");
+        }else{
+            
         }
          
         chain.doFilter(request, response);
