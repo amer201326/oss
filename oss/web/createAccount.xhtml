@@ -1,0 +1,446 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough" class="rest">
+    <h:head>
+        <title>إنشاء حساب</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+        <!-- Favicon -->
+        <link rel="shortcut icon" type="image/icon" href="assets/images/favicon.ico"/>
+        <!-- Font Awesome -->
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"/>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous"/>
+        <!-- Slick slider -->
+        <link href="assets/css/slick.css" rel="stylesheet"/>
+        <!-- Gallery Lightbox -->
+        <link href="assets/css/magnific-popup.css" rel="stylesheet"/>
+        <!-- Skills Circle CSS  -->
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/circlebars@1.0.3/dist/circle.css"/>
+
+
+        <!-- Main Style -->
+        <link href="homePage/assets/css/eman-homePage.css" rel="stylesheet" type="text/css"/>
+
+        <!-- Fonts -->
+
+        <!-- Google Fonts Raleway -->
+        <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,400i,500,500i,600,700" rel="stylesheet"/>
+        <!-- Google Fonts Open sans -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,700,800" rel="stylesheet"/>
+        <style>
+            .mySlides {display:none;}
+        </style>
+    </h:head>
+    <h:body id="page-top">
+
+        <!--START SCROLL TOP BUTTON -->
+        <a class="scrollToTop" href="#">
+            <i class="fa fa-angle-up"></i>
+        </a>
+        <!-- END SCROLL TOP BUTTON -->
+
+        <!-- Start Header -->
+        <header id="mu-hero">
+            <div class="container" dir="rtl">
+                <nav class="navbar navbar-expand-lg navbar-light mu-navbar">
+                    <!-- Text based logo -->
+                    <a class="navbar-brand mu-logo" href="index.xhtml"><span class="fa fa-bank">&nbsp; البلدية &nbsp;</span></a> &nbsp; &nbsp; &nbsp; 
+                    <!-- image based logo --> 
+                    <!-- <a class="navbar-brand mu-logo" href="index.html"><img src="assets/images/logo.png" alt="logo"></a> -->
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" 
+                            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="fa fa-bars"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto mu-navbar-nav">
+                            <li class="nav-item active">
+                                <a href="index.xhtml" style="font-size: 16px;">الرئيسية</a>
+                            </li>
+                            <li class="nav-item"><a href="services.xhtml" style="font-size: 16px;">الخدمات</a></li>
+                            <li class="nav-item"><a href="contact.xhtml" style="font-size: 16px;">اتصل بنا</a></li>
+                            <li class="nav-item"><a href="login/index.xhtml" style="font-size: 16px;">الدخول</a></li>
+
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <!-- End Header -->
+        <br/>
+
+        <!-- Start slider area -->
+        <div id="mu-slider">
+            <div class="mu-slide">
+                <p:column id="contentPage">
+                        <h:form id="formAddCitizen">
+                            <div id="conts">
+                                <div class="row">
+                                    <div class="col-lg-12 text-center">
+
+                                        <!--NO ESCRIBIR ARRIBA-->
+
+                                        
+                                        <br/>
+                                        <div class="row" style="text-align: right; margin: 10px 10px 10px 10px;">
+                                            <div class="col-lg-12" style="text-align: right;" >
+
+                                                <div class="card shadow mb-4" style="text-align: right;" >
+                                                    <div class="card-header py-3">
+                                                        <div class="ui-grid-col-3 floatR">
+                                                            <h2 class="section-heading  inLineB" style=" text-align: center;"> &nbsp; &nbsp;
+                                                                <i class="fa fa-fw fa-chevron-left inLineB" ></i>إنشاء حساب</h2>
+
+                                                        </div>
+
+                                                        <br/>
+                                                    </div>
+
+                                                    <div class="card-body" dir="rtl" style="min-width: 100%;">
+
+                                                       
+
+                                                            <div class="row">
+                                                                <div class="col-lg-6">
+                                                                    <div class="card shadow mb-4">
+                                                                        <div class="card-header py-3">
+                                                                            <h6 class="m-0 font-weight-bold text-primary">المعلومات الشخصية </h6>
+                                                                        </div>
+                                                                        <div class="card-body">
+
+
+                                                                            <h:panelGrid columns="2" dir="rtl" style="display: flex; justify-content: flex-start;">
+
+                                                                                <p:outputLabel for="firstName" value="الاسم الاول" />
+                                                                                <p:inputText id="firstName" value="#{citizenManage.newCitizen.firstName}" required="true" 
+                                                                                             class="form-control form-control" style="text-align:right;" type="text"/>
+
+                                                                                <p:outputLabel for="fatherName" value="اسم الاب" />
+                                                                                <p:inputText id="fatherName" value="#{citizenManage.newCitizen.fatherName}" required="true" 
+                                                                                             class="form-control form-control-user" style="text-align:right;" type="text"/>
+
+                                                                                <p:outputLabel for="grandFatherName" value="اسم الجد" />
+                                                                                <p:inputText id="grandFatherName" value="#{citizenManage.newCitizen.grandFatherName}" required="true" 
+                                                                                             class="form-control form-control-user" style="text-align:right;" type="text"/>
+
+                                                                                <p:outputLabel for="lastName" value="اسم العائلة" />
+                                                                                <p:inputText id="lastName" value="#{citizenManage.newCitizen.lastName}" required="true" 
+                                                                                             class="form-control form-control-user" style="text-align:right;" type="text"/>
+
+                                                                                <p:outputLabel for="gender" value="الجنس" />
+                                                                                <h:panelGrid columns="2" cellpadding="5" class="mytable">
+                                                                                    <p:selectOneRadio value="#{citizenManage.newCitizen.gender}" id="gender" class="label1" required="true">
+                                                                                        <f:selectItem itemLabel="ذكر" itemValue="ذكر" />
+                                                                                        <f:selectItem  itemLabel="أنثى" itemValue="أنثى" />
+                                                                                    </p:selectOneRadio>
+                                                                                </h:panelGrid> 
+
+                                                                                <p:outputLabel for="birthday1" class="label" value="تاريخ الميلاد"/>
+                                                                                <p:calendar id="birthday1" selectOtherMonths="true" yearRange="c-100:c" class=" form-control-user"
+                                                                                            pattern="yyyy-MM-dd" navigator="true" style="text-align:right;"
+                                                                                            value="#{citizenManage.newCitizen.birthday}" required="true"/>
+
+                                                                                <br/>
+                                                                                <p:separator style="width: 250px;"/> 
+
+                                                                                <p:outputLabel for="idCard" value="رقم الهوية" /> 
+                                                                                <p:inputMask id="idCard" class="form-control form-control-user"
+                                                                                             style="text-align:right;" type="text" mask="9 9999999 9" value="#{citizenManage.newCitizen.idCard}" required="true"/>
+
+                                                                                <p:outputLabel for="mobile" value="الجوال" /> 
+                                                                                <p:inputMask id="mobile" class="form-control form-control-user" style="text-align:right;" 
+                                                                                             type="text" mask="999-999-9999" value="#{citizenManage.newCitizen.mobile}" required="true"/>
+
+                                                                                <p:outputLabel for="telephone" value="التلفون" /> 
+                                                                                <p:inputMask id="telephone" class="form-control form-control-user" style="text-align:right;" 
+                                                                                             type="text" value="#{citizenManage.newCitizen.telephone}" mask="99-9999-999"/>
+
+                                                                                <p:outputLabel for="fax" value="فاكس" /> 
+                                                                                <p:inputMask id="fax" class="form-control form-control-user" style="text-align:right;" 
+                                                                                             type="text" value="#{citizenManage.newCitizen.fax}" mask="99-9999-999"/>
+
+                                                                                <p:outputLabel for="email" value="البريد الإلكتروني" /> 
+                                                                                <p:inputText id="email" class="form-control form-control-user" 
+                                                                                             style="text-align:right;" type="email" value="#{citizenManage.newCitizen.email}" 
+                                                                                             required="true"/>
+
+                                                                                <p:outputLabel for="job" value="المهنة" />
+                                                                                <p:inputText id="job" value="#{citizenManage.newCitizen.citizenJob}" required="true" 
+                                                                                             class="form-control form-control-user" style="text-align:right;" type="text"/>
+
+                                                                                <br/>
+                                                                                <p:separator style="width: 250px;"/> 
+
+                                                                                <p:outputLabel for="familyMember" value="عدد افراد الاسرة" />
+                                                                                <p:inputText id="familyMember" value="#{citizenManage.newCitizen.familyMember}" required="true" 
+                                                                                             class="form-control form-control-user" style="text-align:right;" type="number"/>
+
+                                                                                <p:outputLabel for="placeOfBirth" value="مكان الولادة" />
+                                                                                <p:inputText id="placeOfBirth" value="#{citizenManage.newCitizen.placeOfBirth}" required="true" 
+                                                                                             class="form-control form-control-user" style="text-align:right;" type="text"/>
+
+
+
+
+                                                                                <p:outputLabel for="passportNumber" value="رقم جواز السفر" />
+                                                                                <p:inputText id="passportNumber" value="#{citizenManage.newCitizen.passportNumber}" 
+                                                                                             class="form-control form-control-user" style="text-align:right;" type="text"/>
+
+                                                                                <p:outputLabel for="passportType" value="نوع جواز السفر" />
+                                                                                <p:inputText id="passportType" value="#{citizenManage.newCitizen.passportType}" 
+                                                                                             class="form-control form-control-user" style="text-align:right;" type="text"/>
+
+
+
+
+
+
+                                                                            </h:panelGrid>
+                                                                        </div>
+
+                                                                        
+                                                                    </div>
+                                                              
+                                                                </div>
+  <!--33333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333-->
+
+                                                                
+                                                                
+                                                                
+                                                                <div class="col-lg-6">
+                                                                    <div class="card shadow mb-4">
+                                                                        <div class="card-header py-3">
+                                                                            <h6 class="m-0 font-weight-bold text-primary">العنوان </h6>
+                                                                        </div>
+                                                                        <div class="card-body">
+                                                                            <h:panelGrid columns="2" dir="rtl" style="display: flex; justify-content: flex-start;">
+
+                                                                                <p:outputLabel for="address" value="العنوان"/>
+                                                                                <p:inputText id="address" value="#{citizenManage.newCitizen.address}" 
+                                                                                             class="form-control form-control-user" style="text-align:right;" type="text"/>
+                                                                                <p:outputLabel for="quarter" value="الحي" />
+                                                                                <p:inputText id="quarter" value="#{citizenManage.newCitizen.quarter}"  
+                                                                                             class="form-control form-control-user" style="text-align:right;" type="text"/>
+
+                                                                                <p:outputLabel for="street" value="الشارع" />
+                                                                                <p:inputText id="street" value="#{citizenManage.newCitizen.street}" required="true" 
+                                                                                             class="form-control form-control-user" style="text-align:right;" type="text"/>
+
+                                                                                <p:outputLabel for="region" value="المنطقة" />
+                                                                                <p:inputText id="region" value="#{citizenManage.newCitizen.region}" required="true" 
+                                                                                             class="form-control form-control-user" style="text-align:right;" type="text"/>
+
+
+
+                                                                            </h:panelGrid>
+                                                                        </div>
+
+                                                                    </div>
+
+
+                                                                    <div class="card shadow mb-4">
+                                                                        <div class="card-header py-3">
+                                                                            <h6 class="m-0 font-weight-bold text-primary">حساب البلدية</h6>
+                                                                        </div>
+                                                                        <div class="card-body">
+                                                                            <h:panelGrid columns="2" dir="rtl" style="display: flex; justify-content: flex-start;">
+
+
+                                                                                <p:outputLabel for="us" class="label" value="اسم المواطن"/>
+                                                                                <p:inputMask id="us" value="#{citizenManage.newCitizen.account.userName}"
+                                                                                             class="form-control form-control-user" style="text-align:right;"
+                                                                                             type="text" mask="u-******" required="true"/>
+
+                                                                                <p:outputLabel for="password" class="label" value="كلمة مرور الحساب"/>
+                                                                                <p:password value="#{citizenManage.newCitizen.account.password}" class="form-control" style="text-align:right;" id="password" 
+                                                                                            feedback="true" inline="true" required="true"/> 
+
+
+
+                                                                            </h:panelGrid>
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                </div>
+
+
+
+
+                                                            </div>
+                                                       
+
+
+                                                    </div>
+
+                                                    <br/><hr style="border: 1% solid orange; margin-left: 5%; margin-right: 5%;"/><br/>
+                                                    <div style="display: flex; justify-content: center;"  class="col-sm-12">                                                
+
+                                                        <p:commandButton value=" إعادة تعيين" immediate="true" ajax="false" class="myButtonB" style="margin-right:5%;" >
+                                                            <p:resetInput target="@form formAddCitizen" />
+                                                            <f:ajax />
+                                                        </p:commandButton>
+                                                        <p:commandButton value=" اضافة مواطن" class="myButtonC" actionListener="#{citizenManage.addCitizen()}"
+                                                                         update="@form " />   &nbsp; &nbsp; &nbsp;
+
+                                                    </div> <br/>
+
+                                                </div>
+
+
+
+
+                                                <!--  <br/><p:separator/><br/> -->
+                                            </div>
+
+                                        </div>
+
+                                        <!--NO ESCRIBIR DESPUES DE AQUI-->
+                                    </div>
+                                </div>
+                            </div>
+
+                        </h:form>
+
+
+                    </p:column>
+            </div>
+        </div>
+        <!-- End Slider area -->
+        <!-- Start Counter -->
+        <section id="mu-counter">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="mu-counter-area">
+
+                            <div class="mu-counter-block">
+                                <div class="row">
+
+                                    <!-- Start Single Counter -->
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="mu-single-counter">
+                                            <span class="fa fa-suitcase"></span>
+                                            <div class="mu-single-counter-content">
+                                                <div class="counter-value">#{homePageManager.allParameters[0]}</div>
+                                                <h5 class="mu-counter-name">الخدمات</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- / Single Counter -->
+
+                                    <!-- Start Single Counter -->
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="mu-single-counter">
+                                            <span class="fa fa-group"></span>
+                                            <div class="mu-single-counter-content">
+                                                <div class="counter-value">#{homePageManager.allParameters[1]}</div>
+                                                <h5 class="mu-counter-name">المواطنبن</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- / Single Counter -->
+
+                                    <!-- Start Single Counter -->
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="mu-single-counter">
+                                            <span class="fa fa-user"></span>
+                                            <div class="mu-single-counter-content">
+                                                <div class="counter-value" >#{homePageManager.allParameters[2]}</div>
+                                                <h5 class="mu-counter-name">الموظفون</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- / Single Counter -->
+
+                                    <!-- Start Single Counter -->
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="mu-single-counter">
+                                            <span class="fa fa-thumbs-up"></span>
+                                            <div class="mu-single-counter-content">
+                                                <div class="counter-value">#{homePageManager.allParameters[3]}</div>
+                                                <h5 class="mu-counter-name">الخدمات المنجزة</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- / Single Counter -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Counter -->
+        <!-- JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+        <!-- Slick slider -->
+        <script type="text/javascript" src="assets/js/slick.min.js"></script>
+        <!-- Progress Bar -->
+        <script src="https://unpkg.com/circlebars@1.0.3/dist/circle.js"></script>
+        <!-- Filterable Gallery js -->
+        <script type="text/javascript" src="assets/js/jquery.filterizr.min.js"></script>
+        <!-- Gallery Lightbox -->
+        <script type="text/javascript" src="assets/js/jquery.magnific-popup.min.js"></script>
+        <!-- Counter js -->
+        <script type="text/javascript" src="assets/js/counter.js"></script>
+        <!-- Ajax contact form  -->
+        <script type="text/javascript" src="assets/js/app.js"></script>
+        <script type="text/javascript" src="/xxxx/javax.faces.resource/jquery/jquery-plugins.js.xhtml?ln=primefaces&amp;loc=&amp;v=6.1"></script>
+
+
+        <!-- Custom js -->
+        <script type="text/javascript" src="assets/js/custom.js"></script>
+
+        <!-- About us Skills Circle progress  -->
+
+
+
+
+        <script>
+            // First circle
+            new Circlebar({
+                element: "#circle-1",
+                type: "progress",
+                maxValue: "90"
+            });
+
+            // Second circle
+            new Circlebar({
+                element: "#circle-2",
+                type: "progress",
+                maxValue: "84"
+            });
+
+            // Third circle
+            new Circlebar({
+                element: "#circle-3",
+                type: "progress",
+                maxValue: "60"
+            });
+
+            // Fourth circle
+            new Circlebar({
+                element: "#circle-4",
+                type: "progress",
+                maxValue: "74"
+            });
+
+
+        </script>
+    </h:body>
+</html>
+
