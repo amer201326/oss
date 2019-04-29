@@ -35,7 +35,9 @@
         <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,400i,500,500i,600,700" rel="stylesheet"/>
         <!-- Google Fonts Open sans -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,700,800" rel="stylesheet"/>
-
+        <style>
+            .mySlides {display:none;}
+        </style>
     </h:head>
     <h:body id="page-top">
 
@@ -66,7 +68,7 @@
                             <li class="nav-item"><a href="services.xhtml" style="font-size: 16px;">الخدمات</a></li>
                             <li class="nav-item"><a href="contact.xhtml" style="font-size: 16px;">اتصل بنا</a></li>
                             <li class="nav-item"><a href="login/index.xhtml" style="font-size: 16px;">الدخول</a></li>
-                           
+
                         </ul>
                     </div>
                 </nav>
@@ -74,13 +76,22 @@
         </header>
         <!-- End Header -->
         <br/>
-        
+
         <!-- Start slider area -->
-        <div>
-            <img style="padding: 2% 2% 2% 2%; width: 100%;" src="homePage/assets/image/image1.jpg" alt="البلدية"/>
-        </div>
+       <div id="mu-slider">
+		<div class="mu-slide">
+        <h:form>
+
+            <p:contentFlow value="#{imagesView.images}" var="image" >
+                <p:graphicImage value="homePage/assets/image/#{image}" styleClass="content" height="400" width="300"/>
+                <div class="caption" style="color: black; font-size: 1.2em;">#{homePageManager.allDetails[7]}</div>
+            </p:contentFlow>
+
+        </h:form>
+                </div>
+       </div>
         <!-- End Slider area -->
-  <!-- Start Counter -->
+        <!-- Start Counter -->
         <section id="mu-counter">
             <div class="container">
                 <div class="row">
@@ -136,8 +147,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
-                                    
+
+
                                     <!-- / Single Counter -->
                                 </div>
                             </div>
@@ -164,12 +175,17 @@
         <script type="text/javascript" src="assets/js/counter.js"></script>
         <!-- Ajax contact form  -->
         <script type="text/javascript" src="assets/js/app.js"></script>
+        <script type="text/javascript" src="/xxxx/javax.faces.resource/jquery/jquery-plugins.js.xhtml?ln=primefaces&amp;loc=&amp;v=6.1"></script>
 
 
         <!-- Custom js -->
         <script type="text/javascript" src="assets/js/custom.js"></script>
 
         <!-- About us Skills Circle progress  -->
+
+
+
+
         <script>
             // First circle
             new Circlebar({
@@ -198,6 +214,7 @@
                 type: "progress",
                 maxValue: "74"
             });
+
 
         </script>
     </h:body>
