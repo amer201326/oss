@@ -108,7 +108,7 @@ public class ShoeServiceCitizemEmpManeger {
     }
 
     public void submit() throws IOException {
-
+        serviseCitizen.allFileEmployee = allFileEmployee;
         serviseCitizen.ContineuInPath(employee.getEmp_id());
         FacesContext.getCurrentInstance().getExternalContext().redirect("serviceCitizzen.xhtml");
 

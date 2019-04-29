@@ -18,6 +18,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.primefaces.model.UploadedFile;
 
 /**
  *
@@ -35,7 +36,7 @@ public class ServiceCitizen {
     String note;
     public List<ServiceAttachmentName> attachment = new ArrayList<ServiceAttachmentName>();
     public List<ServiceAttachmentName> attwhithFile = new ArrayList<ServiceAttachmentName>();
-
+    public List<UploadedFile> allFileEmployee = new ArrayList<>();
     public Service service;
     DecisionsJob decisionsJob = new DecisionsJob();
     Service_Job service_Job;
@@ -449,7 +450,8 @@ public class ServiceCitizen {
             }
 
             for (DecisionsDepartment decisionsDepartment : midDecDep) {
-                if (!decisionsDepartment.section.isEmpty()) {System.out.println("havev Section In Dep");
+                if (!decisionsDepartment.section.isEmpty()) {
+                    System.out.println("havev Section In Dep");
                     DecisionSection[] decisionSections1 = new DecisionSection[decisionsDepartment.section.size()];
                     decisionSections1 = decisionsDepartment.section.toArray(decisionSections1);
 
@@ -480,7 +482,8 @@ public class ServiceCitizen {
                         }
 
                     }
-                } else {System.out.println("No Section In Dep");
+                } else {
+                    System.out.println("No Section In Dep");
                     List<Section> sections = GetFromDB.getSection(decisionsDepartment.depId);
                     for (Section section : sections) {
                         List<JobTitel> jobTitels = GetFromDB.getJobTittle(section.id + "");
@@ -584,7 +587,7 @@ public class ServiceCitizen {
                     jobCount++;
                 }
             }
-    System.out.println("------------- jjjj -00000000000000");
+            System.out.println("------------- jjjj -00000000000000");
             if (jobCount == 0) {
                 q = "UPDATE `oss`.`dicisions_section` SET `Status` = 'done' WHERE (`Dep_ID` = " + service_Job.Dep_ID + ") "
                         + "and (`Sec_ID` = " + service_Job.Sec_ID + ") and (`Services_Provided_ID` = " + service_Job.Services_Provided_ID + ") "
@@ -613,8 +616,12 @@ public class ServiceCitizen {
 
             List<DecisionsDepartment> departments = GetFromDB.getDecisionsDepartmentNotDone(Cit_ID, Service_Citizen_ID);
 
-            nextjobsPathOfthisService(departments,sections, jobs);
-
+            nextjobsPathOfthisService(departments, sections, jobs);
+            for (UploadedFile uploadedFile : this.allFileEmployee) {
+                AttachmentServiceEmployee att = new AttachmentServiceEmployee(empID,
+                        Cit_ID, Service_Citizen_ID, Services_Provided_ID, uploadedFile,uploadedFile.getFileName() );
+                att.addToDataBase();
+            }
             q = "commit;";
             System.out.println(q);
             db.write(q);
@@ -623,9 +630,9 @@ public class ServiceCitizen {
             try {
                 String q = "rollback;";
                 System.out.println(q);
-                 db = new DB();
+                db = new DB();
                 db.write(q);
-                
+
                 Logger.getLogger(ShoeServiceCitizemEmpManeger.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex1) {
                 Logger.getLogger(ServiceCitizen.class.getName()).log(Level.SEVERE, null, ex1);
@@ -636,21 +643,20 @@ public class ServiceCitizen {
             try {
                 String q = "rollback;";
                 System.out.println(q);
-                 db = new DB();
+                db = new DB();
                 db.write(q);
                 Logger.getLogger(ServiceCitizen.class.getName()).log(Level.SEVERE, null, ex);
-            }
-//
-//        
-//        List<Service_Job> service_Jobs = GetFromDB.getAllService_Jobs(service_Job);
-//        for (Service_Job service_Job : service_Jobs) {
-//            if (service_Job.Order_Section == 0) {
-//
-//            } else {
-//
-//            }
-//
-//        }
+            } //
+            //        
+            //        List<Service_Job> service_Jobs = GetFromDB.getAllService_Jobs(service_Job);
+            //        for (Service_Job service_Job : service_Jobs) {
+            //            if (service_Job.Order_Section == 0) {
+            //
+            //            } else {
+            //
+            //            }
+            //
+            //        }
             catch (SQLException ex1) {
                 Logger.getLogger(ServiceCitizen.class.getName()).log(Level.SEVERE, null, ex1);
             } catch (ClassNotFoundException ex1) {
@@ -660,7 +666,7 @@ public class ServiceCitizen {
 
     }
 
-    private void nextjobsPathOfthisService(List<DecisionsDepartment> decisionsDepartments,List<DecisionSection> decisionSections, List<DecisionsJob> decisionsJobs) throws SQLException, ClassNotFoundException {
+    private void nextjobsPathOfthisService(List<DecisionsDepartment> decisionsDepartments, List<DecisionSection> decisionSections, List<DecisionsJob> decisionsJobs) throws SQLException, ClassNotFoundException {
         System.out.println("===================================================================================================");
 
         DecisionsDepartment[] dds = new DecisionsDepartment[decisionsDepartments.size()];
@@ -834,11 +840,10 @@ public class ServiceCitizen {
         }
     }
 
-
-   public void messages(int idEmp){
-             try {
+    public void messages(int idEmp) {
+        try {
             DB db = new DB();
-            String q = "SELECT Com_ExternalMessage,Com_InternalMessage FROM oss.decisions_job where Dep_ID = "+service_Job.Dep_ID +" and Sec_ID = "+service_Job.Sec_ID+" and Job_ID = "+service_Job.Job_ID+" and Services_Provided_ID = "+service.id+" and Order_Departmant = "+service_Job.Order_Departmant+" and Order_Section = "+service_Job.Order_Section+" and Order_Job = "+service_Job.Order_Job+" and Cit_ID = "+Cit_ID+" and Service_Citizen_ID = "+Service_Citizen_ID+" and Emp_ID = "+idEmp+" ;";
+            String q = "SELECT Com_ExternalMessage,Com_InternalMessage FROM oss.decisions_job where Dep_ID = " + service_Job.Dep_ID + " and Sec_ID = " + service_Job.Sec_ID + " and Job_ID = " + service_Job.Job_ID + " and Services_Provided_ID = " + service.id + " and Order_Departmant = " + service_Job.Order_Departmant + " and Order_Section = " + service_Job.Order_Section + " and Order_Job = " + service_Job.Order_Job + " and Cit_ID = " + Cit_ID + " and Service_Citizen_ID = " + Service_Citizen_ID + " and Emp_ID = " + idEmp + " ;";
             System.out.println(q);
             ResultSet r = db.read(q);
             while (r.next()) {
@@ -850,7 +855,6 @@ public class ServiceCitizen {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ServiceCitizen.class.getName()).log(Level.SEVERE, null, ex);
         }
-   } 
+    }
 
-   
 }

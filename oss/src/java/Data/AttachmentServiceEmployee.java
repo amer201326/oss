@@ -5,6 +5,7 @@
  */
 package Data;
 
+import DB.DB;
 import Data.AttachmentArchiveCitizen;
 import Data.Crypto;
 import javax.crypto.Cipher;
@@ -12,6 +13,8 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.crypto.Cipher;
@@ -29,19 +32,29 @@ public class AttachmentServiceEmployee implements Serializable {
     int Emp_ID, Cit_ID;
     int Service_Citizen_ID;
     int Services_Provided_ID;
-    String Atta_Attachment_src;
+    
     UploadedFile file;
     String filename;
     StreamedContent fileDownload;
-    boolean haveFile;
+   
 
-    public AttachmentServiceEmployee(int Attachment_Service_Employee_ID, int Emp_ID, int Cit_ID, int Service_Citizen_ID, int Services_Provided_ID, String Atta_Attachment_src, InputStream inputStream, String filename) {
+    public AttachmentServiceEmployee(int Emp_ID, int Cit_ID, int Service_Citizen_ID, int Services_Provided_ID, UploadedFile file, String filename) {
+        this.Emp_ID = Emp_ID;
+        this.Cit_ID = Cit_ID;
+        this.Service_Citizen_ID = Service_Citizen_ID;
+        this.Services_Provided_ID = Services_Provided_ID;
+        this.file = file;
+        this.filename = filename;
+    }
+    
+    public AttachmentServiceEmployee(int Attachment_Service_Employee_ID, int Emp_ID, int Cit_ID,
+            int Service_Citizen_ID, int Services_Provided_ID, InputStream inputStream, String filename) {
         this.Attachment_Service_Employee_ID = Attachment_Service_Employee_ID;
         this.Emp_ID = Emp_ID;
         this.Cit_ID = Cit_ID;
         this.Service_Citizen_ID = Service_Citizen_ID;
         this.Services_Provided_ID = Services_Provided_ID;
-        this.Atta_Attachment_src = Atta_Attachment_src;
+        
         this.filename = filename;
         if (inputStream != null) {
             try {
@@ -51,13 +64,13 @@ public class AttachmentServiceEmployee implements Serializable {
                 InputStream inputForData = new ByteArrayInputStream(outputfinal);
 
                 fileDownload = new DefaultStreamedContent(inputForData, "file", filename);
-                haveFile = true;
+                
             } catch (IOException ex) {
                 Logger.getLogger(AttachmentArchiveCitizen.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         } else {
-            haveFile = false;
+            
             System.out.println("no file no file no file no file ");
         }
 
@@ -103,13 +116,7 @@ public class AttachmentServiceEmployee implements Serializable {
         this.Services_Provided_ID = Services_Provided_ID;
     }
 
-    public String getAtta_Attachment_src() {
-        return Atta_Attachment_src;
-    }
-
-    public void setAtta_Attachment_src(String Atta_Attachment_src) {
-        this.Atta_Attachment_src = Atta_Attachment_src;
-    }
+   
 
     public UploadedFile getFile() {
         return file;
@@ -135,12 +142,55 @@ public class AttachmentServiceEmployee implements Serializable {
         this.fileDownload = fileDownload;
     }
 
-    public boolean isHaveFile() {
-        return haveFile;
-    }
+    
+     public void addToDataBase() throws SQLException, ClassNotFoundException {
 
-    public void setHaveFile(boolean haveFile) {
-        this.haveFile = haveFile;
+        String q = "INSERT INTO `oss`.`attachment_service_employee` "
+                + "(`Attachment_Service_Employee_ID`, `Emp_ID`,`Cit_ID`,`Service_Citizen_ID`,`Services_Provided_ID`,`Atta_Attachment_src`)"
+                + "VALUES (null,?,?,?,?,?);";
+
+        
+
+            DB data = new DB();
+            PreparedStatement s = data.prepareStatement(q);
+
+            s.setInt(1, Emp_ID);
+            s.setInt(2, Cit_ID);
+            s.setInt(3, Service_Citizen_ID);
+            s.setInt(4, Services_Provided_ID);
+            if (file.getSize() > 0) {
+                s.setBinaryStream(5, saveFileInDisk());
+            } else {
+                s.setBinaryStream(5, null);
+            }
+            s.setString(6,file.getFileName());
+            
+            System.out.println(q);
+            s.executeUpdate();
+
+       
+
+    }
+    
+    private InputStream saveFileInDisk() {
+        try {
+            InputStream inp = file.getInputstream();
+
+            byte[] inputByte = new byte[inp.available()];
+
+            inp.read(inputByte);
+
+            byte[] outputCipher = Crypto.dec(Cipher.ENCRYPT_MODE, "foreanderDowntop", inputByte);
+
+            InputStream inputForData = new ByteArrayInputStream(outputCipher);
+
+            return inputForData;
+
+        } catch (IOException ex) {
+            Logger.getLogger(ServiceAttachmentName.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
     }
 
 }
