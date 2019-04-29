@@ -5,7 +5,11 @@
  */
 package Data;
 
+import DB.DB;
 import java.io.Serializable;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -30,8 +34,27 @@ public class HomePage implements Serializable {
     int citizenCount;
     int employeeCount;
     int doneCount;
+
+    public HomePage(String homepage_ID, String images, String address, String telephone, String fax, String email, String description, String servName, String depName, String munName, String munCity, String munQuarter, String munStreet) {
+        this.homepage_ID = homepage_ID;
+        this.images = images;
+        this.address = address;
+        this.telephone = telephone;
+        this.fax = fax;
+        this.email = email;
+        this.description = description;
+        this.servName = servName;
+        this.depName = depName;
+        this.munName = munName;
+        this.munCity = munCity;
+        this.munQuarter = munQuarter;
+        this.munStreet = munStreet;
+    }
     
 
+    
+    
+    
     public HomePage(String homepage_ID, String images, String address, String telephone, String fax, 
             String email, String description, String munName, String munCity) {
         this.homepage_ID = homepage_ID;
@@ -201,5 +224,21 @@ public class HomePage implements Serializable {
     }
     
     
-    
+     public void updateHomePage() {
+      String q = "UPDATE oss.homepage_data SET address = '" + address + "',telephone = '" + telephone
+                + "', fax = '" + fax + "',email = '" + email
+                + "', description = '" + description + "',munName = '" + munName
+                + "', munCity = '" + munCity + "',munQuarter = '" + munQuarter + "', munStreet = '"
+                + munStreet + "' WHERE (homepage_ID = 1);";
+      try {
+            DB data = new DB();
+            data.write(q);
+            System.out.println(q);
+        } catch (SQLException ex) {
+            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 }

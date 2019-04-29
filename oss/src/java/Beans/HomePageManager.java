@@ -23,13 +23,24 @@ public class HomePageManager implements Serializable{
     String[] allDetails; 
     int[] allParameters; 
     List<HomePage> serviceDep; 
+   
+    HomePage myData;
     
     public HomePageManager() {
         allDetails = GetDB_Eman.getHomePageDetails();
         allParameters = GetDB_Eman.getAllParameters();
         serviceDep = GetDB_Eman.getServicesByDep();
+        myData = GetDB_Eman.getHomePageData();
+        
         
     }
+    
+      public void editHomePage() {
+
+       myData.updateHomePage();
+        
+    }
+   
 
     public String[] getAllDetails() {
         return allDetails;
@@ -55,6 +66,17 @@ public class HomePageManager implements Serializable{
         this.serviceDep = serviceDep;
     }
 
+    
+
+    public HomePage getMyData() {
+        return myData;
+    }
+
+    public void setMyData(HomePage myData) {
+        this.myData = myData;
+    }
+
+    
     
     
 }
