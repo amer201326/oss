@@ -226,9 +226,9 @@ public class Employee implements Serializable {
             System.out.println(q);
             data.write(q);
             account.addEmpAccountToDB();
+            
 //            for (int i = 0; i < screens.size(); i++) {
 //                Screen get = screens.get(i);
-//                
 //                
 //            }
 

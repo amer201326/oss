@@ -40,6 +40,18 @@ public class LoginFilter implements Filter {
             String contextPath = ((HttpServletRequest)request).getContextPath();
             ((HttpServletResponse)response).sendRedirect(contextPath + "/login/");
         }else{
+//            System.out.println("lllog = "+ ((HttpServletRequest)request).getRequestURI().contains("manager") );
+//            System.out.println("lll "+"jjjj");
+         if(((HttpServletRequest)request).getRequestURI().contains("manager") && loginBean.manager != null){
+             System.out.println("manager");
+         }else if(((HttpServletRequest)request).getRequestURI().contains("citizenn") && loginBean.citizen != null){
+             System.out.println("citizenn");
+         }else if(((HttpServletRequest)request).getRequestURI().contains("employeePages") && loginBean.employee != null){
+             System.out.println("employeePages");
+         }else{
+              String contextPath = ((HttpServletRequest)request).getContextPath();
+              ((HttpServletResponse)response).sendRedirect(contextPath + "/AccessDenied.xhtml");
+         }
             
         }
          
