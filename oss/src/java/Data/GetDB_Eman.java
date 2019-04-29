@@ -176,11 +176,12 @@ public class GetDB_Eman {
     }
     
     public static HomePage getHomePageData() {
-        System.out.println("111111111111111111111111111111111111111111111111111111111");
-        HomePage home = new HomePage();
-
-       
         try {
+            System.out.println("111111111111111111111111111111111111111111111111111111111");
+            HomePage home = new HomePage();
+            
+            
+            
             DB db = new DB();
             String sql = "SELECT * FROM oss.homepage_data;";
            
@@ -188,13 +189,17 @@ public class GetDB_Eman {
             while (r.next()) {
                 home = new HomePage(r.getString(1), r.getString(2), r.getString(3), r.getString(4), r.getString(5),
                         r.getString(6), r.getString(7), r.getString(8), r.getString(9), r.getString(10), 
-                        r.getString(11), r.getString(12), r.getString(13));
+                        r.getString(11));
                 System.out.println(home);
             }
-        } catch (Exception e) {
-            System.out.println("bb" + e.getMessage());
+            
+            return home;
+        } catch (SQLException ex) {
+            Logger.getLogger(GetDB_Eman.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GetDB_Eman.class.getName()).log(Level.SEVERE, null, ex);
         }
-      return home;
+         return new HomePage();
     }
 
     public static String[] getHomePageDetails() {

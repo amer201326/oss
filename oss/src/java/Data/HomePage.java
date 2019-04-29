@@ -35,7 +35,7 @@ public class HomePage implements Serializable {
     int employeeCount;
     int doneCount;
 
-    public HomePage(String homepage_ID, String images, String address, String telephone, String fax, String email, String description, String servName, String depName, String munName, String munCity, String munQuarter, String munStreet) {
+    public HomePage(String homepage_ID, String images, String address, String telephone, String fax, String email, String description, String munName, String munCity, String munQuarter, String munStreet) {
         this.homepage_ID = homepage_ID;
         this.images = images;
         this.address = address;
@@ -43,8 +43,7 @@ public class HomePage implements Serializable {
         this.fax = fax;
         this.email = email;
         this.description = description;
-        this.servName = servName;
-        this.depName = depName;
+        
         this.munName = munName;
         this.munCity = munCity;
         this.munQuarter = munQuarter;
