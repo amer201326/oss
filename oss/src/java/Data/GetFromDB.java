@@ -47,7 +47,7 @@ public class GetFromDB {
         List<JobTitel> job = new ArrayList<JobTitel>();
         try {
             DB db = new DB();
-            String sql = "SELECT * FROM jobtitle ;";
+            String sql = "SELECT * FROM oss.jobtitle ;";
 
             ResultSet r = db.read(sql);
             while (r.next()) {
