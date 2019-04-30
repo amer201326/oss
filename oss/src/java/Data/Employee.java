@@ -27,12 +27,11 @@ public class Employee implements Serializable {
     int sec_id;
     int job_id;
     int emp_id;
-    
+
     String dep_name;
     String sec_name;
     String job_name;
-    
-   
+
     String emp_name;
     String emp_idCard;
     String emp_email;
@@ -45,12 +44,9 @@ public class Employee implements Serializable {
     String emp_EndDate;
     List<Screen> screens;
     EmployeeAccount account = new EmployeeAccount();
-    
+
     public Employee() {
     }
-
-       
-    
 
     public Employee(int dep_id, int sec_id, int job_id, int emp_id, String emp_name, String emp_idCard, String emp_email, String emp_tel, String emp_birth, String emp_StartDate, String emp_EndDate, String emp_mobile, String emp_gender) {
         this.dep_id = dep_id;
@@ -68,9 +64,9 @@ public class Employee implements Serializable {
         this.emp_gender = emp_gender;
 
     }
-    
+
     public Employee(int emp_id, String emp_name, String emp_idCard, String emp_email, String emp_tel, String emp_birth,
-            String emp_StartDate, String emp_EndDate, String emp_mobile, String emp_gender, String dep_name, 
+            String emp_StartDate, String emp_EndDate, String emp_mobile, String emp_gender, String dep_name,
             String sec_name, String job_name) {
         this.emp_id = emp_id;
         this.emp_name = emp_name;
@@ -87,10 +83,6 @@ public class Employee implements Serializable {
         this.job_name = job_name;
 
     }
-
-    
-    
-    
 
     public Employee(int dep_id, int emp_id, String emp_name, String emp_email, String emp_mobile) {
         this.dep_id = dep_id;
@@ -215,27 +207,46 @@ public class Employee implements Serializable {
     }
 
     public void addEmployeeToDB() {
-        
-        
-        String q = "INSERT INTO employees (`Dep_ID`, `Sec_ID`, `Job_ID`, `Emp_ID`, `Emp_Name`, `Emp_ID_Card`, `Emp_Email`, `Emp_Telephone`, `Emp_Birthday`, `Emp_StartDate`, `Emp_Mobile`,`Emp_Gender`) \n"
-                + "VALUES (" + dep_id + "," + sec_id + "," + job_id + "," + emp_id + ",'" + emp_name + "','" + emp_idCard + "','" + emp_email + "','"
-                + emp_tel + "','" + emp_birth + "','" + LocalDate.now() + "','" + emp_mobile + "','" + emp_gender + "');";
 
         try {
             DB data = new DB();
+            String q = "start transaction;";
             System.out.println(q);
             data.write(q);
-            account.addEmpAccountToDB();
-            
-//            for (int i = 0; i < screens.size(); i++) {
-//                Screen get = screens.get(i);
-//                
-//            }
 
-        } catch (SQLException ex) {
-            System.out.println("error Add Employee");
-            Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+            q = "INSERT INTO employees (`Dep_ID`, `Sec_ID`, `Job_ID`, `Emp_ID`, `Emp_Name`, `Emp_ID_Card`, `Emp_Email`, `Emp_Telephone`, `Emp_Birthday`, `Emp_StartDate`, `Emp_Mobile`,`Emp_Gender`) \n"
+                    + "VALUES (" + dep_id + "," + sec_id + "," + job_id + "," + emp_id + ",'" + emp_name + "','" + emp_idCard + "','" + emp_email + "','"
+                    + emp_tel + "','" + emp_birth + "','" + LocalDate.now() + "','" + emp_mobile + "','" + emp_gender + "');";
+            System.out.println(q);
+            data.write(q);
+           
+            account.addEmpAccountToDB();
+
+            for (int i = 0; i < screens.size(); i++) {
+                Screen get = screens.get(i);
+                get.addToDB(account.UserName);
+            }
+
+             q = "commit;";
+            //q = "rollback;";
+            System.out.println(q);
+            data.write(q);
+            
+        } catch (SQLException | ClassNotFoundException ex) {
+              
+            try {
+                DB data = new DB();
+                String q = "rollback;";
+                System.out.println(q);
+                data.write(q);
+                
+            } catch (SQLException ex1) {
+                Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex1);
+            } catch (ClassNotFoundException ex1) {
+                Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+                
+                
             System.out.println("error Add Employee");
             Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -269,10 +280,8 @@ public class Employee implements Serializable {
         }
 
     }
-    
-    
-    
-     public String updateEmployee() {
+
+    public String updateEmployee() {
         String q = "UPDATE oss.employees SET Emp_Name = '" + emp_name + "',Emp_ID_Card = '" + emp_idCard
                 + "', Emp_Email = '" + emp_email + "',Emp_Telephone = '" + emp_tel
                 + "', Emp_Birthday = '" + emp_birth + "',Emp_StartDate = '" + emp_StartDate
@@ -282,8 +291,6 @@ public class Employee implements Serializable {
             DB data = new DB();
 
             data.write(q);
-            
-            
 
         } catch (Exception ex) {
             Logger.getLogger(Citizen.class.getName()).log(Level.SEVERE, null, ex);
@@ -316,15 +323,12 @@ public class Employee implements Serializable {
     public void setJob_name(String job_name) {
         this.job_name = job_name;
     }
-    
-    
 
     @Override
     public String toString() {
         return "Employee{" + "dep_id=" + dep_id + ", sec_id=" + sec_id + ", job_id=" + job_id + ", emp_id=" + emp_id + ", emp_name=" + emp_name + ", emp_idCard=" + emp_idCard + ", emp_email=" + emp_email + ", emp_tel=" + emp_tel + ", emp_mobile=" + emp_mobile + ", emp_gender=" + emp_gender + ", emp_birth=" + emp_birth + ", birthDate=" + birthDate + ", emp_StartDate=" + emp_StartDate + ", emp_EndDate=" + emp_EndDate + '}';
     }
 
-    
     public Date getBirthDate() {
         return birthDate;
     }
@@ -352,7 +356,5 @@ public class Employee implements Serializable {
     public void setAccount(EmployeeAccount account) {
         this.account = account;
     }
-    
-    
 
 }

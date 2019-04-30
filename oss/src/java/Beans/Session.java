@@ -47,6 +47,8 @@ public class Session implements Serializable{
     
     ServiceCitizen serviceCitizenShow;
     
+    boolean[] screens;
+    
     public Session() {
         login = false;
         typeAccount = "";
@@ -92,7 +94,9 @@ public class Session implements Serializable{
                     login = true;
                     typeAccount = "employee";
                     employee = e;
+                    screens = GetFromDB.arrBoolScreens(employee.getAccount().getUserName());
                     FacesContext.getCurrentInstance().getExternalContext().redirect("../employeePages/");
+                    
                 } catch (IOException ex) {
                     Logger.getLogger(Session.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -177,6 +181,14 @@ public class Session implements Serializable{
 
     public void setServiceCitizenShow(ServiceCitizen serviceCitizenShow) {
         this.serviceCitizenShow = serviceCitizenShow;
+    }
+
+    public boolean[] getScreens() {
+        return screens;
+    }
+
+    public void setScreens(boolean[] screens) {
+        this.screens = screens;
     }
     
     

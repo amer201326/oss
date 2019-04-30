@@ -227,18 +227,19 @@ public class EmployeeManage implements Serializable {
             newEmployeeAccount.Emp_ID= id;
             newEmployee.setAccount(newEmployeeAccount);
             
-//            List<Screen> scre = new ArrayList<>();
-//            for (int i = 0; i < screensNamesAndResaults.getTarget().size(); i++) {
-//                String get = screensNamesAndResaults.getTarget().get(i);
-//                for (int j = 0; j < screen.size(); j++) {
-//                    Screen get1 = screen.get(j);
-//                    if(get.equals(get1.getScreenName())){
-//                        scre.add(get1);
-//                    }
-//                }
-//                
-//            }
-//            newEmployee.setScreens(screen);
+            List<Screen> scre = new ArrayList<>();
+            for (int i = 0; i < screensNamesAndResaults.getTarget().size(); i++) {
+                String get = screensNamesAndResaults.getTarget().get(i);
+                for (int j = 0; j < screen.size(); j++) {
+                    Screen get1 = screen.get(j);
+                    if(get.equals(get1.getScreenName())){
+                        scre.add(get1);
+                    }
+                }
+                
+            }
+            newEmployee.setScreens(screen);
+            
             newEmployee.addEmployeeToDB();
             
             newEmployee = new Employee();

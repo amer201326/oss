@@ -1207,5 +1207,28 @@ public static List<DecisionsDepartment> getDecisionsDepartmentNotDone(int Cit_ID
 
         return djs;
     }
+    public static boolean[] arrBoolScreens(String user) {
+        boolean[] screens = new boolean[3];
+        try {
+            DB db = new DB();
+            String sql = "SELECT * FROM employeescreen where UserName = '"+user+"';";
+            System.out.println(sql);
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+            int n = Integer.parseInt(r.getString(2));
+            System.out.println(n);
+            screens[n] = true;
+            }
+            
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        for (int i = 0; i < screens.length; i++) {
+            System.out.println("ssss="+screens[i]);
+            
+        }
+       return screens;
+    }
     
 }
