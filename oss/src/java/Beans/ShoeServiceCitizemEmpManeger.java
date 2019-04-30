@@ -108,6 +108,7 @@ public class ShoeServiceCitizemEmpManeger {
     }
 
     public void submit() throws IOException {
+        System.out.println("size files = "+allFileEmployee.size());
         serviseCitizen.allFileEmployee = allFileEmployee;
         serviseCitizen.ContineuInPath(employee.getEmp_id());
         FacesContext.getCurrentInstance().getExternalContext().redirect("serviceCitizzen.xhtml");
@@ -131,8 +132,9 @@ public class ShoeServiceCitizemEmpManeger {
     }
 
     public void handleFileUpload(FileUploadEvent event) {
-        System.out.println("upload fileeeeeeeeene");
+        System.out.println("upload fileeeeeeeeene"+event.getFile().getFileName());
         allFileEmployee.add(event.getFile());
+        System.out.println("after add  = "+allFileEmployee.size());
     }
 
 }

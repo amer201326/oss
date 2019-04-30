@@ -622,7 +622,7 @@ public class ServiceCitizen {
                         Cit_ID, Service_Citizen_ID, Services_Provided_ID, uploadedFile,uploadedFile.getFileName() );
                 att.addToDataBase();
             }
-            q = "commit;";
+            q = "rollback;";
             System.out.println(q);
             db.write(q);
 
