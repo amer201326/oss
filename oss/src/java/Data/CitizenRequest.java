@@ -15,31 +15,30 @@ import java.util.logging.Logger;
  * @author Eman
  */
 public class CitizenRequest {
-    
+
     int Cit_ID;
-    
-String Cit_FirstName;
-String Cit_FatherName; 
-String Cit_GrandfatherName; 
-String Cit_LastName;
-String Cit_Gender; 
-int Cit_FamilyMembers;
-String Cit_ID_Card; 
-String Cit_Telephone;
-String Cit_Mobile; 
-String Cit_Email;
-String Cit_Fax;
-String Cit_Birthday;
-String Cit_PlaceOfBirth;
-String Cit_Region;
-String Cit_Quarter; 
-String Cit_Street;
-String Cit_Address; 
-String Cit_Job;
-String Cit_PassportNumber; 
-String Cit_PassportType; 
-String Cit_Username; 
-String Cit_Password;
+    String Cit_FirstName;
+    String Cit_FatherName;
+    String Cit_GrandfatherName;
+    String Cit_LastName;
+    String Cit_Gender;
+    int Cit_FamilyMembers;
+    String Cit_ID_Card;
+    String Cit_Telephone;
+    String Cit_Mobile;
+    String Cit_Email;
+    String Cit_Fax;
+    String Cit_Birthday;
+    String Cit_PlaceOfBirth;
+    String Cit_Region;
+    String Cit_Quarter;
+    String Cit_Street;
+    String Cit_Address;
+    String Cit_Job;
+    String Cit_PassportNumber;
+    String Cit_PassportType;
+    String Cit_Username;
+    String Cit_Password;
 
     public CitizenRequest(int Cit_ID, String Cit_FirstName, String Cit_FatherName, String Cit_GrandfatherName, String Cit_LastName, String Cit_Gender, int Cit_FamilyMembers, String Cit_ID_Card, String Cit_Telephone, String Cit_Mobile, String Cit_Email, String Cit_Fax, String Cit_Birthday, String Cit_PlaceOfBirth, String Cit_Region, String Cit_Quarter, String Cit_Street, String Cit_Address, String Cit_Job, String Cit_PassportNumber, String Cit_PassportType, String Cit_Username, String Cit_Password) {
         this.Cit_ID = Cit_ID;
@@ -253,7 +252,6 @@ String Cit_Password;
 
     public void addCitizenToDB() {
 
-       
         String q = "INSERT INTO citizen (`Cit_ID`, `Cit_FirstName`, `Cit_FatherName`, `Cit_GrandfatherName`, `Cit_LastName`, `Cit_Gender`, "
                 + "`Cit_FamilyMembers`, `Cit_ID_Card`, `Cit_Telephone`, `Cit_Mobile`, `Cit_Email`,`Cit_Fax`, `Cit_Birthday`,`Cit_PlaceOfBirth`, "
                 + "`Cit_Region`,`Cit_Quarter`, `Cit_Street`,`Cit_Address`, `Cit_Job`, `Cit_PassportNumber`,`Cit_PassportType`, `Cit_Username`, `Cit_Password`) \n"
@@ -268,7 +266,7 @@ String Cit_Password;
 
             System.out.println(q);
             data.write(q);
-           
+
         } catch (SQLException ex) {
             System.out.println("error Add citizen");
             Logger.getLogger(CitizenRequest.class.getName()).log(Level.SEVERE, null, ex);
@@ -278,7 +276,5 @@ String Cit_Password;
         }
 
     }
-
-
 
 }
