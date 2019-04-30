@@ -12,7 +12,6 @@ import Data.DecisionsJob;
 import Data.DepartmentPaths;
 import Data.GetFromDB;
 import Data.GetFromDBaraa;
-import static Data.GetFromDBaraa.AttachmentServiceEmployee;
 import Data.JobPath;
 import Data.StepsAndDecsions;
 import Data.SectionPath;
