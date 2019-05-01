@@ -43,6 +43,7 @@ public class CitizenManage implements Serializable {
     public void addCitizen() {
 
         newCitizen.addCitizenToDB();
+       
 
         //انتقال الي صفحة كل المواطنين
     }
