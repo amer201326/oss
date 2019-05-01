@@ -279,7 +279,7 @@ public class Citizen implements Serializable {
         this.id = idMax + 1;
         String q = "INSERT INTO citizen (`Cit_ID`, `Cit_FirstName`, `Cit_FatherName`, `Cit_GrandfatherName`, `Cit_LastName`, `Cit_Gender`, "
                 + "`Cit_FamilyMembers`, `Cit_ID_Card`, `Cit_Telephone`, `Cit_Mobile`, `Cit_Email`,`Cit_Fax`, `Cit_Birthday`,`Cit_PlaceOfBirth`, "
-                + "`Cit_Region`,`Cit_Quarter`, `Cit_Street`,`Cit_Address`, `Cit_Job`, `Cit_PassportNumber`,`Cit_PassportType`) \n"
+                + "`Cit_Region`,`Cit_Quarter`, `Cit_Street`,`Cit_Address`, `Cit_Job`, `Cit_PassportNumber`,`Cit_PassportType`) "
                 + "VALUES (" + id + ",'" + FirstName + "','" + FatherName + "','" + GrandFatherName + "','" + LastName + "','" + Gender + "',"
                 + familyMember + ",'" + idCard + "','" + telephone + "','" + mobile + "','" + email
                 + "','" + fax + "','" + birthday + "','" + placeOfBirth + "','"

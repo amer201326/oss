@@ -71,6 +71,21 @@ public class CitizenAccount implements Serializable{
 
     }
     
+    public void addCitizenAccountReuqestToDB() {
+        
+        String q = "INSERT INTO oss.citizenaccount VALUES (" + Cit_ID + ",'" + userName + "','" + password + "');";
+        try {
+            DB data = new DB();
+            System.out.println(q);
+            data.write(q);
+
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.out.println("errorrrrrrrrrrrrrrrrrrr");
+            Logger.getLogger(CitizenAccount.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
      public String updateCit(){
         String q  =" UPDATE citizenaccount SET Password = '" + password + "' WHERE `Cit_ID` = " + Cit_ID + ";" ;
         try {

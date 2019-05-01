@@ -143,9 +143,11 @@
                                                                                 </h:panelGrid> 
 
                                                                                 <p:outputLabel for="birthday1" class="label" value="تاريخ الميلاد"/>
-                                                                                <p:calendar id="birthday1" selectOtherMonths="true" yearRange="c-100:c" class=""
-                                                                                            pattern="yyyy-MM-dd" navigator="true" style="text-align:right; margin-bottom: 10px;"
+                                                                                <p:inputText id="birthday1" style="text-align:right; margin-bottom: 10px;"
                                                                                             value="#{citizenRequestManager.newCitizen.cit_Birthday}" required="false"/>
+                                                                               <!-- <p:calendar id="birthday1" selectOtherMonths="true" yearRange="c-100:c" class=""
+                                                                                            pattern="yyyy-MM-dd" navigator="true" style="text-align:right; margin-bottom: 10px;"
+                                                                                            value="{citizenRequestManager.newCitizen.cit_Birthday}" required="false"/> -->
 
                                                                                 <br/>
                                                                                 <p:separator style="width: 250px;"/> 

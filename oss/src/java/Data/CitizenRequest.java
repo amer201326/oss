@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  *
  * @author Eman
  */
-public class CitizenRequest implements Serializable{
+public class CitizenRequest implements Serializable {
 
     int Cit_ID;
     String Cit_FirstName;
@@ -46,7 +46,7 @@ public class CitizenRequest implements Serializable{
     CitizenAccount account;
 
     public CitizenRequest() {
-
+        account = new CitizenAccount();
     }
 
     public CitizenRequest(int Cit_ID, String Cit_FirstName, String Cit_FatherName, String Cit_GrandfatherName, String Cit_LastName, String Cit_Gender, int Cit_FamilyMembers, String Cit_ID_Card, String Cit_Telephone, String Cit_Mobile, String Cit_Email, String Cit_Fax, String Cit_Birthday, String Cit_PlaceOfBirth, String Cit_Region, String Cit_Quarter, String Cit_Street, String Cit_Address, String Cit_Job, String Cit_PassportNumber, String Cit_PassportType, String Cit_Username, String Cit_Password) {
@@ -74,8 +74,6 @@ public class CitizenRequest implements Serializable{
         this.Cit_Username = Cit_Username;
         this.Cit_Password = Cit_Password;
     }
-    
-    
 
     public CitizenAccount getAccount() {
         return account;
@@ -276,8 +274,6 @@ public class CitizenRequest implements Serializable{
     public void setCit_Status(String Cit_Status) {
         this.Cit_Status = Cit_Status;
     }
-    
-    
 
     public void citizenRequestUpdate() {
         try {
@@ -295,10 +291,10 @@ public class CitizenRequest implements Serializable{
     }
 
     public void addCitizenRequestToDB() {
-       
+
         int idMax = GetDB_Eman.getMaxIdCitizenRequest();
         this.Cit_ID = idMax + 1;
-         Cit_Password = Crypto.encPas(k, Cit_Password);
+        Cit_Password = Crypto.encPas(k, Cit_Password);
         String q = "INSERT INTO  oss.requestcitizen (`Cit_ID`, `Cit_FirstName`, `Cit_FatherName`, `Cit_GrandfatherName`, `Cit_LastName`, `Cit_Gender`, "
                 + "`Cit_FamilyMembers`, `Cit_ID_Card`, `Cit_Telephone`, `Cit_Mobile`, `Cit_Email`,`Cit_Fax`, `Cit_Birthday`,`Cit_PlaceOfBirth`, "
                 + "`Cit_Region`,`Cit_Quarter`, `Cit_Street`,`Cit_Address`, `Cit_Job`, `Cit_PassportNumber`,`Cit_PassportType`, `Cit_Username`, `Cit_Password`) \n"
@@ -328,10 +324,10 @@ public class CitizenRequest implements Serializable{
 
         int idMax = GetDB_Eman.getMaxIdCitizen();
         this.Cit_ID = idMax + 1;
-        
+
         String q = "INSERT INTO  oss.citizen (`Cit_ID`, `Cit_FirstName`, `Cit_FatherName`, `Cit_GrandfatherName`, `Cit_LastName`, `Cit_Gender`, "
                 + "`Cit_FamilyMembers`, `Cit_ID_Card`, `Cit_Telephone`, `Cit_Mobile`, `Cit_Email`,`Cit_Fax`, `Cit_Birthday`,`Cit_PlaceOfBirth`, "
-                + "`Cit_Region`,`Cit_Quarter`, `Cit_Street`,`Cit_Address`, `Cit_Job`, `Cit_PassportNumber`,`Cit_PassportType`, `Cit_Username`, `Cit_Password`) \n"
+                + "`Cit_Region`,`Cit_Quarter`, `Cit_Street`,`Cit_Address`, `Cit_Job`, `Cit_PassportNumber`,`Cit_PassportType`)"
                 + "VALUES (" + Cit_ID + ",'" + Cit_FirstName + "','" + Cit_FatherName + "','" + Cit_GrandfatherName + "','" + Cit_LastName + "','" + Cit_Gender + "',"
                 + Cit_FamilyMembers + ",'" + Cit_ID_Card + "','" + Cit_Telephone + "','" + Cit_Mobile + "','" + Cit_Email
                 + "','" + Cit_Fax + "','" + Cit_Birthday + "','" + Cit_PlaceOfBirth + "','"
@@ -345,8 +341,9 @@ public class CitizenRequest implements Serializable{
             data.write(q);
             account.Cit_ID = this.Cit_ID;
             System.out.println(Cit_ID + "222222222");
-            account.addCitizenAccountToDB();
+            account.addCitizenAccountReuqestToDB();
 
+            // q = "DELETE FROM `oss`.`requestcitizen` WHERE (`Cit_Username` = '" + Cit_Username +"');";
         } catch (SQLException ex) {
             System.out.println("error Add citizen");
             Logger.getLogger(CitizenRequest.class.getName()).log(Level.SEVERE, null, ex);
