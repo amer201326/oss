@@ -6,6 +6,7 @@
 package Data;
 
 import DB.DB;
+import static Data.GetFromDB.k;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -280,7 +281,7 @@ public class CitizenRequest {
     }
 
     public void addCitizenRequestToDB() {
-
+        Cit_Password = Crypto.encPas(k, Cit_Password);
         int idMax = GetDB_Eman.getMaxIdCitizenRequest();
         this.Cit_ID = idMax + 1;
         String q = "INSERT INTO  oss.requestcitizen (`Cit_ID`, `Cit_FirstName`, `Cit_FatherName`, `Cit_GrandfatherName`, `Cit_LastName`, `Cit_Gender`, "

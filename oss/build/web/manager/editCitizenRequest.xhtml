@@ -93,19 +93,20 @@
                                                                             <h:panelGrid columns="2" dir="rtl" style="display: flex; justify-content: flex-start;">
 
                                                                                 <p:outputLabel for="address" value="العنوان"/>
-                                                                                <p:inputText id="address" value="#{editCitizenRequestManager.citizenEdit.cit_Address}" 
-                                                                                             class="form-control form-control-user" style="text-align:right;" type="text"/>
+                                                                                <p:outputLabel id="address" value="#{editCitizenRequestManager.citizenEdit.cit_Address}" 
+                                                                                               style="text-align:center;" />
+
                                                                                 <p:outputLabel for="quarter" value="الحي" />
-                                                                                <p:inputText id="quarter" value="#{editCitizenRequestManager.citizenEdit.cit_Quarter}"  
-                                                                                             class="form-control form-control-user" style="text-align:right;" type="text"/>
+                                                                                <p:outputLabel id="quarter" value="#{editCitizenRequestManager.citizenEdit.cit_Quarter}"  
+                                                                                               style="text-align:center;" />
 
                                                                                 <p:outputLabel for="street" value="الشارع" />
-                                                                                <p:inputText id="street" value="#{editCitizenRequestManager.citizenEdit.cit_Street}" required="true" 
-                                                                                             class="form-control form-control-user" style="text-align:right;" type="text"/>
+                                                                                <p:outputLabel id="street" value="#{editCitizenRequestManager.citizenEdit.cit_Street}" 
+                                                                                               style="text-align:center;"/>
 
                                                                                 <p:outputLabel for="region" value="المنطقة" />
-                                                                                <p:inputText id="region" value="#{editCitizenRequestManager.citizenEdit.cit_Region}" required="true" 
-                                                                                             class="form-control form-control-user" style="text-align:right;" type="text"/>
+                                                                                <p:outputLabel id="region" value="#{editCitizenRequestManager.citizenEdit.cit_Region}"  
+                                                                                               style="text-align:center;" />
 
 
 
@@ -128,13 +129,11 @@
 
 
                                                                                 <p:outputLabel for="us" class="label" value="اسم المستخدم"/>
-                                                                                <p:inputMask id="us" value="#{editCitizenRequestManager.citizenEdit.cit_Username}"
-                                                                                             class="form-control form-control-user" style="text-align:right;"
-                                                                                             type="text" mask="u-******" required="true"/>
+                                                                                <p:outputLabel id="us" value="#{editCitizenRequestManager.citizenEdit.cit_Username}"
+                                                                                               style="text-align:center;"/>
 
                                                                                 <p:outputLabel for="password" class="label" value="كلمة المرور"/>
-                                                                                <p:password value="#{editCitizenRequestManager.citizenEdit.cit_Password}" class="form-control" style="text-align:right;" id="password" 
-                                                                                            feedback="true" inline="true" required="true"/> 
+                                                                                <p:outputLabel value="#{editCitizenRequestManager.citizenEdit.cit_Password}" style="text-align:center;" id="password" /> 
 
 
 
@@ -154,86 +153,77 @@
 
                                                                             <h:panelGrid columns="2" dir="rtl" style="display: flex; justify-content: flex-start;">
 
-                                                                                 
+
                                                                                 <p:outputLabel for="firstName" value="الاسم الاول" />
-                                                                                <p:inputText id="firstName" value="#{editCitizenRequestManager.citizenEdit.cit_FirstName}" required="true" 
-                                                                                             class="form-control form-control-user" style="text-align:right;" type="text"/>
+                                                                                <p:outputLabel id="firstName" value="#{editCitizenRequestManager.citizenEdit.cit_FirstName}" 
+                                                                                               style="text-align:center;" />
 
                                                                                 <p:outputLabel for="fatherName" value="اسم الاب" />
-                                                                                <p:inputText id="fatherName" value="#{editCitizenRequestManager.citizenEdit.cit_FatherName}" required="true" 
-                                                                                             class="form-control form-control-user" style="text-align:right;" type="text"/>
+                                                                                <p:outputLabel id="fatherName" value="#{editCitizenRequestManager.citizenEdit.cit_FatherName}"  
+                                                                                               style="text-align:center;" />
 
                                                                                 <p:outputLabel for="grandFatherName" value="اسم الجد" />
-                                                                                <p:inputText id="grandFatherName" value="#{editCitizenRequestManager.citizenEdit.cit_GrandfatherName}" required="true" 
-                                                                                             class="form-control form-control-user" style="text-align:right;" type="text"/>
+                                                                                <p:outputLabel id="grandFatherName" value="#{editCitizenRequestManager.citizenEdit.cit_GrandfatherName}" 
+                                                                                               style="text-align:center;"/>
 
                                                                                 <p:outputLabel for="lastName" value="اسم العائلة" />
-                                                                                <p:inputText id="lastName" value="#{editCitizenRequestManager.citizenEdit.cit_LastName}" required="true" 
-                                                                                             class="form-control form-control-user" style="text-align:right;" type="text"/>
+                                                                                <p:outputLabel id="lastName" value="#{editCitizenRequestManager.citizenEdit.cit_LastName}" 
+                                                                                               style="text-align:center;" />
 
                                                                                 <p:outputLabel for="gender" value="الجنس" />
-                                                                                <h:panelGrid columns="2" cellpadding="5" class="mytable">
-                                                                                    <p:selectOneRadio value="#{editCitizenRequestManager.citizenEdit.cit_Gender}" id="gender" class="label1" required="true">
-                                                                                        <f:selectItem itemLabel="ذكر" itemValue="ذكر" />
-                                                                                        <f:selectItem  itemLabel="أنثى" itemValue="أنثى" />
-                                                                                    </p:selectOneRadio>
-                                                                                </h:panelGrid>  
+                                                                                <p:outputLabel id="gender" value="#{editCitizenRequestManager.citizenEdit.cit_Gender}" style="text-align:center;" />
+
 
                                                                                 <p:outputLabel for="birthday" class="label"  value="تاريخ الميلاد"/>
-                                                                                <p:calendar id="birthday" selectOtherMonths="true" yearRange="c-100:c" class=" form-control-user"
-                                                                                            pattern="yyyy-MM-dd" navigator="true" style="text-align:right; width: 223px;"
-                                                                                            value="#{editCitizenRequestManager.citizenEdit.cit_Birthday}" required="false"/>
+                                                                                <p:outputLabel id="birthday" style="text-align:center;"
+                                                                                               value="#{editCitizenRequestManager.citizenEdit.cit_Birthday}" />
 
                                                                                 <br/>
                                                                                 <p:separator style="width: 250px;"/> 
 
 
                                                                                 <p:outputLabel for="idCard" value="رقم الهوية" /> 
-                                                                                <p:inputMask id="idCard" class="form-control form-control-user"
-                                                                                             style="text-align:right;" type="text" mask="9 9999999 9" value="#{editCitizenRequestManager.citizenEdit.cit_ID_Card}" required="true"/>
+                                                                                <p:outputLabel id="idCard" style="text-align:center;" value="#{editCitizenRequestManager.citizenEdit.cit_ID_Card}"/>
 
                                                                                 <p:outputLabel for="mobile" value="الجوال" /> 
-                                                                                <p:inputMask id="mobile" class="form-control form-control-user" style="text-align:right;" 
-                                                                                             type="text" mask="999-999-9999" value="#{editCitizenRequestManager.citizenEdit.cit_Mobile}" required="true"/>
+                                                                                <p:outputLabel id="mobile"  style="text-align:center;" 
+                                                                                               value="#{editCitizenRequestManager.citizenEdit.cit_Mobile}"/>
 
                                                                                 <p:outputLabel for="telephone" value="التلفون" /> 
-                                                                                <p:inputMask id="telephone" class="form-control form-control-user" style="text-align:right;" 
-                                                                                             type="text" value="#{editCitizenRequestManager.citizenEdit.cit_Telephone}" mask="99-9999-999"/>
+                                                                                <p:outputLabel id="telephone" style="text-align:center;" 
+                                                                                               value="#{editCitizenRequestManager.citizenEdit.cit_Telephone}" />
 
                                                                                 <p:outputLabel for="fax" value="فاكس" /> 
-                                                                                <p:inputMask id="fax" class="form-control form-control-user" style="text-align:right;" 
-                                                                                             type="text" value="#{editCitizenRequestManager.citizenEdit.cit_Fax}" mask="99-9999-999"/>
+                                                                                <p:outputLabel id="fax"  style="text-align:center;" 
+                                                                                               value="#{editCitizenRequestManager.citizenEdit.cit_Fax}" />
 
                                                                                 <p:outputLabel for="email" value="البريد الإلكتروني" /> 
-                                                                                <p:inputText id="email" class="form-control form-control-user" 
-                                                                                             style="text-align:right;" type="email" value="#{editCitizenRequestManager.citizenEdit.cit_Email}" 
-                                                                                             required="true"/>
+                                                                                <p:outputLabel id="email" style="text-align:center;" value="#{editCitizenRequestManager.citizenEdit.cit_Email}"/>
 
                                                                                 <p:outputLabel for="job" value="المهنة" />
-                                                                                <p:inputText id="job" value="#{editCitizenRequestManager.citizenEdit.cit_Job}" required="true" 
-                                                                                             class="form-control form-control-user" style="text-align:right;" type="text"/>
+                                                                                <p:outputLabel id="job" value="#{editCitizenRequestManager.citizenEdit.cit_Job}" style="text-align:center;"/>
 
                                                                                 <br/>
                                                                                 <p:separator style="width: 250px;"/> 
 
                                                                                 <p:outputLabel for="familyMember" value="عدد افراد الاسرة" />
-                                                                                <p:inputText id="familyMember" value="#{editCitizenRequestManager.citizenEdit.cit_FamilyMembers}" required="true" 
-                                                                                             class="form-control form-control-user" style="text-align:right;" type="number"/>
+                                                                                <p:outputLabel id="familyMember" value="#{editCitizenRequestManager.citizenEdit.cit_FamilyMembers}"
+                                                                                               style="text-align:center;" />
 
                                                                                 <p:outputLabel for="placeOfBirth" value="مكان الولادة" />
-                                                                                <p:inputText id="placeOfBirth" value="#{editCitizenRequestManager.citizenEdit.cit_PlaceOfBirth}" required="true" 
-                                                                                             class="form-control form-control-user" style="text-align:right;" type="text"/>
+                                                                                <p:outputLabel id="placeOfBirth" value="#{editCitizenRequestManager.citizenEdit.cit_PlaceOfBirth}"  
+                                                                                               style="text-align:center;"/>
 
 
 
 
                                                                                 <p:outputLabel for="passportNumber" value="رقم جواز السفر" />
-                                                                                <p:inputText id="passportNumber" value="#{editCitizenRequestManager.citizenEdit.cit_PassportNumber}" 
-                                                                                             class="form-control form-control-user" style="text-align:right;" type="text"/>
+                                                                                <p:outputLabel id="passportNumber" value="#{editCitizenRequestManager.citizenEdit.cit_PassportNumber}" 
+                                                                                               style="text-align:center;"/>
 
                                                                                 <p:outputLabel for="passportType" value="نوع جواز السفر" />
-                                                                                <p:inputText id="passportType" value="#{editCitizenRequestManager.citizenEdit.cit_PassportType}" 
-                                                                                             class="form-control form-control-user" style="text-align:right;" type="text"/>
+                                                                                <p:outputLabel id="passportType" value="#{editCitizenRequestManager.citizenEdit.cit_PassportType}" 
+                                                                                               style="text-align:center;" />
 
 
 
@@ -254,16 +244,9 @@
                                                     <br/><hr style="border: 2px solid orange; margin-left: 10px; margin-right: 10px;"/>
 
                                                     <div style="display: flex; justify-content: center;"  class="col-sm-12">                                                
-                                                        <p:commandButton  value=" إعادة تعيين" immediate="true" ajax="false" class="myButtonB" style="margin-right:20px;" >
-                                                            <p:resetInput target="@form formAddCitizen" />
-                                                            <f:ajax />
-                                                        </p:commandButton>
+                                                        
                                                         <p:commandButton  value=" رفض مواطن" class="myButtonR" actionListener="#{editCitizenRequestManager.rejectCitizenRequest()}"
                                                                           update="@form " />   &nbsp; &nbsp; &nbsp;
-
-                                                        <p:commandButton  value=" تعديل مواطن" class="myButtonO" actionListener="#{editCitizenRequestManager.editCitizen()}"
-                                                                          update="@form " />   &nbsp; &nbsp; &nbsp;
-
 
                                                         <p:commandButton  value=" اضافة مواطن" class="myButtonC" actionListener="#{editCitizenRequestManager.acceptCitizenRequest()}"
                                                                           update="@form " />   &nbsp; &nbsp; &nbsp;
