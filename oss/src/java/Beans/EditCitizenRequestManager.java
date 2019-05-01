@@ -43,6 +43,7 @@ public class EditCitizenRequestManager implements Serializable{
     }
     
     public void acceptCitizenRequest(){
+        System.out.println("accept qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq");
         citizenEdit.acceptCitizenRequestAddToDB();
     }
     

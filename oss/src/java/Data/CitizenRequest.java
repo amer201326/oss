@@ -7,6 +7,7 @@ package Data;
 
 import DB.DB;
 import static Data.GetFromDB.k;
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,7 +16,7 @@ import java.util.logging.Logger;
  *
  * @author Eman
  */
-public class CitizenRequest {
+public class CitizenRequest implements Serializable{
 
     int Cit_ID;
     String Cit_FirstName;
@@ -327,6 +328,7 @@ public class CitizenRequest {
 
         int idMax = GetDB_Eman.getMaxIdCitizen();
         this.Cit_ID = idMax + 1;
+        
         String q = "INSERT INTO  oss.citizen (`Cit_ID`, `Cit_FirstName`, `Cit_FatherName`, `Cit_GrandfatherName`, `Cit_LastName`, `Cit_Gender`, "
                 + "`Cit_FamilyMembers`, `Cit_ID_Card`, `Cit_Telephone`, `Cit_Mobile`, `Cit_Email`,`Cit_Fax`, `Cit_Birthday`,`Cit_PlaceOfBirth`, "
                 + "`Cit_Region`,`Cit_Quarter`, `Cit_Street`,`Cit_Address`, `Cit_Job`, `Cit_PassportNumber`,`Cit_PassportType`, `Cit_Username`, `Cit_Password`) \n"
@@ -342,14 +344,15 @@ public class CitizenRequest {
             System.out.println(q);
             data.write(q);
             account.Cit_ID = this.Cit_ID;
+            System.out.println(Cit_ID + "222222222");
             account.addCitizenAccountToDB();
 
         } catch (SQLException ex) {
             System.out.println("error Add citizen");
-            Logger.getLogger(Citizen.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CitizenRequest.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             System.out.println("error Add citizen");
-            Logger.getLogger(Citizen.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CitizenRequest.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
