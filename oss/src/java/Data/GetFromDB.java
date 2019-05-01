@@ -845,7 +845,7 @@ public class GetFromDB {
     public static Employee getEmployeeAccount(String username, String passWord) {
         Employee em;
         passWord = Crypto.encPas(k, passWord);
-        String q = "SELECT * FROM employees as e inner join employeeaccount as ea on e.Emp_ID= ea.Emp_ID  inner join jobtitle as jt on e.Job_ID = jt.Job_ID where ea.UserName =  '" + username + "' and ea.Password = '" + passWord + "';";
+        String q = "SELECT * FROM employees as e inner join employeeaccount as ea on e.Emp_ID= ea.Emp_ID  where ea.UserName =  '" + username + "' and ea.Password = '" + passWord + "';";
         try {
             DB db = new DB();
             
@@ -855,7 +855,6 @@ public class GetFromDB {
                 em = new Employee(r.getInt(1), r.getInt(2), r.getInt(3), r.getInt(4), r.getString(5), r.getString(6), r.getString(7), r.getString(8), r.getString(9), r.getString(10), r.getString(11), r.getString(12), r.getString(13));
                 em.account = new EmployeeAccount(r.getString(16), r.getString(17));
                 em.setType(r.getString(14));
-                em.jobTitel = new JobTitel(r.getInt(18), r.getString(19));
                 return em;
             }
             
