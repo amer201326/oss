@@ -57,15 +57,18 @@ public class ServiceCitizenManager implements Serializable {
             allRequestService = GetFromDB.getAllRequestService(session.employee);
             allRequestServiceView = new ArrayList<>();
             allRequestServiceNotView = new ArrayList<>();
-
-            for (int i = 0; i < allRequestService.size(); i++) {
-                ServiceCitizen get = allRequestService.get(i);
-                if (get.getService_Job().getStatus().compareTo("done") == 0) {
-                    get.messages(session.employee.getEmp_id());
-                    allRequestServiceView.add(get);
-                } else {
-                    allRequestServiceNotView.add(get);
+            if (!session.employee.isHead()) {
+                for (int i = 0; i < allRequestService.size(); i++) {
+                    ServiceCitizen get = allRequestService.get(i);
+                    if (get.getService_Job().getStatus().compareTo("done") == 0) {
+                        get.messages(session.employee.getEmp_id());
+                        allRequestServiceView.add(get);
+                    } else {
+                        allRequestServiceNotView.add(get);
+                    }
                 }
+            }else{
+               allRequestServiceView = allRequestService;
             }
         }
 
@@ -81,6 +84,7 @@ public class ServiceCitizenManager implements Serializable {
             Logger.getLogger(ServiceCitizenManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     public void showHeadServise() {
         try {
             session.serviceCitizenShow = serviceSelected;

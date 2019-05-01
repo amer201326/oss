@@ -72,7 +72,7 @@ public class LoginFilter implements Filter {
              }else if( ((HttpServletRequest)request).getRequestURI().contains("addEmployee.xhtml") && !loginBean.screens[2]){
                    String contextPath = ((HttpServletRequest)request).getContextPath();
               ((HttpServletResponse)response).sendRedirect(contextPath + "/AccessDenied.xhtml");
-             }else if( ((HttpServletRequest)request).getRequestURI().contains("ShowServiceHead.xhtml") && !loginBean.employee.isHead()){
+                }else if( ((HttpServletRequest)request).getRequestURI().contains("ShowServiceHead.xhtml") && !loginBean.employee.isHead()){
                    String contextPath = ((HttpServletRequest)request).getContextPath();
               ((HttpServletResponse)response).sendRedirect(contextPath + "/AccessDenied.xhtml");
              }
