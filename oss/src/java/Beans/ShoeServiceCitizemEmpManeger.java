@@ -10,6 +10,7 @@ package Beans;
  * @author Amer
  */
 import DB.DB;
+import Data.AttachmentServiceEmployee;
 import Data.Employee;
 import Data.GetFromDB;
 import Data.ServiceAttachmentName;
@@ -30,10 +31,12 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import org.primefaces.component.fileupload.FileUpload;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
 @ManagedBean
+@ViewScoped
 public class ShoeServiceCitizemEmpManeger {
 
     ServiceCitizen serviseCitizen;
@@ -43,7 +46,7 @@ public class ShoeServiceCitizemEmpManeger {
     Session session;
 
     boolean haveService = false;
-    List<UploadedFile> allFileEmployee = new ArrayList<>();
+    List<AttachmentServiceEmployee> attachmentServiceEmployees = new ArrayList<>();
 
     @PostConstruct
     public void init() {
@@ -108,8 +111,8 @@ public class ShoeServiceCitizemEmpManeger {
     }
 
     public void submit() throws IOException {
-        System.out.println("size files = "+allFileEmployee.size());
-        serviseCitizen.allFileEmployee = allFileEmployee;
+        System.out.println("size files = " + attachmentServiceEmployees.size());
+        serviseCitizen.attachmentServiceEmployees = attachmentServiceEmployees;
         serviseCitizen.ContineuInPath(employee.getEmp_id());
         FacesContext.getCurrentInstance().getExternalContext().redirect("serviceCitizzen.xhtml");
 
@@ -123,18 +126,29 @@ public class ShoeServiceCitizemEmpManeger {
         this.employee = employee;
     }
 
-    public List<UploadedFile> getAllFileEmployee() {
-        return allFileEmployee;
+    public List<AttachmentServiceEmployee> getAllFileEmployee() {
+        return attachmentServiceEmployees;
     }
 
-    public void setAllFileEmployee(List<UploadedFile> allFileEmployee) {
-        this.allFileEmployee = allFileEmployee;
+    public void setAllFileEmployee(List<AttachmentServiceEmployee> attachmentServiceEmployees) {
+        this.attachmentServiceEmployees = attachmentServiceEmployees;
     }
 
     public void handleFileUpload(FileUploadEvent event) {
-        System.out.println("upload fileeeeeeeeene"+event.getFile().getFileName());
-        allFileEmployee.add(event.getFile());
-        System.out.println("after add  = "+allFileEmployee.size());
+        try {
+            System.out.println("upload fileeeeeeeeene" + event.getFile().getFileName() + "   SIZE " + event.getFile().getSize());
+            
+            
+            
+            AttachmentServiceEmployee att = new AttachmentServiceEmployee(employee.getEmp_id(),
+                    serviseCitizen.getCit_ID(), serviseCitizen.getService_Citizen_ID(),
+                    serviseCitizen.getServices_Provided_ID(), event.getFile().getInputstream() , event.getFile().getFileName());
+            attachmentServiceEmployees.add(att);
+            
+            System.out.println("after add  = " + attachmentServiceEmployees.size());
+        } catch (IOException ex) {
+            Logger.getLogger(ShoeServiceCitizemEmpManeger.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

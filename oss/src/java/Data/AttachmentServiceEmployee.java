@@ -32,21 +32,20 @@ public class AttachmentServiceEmployee implements Serializable {
     int Emp_ID, Cit_ID;
     int Service_Citizen_ID;
     int Services_Provided_ID;
-    
-    UploadedFile file;
+
+    InputStream inputStreamFile;
     String filename;
     StreamedContent fileDownload;
-   
 
-    public AttachmentServiceEmployee(int Emp_ID, int Cit_ID, int Service_Citizen_ID, int Services_Provided_ID, UploadedFile file, String filename) {
+    public AttachmentServiceEmployee(int Emp_ID, int Cit_ID, int Service_Citizen_ID, int Services_Provided_ID, InputStream file, String filename) {
         this.Emp_ID = Emp_ID;
         this.Cit_ID = Cit_ID;
         this.Service_Citizen_ID = Service_Citizen_ID;
         this.Services_Provided_ID = Services_Provided_ID;
-        this.file = file;
+        this.inputStreamFile = file;
         this.filename = filename;
     }
-    
+
     public AttachmentServiceEmployee(int Attachment_Service_Employee_ID, int Emp_ID, int Cit_ID,
             int Service_Citizen_ID, int Services_Provided_ID, InputStream inputStream, String filename) {
         this.Attachment_Service_Employee_ID = Attachment_Service_Employee_ID;
@@ -54,7 +53,7 @@ public class AttachmentServiceEmployee implements Serializable {
         this.Cit_ID = Cit_ID;
         this.Service_Citizen_ID = Service_Citizen_ID;
         this.Services_Provided_ID = Services_Provided_ID;
-        
+
         this.filename = filename;
         if (inputStream != null) {
             try {
@@ -64,13 +63,13 @@ public class AttachmentServiceEmployee implements Serializable {
                 InputStream inputForData = new ByteArrayInputStream(outputfinal);
 
                 fileDownload = new DefaultStreamedContent(inputForData, "file", filename);
-                
+
             } catch (IOException ex) {
                 Logger.getLogger(AttachmentArchiveCitizen.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         } else {
-            
+
             System.out.println("no file no file no file no file ");
         }
 
@@ -116,14 +115,12 @@ public class AttachmentServiceEmployee implements Serializable {
         this.Services_Provided_ID = Services_Provided_ID;
     }
 
-   
-
-    public UploadedFile getFile() {
-        return file;
+    public InputStream getInputStreamFile() {
+        return inputStreamFile;
     }
 
-    public void setFile(UploadedFile file) {
-        this.file = file;
+    public void setInputStreamFile(InputStream inputStreamFile) {
+        this.inputStreamFile = inputStreamFile;
     }
 
     public String getFilename() {
@@ -142,39 +139,46 @@ public class AttachmentServiceEmployee implements Serializable {
         this.fileDownload = fileDownload;
     }
 
-    
-     public void addToDataBase() throws SQLException, ClassNotFoundException {
+    public void addToDataBase() throws SQLException, ClassNotFoundException {
 
-        String q = "INSERT INTO `oss`.`attachment_service_employee` "
-                + "(`Attachment_Service_Employee_ID`, `Emp_ID`,`Cit_ID`,`Service_Citizen_ID`,`Services_Provided_ID`,`Atta_Attachment_src`)"
-                + "VALUES (null,?,?,?,?,?);";
+        String q = "INSERT INTO attachment_service_employee (`Attachment_Service_Employee_ID`, `Emp_ID`,`Cit_ID`,`Service_Citizen_ID`,`Services_Provided_ID`,`file`, `filename`)"
+                + "VALUES (null,?,?,?,?,?,?);";
 
-        
+        DB data = new DB();
+        PreparedStatement s = data.prepareStatement(q);
 
-            DB data = new DB();
-            PreparedStatement s = data.prepareStatement(q);
+        s.setInt(1, Emp_ID);
+        s.setInt(2, Cit_ID);
+        s.setInt(3, Service_Citizen_ID);
+        s.setInt(4, Services_Provided_ID);
 
-            s.setInt(1, Emp_ID);
-            s.setInt(2, Cit_ID);
-            s.setInt(3, Service_Citizen_ID);
-            s.setInt(4, Services_Provided_ID);
-            if (file.getSize() > 0) {
+        try {
+
+            if (inputStreamFile.available() > 0) {
+                System.out.println("file size > 0");
                 s.setBinaryStream(5, saveFileInDisk());
-            } else {
-                s.setBinaryStream(5, null);
-            }
-            s.setString(6,file.getFileName());
-            
-            System.out.println(q);
-            s.executeUpdate();
 
-       
+            } else {
+                System.out.println("file size = 0 filenulll");
+                s.setBinaryStream(5, null);
+
+            }
+
+        } catch (IOException ex) {
+            s.setBinaryStream(5, null);
+            Logger.getLogger(AttachmentServiceEmployee.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        s.setString(6, filename);
+
+        System.out.println(q);
+        s.executeUpdate();
 
     }
-    
+
     private InputStream saveFileInDisk() {
         try {
-            InputStream inp = file.getInputstream();
+            InputStream inp =  inputStreamFile;
 
             byte[] inputByte = new byte[inp.available()];
 

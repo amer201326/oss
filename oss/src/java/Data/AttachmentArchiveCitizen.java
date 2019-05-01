@@ -87,6 +87,7 @@ public class AttachmentArchiveCitizen implements Serializable {
             } else {
                 s.setBinaryStream(4, null);
             }
+            
             s.setString(5,file.getFileName());
             s.setString(6,form);
             System.out.println(q);

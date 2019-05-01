@@ -42,6 +42,7 @@ public class ServiceCitizen {
     Service_Job service_Job;
     Citizen citizen;
 
+    public List<AttachmentServiceEmployee> attachmentServiceEmployees = new ArrayList<AttachmentServiceEmployee>();
     public ServiceCitizen() {
 
     }
@@ -279,6 +280,24 @@ public class ServiceCitizen {
         this.note = note;
     }
 
+    public List<UploadedFile> getAllFileEmployee() {
+        return allFileEmployee;
+    }
+
+    public void setAllFileEmployee(List<UploadedFile> allFileEmployee) {
+        this.allFileEmployee = allFileEmployee;
+    }
+
+    public List<AttachmentServiceEmployee> getAttachmentServiceEmployees() {
+        return attachmentServiceEmployees;
+    }
+
+    public void setAttachmentServiceEmployees(List<AttachmentServiceEmployee> attachmentServiceEmployees) {
+        this.attachmentServiceEmployees = attachmentServiceEmployees;
+    }
+
+    
+    
     public ArrayList<DepartmentPaths> firstDepsInPathOfthisService() {
         ArrayList<DepartmentPaths> departments = new ArrayList<>();
         try {
@@ -617,12 +636,13 @@ public class ServiceCitizen {
             List<DecisionsDepartment> departments = GetFromDB.getDecisionsDepartmentNotDone(Cit_ID, Service_Citizen_ID);
 
             nextjobsPathOfthisService(departments, sections, jobs);
-            for (UploadedFile uploadedFile : this.allFileEmployee) {
-                AttachmentServiceEmployee att = new AttachmentServiceEmployee(empID,
-                        Cit_ID, Service_Citizen_ID, Services_Provided_ID, uploadedFile,uploadedFile.getFileName() );
-                att.addToDataBase();
+            
+            for (AttachmentServiceEmployee attachmentServiceEmployee : attachmentServiceEmployees) {
+                attachmentServiceEmployee.addToDataBase();
             }
-            q = "rollback;";
+            
+            q = "commit;";
+             //q = "rollback;";
             System.out.println(q);
             db.write(q);
 
@@ -843,12 +863,13 @@ public class ServiceCitizen {
     public void messages(int idEmp) {
         try {
             DB db = new DB();
-            String q = "SELECT Com_ExternalMessage,Com_InternalMessage FROM oss.decisions_job where Dep_ID = " + service_Job.Dep_ID + " and Sec_ID = " + service_Job.Sec_ID + " and Job_ID = " + service_Job.Job_ID + " and Services_Provided_ID = " + service.id + " and Order_Departmant = " + service_Job.Order_Departmant + " and Order_Section = " + service_Job.Order_Section + " and Order_Job = " + service_Job.Order_Job + " and Cit_ID = " + Cit_ID + " and Service_Citizen_ID = " + Service_Citizen_ID + " and Emp_ID = " + idEmp + " ;";
+            String q = "SELECT Com_ExternalMessage,Com_InternalMessage,Cost FROM oss.decisions_job where Dep_ID = " + service_Job.Dep_ID + " and Sec_ID = " + service_Job.Sec_ID + " and Job_ID = " + service_Job.Job_ID + " and Services_Provided_ID = " + service.id + " and Order_Departmant = " + service_Job.Order_Departmant + " and Order_Section = " + service_Job.Order_Section + " and Order_Job = " + service_Job.Order_Job + " and Cit_ID = " + Cit_ID + " and Service_Citizen_ID = " + Service_Citizen_ID + " and Emp_ID = " + idEmp + " ;";
             System.out.println(q);
             ResultSet r = db.read(q);
             while (r.next()) {
                 decisionsJob.externalMessage = r.getString(1);
                 decisionsJob.internalMessage = r.getString(2);
+                decisionsJob.cost = r.getDouble(3);
             }
         } catch (SQLException ex) {
             Logger.getLogger(ServiceCitizen.class.getName()).log(Level.SEVERE, null, ex);

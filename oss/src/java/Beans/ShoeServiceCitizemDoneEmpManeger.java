@@ -10,8 +10,10 @@ package Beans;
  * @author Amer
  */
 import DB.DB;
+import Data.AttachmentServiceEmployee;
 import Data.Employee;
 import Data.GetFromDB;
+import Data.GetFromDBaraa;
 import Data.ServiceAttachmentName;
 import Data.ServiceCitizen;
 import Data.ServiceCitizen_1;
@@ -34,7 +36,7 @@ public class ShoeServiceCitizemDoneEmpManeger {
 
     ServiceCitizen serviseCitizen;
     Employee employee;
-    
+
     @ManagedProperty(value = "#{msession}")
     Session session;
 
@@ -43,8 +45,8 @@ public class ShoeServiceCitizemDoneEmpManeger {
     @PostConstruct
     public void init() {
         serviseCitizen = session.serviceCitizenShow;
-        employee =  session.employee;
-        
+        employee = session.employee;
+
         if (serviseCitizen != null) {
             haveService = true;
             filterFormOrNot();
@@ -53,31 +55,31 @@ public class ShoeServiceCitizemDoneEmpManeger {
     }
 
     public void filterFormOrNot() {
-        List<ServiceAttachmentName> allAtt = GetFromDB.getAttachmentByserviceCitizen(serviseCitizen.getServices_Provided_ID(), serviseCitizen.getCit_ID(),serviseCitizen.getService_Citizen_ID());
+        List<ServiceAttachmentName> allAtt = GetFromDB.getAttachmentByserviceCitizen(serviseCitizen.getServices_Provided_ID(), serviseCitizen.getCit_ID(), serviseCitizen.getService_Citizen_ID());
         List<ServiceAttachmentName> att = new ArrayList<ServiceAttachmentName>();
         List<ServiceAttachmentName> attform = new ArrayList<ServiceAttachmentName>();
+        serviseCitizen.attachmentServiceEmployees = GetFromDB.getAttachmentServiceEmployee(session.employee.getEmp_id(), serviseCitizen.getCit_ID(), serviseCitizen.getService_Citizen_ID(), serviseCitizen.getServices_Provided_ID());
 
         List<ViewerAttachment> jobViewer = GetFromDB.getJobviewerByserviceById(serviseCitizen.getServices_Provided_ID());
 
         for (ServiceAttachmentName serviceAttachmentName : allAtt) {
             for (ViewerAttachment viewer : jobViewer) {
-                if (serviceAttachmentName.getId() == viewer.getServiceAttachmentName_ID() && 
-                       employee.getDep_id()==viewer.getDep_ID()&& employee.getSec_id()==viewer.getSec_ID() &&employee.getJob_id()==viewer.getJob_ID()) {
-                    
+                if (serviceAttachmentName.getId() == viewer.getServiceAttachmentName_ID()
+                        && employee.getDep_id() == viewer.getDep_ID() && employee.getSec_id() == viewer.getSec_ID() && employee.getJob_id() == viewer.getJob_ID()) {
+
                     if ("yes".equals(serviceAttachmentName.getForm())) {
                         attform.add(serviceAttachmentName);
                     } else {
                         att.add(serviceAttachmentName);
                     }
-                    
+
                 }
             }
         }
 
         serviseCitizen.attachment = att;
-        serviseCitizen.attwhithFile= attform;
-        
-        
+        serviseCitizen.attwhithFile = attform;
+
     }
 
     public ServiceCitizen getServiseCitizen() {
@@ -96,7 +98,6 @@ public class ShoeServiceCitizemDoneEmpManeger {
         this.employee = employee;
     }
 
-    
     public Session getSession() {
         return session;
     }
@@ -112,6 +113,5 @@ public class ShoeServiceCitizemDoneEmpManeger {
     public void setHaveService(boolean haveService) {
         this.haveService = haveService;
     }
-
 
 }
