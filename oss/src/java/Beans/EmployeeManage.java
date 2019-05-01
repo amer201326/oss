@@ -27,6 +27,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ValueChangeEvent;
 import org.primefaces.event.ItemSelectEvent;
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.event.SelectEvent;
@@ -56,6 +57,8 @@ public class EmployeeManage implements Serializable {
     DualListModel<String> screenSel;
     List<JobOfSection> jobsOfSections;
     Employee employeeSelected;
+    
+    String Type = "";
 
     public EmployeeManage() {
        
@@ -96,6 +99,18 @@ public class EmployeeManage implements Serializable {
     }
     public List<JobOfSection> filterJob() {
         System.out.println("filter job");
+        List<JobOfSection> list = new ArrayList<>();
+        for (int i = 0; i < jobsOfSections.size(); i++) {
+            JobOfSection get = jobsOfSections.get(i);
+            if (newEmployee.getSec_id() == get.getIdSEction()) {
+                list.add(get);
+            }
+
+        }
+        return list;
+    }
+    public List<JobOfSection> filterJobHED() {
+        System.out.println("filter jobHED");
         List<JobOfSection> list = new ArrayList<>();
         for (int i = 0; i < jobsOfSections.size(); i++) {
             JobOfSection get = jobsOfSections.get(i);
@@ -310,6 +325,29 @@ public class EmployeeManage implements Serializable {
     public void setJobsOfSections(List<JobOfSection> jobsOfSections) {
         this.jobsOfSections = jobsOfSections;
     }
+
+    public String getType() {
+        return Type;
+    }
+
+    public void setType(String Type) {
+        this.Type = Type;
+    }
     
-    
+    public boolean CheckTypeEMP(){
+        if(Type.compareTo("3")==0)
+            return true;
+        else
+            return false;
+    }
+     public boolean CheckTypeHED(){
+        if(Type.compareTo("1")==0)
+            return true;
+        else
+            return false;
+    }
+     
+     public void chagneType(){
+         System.out.println(Type);
+     }
 }

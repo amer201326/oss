@@ -127,6 +127,82 @@
 
                                             <div class="col-lg-6" style="text-align: right; float: right;">
 
+                                                <div class="card shadow mb-4" style="text-align: right;">
+                                                    <div class="card-header py-3">
+                                                        <h6 class="m-0 font-weight-bold text-primary">تحديد الوظيفة</h6>
+                                                    </div>
+                                                    <div class="card-body">
+
+                                                        <div class="form-group row">
+                                                            <div class="col-sm-12 mb-3 mb-sm-0">
+
+                                                                <h:panelGrid columns="2" dir="rtl" style="display: flex; justify-content: flex-start;">
+
+
+
+                                                                    <h:outputLabel  for="dep_id" class="label" value="دائرة"/>
+                                                                    <p:selectOneMenu id="dep_id" value="#{employeeManage.newEmployee.dep_id}"  
+                                                                                     class="pading000 form-control" style="text-align:right; min-width: 223px;" required="true">
+                                                                        <f:selectItems value="#{employeeManage.allDepartments}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}" />
+                                                                        <p:ajax process="@this"  update="sec_id job_id" event="itemSelect" />
+                                                                    </p:selectOneMenu>
+
+                                                                    <h:outputLabel for="console" value="نوع الوظيفة :" />
+                                                                    <p:selectOneRadio id="console" value="#{employeeManage.type}">
+                                                                        <f:selectItem itemLabel="رئيس دائرة" itemValue="1" />
+                                                                        <f:selectItem itemLabel="موظف" itemValue="3" />
+                                                                        <p:ajax process="@this" listener="#{employeeManage.chagneType()}" update="empForm" />
+                                                                    </p:selectOneRadio>
+                                                                </h:panelGrid>
+                                                                <p:outputPanel id="empForm">
+                                                                    <h:panelGrid   rendered="#{employeeManage.CheckTypeEMP()}"   columns="2" dir="rtl" style="display: flex; justify-content: flex-start;">
+                                                                        <p:autoUpdate/>
+                                                                        <h:outputLabel   for="sec_id" class="label" value="القسم"/>
+                                                                        <p:selectOneMenu  id="sec_id" value="#{employeeManage.newEmployee.sec_id}"
+                                                                                          class="pading000 form-control" style="text-align:right; min-width: 223px;" required="true" >
+                                                                            <f:selectItems value="#{employeeManage.filterSections()}" var="s" itemLabel="#{s.name}" itemValue="#{s.id}" />
+                                                                            <p:ajax process="@this"  update="job_id" event="itemSelect" />
+                                                                        </p:selectOneMenu>   
+
+                                                                        <h:outputLabel  for="job_id" class="label" value="المسمى الوظيفة" />
+                                                                        <p:selectOneMenu  id="job_id" value="#{employeeManage.newEmployee.job_id}" 
+                                                                                          class="pading000 form-control" style="text-align:right; min-width: 223px;" required="true" label="Job ID" >
+                                                                            <f:selectItems value="#{employeeManage.filterJob()}" var="j" itemLabel="#{j.name}" itemValue="#{j.idJob}" />
+                                                                        </p:selectOneMenu>
+
+
+
+
+                                                                    </h:panelGrid>
+                                                                </p:outputPanel>
+                                                                <p:outputPanel id="empForm">
+                                                                    <h:panelGrid   rendered="#{employeeManage.checkTypeHED}"   columns="2" dir="rtl" style="display: flex; justify-content: flex-start;">
+                                                                        <p:autoUpdate/>
+                                                                        
+
+                                                                        <h:outputLabel  for="job_id" class="label" value="المسمى الوظيفة" />
+                                                                        <p:selectOneMenu  id="job_id" value="#{employeeManage.newEmployee.job_id}" 
+                                                                                          class="pading000 form-control" style="text-align:right; min-width: 223px;" required="true" label="Job ID" >
+                                                                            <f:selectItems value="#{employeeManage.filterJob()}" var="j" itemLabel="#{j.name}" itemValue="#{j.idJob}" />
+                                                                        </p:selectOneMenu>
+
+
+
+
+                                                                    </h:panelGrid>
+                                                                </p:outputPanel>
+
+
+
+                                                            </div>
+
+                                                        </div>
+
+
+
+
+                                                    </div>
+                                                </div>
                                                 <div class="card shadow mb-4">
                                                     <div class="card-header py-3">
                                                         <h6 class="m-0 font-weight-bold text-primary">إضافة موظف</h6>
@@ -167,14 +243,14 @@
                                                                         <f:selectItem  itemLabel="أنثى" itemValue="أنثى" />
                                                                     </p:selectOneRadio>
 
-                                                             
-                                                                    
+
+
                                                                     <p:outputLabel for="barDa" class="label" value="تاريخ الميلاد"/>
                                                                     <p:calendar id="barDa" selectOtherMonths="true" yearRange="c-100:c" class=" form-control-user"
                                                                                 pattern="yyyy-MM-dd" navigator="true" style="text-align:right; width: 223px;"
                                                                                 value="#{employeeManage.newEmployee.birthDate}" required="true"/>
 
-                                                                   
+
                                                                 </h:panelGrid>
 
                                                             </div>
@@ -185,57 +261,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="card shadow mb-4" style="text-align: right;">
-                                                    <div class="card-header py-3">
-                                                        <h6 class="m-0 font-weight-bold text-primary">تحديد القسم</h6>
-                                                    </div>
-                                                    <div class="card-body">
 
-                                                        <div class="form-group row">
-                                                            <div class="col-sm-12 mb-3 mb-sm-0">
-
-                                                                <h:panelGrid columns="2" dir="rtl" style="display: flex; justify-content: flex-start;">
-
-
-
-                                                                    <h:outputLabel  for="dep_id" class="label" value="دائرة"/>
-                                                                    <p:selectOneMenu id="dep_id" value="#{employeeManage.newEmployee.dep_id}"  
-                                                                                     class="pading000 form-control" style="text-align:right; min-width: 223px;" required="true">
-                                                                        <f:selectItems value="#{employeeManage.allDepartments}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}" />
-                                                                        <p:ajax process="@this"  update="sec_id job_id" event="itemSelect" />
-                                                                    </p:selectOneMenu>
-
-
-                                                                    <h:outputLabel  for="sec_id" class="label" value="القسم"/>
-                                                                    <p:selectOneMenu id="sec_id" value="#{employeeManage.newEmployee.sec_id}"
-                                                                                     class="pading000 form-control" style="text-align:right; min-width: 223px;" required="true" >
-                                                                        <f:selectItems value="#{employeeManage.filterSections()}" var="s" itemLabel="#{s.name}" itemValue="#{s.id}" />
-                                                                        <p:ajax process="@this"  update="job_id" event="itemSelect" />
-                                                                    </p:selectOneMenu>   
-
-                                                                    <h:outputLabel  for="job_id" class="label" value="المسمى الوظيفة" />
-                                                                    <p:selectOneMenu id="job_id" value="#{employeeManage.newEmployee.job_id}" 
-                                                                                     class="pading000 form-control" style="text-align:right; min-width: 223px;" required="true" label="Job ID" >
-                                                                        <f:selectItems value="#{employeeManage.filterJob()}" var="j" itemLabel="#{j.name}" itemValue="#{j.idJob}" />
-                                                                    </p:selectOneMenu>
-
-
-
-
-                                                                </h:panelGrid>
-
-
-
-
-                                                            </div>
-
-                                                        </div>
-
-
-
-
-                                                    </div>
-                                                </div>
 
                                             </div>
 
