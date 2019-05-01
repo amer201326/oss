@@ -666,6 +666,9 @@ hr{
 .textR{
     text-align: right;
 }
+.textcolorBl{
+    color: #cccccc;
+}
 .textC{
     text-align: center;
 }

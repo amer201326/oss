@@ -57,58 +57,52 @@ public class EmployeeManage implements Serializable {
     DualListModel<String> screenSel;
     List<JobOfSection> jobsOfSections;
     Employee employeeSelected;
-    
+
     String Type = "";
 
     public EmployeeManage() {
-       
-        
-        
+
         allDepartments = GetFromDB.getDepartments();
         allSections = GetFromDB.getSection();
-       
+
         newEmployee = new Employee();
-        
+
         screen = GetDB_Eman.getScreens();
-        
+
         screensNamesAndResaults = new DualListModel<>();
         for (int i = 0; i < screen.size(); i++) {
             Screen get = screen.get(i);
             screensNamesAndResaults.getSource().add(get.getScreenName());
         }
-       
+
         newEmployeeAccount = new EmployeeAccount();
-        
+
         jobsOfSections = GetFromDB.getJobOfSectio();
 ///////
 ///
 
-       
-        
         newEmpScreen = new EmployeeScreen();
-        
 
-      
-        
-       
-        
         allemployees = GetDB_Eman.getEmployee();
         employeeSelected = new Employee();
-        
-       
+
     }
+
     public List<JobOfSection> filterJob() {
         System.out.println("filter job");
         List<JobOfSection> list = new ArrayList<>();
         for (int i = 0; i < jobsOfSections.size(); i++) {
             JobOfSection get = jobsOfSections.get(i);
+
             if (newEmployee.getSec_id() == get.getIdSEction()) {
                 list.add(get);
+                System.out.println(newEmployee.getSec_id() + " == " + get.getIdSEction());
             }
 
         }
         return list;
     }
+
     public List<JobOfSection> filterJobHED() {
         System.out.println("filter jobHED");
         List<JobOfSection> list = new ArrayList<>();
@@ -121,9 +115,9 @@ public class EmployeeManage implements Serializable {
         }
         return list;
     }
-    
-    public void onSelectemployee(SelectEvent event){
-        employeeSelected  = (Employee)event.getObject();
+
+    public void onSelectemployee(SelectEvent event) {
+        employeeSelected = (Employee) event.getObject();
     }
 
     public List<Section> filterSections() {
@@ -186,8 +180,6 @@ public class EmployeeManage implements Serializable {
     public void setEmployeeSelected(Employee employeeSelected) {
         this.employeeSelected = employeeSelected;
     }
-    
-    
 
     public void setNewEmployeeAccount(EmployeeAccount newEmployeeAccount) {
         this.newEmployeeAccount = newEmployeeAccount;
@@ -237,26 +229,31 @@ public class EmployeeManage implements Serializable {
         try {
             int id = GetFromDB.getMaxIDEmployee();
             id++;
-            
+
             newEmployee.setEmp_id(id);
-            newEmployeeAccount.Emp_ID= id;
+            newEmployeeAccount.Emp_ID = id;
             newEmployee.setAccount(newEmployeeAccount);
-            
+
             List<Screen> scre = new ArrayList<>();
             for (int i = 0; i < screensNamesAndResaults.getTarget().size(); i++) {
                 String get = screensNamesAndResaults.getTarget().get(i);
                 for (int j = 0; j < screen.size(); j++) {
                     Screen get1 = screen.get(j);
-                    if(get.equals(get1.getScreenName())){
+                    if (get.equals(get1.getScreenName())) {
                         scre.add(get1);
                     }
                 }
-                
+
             }
             newEmployee.setScreens(screen);
-            
+            if (checkTypeHed()) {
+                newEmployee.setSec_id(0);
+                newEmployee.setJob_id(0);
+                
+            }
+
             newEmployee.addEmployeeToDB();
-            
+
             newEmployee = new Employee();
             newEmployeeAccount = new EmployeeAccount();
             newEmpScreen = new EmployeeScreen();
@@ -333,21 +330,24 @@ public class EmployeeManage implements Serializable {
     public void setType(String Type) {
         this.Type = Type;
     }
-    
-    public boolean CheckTypeEMP(){
-        if(Type.compareTo("3")==0)
+
+    public boolean checkTypeEMP() {
+        if (Type.compareTo("3") == 0) {
             return true;
-        else
+        } else {
             return false;
+        }
     }
-     public boolean CheckTypeHED(){
-        if(Type.compareTo("1")==0)
+
+    public boolean checkTypeHed() {
+        if (Type.compareTo("1") == 0) {
             return true;
-        else
+        } else {
             return false;
+        }
     }
-     
-     public void chagneType(){
-         System.out.println(Type);
-     }
+
+    public void chagneType() {
+        System.out.println(Type);
+    }
 }

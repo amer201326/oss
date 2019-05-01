@@ -62,21 +62,21 @@ public class OrganigramView implements Serializable {
 
             try {
                 List<JobTitel> jobs = GetFromDB.getJobTittle(s.getId());
-                for (int j = 0; j < jobs.size(); j++) {
-                    JobTitel get = jobs.get(j);
-                    List<Employee> emp = GetFromDB.GetEmployeeForJobID(get.getId());
-                    String[] empName = new String[emp.size()];
-                    OrganigramNode divisionNode = new DefaultOrganigramNode("job", get.getName(), rootNodee2);
-
-                    System.out.println(divisionNode.getType());
-                    for (int k = 0; k < emp.size(); k++) {
-                        Employee get1 = emp.get(k);
-                        empName[k] = get1.getEmp_name();
-                        OrganigramNode employeeNode = new DefaultOrganigramNode("employee", empName[k], divisionNode);
-
-                    }
-
-                }
+//                for (int j = 0; j < jobs.size(); j++) {
+//                    JobTitel get = jobs.get(j);
+//                    List<Employee> emp = GetFromDB.GetEmployeeForJobID(get.getId());
+//                    String[] empName = new String[emp.size()];
+//                    OrganigramNode divisionNode = new DefaultOrganigramNode("job", get.getName(), rootNodee2);
+//
+//                    System.out.println(divisionNode.getType());
+//                    for (int k = 0; k < emp.size(); k++) {
+//                        Employee get1 = emp.get(k);
+//                        empName[k] = get1.getEmp_name();
+//                        OrganigramNode employeeNode = new DefaultOrganigramNode("employee", empName[k], divisionNode);
+//
+//                    }
+//
+//                }
 
             } catch (Exception e) {
                 break;
