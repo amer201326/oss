@@ -71,6 +71,18 @@ public class ServiceCitizen {
         this.citizen = citizen;
         this.service_Job = service_Job;
     }
+    public ServiceCitizen(Service service, int Service_Citizen_ID, int Services_Provided_ID, int Cit_ID, String Date, String status, String note, Citizen citizen) {
+        this.service = service;
+        this.Service_Citizen_ID = Service_Citizen_ID;
+        this.Services_Provided_ID = Services_Provided_ID;
+        this.Cit_ID = Cit_ID;
+        this.Date = Date;
+        this.status = status;
+
+        this.note = note;
+        this.citizen = citizen;
+        
+    }
 
     public boolean addToDataBase() {
 
