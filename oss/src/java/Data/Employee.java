@@ -45,6 +45,7 @@ public class Employee implements Serializable {
     List<Screen> screens;
     EmployeeAccount account = new EmployeeAccount();
 
+    JobTitel jobTitel = new JobTitel();
     public Employee() {
     }
 
@@ -357,4 +358,19 @@ public class Employee implements Serializable {
         this.account = account;
     }
 
+    public JobTitel getJobTitel() {
+        return jobTitel;
+    }
+
+    public void setJobTitel(JobTitel jobTitel) {
+        this.jobTitel = jobTitel;
+    }
+
+    public boolean isHead() {
+        System.out.println("TTTTTTTTTTTTTT"+jobTitel.type);
+        if("1".equals(jobTitel.type))
+            return true;
+        else
+            return false;
+    }
 }

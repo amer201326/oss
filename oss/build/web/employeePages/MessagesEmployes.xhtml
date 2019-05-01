@@ -97,6 +97,8 @@
                                                                                     <div class="col mr-2" style="text-align: right">
                                                                                         <div class="text-s font-weight-bold text-primary text-uppercase mb-1" > تعليق الدائرة </div>
                                                                                         <div class="h5 mb-0 font-weight-bold text-gray-800">#{d.decisionsDepartment.internalMessage}</div>
+                                                                                        <div class="h5 mb-0 font-weight-bold text-primarytext-primary  ">تكلفة الدائره= #{d.decisionsDepartment.cost}</div>
+
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -131,8 +133,9 @@
 
                                                                                                         <div class="col mr-2 " style="text-align: right">
                                                                                                             <div class="col mr-2" style="text-align: right">
-                                                                                                                <div class=" font-weight-bold text-primary text-uppercase mb-1" > #{j.jobPath.name} </div>
+                                                                                                                <div class=" font-weight-bold text-primary text-uppercase mb-1" > #{j.jobPath.name} #{showServiceHeadManeger.session.employee.emp_name}</div>
                                                                                                                 <div class="h5 mb-0 font-weight-bold text-gray-800">#{j.decisionsJob.internalMessage}</div>
+                                                                                                                <div class="h5 mb-0 font-weight-bold text-primarytext-primary  ">تكلفة = #{j.decisionsJob.cost}</div>
                                                                                                             </div>
 
 

@@ -90,6 +90,12 @@
 
 
 
+                                                            <p:column  style="width:90px;text-align: center" rendered="#{msession.employee.isHead()}">
+                                                                <p:commandLink title="View Detail"  actionListener="#{serviceCitizenManager.showHeadServise()}">
+                                                                    <h:outputText styleClass="fa fa-list-ul" style="margin:0 auto;" />
+                                                                    <f:setPropertyActionListener value="#{service}" target="#{msession.serviceCitizenShow}" />
+                                                                </p:commandLink>
+                                                            </p:column>
 
                                                             <p:column  style="width:90px;text-align: center">
                                                                 <p:commandLink title="View Detail"  actionListener="#{serviceCitizenManager.showServise()}">
@@ -98,7 +104,7 @@
                                                                 </p:commandLink>
                                                             </p:column>
 
-                                                            
+
                                                             <p:column  style="width:90px;text-align: center" headerText="تعليقات">
                                                                 <p:commandLink title="View Detail" actionListener="#{serviceCitizenManager.showMessagesServise()}">
                                                                     <h:outputText styleClass="fa fa-list-ul" style="margin:0 auto;" />
@@ -107,7 +113,7 @@
                                                                 </p:commandLink>
                                                             </p:column>
 
-                                                            
+
                                                             <p:column headerText="اسم الخدمة">
                                                                 <h:outputText value="#{service.service.name}" />
 

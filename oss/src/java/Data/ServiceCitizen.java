@@ -42,6 +42,8 @@ public class ServiceCitizen {
     Service_Job service_Job;
     Citizen citizen;
 
+    DecisionsDepartment decisionsDepartment = new DecisionsDepartment();
+    
     public List<AttachmentServiceEmployee> attachmentServiceEmployees = new ArrayList<AttachmentServiceEmployee>();
     public ServiceCitizen() {
 
@@ -878,4 +880,45 @@ public class ServiceCitizen {
         }
     }
 
+    public DecisionsDepartment getDecisionsDepartment() {
+        return decisionsDepartment;
+    }
+
+    public void setDecisionsDepartment(DecisionsDepartment decisionsDepartment) {
+        this.decisionsDepartment = decisionsDepartment;
+    }
+
+    
+     public void desdepartment() {
+        try {
+            decisionsDepartment.date = LocalDate.now().toString() ;
+            decisionsDepartment.addToDB();
+            
+            String q = "SELECT * FROM oss.decisions_department where Services_Provided_ID="+Services_Provided_ID+" and  Cit_ID="+Cit_ID+" and  Service_Citizen_ID ="+Service_Citizen_ID+";";
+           
+            DB db = new DB();
+            System.out.println(q);
+            ResultSet r = db.read(q);
+            boolean flag = false;
+            while (r.next()) {
+                if("done".equals(r.getString(6)) && "accept".equals(r.getString(6))){
+                    flag = true;
+                }else{
+                    flag = false; 
+                    break;
+                }
+            }
+            if(flag){
+                q="UPDATE `oss`.`service_citizen` SET `status` = 'done' WHERE (`Service_Citizen_ID` = "+Service_Citizen_ID+") and (`Services_Provided_ID` = "+Services_Provided_ID+") and (`Cit_ID` = "+Cit_ID+");";
+                 db.write(q);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceCitizen.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ServiceCitizen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+     
 }

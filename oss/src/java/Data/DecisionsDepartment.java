@@ -35,6 +35,10 @@ public class DecisionsDepartment {
     String decision;
     List<DecisionSection> section = new ArrayList<>();
 
+    public DecisionsDepartment() {
+    }
+
+    
     public DecisionsDepartment(int depId, int depOrder, int Services_Provided_ID, int Cit_ID, int Service_Citizen_ID, String status, double cost, String internalMessage, String externalMessage, String date) {
         this.depId = depId;
         this.depOrder = depOrder;

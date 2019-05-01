@@ -81,6 +81,15 @@ public class ServiceCitizenManager implements Serializable {
             Logger.getLogger(ServiceCitizenManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    public void showHeadServise() {
+        try {
+            session.serviceCitizenShow = serviceSelected;
+            FacesContext.getCurrentInstance().getExternalContext().redirect("ShowServiceHead.xhtml");
+
+        } catch (IOException ex) {
+            Logger.getLogger(ServiceCitizenManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     public void showDoneServise() {
         try {
