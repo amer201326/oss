@@ -88,10 +88,11 @@ public class DepartmentManager implements Serializable{
            
             FacesContext.getCurrentInstance().addMessage("formJob:tableJob", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "لا يمكن اضافة نفس الوظيفة مرتين"));
         }else{
-            creatOrganic();
+            
             newJobOfsection.setName(getJobName(newJobOfsection.getIdJob()));
             newJobOfsection.setSEctionName(getSecName(newJobOfsection.getIdSEction()));
              jobsOfSections.add(newJobOfsection);
+             creatOrganic();
             newJobOfsection = new JobOfSection();
         }
     }
@@ -133,8 +134,9 @@ public class DepartmentManager implements Serializable{
 
     public void deleteJopTitle() {
         jobSelected.delete();
-        creatOrganic();
         jobsOfSections.remove(jobSelected);
+        creatOrganic();
+        
     }
 
     public List<Department> getDepartments() {
@@ -291,7 +293,7 @@ public class DepartmentManager implements Serializable{
                 for (int j = 0; j < jobsOfSections.size(); j++) {
                     JobOfSection get = jobsOfSections.get(j);
                     if (get.getIdSEction() == Integer.parseInt(s.getId())) {
-                        List<Employee> emp = GetFromDB.GetEmployeeForJobID(get.getIdJob() + "");
+                        List<Employee> emp = GetFromDB.GetEmployeeForJobID(get.getIdJob() + "",get.getIdSEction());
                         String[] empName = new String[emp.size()];
                         OrganigramNode divisionNode = new DefaultOrganigramNode("job", get.getName(), rootNodee2);
 

@@ -127,6 +127,27 @@
                                 </div>
                                 <br/><br/>
                                 <!-- Brand Buttons -->
+                                 <div class="card shadow mb-4">
+                                <div class="card-body">
+                                    <div class="flexAm row-space " style="margin-right: 14px">
+                                        <div class="px-3 mb-2 py-5 bg-gradient-primary text-white border-bottom-primary">رئيس الدائرة</div>
+                                        <div class="col-sm-11 px-5  mb-2 py-4  border-bottom-primary ">
+                                            <div class="flexjustify-content row-space" style="margin-right: 14px">
+                                                <dir>
+                                                    <div class="text-xs font-weight-bold text-xs text-warning mb-1" style="font-size: 1.4em">3333</div>
+
+                                                    <div class="text-xs font-weight-bold text-gray-800 text-uppercase mb-1" style="font-size: 0.8em ; margin-right: 20px;">
+                                                        ييي
+                                                    </div>
+
+                                                </dir>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                 </div>
+
                                 <div class="card shadow mb-4">
                                     <div class="card-header py-3">
                                         <h6 class="m-0 font-weight-bold text-primary">الاقسام</h6>
@@ -219,9 +240,9 @@
 
 
                                             <p:dataTable id="tableJob"  var="jop" value="#{departmentManager.jobsOfSections}"  
-                                                          style="margin-bottom:20px; text-align: center;" rowKey="#{jop.idJob}" selectionMode="single" 
-                                                          selection="#{departmentManager.jobSelected}" rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                                          rowsPerPageTemplate="5,10,15" >
+                                                         style="margin-bottom:20px; text-align: center;" rowKey="#{jop.idJob}" selectionMode="single" 
+                                                         selection="#{departmentManager.jobSelected}" rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                         rowsPerPageTemplate="5,10,15" >
 
 
                                                 <f:facet name="header">
@@ -253,7 +274,8 @@
 
                                                     <br/>
 
-                                                    <p:commandButton id="del" value="حذف" action="#{departmentManager.deleteJopTitle()}" update="formJob :formOrganigram" oncomplete="PF('deleteD').hide();"/>
+                                                    <p:commandButton id="del" value="حذف" action="#{departmentManager.deleteJopTitle()}"
+                                                                     update="@form  :formOrganigram  " oncomplete="PF('deleteD').hide();"/>
 
                                                 </h:panelGrid>
                                             </p:dialog>  
@@ -279,8 +301,8 @@
                                                         <p:selectOneMenu id="job" value="#{departmentManager.newJobOfsection.idJob}" dynamic="true" rendered="true" style="min-width:223px;" class="pading000">
                                                             <f:selectItems value="#{departmentManager.jobTitels}" var="d" itemLabel="#{d.name}" itemValue="#{d.id}"/>
                                                         </p:selectOneMenu>
-                                                        
-                                                        
+
+
 
 
                                                     </h:panelGrid>
@@ -289,7 +311,7 @@
                                                         <i class="fas fa-hand-point-left">&nbsp;لاضافة وظائف اخرى اضغط هنا</i>
                                                     </h:link>
                                                     <p:separator/>
-                                                    <p:commandButton value="اضافة" actionListener="#{departmentManager.addJobForSec()}" update="@form formJob formJob:tableJob :formOrganigram" oncomplete="PF('jobAddDep').hide();"/>
+                                                    <p:commandButton value="اضافة" actionListener="#{departmentManager.addJobForSec()}" update="@form formJob :formOrganigram" oncomplete="PF('jobAddDep').hide();"/>
                                                 </p:dialog>  
 
                                             </h:form>

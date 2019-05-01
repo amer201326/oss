@@ -263,13 +263,13 @@ public class GetFromDB {
         
     }
     
-    public static List<Employee> GetEmployeeForJobID(String id) {
+    public static List<Employee> GetEmployeeForJobID(String id,int idSec) {
         
         List<Employee> emp = new ArrayList<Employee>();
         try {
             DB db = new DB();
             
-            String sql = "SELECT * FROM oss.employees where Job_ID =" + id + ";";
+            String sql = "SELECT * FROM oss.employees where Job_ID =" + id + " and Sec_ID = " + idSec + ";";
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
