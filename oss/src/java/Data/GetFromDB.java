@@ -51,7 +51,7 @@ public class GetFromDB {
             
             ResultSet r = db.read(sql);
             while (r.next()) {
-                d = new JobTitel(r.getInt(1), r.getString(2), r.getString(3));
+                d = new JobTitel(r.getInt(1), r.getString(2));
                 job.add(d);
             }
         } catch (Exception e) {
@@ -853,13 +853,16 @@ public class GetFromDB {
             ResultSet r = db.read(q);
             while (r.next()) {
                 em = new Employee(r.getInt(1), r.getInt(2), r.getInt(3), r.getInt(4), r.getString(5), r.getString(6), r.getString(7), r.getString(8), r.getString(9), r.getString(10), r.getString(11), r.getString(12), r.getString(13));
-                em.account = new EmployeeAccount(r.getString(15), r.getString(16));
-                em.jobTitel = new JobTitel(r.getInt(17), r.getString(18), r.getString(19));
+                em.account = new EmployeeAccount(r.getString(16), r.getString(17));
+                em.setType(r.getString(14));
+                em.jobTitel = new JobTitel(r.getInt(18), r.getString(19));
                 return em;
             }
             
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (SQLException ex) { 
+            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return null;

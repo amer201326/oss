@@ -42,7 +42,9 @@ public class Employee implements Serializable {
     Date birthDate;
     String emp_StartDate;
     String emp_EndDate;
+    String type;
     List<Screen> screens;
+    
     EmployeeAccount account = new EmployeeAccount();
 
     JobTitel jobTitel = new JobTitel();
@@ -215,9 +217,9 @@ public class Employee implements Serializable {
             System.out.println(q);
             data.write(q);
 
-            q = "INSERT INTO employees (`Dep_ID`, `Sec_ID`, `Job_ID`, `Emp_ID`, `Emp_Name`, `Emp_ID_Card`, `Emp_Email`, `Emp_Telephone`, `Emp_Birthday`, `Emp_StartDate`, `Emp_Mobile`,`Emp_Gender`) \n"
+            q = "INSERT INTO employees (`Dep_ID`, `Sec_ID`, `Job_ID`, `Emp_ID`, `Emp_Name`, `Emp_ID_Card`, `Emp_Email`, `Emp_Telephone`, `Emp_Birthday`, `Emp_StartDate`, `Emp_Mobile`,`Emp_Gender`,`type`)"
                     + "VALUES (" + dep_id + "," + sec_id + "," + job_id + "," + emp_id + ",'" + emp_name + "','" + emp_idCard + "','" + emp_email + "','"
-                    + emp_tel + "','" + emp_birth + "','" + LocalDate.now() + "','" + emp_mobile + "','" + emp_gender + "');";
+                    + emp_tel + "','" + emp_birth + "','" + LocalDate.now() + "','" + emp_mobile + "','" + emp_gender + "','" + type + "');";
             System.out.println(q);
             data.write(q);
            
@@ -350,6 +352,14 @@ public class Employee implements Serializable {
         this.screens = screens;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+    
     public EmployeeAccount getAccount() {
         return account;
     }
@@ -367,10 +377,7 @@ public class Employee implements Serializable {
     }
 
     public boolean isHead() {
-        System.out.println("TTTTTTTTTTTTTT"+jobTitel.type);
-        if("1".equals(jobTitel.type))
-            return true;
-        else
-            return false;
+        
+        return "h".equals(type);
     }
 }

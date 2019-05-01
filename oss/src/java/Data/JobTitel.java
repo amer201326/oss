@@ -19,7 +19,7 @@ public class JobTitel implements Serializable {
 
     String id;
     String name;
-    String type;
+    
 
     public JobTitel() {
     }
@@ -29,12 +29,7 @@ public class JobTitel implements Serializable {
         this.name = name;
     }
 
-    public JobTitel(int id, String name, String type) {
-        this.id = id + "";
-        this.name = name;
-        this.type = type;
-    }
-
+    
     public String getId() {
         return id;
     }
@@ -51,16 +46,10 @@ public class JobTitel implements Serializable {
         this.name = name;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
+   
 
     public void addJobToDB() {
-        String q = "INSERT INTO jobtitle VALUES(null,'" + name + "','" + type + "');";
+        String q = "INSERT INTO jobtitle VALUES(null,'" + name + "');";
         try {
             DB data = new DB();
             data.write(q);
@@ -106,15 +95,6 @@ public class JobTitel implements Serializable {
         return false;
     }
 
-    public String typeArabic() {
-        if ("1".equals(type)) {
-            return "رئيس دائرة";
-        }else if ("2".equals(type)) {
-            return "رئيس قسم";
-        } else {
-            return "موظف";
-        }
     
-}
 
 }

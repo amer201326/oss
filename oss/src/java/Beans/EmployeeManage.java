@@ -245,11 +245,13 @@ public class EmployeeManage implements Serializable {
                 }
 
             }
-            newEmployee.setScreens(screen);
+            newEmployee.setScreens(scre);
             if (checkTypeHed()) {
                 newEmployee.setSec_id(0);
                 newEmployee.setJob_id(0);
-                
+                newEmployee.setType("h");
+            }else{
+                newEmployee.setType("e");
             }
 
             newEmployee.addEmployeeToDB();
