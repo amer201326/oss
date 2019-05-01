@@ -58,7 +58,7 @@ public class CitizenAccount implements Serializable{
     
     public void addCitizenAccountToDB() {
         password = Crypto.encPas(k, password);
-        String q = "INSERT INTO citizenaccount VALUES (" + Cit_ID + ",'" + userName + "','" + password + "');";
+        String q = "INSERT INTO oss.citizenaccount VALUES (" + Cit_ID + ",'" + userName + "','" + password + "');";
         try {
             DB data = new DB();
             System.out.println(q);

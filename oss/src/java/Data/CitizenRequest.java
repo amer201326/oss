@@ -39,13 +39,13 @@ public class CitizenRequest {
     String Cit_PassportType;
     String Cit_Username;
     String Cit_Password;
-    
+
     CitizenAccount account;
 
-    public CitizenRequest(){
-        
+    public CitizenRequest() {
+
     }
-    
+
     public CitizenRequest(int Cit_ID, String Cit_FirstName, String Cit_FatherName, String Cit_GrandfatherName, String Cit_LastName, String Cit_Gender, int Cit_FamilyMembers, String Cit_ID_Card, String Cit_Telephone, String Cit_Mobile, String Cit_Email, String Cit_Fax, String Cit_Birthday, String Cit_PlaceOfBirth, String Cit_Region, String Cit_Quarter, String Cit_Street, String Cit_Address, String Cit_Job, String Cit_PassportNumber, String Cit_PassportType, String Cit_Username, String Cit_Password) {
         this.Cit_ID = Cit_ID;
         this.Cit_FirstName = Cit_FirstName;
@@ -79,8 +79,6 @@ public class CitizenRequest {
     public void setAccount(CitizenAccount account) {
         this.account = account;
     }
-    
-    
 
     public int getCit_ID() {
         return Cit_ID;
@@ -269,9 +267,9 @@ public class CitizenRequest {
     public void citizenRequestUpdate() {
         try {
 
-            String q = "UPDATE oss.requestcitizen SET Cit_Email = '" + Cit_Email + "',Cit_ID_Card = '" + Cit_ID_Card 
-                    + "', Cit_Mobile = '" + Cit_Mobile + "',Cit_Region = '" + Cit_Region + 
-                    "' WHERE (Cit_ID = " + Cit_ID + ");";
+            String q = "UPDATE oss.requestcitizen SET Cit_Email = '" + Cit_Email + "',Cit_ID_Card = '" + Cit_ID_Card
+                    + "', Cit_Mobile = '" + Cit_Mobile + "',Cit_Region = '" + Cit_Region
+                    + "' WHERE (Cit_ID = " + Cit_ID + ");";
             System.out.println(q);
             DB data = new DB();
             data.write(q);
@@ -280,10 +278,9 @@ public class CitizenRequest {
             Logger.getLogger(CitizenRequest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void addCitizenRequestToDB() {
 
-        
         int idMax = GetDB_Eman.getMaxIdCitizenRequest();
         this.Cit_ID = idMax + 1;
         String q = "INSERT INTO  oss.requestcitizen (`Cit_ID`, `Cit_FirstName`, `Cit_FatherName`, `Cit_GrandfatherName`, `Cit_LastName`, `Cit_Gender`, "
@@ -310,9 +307,11 @@ public class CitizenRequest {
         }
 
     }
-    
-     public void acceptCitizenRequestAddToDB(){
 
+    public void acceptCitizenRequestAddToDB() {
+
+        int idMax = GetDB_Eman.getMaxIdCitizen();
+        this.Cit_ID = idMax + 1;
         String q = "INSERT INTO  oss.citizen (`Cit_ID`, `Cit_FirstName`, `Cit_FatherName`, `Cit_GrandfatherName`, `Cit_LastName`, `Cit_Gender`, "
                 + "`Cit_FamilyMembers`, `Cit_ID_Card`, `Cit_Telephone`, `Cit_Mobile`, `Cit_Email`,`Cit_Fax`, `Cit_Birthday`,`Cit_PlaceOfBirth`, "
                 + "`Cit_Region`,`Cit_Quarter`, `Cit_Street`,`Cit_Address`, `Cit_Job`, `Cit_PassportNumber`,`Cit_PassportType`, `Cit_Username`, `Cit_Password`) \n"
@@ -332,16 +331,16 @@ public class CitizenRequest {
 
         } catch (SQLException ex) {
             System.out.println("error Add citizen");
-            Logger.getLogger(CitizenRequest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Citizen.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             System.out.println("error Add citizen");
-            Logger.getLogger(CitizenRequest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Citizen.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
-    
+
     public void updateCitizenRequest() {
-        
+
         String q = "UPDATE oss.requestcitizen SET Cit_FirstName = '" + Cit_FirstName + "',Cit_FatherName = '" + Cit_FatherName
                 + "', Cit_GrandfatherName = '" + Cit_GrandfatherName + "',Cit_LastName = '" + Cit_LastName
                 + "', Cit_Gender = '" + Cit_Gender + "',Cit_FamilyMembers = '" + Cit_FamilyMembers
@@ -349,10 +348,10 @@ public class CitizenRequest {
                 + Cit_Mobile + "',Cit_Email = '" + Cit_Email + "', Cit_Fax = '" + Cit_Fax + "',Cit_Birthday = '" + Cit_Birthday
                 + "',Cit_PlaceOfBirth = '" + Cit_PlaceOfBirth + "', Cit_Region = '" + Cit_Region + "',Cit_Quarter = '" + Cit_Quarter
                 + "',Cit_Street = '" + Cit_Street + "', Cit_Address = '" + Cit_Address + "',Cit_Job = '" + Cit_Job
-                + "',Cit_PassportNumber = '" + Cit_PassportNumber + "', Cit_PassportType = '" + Cit_PassportType 
+                + "',Cit_PassportNumber = '" + Cit_PassportNumber + "', Cit_PassportType = '" + Cit_PassportType
                 + "',Cit_Username = '" + Cit_Username + "', Cit_Password = '" + Cit_Password
                 + "' WHERE (Cit_ID = " + Cit_ID + ");";
-         try {
+        try {
             DB data = new DB();
             data.write(q);
             System.out.println(q);
@@ -362,13 +361,10 @@ public class CitizenRequest {
             Logger.getLogger(CitizenRequest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void rejectCitizenRequestDeleteFromDB() {
-        
+
         //Delete here from DB
     }
-    
-    
-    
 
 }
