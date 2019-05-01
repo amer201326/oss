@@ -40,6 +40,7 @@ public class CitizenRequest {
     String Cit_PassportType;
     String Cit_Username;
     String Cit_Password;
+    String Cit_Status;
 
     CitizenAccount account;
 
@@ -72,6 +73,8 @@ public class CitizenRequest {
         this.Cit_Username = Cit_Username;
         this.Cit_Password = Cit_Password;
     }
+    
+    
 
     public CitizenAccount getAccount() {
         return account;
@@ -264,6 +267,16 @@ public class CitizenRequest {
     public void setCit_Password(String Cit_Password) {
         this.Cit_Password = Cit_Password;
     }
+
+    public String getCit_Status() {
+        return Cit_Status;
+    }
+
+    public void setCit_Status(String Cit_Status) {
+        this.Cit_Status = Cit_Status;
+    }
+    
+    
 
     public void citizenRequestUpdate() {
         try {
