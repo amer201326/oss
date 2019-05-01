@@ -157,10 +157,10 @@
 
                                             <div class="collapse" id="collapseCardExample" style="">
                                                 <div class="card-body">
+                                                    <div class="row">
+                                                    <div class="col-xl-3 col-md-6 mb-4 ">
 
-                                                    <div class="mb-3 ">
-
-                                                        <div class="card border-right-warning shadow h-100 py-2">
+                                                        <div class="card border-right-warning border-bottom-warning shadow h-100 py-2">
                                                             <div class="card-body">
 
                                                                 <div class="row no-gutters align-items-center">
@@ -179,9 +179,9 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="mb-3 ">
+                                                    <div class="col-xl-3 col-md-6 mb-4  ">
 
-                                                        <div class="card border-right-warning shadow h-100 py-2">
+                                                        <div class="card border-right-warning border-bottom-warning shadow h-100 py-2">
                                                             <div class="card-body">
 
                                                                 <div class="row no-gutters align-items-center">
@@ -196,7 +196,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="mb-3 ">
+                                                    <div class="col-xl-3 col-md-6 mb-4 ">
 
                                                         <div class="card border-right-warning border-bottom-warning shadow h-100 py-2">
                                                             <div class="card-body">
@@ -212,7 +212,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="mb-3 ">
+                                                    <div class="col-xl-3 col-md-6 mb-4 ">
 
                                                         <div class="card border-right-warning border-bottom-warning shadow h-100 py-2">
                                                             <div class="card-body">
@@ -228,7 +228,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="mb-3 ">
+                                                    <div class="col-xl-3 col-md-6 mb-4 ">
 
                                                         <div class="card border-right-warning border-bottom-warning shadow h-100 py-2">
                                                             <div class="card-body">
@@ -244,7 +244,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="mb-3 ">
+                                                    <div class="col-xl-3 col-md-6 mb-4 ">
                                                         <div class="card border-right-warning border-bottom-warning shadow h-100 py-2">
                                                             <div class="card-body">
 
@@ -261,7 +261,7 @@
                                                     </div>
 
 
-
+</div>
 
                                                 </div>
 
@@ -290,8 +290,7 @@
                                                             <div class="row no-gutters align-items-center">
 
                                                                 <div class="col mr-2" style="text-align: right">
-                                                                    <div class="text-s font-weight-bold text-primary text-uppercase mb-1" > ملاحظات المواطن  </div>
-                                                                    <div class="h5 mb-0 font-weight-normal text-gray-800"> #{shoeServiceCitizemEmpManeger.serviseCitizen.note} </div>
+                                                                    <div class="text-s font-weight-bold text-primary text-uppercase mb-1" > #{shoeServiceCitizemEmpManeger.serviseCitizen.note} </div>
                                                                 </div>
 
                                                             </div>
@@ -475,8 +474,6 @@
 
                                         <div class="text-center">
                                             <p:commandButton id="sub" actionListener="#{shoeServiceCitizemEmpManeger.submit()}" action="serviceCitizzen.xhtml" value="ارسال " update="@none"  class="myButtonB ml-3"  />
-                                            <p:commandButton id="sub2" actionListener="#{shoeServiceCitizemEmpManeger.submit()}" action="serviceCitizzen.xhtml" value="قبول " update="@none"  class="myButtonC ml-3"  />
-                                            <p:commandButton id="sub٣" actionListener="#{shoeServiceCitizemEmpManeger.submit()}" action="serviceCitizzen.xhtml" value="رفض " update="@none"  class="myButtonD ml-3"  />
 
 
 
