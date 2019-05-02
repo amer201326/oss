@@ -75,6 +75,35 @@ public class CitizenRequest implements Serializable {
         this.Cit_Password = Cit_Password;
     }
 
+    public CitizenRequest(int Cit_ID, String Cit_FirstName, String Cit_FatherName, String Cit_GrandfatherName, String Cit_LastName, String Cit_Gender, int Cit_FamilyMembers, String Cit_ID_Card, String Cit_Telephone, String Cit_Mobile, String Cit_Email, String Cit_Fax, String Cit_Birthday, String Cit_PlaceOfBirth, String Cit_Region, String Cit_Quarter, String Cit_Street, String Cit_Address, String Cit_Job, String Cit_PassportNumber, String Cit_PassportType, String Cit_Username, String Cit_Password, String Cit_Status) {
+        this.Cit_ID = Cit_ID;
+        this.Cit_FirstName = Cit_FirstName;
+        this.Cit_FatherName = Cit_FatherName;
+        this.Cit_GrandfatherName = Cit_GrandfatherName;
+        this.Cit_LastName = Cit_LastName;
+        this.Cit_Gender = Cit_Gender;
+        this.Cit_FamilyMembers = Cit_FamilyMembers;
+        this.Cit_ID_Card = Cit_ID_Card;
+        this.Cit_Telephone = Cit_Telephone;
+        this.Cit_Mobile = Cit_Mobile;
+        this.Cit_Email = Cit_Email;
+        this.Cit_Fax = Cit_Fax;
+        this.Cit_Birthday = Cit_Birthday;
+        this.Cit_PlaceOfBirth = Cit_PlaceOfBirth;
+        this.Cit_Region = Cit_Region;
+        this.Cit_Quarter = Cit_Quarter;
+        this.Cit_Street = Cit_Street;
+        this.Cit_Address = Cit_Address;
+        this.Cit_Job = Cit_Job;
+        this.Cit_PassportNumber = Cit_PassportNumber;
+        this.Cit_PassportType = Cit_PassportType;
+        this.Cit_Username = Cit_Username;
+        this.Cit_Password = Cit_Password;
+        this.Cit_Status = Cit_Status;
+    }
+
+    
+    
     public CitizenAccount getAccount() {
         return account;
     }
@@ -401,7 +430,16 @@ public class CitizenRequest implements Serializable {
 
     public void rejectCitizenRequestDeleteFromDB() {
 
-        //Delete here from DB
+        String q = "UPDATE oss.requestcitizen SET Cit_Status = 'rejected' WHERE (Cit_ID = " + Cit_ID + ");";
+        try {
+            DB data = new DB();
+            data.write(q);
+            System.out.println(q);
+        } catch (SQLException ex) {
+            Logger.getLogger(CitizenRequest.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CitizenRequest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         
     }

@@ -177,7 +177,31 @@ public class GetDB_Eman {
         List<CitizenRequest> c = new ArrayList<CitizenRequest>();
         try {
             DB db = new DB();
-            String sql = "SELECT * FROM oss.requestcitizen;";
+            String sql = "SELECT * FROM oss.requestcitizen where Cit_Status IS NULL;";
+
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                cit = new CitizenRequest(r.getInt(1), r.getString(2), r.getString(3), r.getString(4), r.getString(5),
+                        r.getString(6), r.getInt(7), r.getString(8), r.getString(9), r.getString(10), r.getString(11),
+                        r.getString(12), r.getString(13),
+                        r.getString(14), r.getString(15), r.getString(16), r.getString(17), r.getString(18), r.getString(19),
+                        r.getString(20), r.getString(21),
+                        r.getString(22), r.getString(23), r.getString(24));
+                c.add(cit);
+            }
+        } catch (Exception e) {
+            System.out.println("bb" + e.getMessage());
+        }
+        return c;
+    }
+    
+    public static List<CitizenRequest> getallCitizenRejected() {
+        CitizenRequest cit = new CitizenRequest();
+
+        List<CitizenRequest> c = new ArrayList<CitizenRequest>();
+        try {
+            DB db = new DB();
+            String sql = "SELECT * FROM oss.requestcitizen where Cit_Status= 'rejected';";
 
             ResultSet r = db.read(sql);
             while (r.next()) {
