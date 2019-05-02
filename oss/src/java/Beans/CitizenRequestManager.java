@@ -9,6 +9,7 @@ import Data.CitizenRequest;
 import Data.GetDB_Eman;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,6 +28,7 @@ public class CitizenRequestManager implements Serializable {
     
     CitizenRequest newCitizen;
     List<CitizenRequest> allCitizenRequest;
+    List<CitizenRequest> allCitizenRejected;
     CitizenRequest citizenSelected;
      List<CitizenRequest> filterCitizen;
 
@@ -35,11 +37,16 @@ public class CitizenRequestManager implements Serializable {
         newCitizen = new CitizenRequest();
         allCitizenRequest = GetDB_Eman.getallCitizenRequest();
         citizenSelected = new CitizenRequest();
+        
+         allCitizenRejected = GetDB_Eman.getallCitizenRejected();
+        
+       
     }
     
-    public void addRequestCitizen(){
+    public void addRequestCitizen() throws IOException{
          System.out.println(newCitizen + "emaneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
         newCitizen.addCitizenRequestToDB();
+          FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
         
     }
     
@@ -55,6 +62,16 @@ public class CitizenRequestManager implements Serializable {
         
         
     }
+
+    public List<CitizenRequest> getAllCitizenRejected() {
+        return allCitizenRejected;
+    }
+
+    public void setAllCitizenRejected(List<CitizenRequest> allCitizenRejected) {
+        this.allCitizenRejected = allCitizenRejected;
+    }
+    
+    
 
     public CitizenRequest getCitizenSelected() {
         return citizenSelected;
@@ -92,6 +109,15 @@ public class CitizenRequestManager implements Serializable {
         try {
 
             FacesContext.getCurrentInstance().getExternalContext().redirect("editCitizenRequest.xhtml?id="+id);
+        } catch (IOException ex) {
+            Logger.getLogger(CitizenManage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+     
+     public void gotToSee(int id){
+        try {
+
+            FacesContext.getCurrentInstance().getExternalContext().redirect("editCitizenRejected.xhtml?id="+id);
         } catch (IOException ex) {
             Logger.getLogger(CitizenManage.class.getName()).log(Level.SEVERE, null, ex);
         }

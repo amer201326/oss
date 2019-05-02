@@ -1,0 +1,301 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough" class="rest">
+    <h:head>
+        <title>تعديل حساب مواطن</title>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <meta name="description" content=""/>
+        <meta name="author" content=""/>
+
+        <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"/>
+
+        <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+
+        <!-- Custom styles for this template-->
+        <link href="../css/sb-admin-2.min.css" rel="stylesheet"/>
+        <link href="../css/amer.css" rel="stylesheet"/>
+
+    </h:head>
+    <h:body id="page-top">
+
+
+        <!-- Page Wrapper -->
+        <div id="wrapper">
+            <!-- Sidebar -->
+
+            <div id="content-wrapper" class="d-flex flex-column">
+
+
+                <!-- Main Content -->
+                <div id="content" >
+
+                    <!-- Topbar -->
+                    <ui:include src="../pages/heder.xhtml"/>
+                    <!-- End of Topbar -->
+                    <p:column id="contentPage">
+                        <h:form id="formAddCitizen">
+                            <div id="conts">
+                                <div class="row">
+                                    <div class="col-lg-12 text-center">
+
+                                        <!--NO ESCRIBIR ARRIBA-->
+
+                                        <div class=" col-md-12 ">
+                                            <div class="card border-left-warning border-right-0 shadow h-100 py-2">
+                                                <div class="card-body">
+                                                    <div class="row no-gutters textC">
+                                                        <div class="col mr-2">
+                                                            <h2 class="section-heading text-uppercase">مواطن مرفوض</h2>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+
+
+                                        <br/><hr style="border: 2px solid orange; margin-left: 10px; margin-right: 10px;"/><br/>
+                                        <div class="row" style="text-align: right; margin: 10px 10px 10px 10px;">
+                                            <div class="col-lg-12" style="text-align: right;" >
+
+                                                <div class="card shadow mb-4" style="text-align: right;" >
+                                                    <div class="card-header py-3">
+                                                        <div class="ui-grid-col-3 floatR">
+                                                            <h2 class="section-heading  inLineB" style="padding: 10px"> &nbsp; &nbsp;
+                                                                <i class="fa fa-fw fa-chevron-left inLineB" ></i>مواطن مرفوض</h2>
+
+                                                        </div>
+
+                                                        <br/>
+                                                    </div>
+
+                                                    <div class="card-body" >
+
+                                                        <div class="text-center">
+
+                                                            <div class="row">
+                                                                <div class="col-lg-6" style="text-align: right; float: right;">
+                                                                    <div class="card shadow mb-4" style="text-align: right;">
+                                                                        <div class="card-header py-3">
+                                                                            <h6 class="m-0 font-weight-bold text-primary">مواطن مرفوض</h6>
+                                                                        </div>
+                                                                        <div class="card-body">
+                                                                            <h:panelGrid columns="2" dir="rtl" style="display: flex; justify-content: flex-start;">
+
+                                                                                <p:outputLabel for="address" value="العنوان"/>
+                                                                                <p:outputLabel id="address" value="#{editCitizenRequestManager.citizenEdit.cit_Address}" 
+                                                                                               style="text-align:center;" />
+
+                                                                                <p:outputLabel for="quarter" value="الحي" />
+                                                                                <p:outputLabel id="quarter" value="#{editCitizenRequestManager.citizenEdit.cit_Quarter}"  
+                                                                                               style="text-align:center;" />
+
+                                                                                <p:outputLabel for="street" value="الشارع" />
+                                                                                <p:outputLabel id="street" value="#{editCitizenRequestManager.citizenEdit.cit_Street}" 
+                                                                                               style="text-align:center;"/>
+
+                                                                                <p:outputLabel for="region" value="المنطقة" />
+                                                                                <p:outputLabel id="region" value="#{editCitizenRequestManager.citizenEdit.cit_Region}"  
+                                                                                               style="text-align:center;" />
+
+
+
+                                                                            </h:panelGrid>
+                                                                        </div>
+
+                                                                    </div>
+
+
+
+
+
+                                                                    <div class="card shadow mb-4" style="text-align: right;">
+                                                                        <div class="card-header py-3">
+                                                                            <h6 class="m-0 font-weight-bold text-primary">مواطن مرفوض</h6>
+                                                                        </div>
+                                                                        <div class="card-body">
+
+                                                                            <h:panelGrid columns="2" dir="rtl" style="display: flex; justify-content: flex-start;">
+
+
+                                                                                <p:outputLabel for="us" class="label" value="اسم المستخدم"/>
+                                                                                <p:outputLabel id="us" value="#{editCitizenRequestManager.citizenEdit.cit_Username}"
+                                                                                               style="text-align:center;"/>
+
+                                      
+
+                                                                            </h:panelGrid>
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <div class="col-lg-6" style="text-align: right; float: right; ">
+                                                                    <div class="card shadow mb-">
+                                                                        <div class="card-header py-3">
+                                                                            <h6 class="m-0 font-weight-bold text-primary">مواطن مرفوض </h6>
+                                                                        </div>
+                                                                        <div class="card-body">
+
+                                                                            <h:panelGrid columns="2" dir="rtl" style="display: flex; justify-content: flex-start;">
+
+
+                                                                                <p:outputLabel for="firstName" value="الاسم الاول" />
+                                                                                <p:outputLabel id="firstName" value="#{editCitizenRequestManager.citizenEdit.cit_FirstName}" 
+                                                                                               style="text-align:center;" />
+
+                                                                                <p:outputLabel for="fatherName" value="اسم الاب" />
+                                                                                <p:outputLabel id="fatherName" value="#{editCitizenRequestManager.citizenEdit.cit_FatherName}"  
+                                                                                               style="text-align:center;" />
+
+                                                                                <p:outputLabel for="grandFatherName" value="اسم الجد" />
+                                                                                <p:outputLabel id="grandFatherName" value="#{editCitizenRequestManager.citizenEdit.cit_GrandfatherName}" 
+                                                                                               style="text-align:center;"/>
+
+                                                                                <p:outputLabel for="lastName" value="اسم العائلة" />
+                                                                                <p:outputLabel id="lastName" value="#{editCitizenRequestManager.citizenEdit.cit_LastName}" 
+                                                                                               style="text-align:center;" />
+
+                                                                                <p:outputLabel for="gender" value="الجنس" />
+                                                                                <p:outputLabel id="gender" value="#{editCitizenRequestManager.citizenEdit.cit_Gender}" style="text-align:center;" />
+
+
+                                                                                <p:outputLabel for="birthday" class="label"  value="تاريخ الميلاد"/>
+                                                                                <p:outputLabel id="birthday" style="text-align:center;"
+                                                                                               value="#{editCitizenRequestManager.citizenEdit.cit_Birthday}" />
+
+                                                                                <br/>
+                                                                                <p:separator style="width: 250px;"/> 
+
+
+                                                                                <p:outputLabel for="idCard" value="رقم الهوية" /> 
+                                                                                <p:outputLabel id="idCard" style="text-align:center;" value="#{editCitizenRequestManager.citizenEdit.cit_ID_Card}"/>
+
+                                                                                <p:outputLabel for="mobile" value="الجوال" /> 
+                                                                                <p:outputLabel id="mobile"  style="text-align:center;" 
+                                                                                               value="#{editCitizenRequestManager.citizenEdit.cit_Mobile}"/>
+
+                                                                                <p:outputLabel for="telephone" value="التلفون" /> 
+                                                                                <p:outputLabel id="telephone" style="text-align:center;" 
+                                                                                               value="#{editCitizenRequestManager.citizenEdit.cit_Telephone}" />
+
+                                                                                <p:outputLabel for="fax" value="فاكس" /> 
+                                                                                <p:outputLabel id="fax"  style="text-align:center;" 
+                                                                                               value="#{editCitizenRequestManager.citizenEdit.cit_Fax}" />
+
+                                                                                <p:outputLabel for="email" value="البريد الإلكتروني" /> 
+                                                                                <p:outputLabel id="email" style="text-align:center;" value="#{editCitizenRequestManager.citizenEdit.cit_Email}"/>
+
+                                                                                <p:outputLabel for="job" value="المهنة" />
+                                                                                <p:outputLabel id="job" value="#{editCitizenRequestManager.citizenEdit.cit_Job}" style="text-align:center;"/>
+
+                                                                                <br/>
+                                                                                <p:separator style="width: 250px;"/> 
+
+                                                                                <p:outputLabel for="familyMember" value="عدد افراد الاسرة" />
+                                                                                <p:outputLabel id="familyMember" value="#{editCitizenRequestManager.citizenEdit.cit_FamilyMembers}"
+                                                                                               style="text-align:center;" />
+
+                                                                                <p:outputLabel for="placeOfBirth" value="مكان الولادة" />
+                                                                                <p:outputLabel id="placeOfBirth" value="#{editCitizenRequestManager.citizenEdit.cit_PlaceOfBirth}"  
+                                                                                               style="text-align:center;"/>
+
+
+
+
+                                                                                <p:outputLabel for="passportNumber" value="رقم جواز السفر" />
+                                                                                <p:outputLabel id="passportNumber" value="#{editCitizenRequestManager.citizenEdit.cit_PassportNumber}" 
+                                                                                               style="text-align:center;"/>
+
+                                                                                <p:outputLabel for="passportType" value="نوع جواز السفر" />
+                                                                                <p:outputLabel id="passportType" value="#{editCitizenRequestManager.citizenEdit.cit_PassportType}" 
+                                                                                               style="text-align:center;" />
+
+
+
+
+
+
+                                                                            </h:panelGrid>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                   
+
+                                                </div>
+
+
+
+
+                                                <!--  <br/><p:separator/><br/> -->
+                                            </div>
+
+                                        </div>
+
+                                        <!--NO ESCRIBIR DESPUES DE AQUI-->
+                                    </div>
+                                </div>
+                            </div>
+
+                        </h:form>
+
+
+                    </p:column>
+                    <!-- Begin Page Content -->
+
+                </div>
+
+                <br/><br/>
+                <!-- End of Main Content -->
+
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright © Your Website 2019</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End of Footer -->
+
+            </div>
+
+
+            <ui:include src="../pages/sidebar.xhtml"/>
+
+
+        </div>
+
+        <!--<script src="../vendor/jquery/jquery.min.js"></script>-->
+        <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Core plugin JavaScript-->
+        <!--<script src="../vendor/jquery-easing/jquery.easing.min.js"></script>-->
+
+        <!-- Custom scripts for all pages-->
+        <script src="../js/sb-admin-2.min.js"></script>
+
+        <!-- Page level plugins -->
+
+        <script src="../js/js.js" type="text/javascript"></script>
+
+    </h:body>
+</html>
