@@ -68,7 +68,7 @@ public class ServiceCitizenManager implements Serializable {
                     }
                 }
             }else{
-               allRequestServiceView = allRequestService;
+               allRequestServiceNotView = allRequestService;
             }
         }
 

@@ -116,7 +116,7 @@
                                                                         <div class="card-body">
 
 
-                                                                            <h:panelGrid columns="2" dir="rtl" style="display: flex; justify-content: flex-start;">
+                                                                            <h:panelGrid columns="2"  style="display: flex; justify-content: flex-start; margin-right: 5%">
 
                                                                                 <p:outputLabel for="firstName" value="الاسم الاول" />
                                                                                 <p:inputText id="firstName" value="#{citizenRequestManager.newCitizen.cit_FirstName}" required="true" 
@@ -143,14 +143,12 @@
                                                                                 </h:panelGrid> 
 
                                                                                 <p:outputLabel for="birthday1" class="label" value="تاريخ الميلاد"/>
-                                                                               <!-- <p:inputText id="birthday1" style="text-align:right; margin-bottom: 10px;"
-                                                                                            value="{citizenRequestManager.newCitizen.cit_Birthday}" required="false"/> -->
+                                                                               
                                                                                 <p:calendar id="birthday1" selectOtherMonths="true" yearRange="c-100:c" 
-                                                                                            pattern="yyyy-MM-dd" navigator="true" style="text-align:right; margin-bottom: 10px;"
-                                                                                            value="#{citizenRequestManager.newCitizen.cit_Birthday}" required="false"/>
+                                                                                            pattern="yyyy-MM-dd" navigator="true" style=" margin-bottom: 10px;"
+                                                                                            value="#{citizenRequestManager.newCitizen.cit_Birthday}" required="true"/>
 
-                                                                                <br/>
-                                                                                <p:separator style="width: 250px;"/> 
+                                                                                
 
                                                                                 <p:outputLabel for="idCard" value="رقم الهوية" /> 
                                                                                 <p:inputMask id="idCard" class="form-control form-control-user"
@@ -177,8 +175,8 @@
                                                                                 <p:inputText id="job" value="#{citizenRequestManager.newCitizen.cit_Job}" required="true" 
                                                                                              class="form-control form-control-user" style="text-align:right; margin-bottom: 10px;" type="text"/>
 
-                                                                                <br/>
-                                                                                <p:separator style="width: 250px;"/> 
+                                                                            
+                                                                                
 
                                                                                 <p:outputLabel for="familyMember" value="عدد افراد الاسرة" />
                                                                                 <p:inputText id="familyMember" value="#{citizenRequestManager.newCitizen.cit_FamilyMembers}" required="true" 
@@ -385,8 +383,8 @@
         <!-- End Counter -->
         <!-- JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>-->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
         <!-- Slick slider -->
         <script type="text/javascript" src="assets/js/slick.min.js"></script>
@@ -400,7 +398,7 @@
         <script type="text/javascript" src="assets/js/counter.js"></script>
         <!-- Ajax contact form  -->
         <script type="text/javascript" src="assets/js/app.js"></script>
-        <script type="text/javascript" src="/xxxx/javax.faces.resource/jquery/jquery-plugins.js.xhtml?ln=primefaces&amp;loc=&amp;v=6.1"></script>
+        <!--<script type="text/javascript" src="/xxxx/javax.faces.resource/jquery/jquery-plugins.js.xhtml?ln=primefaces&amp;loc=&amp;v=6.1"></script>-->
 
 
         <!-- Custom js -->
