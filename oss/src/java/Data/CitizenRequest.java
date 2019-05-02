@@ -43,10 +43,10 @@ public class CitizenRequest implements Serializable {
     String Cit_Password;
     String Cit_Status;
 
-    CitizenAccount account;
+    CitizenAccount account = new CitizenAccount();
 
     public CitizenRequest() {
-        account = new CitizenAccount();
+
     }
 
     public CitizenRequest(int Cit_ID, String Cit_FirstName, String Cit_FatherName, String Cit_GrandfatherName, String Cit_LastName, String Cit_Gender, int Cit_FamilyMembers, String Cit_ID_Card, String Cit_Telephone, String Cit_Mobile, String Cit_Email, String Cit_Fax, String Cit_Birthday, String Cit_PlaceOfBirth, String Cit_Region, String Cit_Quarter, String Cit_Street, String Cit_Address, String Cit_Job, String Cit_PassportNumber, String Cit_PassportType, String Cit_Username, String Cit_Password) {
@@ -325,28 +325,50 @@ public class CitizenRequest implements Serializable {
         int idMax = GetDB_Eman.getMaxIdCitizen();
         this.Cit_ID = idMax + 1;
 
-        String q = "INSERT INTO  oss.citizen (`Cit_ID`, `Cit_FirstName`, `Cit_FatherName`, `Cit_GrandfatherName`, `Cit_LastName`, `Cit_Gender`, "
-                + "`Cit_FamilyMembers`, `Cit_ID_Card`, `Cit_Telephone`, `Cit_Mobile`, `Cit_Email`,`Cit_Fax`, `Cit_Birthday`,`Cit_PlaceOfBirth`, "
-                + "`Cit_Region`,`Cit_Quarter`, `Cit_Street`,`Cit_Address`, `Cit_Job`, `Cit_PassportNumber`,`Cit_PassportType`)"
-                + "VALUES (" + Cit_ID + ",'" + Cit_FirstName + "','" + Cit_FatherName + "','" + Cit_GrandfatherName + "','" + Cit_LastName + "','" + Cit_Gender + "',"
-                + Cit_FamilyMembers + ",'" + Cit_ID_Card + "','" + Cit_Telephone + "','" + Cit_Mobile + "','" + Cit_Email
-                + "','" + Cit_Fax + "','" + Cit_Birthday + "','" + Cit_PlaceOfBirth + "','"
-                + Cit_Region + "','" + Cit_Quarter + "','" + Cit_Street + "','" + Cit_Address + "','" + Cit_Job + "','" + Cit_PassportNumber + "','"
-                + Cit_PassportType + "');";
-
         try {
             DB data = new DB();
+            String q = "start transaction;";
+            data.write(q);
+
+            q = "INSERT INTO  oss.citizen (`Cit_ID`, `Cit_FirstName`, `Cit_FatherName`, `Cit_GrandfatherName`, `Cit_LastName`, `Cit_Gender`, "
+                    + "`Cit_FamilyMembers`, `Cit_ID_Card`, `Cit_Telephone`, `Cit_Mobile`, `Cit_Email`,`Cit_Fax`, `Cit_Birthday`,`Cit_PlaceOfBirth`, "
+                    + "`Cit_Region`,`Cit_Quarter`, `Cit_Street`,`Cit_Address`, `Cit_Job`, `Cit_PassportNumber`,`Cit_PassportType`)"
+                    + "VALUES (" + Cit_ID + ",'" + Cit_FirstName + "','" + Cit_FatherName + "','" + Cit_GrandfatherName + "','" + Cit_LastName + "','" + Cit_Gender + "',"
+                    + Cit_FamilyMembers + ",'" + Cit_ID_Card + "','" + Cit_Telephone + "','" + Cit_Mobile + "','" + Cit_Email
+                    + "','" + Cit_Fax + "','" + Cit_Birthday + "','" + Cit_PlaceOfBirth + "','"
+                    + Cit_Region + "','" + Cit_Quarter + "','" + Cit_Street + "','" + Cit_Address + "','" + Cit_Job + "','" + Cit_PassportNumber + "','"
+                    + Cit_PassportType + "');";
 
             System.out.println(q);
             data.write(q);
+
             account.Cit_ID = this.Cit_ID;
+            account.userName = Cit_Username;
+            account.password = Cit_Password;
             System.out.println(Cit_ID + "222222222");
             account.addCitizenAccountReuqestToDB();
 
-            // q = "DELETE FROM `oss`.`requestcitizen` WHERE (`Cit_Username` = '" + Cit_Username +"');";
+            q = "DELETE FROM `oss`.`requestcitizen` WHERE (`Cit_Username` = '" + Cit_Username + "');";
+            System.out.println(q);
+            data.write(q);
+
+            q = "commit;";
+            //q = "rollback;";
+            System.out.println(q);
+            data.write(q);
+
         } catch (SQLException ex) {
-            System.out.println("error Add citizen");
-            Logger.getLogger(CitizenRequest.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                System.out.println("error Add citizen");
+                DB data = new DB();
+                String q = "rollback;";
+                data.write(q);
+                Logger.getLogger(CitizenRequest.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex1) {
+                Logger.getLogger(CitizenRequest.class.getName()).log(Level.SEVERE, null, ex1);
+            } catch (ClassNotFoundException ex1) {
+                Logger.getLogger(CitizenRequest.class.getName()).log(Level.SEVERE, null, ex1);
+            }
         } catch (ClassNotFoundException ex) {
             System.out.println("error Add citizen");
             Logger.getLogger(CitizenRequest.class.getName()).log(Level.SEVERE, null, ex);
@@ -380,6 +402,8 @@ public class CitizenRequest implements Serializable {
     public void rejectCitizenRequestDeleteFromDB() {
 
         //Delete here from DB
+        
+        
     }
 
 }

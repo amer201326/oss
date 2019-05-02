@@ -8,6 +8,7 @@ package Beans;
 import Data.CitizenRequest;
 import Data.GetDB_Eman;
 import Data.GetFromDB;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -42,13 +43,15 @@ public class EditCitizenRequestManager implements Serializable{
         
     }
     
-    public void acceptCitizenRequest(){
+    public void acceptCitizenRequest() throws IOException{
         System.out.println("accept qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq");
         citizenEdit.acceptCitizenRequestAddToDB();
+        FacesContext.getCurrentInstance().getExternalContext().redirect("allCitizenRequests.xhtml");
     }
     
-    public void rejectCitizenRequest(){
+    public void rejectCitizenRequest() throws IOException{
         citizenEdit.rejectCitizenRequestDeleteFromDB();
+        FacesContext.getCurrentInstance().getExternalContext().redirect("allCitizenRequests.xhtml");
     }
 
     public CitizenRequest getCitizenEdit() {
