@@ -225,7 +225,7 @@ public class GetFromDB {
 
             }
             System.out.println("aaaaaaaaa" + sum);
-            
+
             String sql = "SELECT sc.Services_Provided_ID, COUNT(*) as l ,sp.Serv_Name AS freq FROM service_citizen as sc "
                     + "  inner join services_provided as sp on sp.Services_Provided_ID = sc.Services_Provided_ID "
                     + " GROUP BY Services_Provided_ID order by l DESC LIMIT 5;";
@@ -952,7 +952,7 @@ public class GetFromDB {
     public static List<ServiceCitizen> getAllRequestService(Employee emp) {
         ServiceCitizen cit = new ServiceCitizen();
         List<ServiceCitizen> c = new ArrayList<ServiceCitizen>();
-        if (emp.isHead()) {
+        if (emp.checkTypeHed()) {
             try {
                 DB db = new DB();
                 String sql = "SELECT * FROM services_provided as sp "
@@ -1295,5 +1295,29 @@ public class GetFromDB {
         }
 
         return attach;
+    }
+
+    public static boolean cheekUserName(String userName) {
+        try {
+            DB db = new DB();
+            String sql = "SELECT * FROM employeeaccount where UserName = '" + userName + "';";
+            System.out.println(sql);
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                return true;
+            }
+            sql = "SELECT * FROM citizenaccount where Username = '" + userName + "';";
+            System.out.println(sql);
+            r = db.read(sql);
+            while (r.next()) {
+                return true;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 }

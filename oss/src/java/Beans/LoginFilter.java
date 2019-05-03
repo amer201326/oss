@@ -42,11 +42,11 @@ public class LoginFilter implements Filter {
         }else{
 //            System.out.println("lllog = "+ ((HttpServletRequest)request).getRequestURI().contains("manager") );
 //            System.out.println("lll "+"jjjj");
-         if(((HttpServletRequest)request).getRequestURI().contains("manager") && loginBean.manager != null){
+         if(((HttpServletRequest)request).getRequestURI().contains("manager") && loginBean.employee != null && loginBean.employee.checkTypeAdmin()){
              System.out.println("manager");
          }else if(((HttpServletRequest)request).getRequestURI().contains("citizenn") && loginBean.citizen != null){
              System.out.println("citizenn");
-         }else if(((HttpServletRequest)request).getRequestURI().contains("employeePages") && loginBean.employee != null){
+         }else if(((HttpServletRequest)request).getRequestURI().contains("employeePages") && loginBean.employee != null && loginBean.employee.checkTypeEMP()){
              System.out.println("employeePages");
              if( ((HttpServletRequest)request).getRequestURI().contains("allServices.xhtml") && !loginBean.screens[0]){
                    String contextPath = ((HttpServletRequest)request).getContextPath();
@@ -72,7 +72,7 @@ public class LoginFilter implements Filter {
              }else if( ((HttpServletRequest)request).getRequestURI().contains("addEmployee.xhtml") && !loginBean.screens[2]){
                    String contextPath = ((HttpServletRequest)request).getContextPath();
               ((HttpServletResponse)response).sendRedirect(contextPath + "/AccessDenied.xhtml");
-                }else if( ((HttpServletRequest)request).getRequestURI().contains("ShowServiceHead.xhtml") && !loginBean.employee.isHead()){
+                }else if( ((HttpServletRequest)request).getRequestURI().contains("ShowServiceHead.xhtml") && !loginBean.employee.checkTypeHed()){
                    String contextPath = ((HttpServletRequest)request).getContextPath();
               ((HttpServletResponse)response).sendRedirect(contextPath + "/AccessDenied.xhtml");
              }

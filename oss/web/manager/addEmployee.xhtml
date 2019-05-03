@@ -77,9 +77,9 @@
                                                             <div class="col-sm-12 mb-3 mb-sm-0">
                                                                 <h:panelGrid columns="2" dir="rtl" style="display: flex; justify-content: flex-start;">
                                                                     <p:outputLabel for="us" class="label" value="اسم المستخدم"/>
-                                                                    <p:inputMask id="us" dir="ltr" value="#{employeeManage.newEmployeeAccount.userName}"
+                                                                    <p:inputText id="us" dir="ltr" value="#{employeeManage.newEmployeeAccount.userName}"
                                                                                  class="form-control form-control-user" style="text-align:right;"
-                                                                                 type="text" mask="e-********" required="true" autocomplete="off"/>
+                                                                                 type="text" required="true" autocomplete="off"/>
 
                                                                     <p:outputLabel for="password" class="label" value="كلمة المرور"/>
                                                                     <p:password dir="ltr" id="password" value="#{employeeManage.newEmployeeAccount.password}" autocomplete="off" class="form-control" style="text-align:right;" feedback="true" inline="true" required="true"/> 
@@ -97,7 +97,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="card shadow mb-4">
+                                                <div class="card shadow mb-4" >
                                                     <div class="card-header py-3">
                                                         <h6 class="m-0 font-weight-bold text-primary">صلاحيات</h6>
                                                     </div>
@@ -109,7 +109,7 @@
                                                          justify-content: flex-start; width: 220px; margin: 0 40px 0 40px;">
 
 
-                                                        <p:pickList id="pickList" value="#{employeeManage.screensNamesAndResaults}" var="sna"  
+                                                        <p:pickList id="pickList" value="#{employeeManage.screensNamesAndResaults}" var="sna"
                                                                     itemLabel="#{sna}" itemValue="#{sna}"  showSourceFilter="true" showTargetFilter="true"
                                                                     style=" min-width: 150px; width: 300px;  min-height: 100px;height: 90%; padding-left: 50%;"  orientation="vertical">
                                                             <f:facet name="sourceCaption">كافة المرفقات</f:facet>
@@ -142,6 +142,7 @@
                                                                     <p:selectOneRadio id="console" required="true" value="#{employeeManage.type}">
                                                                         <f:selectItem itemLabel="رئيس دائرة" itemValue="1" />
                                                                         <f:selectItem itemLabel="موظف" itemValue="3" />
+                                                                        <f:selectItem itemLabel="مسؤول" itemValue="2" />
                                                                         <p:ajax process="@this" listener="#{employeeManage.chagneType()}" update="empForm hedForm" />
                                                                     </p:selectOneRadio>
                                                                 </h:panelGrid>

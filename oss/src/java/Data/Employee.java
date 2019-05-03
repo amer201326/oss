@@ -376,8 +376,17 @@ public class Employee implements Serializable {
         this.jobTitel = jobTitel;
     }
 
-    public boolean isHead() {
-        
-        return "h".equals(type);
+   
+    public boolean checkTypeEMP() {
+        return type.compareTo("e") == 0;
     }
+
+    public boolean checkTypeHed() {
+        return type.compareTo("h") == 0;
+    }
+
+        public boolean checkTypeAdmin() {
+        return type.compareTo("a") == 0;
+    }
+        
 }

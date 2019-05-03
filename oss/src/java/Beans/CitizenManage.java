@@ -8,6 +8,7 @@ package Beans;
 import Data.Citizen;
 import Data.CitizenAccount;
 import Data.GetDB_Eman;
+import Data.GetFromDB;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
@@ -31,6 +32,8 @@ public class CitizenManage implements Serializable {
     Citizen citizenSelected;
     List<Citizen> filterCitizen;
 
+    String errorUserName;
+    
     public CitizenManage() {
 
         newCitizen = new Citizen();
@@ -96,6 +99,24 @@ public class CitizenManage implements Serializable {
         } catch (IOException ex) {
             Logger.getLogger(CitizenManage.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public String getErrorUserName() {
+        return errorUserName;
+    }
+
+    public void setErrorUserName(String errorUserName) {
+        this.errorUserName = errorUserName;
+    }
+    
+    public void cheekUserName() {
+       if(newCitizen.getAccount().getUserName().length() < 6){
+           errorUserName = "يجب ان يكون اكبر من ٦ احرف";
+       }else if(GetFromDB.cheekUserName(newCitizen.getAccount().getUserName())){
+           errorUserName = "اسم المستخدم موجود بالغعل";
+       }else{
+           errorUserName = "";
+       }
     }
     
 }

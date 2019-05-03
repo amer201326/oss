@@ -32,81 +32,76 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean(name = "msession")
 @SessionScoped
-public class Session implements Serializable{
-    
+public class Session implements Serializable {
+
     boolean login;
     String typeAccount;
-    
+
     String username;
     String passWord;
-    
-    Manager manager ;
+
+    Manager manager;
     Citizen citizen;
     Employee employee;
- 
-    
+
     ServiceCitizen serviceCitizenShow;
-    
+
     boolean[] screens;
-    
+
     public Session() {
         login = false;
         typeAccount = "";
-        
-    } 
-    
-    public void login(){
+
+    }
+
+    public void login() {
         System.out.println("login");
-        if(username !=null)
-        if(username.startsWith("a-")){
-            Manager m = GetFromDB.getManagerAccount(username,passWord);
-            if(m != null){
-                try {
-                    login = true;
-                    typeAccount = "manager";
-                    manager = m;
-                    FacesContext.getCurrentInstance().getExternalContext().redirect("../manager/");
-                } catch (IOException ex) {
-                    Logger.getLogger(Session.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }else{
-                //error message
-            }
-                
-        }else if(username.startsWith("u-")){
-            Citizen c = GetFromDB.getCitizenAccount(username,passWord);
-            if(c != null){
-                try {
-                    login = true;
-                    typeAccount = "citizen";
-                    citizen = c;
-                    FacesContext.getCurrentInstance().getExternalContext().redirect("../citizenn/");
-                } catch (IOException ex) {
-                    Logger.getLogger(Session.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }else{
-                //error message
-            }
-        }else if(username.startsWith("e-")){
-            Employee e = GetFromDB.getEmployeeAccount(username,passWord);
-            if(e != null){
-                try {
-                    login = true;
-                    typeAccount = "employee";
-                    employee = e;
-                    screens = GetFromDB.arrBoolScreens(employee.getAccount().getUserName());
-                    FacesContext.getCurrentInstance().getExternalContext().redirect("../employeePages/");
+        if (username != null) {
+            Employee e = GetFromDB.getEmployeeAccount(username, passWord);
+           
+            if (e != null) {
+                if(e.checkTypeAdmin()){
                     
-                } catch (IOException ex) {
-                    Logger.getLogger(Session.class.getName()).log(Level.SEVERE, null, ex);
+                    try {
+                        login = true;
+                        typeAccount = "manager";
+                        employee = e;
+                        FacesContext.getCurrentInstance().getExternalContext().redirect("../manager/");
+                    } catch (IOException ex) {
+                        Logger.getLogger(Session.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }else{
+                    try {
+                        login = true;
+                        typeAccount = "employee";
+                        employee = e;
+                        screens = GetFromDB.arrBoolScreens(employee.getAccount().getUserName());
+                        FacesContext.getCurrentInstance().getExternalContext().redirect("../employeePages/");
+
+                    } catch (IOException ex) {
+                        Logger.getLogger(Session.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
-            }else{
-                //error message
-            }
+
+            } else{
+                Citizen c = GetFromDB.getCitizenAccount(username, passWord);
+                if (c != null) {
+                    try {
+                        login = true;
+                        typeAccount = "citizen";
+                        citizen = c;
+                        FacesContext.getCurrentInstance().getExternalContext().redirect("../citizenn/");
+                    } catch (IOException ex) {
+                        Logger.getLogger(Session.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else {
+                    //error message
+                }
+            } 
         }
     }
-    
-    public void logout(){
+
+    public void logout() {
         System.out.println("out");
         try {
             login = false;
@@ -149,8 +144,6 @@ public class Session implements Serializable{
         this.passWord = passWord;
     }
 
-    
-
     public Manager getManager() {
         return manager;
     }
@@ -190,8 +183,5 @@ public class Session implements Serializable{
     public void setScreens(boolean[] screens) {
         this.screens = screens;
     }
-    
-    
-    
- 
+
 }

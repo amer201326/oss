@@ -250,6 +250,12 @@ public class EmployeeManage implements Serializable {
                 newEmployee.setSec_id(0);
                 newEmployee.setJob_id(0);
                 newEmployee.setType("h");
+            }else if(checkTypeAdmin()){
+                newEmployee.setDep_id(0);
+                newEmployee.setSec_id(0);
+                newEmployee.setJob_id(0);
+                newEmployee.setType("a");
+                
             }else{
                 newEmployee.setType("e");
             }
@@ -349,6 +355,14 @@ public class EmployeeManage implements Serializable {
         }
     }
 
+        public boolean checkTypeAdmin() {
+        if (Type.compareTo("2") == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+        
     public void chagneType() {
         System.out.println(Type);
     }
