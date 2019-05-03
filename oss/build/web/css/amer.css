@@ -634,6 +634,19 @@ ui-selectonemenu-trigger.myButton {
 
 }
 
+#formJob .ui-widget-header {
+    background: rgba(181,205,227,1);
+    background: -moz-linear-gradient(left, rgba(181,205,227,1) 0%, rgba(181,205,227,1) 21%, rgba(78,115,223,1) 75%, rgba(78,115,223,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(181,205,227,1)), color-stop(21%, rgba(181,205,227,1)), color-stop(75%, rgba(78,115,223,1)), color-stop(100%, rgba(78,115,223,1)));
+    background: -webkit-linear-gradient(left, rgba(181,205,227,1) 0%, rgba(181,205,227,1) 21%, rgba(78,115,223,1) 75%, rgba(78,115,223,1) 100%);
+    background: -o-linear-gradient(left, rgba(181,205,227,1) 0%, rgba(181,205,227,1) 21%, rgba(78,115,223,1) 75%, rgba(78,115,223,1) 100%);
+    background: -ms-linear-gradient(left, rgba(181,205,227,1) 0%, rgba(181,205,227,1) 21%, rgba(78,115,223,1) 75%, rgba(78,115,223,1) 100%);
+    background: linear-gradient(to right, rgba(181,205,227,1) 0%, rgba(181,205,227,1) 21%, rgba(78,115,223,1) 75%, rgba(78,115,223,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5cde3', endColorstr='#4e73df', GradientType=1 );
+    border: none;
+
+}
+
 
 
 .ui-datatable-header{
