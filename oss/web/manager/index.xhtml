@@ -102,7 +102,7 @@
                                             </div>
                                             <div class="col mr-2" style="text-align: right">
                                                 <div class="text-xs font-weight-bold text-info text-uppercase mb-1">الخدمات قيد التنفيذ</div>
-                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">#{departmentsManage.allParameter[2]}</div>
+                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">#{departmentsManage.allParameter[0]}</div>
                                             </div>
                                         </div>
                                     </div>
@@ -286,7 +286,8 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="text-center">
-                                            <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="../img/undraw_posting_photo.svg" alt=""/>
+                                       
+                                            <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="../homePage/assets/image/image4_1.png" alt=""/>
                                         </div>
                                          <h:panelGrid columns="2" dir="rtl" style="display: flex; justify-content: flex-start;">
 
@@ -486,7 +487,7 @@
                 data: {
                     labels: ["منجزة", "قيد التنفيذ", "غير مشاهدة"],
                     datasets: [{
-                            data: [#{departmentsManage.allParameter[1]}, #{departmentsManage.allParameter[2]}, #{departmentsManage.allParameter[3]}],
+                            data: [#{departmentsManage.allParameter[1]}, #{departmentsManage.allParameter[0]}, #{departmentsManage.allParameter[3]}],
                             backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
                             hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
                             hoverBorderColor: "rgba(234, 236, 244, 1)",

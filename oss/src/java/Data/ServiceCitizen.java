@@ -101,7 +101,7 @@ public class ServiceCitizen {
             data.write(q);
 
             q = "INSERT INTO service_citizen (`Service_Citizen_ID`, `Services_Provided_ID`, `Cit_ID`, `Date`, `status`, `note`) VALUES ("
-                    + idMaxSC + ", " + Services_Provided_ID + ", " + Cit_ID + ", '" + LocalDate.now() + "', 'notdone' , '" + note + "');";
+                    + idMaxSC + ", " + Services_Provided_ID + ", " + Cit_ID + ", '" + LocalDate.now() + "', 'notview' , '" + note + "');";
             System.out.println(q);
             data.write(q);
             System.out.println("  size _>" + attachment.size());

@@ -159,12 +159,13 @@ public class GetFromDB {
         int[] all = new int[10];
         try {
             DB db = new DB();
-            String sql = "select count(Service_Citizen_ID) ,(select count(Service_Citizen_ID) from oss.service_citizen where Status = 'done'),(select count(Service_Citizen_ID) from oss.service_citizen where Status = 'view'),(select count(Service_Citizen_ID) from oss.service_citizen where Status = 'notview'),(select count(Dep_ID) from oss.department ),(select count(Sec_ID) from oss.section ),(select count(Services_Provided_ID) from oss.services_provided),(select count(Cit_ID) from oss.citizen ),(select count(Service_Citizen_ID) from oss.service_citizen),(select count(Emp_ID) from oss.employees ) from oss.service_citizen where Status = 'done' ;";
+            String sql = "select count(Service_Citizen_ID) ,(select count(Service_Citizen_ID) from oss.service_citizen where Status = 'done'),(select count(Service_Citizen_ID) from oss.service_citizen where Status = 'view'),(select count(Service_Citizen_ID) from oss.service_citizen where Status = 'notview'),(select count(Dep_ID) from oss.department ),(select count(Sec_ID) from oss.section ),(select count(Services_Provided_ID) from oss.services_provided),(select count(Cit_ID) from oss.citizen ),(select count(Service_Citizen_ID) from oss.service_citizen),(select count(Emp_ID) from oss.employees ) from oss.service_citizen where Status = 'notdone' ;";
             ResultSet r = db.read(sql);
 
             while (r.next()) {
                 all[0] = r.getInt(1);
                 all[1] = r.getInt(2);
+                //addition
                 all[2] = r.getInt(3);
                 all[3] = r.getInt(4);
                 all[4] = r.getInt(5);
@@ -217,14 +218,17 @@ public class GetFromDB {
         try {
 
             DB db = new DB();
-            String sql1 = "select sum(count) from service_count;";
+            String sql1 = " select count(*) from service_citizen;";
             ResultSet r1 = db.read(sql1);
             while (r1.next()) {
                 sum = r1.getInt(1);
 
             }
             System.out.println("aaaaaaaaa" + sum);
-            String sql = "select * from service_count order by count DESC LIMIT 5;";
+            
+            String sql = "SELECT sc.Services_Provided_ID, COUNT(*) as l ,sp.Serv_Name AS freq FROM service_citizen as sc "
+                    + "  inner join services_provided as sp on sp.Services_Provided_ID = sc.Services_Provided_ID "
+                    + " GROUP BY Services_Provided_ID order by l DESC LIMIT 5;";
 
             ResultSet r = db.read(sql);
 

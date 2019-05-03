@@ -236,6 +236,7 @@ public class Service implements Serializable {
                 have.addToDB();
             }
 
+            
             q = "commit;";
             //q = "rollback;";
             System.out.println(q + "end");
