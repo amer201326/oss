@@ -43,7 +43,7 @@ public class LoginFilter implements Filter {
 //            System.out.println("lllog = "+ ((HttpServletRequest)request).getRequestURI().contains("manager") );
 //            System.out.println("lll "+"jjjj");
          if(((HttpServletRequest)request).getRequestURI().contains("manager") && loginBean.employee != null && loginBean.employee.checkTypeAdmin()){
-             System.out.println("manager");
+             System.out.println("managerLogIn"+loginBean.employee.toString());
          }else if(((HttpServletRequest)request).getRequestURI().contains("citizenn") && loginBean.citizen != null){
              System.out.println("citizenn");
          }else if(((HttpServletRequest)request).getRequestURI().contains("employeePages") && loginBean.employee != null && loginBean.employee.checkTypeEMP()){
