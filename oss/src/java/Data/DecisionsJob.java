@@ -192,12 +192,23 @@ public class DecisionsJob {
         return "DecisionsJob{" + "job=" + job + ", idEmployee=" + idEmployee + ", status=" + status + ", runing=" + runing + ", cost=" + cost + ", internalMessage=" + internalMessage + ", externalMessage=" + externalMessage + ", date=" + date + ", Services_Provided_ID=" + Services_Provided_ID + ", Cit_ID=" + Cit_ID + ", Service_Citizen_ID=" + Service_Citizen_ID + '}';
     }
 
+          
+      public String color() {
+        if ("notdone".equals(status)) {
+            return "warning";
+        } else if("done".equals(status)){
+            return "success";
+        }else {
+            return "danger";
+        }
+    }
+      
     
 
     void updateDone() throws SQLException, ClassNotFoundException {
         DB data = new DB();
         
-            String q = "UPDATE `oss`.`decisions_job` SET `Status` = 'done', `Cost` = "+cost +", `Com_InternalMessage` = '"+internalMessage+"',"
+            String q = "UPDATE `oss`.`decisions_job` SET `Status` = '"+status+"', `Cost` = "+cost +", `Com_InternalMessage` = '"+internalMessage+"',"
                     + " `Com_ExternalMessage` = '"+externalMessage+"',"
                     + " `Date` = '"+date+"' , `Emp_ID` = "+idEmployee+" WHERE (`Dep_ID` = "+job.DepId+") and (`Sec_ID` = "+job.sectionID+") and (`Job_ID` = "+job.id+") "
                     + "and (`Services_Provided_ID` = "+Services_Provided_ID+") and (`Order_Departmant` = "+job.dOrder+") and (`Order_Section` = "+job.sOrder+") "
@@ -213,7 +224,7 @@ public class DecisionsJob {
     void updateNotDone() throws SQLException, ClassNotFoundException {
         DB data = new DB();
         
-            String q = "UPDATE `oss`.`decisions_job` SET `Status` = 'notdone', `Cost` = "+cost +", `Com_InternalMessage` = '"+internalMessage+"',"
+            String q = "UPDATE `oss`.`decisions_job` SET `Status` = '"+status+"', `Cost` = "+cost +", `Com_InternalMessage` = '"+internalMessage+"',"
                     + " `Com_ExternalMessage` = '"+externalMessage+"',"
                     + " `Date` = '"+date+"' , `Emp_ID` = "+idEmployee+" WHERE (`Dep_ID` = "+job.DepId+") and (`Sec_ID` = "+job.sectionID+") and (`Job_ID` = "+job.id+") "
                     + "and (`Services_Provided_ID` = "+Services_Provided_ID+") and (`Order_Departmant` = "+job.dOrder+") and (`Order_Section` = "+job.sOrder+") "

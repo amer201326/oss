@@ -94,10 +94,12 @@
                                                                             <div class="row no-gutters align-items-center">
 
                                                                                 <div class="col mr-2 " style="text-align: right">
-                                                                                    <div class="col mr-2" style="text-align: right">
+                                                                                    <div class="col mr-2 flexjustify-content" style="text-align: right">
+                                                                                        <div>
                                                                                         <div class="text-s font-weight-bold text-primary text-uppercase mb-1" > تعليق الدائرة </div>
                                                                                         <div class="h5 mb-0 font-weight-bold text-gray-800">#{d.decisionsDepartment.internalMessage}</div>
-                                                                                        <div class="h5 mb-0 font-weight-bold text-primarytext-primary  ">تكلفة الدائره= #{d.decisionsDepartment.cost}</div>
+                                                                                       </div>
+                                                                                        <div class="h5 mb-0 text-primarytext-primary  ">تكلفة الدائره= #{d.decisionsDepartment.cost}</div>
 
                                                                                     </div>
                                                                                 </div>
@@ -127,15 +129,18 @@
 
                                                                                         <ui:repeat value="#{s.job}" var="j" >
 
-                                                                                            <div class="card border-right-warning border-bottom-warning shadow h-100 py-2 mb-3" style="margin: 0 10px">
+                                                                                            <div class="card border-right-#{j.decisionsJob.color()} border-bottom-#{j.decisionsJob.color()} shadow h-100 py-2 mb-3" style="margin: 0 10px">
                                                                                                 <div class="card-body">
                                                                                                     <div class="row no-gutters align-items-center">
 
                                                                                                         <div class="col mr-2 " style="text-align: right">
-                                                                                                            <div class="col mr-2" style="text-align: right">
-                                                                                                                <div class=" font-weight-bold text-primary text-uppercase mb-1" > #{j.jobPath.name} #{showServiceHeadManeger.session.employee.emp_name}</div>
-                                                                                                                <div class="h5 mb-0 font-weight-bold text-gray-800">#{j.decisionsJob.internalMessage}</div>
-                                                                                                                <div class="h5 mb-0 font-weight-bold text-primarytext-primary  ">تكلفة = #{j.decisionsJob.cost}</div>
+                                                                                                            <div class="col mr-2 flexjustify-content" style="text-align: right" >
+                                                                                                                <div>
+                                                                                                                    <div class=" font-weight-bold text-primary text-uppercase mb-1" > #{j.jobPath.name} #{showServiceHeadManeger.session.employee.emp_name}</div>
+                                                                                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">#{j.decisionsJob.internalMessage}</div>
+                                                                                                                </div>
+
+                                                                                                                <div class="h5 mb-0  text-primarytext-primary  ">تكلفة = #{j.decisionsJob.cost}</div>
                                                                                                             </div>
 
 

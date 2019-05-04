@@ -712,7 +712,7 @@ public class ServiceCitizen {
 
             String q = "start transaction;";
             db.write(q);
-            service_Job.notDone();
+           
             decisionsJob.Cit_ID = Cit_ID;
             decisionsJob.Service_Citizen_ID = Service_Citizen_ID;
             decisionsJob.Services_Provided_ID = Services_Provided_ID;
@@ -721,7 +721,7 @@ public class ServiceCitizen {
                     service_Job.Order_Section, service_Job.Order_Job,null);
             decisionsJob.date = LocalDate.now().toString();
             decisionsJob.idEmployee = empID;
-            decisionsJob.status = "notdone";
+            decisionsJob.status = "reject";
             decisionsJob.updateNotDone();
             
             }
