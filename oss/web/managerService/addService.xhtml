@@ -575,7 +575,12 @@
                                                                                 <h:outputLabel for="name3" value="الرقم:" />
                                                                                 <p:inputNumber id="name3" required="true" label="name" value="#{addServiceManager.jobPath.order}" minValue="1" maxValue="100" >
                                                                                     <p:ajax update="name3" />  
-                                                                                </p:inputNumber>  
+                                                                                </p:inputNumber> 
+                                                                                 <h:outputLabel for="jesction" value="قرار الموظف" /> 
+                                                                                 <p:selectOneRadio id="jesction" value="#{addServiceManager.jobPath.importantComment}"  required="true">
+                                                                                    <f:selectItem   itemLabel="اساسي " itemValue="yes" />
+                                                                                    <f:selectItem  itemLabel="غير اساسي" itemValue="no" />
+                                                                                </p:selectOneRadio>
 
                                                                                 <p:commandButton value="إضافة" actionListener="#{addServiceManager.addJobToPath()}"
                                                                                                  update="newjob  singleDT2 NewAttachment" process="@this jobs name3" oncomplete="PF('dlg3').hide();"/>

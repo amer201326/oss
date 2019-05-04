@@ -27,24 +27,24 @@ public class JobPath implements Serializable {
     Integer dOrder;
     int sOrder;
     int order;
-
+    public String importantComment;
     String idMarge;
 
     public JobPath() {
     }
 
-    public JobPath(Integer id, int order) {
-        this.id = id;
-        this.order = order;
-    }
+//    public JobPath(Integer id, int order) {
+//        this.id = id;
+//        this.order = order;
+//    }
 
-    public JobPath(int sectionID, int id, String name, int order) {
-        this.sectionID = sectionID;
-        this.id = id;
-        this.name = name;
-        this.order = order;
-        idMarge = id + "-" + sectionID;
-    }
+//    public JobPath(int sectionID, int id, String name, int order) {
+//        this.sectionID = sectionID;
+//        this.id = id;
+//        this.name = name;
+//        this.order = order;
+//        idMarge = id + "-" + sectionID;
+//    }
 
     public JobPath(int DepId, int sectionID, int id, int dOrder, int sOrder, int order) {
         this.DepId = DepId;
@@ -71,7 +71,9 @@ public class JobPath implements Serializable {
         this.id = id;
         this.name = name;
     }
-    public JobPath(int DepId, int sectionID, Integer id, int idService, String name, Integer dOrder, int sOrder, int order) {
+    
+
+    public JobPath(int DepId, int sectionID, Integer id, int idService, String name, Integer dOrder, int sOrder, int order, String importantComment) {
         this.DepId = DepId;
         this.sectionID = sectionID;
         this.id = id;
@@ -80,7 +82,9 @@ public class JobPath implements Serializable {
         this.dOrder = dOrder;
         this.sOrder = sOrder;
         this.order = order;
+        this.importantComment = importantComment;
     }
+    
 
     public int getSectionID() {
         return sectionID;
@@ -142,7 +146,7 @@ public class JobPath implements Serializable {
     public boolean addToDataBase(int idService) throws SQLException, ClassNotFoundException {
    
             DB d = new DB();
-            String q = "INSERT INTO steps_job VALUES(" + DepId + "," + sectionID + "," + id + "," + idService + "," + dOrder + "," + sOrder + "," + order + ");";
+            String q = "INSERT INTO steps_job VALUES(" + DepId + "," + sectionID + "," + id + "," + idService + "," + dOrder + "," + sOrder + "," + order + "," + importantComment +");";
             System.out.println(q);
             d.write(q);
 
@@ -169,5 +173,14 @@ public class JobPath implements Serializable {
     public String kes(){
         return this.DepId+"-"+this.sectionID+"-"+this.id;
     }
+
+    public String getImportantComment() {
+        return importantComment;
+    }
+
+    public void setImportantComment(String importantComment) {
+        this.importantComment = importantComment;
+    }
+    
 
 }

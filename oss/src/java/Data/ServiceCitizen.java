@@ -366,29 +366,29 @@ public class ServiceCitizen {
         return sections;
     }
 
-    public ArrayList<JobPath> firstJobInSPathOfthisService(int Dep_ID, int Order_Departmant, int Sec_ID, int Order_Section) {
-        ArrayList<JobPath> jobs = new ArrayList<>();
-
-        try {
-            DB db = new DB();
-            JobPath j;
-
-            String sql = "SELECT * FROM oss.decisions_job as dd inner join (SELECT Job_ID , min(Order_Job) as mind "
-                    + "FROM oss.decisions_job where Status = 'notdone' and Cit_ID=" + Cit_ID + " and Service_Citizen_ID=" + idMaxSC + " and "
-                    + "Dep_ID = " + Dep_ID + " and Order_Departmant =" + Order_Departmant + "  and Sec_ID = " + Sec_ID + " and Order_Section =" + Order_Section + " group by  Job_ID ) as mdd "
-                    + "on dd.Job_ID = mdd.Job_ID and dd.Order_Job = mind;";
-
-            System.out.println("firstJob q =" + sql);
-            ResultSet r = db.read(sql);
-            while (r.next()) {
-                j = new JobPath(r.getInt(3), r.getInt(7));
-                jobs.add(j);
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        return jobs;
-    }
+//    public ArrayList<JobPath> firstJobInSPathOfthisService(int Dep_ID, int Order_Departmant, int Sec_ID, int Order_Section) {
+//        ArrayList<JobPath> jobs = new ArrayList<>();
+//
+//        try {
+//            DB db = new DB();
+//            JobPath j;
+//
+//            String sql = "SELECT * FROM oss.decisions_job as dd inner join (SELECT Job_ID , min(Order_Job) as mind "
+//                    + "FROM oss.decisions_job where Status = 'notdone' and Cit_ID=" + Cit_ID + " and Service_Citizen_ID=" + idMaxSC + " and "
+//                    + "Dep_ID = " + Dep_ID + " and Order_Departmant =" + Order_Departmant + "  and Sec_ID = " + Sec_ID + " and Order_Section =" + Order_Section + " group by  Job_ID ) as mdd "
+//                    + "on dd.Job_ID = mdd.Job_ID and dd.Order_Job = mind;";
+//
+//            System.out.println("firstJob q =" + sql);
+//            ResultSet r = db.read(sql);
+//            while (r.next()) {
+//                j = new JobPath(r.getInt(3), r.getInt(7));
+//                jobs.add(j);
+//            }
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//        return jobs;
+//    }
 
 //    public void buildjobsPathOfthisService(int Service_Citizen_ID ) throws SQLException, ClassNotFoundException {
 //
@@ -521,7 +521,7 @@ public class ServiceCitizen {
                     for (Section section : sections) {
                         List<JobTitel> jobTitels = GetFromDB.getJobTittle(section.id + "");
                         for (JobTitel jobTitel : jobTitels) {
-                            DecisionsJob decJ = new DecisionsJob(new JobPath(decisionsDepartment.depId, Integer.parseInt(section.id), Integer.parseInt(jobTitel.id), Services_Provided_ID, jobTitel.name, decisionsDepartment.depOrder, 0, 0),
+                            DecisionsJob decJ = new DecisionsJob(new JobPath(decisionsDepartment.depId, Integer.parseInt(section.id), Integer.parseInt(jobTitel.id), Services_Provided_ID, jobTitel.name, decisionsDepartment.depOrder, 0, 0,null),
                                     0, "notdone", "no", 0, "", "", "");
                             minDecjob.add(decJ);
                         }
@@ -570,7 +570,7 @@ public class ServiceCitizen {
                 } else {
                     List<JobTitel> jobTitels = GetFromDB.getJobTittle(decisionSection.section.id + "");
                     for (JobTitel jobTitel : jobTitels) {
-                        DecisionsJob decJ = new DecisionsJob(new JobPath(decisionSection.section.departmentId, decisionSection.section.id, Integer.parseInt(jobTitel.id), Services_Provided_ID, jobTitel.name, decisionSection.section.orderDepartment, decisionSection.section.order, 0),
+                        DecisionsJob decJ = new DecisionsJob(new JobPath(decisionSection.section.departmentId, decisionSection.section.id, Integer.parseInt(jobTitel.id), Services_Provided_ID, jobTitel.name, decisionSection.section.orderDepartment, decisionSection.section.order, 0,null),
                                 0, "notdone", "no", 0, "", "", "");
                         minDecjob.add(decJ);
                     }
@@ -604,7 +604,7 @@ public class ServiceCitizen {
             decisionsJob.Services_Provided_ID = Services_Provided_ID;
             decisionsJob.job = new JobPath(service_Job.Dep_ID, service_Job.Sec_ID,
                     service_Job.Job_ID, service_Job.Services_Provided_ID, "", service_Job.Order_Departmant,
-                    service_Job.Order_Section, service_Job.Order_Job);
+                    service_Job.Order_Section, service_Job.Order_Job,null);
             decisionsJob.date = LocalDate.now().toString();
             decisionsJob.idEmployee = empID;
             decisionsJob.status = "done";
@@ -806,7 +806,8 @@ public class ServiceCitizen {
                     for (Section section : sections) {
                         List<JobTitel> jobTitels = GetFromDB.getJobTittle(section.id + "");
                         for (JobTitel jobTitel : jobTitels) {
-                            DecisionsJob decJ = new DecisionsJob(new JobPath(decisionsDepartment.depId, Integer.parseInt(section.id), Integer.parseInt(jobTitel.id), Services_Provided_ID, jobTitel.name, decisionsDepartment.depOrder, 0, 0),
+                            DecisionsJob decJ = new DecisionsJob(new JobPath(decisionsDepartment.depId, Integer.parseInt(section.id)
+                                    , Integer.parseInt(jobTitel.id), Services_Provided_ID, jobTitel.name, decisionsDepartment.depOrder, 0, 0,null),
                                     0, "notdone", "no", 0, "", "", "");
                             minDecjob.add(decJ);
                         }
@@ -855,7 +856,8 @@ public class ServiceCitizen {
                 } else {
                     List<JobTitel> jobTitels = GetFromDB.getJobTittle(decisionSection.section.id + "");
                     for (JobTitel jobTitel : jobTitels) {
-                        DecisionsJob decJ = new DecisionsJob(new JobPath(decisionSection.section.departmentId, decisionSection.section.id, Integer.parseInt(jobTitel.id), Services_Provided_ID, jobTitel.name, decisionSection.section.orderDepartment, decisionSection.section.order, 0),
+                        DecisionsJob decJ = new DecisionsJob(new JobPath(decisionSection.section.departmentId, decisionSection.section.id, 
+                                Integer.parseInt(jobTitel.id), Services_Provided_ID, jobTitel.name, decisionSection.section.orderDepartment, decisionSection.section.order, 0,null),
                                 0, "notdone", "no", 0, "", "", "");
                         minDecjob.add(decJ);
                     }
