@@ -90,14 +90,14 @@
 
 
 
-                                                            <p:column  style="width:90px;text-align: center" headerText="مشاهده" rendered="#{msession.employee.isHead()}">
+                                                            <p:column  style="width:90px;text-align: center" headerText="مشاهده" rendered="#{msession.employee.checkTypeHed()}">
                                                                 <p:commandLink title="View Detail"  actionListener="#{serviceCitizenManager.showHeadServise()}">
                                                                     <h:outputText styleClass="fa fa-list-ul" style="margin:0 auto;" />
                                                                     <f:setPropertyActionListener value="#{service}" target="#{msession.serviceCitizenShow}" />
                                                                 </p:commandLink>
                                                             </p:column>
 
-                                                            <p:column  style="width:90px;text-align: center" headerText="مشاهده" rendered="#{!msession.employee.isHead()}">
+                                                            <p:column  style="width:90px;text-align: center" headerText="مشاهده" rendered="#{!msession.employee.checkTypeHed()}">
                                                                 <p:commandLink title="View Detail"  actionListener="#{serviceCitizenManager.showServise()}">
                                                                     <h:outputText styleClass="fa fa-list-ul" style="margin:0 auto;" />
                                                                     <f:setPropertyActionListener value="#{service}" target="#{msession.serviceCitizenShow}" />
@@ -105,7 +105,7 @@
                                                             </p:column>
 
 
-                                                            <p:column  style="width:90px;text-align: center" headerText="تعليقات" rendered="#{!msession.employee.isHead()}">
+                                                            <p:column  style="width:90px;text-align: center" headerText="تعليقات" rendered="#{!msession.employee.checkTypeHed()}">
                                                                 <p:commandLink title="View Detail" actionListener="#{serviceCitizenManager.showMessagesServise()}">
                                                                     <h:outputText styleClass="fa fa-list-ul" style="margin:0 auto;" />
                                                                     <f:setPropertyActionListener value="#{service}" target="#{msession.serviceCitizenShow}" />
