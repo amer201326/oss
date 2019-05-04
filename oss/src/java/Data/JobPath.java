@@ -84,6 +84,16 @@ public class JobPath implements Serializable {
         this.order = order;
         this.importantComment = importantComment;
     }
+
+    public JobPath(int DepId, int sectionID, Integer id, int idService, Integer dOrder, int sOrder, int order) {
+        this.DepId = DepId;
+        this.sectionID = sectionID;
+        this.id = id;
+        this.idService = idService;
+        this.dOrder = dOrder;
+        this.sOrder = sOrder;
+        this.order = order;
+    }
     
 
     public int getSectionID() {
@@ -155,6 +165,19 @@ public class JobPath implements Serializable {
         return false;
     }
 
+        public String getImportantCommentFromDataBase() throws SQLException, ClassNotFoundException {
+   
+            DB d = new DB();
+            String q = "SELECT important_Comment FROM oss.steps_job where Dep_ID="+DepId+" and Sec_ID="+sectionID+" and Job_ID="+id +" and Services_Provided_ID="+idService +" and Order_Departmant="+dOrder+" and Order_Section ="+sOrder+" and Order_Job="+order+" ;";
+            System.out.println(q);
+            ResultSet r = d.read(q);
+            while(r.next()){
+                return r.getString(1);
+            }
+
+        return null;
+    }
+        
     public int getdOrder() {
         return dOrder;
     }

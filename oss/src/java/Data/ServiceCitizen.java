@@ -700,6 +700,37 @@ public class ServiceCitizen {
 
     }
 
+     public void ContineuInPathReject(int empID) {
+        try {
+            JobPath jobPath = new JobPath(service_Job.Dep_ID, service_Job.Sec_ID, service_Job.Job_ID, Services_Provided_ID, service_Job.Order_Departmant, service_Job.Order_Section, service_Job.Order_Job);
+            String importantComment = jobPath.getImportantCommentFromDataBase();
+            
+            if("no".equals(importantComment)){
+                ContineuInPath(empID);
+            }else{
+             DB db = new DB();
+
+            String q = "start transaction;";
+            db.write(q);
+            service_Job.notDone();
+            decisionsJob.Cit_ID = Cit_ID;
+            decisionsJob.Service_Citizen_ID = Service_Citizen_ID;
+            decisionsJob.Services_Provided_ID = Services_Provided_ID;
+            decisionsJob.job = new JobPath(service_Job.Dep_ID, service_Job.Sec_ID,
+                    service_Job.Job_ID, service_Job.Services_Provided_ID, "", service_Job.Order_Departmant,
+                    service_Job.Order_Section, service_Job.Order_Job,null);
+            decisionsJob.date = LocalDate.now().toString();
+            decisionsJob.idEmployee = empID;
+            decisionsJob.status = "notdone";
+            decisionsJob.updateNotDone();
+            
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ServiceCitizen.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceCitizen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     }
     private void nextjobsPathOfthisService(List<DecisionsDepartment> decisionsDepartments, List<DecisionSection> decisionSections, List<DecisionsJob> decisionsJobs) throws SQLException, ClassNotFoundException {
         System.out.println("===================================================================================================");
 
@@ -876,6 +907,8 @@ public class ServiceCitizen {
         }
     }
 
+    
+    
     public void messages(int idEmp) {
         try {
             DB db = new DB();

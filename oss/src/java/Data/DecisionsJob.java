@@ -210,5 +210,20 @@ public class DecisionsJob {
             System.out.println("qj  =  "+q);
             data.write(q);
     }
-    
+    void updateNotDone() throws SQLException, ClassNotFoundException {
+        DB data = new DB();
+        
+            String q = "UPDATE `oss`.`decisions_job` SET `Status` = 'notdone', `Cost` = "+cost +", `Com_InternalMessage` = '"+internalMessage+"',"
+                    + " `Com_ExternalMessage` = '"+externalMessage+"',"
+                    + " `Date` = '"+date+"' , `Emp_ID` = "+idEmployee+" WHERE (`Dep_ID` = "+job.DepId+") and (`Sec_ID` = "+job.sectionID+") and (`Job_ID` = "+job.id+") "
+                    + "and (`Services_Provided_ID` = "+Services_Provided_ID+") and (`Order_Departmant` = "+job.dOrder+") and (`Order_Section` = "+job.sOrder+") "
+                    + "and (`Order_Job` = "+job.order+") "
+                    + "and (`Cit_ID` = "+Cit_ID+") and (`Service_Citizen_ID` = "+Service_Citizen_ID+");";
+            
+            //UPDATE `oss`.`decisions_job` SET `Emp_ID` = "++", `Status` = 'done' WHERE (`Dep_ID` = "++") and (`Sec_ID` = "++") and (`Job_ID` = "++") and (`Services_Provided_ID` = "++") and (`Order_Departmant` = "++") and (`Order_Section` = "++") and (`Order_Job` = "++") and (`Cit_ID` = "++") and (`Service_Citizen_ID` = "++") ;
+
+            
+            System.out.println("qj  =  "+q);
+            data.write(q);
+    }
 }

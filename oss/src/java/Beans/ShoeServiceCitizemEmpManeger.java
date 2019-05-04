@@ -118,6 +118,22 @@ public class ShoeServiceCitizemEmpManeger {
 
     }
 
+    public void accept() throws IOException {
+        System.out.println("size files = " + attachmentServiceEmployees.size());
+        serviseCitizen.attachmentServiceEmployees = attachmentServiceEmployees;
+        serviseCitizen.ContineuInPath(employee.getEmp_id());
+        FacesContext.getCurrentInstance().getExternalContext().redirect("serviceCitizzen.xhtml");
+
+    }
+
+    public void reject() throws IOException {
+        System.out.println("size files = " + attachmentServiceEmployees.size());
+        serviseCitizen.attachmentServiceEmployees = attachmentServiceEmployees;
+        serviseCitizen.ContineuInPathReject(employee.getEmp_id());
+        FacesContext.getCurrentInstance().getExternalContext().redirect("serviceCitizzen.xhtml");
+
+    }
+
     public Employee getEmployee() {
         return employee;
     }
@@ -137,14 +153,12 @@ public class ShoeServiceCitizemEmpManeger {
     public void handleFileUpload(FileUploadEvent event) {
         try {
             System.out.println("upload fileeeeeeeeene" + event.getFile().getFileName() + "   SIZE " + event.getFile().getSize());
-            
-            
-            
+
             AttachmentServiceEmployee att = new AttachmentServiceEmployee(employee.getEmp_id(),
                     serviseCitizen.getCit_ID(), serviseCitizen.getService_Citizen_ID(),
-                    serviseCitizen.getServices_Provided_ID(), event.getFile().getInputstream() , event.getFile().getFileName());
+                    serviseCitizen.getServices_Provided_ID(), event.getFile().getInputstream(), event.getFile().getFileName());
             attachmentServiceEmployees.add(att);
-            
+
             System.out.println("after add  = " + attachmentServiceEmployees.size());
         } catch (IOException ex) {
             Logger.getLogger(ShoeServiceCitizemEmpManeger.class.getName()).log(Level.SEVERE, null, ex);

@@ -197,5 +197,38 @@ public class Service_Job {
         }
 
     }
+    
+    public void notDone() throws SQLException, ClassNotFoundException {
+        DB db;
+
+        db = new DB();
+        String q = "";
+        if (Order_Job != 0) {
+
+            q = "UPDATE `oss`.`service_jobs` SET `status` = 'notdone' WHERE (`Service_Citizen_ID` = " + Service_Citizen_ID + ")"
+                    + " and (`Services_Provided_ID` = " + Services_Provided_ID + ") and (`Cit_ID` = " + Cit_ID + ") and (`Dep_ID` = " + getDep_ID() + ")"
+                    + " and (`Sec_ID` = " + Sec_ID + ") and (`Job_ID` = " + Job_ID + ") and (`Order_Departmant` = " + Order_Departmant + ") and"
+                    + " (`Order_Section` = " + Order_Section + ") and (`Order_Job` = " + Order_Job + ");";
+
+            System.out.println(q);
+            db.write(q);
+        } else if (Order_Section != 0) {
+            q = "UPDATE `oss`.`service_jobs` SET `status` = 'notdone' WHERE (`Service_Citizen_ID` = " + Service_Citizen_ID + ")"
+                    + " and (`Services_Provided_ID` = " + Services_Provided_ID + ") and (`Cit_ID` = " + Cit_ID + ") and (`Dep_ID` = " + getDep_ID() + ")"
+                    + " and (`Sec_ID` = " + Sec_ID + ")  and (`Order_Departmant` = " + Order_Departmant + ") and"
+                    + " (`Order_Section` = " + Order_Section + ") ;";
+            System.out.println(q);
+            db.write(q);
+        } else {
+            q = "UPDATE `oss`.`service_jobs` SET `status` = 'notdone' WHERE (`Service_Citizen_ID` = " + Service_Citizen_ID + ")"
+                    + " and (`Services_Provided_ID` = " + Services_Provided_ID + ") and (`Cit_ID` = " + Cit_ID + ")"
+                    + " and (`Dep_ID` = " + getDep_ID() + ")"
+                    + "   and (`Order_Departmant` = " + Order_Departmant + ")  ;";
+            System.out.println(q);
+            db.write(q);
+        }
+
+    }
+    
 
 }
