@@ -50,7 +50,7 @@ public class ShowMyServicesManager implements Serializable {
     public void init() {
         if (session.serviceCitizenShow != null) {
             this.thisServiceCitizen = session.serviceCitizenShow;
-            attachmentServiceEmployee = GetFromDBaraa.AttachmentServiceEmployee(session.employee.getEmp_id(),thisServiceCitizen.getCit_ID(), thisServiceCitizen.getService_Citizen_ID(), thisServiceCitizen.getServices_Provided_ID());
+            attachmentServiceEmployee = GetFromDBaraa.AttachmentServiceEmployee(thisServiceCitizen.getCit_ID(), thisServiceCitizen.getService_Citizen_ID(), thisServiceCitizen.getServices_Provided_ID());
             this.stepsAndDecsions = StepsAndDesion(thisServiceCitizen.getCit_ID(), thisServiceCitizen.getService_Citizen_ID(), thisServiceCitizen.getServices_Provided_ID());
         }
 
