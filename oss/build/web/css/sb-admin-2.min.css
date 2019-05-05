@@ -8774,6 +8774,9 @@ opacity:1
 .border-left-danger {
 	border-left: .25rem solid #e74a3b!important
 }
+.border-right-danger {
+	border-right: .25rem solid #e74a3b!important
+}
 .border-bottom-primary {
 	border-bottom: .25rem solid #4e73df!important
 }

@@ -49,7 +49,8 @@ public class GetFromDBaraa {
             DB db = new DB();
             ServiceCitizen sc;
             Service s;
-            String sql = "SELECT *  FROM service_citizen as sc inner join services_provided as sp where sc.status = 'notdone' and Cit_ID=" + idcitizen + " and sc.Services_Provided_ID=sp.Services_Provided_ID;";
+            String sql = "SELECT *  FROM service_citizen as sc inner join services_provided as sp where sc.status = 'notdone' or sc.status = 'notview' and Cit_ID=" + idcitizen + " and sc.Services_Provided_ID=sp.Services_Provided_ID;";
+             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
                 sc = new ServiceCitizen(r.getInt(1), r.getInt(2), r.getInt(3), r.getString(4), r.getString(5), r.getString(6));
@@ -187,7 +188,7 @@ public class GetFromDBaraa {
             ResultSet r = db.read(sql);
             while (r.next()) {
                 s = new JobPath(r.getInt(1), r.getInt(2), r.getInt(3), r.getString(18), r.getInt(5), r.getInt(6), r.getInt(7));
-                d = new DecisionsJob(r.getString(11), r.getString(12), r.getDouble(13), r.getString(14), r.getString(15));
+                d = new DecisionsJob(r.getInt(10),r.getString(11), r.getString(12), r.getDouble(13), r.getString(14), r.getString(15));
                 d.idEmployee = r.getInt(10);
                 sdj = new StepsAndDecsionsJob(s, d);
                 Lsdj.add(sdj);

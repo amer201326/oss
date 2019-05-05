@@ -104,11 +104,14 @@ public class DecisionsDepartment {
 
     public String colorStatus() {
         if (status == "done") {
+            System.out.println("success");
             return "success";
         }else if(status == "notdone") {
-            return "danger";
+             System.out.println("warning");
+            return "warning";
         }
-        return "warning";
+         System.out.println("danger");
+        return "danger";
     }
     
     public boolean flagStatus() {

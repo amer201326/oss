@@ -37,6 +37,7 @@ public class NotDoneCiticenServiceManeger implements Serializable {
     @PostConstruct
     public void init() {
         if (session.citizen != null) {
+            System.out.println("Cit Not Null");
             idCitizen = session.citizen.getId();
             NotDoneCitizenServices = GetFromDBaraa.notDoneCitizenServices(idCitizen);
         }

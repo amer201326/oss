@@ -18,7 +18,7 @@ public class DecisionsJob {
 
     JobPath job;
     int idEmployee;
-    
+    Employee employee;
     String status;
     String runing;
     double cost;
@@ -39,6 +39,7 @@ public class DecisionsJob {
         this.internalMessage = internalMessage;
         this.externalMessage = externalMessage;
         this.date = date;
+        employee = GetFromDB.GetEmployeeById(""+idEmployee);
     }
 
     public DecisionsJob(JobPath job, int idEmployee, String status, String runing, double cost, String internalMessage, String externalMessage, String date, int Services_Provided_ID, int Cit_ID, int Service_Citizen_ID) {
@@ -53,6 +54,7 @@ public class DecisionsJob {
         this.Services_Provided_ID = Services_Provided_ID;
         this.Cit_ID = Cit_ID;
         this.Service_Citizen_ID = Service_Citizen_ID;
+         employee = GetFromDB.GetEmployeeById(""+idEmployee);
     }
     
     
@@ -65,12 +67,13 @@ public class DecisionsJob {
         this.externalMessage = externalMessage;
     }
 
-    public DecisionsJob(String status, String runing, double cost, String internalMessage, String externalMessage) {
+    public DecisionsJob(int idEmployee,String status, String runing, double cost, String internalMessage, String externalMessage) {
         this.status = status;
         this.runing = runing;
         this.cost = cost;
         this.internalMessage = internalMessage;
         this.externalMessage = externalMessage;
+         employee = GetFromDB.GetEmployeeById(""+idEmployee);
     }
 
     public DecisionsJob() {
@@ -80,6 +83,14 @@ public class DecisionsJob {
         this.Services_Provided_ID = Services_Provided_ID;
         this.Cit_ID = Cit_ID;
         this.Service_Citizen_ID = Service_Citizen_ID;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
     

@@ -114,13 +114,13 @@
                                                     <div class="card border-right-#{d.decisionsDepartment.colorDecision()} shadow h-100 py-2">
                                                         <div class="card-body">
                                                             <div class="row no-gutters align-items-center">
-                                                                
-                                                                
-                                                                
+
+
+
                                                                 <div class="col-auto" >
                                                                     <p:link class="fa fa-cogs fa-2x text-gray-300" rendered="#{!d.decisionsDepartment.flagDecision()}"></p:link>
                                                                 </div>
-                                                                
+
                                                                 <div class="col-auto" >
                                                                     <p:link class="fa fa-thumbs-o-up fa-2x text-gray-300" rendered="#{d.decisionsDepartment.flagDecision()}"></p:link>
                                                                 </div>
@@ -174,35 +174,38 @@
                                                                 </div>
 
 
-                                                                    <ui:repeat value="#{s.job}" var="j" >
+                                                                <ui:repeat value="#{s.job}" var="j" >
 
-                                                                        <div class="card border-right-warning border-bottom-warning shadow h-100 py-2 " style="margin: 0 10px">
-                                                                            <div class="card-body">
-                                                                                <div class="row no-gutters align-items-center">
+                                                                    <div class="card border-right-#{j.decisionsJob.color()} border-bottom-#{j.decisionsJob.color()} shadow h-100 py-2 mb-3" style="margin: 0 10px">
+                                                                        <div class="card-body">
+                                                                            <div class="row no-gutters align-items-center">
+                                                                                <div class="col mr-2 " style="text-align: right">
+                                                                                    
+                                                                                      <div class="col mr-2 flexjustify-content" style="text-align: right">
 
-                                                                                    <div class="col mr-2 " style="text-align: right">
                                                                                         <div class="col mr-2" style="text-align: right">
-                                                                                            <div class=" font-weight-bold text-primary text-uppercase mb-1" > #{j.jobPath.name} </div>
+                                                                                            <div class=" font-weight-bold text-primary text-uppercase mb-1" > #{j.jobPath.name} : #{j.decisionsJob.employee.emp_name}</div>
                                                                                             <div class="h5 mb-0 font-weight-bold text-gray-800">#{j.decisionsJob.externalMessage}</div>
                                                                                         </div>
 
-
-                                                                                        <div></div>
-                                                                                        <div class="col-sm-3 px-5  mb-1 py-2 ">
-                                                                                            <div id="divDown" class="flexColomn ">
-                                                                                                <p:commandButton id="downloadAT"  value="تنزيل" ajax="false" icon="fa fa-arrow-down" style="color: white;" rendered="#{j.attachmentServiceEmployee.haveFile}" >
-                                                                                                    <p:fileDownload value="#{j.attachmentServiceEmployee.fileDownload}"/>
-                                                                                                </p:commandButton>  
-                                                                                                <br/>
-                                                                                            </div>
+                                                                                        <div class="h5 mb-0  text-primarytext-primary  ">تكلفة = #{j.decisionsJob.cost}</div>
+                                                                                    </div>
+                                                                                    
+                                                                                    <div class="col-sm-3 px-5  mb-1 py-2 ">
+                                                                                        <div id="divDown" class="flexColomn ">
+                                                                                            <p:commandButton id="downloadAT"  value="تنزيل" ajax="false" icon="fa fa-arrow-down" style="color: white;" rendered="#{j.attachmentServiceEmployee.haveFile}" >
+                                                                                                <p:fileDownload value="#{j.attachmentServiceEmployee.fileDownload}"/>
+                                                                                            </p:commandButton>  
+                                                                                            <br/>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
+                                                                    </div>
 
 
-                                                                    </ui:repeat>
+                                                                </ui:repeat>
 
 
 
