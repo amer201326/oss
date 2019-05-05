@@ -72,7 +72,7 @@ public class CitizenAccount implements Serializable{
     }
     
     public void addCitizenAccountReuqestToDB() throws SQLException, ClassNotFoundException {
-        
+         password = Crypto.encPas(k, password);
           String q = "INSERT INTO oss.citizenaccount VALUES (" + Cit_ID + ",'" + userName + "','" + password + "');";
     
             DB data = new DB();
@@ -84,6 +84,7 @@ public class CitizenAccount implements Serializable{
     }
     
      public String updateCit(){
+          password = Crypto.encPas(k, password);
         String q  =" UPDATE citizenaccount SET Password = '" + password + "' WHERE `Cit_ID` = " + Cit_ID + ";" ;
         try {
             DB data = new DB();

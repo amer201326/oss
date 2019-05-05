@@ -22,6 +22,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -69,6 +70,7 @@ public class Session implements Serializable {
                         FacesContext.getCurrentInstance().getExternalContext().redirect("../manager/");
                     } catch (IOException ex) {
                         Logger.getLogger(Session.class.getName()).log(Level.SEVERE, null, ex);
+                        
                     }
                 }else{
                     try {
@@ -80,6 +82,8 @@ public class Session implements Serializable {
 
                     } catch (IOException ex) {
                         Logger.getLogger(Session.class.getName()).log(Level.SEVERE, null, ex);
+                        
+                        
                     }
                 }
 
@@ -93,9 +97,13 @@ public class Session implements Serializable {
                         FacesContext.getCurrentInstance().getExternalContext().redirect("../citizenn/");
                     } catch (IOException ex) {
                         Logger.getLogger(Session.class.getName()).log(Level.SEVERE, null, ex);
+                      
                     }
                 } else {
-                    //error message
+                    FacesContext.getCurrentInstance().addMessage(null,
+			new FacesMessage(FacesMessage.SEVERITY_FATAL,
+							"Incorrect Username and Password",
+							"Please enter correct username and Password"));
                 }
             } 
         }
