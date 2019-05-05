@@ -43,10 +43,10 @@ public class CitizenManage implements Serializable {
 
     }
 
-    public void addCitizen() {
+    public void addCitizen() throws IOException {
 
         newCitizen.addCitizenToDB();
-       
+        FacesContext.getCurrentInstance().getExternalContext().redirect("allCitizen.xhtml");
 
         //انتقال الي صفحة كل المواطنين
     }

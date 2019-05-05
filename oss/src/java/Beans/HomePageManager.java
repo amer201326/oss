@@ -7,10 +7,12 @@ package Beans;
 
 import Data.GetDB_Eman;
 import Data.HomePage;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -35,9 +37,10 @@ public class HomePageManager implements Serializable{
         
     }
     
-      public void editHomePage() {
+      public void editHomePage() throws IOException {
 
        myData.updateHomePage();
+       FacesContext.getCurrentInstance().getExternalContext().redirect("../manager/index.xhtml");
         
     }
    
