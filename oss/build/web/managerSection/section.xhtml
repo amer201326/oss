@@ -150,9 +150,14 @@
 
 
                                                     </h:panelGrid> <br/>
-                                                    <h:link class="myButtonG" outcome="jobTitel.xhtml">
-                                                        <i class="fas fa-hand-point-left">&nbsp; لاضافة وظائف اخرى اضغط هنا </i>
-                                                    </h:link>
+                                                    
+                                                    
+                                                    <div style="display: flex; justify-content: center;">
+                                                        <a href="../managerJopTitel/jobTitel.xhtml" class="myButtonO btn btn-success btn-icon-split " style="position: left;">
+                                                            <i class="fas fa-hand-point-left">&nbsp;لاضافة وظائف اخرى اضغط هنا</i>
+                                                        </a>
+                                                    </div>
+
                                                     <p:separator/>
                                                     <p:commandButton value="اضافة" actionListener="#{sectionManage.addJobForSec()}" update="@form :formSection" oncomplete="PF('dlg').hide();"/>
                                                 </p:dialog>  

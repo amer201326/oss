@@ -127,26 +127,26 @@
                                 </div>
                                 <br/><br/>
                                 <!-- Brand Buttons -->
-                                 <div class="card shadow mb-4">
-                                <div class="card-body">
-                                    <div class="flexAm row-space " style="margin-right: 14px">
-                                        <div class="px-3 mb-2 py-5 bg-gradient-primary text-white border-bottom-primary">رئيس الدائرة</div>
-                                        <div class="col-sm-11 px-5  mb-2 py-4  border-bottom-primary ">
-                                            <div class="flexjustify-content row-space" style="margin-right: 14px">
-                                                <dir>
-                                                    <div class="text-xs font-weight-bold text-xs text-warning mb-1" style="font-size: 1.4em">
-                                                        
-                                                    </div>
+                                <div class="card shadow mb-4">
+                                    <div class="card-body">
+                                        <div class="flexAm row-space " style="margin-right: 14px">
+                                            <div class="px-3 mb-2 py-5 bg-gradient-primary text-white border-bottom-primary">رئيس الدائرة</div>
+                                            <div class="col-sm-11 px-5  mb-2 py-4  border-bottom-primary ">
+                                                <div class="flexjustify-content row-space" style="margin-right: 14px">
+                                                    <dir>
+                                                        <div class="text-xs font-weight-bold text-xs text-warning mb-1" style="font-size: 1.4em">
 
-                                                    
+                                                        </div>
 
-                                                </dir>
 
+
+                                                    </dir>
+
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                 </div>
 
                                 <div class="card shadow mb-4">
                                     <div class="card-header py-3">
@@ -307,9 +307,12 @@
 
                                                     </h:panelGrid>
                                                     <br/>
-                                                    <h:link class="myButtonG" outcome="jobTitel.xhtml">
-                                                        <i class="fas fa-hand-point-left">&nbsp;لاضافة وظائف اخرى اضغط هنا</i>
-                                                    </h:link>
+                                                    <div style="display: flex; justify-content: center;">
+                                                        <a href="../managerJopTitel/jobTitel.xhtml" class="myButtonO btn btn-success btn-icon-split " style="position: left;">
+                                                            <i class="fas fa-hand-point-left">&nbsp;لاضافة وظائف اخرى اضغط هنا</i>
+                                                        </a>
+                                                    </div>
+
                                                     <p:separator/>
                                                     <p:commandButton value="اضافة" actionListener="#{departmentManager.addJobForSec()}" update="@form formJob :formOrganigram" oncomplete="PF('jobAddDep').hide();"/>
                                                 </p:dialog>  
