@@ -5,6 +5,9 @@
  */
 package Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author baraakali
@@ -12,10 +15,12 @@ package Data;
 public class StepsAndDecsionsJob {
     public JobPath jobPath;
     public DecisionsJob decisionsJob;
-    AttachmentServiceEmployee attachmentServiceEmployee;
+    List<AttachmentServiceEmployee> attachmentServiceEmployee;
+    
     public StepsAndDecsionsJob(JobPath jobPath, DecisionsJob decisionsJob) {
         this.jobPath = jobPath;
         this.decisionsJob = decisionsJob;
+        attachmentServiceEmployee = new ArrayList<>();
     }
 
     public JobPath getJobPath() {
@@ -34,13 +39,15 @@ public class StepsAndDecsionsJob {
         this.decisionsJob = decisionsJob;
     }
 
-    public AttachmentServiceEmployee getAttachmentServiceEmployee() {
+    public List<AttachmentServiceEmployee> getAttachmentServiceEmployee() {
         return attachmentServiceEmployee;
     }
 
-    public void setAttachmentServiceEmployee(AttachmentServiceEmployee attachmentServiceEmployee) {
+    public void setAttachmentServiceEmployee(List<AttachmentServiceEmployee> attachmentServiceEmployee) {
         this.attachmentServiceEmployee = attachmentServiceEmployee;
     }
+
+    
     
     
 }

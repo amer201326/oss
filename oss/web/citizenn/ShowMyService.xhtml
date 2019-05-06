@@ -185,20 +185,30 @@
 
                                                                                         <div class="col mr-2" style="text-align: right">
                                                                                             <div class=" font-weight-bold text-primary text-uppercase mb-1" > #{j.jobPath.name} : #{j.decisionsJob.employee.emp_name}</div>
-                                                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">#{j.decisionsJob.externalMessage}</div>
+                                                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">تعليق الموظف:  #{j.decisionsJob.externalMessage}</div>
                                                                                         </div>
 
                                                                                         <div class="h5 mb-0  text-primarytext-primary  ">تكلفة = #{j.decisionsJob.cost}</div>
                                                                                     </div>
-                                                                                    
+                                                                                    <p:outputLabel  value="مرفقات الموظف"/>
+
+                                                                                    <ui:repeat value="#{j.attachmentServiceEmployee}" var="a" >
                                                                                     <div class="col-sm-3 px-5  mb-1 py-2 ">
-                                                                                        <div id="divDown" class="flexColomn ">
+                                                                                        
+                                                                                        <h:panelGrid dir="ltr" columns="2"  >
+                                                                                            
+
+                                                                                            <p:outputLabel for="downloadAT" value="#{a.filename}"/>
                                                                                             <p:commandButton id="downloadAT"  value="تنزيل" ajax="false" icon="fa fa-arrow-down" style="color: white;"  >
-                                                                                                <p:fileDownload value="#{j.attachmentServiceEmployee.fileDownload}"/>
+                                                                                                <p:fileDownload value="#{a.fileDownload}"/>
                                                                                             </p:commandButton>  
-                                                                                            <br/>
-                                                                                        </div>
+                                                                                            
+                                                                                            
+                                                                                      
+                                                                                        
+                                                                                        </h:panelGrid>
                                                                                     </div>
+                                                                                    </ui:repeat>
                                                                                 </div>
                                                                             </div>
                                                                         </div>

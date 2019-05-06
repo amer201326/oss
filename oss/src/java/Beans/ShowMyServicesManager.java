@@ -71,7 +71,8 @@ public class ShowMyServicesManager implements Serializable {
                             s.getJob().add(j);
                             for (AttachmentServiceEmployee att : attachmentServiceEmployee) {
                                 if (att.getEmp_ID() == j.decisionsJob.getIdEmployee()) {
-                                    j.setAttachmentServiceEmployee(att);
+                                    //j.setAttachmentServiceEmployee(att);
+                                    j.getAttachmentServiceEmployee().add(att);
                                 }
                             }
 
