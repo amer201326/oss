@@ -69,6 +69,10 @@ public class NotDoneCiticenServiceManeger implements Serializable {
     public void setIdCitizen(int idCitizen) {
         this.idCitizen = idCitizen;
     }
+    
+    public boolean dontHaveService(){
+        return NotDoneCitizenServices.isEmpty();
+    }
 
     public void showServiceCitizen(int idServiceCitizen) {
         

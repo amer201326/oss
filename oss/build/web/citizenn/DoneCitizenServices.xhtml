@@ -64,17 +64,38 @@
                     </div>
 
 
-                        <div class="col-lg-12" align="right">
-                            <ui:repeat value="#{doneCitizenServicesManeger.doneCitizenServices}" var="service" id="fadeEffectImages">
-                             <div class="card mb-4 border-bottom-warning hoverDiv">
-                                    <div class="card-body ">
-                            <h4>#{service.providServicee.name}</h4>
-                            <h5>#{service.date}</h5>
-                                    </div>
-                             </div>
-                        </ui:repeat>
+                    <div class="col-lg-12" align="right">
+                        <ui:repeat value="#{doneCitizenServicesManeger.doneCitizenServices}" var="service" id="fadeEffectImages">
+                            <div class="card mb-4 border-bottom-warning hoverDiv">
+                                <div class="card-body ">
+                                    <h4>#{service.providServicee.name}</h4>
+                                    <h5>#{service.date}</h5>
+                                </div>
                             </div>
-                   
+                        </ui:repeat>
+                        <p:outputPanel rendered="true" class="flexCenter">
+                            <div class="card col-xl-11 border-bottom-warning ">
+
+                                <div class="col-xl-12 col-lg-5 flexCenter" style="text-align: center">
+
+                                    <h3 style="width: 80%;margin-top: 20px">لا يوجد خدمات مقدمة</h3>
+                                    <div  style="width: 80%">
+
+                                        <!-- Pie Chart -->
+                                        <div class="col-xl-12 col-lg-5">
+                                            <br/>
+
+                                            <a href="servicess.xhtml" class="button" style="text-decoration: none; width: 100%; text-align: center;"><span><i class="fa fa-plus-circle" style="padding-left: 2px;"></i></span>اضعط هنا لتقديم خدمة جديدة</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </p:outputPanel>
+                    </div>
+
                 </div>
 
                 <br/><br/>

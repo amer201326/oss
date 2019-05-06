@@ -108,7 +108,7 @@ public class ApplyServiceManager implements Serializable {
         } else //GetFromDBaraa.ApplyService(idCitizen, thisService.getId(), allAttachment,note);
         {
             
-                    FacesContext.getCurrentInstance().addMessage("sub", new FacesMessage(FacesMessage.SEVERITY_ERROR," ", "Duplicate LPCID"));
+                    FacesContext.getCurrentInstance().addMessage("sub", new FacesMessage(FacesMessage.SEVERITY_ERROR," ", "بوجد مرفقات مطلوبة لم يتم ارفاقها"));
         }
     }
 
