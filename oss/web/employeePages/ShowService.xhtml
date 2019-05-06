@@ -313,81 +313,85 @@
                                 </div> 
 
 
+                                <p:outputPanel rendered="#{shoeServiceCitizemEmpManeger.serviseCitizen.sizeAttachment()}">
 
+                                    <div class="col-sm-12 mb-4">
+                                        <div class="col-sm-12" style="text-align: right; min-width:900px ">
+                                            <div class="card shadow mb-xl-4">
+                                                <div class="card-header py-3">
+                                                    <h6 class="m-0 font-weight-bold text-primary">  مرفقات المواطن </h6>
+                                                </div>
 
-                                <div class="col-sm-12 mb-4">
-                                    <div class="col-sm-12" style="text-align: right; min-width:900px ">
-                                        <div class="card shadow mb-xl-4">
-                                            <div class="card-header py-3">
-                                                <h6 class="m-0 font-weight-bold text-primary">  مرفقات المواطن </h6>
-                                            </div>
+                                                <div class="card-body">
+                                                    <ui:repeat value="#{shoeServiceCitizemEmpManeger.serviseCitizen.attachment}" var="att" varStatus="in" >
+                                                        <div class="flexAm row-space " style="margin-right: 14px">
+                                                            <div class="px-3 mb-2 py-5 bg-gradient-#{att.colorHaveFile()} text-white border-bottom-#{att.colorHaveFile()}">مرفق  #{in.index+1}</div>
+                                                            <div class="col-sm-11 px-5  mb-2 py-4  border-bottom-#{att.colorHaveFile()} ">
+                                                                <div class="flexjustify-content row-space" style="margin-right: 14px">
+                                                                    <dir>
+                                                                        <div class="text-xs font-weight-bold text-xs text-warning mb-1" style="font-size: 1.4em">#{att.name}</div>
 
-                                            <div class="card-body">
-                                                <ui:repeat value="#{shoeServiceCitizemEmpManeger.serviseCitizen.attachment}" var="att" varStatus="in" >
-                                                    <div class="flexAm row-space " style="margin-right: 14px">
-                                                        <div class="px-3 mb-2 py-5 bg-gradient-#{att.colorHaveFile()} text-white border-bottom-#{att.colorHaveFile()}">مرفق  #{in.index+1}</div>
-                                                        <div class="col-sm-11 px-5  mb-2 py-4  border-bottom-#{att.colorHaveFile()} ">
-                                                            <div class="flexjustify-content row-space" style="margin-right: 14px">
-                                                                <dir>
-                                                                    <div class="text-xs font-weight-bold text-xs text-warning mb-1" style="font-size: 1.4em">#{att.name}</div>
+                                                                        <div class="text-xs font-weight-bold text-gray-800 text-uppercase mb-1" style="font-size: 0.8em ; margin-right: 20px;">#{att.notes}</div>
 
-                                                                    <div class="text-xs font-weight-bold text-gray-800 text-uppercase mb-1" style="font-size: 0.8em ; margin-right: 20px;">#{att.notes}</div>
-
-                                                                </dir>
-                                                                <div id="divDown" class="flexColomn ">
-                                                                    <p:commandButton id="downloadAT"  value="تنزيل" ajax="false"  icon="fa fa-arrow-down" class="bg-#{att.colorHaveFile()}" 
-                                                                                     style="color: white;">
-                                                                        <p:fileDownload value="#{att.fileDownload}"/>
-                                                                    </p:commandButton>  
-                                                                    <br/>
+                                                                    </dir>
+                                                                    <div id="divDown" class="flexColomn ">
+                                                                        <p:commandButton id="downloadAT"  value="تنزيل" ajax="false"  icon="fa fa-arrow-down" class="bg-#{att.colorHaveFile()}" 
+                                                                                         style="color: white;">
+                                                                            <p:fileDownload value="#{att.fileDownload}"/>
+                                                                        </p:commandButton>  
+                                                                        <br/>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </ui:repeat>
+                                                    </ui:repeat>
+
+                                                </div>
 
                                             </div>
+                                        </div> 
+                                    </div>
 
-                                        </div>
-                                    </div> 
-                                </div>
+                                </p:outputPanel>
 
-                                <div class="col-sm-12 mb-4">
-                                    <div class="col-sm-12" style="text-align: right; min-width:900px ">
-                                        <div class="card shadow mb-xl-4">
-                                            <div class="card-header py-3">
-                                                <h6 class="m-0 font-weight-bold text-primary"> متطلبات الخدمة </h6>
-                                            </div>
-                                            <div class="card-body">
-                                                <ui:repeat value="#{shoeServiceCitizemEmpManeger.serviseCitizen.attwhithFile}" var="att2"  varStatus="inn">
-                                                    <div class="flexAm row-space " style="margin-right: 14px">
-                                                        <div class="px-3 mb-2 py-5 bg-gradient-#{att2.colorHaveFile()} text-white border-bottom-#{att2.colorHaveFile()}">نموذج  #{inn.index+1}</div>
-                                                        <div class="col-sm-11 px-5  mb-2 py-4  border-bottom-#{att2.colorHaveFile()} ">
-                                                            <div class="flexjustify-content row-space" style="margin-right: 14px">
-                                                                <dir>
-                                                                    <div class="text-xs font-weight-bold text-xs text-warning mb-1" style="font-size: 1.4em">#{att2.name}</div>
+                                <p:outputPanel rendered="#{shoeServiceCitizemEmpManeger.serviseCitizen.sizeAttwhithFile()}">
+                                    <div class="col-sm-12 mb-4">
+                                        <div class="col-sm-12" style="text-align: right; min-width:900px ">
+                                            <div class="card shadow mb-xl-4">
+                                                <div class="card-header py-3">
+                                                    <h6 class="m-0 font-weight-bold text-primary"> متطلبات الخدمة </h6>
+                                                </div>
+                                                <div class="card-body">
+                                                    <ui:repeat value="#{shoeServiceCitizemEmpManeger.serviseCitizen.attwhithFile}" var="att2"  varStatus="inn">
+                                                        <div class="flexAm row-space " style="margin-right: 14px">
+                                                            <div class="px-3 mb-2 py-5 bg-gradient-#{att2.colorHaveFile()} text-white border-bottom-#{att2.colorHaveFile()}">نموذج  #{inn.index+1}</div>
+                                                            <div class="col-sm-11 px-5  mb-2 py-4  border-bottom-#{att2.colorHaveFile()} ">
+                                                                <div class="flexjustify-content row-space" style="margin-right: 14px">
+                                                                    <dir>
+                                                                        <div class="text-xs font-weight-bold text-xs text-warning mb-1" style="font-size: 1.4em">#{att2.name}</div>
 
-                                                                    <div class="text-xs font-weight-bold text-gray-800 text-uppercase mb-1" style="font-size: 0.8em ; margin-right: 20px;">#{att2.notes}</div>
+                                                                        <div class="text-xs font-weight-bold text-gray-800 text-uppercase mb-1" style="font-size: 0.8em ; margin-right: 20px;">#{att2.notes}</div>
 
-                                                                </dir>
-                                                                <div id="divDown2" class="flexColomn ">
-                                                                    <p:commandButton id="downloadAT2"  value="تنزيل" ajax="false"  icon="fa fa-arrow-down" class="bg-#{att2.colorHaveFile()}" 
-                                                                                     style="color: white;">
-                                                                        <p:fileDownload value="#{att2.fileDownload}"/>
-                                                                    </p:commandButton>  
-                                                                    <br/>
+                                                                    </dir>
+                                                                    <div id="divDown2" class="flexColomn ">
+                                                                        <p:commandButton id="downloadAT2"  value="تنزيل" ajax="false"  icon="fa fa-arrow-down" class="bg-#{att2.colorHaveFile()}" 
+                                                                                         style="color: white;">
+                                                                            <p:fileDownload value="#{att2.fileDownload}"/>
+                                                                        </p:commandButton>  
+                                                                        <br/>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </ui:repeat>
+                                                    </ui:repeat>
+
+                                                </div>
 
                                             </div>
-
-                                        </div>
-                                    </div> 
-                                </div>
-
+                                        </div> 
+                                    </div>
+                                </p:outputPanel>
+                               
                                 <div class="col-sm-12 mb-4">
                                     <div class="col-sm-12" style="text-align: right; min-width:900px ">
                                         <div class="card shadow mb-xl-4">
@@ -395,11 +399,8 @@
                                                 <h6 class="m-0 font-weight-bold text-primary">ارفاق ملفات</h6>
                                             </div>
                                             <div class="card-body">
-                                                <b>: ملاحظة</b>
-                                                <div class="text-primary" style="margin-right: 30px;margin-bottom: 10px   ">
-                                                    بعد اختيار الملفات  (upload) الرجاء الضغط على
-                                                </div>
-                                                <p:fileUpload fileUploadListener="#{shoeServiceCitizemEmpManeger.handleFileUpload}" multiple="true" update="messages"  />
+                                                
+                                                <p:fileUpload fileUploadListener="#{shoeServiceCitizemEmpManeger.handleFileUpload}" multiple="true" auto="true" update="messages"  />
                                                 <p:growl id="messages" showDetail="false" showSummary="false"/>    
 
                                             </div>

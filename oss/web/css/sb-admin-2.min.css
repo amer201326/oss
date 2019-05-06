@@ -8753,13 +8753,16 @@ opacity:1
 .border-left-primary {
 	border-left: .25rem solid #4e73df!important
 }
+.border-right-primary {
+	border-right: .25rem solid #4e73df!important
+}
 .border-left-success {
 	border-left: .25rem solid #1cc88a!important
 }
 .border-right-success {
 	border-right: .25rem solid #1cc88a!important
 }
-.border-right-info {
+.border-left-info {
 	border-left: .25rem solid #36b9cc!important
 }
 .border-right-info {

@@ -967,5 +967,11 @@ public class ServiceCitizen {
         }
     }
     
-     
+    public boolean sizeAttwhithFile(){
+        return !attwhithFile.isEmpty();
+    } 
+   public boolean sizeAttachment(){
+        return !attachment.isEmpty();
+    }
+    
 }

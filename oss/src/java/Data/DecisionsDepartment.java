@@ -96,49 +96,49 @@ public class DecisionsDepartment {
     }
 
     public String nameStatus() {
-        if (status == "done") {
+        if ("done".equals(status)) {
             return "جاهزه";
         }
         return "قيد التنفيذ";
     }
 
     public String colorStatus() {
-        if (status == "done") {
+        if ("done".equals(status)) {
             System.out.println("success");
             return "success";
-        }else if(status == "notdone") {
+        }else if("notdone".equals(status)) {
              System.out.println("warning");
             return "warning";
         }
-         System.out.println("danger");
+         System.out.println("danger"+status);
         return "danger";
     }
     
     public boolean flagStatus() {
-        if (status == "done") {
+        if ("done".equals(status)) {
             return true;
         }
         return false;
     }
 
     public String nameDecision() {
-        if (decision == "yse") {
+        if ("yse".equals(decision)) {
             return "تم القبول";
-        } else if (status == "no") {
+        } else if ("no".equals(decision)) {
             return "تم الرفض ";
         }
         return "لم يتحدد  ";
     }
     public String colorDecision() {
-        if (decision == "yse") {
+        if ("yse".equals(decision)) {
             return "success";
-        }else if(decision == "no") {
+        }else if("no".equals(decision)) {
             return "danger";
         }
         return "warning";
     }
  public boolean flagDecision() {
-        if (decision == "yse") {
+        if ("yse".equals(decision)) {
             return true;
         }
             return false;
