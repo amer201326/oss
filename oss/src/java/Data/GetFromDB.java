@@ -960,7 +960,7 @@ public class GetFromDB {
                         + "inner join citizen as cit on sc.Cit_ID = cit.Cit_ID "
                         + "inner join decisions_department as dd on sc.Service_Citizen_ID = dd.Service_Citizen_ID and sc.Cit_ID = dd.Cit_ID "
                         + " and sc.Services_Provided_ID = dd.Services_Provided_ID "
-                        + "where dd.Status = 'done' and decisions is NULL and dd.Dep_ID = " + emp.dep_id + ";";
+                        + "where dd.Status = 'show' and decisions is NULL and dd.Dep_ID = " + emp.dep_id + ";";
                 System.out.println(sql);
                 ResultSet r = db.read(sql);
                 while (r.next()) {

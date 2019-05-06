@@ -109,6 +109,9 @@ public class DecisionsDepartment {
         }else if("notdone".equals(status)) {
              System.out.println("warning");
             return "warning";
+        }else if("show".equals(status)) {
+             System.out.println("warning");
+            return "warning";
         }
          System.out.println("danger"+status);
         return "danger";

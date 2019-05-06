@@ -622,7 +622,7 @@ public class ServiceCitizen {
             }
             System.out.println("------------- jjjj -00000000000000");
             if (jobCount == 0) {
-                q = "UPDATE `oss`.`dicisions_section` SET `Status` = 'done' WHERE (`Dep_ID` = " + service_Job.Dep_ID + ") "
+                q = "UPDATE `oss`.`dicisions_section` SET `Status` = 'show' WHERE (`Dep_ID` = " + service_Job.Dep_ID + ") "
                         + "and (`Sec_ID` = " + service_Job.Sec_ID + ") and (`Services_Provided_ID` = " + service_Job.Services_Provided_ID + ") "
                         + "and (`Order_Departmant` = " + service_Job.Order_Departmant + ") "
                         + "and (`Order_Section` = " + service_Job.Order_Section + ") and (`Cit_ID` = " + service_Job.Cit_ID + ") and (`Service_Citizen_ID` = " + service_Job.Service_Citizen_ID + ");";
