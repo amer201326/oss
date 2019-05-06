@@ -26,6 +26,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import org.primefaces.PrimeFaces;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -59,10 +61,10 @@ public class Session implements Serializable {
         System.out.println("login");
         if (username != null) {
             Employee e = GetFromDB.getEmployeeAccount(username, passWord);
-           
+
             if (e != null) {
-                if(e.checkTypeAdmin()){
-                    
+                if (e.checkTypeAdmin()) {
+
                     try {
                         login = true;
                         typeAccount = "manager";
@@ -70,9 +72,9 @@ public class Session implements Serializable {
                         FacesContext.getCurrentInstance().getExternalContext().redirect("../manager/");
                     } catch (IOException ex) {
                         Logger.getLogger(Session.class.getName()).log(Level.SEVERE, null, ex);
-                        
+
                     }
-                }else{
+                } else {
                     try {
                         login = true;
                         typeAccount = "employee";
@@ -82,12 +84,11 @@ public class Session implements Serializable {
 
                     } catch (IOException ex) {
                         Logger.getLogger(Session.class.getName()).log(Level.SEVERE, null, ex);
-                        
-                        
+
                     }
                 }
 
-            } else{
+            } else {
                 Citizen c = GetFromDB.getCitizenAccount(username, passWord);
                 if (c != null) {
                     try {
@@ -97,15 +98,13 @@ public class Session implements Serializable {
                         FacesContext.getCurrentInstance().getExternalContext().redirect("../citizenn/");
                     } catch (IOException ex) {
                         Logger.getLogger(Session.class.getName()).log(Level.SEVERE, null, ex);
-                      
+
                     }
                 } else {
-                    FacesContext.getCurrentInstance().addMessage(null,
-			new FacesMessage(FacesMessage.SEVERITY_FATAL,
-							"Incorrect Username and Password",
-							"Please enter correct username and Password"));
+                    System.out.println("errrorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
+                    
                 }
-            } 
+            }
         }
     }
 
