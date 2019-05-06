@@ -46,11 +46,16 @@ public class CitizenRequestManager implements Serializable {
     }
 
     public void addRequestCitizen() throws IOException {
-        System.out.println(newCitizen + "emaneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+        if(cheekUserName()){
+              System.out.println(newCitizen + "emaneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
         newCitizen.addCitizenRequestToDB();
         FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
 
-                            FacesContext.getCurrentInstance().addMessage("sub", new FacesMessage(FacesMessage.SEVERITY_ERROR," ", "بوجد مرفقات مطلوبة لم يتم ارفاقها"));
+        }else{
+                    FacesContext.getCurrentInstance().addMessage("sub", new FacesMessage(FacesMessage.SEVERITY_ERROR," ", " يحب التاكد من ان المعلومات صحيحه "));
+
+        }
+      
 
     }
 
@@ -133,18 +138,20 @@ public class CitizenRequestManager implements Serializable {
         this.errorUserName = errorUserName;
     }
 
-    public void cheekUserName() {
-        if(newCitizen.getCit_Username().matches("[0-9]")){
+    public boolean cheekUserName() {
+        if(newCitizen.getCit_Username().matches("[a-zA-Z0-9]*")){
         if (newCitizen.getCit_Username().length() < 6) {
             errorUserName = "يجب ان يكون اكبر من ٦ احرف";
         } else if (GetFromDB.cheekUserName(newCitizen.getAccount().getUserName())) {
             errorUserName = "اسم المستخدم موجود بالغعل";
         } else {
             errorUserName = "";
+            return  true;
         }
     }else{
              errorUserName = "يجب ان يحتوي على احرف وارقام فقط  ";
         }
+        return false;
     }
 
 }

@@ -254,7 +254,7 @@
 
 
                                                                         <p:outputLabel for="counter" class="label" value="اسم المستخدم"/>
-                                                                        
+
                                                                         <p:inputText id="counter" value="#{citizenRequestManager.newCitizen.cit_Username}"
                                                                                      class="form-control form-control-user" style="text-align:right;"
                                                                                      type="text" required="true">
@@ -292,9 +292,13 @@
                                                         <p:resetInput target="@form formAddCitizen" />
                                                         <f:ajax />
                                                     </p:commandButton>
-                                                    <p:commandButton value="تسجيل" class="myButtonC" actionListener="#{citizenRequestManager.addRequestCitizen()}"
-                                                                     update="@form " />   &nbsp; &nbsp; &nbsp;
-
+                                                    <div class="text-center">
+                                                        <p:messages id="messages" showDetail="true" closable="true" for="sub" >
+                                                            <p:autoUpdate  />
+                                                        </p:messages>
+                                                        <p:commandButton value="تسجيل" class="myButtonC" actionListener="#{citizenRequestManager.addRequestCitizen()}"
+                                                                         update="@form " />   &nbsp; &nbsp; &nbsp;
+                                                    </div>
                                                 </div> <br/>
 
                                             </div>
