@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -48,6 +49,8 @@ public class CitizenRequestManager implements Serializable {
         System.out.println(newCitizen + "emaneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
         newCitizen.addCitizenRequestToDB();
         FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+
+                            FacesContext.getCurrentInstance().addMessage("sub", new FacesMessage(FacesMessage.SEVERITY_ERROR," ", "بوجد مرفقات مطلوبة لم يتم ارفاقها"));
 
     }
 
