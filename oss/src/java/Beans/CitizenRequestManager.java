@@ -131,12 +131,16 @@ public class CitizenRequestManager implements Serializable {
     }
 
     public void cheekUserName() {
-        if (newCitizen.getAccount().getUserName().length() < 6) {
+        if(newCitizen.getCit_Username().matches("[0-9]")){
+        if (newCitizen.getCit_Username().length() < 6) {
             errorUserName = "يجب ان يكون اكبر من ٦ احرف";
         } else if (GetFromDB.cheekUserName(newCitizen.getAccount().getUserName())) {
             errorUserName = "اسم المستخدم موجود بالغعل";
         } else {
             errorUserName = "";
+        }
+    }else{
+             errorUserName = "يجب ان يحتوي على احرف وارقام فقط  ";
         }
     }
 
