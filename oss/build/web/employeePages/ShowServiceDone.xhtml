@@ -315,6 +315,7 @@
                                 </div> 
 
 
+                                <p:outputPanel rendered="#{shoeServiceCitizemDoneEmpManeger.serviseCitizen.sizeAttachment()}">
                                 <div class="col-sm-12 mb-4">
                                     <div class="col-sm-12" style="text-align: right; min-width:900px ">
                                         <div class="card shadow mb-xl-4">
@@ -322,7 +323,7 @@
                                                 <h6 class="m-0 font-weight-bold text-primary">  مرفقات المواطن </h6>
                                             </div>
                                             <div class="card-body">
-                                                <ui:repeat value="#{shoeServiceCitizemDoneEmpManeger.serviseCitizen.attwhithFile}" var="att" varStatus="in" >
+                                                <ui:repeat value="#{shoeServiceCitizemDoneEmpManeger.serviseCitizen.attachment}" var="att" varStatus="in" >
                                                     <div class="flexAm row-space " style="margin-right: 14px">
                                                         <div class="px-3 mb-2 py-5 bg-gradient-#{att.colorHaveFile()} text-white border-bottom-#{att.colorHaveFile()}">مرفق  #{in.index+1}</div>
                                                         <div class="col-sm-11 px-5  mb-2 py-4  border-bottom-#{att.colorHaveFile()} ">
@@ -350,6 +351,8 @@
                                         </div>
                                     </div> 
                                 </div>
+                               </p:outputPanel>
+                                <p:outputPanel rendered="#{shoeServiceCitizemDoneEmpManeger.serviseCitizen.sizeAttwhithFile()}"><
 
                                 <div class="col-sm-12 mb-4">
                                     <div class="col-sm-12" style="text-align: right; min-width:900px ">
@@ -358,7 +361,7 @@
                                                 <h6 class="m-0 font-weight-bold text-primary"> متطلبات الخدمة </h6>
                                             </div>
                                             <div class="card-body">
-                                                <ui:repeat value="#{shoeServiceCitizemDoneEmpManeger.serviseCitizen.attachment}" var="att2"  varStatus="inn">
+                                                <ui:repeat value="#{shoeServiceCitizemDoneEmpManeger.serviseCitizen.attwhithFile}" var="att2"  varStatus="inn">
                                                     <div class="flexAm row-space " style="margin-right: 14px">
                                                         <div class="px-3 mb-2 py-5 bg-gradient-#{att2.colorHaveFile()} text-white border-bottom-#{att2.colorHaveFile()}">نموذج  #{inn.index+1}</div>
                                                         <div class="col-sm-11 px-5  mb-2 py-4  border-bottom-#{att2.colorHaveFile()} ">
@@ -386,7 +389,7 @@
                                         </div>
                                     </div> 
                                 </div>
-
+</p:outputPanel>
                                 <div class="col-sm-12 mb-4">
                                     <div class="col-sm-12" style="text-align: right; min-width:900px ">
                                         <div class="card shadow mb-xl-4">
