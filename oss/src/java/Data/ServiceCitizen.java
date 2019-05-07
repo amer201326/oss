@@ -910,19 +910,7 @@ public class ServiceCitizen {
 
         }
         
-          List<DecisionsDepartment> departments = GetFromDB.getDecisionsDepartment(Cit_ID, Service_Citizen_ID);
           
-          for (DecisionsDepartment department : departments) {
-            if("done".equals(department.status)){
-                
-            }else{
-                return;
-            }
-        }
-          
-           String q = "UPDATE `oss`.`service_citizen` SET `status` = 'done' WHERE (`Service_Citizen_ID` = "+Service_Citizen_ID+") and (`Services_Provided_ID` = "+Services_Provided_ID+") and (`Cit_ID` = "+Cit_ID+");";
-             DB db = new DB();
-             db.write(q);
              
     }
 
