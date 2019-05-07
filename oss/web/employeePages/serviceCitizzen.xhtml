@@ -120,9 +120,11 @@
                                                             </p:column>
 
 
-                                                            <p:column headerText="الحالة">
+                                                            <p:column headerText="الحالة" rendered="#{!msession.employee.checkTypeHed()}">
                                                                 <h:outputText value="#{service.service_Job.status}" />
-
+                                                            </p:column>
+                                                            <p:column headerText="الحالة" rendered="#{msession.employee.checkTypeHed()}">
+                                                                <h:outputText value="#{service.decisionsDepartment.status}" />
                                                             </p:column>
 
                                                             <p:column headerText="التاريخ">
@@ -166,11 +168,14 @@
                                                                 <h:outputText value="#{service.service.name}" />
                                                             </p:column>
 
-                                                            <p:column headerText="الحالة">
+                                                            <p:column headerText="الحالة" rendered="#{!msession.employee.checkTypeHed()}">
                                                                 <h:outputText value="#{service.service_Job.status}" />
-
                                                             </p:column>
-
+                                                            
+                                                            <p:column headerText="الحالة" rendered="#{msession.employee.checkTypeHed()}">
+                                                                <h:outputText value="#{service.decisionsDepartment.status}" />
+                                                            </p:column>
+                                                            
                                                             <p:column headerText="التاريخ">
                                                                 <h:outputText value="#{service.date}" />
                                                             </p:column>
