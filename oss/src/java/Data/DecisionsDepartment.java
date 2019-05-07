@@ -35,6 +35,8 @@ public class DecisionsDepartment {
     String decision;
     List<DecisionSection> section = new ArrayList<>();
 
+    double totalDepCost;
+    
     public DecisionsDepartment() {
     }
 
@@ -253,6 +255,14 @@ public class DecisionsDepartment {
                 + " and (`Cit_ID` = '" + Cit_ID + "') and (`Service_Citizen_ID` = '" + Service_Citizen_ID + "');";
         System.out.println("q d " + q);
         data.write(q);
+    }
+
+    public double getTotalDepCost() {
+        return totalDepCost;
+    }
+
+    public void setTotalDepCost(double totalDepCost) {
+        this.totalDepCost = totalDepCost;
     }
 
 }

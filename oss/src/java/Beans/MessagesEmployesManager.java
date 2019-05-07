@@ -27,7 +27,7 @@ public class MessagesEmployesManager implements Serializable {
 
     ServiceCitizen thisServiceCitizen;
     List<StepsAndDecsions> stepsAndDecsions;
-    double totalDepCost;
+  
     double totalCost;
 
     public MessagesEmployesManager() {
@@ -54,19 +54,19 @@ public class MessagesEmployesManager implements Serializable {
 
         System.out.println("lllll" + pathJ.size());
         for (StepsAndDecsions d : pathD) {
-            totalDepCost = + d.decisionsDepartment.getCost();
+            d.decisionsDepartment.setTotalDepCost(d.decisionsDepartment.getTotalDepCost() + d.decisionsDepartment.getCost());
             for (DecisionSection s : pathS) {
                 if (d.getDepartmentPaths().id == s.getSection().getDepartmentId() && d.getDepartmentPaths().order == s.getSection().getOrderDepartment()) {
                     d.getSections().add(s);
                     for (StepsAndDecsionsJob j : pathJ) {
                         if (s.getSection().getId() == j.getJobPath().getSectionID() && s.getSection().getOrder() == j.getJobPath().getsOrder()) {
                             s.getJob().add(j);
-                            totalDepCost = +j.decisionsJob.getCost();
+                             d.decisionsDepartment.setTotalDepCost(d.decisionsDepartment.getTotalDepCost() + j.decisionsJob.getCost());
                         }
                     }
                 }
             }
-           totalCost += totalDepCost;
+            totalCost = totalCost + d.decisionsDepartment.getTotalDepCost();
         }
         return pathD;
     }
@@ -103,16 +103,7 @@ public class MessagesEmployesManager implements Serializable {
         this.totalCost = totalCost;
     }
 
-    
-
-    public double getTotalDepCost() {
-        return totalDepCost;
-    }
-
-    public void setTotalDepCost(double totalDepCost) {
-        this.totalDepCost = totalDepCost;
-    }
-
+   
     
 
 }

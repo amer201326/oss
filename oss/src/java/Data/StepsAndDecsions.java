@@ -20,6 +20,7 @@ public class StepsAndDecsions {
     
     //List<StepsAndDecsionsJob> job = new ArrayList<>();
 
+
     public StepsAndDecsions(DepartmentPaths departmentPaths) {
         this.departmentPaths = departmentPaths;
     }
@@ -62,6 +63,7 @@ public class StepsAndDecsions {
         this.sections = sections;
     }
 
+   
     
      
 }

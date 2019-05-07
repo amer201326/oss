@@ -399,7 +399,7 @@
                                         <div style="text-align: right">
                                             <div class="col mr-2 flexjustify-content">
                                                 <h2 class="section-heading inLineB" style="padding: 10px">:  تعليقات الدوائر</h2>
-                                                <h3 class=" ml-2 text-primarytext-primary  "> التكلفة الكلية =   #{messagesEmployesManager.totalCost}</h3>
+                                                <h3 class=" ml-2 text-primarytext-primary  "> التكلفة الكلية =   #{showServiceHeadManeger.totalCost}</h3>
                                             </div>
                                             <br/><br/>
 
@@ -416,7 +416,7 @@
                                                                 <a href="#collapseCardExample#{d.departmentPaths.id}" class="d-block card-header py-3 collapsed " data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseCardExample#{d.departmentPaths.id}">
                                                                     <div class="card-header py-3 flexjustify-content">
                                                                         <h6 class="m-0 font-weight-bold text-primary">#{d.departmentPaths.nameA} </h6>
-                                                                        <div class="m-0 font-weight-bold text-primary ">مجموع تكلفة الدائره =   #{showServiceHeadManeger.totalDepCost}</div>
+                                                                        <div class="m-0 font-weight-bold text-primary ">مجموع تكلفة الدائره =   #{d.decisionsDepartment.totalDepCost}</div>
                                                                     </div>
                                                                 </a>
                                                                 <div class="collapse" id="collapseCardExample#{d.departmentPaths.id}" style="">
