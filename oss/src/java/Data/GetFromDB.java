@@ -1013,23 +1013,24 @@ public class GetFromDB {
     public static List<ServiceCitizen> getAllRequestService(){
          ServiceCitizen cit = new ServiceCitizen();
         List<ServiceCitizen> c = new ArrayList<ServiceCitizen>();
-        
-             try {
+         try {
                 DB db = new DB();
-                String sql = "SELECT * FROM services_provided as sp inner join service_citizen as sc on sc.Services_Provided_ID = sp.Services_Provided_ID "
-                        + " inner join citizen as cit on sc.Cit_ID = cit.Cit_ID inner join service_jobs as sj  on sc.Service_Citizen_ID = sj.Service_Citizen_ID and  sc.Cit_ID = sj.Cit_ID  "
-                        + ";";
+                String sql = "SELECT * FROM services_provided as sp inner join service_citizen as sc on sc.Services_Provided_ID = sp.Services_Provided_ID inner join citizen as cit on sc.Cit_ID = cit.Cit_ID inner join department as d on sp.DepartmentID = d.Dep_ID;";
+                        
                 System.out.println(sql);
                 ResultSet r = db.read(sql);
                 while (r.next()) {
+                    
                     Service s = new Service(r.getInt(1), r.getString(2), r.getDouble(3), r.getInt(4), r.getString(5), r.getString(8));
+                    
                     Citizen c1 = new Citizen(r.getInt(15), r.getString(16), r.getString(17), r.getString(18), r.getString(19), r.getString(20), r.getInt(21),
                             r.getString(22), r.getString(23), r.getString(24), r.getString(25), r.getString(26), r.getString(27), r.getString(28), r.getString(29), r.getString(30),
                             r.getString(31), r.getString(32), r.getString(33), r.getString(34), r.getString(35));
-                    Service_Job service_Job = new Service_Job(r.getInt(36), r.getInt(37), r.getInt(38), r.getInt(39), r.getInt(40), r.getInt(41), r.getInt(42), r.getInt(43), r.getInt(44), r.getString(45));
-                    cit = new ServiceCitizen(s, r.getInt(9), r.getInt(10), r.getInt(11), r.getString(12), r.getString(13), r.getString(14), c1, service_Job);
-//               cit.decisionsJob.internalMessage = r.getString(59);
-//               cit.decisionsJob.externalMessage = r.getString(60);
+
+                    cit = new ServiceCitizen(s, r.getInt(9), r.getInt(10), r.getInt(11), r.getString(12), r.getString(13), r.getString(14), c1);
+                    Department d = new Department(r.getString(37));
+                    d.setId(r.getInt(36));
+                    cit.setDepartment(d);
                     c.add(cit);
                 }
             } catch (SQLException ex) {

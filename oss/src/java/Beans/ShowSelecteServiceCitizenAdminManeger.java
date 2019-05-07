@@ -35,7 +35,7 @@ import org.primefaces.event.FileUploadEvent;
 @ViewScoped
 public class ShowSelecteServiceCitizenAdminManeger {
     ServiceCitizen serviseCitizen;
-    Employee employee;
+ 
     List<StepsAndDecsions> stepsAndDecsions;
 
     @ManagedProperty(value = "#{msession}")
@@ -49,7 +49,7 @@ public class ShowSelecteServiceCitizenAdminManeger {
     @PostConstruct
     public void init() {
         serviseCitizen = session.serviceCitizenShow;
-        employee = session.employee;
+        
 
         if (serviseCitizen != null) {
             haveService = true;
@@ -69,17 +69,14 @@ public class ShowSelecteServiceCitizenAdminManeger {
 
         for (ServiceAttachmentName serviceAttachmentName : allAtt) {
             for (ViewerAttachment viewer : jobViewer) {
-                if (serviceAttachmentName.getId() == viewer.getServiceAttachmentName_ID()
-                        && employee.getDep_id() == viewer.getDep_ID() && employee.getSec_id() == viewer.getSec_ID() && employee.getJob_id() == viewer.getJob_ID()) {
-
-                    if ("yes".equals(serviceAttachmentName.getForm())) {
+               if ("yes".equals(serviceAttachmentName.getForm())) {
                         attform.add(serviceAttachmentName);
                     } else {
                         att.add(serviceAttachmentName);
                     }
 
                 }
-            }
+            
         }
 
         serviseCitizen.attachment = att;
@@ -135,13 +132,7 @@ public class ShowSelecteServiceCitizenAdminManeger {
     }
 
     
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
+ 
 
     public List<AttachmentServiceEmployee> getAllFileEmployee() {
         return attachmentServiceEmployees;

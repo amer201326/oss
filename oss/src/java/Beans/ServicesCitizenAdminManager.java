@@ -32,12 +32,14 @@ import javax.faces.context.FacesContext;
 public class ServicesCitizenAdminManager implements Serializable {
 
     List<ServiceCitizen> allRequestService;
-    List<ServiceCitizen> allRequestServiceView;
-    List<ServiceCitizen> allRequestServiceNotView;
-
+    
+    List<ServiceCitizen> allRequestServiceNotDone;//show
+    List<ServiceCitizen> allRequestServiceDone;//done
+    List<ServiceCitizen> allRequestServiceNotView;//notdone
     ServiceCitizen serviceSelected;
 
     List<ServiceCitizen> filteredRequestService;
+    List<Deprecated> deprecateds = new ArrayList<>();
     
     @ManagedProperty(value = "#{msession}")
     Session session;
@@ -48,25 +50,29 @@ public class ServicesCitizenAdminManager implements Serializable {
 
     @PostConstruct
     public void init() {
-        if (session.employee != null) {
+       
             allRequestService = new ArrayList<>();
-            allRequestService = GetFromDB.getAllRequestService(session.employee);
-            allRequestServiceView = new ArrayList<>();
+            allRequestService = GetFromDB.getAllRequestService();
+            
+            allRequestServiceNotDone = new ArrayList<>();
+            allRequestServiceDone = new ArrayList<>();
             allRequestServiceNotView = new ArrayList<>();
             
+            System.out.println("size+="+allRequestService.size());
             
                 for (int i = 0; i < allRequestService.size(); i++) {
                     ServiceCitizen get = allRequestService.get(i);
                     
-                    if (get.getDecisionsDepartment().getStatus().compareTo("show") == 0) {
+                    if (get.getStatus().compareTo("view") == 0) {
                         //get.messages(session.employee.getEmp_id());
-                        allRequestServiceView.add(get);
-                    } else {
+                        allRequestServiceNotDone.add(get);
+                    } else  if (get.getStatus().compareTo("done") == 0){
+                        allRequestServiceDone.add(get);
+                    }else{
                         allRequestServiceNotView.add(get);
                     }
                 }
-               
-        }
+         
 
         serviceSelected = new ServiceCitizen();
     }
@@ -103,13 +109,23 @@ public class ServicesCitizenAdminManager implements Serializable {
         this.allRequestService = allRequestService;
     }
 
-    public List<ServiceCitizen> getAllRequestServiceView() {
-        return allRequestServiceView;
+    public List<ServiceCitizen> getAllRequestServiceNotDone() {
+        return allRequestServiceNotDone;
     }
 
-    public void setAllRequestServiceView(List<ServiceCitizen> allRequestServiceView) {
-        this.allRequestServiceView = allRequestServiceView;
+    public void setAllRequestServiceNotDone(List<ServiceCitizen> allRequestServiceNotDone) {
+        this.allRequestServiceNotDone = allRequestServiceNotDone;
     }
+
+    public List<ServiceCitizen> getAllRequestServiceDone() {
+        return allRequestServiceDone;
+    }
+
+    public void setAllRequestServiceDone(List<ServiceCitizen> allRequestServiceDone) {
+        this.allRequestServiceDone = allRequestServiceDone;
+    }
+
+    
 
     public List<ServiceCitizen> getAllRequestServiceNotView() {
         return allRequestServiceNotView;
@@ -142,6 +158,14 @@ public class ServicesCitizenAdminManager implements Serializable {
 
     public void setFilteredRequestService(List<ServiceCitizen> filteredRequestService) {
         this.filteredRequestService = filteredRequestService;
+    }
+
+    public List<Deprecated> getDeprecateds() {
+        return deprecateds;
+    }
+
+    public void setDeprecateds(List<Deprecated> deprecateds) {
+        this.deprecateds = deprecateds;
     }
 
     

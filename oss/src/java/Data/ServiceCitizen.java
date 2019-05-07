@@ -41,7 +41,7 @@ public class ServiceCitizen {
     DecisionsJob decisionsJob = new DecisionsJob();
     Service_Job service_Job;
     Citizen citizen;
-
+    Department department;
     DecisionsDepartment decisionsDepartment = new DecisionsDepartment();
     
     public List<AttachmentServiceEmployee> attachmentServiceEmployees = new ArrayList<AttachmentServiceEmployee>();
@@ -310,6 +310,15 @@ public class ServiceCitizen {
         this.attachmentServiceEmployees = attachmentServiceEmployees;
     }
 
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    
     
     
     public ArrayList<DepartmentPaths> firstDepsInPathOfthisService() {
