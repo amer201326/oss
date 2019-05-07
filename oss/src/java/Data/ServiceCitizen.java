@@ -101,7 +101,7 @@ public class ServiceCitizen {
             data.write(q);
 
             q = "INSERT INTO service_citizen (`Service_Citizen_ID`, `Services_Provided_ID`, `Cit_ID`, `Date`, `status`, `note`) VALUES ("
-                    + idMaxSC + ", " + Services_Provided_ID + ", " + Cit_ID + ", '" + LocalDate.now() + "', 'notview' , '" + note + "');";
+                    + idMaxSC + ", " + Services_Provided_ID + ", " + Cit_ID + ", '" + LocalDate.now() + "', 'notdone' , '" + note + "');";
             System.out.println(q);
             data.write(q);
             System.out.println("  size _>" + attachment.size());
@@ -598,6 +598,10 @@ public class ServiceCitizen {
 
             String q = "start transaction;";
             db.write(q);
+            
+            q = "UPDATE `oss`.`service_citizen` SET `status` = 'view' WHERE (`Service_Citizen_ID` = "+Service_Citizen_ID+") and (`Services_Provided_ID` = "+Services_Provided_ID+") and (`Cit_ID` = "+Cit_ID+");";
+            db.write(q);
+            
             service_Job.done();
             decisionsJob.Cit_ID = Cit_ID;
             decisionsJob.Service_Citizen_ID = Service_Citizen_ID;
@@ -905,6 +909,21 @@ public class ServiceCitizen {
             }
 
         }
+        
+          List<DecisionsDepartment> departments = GetFromDB.getDecisionsDepartment(Cit_ID, Service_Citizen_ID);
+          
+          for (DecisionsDepartment department : departments) {
+            if("done".equals(department.status)){
+                
+            }else{
+                return;
+            }
+        }
+          
+           String q = "UPDATE `oss`.`service_citizen` SET `status` = 'done' WHERE (`Service_Citizen_ID` = "+Service_Citizen_ID+") and (`Services_Provided_ID` = "+Services_Provided_ID+") and (`Cit_ID` = "+Cit_ID+");";
+             DB db = new DB();
+             db.write(q);
+             
     }
 
     
