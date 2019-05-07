@@ -799,6 +799,10 @@ hr{
     display: flex;
     flex-direction: row;
 }
+.flexRowRe{
+    display: flex;
+    flex-direction: row-reverse;
+}
 .flexCenter{
     display: flex;
      flex-wrap:  wrap;
@@ -808,6 +812,11 @@ hr{
     display: flex;
     flex-direction: column;
     justify-content:center;
+}
+.flexcolomnright{
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-end;
 }
 .padding10{
     padding-top: 3px;

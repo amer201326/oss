@@ -55,5 +55,7 @@ public class DoneCitizenServicesManeger implements Serializable {
     public void setSession(Session session) {
         this.session = session;
     }
-
+    public boolean nothaveSer(){
+        return doneCitizenServices.isEmpty();
+    }
 }
