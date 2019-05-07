@@ -37,11 +37,10 @@
                 <div id="content">
 
                     <!-- Topbar -->
-                    <ui:include src="heder.xhtml"/>
+                    <ui:include src="../pages/heder.xhtml"/>
                     <!-- End of Topbar -->
-                    <h:form enctype="multipart/form-data">
 
-
+                    <h:form id="ShowServiceCitizinForm" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-sm-12 text-center">
 
@@ -51,7 +50,7 @@
                                         <div class="card-body">
                                             <div class="row no-gutters textC">
                                                 <div class="col mr-2">
-                                                    <h2 class="section-heading text-uppercase">#{shoeServiceCitizemDoneEmpManeger.serviseCitizen.service.name}</h2>
+                                                    <h2 class="section-heading text-uppercase">#{showSelecteServiceCitizenAdminManeger.serviseCitizen.service.name}</h2>
                                                 </div>
                                             </div>
                                         </div>
@@ -60,7 +59,6 @@
 
 
                                 <br/><hr style="border: 2px solid orange; margin-left: 10px; margin-right: 10px;"/><br/>
-
                                 <div class="col-sm-12 mb-4">
                                     <div class="col-sm-12" style="text-align: right; min-width:900px ">
                                         <div class="card shadow mb-xl-4">
@@ -71,7 +69,7 @@
                                             <div class="card-body">
 
                                                 <div class="row-space flexAm">
-                                                    <div class="col-xl-6 col-md-6 mb-3">
+                                                    <div class="col-sm-6  mb-3">
 
                                                         <div class="card border-right-warning shadow h-100 py-2">
                                                             <div class="card-body">
@@ -82,7 +80,7 @@
                                                                     </div>
                                                                     <div class="col mr-2" style="text-align: right">
                                                                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" >رسوم طلب الخدمة</div>
-                                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">#{shoeServiceCitizemDoneEmpManeger.serviseCitizen.service.cost}</div>
+                                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">#{showSelecteServiceCitizenAdminManeger.serviseCitizen.service.cost}</div>
                                                                     </div>
 
                                                                 </div>
@@ -91,7 +89,7 @@
                                                     </div>
 
                                                     <!-- Earnings (Monthly) Card Example -->
-                                                    <div class="col-xl-6 col-md-6 mb-3">
+                                                    <div class="col-sm-6 col-md-6 mb-3">
                                                         <div class="card border-right-warning shadow h-100 py-2">
                                                             <div class="card-body">
                                                                 <div class="row no-gutters align-items-center">
@@ -104,7 +102,7 @@
                                                                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">عدد ايام الاستجابة</div>
                                                                         <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                                             <div style="display: inline;margin-right: 5px">يوم  </div>
-                                                                            <div style="display: inline ;float: right"> #{shoeServiceCitizemDoneEmpManeger.serviseCitizen.service.days}</div> 
+                                                                            <div style="display: inline ;float: right"> #{showSelecteServiceCitizenAdminManeger.serviseCitizen.service.days}</div> 
 
 
                                                                         </div>
@@ -125,7 +123,7 @@
 
                                                                 <div class="col mr-2" style="text-align: right">
                                                                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1 " > الملاحظات  </div>
-                                                                    <div class="h5 mb-0 font-weight-normal text-gray-800"> #{shoeServiceCitizemDoneEmpManeger.serviseCitizen.service.note}</div>
+                                                                    <div class="h5 mb-0 font-weight-normal text-gray-800"> #{showSelecteServiceCitizenAdminManeger.serviseCitizen.service.note}</div>
                                                                 </div>
 
                                                             </div>
@@ -144,8 +142,9 @@
 
 
                                         </div>
-                                    </div>
-                                </div> 
+                                    </div> 
+                                </div>
+
 
                                 <div class="col-sm-12 mb-4">
                                     <div class="col-sm-12" style="text-align: right; min-width:900px ">
@@ -159,7 +158,6 @@
                                             <div class="collapse" id="collapseCardExample" style="">
                                                 <div class="card-body">
                                                     <div class="flexAm row">
-
                                                         <div class="col-xl-3 col-md-6 mb-4 ">
 
                                                             <div class="card border-right-warning border-bottom-warning shadow h-100 py-2">
@@ -169,11 +167,28 @@
 
                                                                         <div class="col mr-2" style="text-align: right">
                                                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" > اسم المواطن </div>
-                                                                            <div class="h5 mb-0 font-weight-normal text-gray-800">#{shoeServiceCitizemDoneEmpManeger.serviseCitizen.citizen.firstName}
-                                                                                #{shoeServiceCitizemDoneEmpManeger.serviseCitizen.citizen.fatherName}
-                                                                                #{shoeServiceCitizemDoneEmpManeger.serviseCitizen.citizen.grandFatherName}
-                                                                                #{shoeServiceCitizemDoneEmpManeger.serviseCitizen.citizen.lastName}
+                                                                            <div class="h5 mb-0 font-weight-normal text-gray-800">#{showSelecteServiceCitizenAdminManeger.serviseCitizen.citizen.firstName}
+                                                                                #{showSelecteServiceCitizenAdminManeger.serviseCitizen.citizen.fatherName}
+                                                                                #{showSelecteServiceCitizenAdminManeger.serviseCitizen.citizen.grandFatherName}
+                                                                                #{showSelecteServiceCitizenAdminManeger.serviseCitizen.citizen.lastName}
                                                                             </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-xl-3 col-md-6 mb-4  ">
+
+                                                            <div class="card border-right-warning border-bottom-warning shadow h-100 py-2">
+                                                                <div class="card-body">
+
+                                                                    <div class="row no-gutters align-items-center">
+
+                                                                        <div class="col mr-2" style="text-align: right">
+                                                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" > العنوان  </div>
+                                                                            <div class="h5 mb-0 font-weight-normal text-gray-800"> #{showSelecteServiceCitizenAdminManeger.serviseCitizen.citizen.address}</div>
                                                                         </div>
 
                                                                     </div>
@@ -189,32 +204,15 @@
                                                                     <div class="row no-gutters align-items-center">
 
                                                                         <div class="col mr-2" style="text-align: right">
-                                                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" > العنوان  </div>
-                                                                            <div class="h5 mb-0 font-weight-normal text-gray-800"> #{shoeServiceCitizemDoneEmpManeger.serviseCitizen.citizen.address}</div>
-                                                                        </div>
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-xl-3 col-md-6 mb-4">
-
-                                                            <div class="card border-right-warning border-bottom-warning shadow h-100 py-2">
-                                                                <div class="card-body">
-
-                                                                    <div class="row no-gutters align-items-center">
-
-                                                                        <div class="col mr-2" style="text-align: right">
                                                                             <div class="text-s font-weight-bold text-primary text-uppercase mb-1" > ايميل المواطن  </div>
-                                                                            <div class="h5 mb-0 font-weight-normal text-gray-800"> #{shoeServiceCitizemDoneEmpManeger.serviseCitizen.citizen.email} </div>
+                                                                            <div class="h5 mb-0 font-weight-normal text-gray-800"> #{showSelecteServiceCitizenAdminManeger.serviseCitizen.citizen.email} </div>
                                                                         </div>
 
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-xl-3 col-md-6 mb-4">
+                                                        <div class="col-xl-3 col-md-6 mb-4 ">
 
                                                             <div class="card border-right-warning border-bottom-warning shadow h-100 py-2">
                                                                 <div class="card-body">
@@ -223,14 +221,14 @@
 
                                                                         <div class="col mr-2" style="text-align: right">
                                                                             <div class="text-s font-weight-bold text-primary text-uppercase mb-1" > جوال المواطن  </div>
-                                                                            <div class="h5 mb-0 font-weight-normal text-gray-800"> #{shoeServiceCitizemDoneEmpManeger.serviseCitizen.citizen.mobile} </div>
+                                                                            <div class="h5 mb-0 font-weight-normal text-gray-800"> #{showSelecteServiceCitizenAdminManeger.serviseCitizen.citizen.mobile} </div>
                                                                         </div>
 
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-xl-3 col-md-6 mb-4">
+                                                        <div class="col-xl-3 col-md-6 mb-4 ">
 
                                                             <div class="card border-right-warning border-bottom-warning shadow h-100 py-2">
                                                                 <div class="card-body">
@@ -239,14 +237,14 @@
 
                                                                         <div class="col mr-2" style="text-align: right">
                                                                             <div class="text-s font-weight-bold text-primary text-uppercase mb-1" > هاتف المواطن  </div>
-                                                                            <div class="h5 mb-0 font-weight-normal text-gray-800"> #{shoeServiceCitizemDoneEmpManeger.serviseCitizen.citizen.telephone} </div>
+                                                                            <div class="h5 mb-0 font-weight-normal text-gray-800"> #{showSelecteServiceCitizenAdminManeger.serviseCitizen.citizen.telephone} </div>
                                                                         </div>
 
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-xl-3 col-md-6 mb-4">
+                                                        <div class="col-xl-3 col-md-6 mb-4 ">
                                                             <div class="card border-right-warning border-bottom-warning shadow h-100 py-2">
                                                                 <div class="card-body">
 
@@ -254,7 +252,7 @@
 
                                                                         <div class="col mr-2" style="text-align: right">
                                                                             <div class="text-s font-weight-bold text-primary text-uppercase mb-1" > رقم هوية المواطن  </div>
-                                                                            <div class="h5 mb-0 font-weight-normal text-gray-800"> #{shoeServiceCitizemDoneEmpManeger.serviseCitizen.citizen.idCard} </div>
+                                                                            <div class="h5 mb-0 font-weight-normal text-gray-800"> #{showSelecteServiceCitizenAdminManeger.serviseCitizen.citizen.idCard} </div>
                                                                         </div>
 
                                                                     </div>
@@ -292,7 +290,7 @@
                                                             <div class="row no-gutters align-items-center">
 
                                                                 <div class="col mr-2" style="text-align: right">
-                                                                    <div class="text-s font-weight-bold text-primary text-uppercase mb-1" >#{shoeServiceCitizemDoneEmpManeger.serviseCitizen.note}</div>
+                                                                    <div class="text-s font-weight-bold text-primary text-uppercase mb-1" > #{showSelecteServiceCitizenAdminManeger.serviseCitizen.note} </div>
                                                                 </div>
 
                                                             </div>
@@ -315,7 +313,9 @@
                                 </div> 
 
 
-                                <p:outputPanel rendered="#{shoeServiceCitizemDoneEmpManeger.serviseCitizen.sizeAttachment()}">
+
+                                <p:outputPanel rendered="#{showSelecteServiceCitizenAdminManeger.serviseCitizen.sizeAttachment()}">
+
                                     <div class="col-sm-12 mb-4">
                                         <div class="col-sm-12" style="text-align: right; min-width:900px ">
                                             <div class="card shadow mb-xl-4">
@@ -323,7 +323,7 @@
                                                     <h6 class="m-0 font-weight-bold text-primary">  مرفقات المواطن </h6>
                                                 </div>
                                                 <div class="card-body">
-                                                    <ui:repeat value="#{shoeServiceCitizemDoneEmpManeger.serviseCitizen.attachment}" var="att" varStatus="in" >
+                                                    <ui:repeat value="#{showSelecteServiceCitizenAdminManeger.serviseCitizen.attachment}" var="att" varStatus="in" >
                                                         <div class="flexAm row-space " style="margin-right: 14px">
                                                             <div class="px-3 mb-2 py-5 bg-gradient-#{att.colorHaveFile()} text-white border-bottom-#{att.colorHaveFile()}">مرفق  #{in.index+1}</div>
                                                             <div class="col-sm-11 px-5  mb-2 py-4  border-bottom-#{att.colorHaveFile()} ">
@@ -335,7 +335,7 @@
 
                                                                     </dir>
                                                                     <div id="divDown" class="flexColomn ">
-                                                                        <p:commandButton id="downloadAT"  value="تنزيل" ajax="false" icon="fa fa-arrow-down" class="bg-#{att.colorHaveFile()}" 
+                                                                        <p:commandButton id="downloadAT"  value="تنزيل" ajax="false"  icon="fa fa-arrow-down" class="bg-#{att.colorHaveFile()}" 
                                                                                          style="color: white;">
                                                                             <p:fileDownload value="#{att.fileDownload}"/>
                                                                         </p:commandButton>  
@@ -347,13 +347,12 @@
                                                     </ui:repeat>
 
                                                 </div>
-
                                             </div>
                                         </div> 
                                     </div>
                                 </p:outputPanel>
-                                <p:outputPanel rendered="#{shoeServiceCitizemDoneEmpManeger.serviseCitizen.sizeAttwhithFile()}">
 
+                                <p:outputPanel rendered="#{showSelecteServiceCitizenAdminManeger.serviseCitizen.sizeAttwhithFile()}">
                                     <div class="col-sm-12 mb-4">
                                         <div class="col-sm-12" style="text-align: right; min-width:900px ">
                                             <div class="card shadow mb-xl-4">
@@ -361,7 +360,7 @@
                                                     <h6 class="m-0 font-weight-bold text-primary"> متطلبات الخدمة </h6>
                                                 </div>
                                                 <div class="card-body">
-                                                    <ui:repeat value="#{shoeServiceCitizemDoneEmpManeger.serviseCitizen.attwhithFile}" var="att2"  varStatus="inn">
+                                                    <ui:repeat value="#{showSelecteServiceCitizenAdminManeger.serviseCitizen.attwhithFile}" var="att2"  varStatus="inn">
                                                         <div class="flexAm row-space " style="margin-right: 14px">
                                                             <div class="px-3 mb-2 py-5 bg-gradient-#{att2.colorHaveFile()} text-white border-bottom-#{att2.colorHaveFile()}">نموذج  #{inn.index+1}</div>
                                                             <div class="col-sm-11 px-5  mb-2 py-4  border-bottom-#{att2.colorHaveFile()} ">
@@ -372,8 +371,8 @@
                                                                         <div class="text-xs font-weight-bold text-gray-800 text-uppercase mb-1" style="font-size: 0.8em ; margin-right: 20px;">#{att2.notes}</div>
 
                                                                     </dir>
-                                                                    <div id="divDown" class="flexColomn ">
-                                                                        <p:commandButton id="downloadAT"  value="تنزيل" ajax="false" icon="fa fa-arrow-down" class="bg-#{att2.colorHaveFile()}" 
+                                                                    <div id="divDown2" class="flexColomn ">
+                                                                        <p:commandButton id="downloadAT2"  value="تنزيل" ajax="false"  icon="fa fa-arrow-down" class="bg-#{att2.colorHaveFile()}" 
                                                                                          style="color: white;">
                                                                             <p:fileDownload value="#{att2.fileDownload}"/>
                                                                         </p:commandButton>  
@@ -389,107 +388,144 @@
                                             </div>
                                         </div> 
                                     </div>
+
                                 </p:outputPanel>
-                                <div class="col-sm-12 mb-4">
-                                    <div class="col-sm-12" style="text-align: right; min-width:900px ">
-                                        <div class="card shadow mb-xl-4">
-                                            <div class="card-header py-3">
-                                                <h6 class="m-0 font-weight-bold text-primary">  مرفقات الموظفين </h6>
+
+
+                                <div class="  mb-4">
+
+                                    <div class="card-body">
+
+                                        <div style="text-align: right">
+                                            <div class="col mr-2 flexjustify-content">
+                                                <h2 class="section-heading inLineB" style="padding: 10px">:  تعليقات الدوائر</h2>
+                                                <h3 class=" ml-2 text-primarytext-primary  "> التكلفة الكلية =   #{showSelecteServiceCitizenAdminManeger.totalCost}</h3>
                                             </div>
-                                            <div class="card-body">
-                                                <ui:repeat value="#{shoeServiceCitizemDoneEmpManeger.serviseCitizen.attachmentServiceEmployees}" var="att3"  varStatus="inn3">
-                                                    <div class="flexAm row-space " style="margin-right: 14px">
-                                                        <div class="px-3 mb-2 py-5 bg-gradient-warning text-white border-bottom-warning">مرفق  #{inn3.index+1}</div>
-                                                        <div class="col-sm-11 px-5  mb-2 py-4  border-bottom-warning ">
-                                                            <div class="flexjustify-content row-space" style="margin-right: 14px">
-                                                                <dir>
-                                                                    <div class="text-xs font-weight-bold text-xs text-warning mb-1" style="font-size: 1.4em">#{att3.filename}</div>
+                                            <br/><br/>
 
 
-                                                                </dir>
-                                                                <div id="divDown" class="flexColomn ">
-                                                                    <p:commandButton id="downloadATE"  value="تنزيل" ajax="false" icon="fa fa-arrow-down" class="bg-warning" 
-                                                                                     style="color: white;">
-                                                                        <p:fileDownload value="#{att3.fileDownload}"/>
-                                                                    </p:commandButton>  
-                                                                    <br/>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </ui:repeat>
-
-                                            </div>
-
-                                        </div>
-                                    </div> 
-                                </div>
-
-                                <div class="col-sm-12 mb-4">
-                                    <div class="col-sm-12" style="text-align: right; min-width:900px ">
-                                        <div class="card shadow mb-xl-4">
-                                            <div class="card-header py-3">
-                                                <h2 class="section-heading inLineB" style="padding: 10px">:  التعليقات</h2>
-                                            </div>
-
-                                            <div class="col-sm-12 mb-4">
-
-                                                <div class="col-sm-12" style="text-align: right; min-width:900px ">
-
-                                                    <div style="text-align: right">
 
 
-                                                        <div class="form-group row">
-                                                            <div class="col-sm-12 py-2">
-                                                                <br/>
-                                                                : التعليقات الخارجيه (يمكن للمواطن ان يرها ) 
-                                                                <p:inputTextarea value="#{shoeServiceCitizemDoneEmpManeger.serviseCitizen.decisionsJob.externalMessage}" rows="5" cols="100" dir="rtl" style="width: 100%; opacity: 100;" disabled="true" /> 
-                                                            </div>
-                                                            <div class="col-sm-12 py-2">
-                                                                <br/>
-                                                                : التعليقات الداخلية (لا يمكن للمواطن ان يرها ) 
-                                                                <p:inputTextarea value="#{shoeServiceCitizemDoneEmpManeger.serviseCitizen.decisionsJob.internalMessage}" rows="5" cols="100" dir="rtl" style="width: 100%; opacity: 100;" disabled="true"/> 
-                                                            </div>
-                                                        </div>
+                                            <div class="col-lg-12 mb-4">
+                                                <ui:repeat value="#{showSelecteServiceCitizenAdminManeger.stepsAndDecsions}" var="d" >
 
-                                                        <br/><hr style="border: 2px solid orange; margin-left: 10px; margin-right: 10px;"/><br/>
+                                                    <div class="col-lg-12 mb-4">
+                                                        <div class="col-lg-12" style="text-align: right; min-width:1200px ">
+                                                            <div class="card shadow mb-xl-4">
+
+                                                                <a href="#collapseCardExample#{d.departmentPaths.id}" class="d-block card-header py-3 collapsed " data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseCardExample#{d.departmentPaths.id}">
+                                                                    <div class="card-header py-3 flexjustify-content">
+                                                                        <h6 class="m-0 font-weight-bold text-primary">#{d.departmentPaths.nameA} </h6>
+                                                                        <div class="m-0 font-weight-bold text-primary ">مجموع تكلفة الدائره =   #{d.decisionsDepartment.totalDepCost}</div>
+                                                                    </div>
+                                                                </a>
+                                                                <div class="collapse" id="collapseCardExample#{d.departmentPaths.id}" style="">
+                                                                    <div class="card-body">
+
+                                                                        <div class="card border-right-#{d.decisionsDepartment.colorStatus()} border-bottom-#{d.decisionsDepartment.colorStatus()} shadow h-100 py-2 " style="margin: 0 10px">
+                                                                            <div class="card-body">
+                                                                                <div class="row no-gutters align-items-center">
+
+                                                                                    <div class="col mr-2 " style="text-align: right">
+                                                                                        <div class="col mr-2 flexjustify-content" style="text-align: right">
+                                                                                            <div>
+                                                                                                <div class="text-s font-weight-bold text-primary text-uppercase mb-1" > تعليق الدائرة </div>
+                                                                                                <div class="h5 mb-0 font-weight-bold text-gray-800">#{d.decisionsDepartment.internalMessage}</div>
+                                                                                            </div>
+                                                                                            <div class="h5 mb-0 text-primarytext-primary  ">تكلفةرئيس الدائره= #{d.decisionsDepartment.cost}</div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <br/><br/>
+
+                                                                        <ui:repeat value="#{d.sections}" var="s" >
+
+                                                                            <div class="col-lg-12 mb-4">
+                                                                                <div class="col-lg-12" style="text-align: right; min-width:1000px ">
+                                                                                    <div class="card shadow mb-xl-4">
+                                                                                        <div class="card-header py-3">
+                                                                                            <h6 class="m-0 font-weight-bold text-primary">#{s.section.name} </h6>
 
 
-                                                    </div>
+                                                                                        </div>
+
+                                                                                        <div class="card-body">
+                                                                                            <div class="row-space flexAm">
 
 
-                                                </div>
+                                                                                            </div>
 
-                                                <div class="col-sm-12  mb-4">
 
-                                                    <div class="card border-right-warning shadow h-100 py-2 border-bottom-warning">
-                                                        <div class="card-body">
+                                                                                            <ui:repeat value="#{s.job}" var="j" >
 
-                                                            <div class="row no-gutters align-items-center">
+                                                                                                <div class="card border-right-#{j.decisionsJob.color()} border-bottom-#{j.decisionsJob.color()} shadow h-100 py-2 mb-3" style="margin: 0 10px">
+                                                                                                    <div class="card-body">
+                                                                                                        <div class="row no-gutters align-items-center">
 
-                                                                <div class="col mr-2" style="text-align: right">
+                                                                                                            <div class="col mr-2 " style="text-align: right">
+                                                                                                                <div class="col mr-2 flexjustify-content" style="text-align: right">
+                                                                                                                    <div>
+                                                                                                                        <div class=" font-weight-bold text-primary text-uppercase mb-1" > #{j.jobPath.name} : #{j.decisionsJob.employee.emp_name}</div>
+                                                                                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">#{j.decisionsJob.internalMessage}</div>
+                                                                                                                    </div>
+                                                                                                                    <div class="h5 mb-0  text-primarytext-primary  ">تكلفة = #{j.decisionsJob.cost}</div>
+                                                                                                                </div>
 
-                                                                    <div class="floatR">
 
-                                                                        <p:outputLabel dir="ltr" id="cost" value="#{shoeServiceCitizemDoneEmpManeger.serviseCitizen.decisionsJob.cost}"
-                                                                                       style="text-align:right;" />     
-                                                                        <p:spacer width="10"/>
-                                                                        <p:outputLabel value="  :التكلفة " for="cost" />
+
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+
+
+                                                                                            </ui:repeat>
+
+
+
+                                                                                        </div>
+
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+
+                                                                        </ui:repeat>
+
 
                                                                     </div>
                                                                 </div>
-
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
 
+                                                </ui:repeat>  
 
                                             </div>
+
+
+
+
+
+                                            <br/><hr style="border: 2px solid orange; margin-left: 10px; margin-right: 10px;"/><br/>
+
+
                                         </div>
-                                    </div> 
+
+
+                                    </div>
+
+
+
+
                                 </div>
-                                <h:panelGrid rendered="#{!shoeServiceCitizemDoneEmpManeger.haveService}">
+
+
+
+                                <h:panelGrid rendered="#{!showSelecteServiceCitizenAdminManeger.haveService}">
                                     <div class="card-body">
                                         <div class="row no-gutters textC">
                                             <div class="col mr-2 ">
@@ -524,24 +560,14 @@
 
             </div>
 
-
-            <ui:include src="sidebar.xhtml"/>
+            
+            <ui:include src="../pages/sidebar.xhtml"/>
 
 
         </div>
-        <script type="text/javascript">
-            //<![CDATA[
-            function start() {
-                PF('statusDialog').show();
-            }
 
-            function stop() {
-                PF('statusDialog').hide();
-            }
-            //]]>
-        </script>    
         <!-- Bootstrap core JavaScript-->
-        <script src="../vendor/jquery/jquery.min.js"></script>
+        <!--<script src="../vendor/jquery/jquery.min.js"></script>-->
         <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
         <!-- Core plugin JavaScript-->
@@ -551,7 +577,7 @@
         <script src="../js/sb-admin-2.min.js"></script>
 
         <!-- Page level plugins -->
-        <script src="../vendor/chart.js/Chart.min.js"></script>
+
 
         <!-- Page level custom scripts -->
 

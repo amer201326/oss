@@ -76,14 +76,14 @@
 
 
                                                 <h:head id="msgs"/>
-                                                <p:tabView dir="ltr">
+                                                <p:tabView >
                                                     <p:tab title="طلبات المواطنين"> 
                                                         <p:dataTable id="allCitizens" var="citizen" value="#{citizenRequestManager.allCitizenRequest}"
                                                                      editable="true" style="margin-bottom:20px; text-align: center;" widgetVar="citizenTable"
                                                                      selection="#{citizenRequestManager.citizenSelected}" dir="rtl"
                                                                      rowKey="#{citizen.cit_ID}" rows="10" paginator="true" 
                                                                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                                                     rowsPerPageTemplate="5,10,15" 
+                                                                     rowsPerPageTemplate="20,40,50" 
                                                                      emptyMessage="لم يتم العثور على مواطن" filteredValue="#{citizenRequestManager.filterCitizen}">
 
 
@@ -164,7 +164,7 @@
                                                                      selection="#{citizenRequestManager.citizenSelected}" dir="rtl"
                                                                      rowKey="#{citizen.cit_ID}" rows="10" paginator="true" 
                                                                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                                                     rowsPerPageTemplate="5,10,15" 
+                                                                     rowsPerPageTemplate="20,40,50" 
                                                                      emptyMessage="لم يتم العثور على مواطن" filteredValue="#{citizenRequestManager.filterCitizen}">
 
 

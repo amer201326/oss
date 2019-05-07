@@ -9,14 +9,10 @@ import Data.DecisionSection;
 import Data.DecisionsDepartment;
 import Data.DecisionsJob;
 import Data.Employee;
-import Data.GetDB_Eman;
 import Data.GetFromDB;
-import Data.Service;
 import Data.ServiceCitizen;
-import Data.ServiceCitizen_1;
 import java.io.IOException;
 import java.io.Serializable;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -26,15 +22,14 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import org.primefaces.event.SelectEvent;
 
 /**
  *
- * @author Eman
+ * @author baraakali
  */
 @ManagedBean
 @ViewScoped
-public class ServiceCitizenManager implements Serializable {
+public class ServicesCitizenAdminManager implements Serializable {
 
     List<ServiceCitizen> allRequestService;
     List<ServiceCitizen> allRequestServiceView;
@@ -47,8 +42,7 @@ public class ServiceCitizenManager implements Serializable {
     @ManagedProperty(value = "#{msession}")
     Session session;
 
-    public ServiceCitizenManager() {
-
+    public ServicesCitizenAdminManager() {
         serviceSelected = new ServiceCitizen();
     }
 
@@ -60,17 +54,7 @@ public class ServiceCitizenManager implements Serializable {
             allRequestServiceView = new ArrayList<>();
             allRequestServiceNotView = new ArrayList<>();
             
-            if (!session.employee.checkTypeHed()) {
-                for (int i = 0; i < allRequestService.size(); i++) {
-                    ServiceCitizen get = allRequestService.get(i);
-                    if (get.getService_Job().getStatus().compareTo("done") == 0) {
-                        get.messages(session.employee.getEmp_id());
-                        allRequestServiceView.add(get);
-                    } else {
-                        allRequestServiceNotView.add(get);
-                    }
-                }
-            }else{
+            
                 for (int i = 0; i < allRequestService.size(); i++) {
                     ServiceCitizen get = allRequestService.get(i);
                     
@@ -82,7 +66,6 @@ public class ServiceCitizenManager implements Serializable {
                     }
                 }
                
-            }
         }
 
         serviceSelected = new ServiceCitizen();
@@ -91,44 +74,26 @@ public class ServiceCitizenManager implements Serializable {
     public void showServise() {
         try {
             session.serviceCitizenShow = serviceSelected;
-            FacesContext.getCurrentInstance().getExternalContext().redirect("ShowService.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("showSelectServiceCitizen.xhtml");
 
         } catch (IOException ex) {
             Logger.getLogger(ServiceCitizenManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public void showHeadServise() {
-        try {
-            session.serviceCitizenShow = serviceSelected;
-            FacesContext.getCurrentInstance().getExternalContext().redirect("ShowServiceHead.xhtml");
-
-        } catch (IOException ex) {
-            Logger.getLogger(ServiceCitizenManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+    
 
     public void showDoneServise() {
         try {
 
             session.serviceCitizenShow = serviceSelected;
-            FacesContext.getCurrentInstance().getExternalContext().redirect("ShowServiceDone.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("showSelectServiceCitizen.xhtml");
 
         } catch (IOException ex) {
             Logger.getLogger(ServiceCitizenManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public void showMessagesServise() {
-        try {
-
-            session.serviceCitizenShow = serviceSelected;
-            FacesContext.getCurrentInstance().getExternalContext().redirect("MessagesEmployes.xhtml");
-
-        } catch (IOException ex) {
-            Logger.getLogger(ServiceCitizenManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 
     public List<ServiceCitizen> getAllRequestService() {
         return allRequestService;
@@ -170,23 +135,7 @@ public class ServiceCitizenManager implements Serializable {
         this.session = session;
     }
 
-    private List<DecisionsDepartment> getDecisionsDepartmentsforEmployee(Employee employee) {
-        List<DecisionsDepartment> dds = GetFromDB.getDecisionsDepartment(employee);
-
-        for (DecisionsDepartment dd : dds) {
-            List<DecisionSection> dses = GetFromDB.getDecisionsSection(employee, dd);
-            dd.setSection(dses);
-            for (DecisionSection ds : dses) {
-                List<DecisionsJob> djs = GetFromDB.getDecisionsJob(employee, ds);
-                ds.setJobs(djs);
-
-            }
-
-        }
-
-        return dds;
-    }
-
+    
     public List<ServiceCitizen> getFilteredRequestService() {
         return filteredRequestService;
     }
