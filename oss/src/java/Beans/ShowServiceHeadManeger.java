@@ -44,6 +44,8 @@ public class ShowServiceHeadManeger {
 
     boolean haveService = false;
     List<AttachmentServiceEmployee> attachmentServiceEmployees = new ArrayList<>();
+    double totalDepCost;
+    double totalCost;
 
     @PostConstruct
     public void init() {
@@ -92,17 +94,19 @@ public class ShowServiceHeadManeger {
 
         System.out.println("lllll" + pathJ.size());
         for (StepsAndDecsions d : pathD) {
+            totalDepCost = +d.decisionsDepartment.getCost();
             for (DecisionSection s : pathS) {
                 if (d.getDepartmentPaths().id == s.getSection().getDepartmentId() && d.getDepartmentPaths().order == s.getSection().getOrderDepartment()) {
                     d.getSections().add(s);
                     for (StepsAndDecsionsJob j : pathJ) {
                         if (s.getSection().getId() == j.getJobPath().getSectionID() && s.getSection().getOrder() == j.getJobPath().getsOrder()) {
                             s.getJob().add(j);
-
+                            totalDepCost = +j.decisionsJob.getCost();
                         }
                     }
                 }
             }
+            totalCost += totalDepCost;
         }
         return pathD;
     }
@@ -144,7 +148,7 @@ public class ShowServiceHeadManeger {
     public void reject() throws IOException {
         System.out.println("size files = " + attachmentServiceEmployees.size());
         serviseCitizen.attachmentServiceEmployees = attachmentServiceEmployees;
-         serviseCitizen.getDecisionsDepartment().setStatus("notdone");
+        serviseCitizen.getDecisionsDepartment().setStatus("notdone");
         serviseCitizen.getDecisionsDepartment().setDecision("reject");
         serviseCitizen.desdepartment();
         FacesContext.getCurrentInstance().getExternalContext().redirect("serviceCitizzen.xhtml");
@@ -188,6 +192,22 @@ public class ShowServiceHeadManeger {
 
     public void setStepsAndDecsions(List<StepsAndDecsions> stepsAndDecsions) {
         this.stepsAndDecsions = stepsAndDecsions;
+    }
+
+    public double getTotalDepCost() {
+        return totalDepCost;
+    }
+
+    public void setTotalDepCost(double totalDepCost) {
+        this.totalDepCost = totalDepCost;
+    }
+
+    public double getTotalCost() {
+        return totalCost;
+    }
+
+    public void setTotalCost(double totalCost) {
+        this.totalCost = totalCost;
     }
 
 }
