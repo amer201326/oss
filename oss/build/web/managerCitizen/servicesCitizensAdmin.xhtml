@@ -107,7 +107,12 @@
                                                                         <h:outputText value="#{service.service.name}" />
                                                                     </p:column>
 
-                                                                    <p:column headerText="الدائرة" >
+                                                                     <p:column filterBy="#{service.department.nameA}" headerText="الدائرة" filterMatchMode="in">
+                                                                        <f:facet name="filter">
+                                                                            <p:selectCheckboxMenu label="الدائرة"  scrollHeight="150" styleClass="custom-filter">
+                                                                                <f:selectItems value="#{servicesCitizenAdminManager.departments}" />
+                                                                            </p:selectCheckboxMenu>
+                                                                        </f:facet>
                                                                         <h:outputText value="#{service.department.nameA}" />
                                                                     </p:column>
 
@@ -153,7 +158,12 @@
                                                                         <h:outputText value="#{service.service.name}" />
 
                                                                     </p:column>
-                                                                    <p:column headerText="الدائرة">
+                                                                     <p:column filterBy="#{service.department.nameA}" headerText="الدائرة" filterMatchMode="in">
+                                                                        <f:facet name="filter">
+                                                                            <p:selectCheckboxMenu label="الدائرة"  scrollHeight="150" styleClass="custom-filter">
+                                                                                <f:selectItems value="#{servicesCitizenAdminManager.departments}" />
+                                                                            </p:selectCheckboxMenu>
+                                                                        </f:facet>
                                                                         <h:outputText value="#{service.department.nameA}" />
                                                                     </p:column>
 
@@ -199,13 +209,13 @@
                                                                         <h:outputText value="#{service.service.name}" />
                                                                     </p:column>
 
-                                                                    <p:column filterBy="#{service.department.nameA}" headerText="الدائرة" footerText="in" filterMatchMode="in">
+                                                                    <p:column filterBy="#{service.department.nameA}" headerText="الدائرة" filterMatchMode="in">
                                                                         <f:facet name="filter">
                                                                             <p:selectCheckboxMenu label="الدائرة"  scrollHeight="150" styleClass="custom-filter">
-                                                                                <f:selectItems value="#{servicesCitizenAdminManager.deprecateds}" />
+                                                                                <f:selectItems value="#{servicesCitizenAdminManager.departments}" />
                                                                             </p:selectCheckboxMenu>
                                                                         </f:facet>
-                                                                        <h:outputText value="#{car.color}" />
+                                                                        <h:outputText value="#{service.department.nameA}" />
                                                                     </p:column>
                                                                     
                                                                     <p:column headerText="التاريخ">

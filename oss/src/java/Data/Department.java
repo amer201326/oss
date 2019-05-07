@@ -103,7 +103,7 @@ public class Department implements Serializable {
 
     @Override
     public String toString() {
-        return "Department{" + "id=" + id + ", nameA=" + nameA + ", image=" + image + '}';
+        return  nameA;
     }
 
     public int getNumberService() {

@@ -8,6 +8,7 @@ package Beans;
 import Data.DecisionSection;
 import Data.DecisionsDepartment;
 import Data.DecisionsJob;
+import Data.Department;
 import Data.Employee;
 import Data.GetFromDB;
 import Data.ServiceCitizen;
@@ -39,7 +40,7 @@ public class ServicesCitizenAdminManager implements Serializable {
     ServiceCitizen serviceSelected;
 
     List<ServiceCitizen> filteredRequestService;
-    List<Deprecated> deprecateds = new ArrayList<>();
+    List<Department>  departments ;
     
     @ManagedProperty(value = "#{msession}")
     Session session;
@@ -72,8 +73,8 @@ public class ServicesCitizenAdminManager implements Serializable {
                         allRequestServiceNotView.add(get);
                     }
                 }
-         
-
+        departments = new ArrayList<>();
+        departments = GetFromDB.getDepartments();
         serviceSelected = new ServiceCitizen();
     }
 
@@ -160,13 +161,15 @@ public class ServicesCitizenAdminManager implements Serializable {
         this.filteredRequestService = filteredRequestService;
     }
 
-    public List<Deprecated> getDeprecateds() {
-        return deprecateds;
+    public List<Department> getDepartments() {
+        return departments;
     }
 
-    public void setDeprecateds(List<Deprecated> deprecateds) {
-        this.deprecateds = deprecateds;
+    public void setDepartments(List<Department> departments) {
+        this.departments = departments;
     }
+
+   
 
     
 }

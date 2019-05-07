@@ -69,14 +69,14 @@ public class ShowSelecteServiceCitizenAdminManeger implements Serializable{
         List<ViewerAttachment> jobViewer = GetFromDB.getJobviewerByserviceById(serviseCitizen.getServices_Provided_ID());
 
         for (ServiceAttachmentName serviceAttachmentName : allAtt) {
-            for (ViewerAttachment viewer : jobViewer) {
+            
                if ("yes".equals(serviceAttachmentName.getForm())) {
                         attform.add(serviceAttachmentName);
                     } else {
                         att.add(serviceAttachmentName);
                     }
 
-                }
+         
             
         }
 
