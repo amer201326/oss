@@ -66,8 +66,10 @@
                                 <div class="card-body">
 
                                     <div style="text-align: right">
-
+                                        <div class="col mr-2 flexjustify-content">
                                         <h2 class="section-heading inLineB" style="padding: 10px">:  التعليقات</h2>
+                                        <h3 class=" ml-2 text-primarytext-primary  "> التكلفة الكلية =   #{messagesEmployesManager.totalCost}</h3>
+                                        </div>
                                         <br/><br/>
 
 
@@ -81,9 +83,10 @@
                                                     <div class="col-lg-12 mb-4">
                                                         <div class="col-lg-12" style="text-align: right; min-width:1200px ">
                                                             <div class="card shadow mb-xl-4">
-                                                                <div class="card-header py-3">
+                                                                <div class="card-header py-3 flexjustify-content">
                                                                     <h6 class="m-0 font-weight-bold text-primary">#{d.departmentPaths.nameA} </h6>
-
+                                                                  
+                                                                    <div class="m-0 font-weight-bold text-primary ">مجموع تكلفة الدائره =   #{messagesEmployesManager.totalDepCost}</div>
 
                                                                 </div>
 
@@ -99,7 +102,8 @@
                                                                                         <div class="text-s font-weight-bold text-primary text-uppercase mb-1" > تعليق الدائرة </div>
                                                                                         <div class="h5 mb-0 font-weight-bold text-gray-800">#{d.decisionsDepartment.internalMessage}</div>
                                                                                        </div>
-                                                                                        <div class="h5 mb-0 text-primarytext-primary  ">تكلفة الدائره= #{d.decisionsDepartment.cost}</div>
+                                                                                        <div class="h5 mb-0 text-primarytext-primary  ">تكلفةرئيس الدائره= #{d.decisionsDepartment.cost}</div>
+                                                                                        
 
                                                                                     </div>
                                                                                 </div>
@@ -110,7 +114,6 @@
                                                                     <br/><br/>
 
                                                                     <ui:repeat value="#{d.sections}" var="s" >
-
                                                                         <div class="col-lg-12 mb-4">
                                                                             <div class="col-lg-12" style="text-align: right; min-width:1000px ">
                                                                                 <div class="card shadow mb-xl-4">
