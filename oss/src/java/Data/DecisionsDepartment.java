@@ -38,7 +38,6 @@ public class DecisionsDepartment {
     public DecisionsDepartment() {
     }
 
-    
     public DecisionsDepartment(int depId, int depOrder, int Services_Provided_ID, int Cit_ID, int Service_Citizen_ID, String status, double cost, String internalMessage, String externalMessage, String date) {
         this.depId = depId;
         this.depOrder = depOrder;
@@ -106,17 +105,17 @@ public class DecisionsDepartment {
         if ("done".equals(status)) {
             System.out.println("success");
             return "success";
-        }else if("notdone".equals(status)) {
-             System.out.println("warning");
+        } else if ("notdone".equals(status)) {
+            System.out.println("warning");
             return "warning";
-        }else if("show".equals(status)) {
-             System.out.println("warning");
+        } else if ("show".equals(status)) {
+            System.out.println("warning");
             return "warning";
         }
-         System.out.println("danger"+status);
+        System.out.println("danger" + status);
         return "danger";
     }
-    
+
     public boolean flagStatus() {
         if ("done".equals(status)) {
             return true;
@@ -132,21 +131,24 @@ public class DecisionsDepartment {
         }
         return "لم يتحدد  ";
     }
+
     public String colorDecision() {
         if ("yse".equals(decision)) {
             return "success";
-        }else if("no".equals(decision)) {
+        } else if ("no".equals(decision)) {
             return "danger";
         }
         return "warning";
     }
- public boolean flagDecision() {
+
+    public boolean flagDecision() {
         if ("yse".equals(decision)) {
             return true;
         }
-            return false;
-        
+        return false;
+
     }
+
     public double getCost() {
         return cost;
     }
@@ -241,6 +243,16 @@ public class DecisionsDepartment {
     @Override
     public String toString() {
         return "DecisionsDepartment{" + "depId=" + depId + ", depOrder=" + depOrder + ", Services_Provided_ID=" + Services_Provided_ID + ", Cit_ID=" + Cit_ID + ", Service_Citizen_ID=" + Service_Citizen_ID + ", status=" + status + ", cost=" + cost + ", internalMessage=" + internalMessage + ", externalMessage=" + externalMessage + ", date=" + date + ", depName=" + depName + ", section=" + section + '}';
+    }
+
+    public void updateState() throws SQLException, ClassNotFoundException {
+        DB data = new DB();
+        String q = "UPDATE `oss`.`decisions_department` SET `Status` = 'done', `Cost` = '" + cost + "', "
+                + "`Com_InternalMessage` = '" + internalMessage + "', `Com_ExternalMessage` = '" + externalMessage + "', `Date` = '" + date + "', `decisions` = '" + decision + "' "
+                + "WHERE (`Dep_ID` = '" + depId + "') and (`Order_Departmant` = '" + depOrder + "') and (`Services_Provided_ID` = '" + Services_Provided_ID + "')"
+                + " and (`Cit_ID` = '" + Cit_ID + "') and (`Service_Citizen_ID` = '" + Service_Citizen_ID + "');";
+        System.out.println("q d " + q);
+        data.write(q);
     }
 
 }

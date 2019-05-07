@@ -958,7 +958,7 @@ public class ServiceCitizen {
      public void desdepartment() {
         try {
             decisionsDepartment.date = LocalDate.now().toString() ;
-            decisionsDepartment.addToDB();
+            decisionsDepartment.updateState();
             
             String q = "SELECT * FROM oss.decisions_department where Services_Provided_ID="+Services_Provided_ID+" and  Cit_ID="+Cit_ID+" and  Service_Citizen_ID ="+Service_Citizen_ID+";";
            
