@@ -84,7 +84,8 @@
                                                                              selection="#{servicesCitizenAdminManager.serviceSelected}"
                                                                              rowKey="#{service.cit_ID}" rows="10" paginator="true" 
                                                                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                                                             rowsPerPageTemplate="15,20,30" filteredValue="#{servicesCitizenAdminManager.filteredRequestService}" emptyMessage="No cars found with given criteria" >
+                                                                             rowsPerPageTemplate="20,40,50" filteredValue="#{servicesCitizenAdminManager.filteredRequestService}" 
+                                                                             widgetVar="notview" emptyMessage="No cars found with given criteria" >
 
 
                                                                     <f:facet name="header"  >
@@ -103,18 +104,6 @@
                                                                         </p:commandLink>
                                                                     </p:column>
 
-                                                                    <p:column headerText="اسم الخدمة"  filterBy="#{service.service.name}" filterMatchMode="contains">
-                                                                        <h:outputText value="#{service.service.name}" />
-                                                                    </p:column>
-
-                                                                     <p:column filterBy="#{service.department.nameA}" headerText="الدائرة" filterMatchMode="in">
-                                                                        <f:facet name="filter">
-                                                                            <p:selectCheckboxMenu label="الدائرة"  scrollHeight="150" styleClass="custom-filter">
-                                                                                <f:selectItems value="#{servicesCitizenAdminManager.departments}" />
-                                                                            </p:selectCheckboxMenu>
-                                                                        </f:facet>
-                                                                        <h:outputText value="#{service.department.nameA}" />
-                                                                    </p:column>
 
                                                                     <p:column headerText="التاريخ">
                                                                         <h:outputText value="#{service.date}" />
@@ -124,6 +113,29 @@
                                                                         <h:outputText value="#{service.citizen.firstName} #{service.citizen.lastName}" />
                                                                     </p:column>
 
+                                                                    
+                                                                    <p:column filterBy="#{service.service.name}" headerText="اسم الخدمة" filterMatchMode="exact">
+                                                                        <f:facet name="filter">
+                                                                            <p:selectOneMenu onchange="PF('notview').filter()" styleClass="custom-filter">
+                                                                                <f:selectItem itemLabel="اختار واحدة" itemValue="#{null}" noSelectionOption="true" />
+                                                                                <f:selectItems value="#{servicesCitizenAdminManager.services}" />
+                                                                            </p:selectOneMenu>
+
+                                                                        </f:facet>
+                                                                        <h:outputText value="#{service.service.name}" />
+                                                                    </p:column>
+
+                                                                    
+                                                                    <p:column filterBy="#{service.department.nameA}" headerText="الدائرة" filterMatchMode="exact">
+                                                                        <f:facet name="filter">
+                                                                            <p:selectOneMenu onchange="PF('notview').filter()" styleClass="custom-filter">
+                                                                                <f:selectItem itemLabel="اختار واحدة" itemValue="#{null}" noSelectionOption="true" />
+                                                                                <f:selectItems value="#{servicesCitizenAdminManager.departments}" />
+                                                                            </p:selectOneMenu>
+
+                                                                        </f:facet>
+                                                                        <h:outputText value="#{service.department.nameA}" />
+                                                                    </p:column>
 
                                                                 </p:dataTable>
                                                             </p:tab>
@@ -134,7 +146,7 @@
                                                                              selection="#{servicesCitizenAdminManager.serviceSelected}"
                                                                              rowKey="#{service.cit_ID}" rows="10" paginator="true" 
                                                                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                                                             rowsPerPageTemplate="15,20,30">
+                                                                             widgetVar="notdone" rowsPerPageTemplate="20,40,50">
 
 
                                                                     <f:facet name="header"  >
@@ -143,36 +155,43 @@
 
 
 
-                                                                    <p:column  style="width:90px;text-align: center" headerText="مشاهده" >
-                                                                        <p:commandLink title="View Detail"  actionListener="#{servicesCitizenAdminManager.showServise()}">
+                                                                    <p:column  style="width:90px;text-align: center" headerText="مشاهده">
+                                                                        <p:commandLink title="View Detail" actionListener="#{servicesCitizenAdminManager.showDoneServise()}">
                                                                             <h:outputText styleClass="fa fa-list-ul" style="margin:0 auto;" />
                                                                             <f:setPropertyActionListener value="#{service}" target="#{msession.serviceCitizenShow}" />
+
                                                                         </p:commandLink>
                                                                     </p:column>
 
-
-
-
-
-                                                                    <p:column headerText="اسم الخدمة">
-                                                                        <h:outputText value="#{service.service.name}" />
-
-                                                                    </p:column>
-                                                                     <p:column filterBy="#{service.department.nameA}" headerText="الدائرة" filterMatchMode="in">
-                                                                        <f:facet name="filter">
-                                                                            <p:selectCheckboxMenu label="الدائرة"  scrollHeight="150" styleClass="custom-filter">
-                                                                                <f:selectItems value="#{servicesCitizenAdminManager.departments}" />
-                                                                            </p:selectCheckboxMenu>
-                                                                        </f:facet>
-                                                                        <h:outputText value="#{service.department.nameA}" />
-                                                                    </p:column>
 
                                                                     <p:column headerText="التاريخ">
                                                                         <h:outputText value="#{service.date}" />
                                                                     </p:column>
 
-                                                                    <p:column headerText="اسم المواطن">
+                                                                    <p:column headerText="اسم المواطن"  filterBy="#{service.citizen.firstName} #{service.citizen.lastName}" filterMatchMode="contains" >
                                                                         <h:outputText value="#{service.citizen.firstName} #{service.citizen.lastName}" />
+                                                                    </p:column>
+
+                                                                     <p:column filterBy="#{service.service.name}" headerText="اسم الخدمة" filterMatchMode="exact">
+                                                                        <f:facet name="filter">
+                                                                            <p:selectOneMenu onchange="PF('notdone').filter()" styleClass="custom-filter">
+                                                                                <f:selectItem itemLabel="اختار واحدة" itemValue="#{null}" noSelectionOption="true" />
+                                                                                <f:selectItems value="#{servicesCitizenAdminManager.services}" />
+                                                                            </p:selectOneMenu>
+
+                                                                        </f:facet>
+                                                                        <h:outputText value="#{service.service.name}" />
+                                                                    </p:column>
+
+                                                                    <p:column filterBy="#{service.department.nameA}" headerText="الدائرة" filterMatchMode="exact">
+                                                                        <f:facet name="filter">
+                                                                            <p:selectOneMenu onchange="PF('notdone').filter()" styleClass="custom-filter">
+                                                                                <f:selectItem itemLabel="اختار واحدة" itemValue="#{null}" noSelectionOption="true" />
+                                                                                <f:selectItems value="#{servicesCitizenAdminManager.departments}" />
+                                                                            </p:selectOneMenu>
+
+                                                                        </f:facet>
+                                                                        <h:outputText value="#{service.department.nameA}" />
                                                                     </p:column>
 
 
@@ -186,7 +205,7 @@
                                                                              selection="#{servicesCitizenAdminManager.serviceSelected}"
                                                                              rowKey="#{service.cit_ID}" rows="10" paginator="true" 
                                                                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                                                             rowsPerPageTemplate="15,20,30" filteredValue="#{servicesCitizenAdminManager.filteredRequestService}" emptyMessage="No cars found with given criteria" >
+                                                                             widgetVar="done" rowsPerPageTemplate="20,40,50" filteredValue="#{servicesCitizenAdminManager.filteredRequestService}" emptyMessage="No cars found with given criteria" >
 
 
                                                                     <f:facet name="header"  >
@@ -204,26 +223,34 @@
 
                                                                         </p:commandLink>
                                                                     </p:column>
-
-                                                                    <p:column headerText="اسم الخدمة"  filterBy="#{service.service.name}" filterMatchMode="contains">
-                                                                        <h:outputText value="#{service.service.name}" />
-                                                                    </p:column>
-
-                                                                    <p:column filterBy="#{service.department.nameA}" headerText="الدائرة" filterMatchMode="in">
-                                                                        <f:facet name="filter">
-                                                                            <p:selectCheckboxMenu label="الدائرة"  scrollHeight="150" styleClass="custom-filter">
-                                                                                <f:selectItems value="#{servicesCitizenAdminManager.departments}" />
-                                                                            </p:selectCheckboxMenu>
-                                                                        </f:facet>
-                                                                        <h:outputText value="#{service.department.nameA}" />
-                                                                    </p:column>
-                                                                    
                                                                     <p:column headerText="التاريخ">
                                                                         <h:outputText value="#{service.date}" />
                                                                     </p:column>
 
                                                                     <p:column headerText="اسم المواطن"  filterBy="#{service.citizen.firstName} #{service.citizen.lastName}" filterMatchMode="contains" >
                                                                         <h:outputText value="#{service.citizen.firstName} #{service.citizen.lastName}" />
+                                                                    </p:column>
+
+                                                                    <p:column filterBy="#{service.service.name}" headerText="اسم الخدمة" filterMatchMode="exact">
+                                                                        <f:facet name="filter">
+                                                                            <p:selectOneMenu onchange="PF('done').filter()" styleClass="custom-filter">
+                                                                                <f:selectItem itemLabel="اختار واحدة" itemValue="#{null}" noSelectionOption="true" />
+                                                                                <f:selectItems value="#{servicesCitizenAdminManager.services}" />
+                                                                            </p:selectOneMenu>
+
+                                                                        </f:facet>
+                                                                        <h:outputText value="#{service.service.name}" />
+                                                                    </p:column>
+
+                                                                    <p:column filterBy="#{service.department.nameA}" headerText="الدائرة" filterMatchMode="exact">
+                                                                        <f:facet name="filter">
+                                                                            <p:selectOneMenu onchange="PF('done').filter()" styleClass="custom-filter">
+                                                                                <f:selectItem itemLabel="اختار واحدة" itemValue="#{null}" noSelectionOption="true" />
+                                                                                <f:selectItems value="#{servicesCitizenAdminManager.departments}" />
+                                                                            </p:selectOneMenu>
+
+                                                                        </f:facet>
+                                                                        <h:outputText value="#{service.department.nameA}" />
                                                                     </p:column>
 
 

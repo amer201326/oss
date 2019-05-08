@@ -8,6 +8,7 @@ package Beans;
 import Data.DecisionSection;
 import Data.DecisionsDepartment;
 import Data.DecisionsJob;
+import Data.Department;
 import Data.Employee;
 import Data.GetDB_Eman;
 import Data.GetFromDB;
@@ -44,6 +45,9 @@ public class ServiceCitizenManager implements Serializable {
 
     List<ServiceCitizen> filteredRequestService;
 
+    List<Department> departments;
+    List<String> Services;
+
     @ManagedProperty(value = "#{msession}")
     Session session;
 
@@ -59,10 +63,11 @@ public class ServiceCitizenManager implements Serializable {
             allRequestService = GetFromDB.getAllRequestService(session.employee);
             allRequestServiceView = new ArrayList<>();
             allRequestServiceNotView = new ArrayList<>();
-
+            Services = new ArrayList<>();
             if (!session.employee.checkTypeHed()) {
                 for (int i = 0; i < allRequestService.size(); i++) {
                     ServiceCitizen get = allRequestService.get(i);
+                    Services.add(get.service.getName());
                     if (get.getService_Job().getStatus().compareTo("done") == 0) {
                         get.messages(session.employee.getEmp_id());
                         allRequestServiceView.add(get);
@@ -85,7 +90,8 @@ public class ServiceCitizenManager implements Serializable {
 
             }
         }
-
+        departments = new ArrayList<>();
+        departments = GetFromDB.getDepartments();
         serviceSelected = new ServiceCitizen();
     }
 
@@ -194,6 +200,22 @@ public class ServiceCitizenManager implements Serializable {
 
     public void setFilteredRequestService(List<ServiceCitizen> filteredRequestService) {
         this.filteredRequestService = filteredRequestService;
+    }
+
+    public List<Department> getDepartments() {
+        return departments;
+    }
+
+    public void setDepartments(List<Department> departments) {
+        this.departments = departments;
+    }
+
+    public List<String> getServices() {
+        return Services;
+    }
+
+    public void setServices(List<String> Services) {
+        this.Services = Services;
     }
 
 }

@@ -41,7 +41,7 @@ public class ServicesCitizenAdminManager implements Serializable {
 
     List<ServiceCitizen> filteredRequestService;
     List<Department>  departments ;
-    
+     List<String> Services;
     @ManagedProperty(value = "#{msession}")
     Session session;
 
@@ -58,12 +58,13 @@ public class ServicesCitizenAdminManager implements Serializable {
             allRequestServiceNotDone = new ArrayList<>();
             allRequestServiceDone = new ArrayList<>();
             allRequestServiceNotView = new ArrayList<>();
+            Services = new ArrayList<>();
             
             System.out.println("size+="+allRequestService.size());
             
                 for (int i = 0; i < allRequestService.size(); i++) {
                     ServiceCitizen get = allRequestService.get(i);
-                    
+                    Services.add(get.service.getName());
                     if (get.getStatus().compareTo("view") == 0) {
                         //get.messages(session.employee.getEmp_id());
                         allRequestServiceNotDone.add(get);
@@ -167,6 +168,14 @@ public class ServicesCitizenAdminManager implements Serializable {
 
     public void setDepartments(List<Department> departments) {
         this.departments = departments;
+    }
+
+    public List<String> getServices() {
+        return Services;
+    }
+
+    public void setServices(List<String> Services) {
+        this.Services = Services;
     }
 
    
