@@ -12,6 +12,7 @@ import Data.Department;
 import Data.Employee;
 import Data.GetDB_Eman;
 import Data.GetFromDB;
+import Data.GetFromDBaraa;
 import Data.Service;
 import Data.ServiceCitizen;
 import Data.ServiceCitizen_1;
@@ -64,10 +65,13 @@ public class ServiceCitizenManager implements Serializable {
             allRequestServiceView = new ArrayList<>();
             allRequestServiceNotView = new ArrayList<>();
             servicesName = new ArrayList<>();
+            List<Service> services = GetFromDBaraa.getAllServices();
+            for (Service service : services) {
+                servicesName.add(service.getName());
+            }
             if (!session.employee.checkTypeHed()) {
                 for (int i = 0; i < allRequestService.size(); i++) {
                     ServiceCitizen get = allRequestService.get(i);
-                    servicesName.add(get.service.getName());
                     if (get.getService_Job().getStatus().compareTo("done") == 0) {
                         get.messages(session.employee.getEmp_id());
                         allRequestServiceView.add(get);
@@ -78,7 +82,6 @@ public class ServiceCitizenManager implements Serializable {
             } else {
                 for (int i = 0; i < allRequestService.size(); i++) {
                     ServiceCitizen get = allRequestService.get(i);
-                    servicesName.add(get.service.getName());
                     if (get.getDecisionsDepartment().getStatus().compareTo("show") == 0) {
                         //get.messages(session.employee.getEmp_id());
                         allRequestServiceNotView.add(get);

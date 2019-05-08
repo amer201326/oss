@@ -50,7 +50,7 @@ public class GetFromDBaraa {
             ServiceCitizen sc;
             Service s;
             String sql = "SELECT *  FROM service_citizen as sc inner join services_provided as sp on  sc.Services_Provided_ID=sp.Services_Provided_ID where ( sc.status = 'notdone' or sc.status = 'notview' ) and Cit_ID=" + idcitizen + " ;";
-             System.out.println(sql);
+            System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
                 sc = new ServiceCitizen(r.getInt(1), r.getInt(2), r.getInt(3), r.getString(4), r.getString(5), r.getString(6));
@@ -188,7 +188,7 @@ public class GetFromDBaraa {
             ResultSet r = db.read(sql);
             while (r.next()) {
                 s = new JobPath(r.getInt(1), r.getInt(2), r.getInt(3), r.getString(18), r.getInt(5), r.getInt(6), r.getInt(7));
-                d = new DecisionsJob(r.getInt(10),r.getString(11), r.getString(12), r.getDouble(13), r.getString(14), r.getString(15));
+                d = new DecisionsJob(r.getInt(10), r.getString(11), r.getString(12), r.getDouble(13), r.getString(14), r.getString(15));
                 d.idEmployee = r.getInt(10);
                 sdj = new StepsAndDecsionsJob(s, d);
                 Lsdj.add(sdj);
@@ -325,7 +325,7 @@ public class GetFromDBaraa {
         return id;
     }
 
-    public static List<AttachmentServiceEmployee> AttachmentServiceEmployee(int Emp_ID,int Cit_ID, int Service_Citizen_ID, int Services_Provided_ID) {
+    public static List<AttachmentServiceEmployee> AttachmentServiceEmployee(int Emp_ID, int Cit_ID, int Service_Citizen_ID, int Services_Provided_ID) {
         System.out.println("AAAtt");
 
         ArrayList<AttachmentServiceEmployee> attachments = new ArrayList<AttachmentServiceEmployee>();
@@ -333,7 +333,7 @@ public class GetFromDBaraa {
             DB db = new DB();
             AttachmentServiceEmployee att;
 
-            String sql = "SELECT * FROM attachment_service_employee where Emp_ID = "+Emp_ID+" and  Cit_ID=" + Cit_ID + " and Service_Citizen_ID=" + Service_Citizen_ID + " and  Services_Provided_ID=" + Services_Provided_ID + " ;";
+            String sql = "SELECT * FROM attachment_service_employee where Emp_ID = " + Emp_ID + " and  Cit_ID=" + Cit_ID + " and Service_Citizen_ID=" + Service_Citizen_ID + " and  Services_Provided_ID=" + Services_Provided_ID + " ;";
             System.out.println(sql);
             ResultSet r = db.read(sql);
             System.out.println(sql);
@@ -349,6 +349,7 @@ public class GetFromDBaraa {
         return attachments;
 
     }
+
     public static List<AttachmentServiceEmployee> AttachmentServiceEmployee(int Cit_ID, int Service_Citizen_ID, int Services_Provided_ID) {
         System.out.println("AAAtt");
 
@@ -374,4 +375,25 @@ public class GetFromDBaraa {
 
     }
 
+    public static List<Service> getAllServices() {
+
+        Service s = new Service();
+
+        List<Service> services = new ArrayList<Service>();
+        try {
+            DB db = new DB();
+            String sql = "SELECT * FROM services_provided ;";
+
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                s = new Service();
+                s.id = r.getInt(1);
+                s.name = r.getString(2);
+                services.add(s);
+            }
+
+        } catch (Exception e) {
+        }
+        return services;
+    }
 }

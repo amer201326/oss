@@ -11,6 +11,8 @@ import Data.DecisionsJob;
 import Data.Department;
 import Data.Employee;
 import Data.GetFromDB;
+import Data.GetFromDBaraa;
+import Data.Service;
 import Data.ServiceCitizen;
 import java.io.IOException;
 import java.io.Serializable;
@@ -60,11 +62,14 @@ public class ServicesCitizenAdminManager implements Serializable {
             allRequestServiceNotView = new ArrayList<>();
             servicesName = new ArrayList<>();
             
+            List<Service> services = GetFromDBaraa.getAllServices();
+            for (Service service : services) {
+                servicesName.add(service.getName());
+            }
             System.out.println("size+="+allRequestService.size());
             
                 for (int i = 0; i < allRequestService.size(); i++) {
                     ServiceCitizen get = allRequestService.get(i);
-                    servicesName.add(get.service.getName());
                     if (get.getStatus().compareTo("view") == 0) {
                         //get.messages(session.employee.getEmp_id());
                         allRequestServiceNotDone.add(get);
