@@ -43,7 +43,7 @@ public class ServiceCitizenManager implements Serializable {
     ServiceCitizen serviceSelected;
 
     List<ServiceCitizen> filteredRequestService;
-    
+
     @ManagedProperty(value = "#{msession}")
     Session session;
 
@@ -59,7 +59,7 @@ public class ServiceCitizenManager implements Serializable {
             allRequestService = GetFromDB.getAllRequestService(session.employee);
             allRequestServiceView = new ArrayList<>();
             allRequestServiceNotView = new ArrayList<>();
-            
+
             if (!session.employee.checkTypeHed()) {
                 for (int i = 0; i < allRequestService.size(); i++) {
                     ServiceCitizen get = allRequestService.get(i);
@@ -70,18 +70,19 @@ public class ServiceCitizenManager implements Serializable {
                         allRequestServiceNotView.add(get);
                     }
                 }
-            }else{
+            } else {
                 for (int i = 0; i < allRequestService.size(); i++) {
                     ServiceCitizen get = allRequestService.get(i);
-                    
+
                     if (get.getDecisionsDepartment().getStatus().compareTo("show") == 0) {
                         //get.messages(session.employee.getEmp_id());
-                        allRequestServiceView.add(get);
-                    } else {
                         allRequestServiceNotView.add(get);
+                    } else {
+                        allRequestServiceView.add(get);
+
                     }
                 }
-               
+
             }
         }
 
@@ -195,5 +196,4 @@ public class ServiceCitizenManager implements Serializable {
         this.filteredRequestService = filteredRequestService;
     }
 
-    
 }
