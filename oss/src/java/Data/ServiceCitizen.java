@@ -476,7 +476,7 @@ public class ServiceCitizen {
 
                 for (int i = 0; i < dses.length; i++) {
                     DecisionSection ds = dses[i];
-                    if (ds.section.departmentId == decisionsDepartment.depId && ds.section.order == decisionsDepartment.depOrder) {
+                    if (ds.section.departmentId == decisionsDepartment.depId && ds.section.orderDepartment == decisionsDepartment.depOrder) {
                         decisionsDepartment.getSection().add(ds);
                         for (int j = 0; j < djs.length; j++) {
                             DecisionsJob dj = djs[j];
@@ -800,9 +800,9 @@ public class ServiceCitizen {
 
                 for (int i = 0; i < dses.length; i++) {
                     DecisionSection ds = dses[i];
-                    System.out.println("- - - " + ds.section.departmentId + " = " + decisionsDepartment.depId + "&&" + ds.section.order + " = " + decisionsDepartment.depOrder);
+                    System.out.println("- - - " + ds.section.departmentId + " = " + decisionsDepartment.depId + "&&" + ds.section.orderDepartment + " = " + decisionsDepartment.depOrder);
 
-                    if (ds.section.departmentId == decisionsDepartment.depId && ds.section.order == decisionsDepartment.depOrder) {
+                    if (ds.section.departmentId == decisionsDepartment.depId && ds.section.orderDepartment == decisionsDepartment.depOrder) {
                         decisionsDepartment.getSection().add(ds);
                         for (int j = 0; j < djs.length; j++) {
                             DecisionsJob dj = djs[j];
@@ -966,7 +966,8 @@ public class ServiceCitizen {
             ResultSet r = db.read(q);
             boolean flag = false;
             while (r.next()) {
-                if ("done".equals(r.getString(6)) && "accept".equals(r.getString(6))) {
+                
+                if ("done".equals(r.getString(6)) && "accept".equals(r.getString(11))) {
                     flag = true;
                 } else {
                     flag = false;
@@ -997,8 +998,8 @@ public class ServiceCitizen {
                 System.out.println("------- d-d-d-d-d-d-d---------------------------------------");
                 nextjobsPathOfthisService(departments, sections, jobs);
 
-                //q = "commit;";
-                q = "rollback;";
+                q = "commit;";
+                //q = "rollback;";
                 db.write(q);
             }
 
