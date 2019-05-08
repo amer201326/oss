@@ -65,67 +65,54 @@
 
                     <div class="col-sm-12 mb-3 mb-sm-0" style="text-align: right;">
 
-                        <h:form id="formSelectD">
-                            <!-- Style Addemployee form Bussectionlo-->
-                            <p:selectOneMenu id="departments" value="#{doneCitizenServicesManeger.idDepartment}" class="pading000"
-                                             dynamic="true" style="min-width: 223px;">
-
-                                <f:selectItem  noSelectionOption="false" itemLabel="كل الدوائر" itemValue="-1" />
-                                <f:selectItems value="#{doneCitizenServicesManeger.allDepartment()}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}"/>
-                                <p:ajax update=":formService" event="itemSelect" listener="#{doneCitizenServicesManeger.filter}" />
-
-                            </p:selectOneMenu>
-
-                            <p:outputLabel for="departments" style="font-size: 28px; margin-left: 4%" value="الدوائر " />
-
-                        </h:form>
-                        <br/><br/>
+                        
                     </div>
+                    <h:form >
+                        <div class="col-lg-12" align="right">
 
-                    <div class="col-lg-12" align="right">
-                        <h:form id="formService">
                             <ui:repeat id="repeatservice" value="#{doneCitizenServicesManeger.doneCitizenServices}" var="service" >
                                 <div class="card mb-4 border-bottom-warning hoverDiv">
-                                   <div class="d-flex justify-content-between" >
+                                    <div class="d-flex justify-content-between" >
 
                                         <div style="margin: 50px">
 
-                                            <p:commandLink class="btn btn-warning btn-circle"  actionListener="#{notDoneCiticenServiceManeger.showServiceCitizen(service.id)}">
+                                            <p:commandLink class="btn btn-warning btn-circle"  actionListener="#{doneCitizenServicesManeger. showServiceCitizen(service.service_Citizen_ID)}">
                                                 <h:outputText styleClass="fas fa-arrow-left" style="margin:0 auto;" />
                                                 <f:setPropertyActionListener value="#{service}" target="#{msession.serviceCitizenShow}" />
                                             </p:commandLink>
 
                                         </div>
-                                    <div class="card-body ">
-                                        <h4>#{service.providServicee.name}</h4>
-                                        <h5>#{service.date}</h5>
-                                    </div> 
-                                   </div>
-                                </div>
-                            </ui:repeat>
-                        </h:form>
-                        <p:outputPanel rendered="#{doneCitizenServicesManeger.dontHaveService()}" class="flexCenter">
-                            <div class="card col-xl-11 border-bottom-warning ">
-
-                                <div class="col-xl-12 col-lg-5 flexCenter" style="text-align: center">
-
-                                    <h3 style="width: 80%;margin-top: 20px">لا يوجد خدمات جاهزه</h3>
-                                    <div  style="width: 80%">
-
-                                        <!-- Pie Chart -->
-                                        <div class="col-xl-12 col-lg-5">
-                                            <br/>
-
-                                            <a href="servicess.xhtml" class="button" style="text-decoration: none; width: 100%; text-align: center;"><span><i class="fa fa-plus-circle" style="padding-left: 2px;"></i></span>اضعط هنا لتقديم خدمة جديدة</a>
-                                        </div>
+                                        <div class="card-body ">
+                                            <h4>#{service.service.name}</h4>
+                                            <h5>#{service.date}</h5>
+                                        </div> 
                                     </div>
                                 </div>
+                            </ui:repeat>
+                        </div>
+                    </h:form>
+                    <p:outputPanel rendered="#{doneCitizenServicesManeger.dontHaveService()}" class="flexCenter">
+                        <div class="card col-xl-11 border-bottom-warning ">
 
+                            <div class="col-xl-12 col-lg-5 flexCenter" style="text-align: center">
 
+                                <h3 style="width: 80%;margin-top: 20px">لا يوجد خدمات جاهزه</h3>
+                                <div  style="width: 80%">
+
+                                    <!-- Pie Chart -->
+                                    <div class="col-xl-12 col-lg-5">
+                                        <br/>
+
+                                        <a href="servicess.xhtml" class="button" style="text-decoration: none; width: 100%; text-align: center;"><span><i class="fa fa-plus-circle" style="padding-left: 2px;"></i></span>اضعط هنا لتقديم خدمة جديدة</a>
+                                    </div>
+                                </div>
                             </div>
 
-                        </p:outputPanel>
-                    </div>
+
+                        </div>
+
+                    </p:outputPanel>
+
 
                 </div>
 

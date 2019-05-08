@@ -29,57 +29,39 @@ import javax.faces.context.FacesContext;
 @ManagedBean
 @ViewScoped
 public class DoneCitizenServicesManeger implements Serializable {
-    List<CitizenService> allDoneCitizenServices ;
-    List<CitizenService> doneCitizenServices ;
+
     @ManagedProperty(value = "#{msession}")
     Session session;
+
+    List<ServiceCitizen> doneCitizenServices;
     int idCitizen;
-    int idDepartment;
-    
-        @PostConstruct
- public void init() {
-     if(session.citizen != null){
+
+    @PostConstruct
+    public void init() {
+        if (session.citizen != null) {
+            System.out.println("Cit Not Null");
             idCitizen = session.citizen.getId();
-         allDoneCitizenServices = GetFromDBaraa.doneCitizenServices(idCitizen);
-         doneCitizenServices = new ArrayList<>();
-         for (CitizenService allDoneCitizenService : allDoneCitizenServices) {
-             doneCitizenServices.add(allDoneCitizenService);
-         }
+            doneCitizenServices = GetFromDBaraa.doneCitizenServices(idCitizen);
         }
- }
+    }
+
     public DoneCitizenServicesManeger() {
-        
-       
+
     }
-    public void filter() {
-       
-      doneCitizenServices.clear();
-      if(idDepartment == -1){
-           for (CitizenService allDoneCitizenService : allDoneCitizenServices) {
-             doneCitizenServices.add(allDoneCitizenService);
-         }
-      }else{
-        for (CitizenService doneCitizenService : allDoneCitizenServices) {
-            if(doneCitizenService.getProvidServicee().getDepartment().id == idDepartment){
-                doneCitizenServices.add(doneCitizenService);
-            }
-        }
-      }
-    }
-     public List<Department> allDepartment() {
+
+    public List<Department> allDepartment() {
         return GetFromDB.getDepartments();
     }
-     
-    public boolean dontHaveService(){
+
+    public boolean dontHaveService() {
         return doneCitizenServices.isEmpty();
     }
 
-    
-    public List<CitizenService> getDoneCitizenServices() {
+    public List<ServiceCitizen> getDoneCitizenServices() {
         return doneCitizenServices;
     }
 
-    public void setDoneCitizenServices(List<CitizenService> doneCitizenServices) {
+    public void setDoneCitizenServices(List<ServiceCitizen> doneCitizenServices) {
         this.doneCitizenServices = doneCitizenServices;
     }
 
@@ -90,33 +72,26 @@ public class DoneCitizenServicesManeger implements Serializable {
     public void setSession(Session session) {
         this.session = session;
     }
-    public boolean nothaveSer(){
+
+    public boolean nothaveSer() {
         return doneCitizenServices.isEmpty();
     }
 
-    public int getIdDepartment() {
-        return idDepartment;
-    }
+    public void showServiceCitizen(int idServiceCitizen) {
 
-    public void setIdDepartment(int idDepartment) {
-        this.idDepartment = idDepartment;
-    }
-   public void showServiceCitizen(int idServiceCitizen) {
-        
+        System.out.println("Bbbbbvvv");
         try {
-             for (ServiceCitizen service : allDoneCitizenServices) {
-            if (service.getService_Citizen_ID() == idServiceCitizen) {
-                session.serviceCitizenShow = service;
+            for (ServiceCitizen service : doneCitizenServices) {
+                if (service.getService_Citizen_ID() == idServiceCitizen) {
+                    session.serviceCitizenShow = service;
+                }
             }
-        }
-         
-             FacesContext.getCurrentInstance().getExternalContext().redirect("ShowMyService.xhtml");
+
+            FacesContext.getCurrentInstance().getExternalContext().redirect("ShowMyService.xhtml");
 
         } catch (IOException ex) {
             Logger.getLogger(NotDoneCiticenServiceManeger.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        
-       
-    } 
+    }
 }

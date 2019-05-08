@@ -19,27 +19,25 @@ import java.util.logging.Logger;
  */
 public class GetFromDBaraa {
 
-    public static ArrayList<CitizenService> doneCitizenServices(int idcitizen) {
-        ArrayList<CitizenService> services = new ArrayList<>();
+    public static ArrayList<ServiceCitizen> doneCitizenServices(int idcitizen) {
+        ArrayList<ServiceCitizen> services = new ArrayList<>();
         try {
             DB db = new DB();
-            CitizenService cs;
+            ServiceCitizen sc;
             Service s;
-            String sql = "SELECT sc.Services_Provided_ID,Serv_Name,sc.Date,sc.Service_Citizen_ID FROM service_citizen as sc inner join services_provided as sp where sc.status = 'done' and Cit_ID=" + idcitizen + " and sc.Services_Provided_ID=sp.Services_Provided_ID;";
+            String sql = "SELECT *  FROM service_citizen as sc inner join services_provided as sp on  sc.Services_Provided_ID=sp.Services_Provided_ID where sc.status = 'done'  and Cit_ID=" + idcitizen + " ;";
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
-                s = new Service();
-                s.id = r.getInt(1);
-                s.name = r.getString(2);
-                cs = new CitizenService(r.getInt(4), s, r.getString(3));
-
-                services.add(cs);
+                sc = new ServiceCitizen(r.getInt(1), r.getInt(2), r.getInt(3), r.getString(4), r.getString(5), r.getString(6));
+                sc.service = new Service(r.getInt(7), r.getString(8), r.getInt(9), r.getInt(10), r.getString(11), new Department(r.getInt(12)), new Section(r.getString(13)), r.getString(14));
+                services.add(sc);
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return services;
+
 
     }
 
