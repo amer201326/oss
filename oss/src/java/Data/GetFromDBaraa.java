@@ -49,7 +49,7 @@ public class GetFromDBaraa {
             DB db = new DB();
             ServiceCitizen sc;
             Service s;
-            String sql = "SELECT *  FROM service_citizen as sc inner join services_provided as sp on  sc.Services_Provided_ID=sp.Services_Provided_ID where ( sc.status = 'notdone' or sc.status = 'notview' ) and Cit_ID=" + idcitizen + " ;";
+            String sql = "SELECT *  FROM service_citizen as sc inner join services_provided as sp on  sc.Services_Provided_ID=sp.Services_Provided_ID where ( sc.status = 'notdone' or sc.status = 'view' ) and Cit_ID=" + idcitizen + " ;";
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
