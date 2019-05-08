@@ -10,6 +10,7 @@ import DB.DB;
 import static Data.GetFromDBaraa.getMaxId_attachment_archive_citizen;
 import static Data.GetFromDBaraa.stepAndDecDep;
 import static Data.GetFromDBaraa.stepAndDecJop;
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -24,7 +25,7 @@ import org.primefaces.model.UploadedFile;
  *
  * @author baraakali
  */
-public class ServiceCitizen {
+public class ServiceCitizen implements Serializable{
 
     int idMaxSC;
 
