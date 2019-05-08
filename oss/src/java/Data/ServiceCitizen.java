@@ -954,12 +954,14 @@ public class ServiceCitizen {
 
     public void desdepartment() {
         try {
+            DB db = new DB();
+            String q = "start transaction;";
+            db.write(q);
             decisionsDepartment.date = LocalDate.now().toString();
             decisionsDepartment.updateState();
 
-            String q = "SELECT * FROM oss.decisions_department where Services_Provided_ID=" + Services_Provided_ID + " and  Cit_ID=" + Cit_ID + " and  Service_Citizen_ID =" + Service_Citizen_ID + ";";
+            q = "SELECT * FROM oss.decisions_department where Services_Provided_ID=" + Services_Provided_ID + " and  Cit_ID=" + Cit_ID + " and  Service_Citizen_ID =" + Service_Citizen_ID + ";";
 
-            DB db = new DB();
             System.out.println(q);
             ResultSet r = db.read(q);
             boolean flag = false;
@@ -975,18 +977,43 @@ public class ServiceCitizen {
                 q = "UPDATE `oss`.`service_citizen` SET `status` = 'done' WHERE (`Service_Citizen_ID` = " + Service_Citizen_ID + ") and (`Services_Provided_ID` = " + Services_Provided_ID + ") and (`Cit_ID` = " + Cit_ID + ");";
                 db.write(q);
             } else {
+                System.out.println("------- d-d-d-d-d-d-d---------------------------------------");
+
                 List<DecisionsJob> jobs = GetFromDB.getDecisionsJobNotDone(Cit_ID, Service_Citizen_ID);
                 for (DecisionsJob job : jobs) {
                     System.out.println(job);
                 }
+                System.out.println("------- ----------------------------------");
                 List<DecisionSection> sections = GetFromDB.getDecisionsSectionNotDone(Cit_ID, Service_Citizen_ID);
-
+                for (DecisionSection section : sections) {
+                    System.out.println(section);
+                }
+                System.out.println("----------------------------------------");
                 List<DecisionsDepartment> departments = GetFromDB.getDecisionsDepartmentNotDone(Cit_ID, Service_Citizen_ID);
+                for (DecisionsDepartment department1 : departments) {
+                    System.out.println(department1);
+                }
+
+                System.out.println("------- d-d-d-d-d-d-d---------------------------------------");
                 nextjobsPathOfthisService(departments, sections, jobs);
+
+                //q = "commit;";
+                q = "rollback;";
+                db.write(q);
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(ServiceCitizen.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                String q = "rollback;";
+                System.out.println(q);
+                DB db = new DB();
+                db.write(q);
+                Logger.getLogger(ServiceCitizen.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex1) {
+                Logger.getLogger(ServiceCitizen.class.getName()).log(Level.SEVERE, null, ex1);
+            } catch (ClassNotFoundException ex1) {
+                Logger.getLogger(ServiceCitizen.class.getName()).log(Level.SEVERE, null, ex1);
+            }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ServiceCitizen.class.getName()).log(Level.SEVERE, null, ex);
         }
