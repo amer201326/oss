@@ -73,12 +73,13 @@
                                 </div>
                             </div>
                         </ui:repeat>
-                        <p:outputPanel rendered="true" class="flexCenter">
+                        
+                        <p:outputPanel rendered="#{doneCitizenServicesManeger.dontHaveService()}" class="flexCenter">
                             <div class="card col-xl-11 border-bottom-warning ">
 
                                 <div class="col-xl-12 col-lg-5 flexCenter" style="text-align: center">
 
-                                    <h3 style="width: 80%;margin-top: 20px">لا يوجد خدمات مقدمة</h3>
+                                    <h3 style="width: 80%;margin-top: 20px">لا يوجد خدمات جاهزه</h3>
                                     <div  style="width: 80%">
 
                                         <!-- Pie Chart -->

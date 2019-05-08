@@ -40,6 +40,11 @@ public class DoneCitizenServicesManeger implements Serializable {
        
     }
 
+    public boolean dontHaveService(){
+        return doneCitizenServices.isEmpty();
+    }
+
+    
     public List<CitizenService> getDoneCitizenServices() {
         return doneCitizenServices;
     }
