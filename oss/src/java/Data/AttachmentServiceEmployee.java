@@ -36,6 +36,10 @@ public class AttachmentServiceEmployee implements Serializable {
     InputStream inputStreamFile;
     String filename;
     StreamedContent fileDownload;
+    long sel;
+
+    public AttachmentServiceEmployee() {
+    }
 
     public AttachmentServiceEmployee(int Emp_ID, int Cit_ID, int Service_Citizen_ID, int Services_Provided_ID, InputStream file, String filename) {
         this.Emp_ID = Emp_ID;
@@ -44,6 +48,14 @@ public class AttachmentServiceEmployee implements Serializable {
         this.Services_Provided_ID = Services_Provided_ID;
         this.inputStreamFile = file;
         this.filename = filename;
+        if (file != null) {
+
+            fileDownload = new DefaultStreamedContent(file, "file", filename);
+
+        } else {
+
+            System.out.println("no file no file no file no file ");
+        }
     }
 
     public AttachmentServiceEmployee(int Attachment_Service_Employee_ID, int Emp_ID, int Cit_ID,
@@ -178,7 +190,7 @@ public class AttachmentServiceEmployee implements Serializable {
 
     private InputStream saveFileInDisk() {
         try {
-            InputStream inp =  inputStreamFile;
+            InputStream inp = inputStreamFile;
 
             byte[] inputByte = new byte[inp.available()];
 
@@ -195,6 +207,30 @@ public class AttachmentServiceEmployee implements Serializable {
         }
 
         return null;
+    }
+
+    public String sizeFile() {
+        try {
+            int s = inputStreamFile.available();
+            s /= 1000;
+            if (s > 1000) {
+                s /= 1000;
+                return s + " MB";
+            } else {
+                return s + " KB";
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(AttachmentServiceEmployee.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "0 KB";
+    }
+
+    public long getSel() {
+        return sel;
+    }
+
+    public void setSel(long sel) {
+        this.sel = sel;
     }
 
 }

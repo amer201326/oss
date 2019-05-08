@@ -300,14 +300,6 @@
 
                                             </div>
 
-
-
-
-
-
-
-
-
                                         </div>
                                     </div>
                                 </div> 
@@ -391,7 +383,7 @@
                                         </div> 
                                     </div>
                                 </p:outputPanel>
-                               
+
                                 <div class="col-sm-12 mb-4">
                                     <div class="col-sm-12" style="text-align: right; min-width:900px ">
                                         <div class="card shadow mb-xl-4">
@@ -399,9 +391,81 @@
                                                 <h6 class="m-0 font-weight-bold text-primary">ارفاق ملفات</h6>
                                             </div>
                                             <div class="card-body">
-                                                
-                                                <p:fileUpload fileUploadListener="#{shoeServiceCitizemEmpManeger.handleFileUpload}" multiple="true" auto="true" update="messages"  />
+
+                                                <p:fileUpload fileUploadListener="#{shoeServiceCitizemEmpManeger.handleFileUpload}" multiple="true" auto="true"
+                                                              update="messages allfiles"  />
                                                 <p:growl id="messages" showDetail="false" showSummary="false"/>    
+
+                                            </div>
+                                            <div class="card-body">
+
+                                                <h:head id="msgs"/>
+                                                <p:dataTable id="allfiles" var="att" value="#{shoeServiceCitizemEmpManeger.attachmentServiceEmployees}"
+                                                             style="margin-bottom:20px; text-align: center;"
+                                                             selection="#{shoeServiceCitizemEmpManeger.selectAtt}"
+                                                             rowKey="#{att.sel}" selectionMode="single"
+                                                             >
+
+
+                                                    <f:facet name="header"  >
+
+                                                        <div style="float: right;">
+                                                            <p class="tableHeader">  الملفات المرفوعة</p>
+                                                            <!--AQUI ESTABA EL BUTTON-->
+                                                        </div>
+                                                        <div id="buttonDiv" style="display:flex; flex-direction: row; ">
+                                                            <!--   <p:commandButton title="إضافة قسم" class="myButton" onclick="PF('dlg').show();" type="button"/>&nbsp;-->
+
+                                                            <p:commandLink actionListener="#{shoeServiceCitizemEmpManeger.deleteAttEMP()}" 
+                                                                           class="btn btn-danger btn-circle marginBuDel"
+                                                                           update="@form" >
+                                                                <h:outputText styleClass="fas fa-trash" style="margin:0 auto;" />
+                                                            </p:commandLink>
+
+                                                        </div>
+                                                    </f:facet>
+
+                                                    <p:ajax event="rowSelect" process="@this"  listener="#{shoeServiceCitizemEmpManeger.onServiceSelect}"/>
+
+                                                    <p:column  style="width:90px;text-align: center">
+                                                        <p:commandLink update=":ShowServiceCitizinForm:attdetali" oncomplete="PF('attshow').show()"  
+                                                                       class="btn btn-danger btn-circle marginBuDel"
+                                                                        >
+                                                            <h:outputText styleClass="fas fa-trash" style="margin:0 auto;" />
+                                                            <f:setPropertyActionListener value="#{att}" target="#{shoeServiceCitizemEmpManeger.selectAtt}" />
+
+                                                        </p:commandLink>
+                                                    </p:column>
+
+                                                    <p:column headerText="الحجم">
+                                                        <h:outputText value="#{att.sizeFile()}" />
+                                                    </p:column>
+
+
+
+
+                                                    <p:column headerText="الاسم">
+                                                        <h:outputText value="#{att.filename}" />
+                                                    </p:column>
+
+
+
+
+
+                                                </p:dataTable>
+                                                <p:dialog header="معلومات المرفق" widgetVar="attshow" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                                                    <p:outputPanel id="attdetali" style="text-align:center;">
+                                                        <p:panelGrid  columns="2"  columnClasses="label,value">
+                                                            <f:facet name="header">
+                                                                <p:graphicImage value="#{shoeServiceCitizemEmpManeger.selectAtt.fileDownload}" />
+                                                            </f:facet>
+
+                                                            <div>dddddddd</div>
+                                                        </p:panelGrid>
+                                                    </p:outputPanel>
+                                                </p:dialog>
+
+
 
                                             </div>
 

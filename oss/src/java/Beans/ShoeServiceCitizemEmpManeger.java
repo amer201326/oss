@@ -13,6 +13,7 @@ import DB.DB;
 import Data.AttachmentServiceEmployee;
 import Data.Employee;
 import Data.GetFromDB;
+import Data.Service;
 import Data.ServiceAttachmentName;
 import Data.ServiceCitizen;
 import Data.ServiceCitizen_1;
@@ -20,6 +21,7 @@ import Data.Service_Job;
 import Data.ViewerAttachment;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +35,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.component.fileupload.FileUpload;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.event.SelectEvent;
 import org.primefaces.model.UploadedFile;
 
 @ManagedBean
@@ -47,9 +50,11 @@ public class ShoeServiceCitizemEmpManeger {
 
     boolean haveService = false;
     List<AttachmentServiceEmployee> attachmentServiceEmployees = new ArrayList<>();
+    AttachmentServiceEmployee selectAtt;
 
     @PostConstruct
     public void init() {
+        selectAtt = new AttachmentServiceEmployee();
         serviseCitizen = session.serviceCitizenShow;
         employee = session.employee;
 
@@ -85,6 +90,7 @@ public class ShoeServiceCitizemEmpManeger {
         serviseCitizen.attachment = att;
         serviseCitizen.attwhithFile = attform;
     }
+    
 
     public ServiceCitizen getServiseCitizen() {
         return serviseCitizen;
@@ -93,7 +99,12 @@ public class ShoeServiceCitizemEmpManeger {
     public void setServiseCitizen(ServiceCitizen serviseCitizen) {
         this.serviseCitizen = serviseCitizen;
     }
-
+    
+    public void deleteAttEMP(){
+        attachmentServiceEmployees.remove(selectAtt);
+        
+    }
+    
     public Session getSession() {
         return session;
     }
@@ -157,12 +168,33 @@ public class ShoeServiceCitizemEmpManeger {
             AttachmentServiceEmployee att = new AttachmentServiceEmployee(employee.getEmp_id(),
                     serviseCitizen.getCit_ID(), serviseCitizen.getService_Citizen_ID(),
                     serviseCitizen.getServices_Provided_ID(), event.getFile().getInputstream(), event.getFile().getFileName());
+            att.setSel(System.currentTimeMillis());
             attachmentServiceEmployees.add(att);
 
             System.out.println("after add  = " + attachmentServiceEmployees.size());
         } catch (IOException ex) {
             Logger.getLogger(ShoeServiceCitizemEmpManeger.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public List<AttachmentServiceEmployee> getAttachmentServiceEmployees() {
+        return attachmentServiceEmployees;
+    }
+
+    public void setAttachmentServiceEmployees(List<AttachmentServiceEmployee> attachmentServiceEmployees) {
+        this.attachmentServiceEmployees = attachmentServiceEmployees;
+    }
+
+    public AttachmentServiceEmployee getSelectAtt() {
+        return selectAtt;
+    }
+
+    public void setSelectAtt(AttachmentServiceEmployee selectAtt) {
+        this.selectAtt = selectAtt;
+    }
+    
+    public void onServiceSelect(SelectEvent event){
+        selectAtt = (AttachmentServiceEmployee) event.getObject();
     }
 
 }
