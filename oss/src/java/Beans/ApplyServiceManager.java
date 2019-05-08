@@ -5,6 +5,7 @@
  */
 package Beans;
 
+import Data.AttachmentArchiveCitizen;
 import Data.GetFromDB;
 import Data.GetFromDBaraa;
 import Data.Service;
@@ -41,8 +42,9 @@ public class ApplyServiceManager implements Serializable {
 
     StreamedContent fileDownload;
     int idCitizen;
-    
+    int idAttachment;
 
+    boolean fromArcheve;
      @ManagedProperty(value = "#{msession}")
     Session session;
      
@@ -88,6 +90,12 @@ public class ApplyServiceManager implements Serializable {
 
     public void submit() {
         boolean b = false;
+        
+        if(fromArcheve){
+            
+            b = true;
+        }else{
+        
         for (ServiceAttachmentName serviceAttachmentName : serviceCitizen.attachment) {
             if (serviceAttachmentName.haveFileToupload()) {
                 if (serviceAttachmentName.getFile().getSize() == 0) {
@@ -97,7 +105,8 @@ public class ApplyServiceManager implements Serializable {
 
             }
         }
-
+        }
+        
         if (!b) {
             try {
                 serviceCitizen.addToDataBase();
@@ -138,5 +147,27 @@ public class ApplyServiceManager implements Serializable {
         this.session = session;
     }
 
+    public List<AttachmentArchiveCitizen> attachmantsArchiveCitizen(){
+        return GetFromDB.getAttachmantsArchive(idCitizen);
+    }
+
+    
+    public List<ServiceAttachmentName> getAllAttachment() {
+        return allAttachment;
+    }
+
+    public void setAllAttachment(List<ServiceAttachmentName> allAttachment) {
+        this.allAttachment = allAttachment;
+    }
+
+    public int getIdAttachment() {
+        return idAttachment;
+    }
+
+    public void setIdAttachment(int idAttachment) {
+        this.idAttachment = idAttachment;
+    }
+
+   
     
 }
