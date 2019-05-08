@@ -42,30 +42,9 @@ public class LoginFilter implements Filter {
         }else{
 //            System.out.println("lllog = "+ ((HttpServletRequest)request).getRequestURI().contains("manager") );
 //            System.out.println("lll "+"jjjj");
-         if(((HttpServletRequest)request).getRequestURI().contains("manager") && loginBean.employee != null && loginBean.employee.checkTypeAdmin()){
-             System.out.println("managerLogIn"+loginBean.employee.toString());
-         }else if(((HttpServletRequest)request).getRequestURI().contains("Municipality") && loginBean.employee != null && loginBean.employee.checkTypeAdmin()){
-             System.out.println("managerLogIn"+loginBean.employee.toString());
-         }else if(((HttpServletRequest)request).getRequestURI().contains("managerCitizen") && loginBean.employee != null && loginBean.employee.checkTypeAdmin()){
-             System.out.println("managerLogIn"+loginBean.employee.toString());
-         }else if(((HttpServletRequest)request).getRequestURI().contains("managerDepartment") && loginBean.employee != null && loginBean.employee.checkTypeAdmin()){
-             System.out.println("managerLogIn"+loginBean.employee.toString());
-         }else if(((HttpServletRequest)request).getRequestURI().contains("managerEmployee") && loginBean.employee != null && loginBean.employee.checkTypeAdmin()){
-             System.out.println("managerLogIn"+loginBean.employee.toString());
-         }else if(((HttpServletRequest)request).getRequestURI().contains("managerJopTitel") && loginBean.employee != null && loginBean.employee.checkTypeAdmin()){
-             System.out.println("managerLogIn"+loginBean.employee.toString());
-         }else if(((HttpServletRequest)request).getRequestURI().contains("managerSection") && loginBean.employee != null && loginBean.employee.checkTypeAdmin()){
-             System.out.println("managerLogIn"+loginBean.employee.toString());
-         }else if(((HttpServletRequest)request).getRequestURI().contains("managerService") && loginBean.employee != null && loginBean.employee.checkTypeAdmin()){
-             System.out.println("managerLogIn"+loginBean.employee.toString());
-         }
          
          
-         
-         
-         
-         
-         else if(((HttpServletRequest)request).getRequestURI().contains("citizenn") && loginBean.citizen != null){
+         if(((HttpServletRequest)request).getRequestURI().contains("citizenn") && loginBean.citizen != null){
              System.out.println("citizenn");
          }
          
@@ -100,7 +79,26 @@ public class LoginFilter implements Filter {
                    String contextPath = ((HttpServletRequest)request).getContextPath();
               ((HttpServletResponse)response).sendRedirect(contextPath + "/AccessDenied.xhtml");
              }
-         }else{
+         }
+         else if(((HttpServletRequest)request).getRequestURI().contains("manager") && loginBean.employee != null && loginBean.employee.checkTypeAdmin()){
+             System.out.println("managerLogIn"+loginBean.employee.toString());
+         }else if(((HttpServletRequest)request).getRequestURI().contains("Municipality") && loginBean.employee != null && loginBean.employee.checkTypeAdmin()){
+             System.out.println("managerLogIn"+loginBean.employee.toString());
+         }else if(((HttpServletRequest)request).getRequestURI().contains("managerCitizen") && loginBean.employee != null && loginBean.employee.checkTypeAdmin()){
+             System.out.println("managerLogIn"+loginBean.employee.toString());
+         }else if(((HttpServletRequest)request).getRequestURI().contains("managerDepartment") && loginBean.employee != null && loginBean.employee.checkTypeAdmin()){
+             System.out.println("managerLogIn"+loginBean.employee.toString());
+         }else if(((HttpServletRequest)request).getRequestURI().contains("managerEmployee") && loginBean.employee != null && loginBean.employee.checkTypeAdmin()){
+             System.out.println("managerLogIn"+loginBean.employee.toString());
+         }else if(((HttpServletRequest)request).getRequestURI().contains("managerJopTitel") && loginBean.employee != null && loginBean.employee.checkTypeAdmin()){
+             System.out.println("managerLogIn"+loginBean.employee.toString());
+         }else if(((HttpServletRequest)request).getRequestURI().contains("managerSection") && loginBean.employee != null && loginBean.employee.checkTypeAdmin()){
+             System.out.println("managerLogIn"+loginBean.employee.toString());
+         }else if(((HttpServletRequest)request).getRequestURI().contains("managerService") && loginBean.employee != null && loginBean.employee.checkTypeAdmin()){
+             System.out.println("managerLogIn"+loginBean.employee.toString());
+         }
+         
+         else{
               String contextPath = ((HttpServletRequest)request).getContextPath();
               ((HttpServletResponse)response).sendRedirect(contextPath + "/AccessDenied.xhtml");
          }
