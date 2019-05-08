@@ -84,7 +84,7 @@
                                                                              selection="#{serviceCitizenManager.serviceSelected}"
                                                                              rowKey="#{service.cit_ID}" rows="10" paginator="true" 
                                                                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                                                             rowsPerPageTemplate="15,20,30" filteredValue="#{serviceCitizenManager.filteredRequestService}" emptyMessage="No cars found with given criteria" >
+                                                                             rowsPerPageTemplate="20,40,50" filteredValue="#{serviceCitizenManager.filteredRequestService}" emptyMessage="لا يوجد بيانات" >
 
 
                                                                     <f:facet name="header"  >
@@ -122,8 +122,8 @@
                                                                     <p:column headerText="اسم المواطن"  filterBy="#{service.citizen.firstName} #{service.citizen.lastName}" filterMatchMode="contains" >
                                                                         <h:outputText value="#{service.citizen.firstName} #{service.citizen.lastName}" />
                                                                     </p:column>
-                                                                    
-                                                                    
+
+
                                                                 </p:dataTable>
                                                             </p:tab>
 
@@ -133,7 +133,7 @@
                                                                              selection="#{serviceCitizenManager.serviceSelected}"
                                                                              rowKey="#{service.cit_ID}" rows="10" paginator="true" 
                                                                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                                                             rowsPerPageTemplate="15,20,30">
+                                                                             rowsPerPageTemplate="20,40,50" emptyMessage="لا يوجد بيانات" filteredValue="#{serviceCitizenManager.filteredRequestService}">
 
 
                                                                     <f:facet name="header"  >
@@ -166,7 +166,7 @@
                                                                     </p:column>
 
 
-                                                                    <p:column headerText="اسم الخدمة">
+                                                                    <p:column headerText="اسم الخدمة" filterBy="#{service.service.name}" filterMatchMode="contains">
                                                                         <h:outputText value="#{service.service.name}" />
 
                                                                     </p:column>
@@ -183,7 +183,7 @@
                                                                         <h:outputText value="#{service.date}" />
                                                                     </p:column>
 
-                                                                    <p:column headerText="اسم المواطن">
+                                                                    <p:column headerText="اسم المواطن" filterBy="#{service.citizen.firstName} #{service.citizen.lastName}" filterMatchMode="contains">
                                                                         <h:outputText value="#{service.citizen.firstName} #{service.citizen.lastName}" />
                                                                     </p:column>
 
