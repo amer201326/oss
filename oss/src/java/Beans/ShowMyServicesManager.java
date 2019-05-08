@@ -40,6 +40,8 @@ public class ShowMyServicesManager implements Serializable {
     List<StepsAndDecsions> stepsAndDecsions;
     List<AttachmentServiceEmployee> attachmentServiceEmployee;
 
+      double totalCost;
+      
     public ShowMyServicesManager() {
 
     }
@@ -63,16 +65,21 @@ public class ShowMyServicesManager implements Serializable {
 
         System.out.println("lllll" + pathJ.size());
         for (StepsAndDecsions d : pathD) {
+                        d.decisionsDepartment.setTotalDepCost(d.decisionsDepartment.getTotalDepCost() + d.decisionsDepartment.getCost());
+
             for (DecisionSection s : pathS) {
                 if (d.getDepartmentPaths().id == s.getSection().getDepartmentId() && d.getDepartmentPaths().order == s.getSection().getOrderDepartment()) {
                     d.getSections().add(s);
                     for (StepsAndDecsionsJob j : pathJ) {
                         if (s.getSection().getId() == j.getJobPath().getSectionID() && s.getSection().getOrder() == j.getJobPath().getsOrder()) {
                             s.getJob().add(j);
+                                d.decisionsDepartment.setTotalDepCost(d.decisionsDepartment.getTotalDepCost() + j.decisionsJob.getCost());
+
                             for (AttachmentServiceEmployee att : attachmentServiceEmployee) {
                                 if (att.getEmp_ID() == j.decisionsJob.getIdEmployee()) {
                                     //j.setAttachmentServiceEmployee(att);
                                     j.getAttachmentServiceEmployee().add(att);
+                                    
                                 }
                             }
 
@@ -80,6 +87,7 @@ public class ShowMyServicesManager implements Serializable {
                     }
                 }
             }
+            totalCost = totalCost + d.decisionsDepartment.getTotalDepCost();
         }
         return pathD;
     }
@@ -116,4 +124,13 @@ public class ShowMyServicesManager implements Serializable {
         this.attachmentServiceEmployee = attachmentServiceEmployee;
     }
 
+    public double getTotalCost() {
+        return totalCost;
+    }
+
+    public void setTotalCost(double totalCost) {
+        this.totalCost = totalCost;
+    }
+
+    
 }
