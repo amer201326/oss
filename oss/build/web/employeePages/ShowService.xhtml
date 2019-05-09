@@ -429,9 +429,9 @@
 
                                                     <p:column  style="width:90px;text-align: center">
                                                         <p:commandLink update=":ShowServiceCitizinForm:attdetali" oncomplete="PF('attshow').show()"  
-                                                                       class="btn btn-danger btn-circle marginBuDel"
+                                                                       class="btn btn-success btn-circle marginBuAdd"
                                                                         >
-                                                            <h:outputText styleClass="fas fa-trash" style="margin:0 auto;" />
+                                                            <h:outputText styleClass="fa fa-fw fa-eye" style="margin:0 auto;" />
                                                             <f:setPropertyActionListener value="#{att}" target="#{shoeServiceCitizemEmpManeger.selectAtt}" />
 
                                                         </p:commandLink>
@@ -457,10 +457,11 @@
                                                     <p:outputPanel id="attdetali" style="text-align:center;">
                                                         <p:panelGrid  columns="2"  columnClasses="label,value">
                                                             <f:facet name="header">
-                                                                <p:graphicImage value="#{shoeServiceCitizemEmpManeger.selectAtt.fileDownload}" />
+                                                                <p:graphicImage width="500px" height="500px" value="/files/#{shoeServiceCitizemEmpManeger.selectAtt.filename}"/>
+                                                                
                                                             </f:facet>
 
-                                                            <div>dddddddd</div>
+                                                            <div>#{shoeServiceCitizemEmpManeger.selectAtt.filename}"</div>
                                                         </p:panelGrid>
                                                     </p:outputPanel>
                                                 </p:dialog>

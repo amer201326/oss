@@ -10,14 +10,19 @@ import Data.AttachmentArchiveCitizen;
 import Data.Crypto;
 import javax.crypto.Cipher;
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.crypto.Cipher;
+import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
@@ -37,24 +42,38 @@ public class AttachmentServiceEmployee implements Serializable {
     String filename;
     StreamedContent fileDownload;
     long sel;
-
+    int si;
     public AttachmentServiceEmployee() {
     }
 
     public AttachmentServiceEmployee(int Emp_ID, int Cit_ID, int Service_Citizen_ID, int Services_Provided_ID, InputStream file, String filename) {
-        this.Emp_ID = Emp_ID;
-        this.Cit_ID = Cit_ID;
-        this.Service_Citizen_ID = Service_Citizen_ID;
-        this.Services_Provided_ID = Services_Provided_ID;
-        this.inputStreamFile = file;
-        this.filename = filename;
-        if (file != null) {
+        try {
+            this.Emp_ID = Emp_ID;
+            this.Cit_ID = Cit_ID;
+            this.Service_Citizen_ID = Service_Citizen_ID;
+            this.Services_Provided_ID = Services_Provided_ID;
+            this.inputStreamFile = file;
+            this.filename = filename;
+            si = file.available();
+//           File a = File.createTempFile(filename.substring(0, filename.length()-3), filename.substring(filename.length()-3, filename.length())); 
+//    		
+//    		System.out.println("Temp file : " + a.getAbsolutePath());
+//            //File a = new File( "/"+filename);
 
-            fileDownload = new DefaultStreamedContent(file, "file", filename);
+            String relativeWebPath = "/files/"+filename;
+            ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+            String absoluteDiskPath = servletContext.getRealPath(relativeWebPath);
+            File a = new File(absoluteDiskPath);
+            System.out.println(a.getAbsolutePath());
+            byte[] buffer = new byte[file.available()];
+            file.read(buffer);
 
-        } else {
-
-            System.out.println("no file no file no file no file ");
+            OutputStream outStream = new FileOutputStream(a);
+            outStream.write(buffer);
+            outStream.close();
+        } catch (IOException ex) {
+            System.out.println("error out put steem");
+            Logger.getLogger(AttachmentServiceEmployee.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -144,6 +163,7 @@ public class AttachmentServiceEmployee implements Serializable {
     }
 
     public StreamedContent getFileDownload() {
+        System.out.println("get file downloafd");
         return fileDownload;
     }
 
@@ -210,8 +230,8 @@ public class AttachmentServiceEmployee implements Serializable {
     }
 
     public String sizeFile() {
-        try {
-            int s = inputStreamFile.available();
+        
+            double s = si;
             s /= 1000;
             if (s > 1000) {
                 s /= 1000;
@@ -219,10 +239,8 @@ public class AttachmentServiceEmployee implements Serializable {
             } else {
                 return s + " KB";
             }
-        } catch (IOException ex) {
-            Logger.getLogger(AttachmentServiceEmployee.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return "0 KB";
+       
+        
     }
 
     public long getSel() {
@@ -231,6 +249,13 @@ public class AttachmentServiceEmployee implements Serializable {
 
     public void setSel(long sel) {
         this.sel = sel;
+    }
+    
+    public String typ(){
+        if(filename !=null)
+            if(filename.length() >3)
+        return filename.substring(filename.length()-3, filename.length());
+        return "";
     }
 
 }
