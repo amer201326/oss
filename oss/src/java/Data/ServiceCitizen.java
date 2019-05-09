@@ -119,13 +119,11 @@ public class ServiceCitizen implements Serializable {
                 attachmentServiceCitizen.addToDataBase();
                 idMaxAAC++;
             }
+            
             for (AttachmentServiceCitizen attachmentServiceCitizen : attachmentServiceCitizens) {
                 attachmentServiceCitizen.addToDataBase();
             }
-            for (AttachmentServiceCitizen attachmentServiceCitizen : attachmentServiceCitizens) {
-                // AttachmentServiceCitizen attachmentServiceCitizen = new AttachmentServiceCitizen(idMaxAAC, idMaxSC, Services_Provided_ID, Cit_ID);                   
-                attachmentServiceCitizen.addToDataBase();
-            }
+            
             System.out.println("ggggggggg");
 
             for (ServiceAttachmentName af : attwhithFile) {
