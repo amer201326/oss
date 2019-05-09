@@ -25,7 +25,7 @@ import org.primefaces.model.UploadedFile;
  *
  * @author baraakali
  */
-public class ServiceCitizen implements Serializable{
+public class ServiceCitizen implements Serializable {
 
     int idMaxSC;
 
@@ -44,6 +44,8 @@ public class ServiceCitizen implements Serializable{
     Citizen citizen;
     Department department;
     DecisionsDepartment decisionsDepartment = new DecisionsDepartment();
+
+    public List<AttachmentServiceCitizen> attachmentServiceCitizens = new ArrayList<AttachmentServiceCitizen>();
 
     public List<AttachmentServiceEmployee> attachmentServiceEmployees = new ArrayList<AttachmentServiceEmployee>();
 
@@ -87,7 +89,7 @@ public class ServiceCitizen implements Serializable{
 
     }
 
-    public boolean addToDataBase() {
+    public boolean addToDataBase(boolean fromArcheve) {
 
         Services_Provided_ID = service.id;
 
@@ -117,7 +119,13 @@ public class ServiceCitizen implements Serializable{
                 attachmentServiceCitizen.addToDataBase();
                 idMaxAAC++;
             }
-
+            for (AttachmentServiceCitizen attachmentServiceCitizen : attachmentServiceCitizens) {
+                attachmentServiceCitizen.addToDataBase();
+            }
+            for (AttachmentServiceCitizen attachmentServiceCitizen : attachmentServiceCitizens) {
+                // AttachmentServiceCitizen attachmentServiceCitizen = new AttachmentServiceCitizen(idMaxAAC, idMaxSC, Services_Provided_ID, Cit_ID);                   
+                attachmentServiceCitizen.addToDataBase();
+            }
             System.out.println("ggggggggg");
 
             for (ServiceAttachmentName af : attwhithFile) {
@@ -319,6 +327,14 @@ public class ServiceCitizen implements Serializable{
 
     public void setDepartment(Department department) {
         this.department = department;
+    }
+
+    public List<AttachmentServiceCitizen> getAttachmentServiceCitizens() {
+        return attachmentServiceCitizens;
+    }
+
+    public void setAttachmentServiceCitizens(List<AttachmentServiceCitizen> attachmentServiceCitizens) {
+        this.attachmentServiceCitizens = attachmentServiceCitizens;
     }
 
     public ArrayList<DepartmentPaths> firstDepsInPathOfthisService() {
@@ -967,7 +983,7 @@ public class ServiceCitizen implements Serializable{
             ResultSet r = db.read(q);
             boolean flag = false;
             while (r.next()) {
-                
+
                 if ("done".equals(r.getString(6)) && "accept".equals(r.getString(11))) {
                     flag = true;
                 } else {

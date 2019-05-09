@@ -162,7 +162,12 @@
 
                                                             <div id="divDown" class="flexColomn ">
 
-                                                                <a  href="#" onclick="PF('dialogatt').show();" >اختيار</a>
+                                                                <p:commandLink oncomplete="PF('dialogatt').show()"  
+                                                                               class="btn btn-danger btn-circle marginBuDel" value="اختيار"
+                                                                               >
+                                                                    <h:outputText styleClass="fas fa-trash" style="margin:0 auto;" />
+                                                                    <f:setPropertyActionListener value="#{att}" target="#{applyServiceManager.selectAtt}" />
+                                                                </p:commandLink>
 
                                                                 <p:fileUpload id="uploadAm" label="اختار ملف" value="#{att.file}" mode="simple" skinSimple="true" required="true" 
                                                                               class="bg-#{att.color()} text-white transparent_btn" rendered="true"
@@ -195,15 +200,15 @@
                                     <h:panelGrid columns="2" >
 
                                         <h:outputLabel for="jobs" value="مرفقات: " />
-                                        <p:selectOneMenu id="jobs" required="true" value="#{applyServiceManager.idAttachment}" 
+                                        <p:selectOneMenu id="jobs" required="true" value="#{applyServiceManager.idatta_ArchiveC_ID}" 
                                                          class="pading000" dynamic="true" style="min-width: 223px;">
                                             <f:selectItem noSelectionOption="true" itemLabel="اختار مرفق" />
                                             <f:selectItems value="#{applyServiceManager.attachmantsArchiveCitizen()}" var="a" itemLabel="#{a.nameAtt}" itemValue="#{a.atta_ArchiveC_ID}"/>
                                         </p:selectOneMenu>
 
                                         <br/>
-                                        
-                                        <p:commandButton id="dele" value="اضافه"  oncomplete="PF('dialogatt').hide();"/>
+
+                                        <p:commandButton id="dele" value="اضافه" actionListener="#{applyServiceManager.addNewServiceAtt()}" oncomplete="PF('dialogatt').hide();"/>
 
                                     </h:panelGrid>
                                 </p:dialog> 

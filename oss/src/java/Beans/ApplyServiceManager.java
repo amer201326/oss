@@ -6,6 +6,7 @@
 package Beans;
 
 import Data.AttachmentArchiveCitizen;
+import Data.AttachmentServiceCitizen;
 import Data.GetFromDB;
 import Data.GetFromDBaraa;
 import Data.Service;
@@ -35,14 +36,14 @@ import org.primefaces.model.UploadedFile;
 @ManagedBean
 @ViewScoped
 public class ApplyServiceManager implements Serializable {
-
+    ServiceAttachmentName selectAtt;
     ServiceCitizen serviceCitizen;
 
     List<ServiceAttachmentName> allAttachment;
 
     StreamedContent fileDownload;
     int idCitizen;
-    int idAttachment;
+    int idatta_ArchiveC_ID;
 
     boolean fromArcheve;
      @ManagedProperty(value = "#{msession}")
@@ -90,12 +91,7 @@ public class ApplyServiceManager implements Serializable {
 
     public void submit() {
         boolean b = false;
-        
-        if(fromArcheve){
-            
-            b = true;
-        }else{
-        
+       
         for (ServiceAttachmentName serviceAttachmentName : serviceCitizen.attachment) {
             if (serviceAttachmentName.haveFileToupload()) {
                 if (serviceAttachmentName.getFile().getSize() == 0) {
@@ -105,11 +101,11 @@ public class ApplyServiceManager implements Serializable {
 
             }
         }
-        }
+        
         
         if (!b) {
             try {
-                serviceCitizen.addToDataBase();
+                serviceCitizen.addToDataBase(fromArcheve);
                 FacesContext.getCurrentInstance().getExternalContext().redirect("notDoneCitizenServices.xhtml");
             } catch (IOException ex) {
                 Logger.getLogger(ApplyServiceManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -121,7 +117,14 @@ public class ApplyServiceManager implements Serializable {
         }
     }
 
-   
+   public void addNewServiceAtt(){
+       for (ServiceAttachmentName serviceAttachmentName : serviceCitizen.attachment) {
+           if(serviceAttachmentName.getId() == selectAtt.getId()){
+               AttachmentServiceCitizen a = new AttachmentServiceCitizen(idatta_ArchiveC_ID, serviceCitizen.getService_Citizen_ID(), serviceCitizen.getServices_Provided_ID(), idCitizen);
+               serviceCitizen.attachmentServiceCitizens.add(a);
+           }
+       }
+   }
 
     public ServiceCitizen getServiceCitizen() {
         return serviceCitizen;
@@ -160,12 +163,23 @@ public class ApplyServiceManager implements Serializable {
         this.allAttachment = allAttachment;
     }
 
-    public int getIdAttachment() {
-        return idAttachment;
+    public int getIdatta_ArchiveC_ID() {
+        return idatta_ArchiveC_ID;
     }
 
-    public void setIdAttachment(int idAttachment) {
-        this.idAttachment = idAttachment;
+    public void setIdatta_ArchiveC_ID(int idatta_ArchiveC_ID) {
+        this.idatta_ArchiveC_ID = idatta_ArchiveC_ID;
+    }
+
+    
+    
+
+    public ServiceAttachmentName getSelectAtt() {
+        return selectAtt;
+    }
+
+    public void setSelectAtt(ServiceAttachmentName selectAtt) {
+        this.selectAtt = selectAtt;
     }
 
    
