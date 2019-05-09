@@ -40,7 +40,7 @@
                     <!-- Topbar -->
                     <ui:include src="../pages/heder.xhtml"/>
                     <!-- End of Topbar -->
-                    
+
                     <div class="container-fluid">
 
                         <!-- Page Heading -->
@@ -211,70 +211,83 @@
                                         <h6 class="m-0 font-weight-bold text-primary">اكثر 5 خدمات تم طلبها</h6>
                                     </div>
                                     <div class="card-body">
-                                        
-                                      
+
+
                                         <ui:repeat value="#{departmentsManage.servicesCount}" var="serCount" >
                                             <h4 class="small font-weight-bold">#{serCount.serviceName} <span class="float-right">#{serCount.count} %</span></h4>
-                                        <div class="progress mb-4">
-                                            <div class="progress-bar " role="progressbar" style="width: #{serCount.count}%;background-color:#1cc88a" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
+                                            <div class="progress mb-4">
+                                                <div class="progress-bar " role="progressbar" style="width: #{serCount.count}%;background-color:#1cc88a" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
                                         </ui:repeat>
-                                        
+
                                     </div>
                                 </div>
 
                                 <!-- Color System -->
                                 <div class="row">
                                     <div class="col-lg-6 mb-4">
-                                        <a href="">
-                                        <div class="card bg-primary text-white shadow">
-                                            
-                                            <div class="card-body" dir="rtl" style="">
-                                                دوائر البلدية 
-                                                <div class="text-white-50 small" dir="rtl" style="font-weight: 600; font-size: 20px; color: white;">#{departmentsManage.allParameter[4]}</div>
+                                        <a href="../managerDepartment/departments.xhtml" style="text-decoration: none;">
+
+                                            <div class="card bg-primary text-white shadow">
+
+                                                <div class="card-body" dir="rtl" style="text-align: right; font-size: 18px; font-weight: 700;">
+                                                    دوائر البلدية 
+                                                    <div class="text-white-50 small" 
+                                                         style="font-weight: 700; font-size: 20px; text-align: left;">#{departmentsManage.allParameter[4]}</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-6 mb-4">
+
+                                        <a href="../managerSection/sections.xhtml" style="text-decoration: none;">
+                                            <div class="card bg-success text-white shadow">
+                                                <div class="card-body"  style="text-align: right; font-size: 18px; font-weight: 700;">
+                                                    أقسام البلدية
+                                                    <div class="text-white-50 small" style="font-weight: 700; font-size: 20px; text-align: left;">#{departmentsManage.allParameter[5]}</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-6 mb-4">
+                                        <a href="../managerEmployee/allEmployees.xhtml" style="text-decoration: none;">
+                                        <div class="card bg-info text-white shadow">
+                                            <div class="card-body"  style="text-align: right; font-size: 18px; font-weight: 700;">
+                                                الموظفين
+                                                <div class="text-white-50 small" style="font-weight: 700; font-size: 20px; text-align: left;">#{departmentsManage.allParameter[9]}</div>
                                             </div>
                                         </div>
                                         </a>
                                     </div>
                                     <div class="col-lg-6 mb-4">
-                                        <div class="card bg-success text-white shadow">
-                                            <div class="card-body">
-                                                أقسام البلدية
-                                                <div class="text-white-50 small">#{departmentsManage.allParameter[5]}</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 mb-4">
-                                        <div class="card bg-info text-white shadow">
-                                            <div class="card-body">
-                                                الموظفين
-                                                <div class="text-white-50 small">#{departmentsManage.allParameter[9]}</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 mb-4">
+                                        <a href="../managerService/allServices.xhtml" style="text-decoration: none;">
                                         <div class="card bg-warning text-white shadow">
-                                            <div class="card-body">
+                                            <div class="card-body"  style="text-align: right; font-size: 18px; font-weight: 700;">
                                                 الخدمات التي تقدمها البلدية
-                                                <div class="text-white-50 small">#{departmentsManage.allParameter[6]}</div>
+                                                <div class="text-white-50 small" style="font-weight: 700; font-size: 20px; text-align: left;">#{departmentsManage.allParameter[6]}</div>
                                             </div>
                                         </div>
+                                        </a>
                                     </div>
                                     <div class="col-lg-6 mb-4">
+                                        <a href="../managerCitizen/allCitizen.xhtml" style="text-decoration: none;">
                                         <div class="card bg-danger text-white shadow">
-                                            <div class="card-body">
+                                            <div class="card-body"  style="text-align: right; font-size: 18px; font-weight: 700;">
                                                 المواطنين
-                                                <div class="text-white-50 small">#{departmentsManage.allParameter[7]}</div>
+                                                <div class="text-white-50 small" style="font-weight: 700; font-size: 20px; text-align: left;">#{departmentsManage.allParameter[7]}</div>
                                             </div>
                                         </div>
+                                        </a>
                                     </div>
                                     <div class="col-lg-6 mb-4">
+                                        <a href="../managerCitizen/servicesCitizensAdmin.xhtml" style="text-decoration: none;">
                                         <div class="card bg-secondary text-white shadow">
-                                            <div class="card-body">
+                                            <div class="card-body"  style="text-align: right; font-size: 18px; font-weight: 700;">
                                                 عدد جميع الخدمات المطلوبة
-                                                <div class="text-white-50 small">#{departmentsManage.allParameter[8]}</div>
+                                                <div class="text-white-50 small" style="font-weight: 700; font-size: 20px; text-align: left;">#{departmentsManage.allParameter[8]}</div>
                                             </div>
                                         </div>
+                                        </a>
                                     </div>
                                 </div>
 
@@ -289,10 +302,10 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="text-center">
-                                       
+
                                             <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="../homePage/assets/image/image4_1.png" alt=""/>
                                         </div>
-                                         <h:panelGrid columns="2" dir="rtl" style="display: flex; justify-content: flex-start;">
+                                        <h:panelGrid columns="2" dir="rtl" style="display: flex; justify-content: flex-start;">
 
                                             <p:outputLabel for="munName" value="اسم البلدية: " /> 
                                             <p:outputLabel id="munName" value="#{homePageManager.allDetails[7]}" style="text-align:right;" class="form-control-user"/>
@@ -374,11 +387,11 @@
         <script src="../vendor/chart.js/Chart.min.js"></script>
 
         <!-- Page level custom scripts -->
-        
+
         <script src="../js/js.js" type="text/javascript"></script>
-        
-        
-         <script>
+
+
+        <script>
 
 //Area chart
             Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
@@ -514,12 +527,12 @@
                     cutoutPercentage: 80,
                 },
             });
-            
+
 
 
         </script>
-        
-        
+
+
     </h:body>
 </html>
 
