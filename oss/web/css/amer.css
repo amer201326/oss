@@ -908,7 +908,7 @@ span[id*='uploadAm'] .ui-fileupload-filename{
 }
 span[id*='j_idt16'] .ui-button{
     color: #f1e5e6;
-    background-color: #d3394c;
+    background-color: transparent;
     border: none;
     font-size: 20px;
     font-weight: bold;
