@@ -832,7 +832,7 @@ public class GetFromDB {
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
-                s = new AttachmentArchiveCitizen(r.getInt(1), r.getInt(2), r.getInt(3), r.getBinaryStream(4), r.getString(5), r.getString(6));
+                s = new AttachmentArchiveCitizen(r.getInt(1), r.getInt(2), r.getInt(3), r.getBinaryStream(4), r.getString(5), r.getString(7));
                 if (s.fileDownload != null) {
                     at.add(s);
                 }

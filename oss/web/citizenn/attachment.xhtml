@@ -71,43 +71,53 @@
 
 
                                     <div class="card shadow mb-xl-4">
-                                        <div class="card-header py-3">
-                                            <h6 class="m-0 font-weight-bold text-primary">#{att.nameAtt}</h6>
-                                        </div>
+                                        <a href="#collapseCardExample#{att.atta_ArchiveC_ID}" class="d-block card-header py-3 collapsed " data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseCardExample#{att.atta_ArchiveC_ID}">
 
-                                        <div class="card-body">
+                                            <div class="card-header py-3">
+                                                <h6 class="m-0 font-weight-bold text-primary">#{att.nameAtt}</h6>
+                                            </div>
+                                        </a>
+                                        <div class="collapse" id="collapseCardExample#{att.atta_ArchiveC_ID}" style="">
+                                            <div class="card-body">
 
-                                            <ui:repeat value="#{archiveCitizen.filterAtta(att.serviceAttachmentName_ID)}"  var="arvhive" varStatus="in" >
-                                                <div class="flexAm row-space " style="margin-right: 14px">
-                                                    <div class="col-sm-12 card mb-4 py-3 border-left-success border-right-success flexjustify-content">
+                                                <ui:repeat value="#{archiveCitizen.filterAtta(att.serviceAttachmentName_ID)}"  var="arvhive" varStatus="in" >
 
-                                                        <div class="card-body">
-                                                            #{arvhive.nameFile}
+
+                                                    <div class="flexAm row-space " style="margin-right: 14px">
+                                                        <div class="col-sm-12 card mb-4 py-3 border-left-success border-right-success flexjustify-content">
+
+
+
+                                                            <div class="card-body">
+                                                                #{arvhive.nameFile}
+                                                            </div>
+
+
+                                                            <div>
+
+                                                                <p:commandButton id="downloadAT"  value="تنزيل" ajax="false"  icon="fa fa-arrow-down" >
+                                                                    <p:fileDownload value="#{arvhive.fileDownload}" />
+                                                                </p:commandButton> 
+                                                            </div> 
                                                         </div>
-                                                        <div>
-                                                           
-                                                            <p:commandButton id="downloadAT"  value="تنزيل" ajax="false"  icon="fa fa-arrow-down" >
-                                                                <p:fileDownload value="#{arvhive.fileDownload}" />
-                                                            </p:commandButton> 
-                                                        </div>
+
+
+
                                                     </div>
-
-
-
-                                                </div>
-                                            </ui:repeat>
+                                                </ui:repeat>
 
 
 
 
 
+                                            </div>
                                         </div>
                                     </div>
                                 </ui:repeat>
 
                             </div>
 
-                           
+
 
 
 
