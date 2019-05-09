@@ -56,7 +56,7 @@
                             <!-- Earnings (Monthly) Card Example -->
                             <div class="col-xl-3 col-md-6 mb-4">
 
-                                <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card border-left-info shadow h-100 py-2">
                                     <div class="card-body">
 
                                         <div class="row no-gutters align-items-center">
@@ -64,7 +64,7 @@
                                                 <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                                             </div>
                                             <div class="col mr-2" style="text-align: right">
-                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" > (مجموع الثمن(شهريا </div>
+                                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1" > (مجموع الثمن(شهريا </div>
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800">#{departmentsManage.costOfThisMonth()}$</div>
                                             </div>
 
@@ -94,14 +94,14 @@
 
                             <!-- Earnings (Monthly) Card Example -->
                             <div class="col-xl-3 col-md-6 mb-4">
-                                <div class="card border-left-info shadow h-100 py-2">
+                                <div class="card border-left-primary shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col-auto">
                                                 <i class="fa fa-wrench fa-2x text-gray-300"></i>
                                             </div>
                                             <div class="col mr-2" style="text-align: right">
-                                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">الخدمات قيد التنفيذ</div>
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">الخدمات قيد التنفيذ</div>
                                                 <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">#{departmentsManage.allParameter[0]}</div>
                                             </div>
                                         </div>
@@ -179,19 +179,19 @@
                                         <h6 class="m-0 font-weight-bold text-primary"> نسبة العمل على الخدمات</h6>
                                     </div>
                                     <!-- Card Body -->
-                                    <div class="card-body">
+                                    <div class="card-body" dir="rtl">
                                         <div class="chart-pie pt-4 pb-2"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
                                             <canvas id="myPieChart" width="532" height="245" class="chartjs-render-monitor" style="display: block; width: 532px; height: 245px;"></canvas>
                                         </div>
                                         <div class="mt-4 text-center small">
                                             <span class="mr-2">
-                                                <i class="fas fa-circle text-primary"></i> غير مشاهدة
+                                                <i class="fas fa-circle text-warning"></i> غير مشاهدة
                                             </span>
                                             <span class="mr-2">
-                                                <i class="fas fa-circle text-success"></i> قيد التنفيذ
+                                                <i class="fas fa-circle text-primary"></i> قيد التنفيذ
                                             </span>
                                             <span class="mr-2">
-                                                <i class="fas fa-circle text-info"></i> منجزة
+                                                <i class="fas fa-circle text-success"></i> منجزة
                                             </span>
                                         </div>
                                     </div>
@@ -504,8 +504,8 @@
                     labels: ["منجزة", "قيد التنفيذ", "غير مشاهدة"],
                     datasets: [{
                             data: [#{departmentsManage.allParameter[1]}, #{departmentsManage.allParameter[0]}, #{departmentsManage.allParameter[3]}],
-                            backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
-                            hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+                            backgroundColor: ['#1cc88a', '#4e73df', '#f6c23e'],
+                            hoverBackgroundColor: ['#17a673', '#2e59d9', '#f6c23e'],
                             hoverBorderColor: "rgba(234, 236, 244, 1)",
                         }],
                 },
