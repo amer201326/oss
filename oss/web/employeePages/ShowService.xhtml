@@ -470,13 +470,13 @@
                                                                    style="width:300px;height:auto" >
                                                         <p:graphicImage width="200px" value="/imgs/pdf-512.png"/>
 
-                                                          <div>#{shoeServiceCitizemEmpManeger.selectAtt.filename}"</div>
+                                                        <div>#{shoeServiceCitizemEmpManeger.selectAtt.filename}"</div>
                                                     </p:outputPanel>
                                                     <p:outputPanel rendered="#{shoeServiceCitizemEmpManeger.selectAtt.canntOpenFile()}"
                                                                    style="width:300px;height:auto" >
                                                         <p:graphicImage width="200px" value="/imgs/download.png"/>
 
-                                                          <div>#{shoeServiceCitizemEmpManeger.selectAtt.filename}"</div>
+                                                        <div>#{shoeServiceCitizemEmpManeger.selectAtt.filename}"</div>
                                                     </p:outputPanel>
                                                 </p:dialog>
 
@@ -553,8 +553,10 @@
 
 
                                         <div class="text-center">
-                                            <p:commandButton id="sub2"  actionListener="#{shoeServiceCitizemEmpManeger.accept()}" action="serviceCitizzen.xhtml" value="قبول " update="@none"  class="myButtonC ml-3"  />
-                                            <p:commandButton id="sub3"  actionListener="#{shoeServiceCitizemEmpManeger.reject()}" action="serviceCitizzen.xhtml" value="رفض " update="@none"  class="myButtonD ml-3"  />
+                                            <p:commandButton id="sub2"  actionListener="#{shoeServiceCitizemEmpManeger.accept()}" action="serviceCitizzen.xhtml" value="قبول " update="@none"  
+                                                             class="myButtonC ml-3" style="background:#77d42a; color:#ffffff;" />
+                                            <p:commandButton id="sub3"  actionListener="#{shoeServiceCitizemEmpManeger.reject()}" action="serviceCitizzen.xhtml" value="رفض " update="@none"  
+                                                             class="myButtonD ml-3" style="background:#f24537;  color:#ffffff;" />
 
 
 
