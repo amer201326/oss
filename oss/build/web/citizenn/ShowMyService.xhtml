@@ -307,37 +307,47 @@
                         </ui:repeat>  
 
                     </div>
-                    <p:dialog id="datshwo" dir="rtl" header="معلومات المرفق" widgetVar="attshow"  position="top,center" width="1000">
-                        <p:panelGrid  columns="2" >
-                            <f:facet name="header">
-                                <p:scrollPanel  rendered="#{showMyServicesManager.selectAttEMP.isImage()}"   style="width:auto;height:auto" mode="native">
+                    <p:dialog id="datshwo" dir="rtl" header="معلومات المرفق" widgetVar="attshow"  position="top,center" width="950"
+                              minWidth="950" minHeight="800" maximizable="false" resizable="false"> 
 
 
-                                    <h:graphicImage id="image" alt="uploaded image" url="/image?type=archsit" style="width: 50%; padding-bottom: 20px;" />
+                        <p:scrollPanel  rendered="#{showMyServicesManager.selectAttEMP.isImage()}" style="width:auto; height:auto;" mode="native">
+
+                            <div class="CenterFlex">
+                                <h:graphicImage id="image" alt="uploaded image" url="/image?type=archsit" style="width: 80%; height: 100%;
+                                                margin: 10px 0 10px 0;"/>
+                            </div>
+
+                            <div class="CenterFlex">#{showMyServicesManager.selectAttEMP.filename}"</div>
+
+                            <div class="CenterFlex" >
+                                <p:commandButton id="downloadAT"  value="تنزيل" ajax="false"  icon="fa fa-arrow-down" 
+                                                 style="color: #f1e5e6; background: #e74a3b 50% 50%; margin: 10px 0 10px 0;
+                                                 border: none; width: 40%; font-size: 20px; font-weight: bold;">
+                                    <p:fileDownload value="#{showMyServicesManager.selectAttEMP.fileDownload}"/>
+                                </p:commandButton>
+
+                            </div>
+
+                        </p:scrollPanel>
 
 
-                                    <div>#{showMyServicesManager.selectAttEMP.filename}"</div>
-                                    <p:commandButton id="downloadAT"  value="تنزيل" ajax="false"  icon="fa fa-arrow-down" class="bg-primary myButtonC" 
-                                                     style="color: white;">
-                                        <p:fileDownload value="#{showMyServicesManager.selectAttEMP.fileDownload}"/>
-                                    </p:commandButton>
 
-                                </p:scrollPanel>
-                            </f:facet>
-                           
-                            <p:outputPanel rendered="#{showMyServicesManager.selectAttEMP.isPDF()}"
-                                           style="width:300px;height:auto" >
-                                <p:graphicImage width="200px" value="/imgs/pdf-512.png"/>
-                                 <br/>
-                                 <div style="padding-top: 20px;">#{showMyServicesManager.selectAttEMP.filename}"</div>
-                            </p:outputPanel>
-                            <p:outputPanel rendered="#{showMyServicesManager.selectAttEMP.canntOpenFile()}"
-                                           style="width:300px;height:auto" >
-                                <p:graphicImage width="200px" value="/imgs/download.png"/>
-                                 <br/>
-                                <div style="padding-top: 20px;">#{showMyServicesManager.selectAttEMP.filename}"</div>
-                            </p:outputPanel>
-                        </p:panelGrid>
+
+                        <p:outputPanel rendered="#{showMyServicesManager.selectAttEMP.isPDF()}"
+                                       style="width:300px;height:auto" >
+                            <p:graphicImage width="200px" value="/imgs/pdf-512.png"/>
+                            <br/>
+                            <div style="padding-top: 20px;">#{showMyServicesManager.selectAttEMP.filename}"</div>
+                        </p:outputPanel>
+
+                        <p:outputPanel rendered="#{showMyServicesManager.selectAttEMP.canntOpenFile()}"
+                                       style="width:300px;height:auto" >
+                            <p:graphicImage width="200px" value="/imgs/download.png"/>
+                            <br/>
+                            <div style="padding-top: 20px;">#{showMyServicesManager.selectAttEMP.filename}"</div>
+                        </p:outputPanel>
+
                     </p:dialog>
 
 

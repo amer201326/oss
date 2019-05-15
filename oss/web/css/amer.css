@@ -769,6 +769,11 @@ hr{
     background: linear-gradient(to bottom, #88c048 0%,#69a038 100%);
 }
 
+.CenterFlex{
+    display: flex;
+    justify-content: center;
+}
+
 .inLineB{
     display: inline;
 }
@@ -926,6 +931,7 @@ button[id*='downloadAT'] {
     font-weight: bold;
 }
 
+
 span[id*='uploadAm']{
     display: flex;
     justify-content: center;
@@ -1024,3 +1030,4 @@ span[id*='j_idt14'] .ui-button{
 .ui-widget .ui-icon.fa, .ui-icon.fa{
     font-size: 90%;
 }
+

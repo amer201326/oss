@@ -453,14 +453,17 @@
 
 
                                                 </p:dataTable>
-                                                <p:dialog id="datshwo" dir="rtl" header="معلومات المرفق" widgetVar="attshow"  position="top">
-                                                    <p:scrollPanel  rendered="#{shoeServiceCitizemEmpManeger.selectAtt.isImage()}" id="attdetali"  style="width:auto;height:auto" mode="native">
+                                                <p:dialog id="datshwo" dir="rtl" header="معلومات المرفق" widgetVar="attshow"  position="top"
+                                                          resizable="false" minWidth="950" minHeight="900" maximizable="false">
+                                                    <p:scrollPanel  rendered="#{shoeServiceCitizemEmpManeger.selectAtt.isImage()}" id="attdetali" style="width:auto;
+                                                                    height:auto" mode="native">
 
+                                                        <div  class="CenterFlex" style="margin: 10px 0 10px 0;" >
+                                                            <p:graphicImage value="/files/#{shoeServiceCitizemEmpManeger.selectAtt.filename}"
+                                                                            style="max-width: 70%; max-height:80%;"/>
+                                                        </div>
 
-                                                        <p:graphicImage width="100%" value="/files/#{shoeServiceCitizemEmpManeger.selectAtt.filename}"/>
-
-
-                                                        <div>#{shoeServiceCitizemEmpManeger.selectAtt.filename}"</div>
+                                                        <div class="CenterFlex">#{shoeServiceCitizemEmpManeger.selectAtt.filename}"</div>
 
                                                     </p:scrollPanel>
                                                     <p:outputPanel rendered="#{shoeServiceCitizemEmpManeger.selectAtt.isPDF()}"
