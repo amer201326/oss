@@ -27,36 +27,39 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import org.primefaces.event.SelectEvent;
 
 /**
  *
  * @author baraakali
  */
-@ManagedBean
+@ManagedBean(name = "showMyServicesManager")
 @ViewScoped
+
 public class ShowMyServicesManager implements Serializable {
 
     ServiceCitizen thisServiceCitizen;
     List<StepsAndDecsions> stepsAndDecsions;
     List<AttachmentServiceEmployee> attachmentServiceEmployee;
+    AttachmentServiceEmployee selectAttEMP;
+    double totalCost;
 
-      double totalCost;
-      
     public ShowMyServicesManager() {
-
+        selectAttEMP = new AttachmentServiceEmployee();
     }
     @ManagedProperty(value = "#{msession}")
     Session session;
 
     @PostConstruct
     public void init() {
+
         if (session.serviceCitizenShow != null) {
             this.thisServiceCitizen = session.serviceCitizenShow;
             attachmentServiceEmployee = GetFromDBaraa.AttachmentServiceEmployee(thisServiceCitizen.getCit_ID(), thisServiceCitizen.getService_Citizen_ID(), thisServiceCitizen.getServices_Provided_ID());
             this.stepsAndDecsions = StepsAndDesion(thisServiceCitizen.getCit_ID(), thisServiceCitizen.getService_Citizen_ID(), thisServiceCitizen.getServices_Provided_ID());
         }
 
-    }  
+    }
 
     public List<StepsAndDecsions> StepsAndDesion(int idcitizen, int idSerCit, int idService) {
         List<StepsAndDecsions> pathD = GetFromDBaraa.stepAndDecDep(idcitizen, idSerCit);
@@ -65,7 +68,7 @@ public class ShowMyServicesManager implements Serializable {
 
         System.out.println("lllll" + pathJ.size());
         for (StepsAndDecsions d : pathD) {
-                        d.decisionsDepartment.setTotalDepCost(d.decisionsDepartment.getTotalDepCost() + d.decisionsDepartment.getCost());
+            d.decisionsDepartment.setTotalDepCost(d.decisionsDepartment.getTotalDepCost() + d.decisionsDepartment.getCost());
 
             for (DecisionSection s : pathS) {
                 if (d.getDepartmentPaths().id == s.getSection().getDepartmentId() && d.getDepartmentPaths().order == s.getSection().getOrderDepartment()) {
@@ -73,13 +76,13 @@ public class ShowMyServicesManager implements Serializable {
                     for (StepsAndDecsionsJob j : pathJ) {
                         if (s.getSection().getId() == j.getJobPath().getSectionID() && s.getSection().getOrder() == j.getJobPath().getsOrder()) {
                             s.getJob().add(j);
-                                d.decisionsDepartment.setTotalDepCost(d.decisionsDepartment.getTotalDepCost() + j.decisionsJob.getCost());
+                            d.decisionsDepartment.setTotalDepCost(d.decisionsDepartment.getTotalDepCost() + j.decisionsJob.getCost());
 
                             for (AttachmentServiceEmployee att : attachmentServiceEmployee) {
                                 if (att.getEmp_ID() == j.decisionsJob.getIdEmployee()) {
                                     //j.setAttachmentServiceEmployee(att);
                                     j.getAttachmentServiceEmployee().add(att);
-                                    
+
                                 }
                             }
 
@@ -132,5 +135,17 @@ public class ShowMyServicesManager implements Serializable {
         this.totalCost = totalCost;
     }
 
+    public AttachmentServiceEmployee getSelectAttEMP() {
+        return selectAttEMP;
+    }
+
+    public void setSelectAttEMP(AttachmentServiceEmployee selectAttEMP) {
+        this.selectAttEMP = selectAttEMP;
+    }
+
     
+
+    public void onServiceSelect(SelectEvent event) {
+        selectAttEMP = (AttachmentServiceEmployee) event.getObject();
+    }
 }

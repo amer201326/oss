@@ -5,6 +5,7 @@
  */
 package Beans;
 
+import Data.AttachmentServiceEmployee;
 import Data.Citizen;
 import Data.Department;
 import Data.Employee;
@@ -28,6 +29,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.PrimeFaces;
 import org.primefaces.context.RequestContext;
+import org.primefaces.event.SelectEvent;
 
 /**
  *
@@ -46,7 +48,7 @@ public class Session implements Serializable {
     Manager manager;
     Citizen citizen;
     Employee employee;
-
+    AttachmentServiceEmployee selectAtt;
     ServiceCitizen serviceCitizenShow;
 
     boolean[] screens;
@@ -192,6 +194,18 @@ public class Session implements Serializable {
 
     public void setScreens(boolean[] screens) {
         this.screens = screens;
+    }
+
+    public AttachmentServiceEmployee getSelectAtt() {
+        return selectAtt;
+    }
+
+    public void setSelectAtt(AttachmentServiceEmployee selectAtt) {
+        this.selectAtt = selectAtt;
+    }
+    
+    public void onServiceSelect(SelectEvent event){
+        selectAtt = (AttachmentServiceEmployee) event.getObject();
     }
 
 }

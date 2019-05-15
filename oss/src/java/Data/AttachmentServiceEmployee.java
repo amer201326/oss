@@ -43,6 +43,7 @@ public class AttachmentServiceEmployee implements Serializable {
     StreamedContent fileDownload;
     long sel;
     int si;
+
     public AttachmentServiceEmployee() {
     }
 
@@ -60,7 +61,7 @@ public class AttachmentServiceEmployee implements Serializable {
 //    		System.out.println("Temp file : " + a.getAbsolutePath());
 //            //File a = new File( "/"+filename);
 
-            String relativeWebPath = "/files/"+filename;
+            String relativeWebPath = "/files/" + filename;
             ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
             String absoluteDiskPath = servletContext.getRealPath(relativeWebPath);
             File a = new File(absoluteDiskPath);
@@ -76,6 +77,7 @@ public class AttachmentServiceEmployee implements Serializable {
             Logger.getLogger(AttachmentServiceEmployee.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    public byte[] outputfinal;
 
     public AttachmentServiceEmployee(int Attachment_Service_Employee_ID, int Emp_ID, int Cit_ID,
             int Service_Citizen_ID, int Services_Provided_ID, InputStream inputStream, String filename) {
@@ -90,7 +92,7 @@ public class AttachmentServiceEmployee implements Serializable {
             try {
                 byte[] inputByte = new byte[inputStream.available()];
                 inputStream.read(inputByte);
-                byte[] outputfinal = Crypto.dec(Cipher.DECRYPT_MODE, "foreanderDowntop", inputByte);
+                outputfinal = Crypto.dec(Cipher.DECRYPT_MODE, "foreanderDowntop", inputByte);
                 InputStream inputForData = new ByteArrayInputStream(outputfinal);
 
                 fileDownload = new DefaultStreamedContent(inputForData, "file", filename);
@@ -230,17 +232,16 @@ public class AttachmentServiceEmployee implements Serializable {
     }
 
     public String sizeFile() {
-        
-            double s = si;
+
+        double s = si;
+        s /= 1000;
+        if (s > 1000) {
             s /= 1000;
-            if (s > 1000) {
-                s /= 1000;
-                return s + " MB";
-            } else {
-                return s + " KB";
-            }
-       
-        
+            return s + " MB";
+        } else {
+            return s + " KB";
+        }
+
     }
 
     public long getSel() {
@@ -250,12 +251,57 @@ public class AttachmentServiceEmployee implements Serializable {
     public void setSel(long sel) {
         this.sel = sel;
     }
-    
-    public String typ(){
-        if(filename !=null)
-            if(filename.length() >3)
-        return filename.substring(filename.length()-3, filename.length());
+
+    public String typ() {
+        if (filename != null) {
+            if (filename.length() > 3) {
+                return filename.substring(filename.length() - 3, filename.length());
+            }
+        }
         return "";
     }
 
+    public boolean isImage() {
+        if (filename != null) {
+            String s = filename.substring(filename.length() - 3, filename.length());
+            System.out.println("s = " + s + "  " + s.compareTo("jpg"));
+            if (s.compareTo("jpg") == 0 || s.compareTo("png") == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isPDF() {
+        if (filename != null) {
+            String s = filename.substring(filename.length() - 3, filename.length());
+            System.out.println("s = " + s + "  " + s.compareTo("pdf"));
+            if (s.compareTo("pdf") == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean canntOpenFile() {
+        return !isImage() && !isPDF();
+    }
+
+    public int getSi() {
+        return si;
+    }
+
+    public void setSi(int si) {
+        this.si = si;
+    }
+
+    public byte[] getOutputfinal() {
+        return outputfinal;
+    }
+
+    public void setOutputfinal(byte[] outputfinal) {
+        this.outputfinal = outputfinal;
+    }
+    
+    
 }
