@@ -163,7 +163,7 @@
                                                             <div id="divDown" class="flexColomn ">
 
                                                                 <p:commandLink oncomplete="PF('dialogatt').show()"  
-                                                                               class="btn btn-danger marginBuDel" value="اختيار من الارشيف"
+                                                                               class="btn btn-danger marginBuDel bg-#{att.color()} text-white transparent_btn" style="border-radius: 0;" value="اختيار من الارشيف"
                                                                                >
                                                                     <h:outputText styleClass="fas fa-trash" style="margin:0 auto;" />
                                                                     <f:setPropertyActionListener value="#{att}" target="#{applyServiceManager.selectAtt}" />
@@ -196,22 +196,7 @@
                                 </p:outputPanel>
 
 
-                                <p:dialog id="dialogatt" resizable="false"  widgetVar="dialogatt" dir="rtl">
-                                    <h:panelGrid columns="2" >
 
-                                        <h:outputLabel for="jobs" value="مرفقات: " />
-                                        <p:selectOneMenu id="jobs" required="true" value="#{applyServiceManager.idatta_ArchiveC_ID}" 
-                                                         class="pading000" dynamic="true" style="min-width: 223px;">
-                                            <f:selectItem noSelectionOption="true" itemLabel="اختار مرفق" />
-                                            <f:selectItems value="#{applyServiceManager.attachmantsArchiveCitizen()}" var="a" itemLabel="#{a.nameAtt}" itemValue="#{a.atta_ArchiveC_ID}"/>
-                                        </p:selectOneMenu>
-
-                                        <br/>
-
-                                        <p:commandButton id="dele" value="اضافه" actionListener="#{applyServiceManager.addNewServiceAtt()}" oncomplete="PF('dialogatt').hide();"/>
-
-                                    </h:panelGrid>
-                                </p:dialog> 
 
                                 <p:outputPanel rendered="#{applyServiceManager.serviceCitizen.sizeAttwhithFile()}">
                                     <div class="card shadow mb-xl-4">
@@ -302,7 +287,126 @@
 
 
                         </div>
+
+
+
+
                     </h:form>
+                    <h:form id="dialogallShowAttC" >
+                        <p:dialog id="dialogatt" resizable="false"  widgetVar="dialogatt" dir="ltr" >
+                            <p:dataTable  id="allfiles" var="attarchev" tableStyle="table-layout: auto;" value="#{applyServiceManager.attaCitizen}"
+                                          style="max-width: 1200px"
+                                          selection="#{applyServiceManager.selectAttCitizen}"
+                                          rowKey="#{attarchev.atta_ArchiveC_ID}" selectionMode="single" >
+                                <f:facet name="header"  >
+                                    ارشيف المرفقات
+
+                                </f:facet>
+
+
+                                <p:column headerText="اختيار"  style="width:90px;text-align: center">
+                                    <p:commandLink  process="@this" actionListener="#{applyServiceManager.selectfileForAtt(attarchev.atta_ArchiveC_ID)}" oncomplete="PF('dialogatt').hide()"  
+                                                    class="btn btn-primary btn-circle marginBuAddblue"
+                                                    >
+                                        <h:outputText styleClass="fa fa-fw fa-arrow-circle-left" style="margin:0 auto;" />
+                                        
+
+                                    </p:commandLink>
+                                </p:column>
+                                <p:column  headerText="مشاهدة"  style="width:90px;text-align: center">
+                                    <p:commandLink update="dialogShowAttC:datshwo dialogShowAttC" process="@this"  oncomplete="PF('attshow').show()"  
+                                                   class="btn btn-success btn-circle marginBuAdd"
+                                                   >
+                                        <h:outputText styleClass="fa fa-fw fa-eye" style="margin:0 auto;" />
+                                        <f:setPropertyActionListener value="#{attarchev}" target="#{msession.attachmentArchiveCitizenSELECTED}" />
+
+                                    </p:commandLink>
+                                </p:column>
+
+                                <p:column headerText="الحجم">
+                                    <h:outputText value="#{attarchev.sizeFile()}" />
+                                </p:column>
+
+                                <p:column headerText="اسم الملف" style="width: auto">
+                                    <h:outputText value="#{attarchev.nameFile}" />
+                                </p:column>
+                                <p:column headerText="اسم المرفق">
+                                    <h:outputText value="#{attarchev.nameAtt}" />
+                                </p:column>
+
+                            </p:dataTable>
+
+
+                        </p:dialog> 
+                    </h:form> 
+                    <h:form id="dialogShowAttC" enctype="multipart/form-data">
+
+                        <p:dialog id="datshwo" dir="rtl" header="معلومات المرفق" widgetVar="attshow"  position="top,center" width="950"
+                                  minWidth="950" minHeight="800" maximizable="false" resizable="false"> 
+
+
+                            <p:scrollPanel  rendered="#{msession.attachmentArchiveCitizenSELECTED.isImage()}" style="width:auto; height:auto;" mode="native">
+
+                                <div class="CenterFlex">
+                                    <h:graphicImage id="image" alt="uploaded image" url="/image?type=asit&amp;f=#{msession.attachmentArchiveCitizenSELECTED.atta_ArchiveC_ID}" style="width: 80%; height: 100%;
+                                                    margin: 10px 0 10px 0;"/>
+                                </div>
+
+                                <div class="CenterFlex">#{msession.attachmentArchiveCitizenSELECTED.nameFile}"</div>
+
+                                <div class="CenterFlex" >
+                                    <p:commandButton id="downloadAT"  value="تنزيل" ajax="false"  icon="fa fa-arrow-down" 
+                                                     style="color: #f1e5e6; background: #e74a3b 50% 50%; margin: 10px 0 10px 0;
+                                                     border: none; width: 40%; font-size: 20px; font-weight: bold;">
+                                        <p:fileDownload value="#{msession.attachmentArchiveCitizenSELECTED.fileDownload}"/>
+                                    </p:commandButton>
+
+                                </div>
+
+                            </p:scrollPanel>
+                            <p:scrollPanel  rendered="#{msession.attachmentArchiveCitizenSELECTED.isPDF()}" style="width:auto; height:auto;" mode="native">
+
+                                <div class="CenterFlex">
+                                    <h:graphicImage id="pdf" alt="uploaded image" value="/imgs/pdf-512.png" style="width: 80%; height: 100%;
+                                                    margin: 10px 0 10px 0;"/>
+                                </div>
+
+                                <div class="CenterFlex">#{msession.attachmentArchiveCitizenSELECTED.nameFile}"</div>
+
+                                <div class="CenterFlex" >
+                                    <p:commandButton id="downloadATpdf"  value="تنزيل" ajax="false"  icon="fa fa-arrow-down" 
+                                                     style="color: #f1e5e6; background: #e74a3b 50% 50%; margin: 10px 0 10px 0;
+                                                     border: none; width: 40%; font-size: 20px; font-weight: bold;">
+                                        <p:fileDownload value="#{msession.attachmentArchiveCitizenSELECTED.fileDownload}"/>
+                                    </p:commandButton>
+
+                                </div>
+
+                            </p:scrollPanel>
+                            <p:scrollPanel  rendered="#{msession.attachmentArchiveCitizenSELECTED.canntOpenFile()}" style="width:auto; height:auto;" mode="native">
+
+                                <div class="CenterFlex">
+                                    <h:graphicImage id="n" alt="uploaded image" value="/imgs/download.png" style="width: 80%; height: 100%;
+                                                    margin: 10px 0 10px 0;"/>
+                                </div>
+
+                                <div class="CenterFlex">#{msession.attachmentArchiveCitizenSELECTED.nameFile}"</div>
+
+                                <div class="CenterFlex" >
+                                    <p:commandButton id="downloadATn"  value="تنزيل" ajax="false"  icon="fa fa-arrow-down" 
+                                                     style="color: #f1e5e6; background: #e74a3b 50% 50%; margin: 10px 0 10px 0;
+                                                     border: none; width: 40%; font-size: 20px; font-weight: bold;">
+                                        <p:fileDownload value="#{msession.attachmentArchiveCitizenSELECTED.fileDownload}"/>
+                                    </p:commandButton>
+
+                                </div>
+
+                            </p:scrollPanel>
+
+
+                        </p:dialog>
+                    </h:form>
+
                     <!-- Begin Page Content -->
 
                 </div>

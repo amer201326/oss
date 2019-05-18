@@ -86,10 +86,11 @@ public class AttachmentServiceEmployee implements Serializable {
         this.Cit_ID = Cit_ID;
         this.Service_Citizen_ID = Service_Citizen_ID;
         this.Services_Provided_ID = Services_Provided_ID;
-
+        
         this.filename = filename;
         if (inputStream != null) {
             try {
+                si = inputStream.available();
                 byte[] inputByte = new byte[inputStream.available()];
                 inputStream.read(inputByte);
                 outputfinal = Crypto.dec(Cipher.DECRYPT_MODE, "foreanderDowntop", inputByte);

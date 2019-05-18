@@ -89,7 +89,7 @@ public class ServiceCitizen implements Serializable {
 
     }
 
-    public boolean addToDataBase(boolean fromArcheve) {
+    public boolean addToDataBase() {
 
         Services_Provided_ID = service.id;
 
@@ -112,18 +112,24 @@ public class ServiceCitizen implements Serializable {
             System.out.println("  size _>" + attachment.size());
 
             for (ServiceAttachmentName a : attachment) {
-                AttachmentArchiveCitizen attachmentArchiveCitizen = new AttachmentArchiveCitizen(idMaxAAC, Cit_ID, a.id, a.file, a.nameFile, a.name, "no");
-                attachmentArchiveCitizen.addToDataBase();
+                if (!a.formArchevCitizen) {
+                    AttachmentArchiveCitizen attachmentArchiveCitizen = new AttachmentArchiveCitizen(idMaxAAC, Cit_ID, a.id, a.file, a.nameFile, a.name, "no");
+                    attachmentArchiveCitizen.addToDataBase();
 
-                AttachmentServiceCitizen attachmentServiceCitizen = new AttachmentServiceCitizen(idMaxAAC, idMaxSC, Services_Provided_ID, Cit_ID);
-                attachmentServiceCitizen.addToDataBase();
-                idMaxAAC++;
+                    AttachmentServiceCitizen attachmentServiceCitizen = new AttachmentServiceCitizen(idMaxAAC, idMaxSC, Services_Provided_ID, Cit_ID);
+                    attachmentServiceCitizen.addToDataBase();
+                    idMaxAAC++;
+                } else {
+                    AttachmentServiceCitizen attachmentServiceCitizen = new AttachmentServiceCitizen(a.idAttachmentArcheveCitisen, idMaxSC, Services_Provided_ID, Cit_ID);
+                    attachmentServiceCitizen.addToDataBase();
+                }
+
             }
-            
+
             for (AttachmentServiceCitizen attachmentServiceCitizen : attachmentServiceCitizens) {
                 attachmentServiceCitizen.addToDataBase();
             }
-            
+
             System.out.println("ggggggggg");
 
             for (ServiceAttachmentName af : attwhithFile) {

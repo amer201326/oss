@@ -108,6 +108,7 @@
                                                                 <div class="col mr-2" style="text-align: right">
                                                                     <div class="text-s font-weight-bold text-primary text-uppercase mb-1" >حالة الخدمة</div>
                                                                     <div class="h5 mb-0 font-weight-bold text-gray-800">#{d.decisionsDepartment.nameStatus()}</div>
+                                                                    
                                                                 </div>
 
                                                             </div>
@@ -134,7 +135,7 @@
                                                                 <div class="col mr-2" style="text-align: right">
                                                                     <div class="col mr-2" style="text-align: right">
                                                                         <div class="text-s font-weight-bold text-primary text-uppercase mb-1" > قرار الدائرة</div>
-                                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">#{d.decisionsDepartment.nameDecision()}</div>
+                                                                        <div class="h5 mb-0 font-weight-bold text-gray-800 ">#{d.decisionsDepartment.nameDecision()}</div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -330,23 +331,51 @@
                             </div>
 
                         </p:scrollPanel>
+                        <p:scrollPanel  rendered="#{showMyServicesManager.selectAttEMP.isPDF()}" style="width:auto; height:auto;" mode="native">
+
+                            <div class="CenterFlex">
+                                <h:graphicImage id="pdf" alt="uploaded image" value="/imgs/pdf-512.png" style="width: 80%; height: 100%;
+                                                margin: 10px 0 10px 0;"/>
+                            </div>
+
+                            <div class="CenterFlex">#{showMyServicesManager.selectAttEMP.filename}"</div>
+
+                            <div class="CenterFlex" >
+                                <p:commandButton id="downloadATpdf"  value="تنزيل" ajax="false"  icon="fa fa-arrow-down" 
+                                                 style="color: #f1e5e6; background: #e74a3b 50% 50%; margin: 10px 0 10px 0;
+                                                 border: none; width: 40%; font-size: 20px; font-weight: bold;">
+                                    <p:fileDownload value="#{showMyServicesManager.selectAttEMP.fileDownload}"/>
+                                </p:commandButton>
+
+                            </div>
+
+                        </p:scrollPanel>
+                        <p:scrollPanel  rendered="#{showMyServicesManager.selectAttEMP.canntOpenFile()}" style="width:auto; height:auto;" mode="native">
+
+                            <div class="CenterFlex">
+                                <h:graphicImage id="n" alt="uploaded image" value="/imgs/download.png" style="width: 80%; height: 100%;
+                                                margin: 10px 0 10px 0;"/>
+                            </div>
+
+                            <div class="CenterFlex">#{showMyServicesManager.selectAttEMP.filename}"</div>
+
+                            <div class="CenterFlex" >
+                                <p:commandButton id="downloadATn"  value="تنزيل" ajax="false"  icon="fa fa-arrow-down" 
+                                                 style="color: #f1e5e6; background: #e74a3b 50% 50%; margin: 10px 0 10px 0;
+                                                 border: none; width: 40%; font-size: 20px; font-weight: bold;">
+                                    <p:fileDownload value="#{showMyServicesManager.selectAttEMP.fileDownload}"/>
+                                </p:commandButton>
+
+                            </div>
+
+                        </p:scrollPanel>
 
 
+                        
 
-
-                        <p:outputPanel rendered="#{showMyServicesManager.selectAttEMP.isPDF()}"
-                                       style="width:300px;height:auto" >
-                            <p:graphicImage width="200px" value="/imgs/pdf-512.png"/>
-                            <br/>
-                            <div style="padding-top: 20px;">#{showMyServicesManager.selectAttEMP.filename}"</div>
-                        </p:outputPanel>
-
-                        <p:outputPanel rendered="#{showMyServicesManager.selectAttEMP.canntOpenFile()}"
-                                       style="width:300px;height:auto" >
-                            <p:graphicImage width="200px" value="/imgs/download.png"/>
-                            <br/>
-                            <div style="padding-top: 20px;">#{showMyServicesManager.selectAttEMP.filename}"</div>
-                        </p:outputPanel>
+                        
+                        
+                      
 
                     </p:dialog>
 

@@ -50,7 +50,8 @@ public class ServiceAttachmentName implements Serializable {
     StreamedContent fileDownload;
     String haveFile;
     String form;
-
+    boolean formArchevCitizen;
+    int idAttachmentArcheveCitisen;
     public ServiceAttachmentName() {
     }
 
@@ -404,5 +405,22 @@ public class ServiceAttachmentName implements Serializable {
         this.form = form;
     }
 
+    public boolean isFormArchevCitizen() {
+        return formArchevCitizen;
+    }
+
+    public void setFormArchevCitizen(boolean formArchevCitizen) {
+        this.formArchevCitizen = formArchevCitizen;
+    }
+
+    public int getIdAttachmentArcheveCitisen() {
+        return idAttachmentArcheveCitisen;
+    }
+
+    public void setIdAttachmentArcheveCitisen(int idAttachmentArcheveCitisen) {
+        this.idAttachmentArcheveCitisen = idAttachmentArcheveCitisen;
+    }
+    
     
 }
+    

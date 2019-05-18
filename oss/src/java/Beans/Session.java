@@ -5,6 +5,7 @@
  */
 package Beans;
 
+import Data.AttachmentArchiveCitizen;
 import Data.AttachmentServiceEmployee;
 import Data.Citizen;
 import Data.Department;
@@ -50,7 +51,7 @@ public class Session implements Serializable {
     Employee employee;
     AttachmentServiceEmployee selectAtt;
     ServiceCitizen serviceCitizenShow;
-
+    AttachmentArchiveCitizen attachmentArchiveCitizenSELECTED;
     boolean[] screens;
 
     public Session() {
@@ -182,6 +183,15 @@ public class Session implements Serializable {
 
     public ServiceCitizen getServiceCitizenShow() {
         return serviceCitizenShow;
+    }
+
+    public AttachmentArchiveCitizen getAttachmentArchiveCitizenSELECTED() {
+        return attachmentArchiveCitizenSELECTED;
+    }
+
+    public void setAttachmentArchiveCitizenSELECTED(AttachmentArchiveCitizen attachmentArchiveCitizenSELECTED) {
+        System.out.println("set select att "+attachmentArchiveCitizenSELECTED.getNameFile());
+        this.attachmentArchiveCitizenSELECTED = attachmentArchiveCitizenSELECTED;
     }
 
     public void setServiceCitizenShow(ServiceCitizen serviceCitizenShow) {

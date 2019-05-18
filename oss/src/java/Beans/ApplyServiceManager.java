@@ -36,48 +36,50 @@ import org.primefaces.model.UploadedFile;
 @ManagedBean
 @ViewScoped
 public class ApplyServiceManager implements Serializable {
+
     ServiceAttachmentName selectAtt;
     ServiceCitizen serviceCitizen;
 
     List<ServiceAttachmentName> allAttachment;
-
+    List<AttachmentArchiveCitizen> attaCitizen;
+    AttachmentArchiveCitizen selectAttCitizen;
     StreamedContent fileDownload;
     int idCitizen;
     int idatta_ArchiveC_ID;
 
     boolean fromArcheve;
-     @ManagedProperty(value = "#{msession}")
+    @ManagedProperty(value = "#{msession}")
     Session session;
-     
-      @PostConstruct
+
+    @PostConstruct
     public void init() {
-     if(session.citizen != null){
+        if (session.citizen != null) {
             idCitizen = session.citizen.getId();
 
             Map<String, String> parameterMap = (Map<String, String>) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        String param = parameterMap.get("id");
-        System.out.println(param +"===================================================================");
-        serviceCitizen = new ServiceCitizen();
-        serviceCitizen.service = GetFromDB.getServiceByID2(param);
-        serviceCitizen.setCit_ID(idCitizen);
-        
-        allAttachment = GetFromDB.getAttavhmentByserviceById(serviceCitizen.service.getId());
-        System.out.println("Bdddddd" + allAttachment.size());
+            String param = parameterMap.get("id");
+            System.out.println(param + "===================================================================");
+            serviceCitizen = new ServiceCitizen();
+            serviceCitizen.service = GetFromDB.getServiceByID2(param);
+            serviceCitizen.setCit_ID(idCitizen);
 
-        for (ServiceAttachmentName serviceAttachmentName : allAttachment) {
+            allAttachment = GetFromDB.getAttavhmentByserviceById(serviceCitizen.service.getId());
+            System.out.println("Bdddddd" + allAttachment.size());
+            attaCitizen = GetFromDB.getAttachmantsArchive(idCitizen);
+            for (ServiceAttachmentName serviceAttachmentName : allAttachment) {
 
-            if (serviceAttachmentName.getFileDownload() == null) {
-                serviceCitizen.attachment.add(serviceAttachmentName);
-            } else {
-                serviceCitizen.attwhithFile.add(serviceAttachmentName);
+                if (serviceAttachmentName.getFileDownload() == null) {
+                    serviceCitizen.attachment.add(serviceAttachmentName);
+                } else {
+                    serviceCitizen.attwhithFile.add(serviceAttachmentName);
+                }
+
             }
 
         }
-            
-        }
- }
+    }
+
     public ApplyServiceManager() {
-      
 
     }
 
@@ -91,40 +93,42 @@ public class ApplyServiceManager implements Serializable {
 
     public void submit() {
         boolean b = false;
-       
+
         for (ServiceAttachmentName serviceAttachmentName : serviceCitizen.attachment) {
             if (serviceAttachmentName.haveFileToupload()) {
-                if (serviceAttachmentName.getFile().getSize() == 0) {
+                if (serviceAttachmentName.getFile().getSize() == 0 && !serviceAttachmentName.isFormArchevCitizen()) {
+                    
                     b = true;
                     break;
                 }
 
             }
         }
-        
-        
+
         if (!b) {
             try {
-                serviceCitizen.addToDataBase(fromArcheve);
+                serviceCitizen.addToDataBase();
                 FacesContext.getCurrentInstance().getExternalContext().redirect("notDoneCitizenServices.xhtml");
             } catch (IOException ex) {
                 Logger.getLogger(ApplyServiceManager.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else //GetFromDBaraa.ApplyService(idCitizen, thisService.getId(), allAttachment,note);
         {
-            
-                    FacesContext.getCurrentInstance().addMessage("sub", new FacesMessage(FacesMessage.SEVERITY_ERROR," ", "بوجد مرفقات مطلوبة لم يتم ارفاقها"));
+
+            FacesContext.getCurrentInstance().addMessage("sub", new FacesMessage(FacesMessage.SEVERITY_ERROR, " ", "بوجد مرفقات مطلوبة لم يتم ارفاقها"));
         }
     }
 
-   public void addNewServiceAtt(){
-       for (ServiceAttachmentName serviceAttachmentName : serviceCitizen.attachment) {
-           if(serviceAttachmentName.getId() == selectAtt.getId()){
-               AttachmentServiceCitizen a = new AttachmentServiceCitizen(idatta_ArchiveC_ID, serviceCitizen.getService_Citizen_ID(), serviceCitizen.getServices_Provided_ID(), idCitizen);
-               serviceCitizen.attachmentServiceCitizens.add(a);
-           }
-       }
-   }
+    public void selectfileForAtt(int idAttACitizen) {
+        for (ServiceAttachmentName serviceAttachmentName : serviceCitizen.attachment) {
+            if(serviceAttachmentName.getId() == selectAtt.getId()){
+                serviceAttachmentName.setFormArchevCitizen(true);
+                serviceAttachmentName.setIdAttachmentArcheveCitisen(idAttACitizen);
+                break;
+            }
+        }
+        System.out.println("afte select "+idAttACitizen);
+    }
 
     public ServiceCitizen getServiceCitizen() {
         return serviceCitizen;
@@ -150,11 +154,24 @@ public class ApplyServiceManager implements Serializable {
         this.session = session;
     }
 
-    public List<AttachmentArchiveCitizen> attachmantsArchiveCitizen(){
-        return GetFromDB.getAttachmantsArchive(idCitizen);
+    public List<AttachmentArchiveCitizen> getAttaCitizen() {
+        return attaCitizen;
+    }
+
+    public void setAttaCitizen(List<AttachmentArchiveCitizen> attaCitizen) {
+        this.attaCitizen = attaCitizen;
+    }
+
+    public boolean isFromArcheve() {
+        return fromArcheve;
+    }
+
+    public void setFromArcheve(boolean fromArcheve) {
+        this.fromArcheve = fromArcheve;
     }
 
     
+
     public List<ServiceAttachmentName> getAllAttachment() {
         return allAttachment;
     }
@@ -171,9 +188,6 @@ public class ApplyServiceManager implements Serializable {
         this.idatta_ArchiveC_ID = idatta_ArchiveC_ID;
     }
 
-    
-    
-
     public ServiceAttachmentName getSelectAtt() {
         return selectAtt;
     }
@@ -182,6 +196,12 @@ public class ApplyServiceManager implements Serializable {
         this.selectAtt = selectAtt;
     }
 
-   
+    public AttachmentArchiveCitizen getSelectAttCitizen() {
+        return selectAttCitizen;
+    }
+
+    public void setSelectAttCitizen(AttachmentArchiveCitizen selectAttCitizen) {
+        this.selectAttCitizen = selectAttCitizen;
+    }
     
 }

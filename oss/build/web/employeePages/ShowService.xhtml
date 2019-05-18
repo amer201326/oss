@@ -466,17 +466,23 @@
                                                         <div class="CenterFlex">#{shoeServiceCitizemEmpManeger.selectAtt.filename}"</div>
 
                                                     </p:scrollPanel>
+
+
                                                     <p:outputPanel rendered="#{shoeServiceCitizemEmpManeger.selectAtt.isPDF()}"
                                                                    style="width:300px;height:auto" >
-                                                        <p:graphicImage width="200px" value="/imgs/pdf-512.png"/>
-
-                                                        <div>#{shoeServiceCitizemEmpManeger.selectAtt.filename}"</div>
+                                                        <div  class="CenterFlex" style="margin: 10px 0 10px 0;" >
+                                                            <p:graphicImage width="200px" value="/imgs/pdf-512.png" style="max-width: 70%; max-height:80%;"/>
+                                                        </div>
+                                                        <div class="CenterFlex">#{shoeServiceCitizemEmpManeger.selectAtt.filename}"</div>
                                                     </p:outputPanel>
+
+
                                                     <p:outputPanel rendered="#{shoeServiceCitizemEmpManeger.selectAtt.canntOpenFile()}"
                                                                    style="width:300px;height:auto" >
-                                                        <p:graphicImage width="200px" value="/imgs/download.png"/>
-
-                                                        <div>#{shoeServiceCitizemEmpManeger.selectAtt.filename}"</div>
+                                                        <div  class="CenterFlex" style="margin: 10px 0 10px 0;" >
+                                                            <p:graphicImage width="200px" value="/imgs/download.png" style="max-width: 70%; max-height:80%;"/>
+                                                        </div>
+                                                        <div class="CenterFlex">#{shoeServiceCitizemEmpManeger.selectAtt.filename}"</div>
                                                     </p:outputPanel>
                                                 </p:dialog>
 

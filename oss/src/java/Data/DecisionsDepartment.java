@@ -100,7 +100,7 @@ public class DecisionsDepartment {
         if ("done".equals(status)) {
             return "جاهزه";
         }
-        return "قيد التنفيذ";
+        return "قيد الانتظار";
     }
 
     public String colorStatus() {

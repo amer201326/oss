@@ -28,13 +28,13 @@ public class AttachmentArchiveCitizen implements Serializable {
     int Atta_ArchiveC_ID;
     int Cit_ID;
     int ServiceAttachmentName_ID;
-
+    double si;
     UploadedFile file;
     StreamedContent fileDownload;
     String nameFile;
     String nameAtt;
     String form;
-
+    byte[] outputfinal;
     public AttachmentArchiveCitizen(int Atta_ArchiveC_ID, int Cit_ID, int ServiceAttachmentName_ID, InputStream inputStream, String nameFile, String nameAtt) {
         this.Atta_ArchiveC_ID = Atta_ArchiveC_ID;
         this.Cit_ID = Cit_ID;
@@ -43,9 +43,10 @@ public class AttachmentArchiveCitizen implements Serializable {
         this.nameFile = nameFile;
         if (inputStream != null) {
             try {
+                si = inputStream.available();
                 byte[] inputByte = new byte[inputStream.available()];
                 inputStream.read(inputByte);
-                byte[] outputfinal = Crypto.dec(Cipher.DECRYPT_MODE, "foreanderDowntop", inputByte);
+                outputfinal = Crypto.dec(Cipher.DECRYPT_MODE, "foreanderDowntop", inputByte);
                 InputStream inputForData = new ByteArrayInputStream(outputfinal);
 
                 fileDownload = new DefaultStreamedContent(inputForData, "file", nameFile);
@@ -71,7 +72,7 @@ public class AttachmentArchiveCitizen implements Serializable {
 
     public void addToDataBase() throws SQLException, ClassNotFoundException {
 
-        String q = "INSERT INTO attachment_archive_citizen (`Atta_ArchiveC_ID`, `Cit_ID`,`ServiceAttachmentName_ID`,`file`,`filename`,`form`) VALUES (?,?,?,?,?,?);";
+        String q = "INSERT INTO attachment_archive_citizen (`Atta_ArchiveC_ID`, `Cit_ID`,`ServiceAttachmentName_ID`,`file`,`nameFile`,`form`) VALUES (?,?,?,?,?,?);";
 
         System.out.println("data is   > < " + Atta_ArchiveC_ID + "  " + Cit_ID + "  " + ServiceAttachmentName_ID);
 
@@ -121,6 +122,16 @@ public class AttachmentArchiveCitizen implements Serializable {
     public int getAtta_ArchiveC_ID() {
         return Atta_ArchiveC_ID;
     }
+
+    public byte[] getOutputfinal() {
+        return outputfinal;
+    }
+
+    public void setOutputfinal(byte[] outputfinal) {
+        this.outputfinal = outputfinal;
+    }
+
+   
 
     public void setAtta_ArchiveC_ID(int Atta_ArchiveC_ID) {
         this.Atta_ArchiveC_ID = Atta_ArchiveC_ID;
@@ -187,4 +198,44 @@ public class AttachmentArchiveCitizen implements Serializable {
         this.form = form;
     }
 
+    public boolean isImage() {
+        if (nameFile != null) {
+            String s = nameFile.substring(nameFile.length() - 3, nameFile.length());
+            System.out.println("s = " + s + "  " + s.compareTo("jpg"));
+            if (s.compareTo("jpg") == 0 || s.compareTo("png") == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+ 
+    
+    public boolean isPDF() {
+        if (nameFile != null) {
+            String s = nameFile.substring(nameFile.length() - 3, nameFile.length());
+            System.out.println("s = " + s + "  " + s.compareTo("pdf"));
+            if (s.compareTo("pdf") == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean canntOpenFile() {
+        return !isImage() && !isPDF();
+    }
+    
+    public String sizeFile() {
+        
+
+        double s = si;
+        s /= 1000;
+        if (s > 1000) {
+            s /= 1000;
+            return s + " MB";
+        } else {
+            return s + " KB";
+        }
+
+    }
 }

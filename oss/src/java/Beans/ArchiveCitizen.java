@@ -21,7 +21,7 @@ import org.primefaces.model.DefaultStreamedContent;
  *
  * @author Amer
  */
-@ManagedBean
+@ManagedBean(name = "archiveCitizen")
 @ViewScoped
 public class ArchiveCitizen implements Serializable {
 
@@ -100,7 +100,7 @@ public class ArchiveCitizen implements Serializable {
     public void setSelected(AttachmentArchiveCitizen selected) {
         image = new DefaultStreamedContent(selected.getFileDownload().getStream());
         this.selected = selected;
-        System.out.println("set arr");
+        System.out.println(selected.getNameFile() + "11111111111111111111111111111111111111111111111111111");
     }
 
     

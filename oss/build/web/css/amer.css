@@ -233,6 +233,11 @@ ui-selectonemenu-trigger.myButton {
     background: #12c40f;
     border: #12c40f;
 }
+.marginBuAddblue{
+    margin: 5px;
+    background: #3d94f6;
+    border: #3d94f6;
+}
 
 #buttonDiv .myButton:hover{
     background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #a5cc52), color-stop(1, #b8e356));
