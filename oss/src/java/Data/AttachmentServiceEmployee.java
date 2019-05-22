@@ -43,7 +43,7 @@ public class AttachmentServiceEmployee implements Serializable {
     StreamedContent fileDownload;
     long sel;
     int si;
-
+    int jobID;
     public AttachmentServiceEmployee() {
     }
 
@@ -56,37 +56,69 @@ public class AttachmentServiceEmployee implements Serializable {
             this.inputStreamFile = file;
             this.filename = filename;
             si = file.available();
+            Attachment_Service_Employee_ID = (int)System.currentTimeMillis();
 //           File a = File.createTempFile(filename.substring(0, filename.length()-3), filename.substring(filename.length()-3, filename.length())); 
 //    		
 //    		System.out.println("Temp file : " + a.getAbsolutePath());
 //            //File a = new File( "/"+filename);
 
-            String relativeWebPath = "/files/" + filename;
-            ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-            String absoluteDiskPath = servletContext.getRealPath(relativeWebPath);
-            File a = new File(absoluteDiskPath);
-            System.out.println(a.getAbsolutePath());
-            byte[] buffer = new byte[file.available()];
-            file.read(buffer);
-
-            OutputStream outStream = new FileOutputStream(a);
-            outStream.write(buffer);
-            outStream.close();
+//            String relativeWebPath = "/files/" + filename;
+//            ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+//            String absoluteDiskPath = servletContext.getRealPath(relativeWebPath);
+//            File a = new File(absoluteDiskPath);
+//            System.out.println(a.getAbsolutePath());
+            
+            outputfinal = new byte[file.available()];
+            file.read(outputfinal);
+            this.inputStreamFile = new ByteArrayInputStream( outputfinal);
+//
+//            OutputStream outStream = new FileOutputStream(a);
+//            outStream.write(buffer);
+//            outStream.close();
         } catch (IOException ex) {
             System.out.println("error out put steem");
             Logger.getLogger(AttachmentServiceEmployee.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     public byte[] outputfinal;
-
+    
     public AttachmentServiceEmployee(int Attachment_Service_Employee_ID, int Emp_ID, int Cit_ID,
-            int Service_Citizen_ID, int Services_Provided_ID, InputStream inputStream, String filename) {
+            int Service_Citizen_ID, int Services_Provided_ID, InputStream inputStream, String filename ) {
         this.Attachment_Service_Employee_ID = Attachment_Service_Employee_ID;
         this.Emp_ID = Emp_ID;
         this.Cit_ID = Cit_ID;
         this.Service_Citizen_ID = Service_Citizen_ID;
         this.Services_Provided_ID = Services_Provided_ID;
-        
+       
+        this.filename = filename;
+        if (inputStream != null) {
+            try {
+                si = inputStream.available();
+                byte[] inputByte = new byte[inputStream.available()];
+                inputStream.read(inputByte);
+                outputfinal = Crypto.dec(Cipher.DECRYPT_MODE, "foreanderDowntop", inputByte);
+                InputStream inputForData = new ByteArrayInputStream(outputfinal);
+
+                fileDownload = new DefaultStreamedContent(inputForData, "file", filename);
+
+            } catch (IOException ex) {
+                Logger.getLogger(AttachmentArchiveCitizen.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+
+            System.out.println("no file no file no file no file ");
+        }
+
+    }
+    public AttachmentServiceEmployee(int Attachment_Service_Employee_ID, int Emp_ID, int Cit_ID,
+            int Service_Citizen_ID, int Services_Provided_ID, InputStream inputStream, String filename,int jobID ) {
+        this.Attachment_Service_Employee_ID = Attachment_Service_Employee_ID;
+        this.Emp_ID = Emp_ID;
+        this.Cit_ID = Cit_ID;
+        this.Service_Citizen_ID = Service_Citizen_ID;
+        this.Services_Provided_ID = Services_Provided_ID;
+        this.jobID = jobID;
         this.filename = filename;
         if (inputStream != null) {
             try {
@@ -140,6 +172,15 @@ public class AttachmentServiceEmployee implements Serializable {
     public void setService_Citizen_ID(int Service_Citizen_ID) {
         this.Service_Citizen_ID = Service_Citizen_ID;
     }
+
+    public int getJobID() {
+        return jobID;
+    }
+
+    public void setJobID(int jobID) {
+        this.jobID = jobID;
+    }
+    
 
     public int getServices_Provided_ID() {
         return Services_Provided_ID;
@@ -303,6 +344,5 @@ public class AttachmentServiceEmployee implements Serializable {
     public void setOutputfinal(byte[] outputfinal) {
         this.outputfinal = outputfinal;
     }
-    
-    
+
 }

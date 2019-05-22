@@ -677,14 +677,14 @@ public class ServiceCitizen implements Serializable {
                         + "and (`Cit_ID` = " + service_Job.Cit_ID + ") and (`Service_Citizen_ID` = " + service_Job.Service_Citizen_ID + ");";
                 System.out.println(q);
                 db.write(q);
-            }
+            } else {
 
-            List<DecisionsDepartment> departments = GetFromDB.getDecisionsDepartmentNotDone(Cit_ID, Service_Citizen_ID);
-            for (DecisionsDepartment department1 : departments) {
-                System.out.println("  -- " + department1);
+                List<DecisionsDepartment> departments = GetFromDB.getDecisionsDepartmentNotDone(Cit_ID, Service_Citizen_ID);
+                for (DecisionsDepartment department1 : departments) {
+                    System.out.println("  -- " + department1);
+                }
+                nextjobsPathOfthisService(departments, sections, jobs);
             }
-            nextjobsPathOfthisService(departments, sections, jobs);
-
             for (AttachmentServiceEmployee attachmentServiceEmployee : attachmentServiceEmployees) {
                 attachmentServiceEmployee.addToDataBase();
             }
@@ -1043,6 +1043,10 @@ public class ServiceCitizen implements Serializable {
 
     public boolean sizeAttwhithFile() {
         return !attwhithFile.isEmpty();
+    }
+
+    public boolean sizeAttEMPwhithFile() {
+        return !attachmentServiceEmployees.isEmpty();
     }
 
     public boolean sizeAttachment() {

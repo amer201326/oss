@@ -6,6 +6,7 @@
 package Data;
 
 import DB.DB;
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.logging.Logger;
  *
  * @author baraakali
  */
-public class DecisionsDepartment {
+public class DecisionsDepartment implements Serializable{
 
     int depId;
     int depOrder;

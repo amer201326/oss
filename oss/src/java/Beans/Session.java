@@ -16,6 +16,7 @@ import Data.Manager;
 import Data.Section;
 import Data.SectionPath;
 import Data.Service;
+import Data.ServiceAttachmentName;
 import Data.ServiceCitizen;
 import Data.ServiceCitizen_1;
 import Data.ServiceErr;
@@ -51,6 +52,7 @@ public class Session implements Serializable {
     Employee employee;
     AttachmentServiceEmployee selectAtt;
     ServiceCitizen serviceCitizenShow;
+    ServiceAttachmentName serviceAttachmentName;
     AttachmentArchiveCitizen attachmentArchiveCitizenSELECTED;
     boolean[] screens;
 
@@ -211,6 +213,7 @@ public class Session implements Serializable {
     }
 
     public void setSelectAtt(AttachmentServiceEmployee selectAtt) {
+        System.out.println("set session file AttachmentServiceEmployee");
         this.selectAtt = selectAtt;
     }
     
@@ -218,4 +221,13 @@ public class Session implements Serializable {
         selectAtt = (AttachmentServiceEmployee) event.getObject();
     }
 
+    public ServiceAttachmentName getServiceAttachmentName() {
+        return serviceAttachmentName;
+    }
+
+    public void setServiceAttachmentName(ServiceAttachmentName serviceAttachmentName) {
+        this.serviceAttachmentName = serviceAttachmentName;
+    }
+    
+    
 }

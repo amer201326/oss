@@ -20,6 +20,7 @@ import Data.ServiceCitizen_1;
 import Data.Service_Job;
 import Data.ViewerAttachment;
 import java.io.IOException;
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -40,7 +41,7 @@ import org.primefaces.model.UploadedFile;
 
 @ManagedBean
 @ViewScoped
-public class ShoeServiceCitizemEmpManeger {
+public class ShoeServiceCitizemEmpManeger implements Serializable{
 
     ServiceCitizen serviseCitizen;
     Employee employee;

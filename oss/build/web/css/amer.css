@@ -233,6 +233,11 @@ ui-selectonemenu-trigger.myButton {
     background: #12c40f;
     border: #12c40f;
 }
+.marginBuAddwrong{
+    margin: 5px;
+    background: #12c40f;
+    border: #12c40f;
+}
 .marginBuAddblue{
     margin: 5px;
     background: #3d94f6;
@@ -815,7 +820,7 @@ hr{
 }
 .flexCenter{
     display: flex;
-     flex-wrap:  wrap;
+    flex-wrap:  wrap;
     justify-content:center;
 }
 .flexCenterColomn{
@@ -914,6 +919,18 @@ span[id*='uploadAm'] .ui-fileupload-filename{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+
+}
+
+#divDown222 a{
+    margin-left: 16px;
+    margin-bottom: 10px;
+}
+.flexColomncenter{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
 
 }
 span[id*='j_idt16'] .ui-button{

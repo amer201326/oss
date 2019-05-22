@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ImageServlet extends HttpServlet {
 
-    private static final long serialVersionUID = -6449908958106497977L;
+    
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -40,33 +40,42 @@ public class ImageServlet extends HttpServlet {
         // Image bytes
         String type = req.getParameter("type");
         if (type.compareTo("archsit") == 0) {
+            System.out.println("ImageServlet   send  AttachmentServiceEmployee");
             AttachmentServiceEmployee att = ms.getSelectAtt();
 
-            // Load driver
-//            DB d = new DB();
-//            ResultSet r = d.read("SELECT file FROM oss.attachment_archive_citizen where Atta_ArchiveC_ID =2;");
-//           InputStream in = null;
-//            while (r.next()) {
-//             in = r.getBinaryStream(1);
-//            }
-//            
-//            byte[] inputByte = new byte[in.available()];
-//                in.read(inputByte);
-//                byte[] outputfinal = Crypto.dec(Cipher.DECRYPT_MODE, "foreanderDowntop", inputByte);
-//                
-//            
-            resp.getOutputStream().write(att.outputfinal);
-            resp.getOutputStream().close();
+         
+            if (att != null) {
+                if (att.outputfinal != null) {
+                    resp.getOutputStream().write(att.outputfinal);
+                    resp.getOutputStream().close();
+                }
+            }
         }
         if (type.compareTo("asit") == 0) {
-            
+
             System.out.println("asit");
-            
-                AttachmentArchiveCitizen att = ms.getAttachmentArchiveCitizenSELECTED();
-                System.out.println("from imgserv = "+att.nameFile);
-                resp.getOutputStream().write(att.outputfinal);
-                resp.getOutputStream().close();
-            
+
+            AttachmentArchiveCitizen att = ms.getAttachmentArchiveCitizenSELECTED();
+            if (att != null) {
+                if (att.outputfinal != null) {
+                    System.out.println("from imgserv = " + att.nameFile);
+                    resp.getOutputStream().write(att.outputfinal);
+                    resp.getOutputStream().close();
+                }
+            }
+
+        }
+        if (type.compareTo("serviceAttachmentName") == 0) {
+            System.out.println("serviceAttachmentName");
+
+            ServiceAttachmentName att = ms.getServiceAttachmentName();
+            if (att != null) {
+                if (att.outputfinal != null) {
+                    System.out.println("from imgserv = " + att.nameFile);
+                    resp.getOutputStream().write(att.outputfinal);
+                    resp.getOutputStream().close();
+                }
+            }
         }
 
         System.out.println("done");

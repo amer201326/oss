@@ -82,6 +82,7 @@ public class ServiceCitizenManager implements Serializable {
             } else {
                 for (int i = 0; i < allRequestService.size(); i++) {
                     ServiceCitizen get = allRequestService.get(i);
+                    System.out.println("status dep = +++++++++++++ + + + ++++++++++      ===  "+get.getDecisionsDepartment().getStatus());
                     if (get.getDecisionsDepartment().getStatus().compareTo("show") == 0) {
                         //get.messages(session.employee.getEmp_id());
                         allRequestServiceNotView.add(get);

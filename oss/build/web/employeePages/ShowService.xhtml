@@ -326,11 +326,18 @@
                                                                         <div class="text-xs font-weight-bold text-gray-800 text-uppercase mb-1" style="font-size: 0.8em ; margin-right: 20px;">#{att.notes}</div>
 
                                                                     </dir>
-                                                                    <div id="divDown" class="flexColomn ">
-                                                                        <p:commandButton id="downloadAT"  value="تنزيل" ajax="false"  icon="fa fa-arrow-down" class="bg-#{att.colorHaveFile()}" 
-                                                                                         style="color: white;">
-                                                                            <p:fileDownload value="#{att.fileDownload}"/>
-                                                                        </p:commandButton>  
+                                                                    <div id="divDown222" class="flexColomn ">
+
+                                                                        <p:column  style="width:90px;text-align: center;">
+                                                                            <p:commandLink update=" :ShowServiceCitizinForm:dserviceAttachmentName" oncomplete="PF('dserviceAttachmentName').show()"  
+                                                                                           class="btn-lg btn-success btn-circle marginBuAdd"
+                                                                                           >
+                                                                                <h:outputText styleClass="fa fa-fw fa-eye" style="margin:0 auto;" />
+                                                                                <f:setPropertyActionListener value="#{att}" target="#{msession.serviceAttachmentName}" />
+
+                                                                            </p:commandLink>
+                                                                        </p:column>
+                                                                        
                                                                         <br/>
                                                                     </div>
                                                                 </div>
@@ -366,6 +373,7 @@
 
                                                                     </dir>
                                                                     <div id="divDown2" class="flexColomn ">
+
                                                                         <p:commandButton id="downloadAT2"  value="تنزيل" ajax="false"  icon="fa fa-arrow-down" class="bg-#{att2.colorHaveFile()}" 
                                                                                          style="color: white;">
                                                                             <p:fileDownload value="#{att2.fileDownload}"/>
@@ -428,11 +436,11 @@
                                                     <p:ajax event="rowSelect" process="@this"  listener="#{shoeServiceCitizemEmpManeger.onServiceSelect}"/>
 
                                                     <p:column  style="width:90px;text-align: center">
-                                                        <p:commandLink update=":ShowServiceCitizinForm:attdetali :ShowServiceCitizinForm:datshwo" oncomplete="PF('attshow').show()"  
+                                                        <p:commandLink update=" ShowServiceCitizinForm:datshwo" oncomplete="PF('attshow').show()"  
                                                                        class="btn btn-success btn-circle marginBuAdd"
                                                                        >
                                                             <h:outputText styleClass="fa fa-fw fa-eye" style="margin:0 auto;" />
-                                                            <f:setPropertyActionListener value="#{att}" target="#{shoeServiceCitizemEmpManeger.selectAtt}" />
+                                                            <f:setPropertyActionListener value="#{att}" target="#{msession.selectAtt}" />
 
                                                         </p:commandLink>
                                                     </p:column>
@@ -453,37 +461,46 @@
 
 
                                                 </p:dataTable>
+
                                                 <p:dialog id="datshwo" dir="rtl" header="معلومات المرفق" widgetVar="attshow"  position="top"
                                                           resizable="false" minWidth="950" minHeight="900" maximizable="false">
-                                                    <p:scrollPanel  rendered="#{shoeServiceCitizemEmpManeger.selectAtt.isImage()}" id="attdetali" style="width:auto;
-                                                                    height:auto" mode="native">
 
-                                                        <div  class="CenterFlex" style="margin: 10px 0 10px 0;" >
-                                                            <p:graphicImage value="/files/#{shoeServiceCitizemEmpManeger.selectAtt.filename}"
-                                                                            style="max-width: 70%; max-height:80%;"/>
+                                                    <p:scrollPanel  rendered="#{msession.selectAtt.isImage()}" style="width:auto; height:auto;" mode="native">
+
+                                                        <div class="CenterFlex">
+                                                            <h:graphicImage id="image2" alt="uploaded image" url="/image?type=archsit&amp;f=#{msession.selectAtt.attachment_Service_Employee_ID}" style="width: 80%; height: 100%;
+                                                                            margin: 10px 0 10px 0;"/>
                                                         </div>
 
-                                                        <div class="CenterFlex">#{shoeServiceCitizemEmpManeger.selectAtt.filename}"</div>
+                                                        <div class="CenterFlex">#{msession.selectAtt.filename}"</div>
+
+
 
                                                     </p:scrollPanel>
+                                                    <p:scrollPanel  rendered="#{msession.selectAtt.isPDF()}" style="width:auto; height:auto;" mode="native">
 
-
-                                                    <p:outputPanel rendered="#{shoeServiceCitizemEmpManeger.selectAtt.isPDF()}"
-                                                                   style="width:300px;height:auto" >
-                                                        <div  class="CenterFlex" style="margin: 10px 0 10px 0;" >
-                                                            <p:graphicImage width="200px" value="/imgs/pdf-512.png" style="max-width: 70%; max-height:80%;"/>
+                                                        <div class="CenterFlex">
+                                                            <h:graphicImage id="pdf3" alt="uploaded image" value="/imgs/pdf-512.png" style="width: 80%; height: 100%;
+                                                                            margin: 10px 0 10px 0;"/>
                                                         </div>
-                                                        <div class="CenterFlex">#{shoeServiceCitizemEmpManeger.selectAtt.filename}"</div>
-                                                    </p:outputPanel>
+
+                                                        <div class="CenterFlex">#{msession.selectAtt.filename}</div>
 
 
-                                                    <p:outputPanel rendered="#{shoeServiceCitizemEmpManeger.selectAtt.canntOpenFile()}"
-                                                                   style="width:300px;height:auto" >
-                                                        <div  class="CenterFlex" style="margin: 10px 0 10px 0;" >
-                                                            <p:graphicImage width="200px" value="/imgs/download.png" style="max-width: 70%; max-height:80%;"/>
+
+                                                    </p:scrollPanel>
+                                                    <p:scrollPanel  rendered="#{msession.selectAtt.canntOpenFile()}" style="width:auto; height:auto;" mode="native">
+
+                                                        <div class="CenterFlex">
+                                                            <h:graphicImage id="n2" alt="uploaded image" value="/imgs/download.png" style="width: 80%; height: 100%;
+                                                                            margin: 10px 0 10px 0;"/>
                                                         </div>
-                                                        <div class="CenterFlex">#{shoeServiceCitizemEmpManeger.selectAtt.filename}"</div>
-                                                    </p:outputPanel>
+
+                                                        <div class="CenterFlex">#{msession.selectAtt.filename}"</div>
+
+
+
+                                                    </p:scrollPanel>
                                                 </p:dialog>
 
 
@@ -587,7 +604,76 @@
                                 </h:panelGrid>
 
                             </div>
+                            <p:dialog id="dserviceAttachmentName" dir="rtl" header="معلومات المرفق" widgetVar="dserviceAttachmentName"  position="top,center" width="950"
+                                      minWidth="950" minHeight="800" maximizable="false" resizable="false"> 
 
+
+                                <p:scrollPanel  rendered="#{msession.serviceAttachmentName.isImage()}" style="width:auto; height:auto;" mode="native">
+
+                                    <div class="CenterFlex">
+                                        <h:graphicImage id="image" alt="uploaded image" url="/image?type=serviceAttachmentName&amp;f=#{msession.serviceAttachmentName.id}" style="width: 80%; height: 100%;
+                                                        margin: 10px 0 10px 0;"/>
+                                    </div>
+
+                                    <div class="CenterFlex">#{msession.serviceAttachmentName.nameFile}"</div>
+
+                                    <div class="CenterFlex" >
+                                        <p:commandButton id="downloadAT"  value="تنزيل" ajax="false"  icon="fa fa-arrow-down" 
+                                                         style="color: #f1e5e6; background: #e74a3b 50% 50%; margin: 10px 0 10px 0;
+                                                         border: none; width: 40%; font-size: 20px; font-weight: bold;">
+                                            <p:fileDownload value="#{msession.serviceAttachmentName.fileDownload}"/>
+                                        </p:commandButton>
+
+                                    </div>
+
+                                </p:scrollPanel>
+                                <p:scrollPanel  rendered="#{msession.serviceAttachmentName.isPDF()}" style="width:auto; height:auto;" mode="native">
+
+                                    <div class="CenterFlex">
+                                        <h:graphicImage id="pdf" alt="uploaded image" value="/imgs/pdf-512.png" style="width: 80%; height: 100%;
+                                                        margin: 10px 0 10px 0;"/>
+                                    </div>
+
+                                    <div class="CenterFlex">#{msession.serviceAttachmentName.nameFile}"</div>
+
+                                    <div class="CenterFlex" >
+                                        <p:commandButton id="downloadATpdf"  value="تنزيل" ajax="false"  icon="fa fa-arrow-down" 
+                                                         style="color: #f1e5e6; background: #e74a3b 50% 50%; margin: 10px 0 10px 0;
+                                                         border: none; width: 40%; font-size: 20px; font-weight: bold;">
+                                            <p:fileDownload value="#{msession.serviceAttachmentName.fileDownload}"/>
+                                        </p:commandButton>
+
+                                    </div>
+
+                                </p:scrollPanel>
+                                <p:scrollPanel  rendered="#{msession.serviceAttachmentName.canntOpenFile()}" style="width:auto; height:auto;" mode="native">
+
+                                    <div class="CenterFlex">
+                                        <h:graphicImage id="n" alt="uploaded image" value="/imgs/download.png" style="width: 80%; height: 100%;
+                                                        margin: 10px 0 10px 0;"/>
+                                    </div>
+
+                                    <div class="CenterFlex">#{msession.serviceAttachmentName.nameFile}"</div>
+
+                                    <div class="CenterFlex" >
+                                        <p:commandButton id="downloadATn"  value="تنزيل" ajax="false"  icon="fa fa-arrow-down" 
+                                                         style="color: #f1e5e6; background: #e74a3b 50% 50%; margin: 10px 0 10px 0;
+                                                         border: none; width: 40%; font-size: 20px; font-weight: bold;">
+                                            <p:fileDownload value="#{msession.serviceAttachmentName.fileDownload}"/>
+                                        </p:commandButton>
+
+                                    </div>
+
+                                </p:scrollPanel>
+
+
+
+
+
+
+
+
+                            </p:dialog>
 
                         </div>
                     </h:form>

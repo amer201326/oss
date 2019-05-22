@@ -1,6 +1,8 @@
 package Beans;
 
+import Data.AttachmentServiceEmployee;
 import Data.DecisionSection;
+import Data.GetFromDB;
 import Data.GetFromDBaraa;
 import Data.ServiceCitizen;
 import Data.StepsAndDecsions;
@@ -51,7 +53,16 @@ public class MessagesEmployesManager implements Serializable {
         List<StepsAndDecsions> pathD = GetFromDBaraa.stepAndDecDep(idcitizen, idSerCit);
         List<DecisionSection> pathS = GetFromDBaraa.sectionsteps(idService);
         List<StepsAndDecsionsJob> pathJ = GetFromDBaraa.stepAndDecJop(idcitizen, idSerCit);
-
+        List<AttachmentServiceEmployee> att = GetFromDB.getAttachmentServiceEmployee( idcitizen, idSerCit, idService);
+        for (StepsAndDecsionsJob j : pathJ) {
+            for (AttachmentServiceEmployee att2 : att) {
+                if(att2.getJobID()  == j.jobPath.getId()){
+                    j.getAttachmentServiceEmployee().add(att2);
+                    System.out.println("lingth is [] = "+att2.outputfinal);
+                    break;
+                }
+            }
+        }
         System.out.println("lllll" + pathJ.size());
         for (StepsAndDecsions d : pathD) {
             d.decisionsDepartment.setTotalDepCost(d.decisionsDepartment.getTotalDepCost() + d.decisionsDepartment.getCost());

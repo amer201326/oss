@@ -1336,6 +1336,29 @@ public class GetFromDB {
 
         return attach;
     }
+    public static List<AttachmentServiceEmployee> getAttachmentServiceEmployee(int Cit_ID, int Service_Citizen_ID, int Services_Provided_ID) {
+        List<AttachmentServiceEmployee> attach = new ArrayList<>();
+        try {
+            DB db = new DB();
+            String sql = "SELECT atsc.*,j.Job_ID FROM oss.attachment_service_employee as atsc "
+                    + " join employees as e on e.Emp_ID = atsc.Emp_ID "
+                    + "inner join jobtitle as j on e.Job_ID  = j.Job_ID  where  "
+                    + "  atsc.Cit_ID =" + Cit_ID + " and atsc.Service_Citizen_ID = " + Service_Citizen_ID + " and atsc.Services_Provided_ID = " + Services_Provided_ID + " ;";
+            System.out.println(sql);
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+
+                AttachmentServiceEmployee att = new AttachmentServiceEmployee(r.getInt(1), r.getInt(2), Cit_ID, Service_Citizen_ID, Services_Provided_ID, r.getBinaryStream(6), r.getString(7),r.getInt(8));
+                attach.add(att);
+
+            }
+
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return attach;
+    }
 
     public static boolean cheekUserName(String userName) {
         try {

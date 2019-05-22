@@ -52,6 +52,8 @@ public class ServiceAttachmentName implements Serializable {
     String form;
     boolean formArchevCitizen;
     int idAttachmentArcheveCitisen;
+    
+    byte[] outputfinal;
     public ServiceAttachmentName() {
     }
 
@@ -73,7 +75,7 @@ public class ServiceAttachmentName implements Serializable {
                 System.out.println(id);
                 byte[] inputByte = new byte[inputStream.available()];
                 inputStream.read(inputByte);
-                byte[] outputfinal = Crypto.dec(Cipher.DECRYPT_MODE, "foreanderDowntop", inputByte);
+                outputfinal = Crypto.dec(Cipher.DECRYPT_MODE, "foreanderDowntop", inputByte);
                 InputStream inputForData = new ByteArrayInputStream(outputfinal);
                 System.out.println(nameFile);
                 fileDownload = new DefaultStreamedContent(inputForData, "file", nameFile);
@@ -419,6 +421,32 @@ public class ServiceAttachmentName implements Serializable {
 
     public void setIdAttachmentArcheveCitisen(int idAttachmentArcheveCitisen) {
         this.idAttachmentArcheveCitisen = idAttachmentArcheveCitisen;
+    }
+    
+    public boolean isImage() {
+        if (nameFile != null) {
+            String s = nameFile.substring(nameFile.length() - 3, nameFile.length());
+            System.out.println("s = " + s + "  " + s.compareTo("jpg"));
+            if (s.compareTo("jpg") == 0 || s.compareTo("png") == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isPDF() {
+        if (nameFile != null) {
+            String s = nameFile.substring(nameFile.length() - 3, nameFile.length());
+            System.out.println("s = " + s + "  " + s.compareTo("pdf"));
+            if (s.compareTo("pdf") == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean canntOpenFile() {
+        return !isImage() && !isPDF();
     }
     
     
