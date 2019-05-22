@@ -977,6 +977,7 @@ public class ServiceCitizen implements Serializable {
         try {
             DB db = new DB();
             String q = "start transaction;";
+            System.out.println(q);
             db.write(q);
             decisionsDepartment.date = LocalDate.now().toString();
             decisionsDepartment.updateState();
@@ -995,8 +996,9 @@ public class ServiceCitizen implements Serializable {
                     break;
                 }
             }
+            System.out.println("flag for done service is = "+ flag);
             if (flag) {
-                q = "UPDATE `oss`.`service_citizen` SET `status` = 'done' WHERE (`Service_Citizen_ID` = " + Service_Citizen_ID + ") and (`Services_Provided_ID` = " + Services_Provided_ID + ") and (`Cit_ID` = " + Cit_ID + ");";
+                q = "UPDATE service_citizen SET status = 'done' WHERE (Service_Citizen_ID = " + Service_Citizen_ID + ") and (Services_Provided_ID = " + Services_Provided_ID + ") and (Cit_ID = " + Cit_ID + ");";
                 db.write(q);
             } else {
                 System.out.println("------- d-d-d-d-d-d-d---------------------------------------");

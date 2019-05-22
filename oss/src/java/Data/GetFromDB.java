@@ -955,12 +955,13 @@ public class GetFromDB {
         if (emp.checkTypeHed()) {
             try {
                 DB db = new DB();
+                
                 String sql = "SELECT * FROM services_provided as sp "
                         + "inner join service_citizen as sc on sc.Services_Provided_ID = sp.Services_Provided_ID  "
                         + "inner join citizen as cit on sc.Cit_ID = cit.Cit_ID "
                         + "inner join decisions_department as dd on sc.Service_Citizen_ID = dd.Service_Citizen_ID and sc.Cit_ID = dd.Cit_ID "
-                        + " and sc.Services_Provided_ID = dd.Services_Provided_ID inner join department as d on sp.DepartmentID = d.Dep_ID "
-                        + "where dd.Dep_ID = " + emp.dep_id + ";";
+                        + " and sc.Services_Provided_ID = dd.Services_Provided_ID inner join department as d on dd.Dep_ID = d.Dep_ID "
+                        + " where dd.Dep_ID = " + emp.dep_id + ";";
                 System.out.println(sql);
                 ResultSet r = db.read(sql);
                 while (r.next()) {
@@ -969,6 +970,7 @@ public class GetFromDB {
                             r.getString(22), r.getString(23), r.getString(24), r.getString(25), r.getString(26), r.getString(27), r.getString(28), r.getString(29), r.getString(30),
                             r.getString(31), r.getString(32), r.getString(33), r.getString(34), r.getString(35));
                     DecisionsDepartment dd = new DecisionsDepartment(r.getInt(36), r.getInt(37), r.getInt(38), r.getInt(39), r.getInt(40), r.getString(41), r.getInt(42), r.getString(43), r.getString(44), r.getString(45));
+                    System.out.println("dip dis = >> "+dd);
                     cit = new ServiceCitizen(s, r.getInt(9), r.getInt(10), r.getInt(11), r.getString(12), r.getString(13), r.getString(14), c1);
                     cit.decisionsDepartment = dd;
                    

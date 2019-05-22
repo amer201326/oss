@@ -250,10 +250,10 @@ public class DecisionsDepartment implements Serializable{
 
     public void updateState() throws SQLException, ClassNotFoundException {
         DB data = new DB();
-        String q = "UPDATE `oss`.`decisions_department` SET `Status` = 'done', `Cost` = '" + cost + "', "
-                + "`Com_InternalMessage` = '" + internalMessage + "', `Com_ExternalMessage` = '" + externalMessage + "', `Date` = '" + date + "', `decisions` = '" + decision + "' "
-                + "WHERE (`Dep_ID` = '" + depId + "') and (`Order_Departmant` = '" + depOrder + "') and (`Services_Provided_ID` = '" + Services_Provided_ID + "')"
-                + " and (`Cit_ID` = '" + Cit_ID + "') and (`Service_Citizen_ID` = '" + Service_Citizen_ID + "');";
+        String q = "UPDATE decisions_department SET Status = 'done', Cost = '" + cost + "', "
+                + "Com_InternalMessage = '" + internalMessage + "', Com_ExternalMessage = '" + externalMessage + "', Date = '" + date + "', decisions = '" + decision + "' "
+                + "WHERE (Dep_ID = " + depId + ") and (Order_Departmant = " + depOrder + ") and (Services_Provided_ID = " + Services_Provided_ID + ")"
+                + " and (Cit_ID = " + Cit_ID + ") and (Service_Citizen_ID = " + Service_Citizen_ID + ");";
         System.out.println("q d " + q);
         data.write(q);
     }
