@@ -226,6 +226,7 @@ public class Session implements Serializable {
     }
 
     public void setServiceAttachmentName(ServiceAttachmentName serviceAttachmentName) {
+        System.out.println("set att ser name -= "+serviceAttachmentName.getNameFile());
         this.serviceAttachmentName = serviceAttachmentName;
     }
     

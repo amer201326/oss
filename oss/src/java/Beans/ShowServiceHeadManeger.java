@@ -16,6 +16,7 @@ import Data.StepsAndDecsions;
 import Data.StepsAndDecsionsJob;
 import Data.ViewerAttachment;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -33,7 +34,7 @@ import org.primefaces.event.FileUploadEvent;
  */
 @ManagedBean
 @ViewScoped
-public class ShowServiceHeadManeger {
+public class ShowServiceHeadManeger implements Serializable{
 
     ServiceCitizen serviseCitizen;
     Employee employee;

@@ -332,7 +332,7 @@
 
                                                                     </dir>
                                                                     <div id="divDown" class="flexColomn ">
-                                                                        <p:commandLink update="ShowServiceCitizinForm:datshwo" oncomplete="PF('datshwo').show()"  
+                                                                        <p:commandLink update=":ShowServiceCitizinForm:datshwo" oncomplete="showDialogATT()" onclick="showDialogATT()"  
                                                                                        class="btn-lg btn-success btn-circle marginBuAdd"
                                                                                        >
                                                                             <h:outputText styleClass="fa fa-fw fa-eye" style="margin:0 auto;" />
@@ -341,7 +341,7 @@
                                                                         </p:commandLink>
 
                                                                         <!--Eman1234-->
-                                                                        <a id="myBtn">Open Modal</a>
+                                                                        <a id="myBtn" onclick="showDialogATT()" >Open Modal</a>
 
 
                                                                     </div>
@@ -378,7 +378,7 @@
 
                                                                     </dir>
                                                                     <div id="divDown" class="flexColomn ">
-                                                                        <p:commandLink update="ShowServiceCitizinForm:datshwo" oncomplete="PF('datshwo').show()"  
+                                                                        <p:commandLink update=":ShowServiceCitizinForm:datshwo" oncomplete="PF('datshwo').show()"  
                                                                                        class="btn-lg btn-success btn-circle marginBuAdd"
                                                                                        >
                                                                             <h:outputText styleClass="fa fa-fw fa-eye" style="margin:0 auto;" />
@@ -793,15 +793,15 @@
 
                                     <div class="CenterFlex modal-body">
                                         <h:graphicImage  alt="uploaded image" url="/image?type=serviceAttachmentName&amp;f=#{msession.serviceAttachmentName.id}" style="width: 80%; height: 100%;
-                                                        margin: 10px 0 10px 0;"/>
+                                                         margin: 10px 0 10px 0;"/>
                                     </div>
 
                                     <div class="CenterFlex modal-body">#{msession.serviceAttachmentName.nameFile}"</div>
 
                                     <div class="CenterFlex modal-body" >
                                         <p:commandButton   value="تنزيل" ajax="false"  icon="fa fa-arrow-down" 
-                                                         style="color: #f1e5e6; background: #e74a3b 50% 50%; margin: 10px 0 10px 0;
-                                                         border: none; width: 40%; font-size: 20px; font-weight: bold;">
+                                                           style="color: #f1e5e6; background: #e74a3b 50% 50%; margin: 10px 0 10px 0;
+                                                           border: none; width: 40%; font-size: 20px; font-weight: bold;">
                                             <p:fileDownload value="#{msession.serviceAttachmentName.fileDownload}"/>
                                         </p:commandButton>
 
@@ -821,8 +821,8 @@
 
                                     <div class="CenterFlex modal-body" >
                                         <p:commandButton   value="تنزيل" ajax="false"  icon="fa fa-arrow-down" 
-                                                         style="color: #f1e5e6; background: #e74a3b 50% 50%; margin: 10px 0 10px 0;
-                                                         border: none; width: 40%; font-size: 20px; font-weight: bold;">
+                                                           style="color: #f1e5e6; background: #e74a3b 50% 50%; margin: 10px 0 10px 0;
+                                                           border: none; width: 40%; font-size: 20px; font-weight: bold;">
                                             <p:fileDownload value="#{msession.serviceAttachmentName.fileDownload}"/>
                                         </p:commandButton>
 
@@ -833,15 +833,15 @@
 
                                     <div class="CenterFlex modal-body">
                                         <h:graphicImage  alt="uploaded image" value="/imgs/download.png" style="width: 80%; height: 100%;
-                                                        margin: 10px 0 10px 0;"/>
+                                                         margin: 10px 0 10px 0;"/>
                                     </div>
 
                                     <div class="CenterFlex modal-body">#{msession.serviceAttachmentName.nameFile}"</div>
 
                                     <div class="CenterFlex modal-body" >
                                         <p:commandButton   value="تنزيل" ajax="false"  icon="fa fa-arrow-down" 
-                                                         style="color: #f1e5e6; background: #e74a3b 50% 50%; margin: 10px 0 10px 0;
-                                                         border: none; width: 40%; font-size: 20px; font-weight: bold;">
+                                                           style="color: #f1e5e6; background: #e74a3b 50% 50%; margin: 10px 0 10px 0;
+                                                           border: none; width: 40%; font-size: 20px; font-weight: bold;">
                                             <p:fileDownload value="#{msession.serviceAttachmentName.fileDownload}"/>
                                         </p:commandButton>
 
@@ -861,8 +861,8 @@
                             </div>
 
                         </div>
-                        
-                          <p:dialog id="datshwo" dir="rtl" header="معلومات المرفق" widgetVar="datshwo"  position="top,center" width="950"
+
+                        <p:dialog id="datshwo" dir="rtl" header="معلومات المرفق" widgetVar="datshwo"  position="top,center" width="950"
                                   minWidth="950" minHeight="800" maximizable="false" resizable="false"> 
 
 
@@ -1039,7 +1039,8 @@
             var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks the button, open the modal 
-            btn.onclick = function () {
+            
+            function showDialogATT() {
                 modal.style.display = "block";
             }
 
