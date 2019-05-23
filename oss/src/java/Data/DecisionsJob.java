@@ -208,6 +208,7 @@ public class DecisionsJob {
             return true;
         return false;
     }
+    
 
     void updateDone() throws SQLException, ClassNotFoundException {
         DB data = new DB();

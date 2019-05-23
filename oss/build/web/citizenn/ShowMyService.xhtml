@@ -99,16 +99,11 @@
 
                                                             <div class="row no-gutters align-items-center">
 
-                                                                <div class="col-auto" >
-                                                                    <p:link class="fa fa-wrench fa-2x text-gray-300" rendered="#{!d.decisionsDepartment.flagStatus()}"></p:link>
-                                                                </div>
-                                                                <div class="col-auto" >
-                                                                    <p:link class="fa fa-thumbs-up  fa-2x text-gray-300" rendered="#{d.decisionsDepartment.flagStatus()}"></p:link>
-                                                                </div>
+
                                                                 <div class="col mr-2" style="text-align: right">
                                                                     <div class="text-s font-weight-bold text-primary text-uppercase mb-1" >حالة الخدمة</div>
                                                                     <div class="h5 mb-0 font-weight-bold text-gray-800">#{d.decisionsDepartment.nameStatus()}</div>
-                                                                    
+
                                                                 </div>
 
                                                             </div>
@@ -147,7 +142,7 @@
                                             </div>
 
 
-                                            <div class="card border-right-warning border-bottom-warning shadow h-100 py-2 " style="margin: 0 10px">
+                                            <div class="card border-right-#{d.decisionsDepartment.colorDecision()} border-bottom-#{d.decisionsDepartment.colorDecision()} shadow h-100 py-2 " style="margin: 0 10px">
                                                 <div class="card-body">
                                                     <div class="row no-gutters align-items-center">
 
@@ -202,7 +197,8 @@
 
                                                                                         <div class="h5 mb-0  text-primarytext-primary  ">تكلفة = #{j.decisionsJob.cost}</div>
                                                                                     </div>
-                                                                                    <p:outputPanel  rendered="#{!j.decisionsJob.isRun()}">
+
+                                                                                    <p:outputPanel  rendered="#{d.decisionsDepartment.flagDecision()}">
                                                                                         <div class="flexAm row-space " style="margin-right: 14px">
 
                                                                                             <div class="  py-3 bg-gradient-#{j.decisionsJob.color()} text-white border-bottom-#{j.decisionsJob.color()}" style="padding: 5px" >:تعليق الموظف</div>
@@ -223,61 +219,63 @@
                                                                                         </div>
                                                                                     </p:outputPanel>
                                                                                     <br/>
-                                                                                    <p:outputPanel rendered="#{!j.attachmentServiceEmployee.isEmpty()}">
-                                                                                        <div class="col-lg-12 mb-4">
-                                                                                            <div class="col-lg-12" style="text-align: right; min-width:1000px ">
-                                                                                                <div class="card shadow mb-xl-4">
-                                                                                                    <div class="card-header py-3">
-                                                                                                        <h6 class="m-0 font-weight-bold text-primary">مرفقات الموظف</h6>
+                                                                                    <p:outputPanel rendered="#{d.decisionsDepartment.flagDecision()}">
+                                                                                        <p:outputPanel rendered="#{!j.attachmentServiceEmployee.isEmpty()}">
+                                                                                            <div class="col-lg-12 mb-4">
+                                                                                                <div class="col-lg-12" style="text-align: right; min-width:1000px ">
+                                                                                                    <div class="card shadow mb-xl-4">
+                                                                                                        <div class="card-header py-3">
+                                                                                                            <h6 class="m-0 font-weight-bold text-primary">مرفقات الموظف</h6>
 
 
+                                                                                                        </div>
+                                                                                                        <p:dataTable  id="allfiles" var="att" value="#{j.attachmentServiceEmployee}"
+                                                                                                                      style=""
+                                                                                                                      selection="#{showMyServicesManager.selectAttEMP}"
+                                                                                                                      rowKey="#{att.sel}" selectionMode="single"
+                                                                                                                      >
+
+
+                                                                                                            <f:facet name="header"  >
+
+
+                                                                                                                الملفات المرفوعة
+
+
+                                                                                                            </f:facet>
+
+                                                                                                            <p:ajax event="rowSelect" process="@this"  listener="#{showMyServicesManager.onServiceSelect}"/>
+
+                                                                                                            <p:column  style="width:90px;text-align: center">
+                                                                                                                <p:commandLink update=":applycervce:datshwo" oncomplete="PF('attshow').show()"  
+                                                                                                                               class="btn btn-success btn-circle marginBuAdd"
+                                                                                                                               >
+                                                                                                                    <h:outputText styleClass="fa fa-fw fa-eye" style="margin:0 auto;" />
+                                                                                                                    <f:setPropertyActionListener value="#{att}" target="#{msession.selectAtt}" />
+
+                                                                                                                </p:commandLink>
+                                                                                                            </p:column>
+
+                                                                                                            <p:column headerText="الحجم">
+                                                                                                                <h:outputText value="#{att.sizeFile()}" />
+                                                                                                            </p:column>
+
+
+
+
+                                                                                                            <p:column headerText="الاسم">
+                                                                                                                <h:outputText value="#{att.filename}" />
+                                                                                                            </p:column>
+
+
+
+
+
+                                                                                                        </p:dataTable>
                                                                                                     </div>
-                                                                                                    <p:dataTable  id="allfiles" var="att" value="#{j.attachmentServiceEmployee}"
-                                                                                                                  style=""
-                                                                                                                  selection="#{showMyServicesManager.selectAttEMP}"
-                                                                                                                  rowKey="#{att.sel}" selectionMode="single"
-                                                                                                                  >
-
-
-                                                                                                        <f:facet name="header"  >
-
-
-                                                                                                            الملفات المرفوعة
-
-
-                                                                                                        </f:facet>
-
-                                                                                                        <p:ajax event="rowSelect" process="@this"  listener="#{showMyServicesManager.onServiceSelect}"/>
-
-                                                                                                        <p:column  style="width:90px;text-align: center">
-                                                                                                            <p:commandLink update=":applycervce:datshwo" oncomplete="PF('attshow').show()"  
-                                                                                                                           class="btn btn-success btn-circle marginBuAdd"
-                                                                                                                           >
-                                                                                                                <h:outputText styleClass="fa fa-fw fa-eye" style="margin:0 auto;" />
-                                                                                                                <f:setPropertyActionListener value="#{att}" target="#{msession.selectAtt}" />
-
-                                                                                                            </p:commandLink>
-                                                                                                        </p:column>
-
-                                                                                                        <p:column headerText="الحجم">
-                                                                                                            <h:outputText value="#{att.sizeFile()}" />
-                                                                                                        </p:column>
-
-
-
-
-                                                                                                        <p:column headerText="الاسم">
-                                                                                                            <h:outputText value="#{att.filename}" />
-                                                                                                        </p:column>
-
-
-
-
-
-                                                                                                    </p:dataTable>
                                                                                                 </div>
                                                                                             </div>
-                                                                                        </div>
+                                                                                        </p:outputPanel>
                                                                                     </p:outputPanel>
                                                                                 </div>
                                                                             </div>
@@ -371,11 +369,11 @@
                         </p:scrollPanel>
 
 
-                        
 
-                        
-                        
-                      
+
+
+
+
 
                     </p:dialog>
 

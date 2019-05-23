@@ -127,7 +127,7 @@ public class DecisionsDepartment implements Serializable{
     }
 
     public String nameDecision() {
-        if ("yse".equals(decision)) {
+        if ("accept".equals(decision)) {
             return "تم القبول";
         } else if ("no".equals(decision)) {
             return "تم الرفض ";
@@ -136,7 +136,7 @@ public class DecisionsDepartment implements Serializable{
     }
 
     public String colorDecision() {
-        if ("yse".equals(decision)) {
+        if ("accept".equals(decision)) {
             return "success";
         } else if ("no".equals(decision)) {
             return "danger";
@@ -145,7 +145,7 @@ public class DecisionsDepartment implements Serializable{
     }
 
     public boolean flagDecision() {
-        if ("yse".equals(decision)) {
+        if ("accept".equals(decision)) {
             return true;
         }
         return false;

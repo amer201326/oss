@@ -44,7 +44,7 @@ public class ShowServiceHeadManeger {
 
     boolean haveService = false;
     List<AttachmentServiceEmployee> attachmentServiceEmployees = new ArrayList<>();
-    
+
     double totalCost;
 
     @PostConstruct
@@ -65,17 +65,14 @@ public class ShowServiceHeadManeger {
         List<ServiceAttachmentName> allAtt = GetFromDB.getAttachmentByserviceCitizen(serviseCitizen.getServices_Provided_ID(), serviseCitizen.getCit_ID(), serviseCitizen.getService_Citizen_ID());
         List<ServiceAttachmentName> att = new ArrayList<ServiceAttachmentName>();
         List<ServiceAttachmentName> attform = new ArrayList<ServiceAttachmentName>();
-
-
         for (ServiceAttachmentName serviceAttachmentName : allAtt) {
-                
-                    if ("yes".equals(serviceAttachmentName.getForm())) {
-                        attform.add(serviceAttachmentName);
-                    } else {
-                        att.add(serviceAttachmentName);
-                    }
 
-            
+            if ("yes".equals(serviceAttachmentName.getForm())) {
+                attform.add(serviceAttachmentName);
+            } else {
+                att.add(serviceAttachmentName);
+            }
+
         }
 
         serviseCitizen.attachment = att;
@@ -86,6 +83,7 @@ public class ShowServiceHeadManeger {
         List<StepsAndDecsions> pathD = GetFromDBaraa.stepAndDecDep(idcitizen, idSerCit);
         List<DecisionSection> pathS = GetFromDBaraa.sectionsteps(idService);
         List<StepsAndDecsionsJob> pathJ = GetFromDBaraa.stepAndDecJop(idcitizen, idSerCit);
+        attachmentServiceEmployees = GetFromDBaraa.AttachmentServiceEmployee(serviseCitizen.getCit_ID(), serviseCitizen.getService_Citizen_ID(), serviseCitizen.getServices_Provided_ID());
 
         System.out.println("lllll" + pathJ.size());
         for (StepsAndDecsions d : pathD) {
@@ -96,7 +94,14 @@ public class ShowServiceHeadManeger {
                     for (StepsAndDecsionsJob j : pathJ) {
                         if (s.getSection().getId() == j.getJobPath().getSectionID() && s.getSection().getOrder() == j.getJobPath().getsOrder()) {
                             s.getJob().add(j);
-                             d.decisionsDepartment.setTotalDepCost(d.decisionsDepartment.getTotalDepCost() + j.decisionsJob.getCost());
+                            d.decisionsDepartment.setTotalDepCost(d.decisionsDepartment.getTotalDepCost() + j.decisionsJob.getCost());
+                             for (AttachmentServiceEmployee att : attachmentServiceEmployees) {
+                                if (att.getEmp_ID() == j.decisionsJob.getIdEmployee()) {
+                                    //j.setAttachmentServiceEmployee(att);
+                                    j.getAttachmentServiceEmployee().add(att);
+
+                                }
+                            }
                         }
                     }
                 }
@@ -188,8 +193,6 @@ public class ShowServiceHeadManeger {
     public void setStepsAndDecsions(List<StepsAndDecsions> stepsAndDecsions) {
         this.stepsAndDecsions = stepsAndDecsions;
     }
-
-   
 
     public double getTotalCost() {
         return totalCost;

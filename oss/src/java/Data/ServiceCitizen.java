@@ -999,6 +999,7 @@ public class ServiceCitizen implements Serializable {
             System.out.println("flag for done service is = "+ flag);
             if (flag) {
                 q = "UPDATE service_citizen SET status = 'done' WHERE (Service_Citizen_ID = " + Service_Citizen_ID + ") and (Services_Provided_ID = " + Services_Provided_ID + ") and (Cit_ID = " + Cit_ID + ");";
+                System.out.println(q);
                 db.write(q);
             } else {
                 System.out.println("------- d-d-d-d-d-d-d---------------------------------------");
@@ -1021,10 +1022,13 @@ public class ServiceCitizen implements Serializable {
                 System.out.println("------- d-d-d-d-d-d-d---------------------------------------");
                 nextjobsPathOfthisService(departments, sections, jobs);
 
-                q = "commit;";
-                //q = "rollback;";
-                db.write(q);
+                
             }
+            
+            q = "commit;";
+                //q = "rollback;";
+            System.out.println(q);
+                db.write(q);
 
         } catch (SQLException ex) {
             try {
