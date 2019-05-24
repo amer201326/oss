@@ -341,15 +341,15 @@
                     </h:form> 
                     <h:form id="dialogShowAttC" enctype="multipart/form-data">
 
-                        <p:dialog id="datshwo" dir="rtl" header="معلومات المرفق" widgetVar="attshow"  position="top,center" width="950"
-                                  minWidth="950" minHeight="800" maximizable="false" resizable="false"> 
+                        <p:dialog id="datshwo" dir="rtl" header="معلومات المرفق" widgetVar="attshow"  position="top,center" width="800" height="650"
+                                 maximizable="true" resizable="false"> 
 
 
                             <p:scrollPanel  rendered="#{msession.attachmentArchiveCitizenSELECTED.isImage()}" style="width:auto; height:auto;" mode="native">
 
                                 <div class="CenterFlex">
-                                    <h:graphicImage id="image" alt="uploaded image" url="/image?type=asit&amp;f=#{msession.attachmentArchiveCitizenSELECTED.atta_ArchiveC_ID}" style="width: 80%; height: 100%;
-                                                    margin: 10px 0 10px 0;"/>
+                                    <h:graphicImage id="image" alt="uploaded image" url="/image?type=asit&amp;f=#{msession.attachmentArchiveCitizenSELECTED.atta_ArchiveC_ID}" 
+                                                    style="margin: 10px 0 10px 0; max-height: 100%; max-width: 98%;" />
                                 </div>
 
                                 <div class="CenterFlex">#{msession.attachmentArchiveCitizenSELECTED.nameFile}"</div>
@@ -360,6 +360,7 @@
                                                      border: none; width: 40%; font-size: 20px; font-weight: bold;">
                                         <p:fileDownload value="#{msession.attachmentArchiveCitizenSELECTED.fileDownload}"/>
                                     </p:commandButton>
+                                    <br/>
 
                                 </div>
 
@@ -367,8 +368,7 @@
                             <p:scrollPanel  rendered="#{msession.attachmentArchiveCitizenSELECTED.isPDF()}" style="width:auto; height:auto;" mode="native">
 
                                 <div class="CenterFlex">
-                                    <h:graphicImage id="pdf" alt="uploaded image" value="/imgs/pdf-512.png" style="width: 80%; height: 100%;
-                                                    margin: 10px 0 10px 0;"/>
+                                    <h:graphicImage id="pdf" alt="uploaded image" value="/imgs/pdf-512.png" style="margin: 10px 0 10px 0; max-height: 100%; max-width: 98%;"/>
                                 </div>
 
                                 <div class="CenterFlex">#{msession.attachmentArchiveCitizenSELECTED.nameFile}"</div>
@@ -379,6 +379,7 @@
                                                      border: none; width: 40%; font-size: 20px; font-weight: bold;">
                                         <p:fileDownload value="#{msession.attachmentArchiveCitizenSELECTED.fileDownload}"/>
                                     </p:commandButton>
+                                    <br/>
 
                                 </div>
 
@@ -386,8 +387,7 @@
                             <p:scrollPanel  rendered="#{msession.attachmentArchiveCitizenSELECTED.canntOpenFile()}" style="width:auto; height:auto;" mode="native">
 
                                 <div class="CenterFlex">
-                                    <h:graphicImage id="n" alt="uploaded image" value="/imgs/download.png" style="width: 80%; height: 100%;
-                                                    margin: 10px 0 10px 0;"/>
+                                    <h:graphicImage id="n" alt="uploaded image" value="/imgs/download.png" style="margin: 10px 0 10px 0; max-height: 100%; max-width: 98%;"/>
                                 </div>
 
                                 <div class="CenterFlex">#{msession.attachmentArchiveCitizenSELECTED.nameFile}"</div>
@@ -398,6 +398,7 @@
                                                      border: none; width: 40%; font-size: 20px; font-weight: bold;">
                                         <p:fileDownload value="#{msession.attachmentArchiveCitizenSELECTED.fileDownload}"/>
                                     </p:commandButton>
+                                    <br/>
 
                                 </div>
 
