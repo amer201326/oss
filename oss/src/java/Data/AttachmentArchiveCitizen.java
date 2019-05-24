@@ -72,7 +72,7 @@ public class AttachmentArchiveCitizen implements Serializable {
 
     public void addToDataBase() throws SQLException, ClassNotFoundException {
 
-        String q = "INSERT INTO attachment_archive_citizen (`Atta_ArchiveC_ID`, `Cit_ID`,`ServiceAttachmentName_ID`,`file`,`nameFile`,`form`) VALUES (?,?,?,?,?,?);";
+        String q = "INSERT INTO attachment_archive_citizen (`Atta_ArchiveC_ID`, `Cit_ID`,`ServiceAttachmentName_ID`,`file`,`filename`,`form`) VALUES (?,?,?,?,?,?);";
 
         System.out.println("data is   > < " + Atta_ArchiveC_ID + "  " + Cit_ID + "  " + ServiceAttachmentName_ID);
 

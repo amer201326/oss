@@ -124,6 +124,9 @@ public class ServiceCitizenManager implements Serializable {
         try {
 
             session.serviceCitizenShow = serviceSelected;
+            if(session.employee.checkTypeHed())
+                FacesContext.getCurrentInstance().getExternalContext().redirect("ShowServiceDoneHead.xhtml");
+            else
             FacesContext.getCurrentInstance().getExternalContext().redirect("ShowServiceDone.xhtml");
 
         } catch (IOException ex) {
