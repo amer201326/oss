@@ -374,10 +374,13 @@
                                                                     </dir>
                                                                     <div id="divDown2" class="flexColomn ">
 
-                                                                        <p:commandButton id="downloadAT2"  value="تنزيل" ajax="false"  icon="fa fa-arrow-down" class="bg-#{att2.colorHaveFile()}" 
-                                                                                         style="color: white;">
-                                                                            <p:fileDownload value="#{att2.fileDownload}"/>
-                                                                        </p:commandButton>  
+                                                                        <p:commandLink update=" :ShowServiceCitizinForm:dserviceAttachmentName" oncomplete="PF('dserviceAttachmentName').show()"  
+                                                                                           class="btn-lg btn-success btn-circle marginBuAdd"
+                                                                                           >
+                                                                                <h:outputText styleClass="fa fa-fw fa-eye" style="margin:0 auto;" />
+                                                                                <f:setPropertyActionListener value="#{att2}" target="#{msession.serviceAttachmentName}" />
+
+                                                                            </p:commandLink>
                                                                         <br/>
                                                                     </div>
                                                                 </div>

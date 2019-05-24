@@ -320,7 +320,7 @@
                                                     <h6 class="m-0 font-weight-bold text-primary">  مرفقات المواطن </h6>
                                                 </div>
                                                 <div class="card-body">
-                                                    <ui:repeat value="#{showServiceHeadManeger.serviseCitizen.attachment}" var="att" varStatus="in" >
+                                                    <ui:repeat value="#{showServiceHeadManeger.att}" var="att" varStatus="in" >
                                                         <div class="flexAm row-space " style="margin-right: 14px">
                                                             <div class="px-3 mb-2 py-5 bg-gradient-#{att.colorHaveFile()} text-white border-bottom-#{att.colorHaveFile()}">مرفق  #{in.index+1}</div>
                                                             <div class="col-sm-11 px-5  mb-2 py-4  border-bottom-#{att.colorHaveFile()} ">
@@ -332,7 +332,7 @@
 
                                                                     </dir>
                                                                     <div id="divDown" class="flexColomn ">
-                                                                        <p:commandLink update=":ShowServiceCitizinForm:datshwo" oncomplete="showDialogATT()" onclick="showDialogATT()"  
+                                                                <p:commandLink update="upImage" oncomplete="PF('attshow').show()"  
                                                                                        class="btn-lg btn-success btn-circle marginBuAdd"
                                                                                        >
                                                                             <h:outputText styleClass="fa fa-fw fa-eye" style="margin:0 auto;" />
@@ -341,7 +341,6 @@
                                                                         </p:commandLink>
 
                                                                         <!--Eman1234-->
-                                                                        <a id="myBtn" onclick="showDialogATT()" >Open Modal</a>
 
 
                                                                     </div>
@@ -357,7 +356,7 @@
                                     </div>
                                 </p:outputPanel>
 
-                                <p:outputPanel rendered="#{shoeServiceCitizemDoneEmpManeger.serviseCitizen.sizeAttwhithFile()}">
+                                <p:outputPanel rendered="#{showServiceHeadManeger.serviseCitizen.sizeAttwhithFile()}">
 
                                     <div class="col-sm-12 mb-4">
                                         <div class="col-sm-12" style="text-align: right; min-width:900px ">
@@ -378,7 +377,7 @@
 
                                                                     </dir>
                                                                     <div id="divDown" class="flexColomn ">
-                                                                        <p:commandLink update=":ShowServiceCitizinForm:datshwo" oncomplete="PF('datshwo').show()"  
+                                                                <p:commandLink update="upImage" oncomplete="PF('attshow').show()"  
                                                                                        class="btn-lg btn-success btn-circle marginBuAdd"
                                                                                        >
                                                                             <h:outputText styleClass="fa fa-fw fa-eye" style="margin:0 auto;" />
@@ -399,11 +398,9 @@
                                         </div> 
                                     </div>
                                 </p:outputPanel>
-
                                 
-
-                                <br/><hr style="border: 2px solid orange; margin-left: 10px; margin-right: 10px;"/><br/>
-                                <div class="  mb-4">
+                                
+                                 <div class="  mb-4">
 
                                     <div class="card-body">
 
@@ -536,7 +533,7 @@
                                                                                                                                     <p:ajax event="rowSelect" process="@this"  listener="#{showMyServicesManager.onServiceSelect}"/>
 
                                                                                                                                     <p:column  style="width:90px;text-align: center">
-                                                                                                                                        <p:commandLink update="ShowServiceCitizinForm:datshwoEMP" oncomplete="PF('datshwoEMP').show()"  
+                                                                                                                                        <p:commandLink update="upImageEMP" oncomplete="PF('datshwoEMP').show()"  
                                                                                                                                                        class="btn btn-success btn-circle marginBuAdd"
                                                                                                                                                        >
                                                                                                                                             <h:outputText styleClass="fa fa-fw fa-eye" style="margin:0 auto;" />
@@ -619,6 +616,10 @@
                                 </div>
 
 
+                                
+
+                                <br/><hr style="border: 2px solid orange; margin-left: 10px; margin-right: 10px;"/><br/>
+                               
 
 
 
@@ -697,92 +698,16 @@
 
 
                         <!-- The Modal Eman123 -->
-                        <div id="modal1" class="modal" >
+                        
 
-                            <!-- Modal content -->
-                            <div class="modal-content" dir="rtl">
-                                <div class="modal-header">
-                                    <span class="close" dir="rtl">&times;</span>
-                                    <h2>معلومات المرفق</h2>
-                                </div>
+                        
+                            
 
-
-                                <p:scrollPanel  rendered="#{msession.serviceAttachmentName.isImage()}" style="width:auto; height:auto;" mode="native">
-
-                                    <div class="CenterFlex modal-body">
-                                        <h:graphicImage  alt="uploaded image" url="/image?type=serviceAttachmentName&amp;f=#{msession.serviceAttachmentName.id}" style="width: 80%; height: 100%;
-                                                         margin: 10px 0 10px 0;"/>
-                                    </div>
-
-                                    <div class="CenterFlex modal-body">#{msession.serviceAttachmentName.nameFile}"</div>
-
-                                    <div class="CenterFlex modal-body" >
-                                        <p:commandButton   value="تنزيل" ajax="false"  icon="fa fa-arrow-down" 
-                                                           style="color: #f1e5e6; background: #e74a3b 50% 50%; margin: 10px 0 10px 0;
-                                                           border: none; width: 40%; font-size: 20px; font-weight: bold;">
-                                            <p:fileDownload value="#{msession.serviceAttachmentName.fileDownload}"/>
-                                        </p:commandButton>
-
-                                    </div>
-
-                                </p:scrollPanel>
-
-
-                                <p:scrollPanel  rendered="#{msession.serviceAttachmentName.isPDF()}" style="width:auto; height:auto;" mode="native">
-
-                                    <div class="CenterFlex modal-body">
-                                        <h:graphicImage alt="uploaded image" value="/imgs/pdf-512.png" style="width: 80%; height: 100%;
-                                                        margin: 10px 0 10px 0;"/>
-                                    </div>
-
-                                    <div class="CenterFlex modal-body">#{msession.serviceAttachmentName.nameFile}"</div>
-
-                                    <div class="CenterFlex modal-body" >
-                                        <p:commandButton   value="تنزيل" ajax="false"  icon="fa fa-arrow-down" 
-                                                           style="color: #f1e5e6; background: #e74a3b 50% 50%; margin: 10px 0 10px 0;
-                                                           border: none; width: 40%; font-size: 20px; font-weight: bold;">
-                                            <p:fileDownload value="#{msession.serviceAttachmentName.fileDownload}"/>
-                                        </p:commandButton>
-
-                                    </div>
-
-                                </p:scrollPanel>
-                                <p:scrollPanel  rendered="#{msession.serviceAttachmentName.canntOpenFile()}" style="width:auto; height:auto;" mode="native">
-
-                                    <div class="CenterFlex modal-body">
-                                        <h:graphicImage  alt="uploaded image" value="/imgs/download.png" style="width: 80%; height: 100%;
-                                                         margin: 10px 0 10px 0;"/>
-                                    </div>
-
-                                    <div class="CenterFlex modal-body">#{msession.serviceAttachmentName.nameFile}"</div>
-
-                                    <div class="CenterFlex modal-body" >
-                                        <p:commandButton   value="تنزيل" ajax="false"  icon="fa fa-arrow-down" 
-                                                           style="color: #f1e5e6; background: #e74a3b 50% 50%; margin: 10px 0 10px 0;
-                                                           border: none; width: 40%; font-size: 20px; font-weight: bold;">
-                                            <p:fileDownload value="#{msession.serviceAttachmentName.fileDownload}"/>
-                                        </p:commandButton>
-
-                                    </div>
-
-                                </p:scrollPanel>
-
-
-
-
-
-
-                                <!--   <div class="modal-footer">
-                                       <h3>Modal Footer</h3>
-                                   </div> -->
-
-                            </div>
-
-                        </div>
-
-                        <p:dialog id="datshwo" dir="rtl" header="معلومات المرفق" widgetVar="datshwo"  position="top,center" width="950"
-                                  minWidth="950" minHeight="800" maximizable="false" resizable="false"> 
-
+                       
+                    </h:form>
+                    <h:form id="upImage" enctype="multipart/form-data">
+                         <p:dialog id="datshwo" dir="rtl" header="معلومات المرفق" widgetVar="attshow" position="top,center" width="800"
+                                          height="650"  maximizable="true" resizable="false"> 
 
                             <p:scrollPanel  rendered="#{msession.serviceAttachmentName.isImage()}" style="width:auto; height:auto;" mode="native">
 
@@ -850,63 +775,65 @@
 
 
                         </p:dialog>
-
-                        <p:dialog id="datshwoEMP" dir="rtl" header="معلومات المرفق" widgetVar="datshwoEMP"  position="top,center" width="950"
+                    </h:form>
+                    
+                    <h:form id="upImageEMP" enctype="multipart/form-data">
+                     <p:dialog id="datshwoEMP" dir="rtl" header="معلومات المرفق" widgetVar="datshwoEMP"  position="top,center" width="950"
                                   minWidth="950" minHeight="800" maximizable="false" resizable="false"> 
 
 
-                            <p:scrollPanel  rendered="#{showMyServicesManager.selectAttEMP.isImage()}" style="width:auto; height:auto;" mode="native">
+                         <p:scrollPanel  rendered="#{msession.selectAtt.isImage()}" style="width:auto; height:auto;" mode="native">
 
                                 <div class="CenterFlex">
                                     <h:graphicImage  alt="uploaded image" url="/image?type=archsit" style="width: 80%; height: 100%;
                                                      margin: 10px 0 10px 0;"/>
                                 </div>
 
-                                <div class="CenterFlex">#{showMyServicesManager.selectAttEMP.filename}"</div>
+                                <div class="CenterFlex">#{msession.selectAtt.filename}"</div>
 
                                 <div class="CenterFlex" >
                                     <p:commandButton   value="تنزيل" ajax="false"  icon="fa fa-arrow-down" 
                                                        style="color: #f1e5e6; background: #e74a3b 50% 50%; margin: 10px 0 10px 0;
                                                        border: none; width: 40%; font-size: 20px; font-weight: bold;">
-                                        <p:fileDownload value="#{showMyServicesManager.selectAttEMP.fileDownload}"/>
+                                        <p:fileDownload value="#{msession.selectAtt.fileDownload}"/>
                                     </p:commandButton>
 
                                 </div>
 
                             </p:scrollPanel>
-                            <p:scrollPanel  rendered="#{showMyServicesManager.selectAttEMP.isPDF()}" style="width:auto; height:auto;" mode="native">
+                            <p:scrollPanel  rendered="#{msession.selectAtt.isPDF()}" style="width:auto; height:auto;" mode="native">
 
                                 <div class="CenterFlex">
                                     <h:graphicImage  alt="uploaded image" value="/imgs/pdf-512.png" style="width: 80%; height: 100%;
                                                      margin: 10px 0 10px 0;"/>
                                 </div>
 
-                                <div class="CenterFlex">#{showMyServicesManager.selectAttEMP.filename}"</div>
+                                <div class="CenterFlex">#{msession.selectAtt.filename}"</div>
 
                                 <div class="CenterFlex" >
                                     <p:commandButton   value="تنزيل" ajax="false"  icon="fa fa-arrow-down" 
                                                        style="color: #f1e5e6; background: #e74a3b 50% 50%; margin: 10px 0 10px 0;
                                                        border: none; width: 40%; font-size: 20px; font-weight: bold;">
-                                        <p:fileDownload value="#{showMyServicesManager.selectAttEMP.fileDownload}"/>
+                                        <p:fileDownload value="#{msession.selectAtt.fileDownload}"/>
                                     </p:commandButton>
 
                                 </div>
 
                             </p:scrollPanel>
-                            <p:scrollPanel  rendered="#{showMyServicesManager.selectAttEMP.canntOpenFile()}" style="width:auto; height:auto;" mode="native">
+                            <p:scrollPanel  rendered="#{msession.selectAtt.canntOpenFile()}" style="width:auto; height:auto;" mode="native">
 
                                 <div class="CenterFlex">
                                     <h:graphicImage  alt="uploaded image" value="/imgs/download.png" style="width: 80%; height: 100%;
                                                      margin: 10px 0 10px 0;"/>
                                 </div>
 
-                                <div class="CenterFlex">#{showMyServicesManager.selectAttEMP.filename}"</div>
+                                <div class="CenterFlex">#{msession.selectAtt.filename}"</div>
 
                                 <div class="CenterFlex" >
                                     <p:commandButton  value="تنزيل" ajax="false"  icon="fa fa-arrow-down" 
                                                       style="color: #f1e5e6; background: #e74a3b 50% 50%; margin: 10px 0 10px 0;
                                                       border: none; width: 40%; font-size: 20px; font-weight: bold;">
-                                        <p:fileDownload value="#{showMyServicesManager.selectAttEMP.fileDownload}"/>
+                                        <p:fileDownload value="#{msession.selectAtt.fileDownload}"/>
                                     </p:commandButton>
 
                                 </div>
@@ -921,8 +848,9 @@
 
 
                         </p:dialog>
+                    
                     </h:form>
-                    <!-- Begin Page Content -->
+                        <!-- Begin Page Content -->
 
                 </div>
 
@@ -946,34 +874,7 @@
 
 
         </div>
-        <script>
-// Get the modal
-            var modal = document.getElementById("modal1");
-
-// Get the button that opens the modal
-            var btn = document.getElementById("myBtn");
-
-// Get the span element that closes the modal
-            var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal 
-
-            function showDialogATT() {
-                modal.style.display = "block";
-            }
-
-// When the user clicks on span (x), close the modal
-            span.onclick = function () {
-                modal.style.display = "none";
-            }
-
-// When the user clicks anywhere outside of the modal, close it
-            window.onclick = function (event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
-            }
-        </script>
+       
         <!-- Bootstrap core JavaScript-->
         <!--<script src="../vendor/jquery/jquery.min.js"></script>-->
         <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

@@ -27,6 +27,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.event.SelectEvent;
 
 /**
  *
@@ -34,7 +35,7 @@ import org.primefaces.event.FileUploadEvent;
  */
 @ManagedBean
 @ViewScoped
-public class ShowServiceHeadManeger implements Serializable{
+public class ShowServiceHeadManeger implements Serializable {
 
     ServiceCitizen serviseCitizen;
     Employee employee;
@@ -45,8 +46,10 @@ public class ShowServiceHeadManeger implements Serializable{
 
     boolean haveService = false;
     List<AttachmentServiceEmployee> attachmentServiceEmployees = new ArrayList<>();
-
+    List<ServiceAttachmentName> att = new ArrayList<>();
+    List<ServiceAttachmentName> attform = new ArrayList<>();
     double totalCost;
+    private AttachmentServiceEmployee selectAttEMP;
 
     @PostConstruct
     public void init() {
@@ -64,8 +67,8 @@ public class ShowServiceHeadManeger implements Serializable{
 
     public void filterFormOrNot() {
         List<ServiceAttachmentName> allAtt = GetFromDB.getAttachmentByserviceCitizen(serviseCitizen.getServices_Provided_ID(), serviseCitizen.getCit_ID(), serviseCitizen.getService_Citizen_ID());
-        List<ServiceAttachmentName> att = new ArrayList<ServiceAttachmentName>();
-        List<ServiceAttachmentName> attform = new ArrayList<ServiceAttachmentName>();
+        att = new ArrayList<ServiceAttachmentName>();
+        attform = new ArrayList<ServiceAttachmentName>();
         for (ServiceAttachmentName serviceAttachmentName : allAtt) {
 
             if ("yes".equals(serviceAttachmentName.getForm())) {
@@ -96,7 +99,7 @@ public class ShowServiceHeadManeger implements Serializable{
                         if (s.getSection().getId() == j.getJobPath().getSectionID() && s.getSection().getOrder() == j.getJobPath().getsOrder()) {
                             s.getJob().add(j);
                             d.decisionsDepartment.setTotalDepCost(d.decisionsDepartment.getTotalDepCost() + j.decisionsJob.getCost());
-                             for (AttachmentServiceEmployee att : attachmentServiceEmployees) {
+                            for (AttachmentServiceEmployee att : attachmentServiceEmployees) {
                                 if (att.getEmp_ID() == j.decisionsJob.getIdEmployee()) {
                                     //j.setAttachmentServiceEmployee(att);
                                     j.getAttachmentServiceEmployee().add(att);
@@ -202,5 +205,43 @@ public class ShowServiceHeadManeger implements Serializable{
     public void setTotalCost(double totalCost) {
         this.totalCost = totalCost;
     }
+
+    public List<AttachmentServiceEmployee> getAttachmentServiceEmployees() {
+        return attachmentServiceEmployees;
+    }
+
+    public void setAttachmentServiceEmployees(List<AttachmentServiceEmployee> attachmentServiceEmployees) {
+        this.attachmentServiceEmployees = attachmentServiceEmployees;
+    }
+
+    public List<ServiceAttachmentName> getAtt() {
+        return att;
+    }
+
+    public void setAtt(List<ServiceAttachmentName> att) {
+        this.att = att;
+    }
+
+    public List<ServiceAttachmentName> getAttform() {
+        return attform;
+    }
+
+    public void setAttform(List<ServiceAttachmentName> attform) {
+        this.attform = attform;
+    }
+    
+    public void onServiceSelect(SelectEvent event) {
+        selectAttEMP = (AttachmentServiceEmployee) event.getObject();
+    }
+
+    public AttachmentServiceEmployee getSelectAttEMP() {
+        return selectAttEMP;
+    }
+
+    public void setSelectAttEMP(AttachmentServiceEmployee selectAttEMP) {
+        this.selectAttEMP = selectAttEMP;
+    }
+    
+    
 
 }
