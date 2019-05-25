@@ -712,8 +712,8 @@
                             <p:scrollPanel  rendered="#{msession.serviceAttachmentName.isImage()}" style="width:auto; height:auto;" mode="native">
 
                                 <div class="CenterFlex">
-                                    <h:graphicImage id="image" alt="uploaded image" url="/image?type=serviceAttachmentName&amp;f=#{msession.serviceAttachmentName.id}" style="width: 80%; height: 100%;
-                                                    margin: 10px 0 10px 0;"/>
+                                    <h:graphicImage id="image" alt="uploaded image" url="/image?type=serviceAttachmentName&amp;f=#{msession.serviceAttachmentName.id}" 
+                                                    style="margin: 10px 0 10px 0; max-height: 100%; max-width: 98%;"/>
                                 </div>
 
                                 <div class="CenterFlex">#{msession.serviceAttachmentName.nameFile}"</div>
@@ -724,15 +724,15 @@
                                                      border: none; width: 40%; font-size: 20px; font-weight: bold;">
                                         <p:fileDownload value="#{msession.serviceAttachmentName.fileDownload}"/>
                                     </p:commandButton>
-
+                                    <br/>
                                 </div>
 
                             </p:scrollPanel>
                             <p:scrollPanel  rendered="#{msession.serviceAttachmentName.isPDF()}" style="width:auto; height:auto;" mode="native">
 
                                 <div class="CenterFlex">
-                                    <h:graphicImage id="pdf" alt="uploaded image" value="/imgs/pdf-512.png" style="width: 80%; height: 100%;
-                                                    margin: 10px 0 10px 0;"/>
+                                    <h:graphicImage id="pdf" alt="uploaded image" value="/imgs/pdf-512.png" 
+                                                    style="margin: 10px 0 10px 0; max-height: 100%; max-width: 98%;"/>
                                 </div>
 
                                 <div class="CenterFlex">#{msession.serviceAttachmentName.nameFile}"</div>
@@ -743,15 +743,15 @@
                                                      border: none; width: 40%; font-size: 20px; font-weight: bold;">
                                         <p:fileDownload value="#{msession.serviceAttachmentName.fileDownload}"/>
                                     </p:commandButton>
-
+                                    <br/>
                                 </div>
 
                             </p:scrollPanel>
                             <p:scrollPanel  rendered="#{msession.serviceAttachmentName.canntOpenFile()}" style="width:auto; height:auto;" mode="native">
 
                                 <div class="CenterFlex">
-                                    <h:graphicImage id="n" alt="uploaded image" value="/imgs/download.png" style="width: 80%; height: 100%;
-                                                    margin: 10px 0 10px 0;"/>
+                                    <h:graphicImage id="n" alt="uploaded image" value="/imgs/download.png" 
+                                                    style="margin: 10px 0 10px 0; max-height: 100%; max-width: 98%;"/>
                                 </div>
 
                                 <div class="CenterFlex">#{msession.serviceAttachmentName.nameFile}"</div>
@@ -762,7 +762,7 @@
                                                      border: none; width: 40%; font-size: 20px; font-weight: bold;">
                                         <p:fileDownload value="#{msession.serviceAttachmentName.fileDownload}"/>
                                     </p:commandButton>
-
+                                    <br/>
                                 </div>
 
                             </p:scrollPanel>
@@ -778,15 +778,15 @@
                     </h:form>
                     
                     <h:form id="upImageEMP" enctype="multipart/form-data">
-                     <p:dialog id="datshwoEMP" dir="rtl" header="معلومات المرفق" widgetVar="datshwoEMP"  position="top,center" width="950"
-                                  minWidth="950" minHeight="800" maximizable="false" resizable="false"> 
+                     <p:dialog id="datshwoEMP" dir="rtl" header="معلومات المرفق" widgetVar="datshwoEMP"  position="top,center" width="800"
+                                  height="650" maximizable="true" resizable="false"> 
 
 
                          <p:scrollPanel  rendered="#{msession.selectAtt.isImage()}" style="width:auto; height:auto;" mode="native">
 
                                 <div class="CenterFlex">
-                                    <h:graphicImage  alt="uploaded image" url="/image?type=archsit" style="width: 80%; height: 100%;
-                                                     margin: 10px 0 10px 0;"/>
+                                    <h:graphicImage  alt="uploaded image" url="/image?type=archsit" 
+                                                     style="margin: 10px 0 10px 0; max-height: 100%; max-width: 98%;"/>
                                 </div>
 
                                 <div class="CenterFlex">#{msession.selectAtt.filename}"</div>
@@ -797,6 +797,7 @@
                                                        border: none; width: 40%; font-size: 20px; font-weight: bold;">
                                         <p:fileDownload value="#{msession.selectAtt.fileDownload}"/>
                                     </p:commandButton>
+                                    <br/>
 
                                 </div>
 
@@ -804,8 +805,7 @@
                             <p:scrollPanel  rendered="#{msession.selectAtt.isPDF()}" style="width:auto; height:auto;" mode="native">
 
                                 <div class="CenterFlex">
-                                    <h:graphicImage  alt="uploaded image" value="/imgs/pdf-512.png" style="width: 80%; height: 100%;
-                                                     margin: 10px 0 10px 0;"/>
+                                    <h:graphicImage  alt="uploaded image" value="/imgs/pdf-512.png" style="margin: 10px 0 10px 0; max-height: 100%; max-width: 98%;"/>
                                 </div>
 
                                 <div class="CenterFlex">#{msession.selectAtt.filename}"</div>
@@ -816,15 +816,15 @@
                                                        border: none; width: 40%; font-size: 20px; font-weight: bold;">
                                         <p:fileDownload value="#{msession.selectAtt.fileDownload}"/>
                                     </p:commandButton>
-
+                                    <br/>
                                 </div>
 
                             </p:scrollPanel>
                             <p:scrollPanel  rendered="#{msession.selectAtt.canntOpenFile()}" style="width:auto; height:auto;" mode="native">
 
                                 <div class="CenterFlex">
-                                    <h:graphicImage  alt="uploaded image" value="/imgs/download.png" style="width: 80%; height: 100%;
-                                                     margin: 10px 0 10px 0;"/>
+                                    <h:graphicImage  alt="uploaded image" value="/imgs/download.png" 
+                                                     style="margin: 10px 0 10px 0; max-height: 100%; max-width: 98%;"/>
                                 </div>
 
                                 <div class="CenterFlex">#{msession.selectAtt.filename}"</div>
@@ -835,7 +835,7 @@
                                                       border: none; width: 40%; font-size: 20px; font-weight: bold;">
                                         <p:fileDownload value="#{msession.selectAtt.fileDownload}"/>
                                     </p:commandButton>
-
+                                    <br/>
                                 </div>
 
                             </p:scrollPanel>

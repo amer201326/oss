@@ -236,15 +236,15 @@
 
                                             </div>
 
-                                            <p:dialog id="dserviceAttachmentEMP" dir="rtl" header="معلومات المرفق" widgetVar="dserviceAttachmentEMP"  position="top,center" width="950"
-                                                      minWidth="950" minHeight="800" maximizable="false" resizable="false"> 
+                                            <p:dialog id="dserviceAttachmentEMP" dir="rtl" header="معلومات المرفق" widgetVar="dserviceAttachmentEMP"  position="top,center" width="800"
+                                                      height="650" maximizable="true" resizable="false"> 
 
-
+                                                
                                                 <p:scrollPanel  rendered="#{msession.selectAtt.isImage()}" style="width:auto; height:auto;" mode="native">
 
                                                     <div class="CenterFlex">
-                                                        <h:graphicImage  alt="uploaded image" url="/image?type=archsit&amp;f=#{msession.selectAtt.attachment_Service_Employee_ID}" style="width: 80%; height: 100%;
-                                                                         margin: 10px 0 10px 0;"/>
+                                                        <h:graphicImage  alt="uploaded image" url="/image?type=archsit&amp;f=#{msession.selectAtt.attachment_Service_Employee_ID}" 
+                                                                         style="margin: 10px 0 10px 0; max-height: 100%; max-width: 98%;"/>
                                                     </div>
 
                                                     <div class="CenterFlex">#{msession.selectAtt.filename}"</div>
@@ -255,15 +255,15 @@
                                                                           border: none; width: 40%; font-size: 20px; font-weight: bold;">
                                                             <p:fileDownload value="#{msession.selectAtt.fileDownload}"/>
                                                         </p:commandButton>
-
+                                                        <br/>
                                                     </div>
 
                                                 </p:scrollPanel>
                                                 <p:scrollPanel  rendered="#{msession.selectAtt.isPDF()}" style="width:auto; height:auto;" mode="native">
 
                                                     <div class="CenterFlex">
-                                                        <h:graphicImage  alt="uploaded image" value="/imgs/pdf-512.png" style="width: 80%; height: 100%;
-                                                                         margin: 10px 0 10px 0;"/>
+                                                        <h:graphicImage  alt="uploaded image" value="/imgs/pdf-512.png" 
+                                                                         style="margin: 10px 0 10px 0; max-height: 100%; max-width: 98%;"/>
                                                     </div>
 
                                                     <div class="CenterFlex">#{msession.selectAtt.filename}"</div>
@@ -274,15 +274,15 @@
                                                                            border: none; width: 40%; font-size: 20px; font-weight: bold;">
                                                             <p:fileDownload value="#{msession.serviceAttachmentName.fileDownload}"/>
                                                         </p:commandButton>
-
+                                                        <br/>
                                                     </div>
 
                                                 </p:scrollPanel>
                                                 <p:scrollPanel  rendered="#{msession.selectAtt.canntOpenFile()}" style="width:auto; height:auto;" mode="native">
 
                                                     <div class="CenterFlex">
-                                                        <h:graphicImage  alt="uploaded image" value="/imgs/download.png" style="width: 80%; height: 100%;
-                                                                         margin: 10px 0 10px 0;"/>
+                                                        <h:graphicImage  alt="uploaded image" value="/imgs/download.png" 
+                                                                         style="margin: 10px 0 10px 0; max-height: 100%; max-width: 98%;"/>
                                                     </div>
 
                                                     <div class="CenterFlex">#{msession.selectAtt.filename}"</div>
@@ -293,6 +293,7 @@
                                                                            border: none; width: 40%; font-size: 20px; font-weight: bold;">
                                                             <p:fileDownload value="#{msession.selectAtt.fileDownload}"/>
                                                         </p:commandButton>
+                                                        <br/>
 
                                                     </div>
 
