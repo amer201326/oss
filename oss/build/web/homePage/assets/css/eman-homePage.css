@@ -303,7 +303,7 @@ a:focus,
 
 .mu-social-media a:hover,
 .mu-social-media a:focus {
-	border: 1px solid #4e73df
+	border: 1px solid #4e73df;
 	color: #4e73df;
 }
 
@@ -3719,4 +3719,3 @@ a:focus,
 .floatL{
     float: left;
 }
-
