@@ -321,31 +321,36 @@
 
 
 
-                                                                        <p:dialog id="DNewSection" resizable="false" header="إضافة دائرة" widgetVar="dlg" dir="rtl">
+                                                                        <p:dialog id="DNewSection" resizable="false" header="إضافة دائرة" widgetVar="dlg" dir="rtl" >
 
-                                                                            <h:panelGrid columns="2" cellpadding="5">
+                                                                            <h:panelGrid columns="2" cellpadding="2" width="100" cellspacing="2" >
 
-                                                                                <h:outputLabel for="departments" value="دائرة:" />
+                                                                                <h:outputLabel for="departments" value="دائرة:"  style="font-size: 18px;"/>
                                                                                 <p:selectOneMenu id="departments" value="#{addServiceManager.departmentPaths.id}"  class="pading000"
                                                                                                  required="true" dynamic="true"  style="width:200px; height:100%; min-width: 223px;">
-                                                                                    <f:selectItem noSelectionOption="true" itemLabel="اختار دائرة"/>
+                                                                                    <f:selectItem noSelectionOption="true" itemLabel="اختار دائرة"/> 
                                                                                     <f:selectItems value="#{addServiceManager.departments}" var="d" itemLabel="#{d.nameA}" itemValue="#{d.id}"/>
                                                                                 </p:selectOneMenu>
 
-                                                                                <h:outputLabel for="name1" value="الرقم:" /> 
+
+                                                                                <h:outputLabel for="name1" value="الرقم:" style="font-size: 18px;"/> 
                                                                                 <p:inputNumber id="name1"  required="true" value="#{addServiceManager.departmentPaths.order}" minValue="1" maxValue="100">
                                                                                     <p:ajax update="name1" />  
                                                                                 </p:inputNumber>  
 
-                                                                                <h:outputLabel for="desction" value="قرار الدائرة" /> 
-                                                                                <p:selectOneRadio id="desction" value="#{addServiceManager.departmentPaths.importantComment}"  required="true">
+                                                                                <h:outputLabel for="desction" value="قرار الدائرة" style="font-size: 18px;"/> 
+                                                                                <p:selectOneRadio id="desction" value="#{addServiceManager.departmentPaths.importantComment}"  required="true" class="label1">
                                                                                     <f:selectItem   itemLabel="اساسي " itemValue="yes" />
                                                                                     <f:selectItem  itemLabel="غير اساسي" itemValue="no" />
                                                                                 </p:selectOneRadio>
 
                                                                                 <p:spacer/>
+                                                                                <p:separator/>
+
+                                                                                <p:spacer/>
                                                                                 <p:commandButton value="إضافة" actionListener="#{addServiceManager.addDepartmentToPath()}" update="DNewSection singleDT NewAttachment"
-                                                                                                 process="@this departments name1 desction" oncomplete="PF('dlg').hide();"/>
+                                                                                                 process="@this departments name1 desction" style="font-size: 18px;"
+                                                                                                 oncomplete="PF('dlg').hide();"/>
 
 
                                                                             </h:panelGrid>
@@ -455,6 +460,7 @@
                                                                                     <p:ajax update="name2" />  
                                                                                 </p:inputNumber>  
 
+                                                                                <p:spacer/>
                                                                                 <p:commandButton value="إضافة" actionListener="#{addServiceManager.addSectionToPath()}"
                                                                                                  update="NewSection singleDT1 NewAttachment" process="@this sections name2"  oncomplete="PF('dlg2').hide();"/>
 
@@ -563,25 +569,30 @@
 
                                                                         <p:dialog id="newjob" resizable="false" header="إضافة وظيفة" widgetVar="dlg3" dir="rtl">
 
-                                                                            <h:panelGrid columns="2" cellpadding="5">
+                                                                            <h:panelGrid columns="2" cellpadding="2" width="100">
 
-                                                                                <h:outputLabel for="jobs" value="وظيفة: " />
+                                                                                <h:outputLabel for="jobs" value="وظيفة: " style="font-size: 18px;"/>
                                                                                 <p:selectOneMenu id="jobs" required="true" value="#{addServiceManager.jobPath.id}" 
                                                                                                  class="pading000" dynamic="true" style="min-width: 223px;">
                                                                                     <f:selectItem noSelectionOption="true" itemLabel="اختار وظيفة" />
                                                                                     <f:selectItems value="#{addServiceManager.filterJop()}" var="j" itemLabel="#{j.name}" itemValue="#{j.idJob}"/>
                                                                                 </p:selectOneMenu>
 
-                                                                                <h:outputLabel for="name3" value="الرقم:" />
+                                                                                <h:outputLabel for="name3" value="الرقم:" style="font-size: 18px;"/>
                                                                                 <p:inputNumber id="name3" required="true" label="name" value="#{addServiceManager.jobPath.order}" minValue="1" maxValue="100" >
                                                                                     <p:ajax update="name3" />  
                                                                                 </p:inputNumber> 
-                                                                                 <h:outputLabel for="jesction" value="قرار الموظف" /> 
-                                                                                 <p:selectOneRadio id="jesction" value="#{addServiceManager.jobPath.importantComment}"  required="true">
+
+                                                                                <h:outputLabel for="jesction" value="قرار الموظف" style="font-size: 18px;"/> 
+                                                                                <p:selectOneRadio id="jesction" value="#{addServiceManager.jobPath.importantComment}"  required="true">
                                                                                     <f:selectItem   itemLabel="اساسي " itemValue="yes" />
                                                                                     <f:selectItem  itemLabel="غير اساسي" itemValue="no" />
                                                                                 </p:selectOneRadio>
 
+                                                                                <p:spacer/>
+                                                                                <p:separator/>
+
+                                                                                <p:spacer/>
                                                                                 <p:commandButton value="إضافة" actionListener="#{addServiceManager.addJobToPath()}"
                                                                                                  update="newjob  singleDT2 NewAttachment" process="@this jobs name3" oncomplete="PF('dlg3').hide();"/>
 
@@ -745,109 +756,116 @@
                                                                         <div id="depTaq" />
 
 
-                                                                        
-                                                                        
-                                                                        
+
+
+
                                                                         <p:dataTable id="singleAT" var="havAtt" value="#{addServiceManager.newService.haveServiceAttachments}"
-                                                                                                             style="margin-bottom:20px" emptyMessage="لا يوجد مرفقات "  selectionMode="single" selection="#{addServiceManager.selectHavServAttachment}"
-                                                                                                             rowKey="#{havAtt.serviceAttachmentName_ID}-#{havAtt.services_Provided_ID}">
+                                                                                     style="margin-bottom:20px" emptyMessage="لا يوجد مرفقات "  selectionMode="single" selection="#{addServiceManager.selectHavServAttachment}"
+                                                                                     rowKey="#{havAtt.serviceAttachmentName_ID}-#{havAtt.services_Provided_ID}">
 
-                                                                                                    <f:facet name="header">
+                                                                            <f:facet name="header">
 
-                                                                                                    </f:facet>
+                                                                            </f:facet>
 
-                                                                                                    <f:facet name="header" >
-                                                                                                        <div style="float: right;">
-                                                                                                            <p class="tableHeader">  المرفقات</p>
-                                                                                                            <!--AQUI ESTABA EL BUTTON-->
-                                                                                                        </div>
-                                                                                                        <div id="buttonDiv" style="display:flex; flex-direction: row; ">
-                                                                                                            
-                                                                                                            <a onclick="PF('dlga').show();" class="btn btn-danger btn-circle marginBuDel">
-                                                                                                                <i class="fas fa-trash"></i>
-                                                                                                            </a>
-                                                                                                            &nbsp;
-                                                                                                            <a onclick="PF('dlgA').show();" class="btn btn-success btn-circle marginBuAdd">
-                                                                                                                <i class="fas fa-plus"></i>
-                                                                                                            </a>
+                                                                            <f:facet name="header" >
+                                                                                <div style="float: right;">
+                                                                                    <p class="tableHeader">  المرفقات</p>
+                                                                                    <!--AQUI ESTABA EL BUTTON-->
+                                                                                </div>
+                                                                                <div id="buttonDiv" style="display:flex; flex-direction: row; ">
 
-                                                                                                        </div>
-                                                                                                    </f:facet>
+                                                                                    <a onclick="PF('dlga').show();" class="btn btn-danger btn-circle marginBuDel">
+                                                                                        <i class="fas fa-trash"></i>
+                                                                                    </a>
+                                                                                    &nbsp;
+                                                                                    <a onclick="PF('dlgA').show();" class="btn btn-success btn-circle marginBuAdd">
+                                                                                        <i class="fas fa-plus"></i>
+                                                                                    </a>
 
-                                                                                                    <p:ajax event="rowSelect" listener="#{addServiceManager.onRowSelectFromAtt}"
-                                                                                                            process="@this" />
-                                                                                                    <p:ajax event="rowUnselect" listener="#{addServiceManager.onRowUnselectFromAtt}"
-                                                                                                            process="@this" />
+                                                                                </div>
+                                                                            </f:facet>
 
-
-                                                                                                    <p:column headerText="اسم المرفق ">
-
-                                                                                                        <h:outputText value="#{havAtt.name}" />
+                                                                            <p:ajax event="rowSelect" listener="#{addServiceManager.onRowSelectFromAtt}"
+                                                                                    process="@this" />
+                                                                            <p:ajax event="rowUnselect" listener="#{addServiceManager.onRowUnselectFromAtt}"
+                                                                                    process="@this" />
 
 
-                                                                                                    </p:column>
-                                                                                                    <p:column headerText="الارفاق">
+                                                                            <p:column headerText="اسم المرفق ">
 
-                                                                                                        <h:outputText value="#{havAtt.importantASString()}" />
-
-
-                                                                                                    </p:column>
+                                                                                <h:outputText value="#{havAtt.name}" />
 
 
-                                                                                                </p:dataTable>
+                                                                            </p:column>
+                                                                            <p:column headerText="الارفاق">
 
-                                                                                                <p:dialog id="Aeldepartment" resizable="false" header="حذف المرفق" widgetVar="dlga" dir="rtl">
-
-                                                                                                    <h:panelGrid columns="2" cellpadding="5">
-
-                                                                                                        <h:outputLabel for="delete" value="هل انت متأكد من الحذف؟ " />
-                                                                                                        <br/> <br/>
-                                                                                                        <p:commandButton id="delete4"  value="حذف"
-                                                                                                                         actionListener="#{addServiceManager.deleteSelectedAtt()}"
-                                                                                                                         process="@this"  update="singleAT" oncomplete="PF('dlga').hide();"/>
-                                                                                                    </h:panelGrid>
-                                                                                                </p:dialog>  
+                                                                                <h:outputText value="#{havAtt.importantASString()}" />
 
 
-
-                                                                                                <p:dialog id="NewAttachment" resizable="false" header="إضافة مرفق" widgetVar="dlgA" dir="rtl">
-
-                                                                                                    <h:panelGrid columns="2" cellpadding="5">
-
-                                                                                                        <h:outputLabel for="attachments" value="المرفق:" />                                                                             
-                                                                                                        <p:selectOneMenu id="attachments" value="#{addServiceManager.newSelectAttachment.serviceAttachmentName_ID}"  class="pading000"
-                                                                                                                         required="true" dynamic="true"  style="width:200px; height:100%; min-width: 223px;">
-                                                                                                            <f:selectItem noSelectionOption="true" itemLabel="اختار مرفق"/>
-                                                                                                            <f:selectItems value="#{addServiceManager.allattachment}" var="a" itemLabel="#{a.name}" itemValue="#{a.id}"/>
-                                                                                                        </p:selectOneMenu>
-
-                                                                                                        <h:outputLabel for="important" value="ارفاق المرفق " /> 
-                                                                                                        <p:selectOneRadio id="important" value="#{addServiceManager.newSelectAttachment.important}"  required="true">
-                                                                                                            <f:selectItem   itemLabel="ضروري " itemValue="yes" />
-                                                                                                            <f:selectItem  itemLabel="غير ضروري" itemValue="no" />
-                                                                                                        </p:selectOneRadio>
+                                                                            </p:column>
 
 
-                                                                                                        <h:outputLabel for="attachments2" value="المسمى الوظيفي الذي يسمح له برؤية المرفق:" /> 
+                                                                        </p:dataTable>
 
-                                                                                                        <p:selectCheckboxMenu id="attachments2" value="#{addServiceManager.selectedAtts}" label="Cars" multiple="true"
-                                                                                                                              filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
-                                                                                                            <f:selectItems value="#{addServiceManager.jobShowThisService()}" var="jop" />
-                                                                                                        </p:selectCheckboxMenu>
+                                                                        <p:dialog id="Aeldepartment" resizable="false" header="حذف المرفق" widgetVar="dlga" dir="rtl">
 
-                                                                                                        <p:spacer/>
-                                                                                                        <p:commandButton id="addAtt"  value="اضافة"
-                                                                                                                         actionListener="#{addServiceManager.addJobViewerToServise()}"
-                                                                                                                         process="@this attachments important attachments2 " update="singleAT" oncomplete="PF('dlgA').hide();"/>
+                                                                            <h:panelGrid columns="2" cellpadding="5">
 
-                                                                                                    </h:panelGrid>
-                                                                                                </p:dialog>  
+                                                                                <h:outputLabel for="delete" value="هل انت متأكد من الحذف؟ " />
+                                                                                <br/> <br/>
+                                                                                <p:commandButton id="delete4"  value="حذف"
+                                                                                                 actionListener="#{addServiceManager.deleteSelectedAtt()}"
+                                                                                                 process="@this"  update="singleAT" oncomplete="PF('dlga').hide();"/>
+                                                                            </h:panelGrid>
+                                                                        </p:dialog>  
 
 
-                                                                        
-                                                                        
-                                                                        
-                                                                        
+
+                                                                        <p:dialog id="NewAttachment" resizable="false" header="إضافة مرفق" widgetVar="dlgA" dir="rtl">
+
+                                                                            <h:panelGrid columns="2" cellpadding="2" width="100">
+
+                                                                                <h:outputLabel for="attachments" value="المرفق:" style="font-size: 18px;" />                                                                             
+                                                                                <p:selectOneMenu id="attachments" value="#{addServiceManager.newSelectAttachment.serviceAttachmentName_ID}"  class="pading000"
+                                                                                                 required="true" dynamic="true"  style="width:200px; height:100%; min-width: 223px;">
+                                                                                    <f:selectItem noSelectionOption="true" itemLabel="اختار مرفق"/>
+                                                                                    <f:selectItems value="#{addServiceManager.allattachment}" var="a" itemLabel="#{a.name}" itemValue="#{a.id}"/>
+                                                                                </p:selectOneMenu>
+
+
+
+                                                                                <h:outputLabel for="important" value="ارفاق المرفق " style="font-size: 18px;"/> 
+                                                                                <p:selectOneRadio id="important" value="#{addServiceManager.newSelectAttachment.important}"  required="true">
+                                                                                    <f:selectItem   itemLabel="ضروري " itemValue="yes" /> 
+                                                                                    <f:selectItem  itemLabel="غير ضروري" itemValue="no" />
+                                                                                </p:selectOneRadio>
+
+
+                                                                                <h:outputLabel for="attachments2" value="المسمى الوظيفي الذي يسمح له برؤية المرفق:" style="font-size: 18px;" /> 
+
+                                                                                <p:selectCheckboxMenu id="attachments2" value="#{addServiceManager.selectedAtts}" label="Cars" multiple="true"
+                                                                                                      filter="true" filterMatchMode="startsWith" style="width: 230px;"
+                                                                                                      panelStyle="width:300px" class="pading000" >
+
+                                                                                    <f:selectItems value="#{addServiceManager.jobShowThisService()}" var="jop" />
+                                                                                </p:selectCheckboxMenu>
+
+                                                                                <p:spacer/>
+                                                                                <p:separator/>
+
+                                                                                <p:spacer/>
+                                                                                <p:commandButton id="addAtt"  value="اضافة"
+                                                                                                 actionListener="#{addServiceManager.addJobViewerToServise()}"
+                                                                                                 process="@this attachments important attachments2 " update="singleAT" oncomplete="PF('dlgA').hide();"/>
+
+                                                                            </h:panelGrid>
+                                                                        </p:dialog>  
+
+
+
+
+
+
 
                                                                     </div>
 
@@ -862,26 +880,29 @@
 
                                                         <div class="row">
                                                             <div class="col-lg-12 text-center">
-                                                                <h:outputLink id="openDialogLink" value="javascript:void(0)" onclick="PF('dlgAddSer').show();">
+                                                                <h:outputLink id="openDialogLink" value="javascript:void(0)"   >
 
                                                                     <span class="fa-stack fa-4x">
                                                                         <i class="fas fa-circle fa-stack-2x greenColor"></i>
                                                                         <i class="fas fa-plus fa-stack-1x fa-inverse warcolor "></i> 
+                                                                        
+                                                                        <p:commandButton actionListener="#{addServiceManager.addService()}" value="اضافة الخدمة" 
+                                                                                         id="add_service" oncomplete="PF('dlgAddSer').hide();" 
+                                                                                         process="@this ServiceName DaysService Cost states dep_id sec_id noteForService"  
+                                                                                         update="@form"  style="text-decoration: none; margin-top:125px;
+                                                                                         background: transparent; border: none; font-size: 20px; "
+                                                                                         styleClass="ui-priority-primary"/>
                                                                     </span>
-
-                                                                    <h4 class="service-heading " style="margin-top: 10px">اضافة الخدمة</h4>
                                                                 </h:outputLink>
+                                                                <br/> <br/>
 
                                                                 <p:dialog id="addDepartment"  dir="rtl" widgetVar="dlgAddSer" header="اضافة الخدمة جديدة"  resizable="false" showEffect="clip" hideEffect="clip">
 
                                                                     <h:panelGrid columns="2" cellpadding="5">
 
-                                                                        <h:outputLabel  value="اضافة الخدمة جديدة" /> <br/>
+                                                                        <h:outputLabel  value="اضافة الخدمة جديدة" /> 
 
-                                                                        <p:commandButton actionListener="#{addServiceManager.addService()}" value="اضافة الخدمة" 
-                                                                                         id="add_service" oncomplete="PF('dlgAddSer').hide();" 
-                                                                                         process="@this ServiceName DaysService Cost states dep_id  sec_id noteForService"  
-                                                                                         update="@form"  style="margin-right:20px;" styleClass="ui-priority-primary"/>
+
 
                                                                     </h:panelGrid>
 
