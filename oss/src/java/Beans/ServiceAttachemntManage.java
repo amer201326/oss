@@ -32,6 +32,10 @@ public class ServiceAttachemntManage implements Serializable {
     ServiceAttachmentName serv;
     
     ServiceAttachmentName newService;
+    
+     @ManagedProperty(value = "#{msession}")
+    Session session;
+	
 
     public ServiceAttachemntManage() {
         allServicesAttach = GetFromDB.getServiceAttachmentName();
@@ -148,6 +152,33 @@ public class ServiceAttachemntManage implements Serializable {
 
     public void setAllServicesAttachwithoutFile(List<ServiceAttachmentName> allServicesAttachwithoutFile) {
         this.allServicesAttachwithoutFile = allServicesAttachwithoutFile;
+    }
+    
+    
+    	  public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
+    
+    public String urlSideBar() {
+        if (session.employee != null) {
+            if (session.employee.checkTypeAdmin()) {
+                System.out.println("cheackAdmin is  = " + session.employee.checkTypeAdmin());
+                return "../pages/sidebar.xhtml";
+            }
+        }
+        if (session.employee != null) {
+            if (session.employee.checkTypeEMP()) {
+
+                System.out.println("cheackemp is  = " + session.employee.checkTypeEMP());
+
+                return "../employeePages/sidebar.xhtml";
+            }
+        }
+        return "";
     }
 
 }

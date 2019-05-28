@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.RowEditEvent;
@@ -35,6 +36,9 @@ public class CitizenRequestManager implements Serializable {
     List<CitizenRequest> filterCitizen;
     String errorUserName;
 
+     @ManagedProperty(value = "#{msession}")
+    Session session;
+    
     public CitizenRequestManager() {
 
         newCitizen = new CitizenRequest();
@@ -87,6 +91,16 @@ public class CitizenRequestManager implements Serializable {
     public void setCitizenSelected(CitizenRequest citizenSelected) {
         this.citizenSelected = citizenSelected;
     }
+
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
+    
+    
 
     public CitizenRequest getNewCitizen() {
         return newCitizen;
@@ -152,6 +166,25 @@ public class CitizenRequestManager implements Serializable {
              errorUserName = "يجب ان يحتوي على احرف وارقام فقط  ";
         }
         return false;
+    }
+    
+    
+     public String urlSideBar() {
+        if (session.employee != null) {
+            if (session.employee.checkTypeAdmin()) {
+                System.out.println("cheackAdmin is  = " + session.employee.checkTypeAdmin());
+                return "../pages/sidebar.xhtml";
+            }
+        }
+        if (session.employee != null) {
+            if (session.employee.checkTypeEMP()) {
+
+                System.out.println("cheackemp is  = " + session.employee.checkTypeEMP());
+
+                return "../employeePages/sidebar.xhtml";
+            }
+        }
+        return "";
     }
 
 }

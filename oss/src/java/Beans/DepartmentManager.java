@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.RowEditEvent;
@@ -29,7 +30,7 @@ import org.primefaces.model.OrganigramNode;
  */
 @ManagedBean
 @ViewScoped
-public class DepartmentManager implements Serializable{
+public class DepartmentManager implements Serializable {
 
     List<Department> departments;
     List<Section> sections;
@@ -42,6 +43,9 @@ public class DepartmentManager implements Serializable{
     List<Employee> employees;
     JobOfSection jobSelected;
     JobOfSection newJobOfsection;
+
+    @ManagedProperty(value = "#{msession}")
+    Session session;
 
     ///////////////
     private OrganigramNode rootNode;
@@ -72,39 +76,38 @@ public class DepartmentManager implements Serializable{
 
         //////////////
     }
- 
 
     public void onSectionEdit(RowEditEvent event) {
         Section s = ((Section) event.getObject());
         s.update();
         creatOrganic();
-        jobsOfSections = GetFromDB.getJobOfSectio(thisDepartment.id+"");
-        
+        jobsOfSections = GetFromDB.getJobOfSectio(thisDepartment.id + "");
 
     }
-     public void addJobForSec() {
-        
-        if(!newJobOfsection.addToDB()){
-           
+
+    public void addJobForSec() {
+
+        if (!newJobOfsection.addToDB()) {
+
             FacesContext.getCurrentInstance().addMessage("formJob:tableJob", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "لا يمكن اضافة نفس الوظيفة مرتين"));
-        }else{
-            
+        } else {
+
             newJobOfsection.setName(getJobName(newJobOfsection.getIdJob()));
             newJobOfsection.setSEctionName(getSecName(newJobOfsection.getIdSEction()));
-             jobsOfSections.add(newJobOfsection);
-             creatOrganic();
+            jobsOfSections.add(newJobOfsection);
+            creatOrganic();
             newJobOfsection = new JobOfSection();
         }
     }
 
-   public String getJobName(int id){
-       for (JobTitel jobTitel : jobTitels) {
-           if(jobTitel.getId().compareTo(id+"")==0){
-               return jobTitel.getName();
-           }
-       }
-       return "refreash";
-   }
+    public String getJobName(int id) {
+        for (JobTitel jobTitel : jobTitels) {
+            if (jobTitel.getId().compareTo(id + "") == 0) {
+                return jobTitel.getName();
+            }
+        }
+        return "refreash";
+    }
 
     public void onSectionSelected(SelectEvent event) {
         System.out.println("form al ajax " + ((Section) event.getObject()).getId());
@@ -112,7 +115,7 @@ public class DepartmentManager implements Serializable{
     }
 
     public void onJobSelected(SelectEvent event) {
-       
+
         jobSelected = (JobOfSection) event.getObject();
     }
 
@@ -123,9 +126,9 @@ public class DepartmentManager implements Serializable{
     }
 
     public void addSection() {
-        newSection.setDepartmentId(thisDepartment.id+"");
+        newSection.setDepartmentId(thisDepartment.id + "");
         newSection.addToDB();
-        
+
         sections = GetFromDB.getFsection(thisDepartment.id);
         creatOrganic();
         newSection = new Section();
@@ -136,7 +139,7 @@ public class DepartmentManager implements Serializable{
         jobSelected.delete();
         jobsOfSections.remove(jobSelected);
         creatOrganic();
-        
+
     }
 
     public List<Department> getDepartments() {
@@ -177,6 +180,14 @@ public class DepartmentManager implements Serializable{
 
     public void setFilterJobsOfSections(List<JobOfSection> filterJobsOfSections) {
         this.filterJobsOfSections = filterJobsOfSections;
+    }
+
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
     }
 
     public List<JobTitel> getJobTitels() {
@@ -293,7 +304,7 @@ public class DepartmentManager implements Serializable{
                 for (int j = 0; j < jobsOfSections.size(); j++) {
                     JobOfSection get = jobsOfSections.get(j);
                     if (get.getIdSEction() == Integer.parseInt(s.getId())) {
-                        List<Employee> emp = GetFromDB.GetEmployeeForJobID(get.getIdJob() + "",get.getIdSEction());
+                        List<Employee> emp = GetFromDB.GetEmployeeForJobID(get.getIdJob() + "", get.getIdSEction());
                         String[] empName = new String[emp.size()];
                         OrganigramNode divisionNode = new DefaultOrganigramNode("job", get.getName(), rootNodee2);
 
@@ -317,12 +328,29 @@ public class DepartmentManager implements Serializable{
 
     private String getSecName(int idSEction) {
         for (Section section : sections) {
-            if(section.getId().compareTo(idSEction+"")==0){
+            if (section.getId().compareTo(idSEction + "") == 0) {
                 return section.getName();
             }
         }
         return "refresh";
     }
-    
+
+    public String urlSideBar() {
+        if (session.employee != null) {
+            if (session.employee.checkTypeAdmin()) {
+                System.out.println("cheackAdmin is  = " + session.employee.checkTypeAdmin());
+                return "../pages/sidebar.xhtml";
+            }
+        }
+        if (session.employee != null) {
+            if (session.employee.checkTypeEMP()) {
+
+                System.out.println("cheackemp is  = " + session.employee.checkTypeEMP());
+
+                return "../employeePages/sidebar.xhtml";
+            }
+        }
+        return "";
+    }
 
 }

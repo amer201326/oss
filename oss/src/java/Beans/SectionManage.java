@@ -35,6 +35,12 @@ public class SectionManage {
     JobOfSection newJobOfsection;
     String  idsection;
     
+     @ManagedProperty(value = "#{msession}")
+    Session session;
+	
+	
+	
+	
     public SectionManage() {
         Map<String, String> parameterMap = (Map<String, String>) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         String id = parameterMap.get("id");
@@ -89,6 +95,15 @@ public class SectionManage {
         return newJobOfsection;
     }
 
+    
+      public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
+    
     public void setNewJobOfsection(JobOfSection newJobOfsection) {
         this.newJobOfsection = newJobOfsection;
     }
@@ -117,4 +132,23 @@ public class SectionManage {
         this.jobOfSectionSelected = jobOfSectionSelected;
     }
 
+    
+     public String urlSideBar() {
+        if (session.employee != null) {
+            if (session.employee.checkTypeAdmin()) {
+                System.out.println("cheackAdmin is  = " + session.employee.checkTypeAdmin());
+                return "../pages/sidebar.xhtml";
+            }
+        }
+        if (session.employee != null) {
+            if (session.employee.checkTypeEMP()) {
+
+                System.out.println("cheackemp is  = " + session.employee.checkTypeEMP());
+
+                return "../employeePages/sidebar.xhtml";
+            }
+        }
+        return "";
+    }
+	
 }

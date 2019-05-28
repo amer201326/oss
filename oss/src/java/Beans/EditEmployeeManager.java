@@ -25,6 +25,13 @@ import javax.faces.context.FacesContext;
 public class EditEmployeeManager {
     
     Employee employeeEdit;
+    
+     @ManagedProperty(value = "#{msession}")
+    Session session;
+	
+	
+	
+	
     public EditEmployeeManager() {
         Map<String, String> parameterMap = (Map<String, String>) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         String param = parameterMap.get("id");
@@ -49,6 +56,32 @@ public class EditEmployeeManager {
         
     }
     
+      public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
+    
+    
+     public String urlSideBar() {
+        if (session.employee != null) {
+            if (session.employee.checkTypeAdmin()) {
+                System.out.println("cheackAdmin is  = " + session.employee.checkTypeAdmin());
+                return "../pages/sidebar.xhtml";
+            }
+        }
+        if (session.employee != null) {
+            if (session.employee.checkTypeEMP()) {
+
+                System.out.println("cheackemp is  = " + session.employee.checkTypeEMP());
+
+                return "../employeePages/sidebar.xhtml";
+            }
+        }
+        return "";
+    }
    
     
     

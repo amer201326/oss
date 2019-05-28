@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.RowEditEvent;
@@ -27,6 +28,9 @@ import org.primefaces.event.RowEditEvent;
 public class EditCitizenManage implements Serializable{
 
     Citizen citizenEdit;
+    
+     @ManagedProperty(value = "#{msession}")
+    Session session;
     
     public EditCitizenManage() {
         Map<String, String> parameterMap = (Map<String, String>) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
@@ -51,6 +55,16 @@ public class EditCitizenManage implements Serializable{
         this.citizenEdit = citizenEdit;
     }
 
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
+    
+    
+
     public void onCitizenEdit(RowEditEvent event) {
         Citizen c = (Citizen) event.getObject();
         c.citizenUpdate();
@@ -58,6 +72,24 @@ public class EditCitizenManage implements Serializable{
 
     public void onCitizenEditCancel(RowEditEvent event) {
 
+    }
+    
+     public String urlSideBar() {
+        if (session.employee != null) {
+            if (session.employee.checkTypeAdmin()) {
+                System.out.println("cheackAdmin is  = " + session.employee.checkTypeAdmin());
+                return "../pages/sidebar.xhtml";
+            }
+        }
+        if (session.employee != null) {
+            if (session.employee.checkTypeEMP()) {
+
+                System.out.println("cheackemp is  = " + session.employee.checkTypeEMP());
+
+                return "../employeePages/sidebar.xhtml";
+            }
+        }
+        return "";
     }
 
 }

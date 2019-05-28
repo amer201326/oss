@@ -41,6 +41,13 @@ public class ServicesManager implements Serializable {
     List<Department> allDep;
     List<Section> allSec;
     Service seviceSelected;
+    
+     @ManagedProperty(value = "#{msession}")
+    Session session;
+	
+	
+	
+	
 
     public ServicesManager() {
         allSrvices = GetFromDB.getAllServices();
@@ -109,7 +116,33 @@ public class ServicesManager implements Serializable {
         this.seviceSelected = seviceSelected;
     }
 
+      public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
     
+     public String urlSideBar() {
+        if (session.employee != null) {
+            if (session.employee.checkTypeAdmin()) {
+                System.out.println("cheackAdmin is  = " + session.employee.checkTypeAdmin());
+                return "../pages/sidebar.xhtml";
+            }
+        }
+        if (session.employee != null) {
+            if (session.employee.checkTypeEMP()) {
+
+                System.out.println("cheackemp is  = " + session.employee.checkTypeEMP());
+
+                return "../employeePages/sidebar.xhtml";
+            }
+        }
+        return "";
+    }
+	
+	
     
     
     

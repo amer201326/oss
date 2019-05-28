@@ -57,6 +57,9 @@ public class EmployeeManage implements Serializable {
     DualListModel<String> screenSel;
     List<JobOfSection> jobsOfSections;
     Employee employeeSelected;
+    
+     @ManagedProperty(value = "#{msession}")
+    Session session;
 
     String Type = "";
 
@@ -212,6 +215,14 @@ public class EmployeeManage implements Serializable {
     public List<Section> allSections() {
         return GetFromDB.getSection();
     }
+    
+     public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
 
     public void setAllSections(List<Section> allSections) {
         this.allSections = allSections;
@@ -366,4 +377,23 @@ public class EmployeeManage implements Serializable {
     public void chagneType() {
         System.out.println(Type);
     }
+    
+     public String urlSideBar() {
+        if (session.employee != null) {
+            if (session.employee.checkTypeAdmin()) {
+                System.out.println("cheackAdmin is  = " + session.employee.checkTypeAdmin());
+                return "../pages/sidebar.xhtml";
+            }
+        }
+        if (session.employee != null) {
+            if (session.employee.checkTypeEMP()) {
+
+                System.out.println("cheackemp is  = " + session.employee.checkTypeEMP());
+
+                return "../employeePages/sidebar.xhtml";
+            }
+        }
+        return "";
+    }
+	
 }

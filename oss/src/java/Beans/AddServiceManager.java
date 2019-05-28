@@ -77,6 +77,13 @@ public class AddServiceManager implements Serializable {
 
     List<SelectItem> viewerJob;
     private String[] selectedAtts;
+    
+     @ManagedProperty(value = "#{msession}")
+    Session session;
+	
+	
+	
+	 
 
     public AddServiceManager() {
 
@@ -669,5 +676,32 @@ public class AddServiceManager implements Serializable {
     public void setViewerJob(List<SelectItem> viewerJob) {
         this.viewerJob = viewerJob;
     }
+    
+     public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
+    
+    public String urlSideBar() {
+        if (session.employee != null) {
+            if (session.employee.checkTypeAdmin()) {
+                System.out.println("cheackAdmin is  = " + session.employee.checkTypeAdmin());
+                return "../pages/sidebar.xhtml";
+            }
+        }
+        if (session.employee != null) {
+            if (session.employee.checkTypeEMP()) {
+
+                System.out.println("cheackemp is  = " + session.employee.checkTypeEMP());
+
+                return "../employeePages/sidebar.xhtml";
+            }
+        }
+        return "";
+    }
+	
 
 }
