@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.RowEditEvent;
@@ -33,13 +34,14 @@ public class CitizenManage implements Serializable {
     List<Citizen> filterCitizen;
 
     String errorUserName;
-    
+    @ManagedProperty(value = "#{msession}")
+    Session session;
+
     public CitizenManage() {
 
         newCitizen = new Citizen();
         allCitizen = GetDB_Eman.getallCitizen();
         citizenSelected = new Citizen();
-        
 
     }
 
@@ -74,14 +76,14 @@ public class CitizenManage implements Serializable {
     public void setNewCitizen(Citizen newCitizen) {
         this.newCitizen = newCitizen;
     }
-    
-    public void onCitizenEdit(RowEditEvent event){
-        Citizen c = (Citizen)event.getObject();
+
+    public void onCitizenEdit(RowEditEvent event) {
+        Citizen c = (Citizen) event.getObject();
         c.citizenUpdate();
     }
-    public void onCitizenEditCancel(RowEditEvent event){
-        
-        
+
+    public void onCitizenEditCancel(RowEditEvent event) {
+
     }
 
     public List<Citizen> getFilterCitizen() {
@@ -92,10 +94,10 @@ public class CitizenManage implements Serializable {
         this.filterCitizen = filterCitizen;
     }
 
-    public void gotToEdit(int id){
+    public void gotToEdit(int id) {
         try {
 
-            FacesContext.getCurrentInstance().getExternalContext().redirect("editCitizen.xhtml?id="+id);
+            FacesContext.getCurrentInstance().getExternalContext().redirect("editCitizen.xhtml?id=" + id);
         } catch (IOException ex) {
             Logger.getLogger(CitizenManage.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -108,15 +110,41 @@ public class CitizenManage implements Serializable {
     public void setErrorUserName(String errorUserName) {
         this.errorUserName = errorUserName;
     }
-    
+
     public void cheekUserName() {
-       if(newCitizen.getAccount().getUserName().length() < 6){
-           errorUserName = "يجب ان يكون اكبر من ٦ احرف";
-       }else if(GetFromDB.cheekUserName(newCitizen.getAccount().getUserName())){
-           errorUserName = "اسم المستخدم موجود بالغعل";
-       }else{
-           errorUserName = "";
-       }
+        if (newCitizen.getAccount().getUserName().length() < 6) {
+            errorUserName = "يجب ان يكون اكبر من ٦ احرف";
+        } else if (GetFromDB.cheekUserName(newCitizen.getAccount().getUserName())) {
+            errorUserName = "اسم المستخدم موجود بالغعل";
+        } else {
+            errorUserName = "";
+        }
     }
-    
+
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
+
+    public String urlSideBar() {
+        if (session.employee != null) {
+            if (session.employee.checkTypeAdmin()) {
+                System.out.println("cheackAdmin is  = " + session.employee.checkTypeAdmin());
+                return "../pages/sidebar.xhtml";
+            }
+        }
+        if (session.employee != null) {
+            if (session.employee.checkTypeEMP()) {
+
+                System.out.println("cheackemp is  = " + session.employee.checkTypeEMP());
+
+                return "../employeePages/sidebar.xhtml";
+            }
+        }
+        return "";
+    }
+
 }

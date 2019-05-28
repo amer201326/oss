@@ -23,6 +23,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -209,7 +211,7 @@ public class EditServiceManager implements Serializable {
         jobPath = new JobPath();
     }
 
-    public void editService() throws IOException {
+    public void editService()  {
 
 //        List<ServiceAttachmentName> l = new ArrayList<>();
 //        for (int i = 0; i < attachmentNamesAndResaults.getTarget().size(); i++) {
@@ -227,7 +229,13 @@ public class EditServiceManager implements Serializable {
 
         newService.update();
         
-        // FacesContext.getCurrentInstance().getExternalContext().redirect("allServices.xhtml");
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("allServices.xhtml");
+        } catch (IOException ex) {
+            
+            System.out.println("error redirect allServices.xhtml");
+            Logger.getLogger(EditServiceManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
