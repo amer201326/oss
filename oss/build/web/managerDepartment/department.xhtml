@@ -158,7 +158,7 @@
                                             <p:dataTable id="singleDT" var="section" value="#{departmentManager.sections}"  editable="true" style="margin-bottom:20px; text-align: center;"
                                                          selectionMode="single"  selection="#{departmentManager.sectionSelected}" rowKey="#{section.id}-#{section.id.length()}" rows="10" paginator="true" 
                                                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                                         rowsPerPageTemplate="20,40,50">
+                                                         rowsPerPageTemplate="20,40,50" emptyMessage="لا يوجد بيانات">
 
                                                 <f:facet name="header">
                                                     اقسام الدائرة #{sessionLists.departmentSelected.nameA}
@@ -242,7 +242,7 @@
                                             <p:dataTable id="tableJob"  var="jop" value="#{departmentManager.jobsOfSections}"  
                                                          style="margin-bottom:20px; text-align: center;" rowKey="#{jop.idJob}" selectionMode="single" 
                                                          selection="#{departmentManager.jobSelected}" rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                                         rowsPerPageTemplate="20,40,50" >
+                                                         rowsPerPageTemplate="20,40,50" emptyMessage="لا يوجد بيانات" >
 
 
                                                 <f:facet name="header">

@@ -63,7 +63,10 @@
                                 <h:form id="formSection">
                                    
                                     <h:head id="msgs"/>
-                                    <p:dataTable id="singleDT" var="employee" value="#{homePageManager.allDetails}"  editable="true" style="margin-bottom:20px" selectionMode="single" selection="#{employeeManage.newEmployee}" rowKey="#{employee.emp_id}">
+                                    <p:dataTable id="singleDT" var="employee" 
+                                                 value="#{homePageManager.allDetails}" emptyMessage="لا يوجد بيانات"
+                                                 editable="true" style="margin-bottom:20px" 
+                                                 selectionMode="single" selection="#{employeeManage.newEmployee}" rowKey="#{employee.emp_id}">
 
                                         <f:facet name="header">
                                             عرض جميع الموظفين

@@ -412,7 +412,7 @@
 
                                                 <h:head id="msgs"/>
                                                 <p:dataTable id="allfiles" var="att" value="#{shoeServiceCitizemEmpManeger.attachmentServiceEmployees}"
-                                                             style="margin-bottom:20px; text-align: center;"
+                                                             style="margin-bottom:20px; text-align: center;" emptyMessage="لا يوجد بيانات"
                                                              selection="#{shoeServiceCitizemEmpManeger.selectAtt}"
                                                              rowKey="#{att.sel}" selectionMode="single"
                                                              >

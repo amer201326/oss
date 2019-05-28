@@ -39,12 +39,12 @@
             <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
                 <form class="form-inline mr-auto w-100 navbar-search">
                     <div class="input-group">
-                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2"/>
+                       <!-- <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2"/>
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="button">
                                 <i class="fas fa-search fa-sm"></i>
                             </button>
-                        </div>
+                        </div> -->
                     </div>
                 </form>
             </div>
@@ -161,7 +161,7 @@
         <h:form>
             <li class="nav-item dropdown no-arrow">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">#{msession.manager.emp_name}</span>
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">#{msession.employee.emp_name}</span>
                     <img class="img-profile rounded-circle" src="../homePage/assets/image/user.png" />
                    
                 </a>
@@ -169,12 +169,12 @@
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                     <a class="dropdown-item" href="managerProfile.xhtml">
                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Profile
+                        الملف الشخصي
                     </a>
                     
                     <div class="dropdown-divider"></div>
                     
-                    <h:commandButton  value="Logout"  actionListener="#{msession.logout()}" class="dropdown-item"  />
+                    <h:commandButton  value="الخروج"  actionListener="#{msession.logout()}" style="text-align: center;" class="dropdown-item"  />
                 
                 </div>
             </li>

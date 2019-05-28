@@ -91,7 +91,7 @@
                                                 <h:head id="msgs"/>
                                                 <p:dataTable id="singleDT" var="employee" value="#{employeeManage.allemployees}"  editable="true" 
                                                              style="margin-bottom:20px" selectionMode="single" selection="#{employeeManage.employeeSelected}" 
-                                                             rowKey="#{employee.emp_id}" rows="10"
+                                                             rowKey="#{employee.emp_id}" rows="10" emptyMessage="لا يوجد بيانات"
                                                              paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                                              rowsPerPageTemplate="20,40,50">
 

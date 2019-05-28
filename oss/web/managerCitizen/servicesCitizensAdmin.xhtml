@@ -85,7 +85,7 @@
                                                                              rowKey="#{service.cit_ID}" rows="10" paginator="true" 
                                                                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                                                              rowsPerPageTemplate="20,40,50" filteredValue="#{servicesCitizenAdminManager.filteredRequestService}" 
-                                                                             widgetVar="notview" emptyMessage="No cars found with given criteria" >
+                                                                             widgetVar="notview" emptyMessage="لا يوجد بيانات" >
 
 
                                                                     <f:facet name="header"  >
@@ -142,7 +142,7 @@
 
                                                             <p:tab title="غير منجزة"> 
                                                                 <p:dataTable id="serviceRequestNotDone" var="service" value="#{servicesCitizenAdminManager.allRequestServiceNotDone}"
-                                                                             style="margin-bottom:20px; text-align: center;" 
+                                                                             style="margin-bottom:20px; text-align: center;" emptyMessage="لا يوجد بيانات"
                                                                              selection="#{servicesCitizenAdminManager.serviceSelected}"
                                                                              rowKey="#{service.cit_ID}" rows="10" paginator="true" 
                                                                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -205,7 +205,7 @@
                                                                              selection="#{servicesCitizenAdminManager.serviceSelected}"
                                                                              rowKey="#{service.cit_ID}" rows="10" paginator="true" 
                                                                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                                                             widgetVar="done" rowsPerPageTemplate="20,40,50" filteredValue="#{servicesCitizenAdminManager.filteredRequestService}" emptyMessage="No cars found with given criteria" >
+                                                                             widgetVar="done" rowsPerPageTemplate="20,40,50" filteredValue="#{servicesCitizenAdminManager.filteredRequestService}" emptyMessage="لا يوجد بيانات" >
 
 
                                                                     <f:facet name="header"  >

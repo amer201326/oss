@@ -332,7 +332,8 @@
 
                                                                         <p:dataTable id="singleDT" var="department" value="#{editServiceManager.departmentsInPath}"
                                                                                      style="margin-bottom:20px" emptyMessage="لا يوجد دوائر "  selectionMode="single"
-                                                                                     selection="#{editServiceManager.selectDepartmentPath}" rowKey="#{department.id}-#{department.order}" >
+                                                                                     selection="#{editServiceManager.selectDepartmentPath}" 
+                                                                                     rowKey="#{department.id}-#{department.order}" >
 
                                                                             <f:facet name="header">
 

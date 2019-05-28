@@ -295,7 +295,7 @@
                     <h:form id="dialogallShowAttC" >
                         <p:dialog id="dialogatt" resizable="false"  widgetVar="dialogatt" dir="ltr" >
                             <p:dataTable  id="allfiles" var="attarchev" tableStyle="table-layout: auto;" value="#{applyServiceManager.attaCitizen}"
-                                          style="max-width: 1200px"
+                                          style="max-width: 1200px" emptyMessage="لا يوجد بيانات"
                                           selection="#{applyServiceManager.selectAttCitizen}"
                                           rowKey="#{attarchev.atta_ArchiveC_ID}" selectionMode="single" >
                                 <f:facet name="header"  >

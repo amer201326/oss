@@ -27,7 +27,8 @@
             <h:form id="form">
     
  
-    <p:dataTable id="allService" var="service" value="#{sessionLists.services}" editable="true" style="margin-bottom:20px">
+    <p:dataTable id="allService" var="service" value="#{sessionLists.services}" 
+                 editable="true" style="margin-bottom:20px" emptyMessage="لا يوجد بيانات">
         <f:facet name="header">
             الخدمات المقدمة
         </f:facet>
