@@ -18,6 +18,7 @@ import Data.SectionPath;
 import Data.Service;
 import Data.ServiceAttachmentName;
 import Data.ViewerAttachment;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -208,7 +209,7 @@ public class EditServiceManager implements Serializable {
         jobPath = new JobPath();
     }
 
-    public void editService() {
+    public void editService() throws IOException {
 
 //        List<ServiceAttachmentName> l = new ArrayList<>();
 //        for (int i = 0; i < attachmentNamesAndResaults.getTarget().size(); i++) {
@@ -225,6 +226,8 @@ public class EditServiceManager implements Serializable {
         newService.setPath(departmentsInPath);
 
         newService.update();
+        
+        // FacesContext.getCurrentInstance().getExternalContext().redirect("allServices.xhtml");
 
     }
 
