@@ -880,29 +880,29 @@
 
                                                         <div class="row">
                                                             <div class="col-lg-12 text-center">
-                                                                <h:outputLink id="openDialogLink" value="javascript:void(0)"   >
+                                                                <h:outputLink id="openDialogLink" value="javascript:void(0)" 	 onclick="PF('dlgAddSer').show();"  >
 
                                                                     <span class="fa-stack fa-4x">
                                                                         <i class="fas fa-circle fa-stack-2x greenColor"></i>
                                                                         <i class="fas fa-plus fa-stack-1x fa-inverse warcolor "></i> 
                                                                         
-                                                                        <p:commandButton actionListener="#{addServiceManager.addService()}" value="اضافة الخدمة" 
-                                                                                         id="add_service" oncomplete="PF('dlgAddSer').hide();" 
-                                                                                         process="@this ServiceName DaysService Cost states dep_id sec_id noteForService"  
-                                                                                         update="@form"  style="text-decoration: none; margin-top:125px;
-                                                                                         background: transparent; border: none; font-size: 20px; "
-                                                                                         styleClass="ui-priority-primary"/>
+                                                                       
                                                                     </span>
+                                                                    
+                                                                     <h4 class="service-heading " style="margin-top: 10px">اضافة الخدمة</h4>
                                                                 </h:outputLink>
                                                                 <br/> <br/>
 
                                                                 <p:dialog id="addDepartment"  dir="rtl" widgetVar="dlgAddSer" header="اضافة الخدمة جديدة"  resizable="false" showEffect="clip" hideEffect="clip">
 
-                                                                    <h:panelGrid columns="2" cellpadding="5">
+                                                                    <h:panelGrid columns="2" cellpadding="2">
 
                                                                         <h:outputLabel  value="اضافة الخدمة جديدة" /> 
 
-
+                                                                         <p:commandButton actionListener="#{addServiceManager.addService()}" value="اضافة الخدمة" 
+                                                                                         id="add_service" oncomplete="PF('dlgAddSer').hide();" 
+                                                                                         process="@this ServiceName DaysService Cost states dep_id sec_id noteForService"  
+                                                                                         update="@form"  styleClass="ui-priority-primary"/>
 
                                                                     </h:panelGrid>
 
