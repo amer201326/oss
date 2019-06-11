@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  *
  * @author baraakali
  */
-public class DecisionsDepartment implements Serializable{
+public class DecisionsDepartment implements Serializable {
 
     int depId;
     int depOrder;
@@ -37,11 +37,12 @@ public class DecisionsDepartment implements Serializable{
     List<DecisionSection> section = new ArrayList<>();
 
     double totalDepCost;
-    
+    String running;
+
     public DecisionsDepartment() {
     }
 
-    public DecisionsDepartment(int depId, int depOrder, int Services_Provided_ID, int Cit_ID, int Service_Citizen_ID, String status, double cost, String internalMessage, String externalMessage, String date) {
+    public DecisionsDepartment(int depId, int depOrder, int Services_Provided_ID, int Cit_ID, int Service_Citizen_ID, String status, double cost, String internalMessage, String externalMessage, String date, String running) {
         this.depId = depId;
         this.depOrder = depOrder;
         this.Services_Provided_ID = Services_Provided_ID;
@@ -52,9 +53,11 @@ public class DecisionsDepartment implements Serializable{
         this.internalMessage = internalMessage;
         this.externalMessage = externalMessage;
         this.date = date;
+        this.running = running;
+        
     }
 
-    public DecisionsDepartment(String internalMessage, String externalMessage, String status, double cost, int depId, int depOrder, String depName, String decision) {
+    public DecisionsDepartment(String internalMessage, String externalMessage, String status, double cost, int depId, int depOrder, String depName, String decision, String running) {
         this.internalMessage = internalMessage;
         this.externalMessage = externalMessage;
         this.status = status;
@@ -63,14 +66,16 @@ public class DecisionsDepartment implements Serializable{
         this.depOrder = depOrder;
         this.depName = depName;
         this.decision = decision;
+        this.running = running;
     }
 
-    public DecisionsDepartment(String status, double cost, int depId, int depOrder) {
+    public DecisionsDepartment(String status, double cost, int depId, int depOrder, String running) {
         this.status = status;
         this.cost = cost;
         this.date = date;
         this.depId = depId;
         this.depOrder = depOrder;
+        this.running = running;
     }
 
     public String getInternalMessage() {
@@ -243,11 +248,6 @@ public class DecisionsDepartment implements Serializable{
         this.decision = decision;
     }
 
-    @Override
-    public String toString() {
-        return "DecisionsDepartment{" + "depId=" + depId + ", depOrder=" + depOrder + ", Services_Provided_ID=" + Services_Provided_ID + ", Cit_ID=" + Cit_ID + ", Service_Citizen_ID=" + Service_Citizen_ID + ", status=" + status + ", cost=" + cost + ", internalMessage=" + internalMessage + ", externalMessage=" + externalMessage + ", date=" + date + ", depName=" + depName + ", section=" + section + '}';
-    }
-
     public void updateState() throws SQLException, ClassNotFoundException {
         DB data = new DB();
         String q = "UPDATE decisions_department SET Status = 'done', Cost = '" + cost + "', "
@@ -264,6 +264,19 @@ public class DecisionsDepartment implements Serializable{
 
     public void setTotalDepCost(double totalDepCost) {
         this.totalDepCost = totalDepCost;
+    }
+
+    public String getRunning() {
+        return running;
+    }
+
+    public void setRunning(String running) {
+        this.running = running;
+    }
+
+    @Override
+    public String toString() {
+        return "DecisionsDepartment{" + "depId=" + depId + ", depOrder=" + depOrder + ", Services_Provided_ID=" + Services_Provided_ID + ", Cit_ID=" + Cit_ID + ", Service_Citizen_ID=" + Service_Citizen_ID + ", status=" + status + ", cost=" + cost + ", internalMessage=" + internalMessage + ", externalMessage=" + externalMessage + ", date=" + date + ", depName=" + depName + ", decision=" + decision + ", section=" + section + ", totalDepCost=" + totalDepCost + ", running=" + running + '}';
     }
 
 }

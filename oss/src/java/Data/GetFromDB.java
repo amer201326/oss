@@ -879,7 +879,7 @@ public class GetFromDB {
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
-                dds.add(new DecisionsDepartment(r.getInt(1), r.getInt(2), r.getInt(3), r.getInt(4), r.getInt(5), r.getString(6), r.getDouble(7), r.getString(8), r.getString(9), r.getString(10)));
+                dds.add(new DecisionsDepartment(r.getInt(1), r.getInt(2), r.getInt(3), r.getInt(4), r.getInt(5), r.getString(6), r.getDouble(7), r.getString(8), r.getString(9), r.getString(10),r.getString(12)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
@@ -961,7 +961,7 @@ public class GetFromDB {
                         + "inner join citizen as cit on sc.Cit_ID = cit.Cit_ID "
                         + "inner join decisions_department as dd on sc.Service_Citizen_ID = dd.Service_Citizen_ID and sc.Cit_ID = dd.Cit_ID "
                         + " and sc.Services_Provided_ID = dd.Services_Provided_ID inner join department as d on dd.Dep_ID = d.Dep_ID "
-                        + " where dd.Dep_ID = " + emp.dep_id + ";";
+                        + " where dd.Dep_ID = " + emp.dep_id + " order by sc.date DESC;";
                 System.out.println(sql);
                 ResultSet r = db.read(sql);
                 while (r.next()) {
@@ -969,13 +969,16 @@ public class GetFromDB {
                     Citizen c1 = new Citizen(r.getInt(15), r.getString(16), r.getString(17), r.getString(18), r.getString(19), r.getString(20), r.getInt(21),
                             r.getString(22), r.getString(23), r.getString(24), r.getString(25), r.getString(26), r.getString(27), r.getString(28), r.getString(29), r.getString(30),
                             r.getString(31), r.getString(32), r.getString(33), r.getString(34), r.getString(35));
-                    DecisionsDepartment dd = new DecisionsDepartment(r.getInt(36), r.getInt(37), r.getInt(38), r.getInt(39), r.getInt(40), r.getString(41), r.getInt(42), r.getString(43), r.getString(44), r.getString(45));
+                    DecisionsDepartment dd = new DecisionsDepartment(r.getInt(36), r.getInt(37), r.getInt(38), r.getInt(39), r.getInt(40), r.getString(41), r.getInt(42), r.getString(43), r.getString(44), r.getString(45),r.getString(47));
                     System.out.println("dip dis = >> "+dd);
                     cit = new ServiceCitizen(s, r.getInt(9), r.getInt(10), r.getInt(11), r.getString(12), r.getString(13), r.getString(14), c1);
                     cit.decisionsDepartment = dd;
                    
-                   Department d = new Department(r.getString(48));
-                   d.setId(r.getInt(47));
+                   Department d = new Department(r.getString(49));
+                   d.setId(r.getInt(48));
+                   d.setImage(r.getString(50));
+                    System.out.println(d);
+                    s.department = d;
                    cit.setDepartment(d);
                     
 //               cit.decisionsJob.internalMessage = r.getString(59);
@@ -992,7 +995,7 @@ public class GetFromDB {
                 DB db = new DB();
                 String sql = "SELECT * FROM services_provided as sp inner join service_citizen as sc on sc.Services_Provided_ID = sp.Services_Provided_ID "
                         + " inner join citizen as cit on sc.Cit_ID = cit.Cit_ID inner join service_jobs as sj  on sc.Service_Citizen_ID = sj.Service_Citizen_ID and  sc.Cit_ID = sj.Cit_ID  "
-                        + " inner join department as d on sp.DepartmentID = d.Dep_ID where sj.Job_ID = " + emp.job_id + " and  sj.Sec_ID = " + emp.sec_id + " and sj.Dep_ID = " + emp.dep_id + ";";
+                        + " inner join department as d on sp.DepartmentID = d.Dep_ID where sj.Job_ID = " + emp.job_id + " and  sj.Sec_ID = " + emp.sec_id + " and sj.Dep_ID = " + emp.dep_id + " order by date DESC;";
                 System.out.println(sql);
                 ResultSet r = db.read(sql);
                 while (r.next()) {
@@ -1000,15 +1003,18 @@ public class GetFromDB {
                     Citizen c1 = new Citizen(r.getInt(15), r.getString(16), r.getString(17), r.getString(18), r.getString(19), r.getString(20), r.getInt(21),
                             r.getString(22), r.getString(23), r.getString(24), r.getString(25), r.getString(26), r.getString(27), r.getString(28), r.getString(29), r.getString(30),
                             r.getString(31), r.getString(32), r.getString(33), r.getString(34), r.getString(35));
-                    Service_Job service_Job = new Service_Job(r.getInt(36), r.getInt(37), r.getInt(38), r.getInt(39), r.getInt(40), r.getInt(41), r.getInt(42), r.getInt(43), r.getInt(44), r.getString(45));
+                    Service_Job service_Job = new Service_Job(r.getInt(36), r.getInt(37), r.getInt(38), r.getInt(39), r.getInt(40), r.getInt(41), r.getInt(42), r.getInt(43), r.getInt(44), r.getString(45),r.getString(46));
+                   
                     cit = new ServiceCitizen(s, r.getInt(9), r.getInt(10), r.getInt(11), r.getString(12), r.getString(13), r.getString(14), c1, service_Job);
 //               cit.decisionsJob.internalMessage = r.getString(59);
 //               cit.decisionsJob.externalMessage = r.getString(60);
 
-                   Department d = new Department(r.getString(47));
-                   d.setId(r.getInt(46));
+                   Department d = new Department(r.getString(48));
+                   d.setId(r.getInt(47));
+                   d.setImage(r.getString(49));
+                   s.department = d;
                    cit.setDepartment(d);
-
+                   
                     c.add(cit);
                 }
             } catch (SQLException ex) {
@@ -1105,7 +1111,7 @@ public class GetFromDB {
 
             ResultSet r = db.read(sql);
             while (r.next()) {
-                d = new Service_Job(r.getInt(1), r.getInt(2), r.getInt(3), r.getInt(4), r.getInt(5), r.getInt(6), r.getInt(7), r.getInt(8), r.getInt(9), r.getString(10));
+                d = new Service_Job(r.getInt(1), r.getInt(2), r.getInt(3), r.getInt(4), r.getInt(5), r.getInt(6), r.getInt(7), r.getInt(8), r.getInt(9), r.getString(10),r.getString(11));
                 job.add(d);
             }
         } catch (Exception e) {
@@ -1122,7 +1128,7 @@ public class GetFromDB {
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
-                dds.add(new DecisionsDepartment(r.getInt(1), r.getInt(2), r.getInt(3), r.getInt(4), r.getInt(5), r.getString(6), r.getDouble(7), r.getString(8), r.getString(9), r.getString(10)));
+                dds.add(new DecisionsDepartment(r.getInt(1), r.getInt(2), r.getInt(3), r.getInt(4), r.getInt(5), r.getString(6), r.getDouble(7), r.getString(8), r.getString(9), r.getString(10),r.getString(12)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
@@ -1141,7 +1147,7 @@ public class GetFromDB {
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
-                dds.add(new DecisionsDepartment(r.getInt(1), r.getInt(2), r.getInt(3), r.getInt(4), r.getInt(5), r.getString(6), r.getDouble(7), r.getString(8), r.getString(9), r.getString(10)));
+                dds.add(new DecisionsDepartment(r.getInt(1), r.getInt(2), r.getInt(3), r.getInt(4), r.getInt(5), r.getString(6), r.getDouble(7), r.getString(8), r.getString(9), r.getString(10),r.getString(12)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);

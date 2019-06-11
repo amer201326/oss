@@ -13,6 +13,7 @@ import DB.DB;
 import Data.AttachmentServiceEmployee;
 import Data.Employee;
 import Data.GetFromDB;
+import Data.JobPath;
 import Data.Service;
 import Data.ServiceAttachmentName;
 import Data.ServiceCitizen;
@@ -61,6 +62,8 @@ public class ShoeServiceCitizemEmpManeger implements Serializable{
 
         if (serviseCitizen != null) {
             haveService = true;
+            serviseCitizen.getService_Job().updateShow();
+            
             filterFormOrNot();
         }
 

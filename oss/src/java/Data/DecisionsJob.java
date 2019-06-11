@@ -183,7 +183,9 @@ public class DecisionsJob {
     public void addToDB() throws SQLException, ClassNotFoundException {
 
         DB data = new DB();
-        String q = "INSERT INTO decisions_job (`Dep_ID`, `Sec_ID`, `Job_ID`, `Services_Provided_ID`, `Order_Departmant`, `Order_Section`, `Order_Job`, `Cit_ID`, `Service_Citizen_ID`, `Emp_ID`, `Status`, `Cost`) VALUES ('" + job.DepId + "', '" + job.sectionID + "', '" + job.id + "', '" + Services_Provided_ID + "', '" + job.dOrder + "', '" + job.sOrder + "', '" + job.order + "', '" + Cit_ID + "', '" + Service_Citizen_ID + "', '" + idEmployee + "', 'notdone', 0);";
+        String q = "INSERT INTO decisions_job (`Dep_ID`, `Sec_ID`, `Job_ID`, `Services_Provided_ID`, `Order_Departmant`, `Order_Section`, `Order_Job`, `Cit_ID`, `Service_Citizen_ID`, `Emp_ID`, `Status`, `Cost`)"
+                + " VALUES ('" + job.DepId + "', '" + job.sectionID + "', '" + job.id + "', '" + Services_Provided_ID + "', '" + job.dOrder + "', '" + job.sOrder 
+                + "', '" + job.order + "', '" + Cit_ID + "', '" + Service_Citizen_ID + "', '" + idEmployee + "', 'notdone', 0);";
         System.out.println("qj  =  " + q);
         data.write(q);
 
@@ -239,4 +241,7 @@ public class DecisionsJob {
         System.out.println("qj  =  " + q);
         data.write(q);
     }
+    
+
+    
 }

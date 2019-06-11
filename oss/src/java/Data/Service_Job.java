@@ -26,11 +26,12 @@ public class Service_Job {
     int Order_Section;
     int Order_Job;
     String status;
+    String show;
 
     public Service_Job() {
     }
 
-    public Service_Job(int Service_Citizen_ID, int Services_Provided_ID, int Cit_ID, int Dep_ID, int Sec_ID, int Job_ID, int Order_Departmant, int Order_Section, int Order_Job, String status) {
+    public Service_Job(int Service_Citizen_ID, int Services_Provided_ID, int Cit_ID, int Dep_ID, int Sec_ID, int Job_ID, int Order_Departmant, int Order_Section, int Order_Job, String status,String show) {
         this.Service_Citizen_ID = Service_Citizen_ID;
         this.Services_Provided_ID = Services_Provided_ID;
         this.Cit_ID = Cit_ID;
@@ -41,6 +42,7 @@ public class Service_Job {
         this.Order_Section = Order_Section;
         this.Order_Job = Order_Job;
         this.status = status;
+        this.show = show;
     }
 
     public int getService_Citizen_ID() {
@@ -229,6 +231,34 @@ public class Service_Job {
         }
 
     }
+    public void updateShow(){
+        try {
+            String q = "UPDATE `oss`.`service_jobs` SET `show` = 'yes' "
+                    + "WHERE (`Service_Citizen_ID` = '"+Service_Citizen_ID+"') and (`Services_Provided_ID` = '"+Services_Provided_ID+"') "
+                    + "and (`Cit_ID` = '"+Cit_ID+"') and (`Sec_ID` = '"+Sec_ID+"') and (`Job_ID` = '"+Job_ID+"') "
+                    + "and (`Order_Departmant` = '" + Order_Departmant + "') and (`Order_Section` = '" + Order_Section + "') "
+                    + "and (`Order_Job` = '" + Order_Job + "') and (`Dep_ID` = '"+Dep_ID+"');";
+            DB db = new DB();
+            System.out.println(q);
+            db.write(q);
+        } catch (SQLException ex) {
+            Logger.getLogger(Service_Job.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Service_Job.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }
+
+    public String getShow() {
+        return show;
+    }
+
+    public void setShow(String show) {
+        this.show = show;
+    }
+    
+    
     
 
 }

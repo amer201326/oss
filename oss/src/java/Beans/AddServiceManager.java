@@ -37,7 +37,7 @@ import org.primefaces.PrimeFaces;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
 
-/**
+/*
  *
  * @author Amer$_$
  */
@@ -79,11 +79,8 @@ public class AddServiceManager implements Serializable {
     private String[] selectedAtts;
     
      @ManagedProperty(value = "#{msession}")
-    Session session;
+    Session session;    
 	
-	
-	
-	 
 
     public AddServiceManager() {
 
@@ -106,9 +103,7 @@ public class AddServiceManager implements Serializable {
         stringToJop = new ArrayList<>();
         viewerJob = new ArrayList<SelectItem>();
 
-        Newattachment = new ArrayList<ServiceAttachmentName>();
-
-                
+        Newattachment = new ArrayList<ServiceAttachmentName>();  
     }
 
     public String[] getSelectedAtts() {
@@ -684,7 +679,7 @@ public class AddServiceManager implements Serializable {
     public void setSession(Session session) {
         this.session = session;
     }
-    
+     
     public String urlSideBar() {
         if (session.employee != null) {
             if (session.employee.checkTypeAdmin()) {

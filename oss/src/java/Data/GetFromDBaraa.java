@@ -161,8 +161,8 @@ public class GetFromDBaraa {
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
-                s = new DepartmentPaths(r.getInt(1), r.getString(16), r.getInt(2), r.getString(15));
-                d = new DecisionsDepartment(r.getString(8), r.getString(9), r.getString(6), r.getDouble(7), r.getInt(1), r.getInt(2), r.getString(15), r.getString(11));
+                s = new DepartmentPaths(r.getInt(1), r.getString(17), r.getInt(2), r.getString(16));
+                d = new DecisionsDepartment(r.getString(8), r.getString(9), r.getString(6), r.getDouble(7), r.getInt(1), r.getInt(2), r.getString(16), r.getString(11),r.getString(12));
                 sd = new StepsAndDecsions(s, d);
                 deps.add(sd);
             }

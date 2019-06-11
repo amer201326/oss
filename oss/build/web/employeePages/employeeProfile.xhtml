@@ -38,7 +38,7 @@
 
                     <!-- Topbar -->
 
-                    <ui:include src="heder.xhtml"/>
+                    <ui:include src="../pages/heder.xhtml"/>
                     <!-- End of Topbar -->
                     <p:column id="contentPage">
                         <h:form id="formAddEmployee">
@@ -229,8 +229,6 @@
                                                     <p:resetInput target="formAddEmployee" />
                                                     <f:ajax />
                                                 </p:commandButton> &nbsp; &nbsp; &nbsp;
-
-                                                <p:commandButton actionListener="#{employeeProfileManager.updateEmployee()}" value="إضافة موظف" id="add_emp"  update="@form"  class="myButtonC" />
 
                                             </div>
 

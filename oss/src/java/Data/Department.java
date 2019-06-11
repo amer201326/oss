@@ -103,8 +103,10 @@ public class Department implements Serializable {
 
     @Override
     public String toString() {
-        return  nameA;
+        return "Department{" + "id=" + id + ", nameA=" + nameA + ", image=" + image + ", numberService=" + numberService + '}';
     }
+
+    
 
     public int getNumberService() {
         return numberService;
@@ -113,6 +115,6 @@ public class Department implements Serializable {
     public void setNumberService(int numberService) {
         this.numberService = numberService;
     }
-
+    
     
 }
