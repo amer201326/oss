@@ -82,7 +82,7 @@
                         <ui:repeat value="#{showMyServicesManager.stepsAndDecsions}" var="d" >
 
                             <div class="col-lg-12 mb-4">
-                                <div class="col-lg-12" style="text-align: right; min-width:1200px ">
+                                <div class="col-lg-12" style="text-align: right; min-width:100px; ">
                                     <div class="card shadow mb-xl-4">
                                         <div class="card-header py-3 flexjustify-content">
                                             <h6 class="m-0 font-weight-bold text-primary">#{d.departmentPaths.nameA} </h6>
@@ -162,7 +162,7 @@
                                             <ui:repeat value="#{d.sections}" var="s" >
 
                                                 <div class="col-lg-12 mb-4">
-                                                    <div class="col-lg-12" style="text-align: right; min-width:1000px ">
+                                                    <div class="col-lg-12" style="text-align: right; min-width:100px; ">
                                                         <div class="card shadow mb-xl-4">
                                                             <div class="card-header py-3">
                                                                 <h6 class="m-0 font-weight-bold text-primary">#{s.section.name} </h6>
@@ -223,7 +223,7 @@
                                                                                     <p:outputPanel rendered="#{d.decisionsDepartment.flagDecision()}">
                                                                                         <p:outputPanel rendered="#{!j.attachmentServiceEmployee.isEmpty()}">
                                                                                             <div class="col-lg-12 mb-4">
-                                                                                                <div class="col-lg-12" style="text-align: right; min-width:1000px ">
+                                                                                                <div class="col-lg-12" style="text-align: right; min-width:100px; ">
                                                                                                     <div class="card shadow mb-xl-4">
                                                                                                         <div class="card-header py-3">
                                                                                                             <h6 class="m-0 font-weight-bold text-primary">مرفقات الموظف</h6>

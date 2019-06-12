@@ -89,8 +89,8 @@
                                                     
                                                     <p:ajax event="rowSelect" process="@this"  listener="#{servicesManager.onServiceSelect}"/>
                                                     
-                                                    <p:column  style="width:90px;text-align: center">
-                                                        <p:commandLink  actionListener="#{servicesManager.gotToEdit(service.id)}" title="View Detail">
+                                                    <p:column  style="width:90px; text-align: center" headerText="مشاهده">
+                                                        <p:commandLink  actionListener="#{servicesManager.gotToEdit(service.id)}" title="مشاهده">
                                                             <h:outputText styleClass="fa fa-list-ul" style="margin:0 auto;" />
                                                             
                                                         </p:commandLink>

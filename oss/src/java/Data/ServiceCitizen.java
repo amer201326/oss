@@ -150,7 +150,7 @@ public class ServiceCitizen implements Serializable {
             for (DepartmentPaths d : departments) {
                 DecisionsDepartment decisionsDepartment = new DecisionsDepartment(d.id,
                         d.order, Services_Provided_ID, Cit_ID,
-                        idMaxSC, "notdone", 0, "", "", Date);
+                        idMaxSC, "notdone", 0, "", "", Date ,"");
 
                 decisionsDepartment.addToDB();
                 decisionsDepartments.add(decisionsDepartment);

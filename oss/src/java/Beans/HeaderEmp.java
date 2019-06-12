@@ -81,9 +81,10 @@ public class HeaderEmp implements Serializable {
         List<ServiceCitizen> list = GetFromDB.getAllRequestService(employee);
         if (employee.checkTypeHed()) {
             for (ServiceCitizen list1 : list) {
-                if (list1.getDecisionsDepartment().getRunning().compareTo("no") == 0) {
-                    serviceCitizens.add(list1);
-                }
+               
+              //  if (list1.getDecisionsDepartment().getRunning().compareTo("no") == 0) {
+                //    serviceCitizens.add(list1);
+               // }
 
             }
 
@@ -99,7 +100,6 @@ public class HeaderEmp implements Serializable {
 
     }
 
-    
     public Session getSession() {
         return session;
     }
@@ -107,13 +107,24 @@ public class HeaderEmp implements Serializable {
     public void setSession(Session session) {
         this.session = session;
     }
+    
+    public boolean showNotification(){
+        if(employee.checkTypeAdmin())
+            return false;
+        return true;
+    }
 
     public void showServise() {
 
         System.out.println("show ssssssssssssssssssssssssssssssssss - -  -");
         try {
+            if (employee.checkTypeHed()) {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("ShowServiceHead.xhtml");
 
-            FacesContext.getCurrentInstance().getExternalContext().redirect("ShowService.xhtml");
+            } else {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("ShowService.xhtml");
+
+            }
 
         } catch (IOException ex) {
             Logger.getLogger(ServiceCitizenManager.class
@@ -124,6 +135,9 @@ public class HeaderEmp implements Serializable {
     public String urlallServices() {
         if (employee.checkTypeEMP()) {
             return "../employeePages/serviceCitizennNotDone.xhtml";
+        }else if (employee.checkTypeHed()) {
+            return "../employeePages/serviceCitizennNotDone.xhtml";
+            
         }
         return "";
     }

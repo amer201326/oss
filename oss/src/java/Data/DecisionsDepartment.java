@@ -279,4 +279,21 @@ public class DecisionsDepartment implements Serializable {
         return "DecisionsDepartment{" + "depId=" + depId + ", depOrder=" + depOrder + ", Services_Provided_ID=" + Services_Provided_ID + ", Cit_ID=" + Cit_ID + ", Service_Citizen_ID=" + Service_Citizen_ID + ", status=" + status + ", cost=" + cost + ", internalMessage=" + internalMessage + ", externalMessage=" + externalMessage + ", date=" + date + ", depName=" + depName + ", decision=" + decision + ", section=" + section + ", totalDepCost=" + totalDepCost + ", running=" + running + '}';
     }
 
+    public void updateRunning() {
+        try {
+            DB data = new DB();
+            String q = "UPDATE `oss`.`decisions_department` SET `running` = 'yes' "
+                    + "WHERE (Dep_ID = " + depId + ") and (Order_Departmant = " + depOrder + ") and (Services_Provided_ID = " + Services_Provided_ID + ")"
+                    + " and (Cit_ID = " + Cit_ID + ") and (Service_Citizen_ID = " + Service_Citizen_ID + ");";
+            System.out.println("q d " + q);
+            data.write(q);
+        } catch (SQLException ex) {
+            Logger.getLogger(DecisionsDepartment.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DecisionsDepartment.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+        
+    }
+
 }

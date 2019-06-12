@@ -68,8 +68,10 @@ public class ShoeServiceCitizemEmpManeger implements Serializable{
         }
 
     }
+    
 
     public void filterFormOrNot() {
+        System.out.println("att-----------\n-\n-\n---\n");
         List<ServiceAttachmentName> allAtt = GetFromDB.getAttachmentByserviceCitizen(serviseCitizen.getServices_Provided_ID(), serviseCitizen.getCit_ID(), serviseCitizen.getService_Citizen_ID());
         List<ServiceAttachmentName> att = new ArrayList<ServiceAttachmentName>();
         List<ServiceAttachmentName> attform = new ArrayList<ServiceAttachmentName>();
@@ -90,6 +92,7 @@ public class ShoeServiceCitizemEmpManeger implements Serializable{
                 }
             }
         }
+        System.out.println("\n-\n-\n---\n");
 
         serviseCitizen.attachment = att;
         serviseCitizen.attwhithFile = attform;

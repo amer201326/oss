@@ -57,6 +57,7 @@ public class ShowServiceHeadManeger implements Serializable {
         employee = session.employee;
 
         if (serviseCitizen != null) {
+            serviseCitizen.getDecisionsDepartment().updateRunning();
             haveService = true;
             filterFormOrNot();
             this.stepsAndDecsions = StepsAndDesion(serviseCitizen.getCit_ID(), serviseCitizen.getService_Citizen_ID(), serviseCitizen.getServices_Provided_ID());

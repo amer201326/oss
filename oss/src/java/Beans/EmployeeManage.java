@@ -383,15 +383,13 @@ public class EmployeeManage implements Serializable {
             if (session.employee.checkTypeAdmin()) {
                 System.out.println("cheackAdmin is  = " + session.employee.checkTypeAdmin());
                 return "../pages/sidebar.xhtml";
-            }
-        }
-        if (session.employee != null) {
-            if (session.employee.checkTypeEMP()) {
+            }else {
 
                 System.out.println("cheackemp is  = " + session.employee.checkTypeEMP());
 
                 return "../employeePages/sidebar.xhtml";
             }
+            
         }
         return "";
     }

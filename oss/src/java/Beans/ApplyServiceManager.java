@@ -42,6 +42,7 @@ public class ApplyServiceManager implements Serializable {
 
     List<ServiceAttachmentName> allAttachment;
     List<AttachmentArchiveCitizen> attaCitizen;
+    List<AttachmentArchiveCitizen> attaCitizenNotForm;
     AttachmentArchiveCitizen selectAttCitizen;
     StreamedContent fileDownload;
     int idCitizen;
@@ -55,7 +56,7 @@ public class ApplyServiceManager implements Serializable {
     public void init() {
         if (session.citizen != null) {
             idCitizen = session.citizen.getId();
-
+            attaCitizenNotForm = new ArrayList<>();
             Map<String, String> parameterMap = (Map<String, String>) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
             String param = parameterMap.get("id");
             System.out.println(param + "===================================================================");
@@ -66,6 +67,11 @@ public class ApplyServiceManager implements Serializable {
             allAttachment = GetFromDB.getAttavhmentByserviceById(serviceCitizen.service.getId());
             System.out.println("Bdddddd" + allAttachment.size());
             attaCitizen = GetFromDB.getAttachmantsArchive(idCitizen);
+            for (AttachmentArchiveCitizen att : attaCitizen) {
+                if(att.getForm().compareTo("no")==0){
+                    attaCitizenNotForm.add(att);
+                }
+            }
             for (ServiceAttachmentName serviceAttachmentName : allAttachment) {
 
                 if (serviceAttachmentName.getFileDownload() == null) {
@@ -203,5 +209,14 @@ public class ApplyServiceManager implements Serializable {
     public void setSelectAttCitizen(AttachmentArchiveCitizen selectAttCitizen) {
         this.selectAttCitizen = selectAttCitizen;
     }
+
+    public List<AttachmentArchiveCitizen> getAttaCitizenNotForm() {
+        return attaCitizenNotForm;
+    }
+
+    public void setAttaCitizenNotForm(List<AttachmentArchiveCitizen> attaCitizenNotForm) {
+        this.attaCitizenNotForm = attaCitizenNotForm;
+    }
+    
     
 }

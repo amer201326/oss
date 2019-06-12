@@ -35,12 +35,14 @@ public class AttachmentArchiveCitizen implements Serializable {
     String nameAtt;
     String form;
     byte[] outputfinal;
-    public AttachmentArchiveCitizen(int Atta_ArchiveC_ID, int Cit_ID, int ServiceAttachmentName_ID, InputStream inputStream, String nameFile, String nameAtt) {
+    public AttachmentArchiveCitizen(int Atta_ArchiveC_ID, int Cit_ID, int ServiceAttachmentName_ID, InputStream inputStream, String nameFile,String form, String nameAtt) {
         this.Atta_ArchiveC_ID = Atta_ArchiveC_ID;
         this.Cit_ID = Cit_ID;
         this.ServiceAttachmentName_ID = ServiceAttachmentName_ID;
         this.nameAtt = nameAtt;
         this.nameFile = nameFile;
+        this.form = form;
+    
         if (inputStream != null) {
             try {
                 si = inputStream.available();

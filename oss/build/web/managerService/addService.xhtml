@@ -333,7 +333,7 @@
                                                                                 </p:selectOneMenu>
 
 
-                                                                                <h:outputLabel for="name1" value="الرقم:" style="font-size: 18px;"/> 
+                                                                                <h:outputLabel for="name1" value="التسلسل:" style="font-size: 18px;"/> 
                                                                                 <p:inputNumber id="name1"  required="true" value="#{addServiceManager.departmentPaths.order}" minValue="1" maxValue="100">
                                                                                     <p:ajax update="name1" />  
                                                                                 </p:inputNumber>  
@@ -455,7 +455,7 @@
                                                                                 </p:selectOneMenu>
 
 
-                                                                                <h:outputLabel for="name2" value="الرقم:" />
+                                                                                <h:outputLabel for="name2" value="التسلسل:" />
                                                                                 <p:inputNumber id="name2" required="true" label="name" value="#{addServiceManager.sectionPath_new.order}" minValue="1" maxValue="100">
                                                                                     <p:ajax update="name2" />  
                                                                                 </p:inputNumber>  
@@ -578,7 +578,7 @@
                                                                                     <f:selectItems value="#{addServiceManager.filterJop()}" var="j" itemLabel="#{j.name}" itemValue="#{j.idJob}"/>
                                                                                 </p:selectOneMenu>
 
-                                                                                <h:outputLabel for="name3" value="الرقم:" style="font-size: 18px;"/>
+                                                                                <h:outputLabel for="name3" value="التسلسل:" style="font-size: 18px;"/>
                                                                                 <p:inputNumber id="name3" required="true" label="name" value="#{addServiceManager.jobPath.order}" minValue="1" maxValue="100" >
                                                                                     <p:ajax update="name3" />  
                                                                                 </p:inputNumber> 

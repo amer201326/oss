@@ -115,7 +115,7 @@
                                                     </p:column>
 
 
-                                                    <p:column headerText="البريد الإلكتروني">
+                                                    <p:column headerText="البريد الإلكتروني" style="width: 25%;">
                                                         <p:cellEditor disabled="false">
                                                             <f:facet name="output"><h:outputText value="#{employee.emp_email}" /></f:facet>
                                                             <f:facet name="input"><p:inputText id="modelInput" value="#{employee.emp_email}" style="width:100%"/></f:facet>
@@ -141,12 +141,12 @@
                                                     </p:column> 
 
 
-                                                    <p:column headerText="رقم تعريف الموظف">
+                                                 <!--   <p:column headerText="رقم تعريف الموظف" style="width: 80px;" >
                                                         <p:cellEditor disabled="true" >
-                                                            <f:facet name="output"><h:outputText value="#{employee.emp_id}" /></f:facet>
-                                                            <f:facet name="input"><p:inputText value="#{employee.emp_id}" style="width:30%" /></f:facet>
+                                                            <f:facet name="output"><h:outputText value="#{employee.emp_id}"/></f:facet>
+                                                            <f:facet name="input"><p:inputText value="#{employee.emp_id}"  /></f:facet>
                                                         </p:cellEditor>
-                                                    </p:column>
+                                                    </p:column> -->
 
 
 

@@ -19,109 +19,168 @@
 
 
     <!-- Topbar Navbar -->
-    <ul class="navbar-nav ml-auto">
+    <p:column rendered="#{headerEmp.showNotification()}">
 
-        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-        <li class="nav-item dropdown no-arrow d-sm-none">
-            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-search fa-fw"></i>
-            </a>
-            <!-- Dropdown - Messages -->
-            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                <form class="form-inline mr-auto w-100 navbar-search">
-                    <div class="input-group">
-                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2"/>
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" type="button">
-                                <i class="fas fa-search fa-sm"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </li>
+        <ul class="navbar-nav ml-auto">
 
-        <!-- Nav Item - Alerts -->
-        <li class="nav-item dropdown no-arrow mx-1">
-            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-bell fa-fw"></i>
-                <!-- Counter - Alerts -->
-                <p:column rendered="#{headerEmp.numberOfNot!=0}">
-                    <span class="badge badge-danger badge-counter">
-                        <h:form>
-                            <h:outputText id="txt_count" value="#{headerEmp.numberOfNot}" />
-                            <p:poll interval="2" listener="#{headerEmp.updateNotification()}" update="txt_count allser" />
-                        </h:form>
-                    </span>
-                </p:column>
-            </a>
-            <!-- Dropdown - Alerts -->
-
-            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
-                <h6 class="dropdown-header flexAm">
-                    الاشعارات
-                </h6>
-                <h:form id="allser">
-                    <ui:repeat value="#{headerEmp.serviceCitizens}" var="serv" >
-                        <p:commandLink actionListener="#{headerEmp.showServise()}">
-
-                            <div class="dropdown-item d-flex  align-items-center flexAm" >
-
-                                <div class="mr-3">
-                                    <div class="icon-circle bg-primary">
-                                        <i class="fas #{serv.service.department.image} text-white"></i>
-                                    </div>
-                                </div>
-                                <div style="margin-right: 1em;text-align: right">
-                                    <div class="small text-success">#{serv.date}</div>
-                                    <span class="font-weight-bold">#{serv.service.name}</span>
-                                </div>
-
-                            </div>
-                            <f:setPropertyActionListener value="#{serv}" target="#{msession.serviceCitizenShow}" />
-                        </p:commandLink>
-                    </ui:repeat>
-                </h:form>
-                <p:column rendered="#{headerEmp.numberOfNot==0}">
-                    <div class="dropdown-item d-flex align-items-center" style="text-align: right">
-                        <div style="width: 100%;">
-                             <span class="font-weight-bold " style="float: right">لا يوجد اشعارات جديدة</span>
-                        </div>
-                    </div>
-                </p:column>
-                <a class="dropdown-item text-center small text-primary" href="#{headerEmp.urlallServices()}">مشاهدة الخدمات</a>
-
-            </div>
-
-        </li>
-
-        <!-- Nav Item - Messages -->
-
-
-        <div class="topbar-divider d-none d-sm-block"></div>
-
-        <!-- Nav Item - User Information -->
-        <li class="nav-item dropdown no-arrow">
-            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">#{msession.employee.emp_name}</span>
-                <img class="img-profile rounded-circle" src="../homePage/assets/image/user.png"/>
-            </a>
-            <!-- Dropdown - User Information -->
-            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#{headerEmp.urlProfile()}">
-                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                    الملف الشخصي
+            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+            <li class="nav-item dropdown no-arrow d-sm-none">
+                <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-search fa-fw"></i>
                 </a>
+                <!-- Dropdown - Messages -->
+                <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                    <form class="form-inline mr-auto w-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2"/>
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </li>
 
-                <div class="dropdown-divider"></div>
+            <!-- Nav Item - Alerts -->
+            <li class="nav-item dropdown no-arrow mx-1">
+                <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-bell fa-fw"></i>
+                    <!-- Counter - Alerts -->
+                    <p:column rendered="#{headerEmp.numberOfNot!=0}">
+                        <span class="badge badge-danger badge-counter">
+                            <h:form>
+                                <h:outputText id="txt_count" value="#{headerEmp.numberOfNot}" />
+                                <p:poll interval="2" listener="#{headerEmp.updateNotification()}" update="txt_count allser" />
+                            </h:form>
+                        </span>
+                    </p:column>
+                </a>
+                <!-- Dropdown - Alerts -->
 
-                <h:form>
-                    <h:commandButton value="الخروج"  actionListener="#{msession.logout()}" style="text-align: center;" class="dropdown-item" />
-                </h:form>
-            </div>
-        </li>
+                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
+                    <h6 class="dropdown-header flexAm">
+                        الاشعارات
+                    </h6>
+                    <h:form id="allser">
+                        <ui:repeat value="#{headerEmp.serviceCitizens}" var="serv" >
+                            <p:commandLink actionListener="#{headerEmp.showServise()}">
 
-    </ul>
+                                <div class="dropdown-item d-flex  align-items-center flexAm" >
+
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-primary">
+                                            <i class="fas #{serv.service.department.image} text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div style="margin-right: 1em;text-align: right">
+                                        <div class="small text-success">#{serv.date}</div>
+                                        <span class="font-weight-bold">#{serv.service.name}</span>
+                                    </div>
+
+                                </div>
+                                <f:setPropertyActionListener value="#{serv}" target="#{msession.serviceCitizenShow}" />
+                            </p:commandLink>
+                        </ui:repeat>
+                    </h:form>
+                    <p:column rendered="#{headerEmp.numberOfNot==0}">
+                        <div class="dropdown-item d-flex align-items-center" style="text-align: right">
+                            <div style="width: 100%;">
+                                <span class="font-weight-bold " style="float: right">لا يوجد اشعارات جديدة</span>
+                            </div>
+                        </div>
+                    </p:column>
+                    <a class="dropdown-item text-center small text-primary" href="#{headerEmp.urlallServices()}">مشاهدة الخدمات</a>
+
+                </div>
+
+            </li>
+
+            <!-- Nav Item - Messages -->
+
+
+            <div class="topbar-divider d-none d-sm-block"></div>
+
+            <!-- Nav Item - User Information -->
+            <li class="nav-item dropdown no-arrow">
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">#{msession.employee.emp_name}</span>
+                    <img class="img-profile rounded-circle" src="../homePage/assets/image/user.png"/>
+                </a>
+                <!-- Dropdown - User Information -->
+                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                    <a class="dropdown-item" href="#{headerEmp.urlProfile()}">
+                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                        الملف الشخصي
+                    </a>
+
+                    <div class="dropdown-divider"></div>
+
+                    <h:form>
+                        <h:commandButton value="الخروج"  actionListener="#{msession.logout()}" style="text-align: center;" class="dropdown-item" />
+                    </h:form>
+                </div>
+            </li>
+
+        </ul>
+    </p:column>
+    <p:column rendered="#{!headerEmp.showNotification()}">
+
+        <ul class="navbar-nav ml-auto">
+
+            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+            <li class="nav-item dropdown no-arrow d-sm-none">
+                <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-search fa-fw"></i>
+                </a>
+                <!-- Dropdown - Messages -->
+                <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                    <form class="form-inline mr-auto w-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2"/>
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </li>
+
+            <!-- Nav Item - Alerts -->
+          
+
+            <!-- Nav Item - Messages -->
+
+
+            <div class="topbar-divider d-none d-sm-block"></div>
+
+            <!-- Nav Item - User Information -->
+            <li class="nav-item dropdown no-arrow">
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">#{msession.employee.emp_name}</span>
+                    <img class="img-profile rounded-circle" src="../homePage/assets/image/user.png"/>
+                </a>
+                <!-- Dropdown - User Information -->
+                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                    <a class="dropdown-item" href="#{headerEmp.urlProfile()}">
+                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                        الملف الشخصي
+                    </a>
+
+                    <div class="dropdown-divider"></div>
+
+                    <h:form>
+                        <h:commandButton value="الخروج"  actionListener="#{msession.logout()}" style="text-align: center;" class="dropdown-item" />
+                    </h:form>
+                </div>
+            </li>
+
+        </ul>
+    </p:column>
+
 
 </nav>
 
