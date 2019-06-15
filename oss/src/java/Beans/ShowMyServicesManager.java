@@ -56,11 +56,13 @@ public class ShowMyServicesManager implements Serializable {
         if (session.serviceCitizenShow != null) {
             this.thisServiceCitizen = session.serviceCitizenShow;
             attachmentServiceEmployee = GetFromDBaraa.AttachmentServiceEmployee(thisServiceCitizen.getCit_ID(), thisServiceCitizen.getService_Citizen_ID(), thisServiceCitizen.getServices_Provided_ID());
+            
             this.stepsAndDecsions = StepsAndDesion(thisServiceCitizen.getCit_ID(), thisServiceCitizen.getService_Citizen_ID(), thisServiceCitizen.getServices_Provided_ID());
+            this.thisServiceCitizen.notificationUser.updateShow();
         }
 
     }
-
+ 
     public List<StepsAndDecsions> StepsAndDesion(int idcitizen, int idSerCit, int idService) {
         List<StepsAndDecsions> pathD = GetFromDBaraa.stepAndDecDep(idcitizen, idSerCit);
         List<DecisionSection> pathS = GetFromDBaraa.sectionsteps(idService);

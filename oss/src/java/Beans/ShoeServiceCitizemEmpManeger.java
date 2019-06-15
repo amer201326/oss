@@ -128,27 +128,21 @@ public class ShoeServiceCitizemEmpManeger implements Serializable{
         this.haveService = haveService;
     }
 
-    public void submit() throws IOException {
-        System.out.println("size files = " + attachmentServiceEmployees.size());
-        serviseCitizen.attachmentServiceEmployees = attachmentServiceEmployees;
-        serviseCitizen.ContineuInPath(employee.getEmp_id());
-        FacesContext.getCurrentInstance().getExternalContext().redirect("serviceCitizzen.xhtml");
-
-    }
+    
 
     public void accept() throws IOException {
         System.out.println("size files = " + attachmentServiceEmployees.size());
         serviseCitizen.attachmentServiceEmployees = attachmentServiceEmployees;
-        serviseCitizen.ContineuInPath(employee.getEmp_id());
-        FacesContext.getCurrentInstance().getExternalContext().redirect("serviceCitizzen.xhtml");
+        serviseCitizen.ContineuInPath(employee);
+        FacesContext.getCurrentInstance().getExternalContext().redirect("serviceCitizzenDone.xhtml");
 
     }
 
     public void reject() throws IOException {
         System.out.println("size files = " + attachmentServiceEmployees.size());
         serviseCitizen.attachmentServiceEmployees = attachmentServiceEmployees;
-        serviseCitizen.ContineuInPathReject(employee.getEmp_id());
-        FacesContext.getCurrentInstance().getExternalContext().redirect("serviceCitizzen.xhtml");
+        serviseCitizen.ContineuInPathReject(employee);
+        FacesContext.getCurrentInstance().getExternalContext().redirect("serviceCitizzenDone.xhtml");
 
     }
 

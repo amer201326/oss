@@ -35,6 +35,8 @@ public class HeaderEmp implements Serializable {
     Employee employee;
     List<ServiceCitizen> serviceCitizens = new ArrayList<>();
     int numberOfNot;
+    int numberOfservecNotDone;
+    int numberOfservecDone;
 
     public HeaderEmp() {
 
@@ -79,17 +81,28 @@ public class HeaderEmp implements Serializable {
     public void updateNotification() {
         serviceCitizens.clear();
         List<ServiceCitizen> list = GetFromDB.getAllRequestService(employee);
+        numberOfservecDone = 0;
+        numberOfservecNotDone = 0;
         if (employee.checkTypeHed()) {
             for (ServiceCitizen list1 : list) {
-               
-              //  if (list1.getDecisionsDepartment().getRunning().compareTo("no") == 0) {
-                //    serviceCitizens.add(list1);
-               // }
+                if (list1.getDecisionsDepartment() == null) {
+                    System.out.println("\n\n\n null  updateNotification   getDecisionsDepartment  \n\n\n");
+                }
+                if (list1.getDecisionsDepartment().getRunning().compareTo("no") == 0) {
+                    serviceCitizens.add(list1);
+                }
 
             }
 
         } else {
             for (ServiceCitizen list1 : list) {
+
+                if (list1.getService_Job().getStatus().compareTo("done") == 0) {
+                   numberOfservecDone++;
+                    
+                } else {
+                   numberOfservecNotDone++;
+                }
                 if (list1.getService_Job().getShow().compareTo("no") == 0) {
                     serviceCitizens.add(list1);
                 }
@@ -107,10 +120,11 @@ public class HeaderEmp implements Serializable {
     public void setSession(Session session) {
         this.session = session;
     }
-    
-    public boolean showNotification(){
-        if(employee.checkTypeAdmin())
+
+    public boolean showNotification() {
+        if (employee.checkTypeAdmin()) {
             return false;
+        }
         return true;
     }
 
@@ -135,12 +149,13 @@ public class HeaderEmp implements Serializable {
     public String urlallServices() {
         if (employee.checkTypeEMP()) {
             return "../employeePages/serviceCitizennNotDone.xhtml";
-        }else if (employee.checkTypeHed()) {
+        } else if (employee.checkTypeHed()) {
             return "../employeePages/serviceCitizennNotDone.xhtml";
-            
+
         }
         return "";
     }
+    
 
     public String urlProfile() {
         if (employee.checkTypeEMP() || employee.checkTypeHed()) {
@@ -150,6 +165,22 @@ public class HeaderEmp implements Serializable {
             return "../manager/managerProfile.xhtml";
         }
         return "";
+    }
+
+    public int getNumberOfservecNotDone() {
+        return numberOfservecNotDone;
+    }
+
+    public void setNumberOfservecNotDone(int numberOfservecNotDone) {
+        this.numberOfservecNotDone = numberOfservecNotDone;
+    }
+
+    public int getNumberOfservecDone() {
+        return numberOfservecDone;
+    }
+
+    public void setNumberOfservecDone(int numberOfservecDone) {
+        this.numberOfservecDone = numberOfservecDone;
     }
 
 }

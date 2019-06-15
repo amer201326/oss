@@ -29,7 +29,7 @@ public class DecisionsJob {
     int Services_Provided_ID;
     int Cit_ID;
     int Service_Citizen_ID;
-
+    
     public DecisionsJob(JobPath job, int idEmployee, String status, String runing, double cost, String internalMessage, String externalMessage, String date) {
         this.job = job;
         this.idEmployee = idEmployee;
@@ -241,6 +241,8 @@ public class DecisionsJob {
         System.out.println("qj  =  " + q);
         data.write(q);
     }
+
+    
     
 
     

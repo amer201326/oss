@@ -145,8 +145,8 @@ public class ShowServiceHeadManeger implements Serializable {
         serviseCitizen.attachmentServiceEmployees = attachmentServiceEmployees;
         serviseCitizen.getDecisionsDepartment().setStatus("done");
         serviseCitizen.getDecisionsDepartment().setDecision("accept");
-        serviseCitizen.desdepartment();
-        FacesContext.getCurrentInstance().getExternalContext().redirect("serviceCitizzen.xhtml");
+        serviseCitizen.desdepartment(employee);
+        FacesContext.getCurrentInstance().getExternalContext().redirect("serviceCitizennNotDone.xhtml");
 
     }
 
@@ -155,8 +155,8 @@ public class ShowServiceHeadManeger implements Serializable {
         serviseCitizen.attachmentServiceEmployees = attachmentServiceEmployees;
         serviseCitizen.getDecisionsDepartment().setStatus("notdone");
         serviseCitizen.getDecisionsDepartment().setDecision("reject");
-        serviseCitizen.desdepartment();
-        FacesContext.getCurrentInstance().getExternalContext().redirect("serviceCitizzen.xhtml");
+        serviseCitizen.desdepartment(employee);
+        FacesContext.getCurrentInstance().getExternalContext().redirect("serviceCitizennNotDone.xhtml");
 
     }
 

@@ -48,14 +48,16 @@
                 <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-bell fa-fw"></i>
                     <!-- Counter - Alerts -->
-                    <p:column rendered="#{headerEmp.numberOfNot!=0}">
-                        <span class="badge badge-danger badge-counter">
-                            <h:form>
+                    <h:form id="formNoti">
+                        <p:column id="red" rendered="#{headerEmp.numberOfNot!=0}">
+                            <span class="badge badge-danger badge-counter">
+
                                 <h:outputText id="txt_count" value="#{headerEmp.numberOfNot}" />
-                                <p:poll interval="2" listener="#{headerEmp.updateNotification()}" update="txt_count allser" />
-                            </h:form>
-                        </span>
-                    </p:column>
+                                <p:poll interval="2" listener="#{headerEmp.updateNotification()}" update="txt_count @form allser allser:kdk red" />
+
+                            </span>
+                        </p:column>
+                    </h:form>
                 </a>
                 <!-- Dropdown - Alerts -->
 
@@ -65,7 +67,7 @@
                     </h6>
                     <h:form id="allser">
                         <ui:repeat value="#{headerEmp.serviceCitizens}" var="serv" >
-                            <p:commandLink actionListener="#{headerEmp.showServise()}">
+                            <p:commandLink actionListener="#{headerEmp.showServise()}" update="allser:kdk" style="text-decoration: none;">
 
                                 <div class="dropdown-item d-flex  align-items-center flexAm" >
 
@@ -83,14 +85,15 @@
                                 <f:setPropertyActionListener value="#{serv}" target="#{msession.serviceCitizenShow}" />
                             </p:commandLink>
                         </ui:repeat>
-                    </h:form>
-                    <p:column rendered="#{headerEmp.numberOfNot==0}">
+                        <p:column id="kdk" rendered="#{headerEmp.numberOfNot==0}">
                         <div class="dropdown-item d-flex align-items-center" style="text-align: right">
                             <div style="width: 100%;">
                                 <span class="font-weight-bold " style="float: right">لا يوجد اشعارات جديدة</span>
                             </div>
                         </div>
                     </p:column>
+                    </h:form>
+                    
                     <a class="dropdown-item text-center small text-primary" href="#{headerEmp.urlallServices()}">مشاهدة الخدمات</a>
 
                 </div>
@@ -150,7 +153,7 @@
             </li>
 
             <!-- Nav Item - Alerts -->
-          
+
 
             <!-- Nav Item - Messages -->
 

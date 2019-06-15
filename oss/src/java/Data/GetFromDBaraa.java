@@ -61,6 +61,7 @@ public class GetFromDBaraa {
         return services;
 
     }
+    
 
     public static ArrayList<DepartmentPaths> departmentPath(int idservice) {
         ArrayList<DepartmentPaths> departments = new ArrayList<>();

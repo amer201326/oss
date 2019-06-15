@@ -420,7 +420,7 @@
                                                 <ui:repeat value="#{showServiceHeadManeger.stepsAndDecsions}" var="d" >
 
                                                     <div class="col-lg-12 mb-4">
-                                                        <div class="col-lg-12" style="text-align: right; min-width:1200px ">
+                                                        <div class="col-lg-12" style="text-align: right; min-width:100px ">
                                                             <div class="card shadow mb-xl-4">
 
                                                                 <a href="#collapseCardExample#{d.departmentPaths.id}" class="d-block card-header py-3 collapsed " data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseCardExample#{d.departmentPaths.id}">
@@ -690,8 +690,8 @@
                                         <div class="text-center">
 
 
-                                            <p:commandButton id="sub2"  actionListener="#{showServiceHeadManeger.accept()}" action="serviceCitizzen.xhtml" value="قبول " update="@none"  class="myButtonC ml-3"  />
-                                            <p:commandButton id="sub3"  actionListener="#{showServiceHeadManeger.reject()}" action="serviceCitizzen.xhtml" value="رفض " update="@none"  class="myButtonD ml-3"  />
+                                            <p:commandButton id="sub2"  actionListener="#{showServiceHeadManeger.accept()}" action="serviceCitizzenDone.xhtml" value="قبول " update="@none"  class="myButtonC ml-3"  />
+                                            <p:commandButton id="sub3"  actionListener="#{showServiceHeadManeger.reject()}" action="serviceCitizzenDone.xhtml" value="رفض " update="@none"  class="myButtonD ml-3"  />
 
 
                                         </div>
