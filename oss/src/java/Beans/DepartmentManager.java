@@ -43,6 +43,7 @@ public class DepartmentManager implements Serializable {
     List<Employee> employees;
     JobOfSection jobSelected;
     JobOfSection newJobOfsection;
+    Employee managerName;
 
     @ManagedProperty(value = "#{msession}")
     Session session;
@@ -62,6 +63,7 @@ public class DepartmentManager implements Serializable {
         String param = parameterMap.get("id");
 
         thisDepartment = GetFromDB.getDepartmentById(param);
+        managerName = GetFromDB.getNameOfDepartmentManagerById(param);
 
         jobTitels = GetFromDB.getJobTittle();
         sections = GetFromDB.getFsection(Integer.parseInt(param));
@@ -71,6 +73,7 @@ public class DepartmentManager implements Serializable {
         newSection = new Section();
         newJobOfsection = new JobOfSection();
         sectionSelected = new Section();
+        
         ////////////////
         creatOrganic();
 
@@ -253,7 +256,7 @@ public class DepartmentManager implements Serializable {
     public void setLeafNodeConnectorHeight(int leafNodeConnectorHeight) {
         this.leafNodeConnectorHeight = leafNodeConnectorHeight;
     }
-
+    
     public boolean isAutoScrollToSelection() {
         return autoScrollToSelection;
     }
@@ -353,4 +356,21 @@ public class DepartmentManager implements Serializable {
         return "";
     }
 
+    public Employee getManagerName() {
+        return managerName;
+    }
+
+    public void setManagerName(Employee managerName) {
+        this.managerName = managerName;
+    }
+
+    
+     public String returnManagerName() {
+        if (managerName.getEmp_name() != null) {
+            return "";
+        } else {
+            return "لا يوجد رئيس الدائرة";
+        }
+    }
+  
 }

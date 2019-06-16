@@ -1127,3 +1127,8 @@ span[id*='j_idt14'] .ui-button{
   background-color: #5cb85c;
   color: white;
 }
+
+.ui-picklist .ui-picklist-caption{
+    width: 200px;
+    
+}

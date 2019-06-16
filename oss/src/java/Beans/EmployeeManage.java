@@ -365,6 +365,8 @@ public class EmployeeManage implements Serializable {
             return false;
         }
     }
+    
+ 
 
         public boolean checkTypeAdmin() {
         if (Type.compareTo("2") == 0) {
@@ -394,4 +396,6 @@ public class EmployeeManage implements Serializable {
         return "";
     }
 	
+     
+     
 }

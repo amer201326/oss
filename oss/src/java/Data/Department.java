@@ -23,6 +23,7 @@ public class Department implements Serializable {
     public String nameA;
     public String image;
      public int numberService;
+     String managerName;
 
     public Department() {
         
@@ -114,6 +115,14 @@ public class Department implements Serializable {
 
     public void setNumberService(int numberService) {
         this.numberService = numberService;
+    }
+
+    public String getManagerName() {
+        return managerName;
+    }
+
+    public void setManagerName(String managerName) {
+        this.managerName = managerName;
     }
     
     

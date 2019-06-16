@@ -30,6 +30,10 @@ public class EmployeeAccount implements Serializable{
     public EmployeeAccount() {
     }
 
+    EmployeeAccount(int aInt, String string, String string0) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     
     public int getEmp_ID() {
         return Emp_ID;
@@ -80,7 +84,7 @@ public class EmployeeAccount implements Serializable{
             
         } catch (Exception ex) {
             
-            Logger.getLogger(CitizenAccount.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EmployeeAccount.class.getName()).log(Level.SEVERE, null, ex);
             return "اسم المستخدم موجود , ادخل اسم اخر";
         }
         return "1";

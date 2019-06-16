@@ -5,9 +5,11 @@
  */
 package Beans;
 
+import Data.Department;
 import Data.Employee;
 import Data.GetFromDB;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,11 +27,13 @@ import javax.faces.context.FacesContext;
 public class EditEmployeeManager {
     
     Employee employeeEdit;
+    List<Department> allDepartments;
+
     
      @ManagedProperty(value = "#{msession}")
     Session session;
 	
-	
+	  String Type = "";
 	
 	
     public EditEmployeeManager() {
@@ -53,6 +57,13 @@ public class EditEmployeeManager {
     public void editEmployee() {
 
         employeeEdit.updateEmployee();
+        
+    }
+    
+    public void editEmployeePassword() {
+
+        employeeEdit.updateEmployeePassword();
+        System.out.println("amerrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
         
     }
     
@@ -83,8 +94,59 @@ public class EditEmployeeManager {
         return "";
     }
    
+        public void chagneType() {
+        System.out.println(Type);
+    }
+        
+     public boolean checkTypeEMP() {
+        if (Type.compareTo("3") == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+     
+       public boolean checkTypeHed() {
+        if (Type.compareTo("1") == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public List<Department> getAllDepartments() {
+        return allDepartments;
+    }
+
+    public void setAllDepartments(List<Department> allDepartments) {
+        this.allDepartments = allDepartments;
+    }
+
+    public String getType() {
+        return Type;
+    }
+
+    public void setType(String Type) {
+        this.Type = Type;
+    }
     
+    public String returnEmployeeType() {
+        if (employeeEdit.getType().compareTo("e") == 0) {
+            return "موظف";
+        } else if (employeeEdit.getType().compareTo("h") == 0) {
+            return "مسؤول";
+        } else{
+            return "رئيس دائرة";
+        }
+    }
     
+     public String returnEmployeeGender() {
+        if (employeeEdit.getEmp_gender().compareTo("M") == 0) {
+            return "ذكر";
+        }else{
+            return "انثى";
+        }
+    }
   
     
 }

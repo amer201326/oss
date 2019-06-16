@@ -469,6 +469,30 @@ public class GetFromDB {
         }
         return d;
     }
+    
+    
+    
+    public static Employee getNameOfDepartmentManagerById(String param) {
+        Employee d = new Employee();
+
+        try {
+            DB db = new DB();
+            String sql = "SELECT em.Emp_Name FROM oss.employees as em where Dep_ID =" + param + " and type='h';";
+
+            ResultSet r = db.read(sql);
+            while (r.next()) {
+                d = new Employee(r.getString(1));
+                System.out.println(d + "..............................");
+
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return d;
+    }
+    
+    
+    
 
     public static List<Employee> GetEmployeeinDepartment(String param) {
         List<Employee> emp = new ArrayList<Employee>();
@@ -493,11 +517,22 @@ public class GetFromDB {
         try {
             DB db = new DB();
 
-            String sql = "SELECT * FROM oss.employees where Emp_ID =" + param + ";";
+            String sql = " SELECT e.Dep_ID, e.Sec_ID, e.Job_ID, e.Emp_ID, e.Emp_Name, e.Emp_ID_Card, e.Emp_Email, "
+                    + "e.Emp_Telephone, e.Emp_Birthday, e.Emp_StartDate, e.Emp_EndDate, e.Emp_Mobile, e.Emp_Gender, "
+                    + "e.type, d.Dep_Name, s.Sec_Name, j.Job_name, ac.UserName, ac.Password FROM oss.employees as e "
+                    + "left join department as d on  e.Dep_ID = d.Dep_ID left join section as s on e.Sec_ID = s.Sec_ID "
+                    + " left join jobtitle as j on e.Job_ID = j.Job_ID left join employeeaccount as ac on "
+                    + "ac.Emp_ID = e.Emp_ID  where e.Emp_ID =" + param + ";";
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
-                emp = new Employee(r.getInt(1), r.getInt(2), r.getInt(3), r.getInt(4), r.getString(5), r.getString(6), r.getString(7), r.getString(8), r.getString(9), r.getString(10), r.getString(11), r.getString(12), r.getString(13));
+                emp = new Employee(r.getInt(1), r.getInt(2), r.getInt(3), r.getInt(4), 
+                        r.getString(5), r.getString(6), r.getString(7), r.getString(8), 
+                        r.getString(9), r.getString(10), r.getString(11), r.getString(12), 
+                        r.getString(13), r.getString(14), r.getString(15), r.getString(16), r.getString(17));
+                emp.setAccount(new EmployeeAccount(r.getString(18), r.getString(19)));
+                
+                System.out.println(emp + "\n\n\n\n 11111111111111111111111111111111111111");
 
             }
         } catch (Exception e) {
@@ -505,6 +540,11 @@ public class GetFromDB {
         }
         return emp;
 
+        
+        
+
+        
+        
     }
 
     public static List<Integer> getAttavhmentForserviceById(String id) {
@@ -1401,11 +1441,11 @@ public class GetFromDB {
             DB db = new DB();
             ServiceCitizen sc;
             Service s;
-            
+
             String sql = "SELECT *  FROM service_citizen as sc inner join services_provided as sp on  sc.Services_Provided_ID=sp.Services_Provided_ID "
                     + "inner join notificationuser as nn on sc.Service_Citizen_ID = nn.Service_Citizen_ID and sc.Cit_ID = nn.Cit_ID "
-                    + " inner join department as d on sp.DepartmentID = d.Dep_ID where  sc.Cit_ID="+citizen.id+" and nn.show = 'yes' order by nn.date DESC;";
-            
+                    + " inner join department as d on sp.DepartmentID = d.Dep_ID where  sc.Cit_ID=" + citizen.id + " and nn.show = 'yes' order by nn.date DESC;";
+
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
@@ -1421,5 +1461,4 @@ public class GetFromDB {
         return services;
     }
 
-   
 }
