@@ -128,18 +128,19 @@
 
                             <div class="col-xl-8 col-lg-7">
                                 <div class="card shadow mb-4">
-                                    <!-- Card Header - Dropdown -->
-                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-
-
-                                        <div class="dropdown no-arrow">
-
-                                        </div>
-                                        <h6 class="m-0 font-weight-bold text-primary">عدد الخدمات خلال السنة</h6>
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary" style="text-align: right;">اكثر 3 خدمات تم طلبها</h6>
                                     </div>
-                                    <!-- Card Body -->
                                     <div class="card-body">
-                                        escribe aqui
+
+
+                                        <ui:repeat value="#{headerEmp.servicesCount}" var="serCount" >
+                                            <h4 class="small font-weight-bold" style="text-align: right;">#{serCount.serviceName} <span style="text-align: left;">% #{serCount.count} </span></h4>
+                                            <div class="progress mb-4">
+                                                <div class="progress-bar " role="progressbar" style="width: #{serCount.count}%;background-color:#1cc88a" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </ui:repeat>
+
                                     </div>
                                 </div>
                             </div>

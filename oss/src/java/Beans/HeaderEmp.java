@@ -10,6 +10,7 @@ import Data.Employee;
 import Data.GetFromDB;
 import Data.Service;
 import Data.ServiceCitizen;
+import Data.ServiceCount;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.Serializable;
@@ -34,6 +35,8 @@ public class HeaderEmp implements Serializable {
 
     Employee employee;
     List<ServiceCitizen> serviceCitizens = new ArrayList<>();
+    List<ServiceCount> servicesCount;
+
     int numberOfNot;
     int numberOfservecNotDone;
     int numberOfservecDone;
@@ -52,6 +55,7 @@ public class HeaderEmp implements Serializable {
             updateNotification();
 
         }
+        servicesCount = GetFromDB.getMore3ServiceRequest();
     }
 
     public Employee getEmployee() {
@@ -181,6 +185,14 @@ public class HeaderEmp implements Serializable {
 
     public void setNumberOfservecDone(int numberOfservecDone) {
         this.numberOfservecDone = numberOfservecDone;
+    }
+
+    public List<ServiceCount> getServicesCount() {
+        return servicesCount;
+    }
+
+    public void setServicesCount(List<ServiceCount> servicesCount) {
+        this.servicesCount = servicesCount;
     }
 
 }

@@ -245,6 +245,43 @@ public class GetFromDB {
         return servicesCount;
 
     }
+    
+    
+    
+    public static List<ServiceCount> getMore3ServiceRequest() {
+        List<ServiceCount> servicesCount = new ArrayList<ServiceCount>();
+        int i = 0;
+        double sum = 1;
+        try {
+
+            DB db = new DB();
+            String sql1 = " select count(*) from service_citizen;";
+            ResultSet r1 = db.read(sql1);
+            while (r1.next()) {
+                sum = r1.getInt(1);
+
+            }
+            System.out.println("aaaaaaaaa" + sum);
+
+            String sql = "SELECT sc.Services_Provided_ID, COUNT(*) as l ,sp.Serv_Name AS freq FROM service_citizen as sc \n" +
+"                      inner join services_provided as sp on sp.Services_Provided_ID = sc.Services_Provided_ID \n" +
+"                     GROUP BY Services_Provided_ID order by l DESC LIMIT 3;";
+
+            ResultSet r = db.read(sql);
+
+            while (r.next()) {
+                servicesCount.add(new ServiceCount(r.getString(3), (int) ((r.getInt(2) / sum) * 100)));
+
+                i++;
+
+            }
+
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return servicesCount;
+
+    }
 
     public static List<JobTitel> getJobTittle(String id) {
         JobTitel d = new JobTitel();
