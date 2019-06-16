@@ -9,6 +9,7 @@ import Data.Citizen;
 import Data.CitizenAccount;
 import Data.GetDB_Eman;
 import Data.GetFromDB;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -41,9 +42,18 @@ public class EditCitizenManage implements Serializable{
 
     }
 
-    public void editCitizen() {
+    public void editCitizen() throws IOException {
 
         citizenEdit.updateCitizen();
+        FacesContext.getCurrentInstance().getExternalContext().redirect("allCitizen.xhtml");
+        
+    }
+    
+     public void editCitizenPassword() throws IOException {
+
+        citizenEdit.updateCitizenPassword();
+         FacesContext.getCurrentInstance().getExternalContext().redirect("allCitizen.xhtml");
+        System.out.println("amerrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr_______Citizennnnn");
         
     }
 
@@ -90,6 +100,14 @@ public class EditCitizenManage implements Serializable{
             }
         }
         return "";
+    }
+     
+     public String returnCitizenGender() {
+        if (citizenEdit.getGender().compareTo("M") == 0) {
+            return "ذكر";
+        }else{
+            return "انثى";
+        }
     }
 
 }

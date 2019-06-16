@@ -123,25 +123,48 @@
                                                                             <h6 class="m-0 font-weight-bold text-primary">تعديل</h6>
                                                                         </div>
                                                                         <div class="card-body">
-                                                                             
+
+                                                                            
+
                                                                             <h:panelGrid columns="2" dir="rtl" style="display: flex; justify-content: flex-start;">
-
-                                                                               
                                                                                 <p:outputLabel for="us" class="label" value="اسم المستخدم"/>
-                                                                                <p:inputText id="us" value="#{editCitizenManage.citizenEdit.account.userName}"
-                                                                                             class="form-control form-control-user" style="text-align:right;"
-                                                                                             type="text" required="true" disabled="true"/>
- 
-                                                                                <p:outputLabel for="password" class="label" value="كلمة المرور"/>
-                                                                                <p:password value="#{editCitizenManage.citizenEdit.account.password}" class="form-control" style="text-align:right;" id="password" 
-                                                                                            feedback="true" inline="true" required="true"/> 
+                                                                                <p:outputLabel id="us" dir="ltr" value="#{editCitizenManage.citizenEdit.account.userName}"
+                                                                                               style="text-align:right;"  />
 
 
+                                                                                <h:outputLink dir="ltr" id="pass" value="javascript:void(0)" style="text-align:right; 
+                                                                                              text-decoration: none; font-size: 14px; font-weight: bold; color: red;" 
+                                                                                              onclick="PF('changePassword').show();"> 
+                                                                                    <p style="margin-right: 50px;">تغيير كلمة المرور </p>
 
+                                                                                </h:outputLink>
+                                                                                <p:outputLabel for="pass" class="label" value=""/>
                                                                             </h:panelGrid>
+
+
                                                                         </div>
 
                                                                     </div>
+
+
+                                                                    <p:dialog id="changePassword" resizable="false" header="تغيير كلمة المرور" widgetVar="changePassword" dir="rtl">
+
+                                                                        <h:panelGrid columns="2" cellpadding="5">
+
+                                                                            <p:outputLabel for="password" class="label" value="كلمة المرور الجديدة"/>
+                                                                            <p:password dir="ltr" id="password" value="#{editCitizenManage.citizenEdit.account.password}" 
+                                                                                        autocomplete="off" class="form-control" style="text-align:right;" feedback="true" 
+                                                                                        inline="true"/> 
+
+                                                                            <p:outputLabel for="dialog1"/>
+                                                                            <p:commandButton id="dialog1" value="تغيير" process="@this" oncomplete="PF('changePassword').hide();"
+                                                                                             actionListener="#{editCitizenManage.editCitizenPassword()}" />
+                                                                            <!-- Aqui va action listner arriba-->
+
+
+                                                                        </h:panelGrid>
+                                                                    </p:dialog>  
+
 
                                                                 </div>
 
@@ -171,13 +194,10 @@
                                                                                              class="form-control form-control-user" style="text-align:right;" type="text"/>
 
                                                                                 <p:outputLabel for="gender" value="الجنس" />
-                                                                                <h:panelGrid columns="2" cellpadding="5" class="mytable">
-                                                                                    <p:selectOneRadio value="#{editCitizenManage.citizenEdit.gender}" id="gender" class="label1" required="true">
-                                                                                        <f:selectItem itemLabel="ذكر" itemValue="ذكر" />
-                                                                                        <f:selectItem  itemLabel="أنثى" itemValue="أنثى" />
-                                                                                    </p:selectOneRadio>
-                                                                                </h:panelGrid>  
-                                                                                
+                                                                                <p:outputLabel id="gender" class="form-control-user" style="text-align:right; width: 223px;"
+                                                                                               value="#{editCitizenManage.returnCitizenGender()}" />
+
+
                                                                                 <p:outputLabel for="birthday" class="label"  value="تاريخ الميلاد"/>
                                                                                 <p:calendar id="birthday" selectOtherMonths="true" yearRange="c-100:c" class=" form-control-user"
                                                                                             pattern="yyyy-MM-dd" navigator="true" style="text-align:right; width: 223px;"
@@ -186,7 +206,7 @@
                                                                                 <br/>
                                                                                 <p:separator style="width: 250px;"/> 
 
-                                                                                
+
                                                                                 <p:outputLabel for="idCard" value="رقم الهوية" /> 
                                                                                 <p:inputMask id="idCard" class="form-control form-control-user"
                                                                                              style="text-align:right;" type="text" mask="9 9999999 9" value="#{editCitizenManage.citizenEdit.idCard}" required="true"/>
@@ -251,14 +271,11 @@
 
                                                     </div>
                                                     <br/><hr style="border: 2px solid orange; margin-left: 10px; margin-right: 10px;"/>
-                                                    
+
                                                     <div style="display: flex; justify-content: center;"  class="col-sm-12">                                                
-                                                        <p:commandButton  value=" إعادة تعيين" immediate="true" ajax="false" class="myButtonB" style="margin-right:20px;" >
-                                                            <p:resetInput target="@form formAddCitizen" />
-                                                            <f:ajax />
-                                                        </p:commandButton>
-                                                        <p:commandButton  value=" تعديل مواطن" class="myButtonO" actionListener="#{editCitizenManage.editCitizen()}"
-                                                                         update="@form " />   &nbsp; &nbsp; &nbsp;
+
+                                                        <p:commandButton  value=" تعديل موظف" class="myButtonO" actionListener="#{editCitizenManage.editCitizen()}"
+                                                                          update="@form " />   &nbsp; &nbsp; &nbsp;
 
                                                     </div> <br/>
 

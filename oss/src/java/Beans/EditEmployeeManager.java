@@ -54,15 +54,17 @@ public class EditEmployeeManager {
     }
     
     
-    public void editEmployee() {
+    public void editEmployee() throws IOException {
 
         employeeEdit.updateEmployee();
+        FacesContext.getCurrentInstance().getExternalContext().redirect("allEmployees.xhtml");
         
     }
     
-    public void editEmployeePassword() {
+    public void editEmployeePassword() throws IOException {
 
         employeeEdit.updateEmployeePassword();
+         FacesContext.getCurrentInstance().getExternalContext().redirect("allEmployees.xhtml");
         System.out.println("amerrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
         
     }

@@ -322,12 +322,10 @@ public class Employee implements Serializable {
     public String updateEmployee() {
         String q = "UPDATE oss.employees SET Emp_Name = '" + emp_name + "',Emp_ID_Card = '" + emp_idCard
                 + "', Emp_Email = '" + emp_email + "',Emp_Telephone = '" + emp_tel
-                + "', Emp_Birthday = '" + emp_birth + "',Emp_StartDate = '" + emp_StartDate
-                + "', Emp_EndDate = '" + emp_EndDate + "',Emp_Mobile = '" + emp_mobile + "', Emp_Gender = '"
-                + emp_gender + "' WHERE (Emp_ID = " + emp_id + ");";
+                + "' ,Emp_Mobile = '" + emp_mobile + "' WHERE (Emp_ID = " + emp_id + ");";
         try {
             DB data = new DB();
-
+            System.out.println(q);
             data.write(q);
 
         } catch (Exception ex) {

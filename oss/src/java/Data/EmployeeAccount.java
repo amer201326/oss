@@ -79,6 +79,7 @@ public class EmployeeAccount implements Serializable{
         String q  =" UPDATE employeeaccount SET Password = '" + Password + "' WHERE `Emp_ID` = " + Emp_ID + ";" ;
         try {
             DB data = new DB();
+            System.out.println(q);
             data.write(q);
             
             

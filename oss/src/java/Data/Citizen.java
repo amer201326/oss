@@ -84,6 +84,13 @@ public class Citizen implements Serializable {
         this.email = email;
         this.region = region;
     }
+    
+    
+     public String updateCitizenPassword() {
+        
+        return account.updateCit();
+
+    }
 
     public Citizen() {
         account = new CitizenAccount();
@@ -320,7 +327,7 @@ public class Citizen implements Serializable {
     public String updateCitizen() {
         String q = "UPDATE citizen SET Cit_FirstName = '" + FirstName + "',Cit_FatherName = '" + FatherName
                 + "', Cit_GrandfatherName = '" + GrandFatherName + "',Cit_LastName = '" + LastName
-                + "', Cit_Gender = '" + Gender + "',Cit_FamilyMembers = '" + familyMember
+                + "',Cit_FamilyMembers = '" + familyMember
                 + "', Cit_ID_Card = '" + idCard + "',Cit_Telephone = '" + telephone + "', Cit_Mobile = '"
                 + mobile + "',Cit_Email = '" + email + "', Cit_Fax = '" + fax + "',Cit_Birthday = '" + birthday
                 + "',Cit_PlaceOfBirth = '" + placeOfBirth + "', Cit_Region = '" + region + "',Cit_Quarter = '" + quarter

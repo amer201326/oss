@@ -256,13 +256,11 @@
 
                                             <div >
 
-                                                <p:commandButton value=" إعادة تعيين" immediate="true" ajax="false" class="myButtonB" >
-                                                    <p:resetInput target="formAddEmployee" />
-                                                    <f:ajax />
-                                                </p:commandButton> &nbsp; &nbsp; &nbsp;
-
-                                                <p:commandButton actionListener="#{editEmployeeManager.editEmployee()}" value="إضافة موظف" id="add_emp"  update="@form"  class="myButtonC" />
-
+                                                
+                                                <p:commandButton  value=" تعديل مواطن" class="myButtonO" actionListener="#{editEmployeeManager.editEmployee()}"
+                                                                         update="@form " />   &nbsp; &nbsp; &nbsp;
+                                                
+                                                
                                             </div>
 
                                         </div>
