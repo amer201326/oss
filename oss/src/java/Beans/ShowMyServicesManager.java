@@ -56,7 +56,7 @@ public class ShowMyServicesManager implements Serializable {
 
     DefaultDiagramModel model;
 
-    public ShowMyServicesManager() {
+    public ShowMyServicesManager() { 
         selectAttEMP = new AttachmentServiceEmployee();
     }
     @ManagedProperty(value = "#{msession}")

@@ -1,0 +1,585 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough" class="rest">
+    <h:head>
+        <title> مشاهدة الخدمة</title>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <meta name="description" content=""/>
+        <meta name="author" content=""/>
+        <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"/>
+
+        <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+
+        <!-- Custom styles for this template-->
+        <link href="../css/sb-admin-2.min.css" rel="stylesheet"/>
+        <link href="../css/amer.css" rel="stylesheet"/>
+        <style type="text/css">
+            .ui-diagram-element {   
+
+                max-width: 9em;
+                line-height:2em;
+                text-align: center;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.8);
+                border-radius: 4px;
+                border: 1px solid transparent;
+                background-color: #98AFC7;
+                color: #ffffff;
+                padding-left: 3px;
+                padding-right: 3px;
+            }
+
+            .ui-diagram-successDEP {
+                padding-top: 10px;
+                min-width:10em;
+                height:3em;   
+                background-color: #23ef30;
+                color: #ffffff;
+                border-color: #7ab02c;
+            }
+            .ui-diagram-failDEP {
+                padding-top: 10px;
+                min-width:10em;
+                height:3em;   
+                background-color: #f14a4a;
+                color: #ffffff;
+                border-color: #7ab02c;
+            }
+            .ui-diagram-success {
+                min-width:10em;
+                height:2em;   
+                background-color: #23ef30;
+                color: #ffffff;
+                border-color: #7ab02c;
+            }
+            .ui-diagram-fail {
+                min-width:10em;
+                height:2em;   
+                background-color: #f31818;
+                color: #ffffff;
+                border-color: #7ab02c;
+            }
+            .ui-diagram-start {
+                width: 47px;
+                height:52px;   
+                -webkit-border-radius: 100px;
+                border-radius: 100px;
+                background-color: #1896f3;
+                color: #ffffff;
+                border-color: #7ab02c;
+            }
+            .ui-diagram-end {
+                width: 47px;
+                height:52px;   
+                -webkit-border-radius: 100px;
+                border-radius: 100px;
+                background-color: #ee5b5b;
+                color: #ffffff;
+                border-color: #7ab02c;
+            }
+
+
+            .flow-label {
+                min-width:200px; 
+                height:2em;   
+                font-size: 24px;
+                font-weight: bold;
+                color: #816A51;
+            }
+        </style>
+
+    </h:head>
+
+    <h:body id="page-top">
+        <style type="text/css"> 
+            .hoverDiv:hover {background: #f5f5f5;}
+        </style>
+
+
+        <!-- Page Wrapper -->
+        <div id="wrapper">
+            <!-- Sidebar -->
+
+            <div id="content-wrapper" class="d-flex flex-column">
+
+
+                <!-- Main Content -->
+                <div id="content">
+
+                    <!-- Topbar -->
+                    <!--                    <ui:include src="heder.xhtml"/>-->
+                    <!-- End of Topbar -->
+                    <!-- Begin Page Content -->
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+
+
+                            <div class=" col-md-12 ">
+                                <div class="card border-left-warning border-right-0 shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters textC">
+                                            <div class="col mr-2">
+                                                <h2 class="section-heading text-uppercase">#{showMyServicesManager.thisServiceCitizen.service.name}</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+                <br/><hr style="border: 2px solid orange; margin-left: 10px; margin-right: 10px;"/><br/>
+                <div class="card  border-bottom-success shadow h-100 py-2 " style="margin: 0 10px">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+
+                            <div class="col mr-2 " style="text-align: right">
+                                <div class="col mr-2" style="text-align: right">
+
+                                    <div class="text-primarytext-primary h3 font-weight-bold text-primary text-uppercase mb-1 text-center" >
+                                        مسار الخدمة
+                                    </div>
+                                    <div class="card-body flexAm">
+                                        <div style="display: inline; -webkit-box-sizing: content-box;
+                                             -moz-box-sizing: content-box;
+                                             box-sizing: content-box;
+                                             width: 0;
+                                             height: 0;
+                                             padding: 15px;
+                                             overflow: hidden;
+                                             border: none;
+                                             font: normal 16px/1 Times New Roman, Times, serif;
+                                             color: rgba(255,255,255,1);
+                                             text-align: center;
+                                             -o-text-overflow: ellipsis;
+                                             text-overflow: ellipsis;
+                                             background:#23ef30;
+                                             -webkit-box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.3) ;
+                                             box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.3) ;
+                                             text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+                                             margin-left: 30px;
+                                             ">
+
+                                        </div>
+                                        <h5 style="margin-left: 40px">جاهزة</h5>
+                                        <div style="display: inline; -webkit-box-sizing: content-box;
+                                             -moz-box-sizing: content-box;
+                                             box-sizing: content-box;
+                                             width: 0;
+                                             height: 0;
+                                             padding: 15px;
+                                             overflow: hidden;
+                                             border: none;
+                                             font: normal 16px/1 Times New Roman, Times, serif;
+                                             color: rgba(255,255,255,1);
+                                             text-align: center;
+                                             -o-text-overflow: ellipsis;
+                                             text-overflow: ellipsis;
+                                             background:#98AFC7;
+                                             -webkit-box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.3) ;
+                                             box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.3) ;
+                                             text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+                                             margin-left: 30px;
+                                             ">
+
+                                        </div>
+                                        <h5 style="margin-left: 40px">قيد التنفيذ</h5>
+                                        <div style="display: inline; -webkit-box-sizing: content-box;
+                                             -moz-box-sizing: content-box;
+                                             box-sizing: content-box;
+                                             width: 0;
+                                             height: 0;
+                                             padding: 15px;
+                                             overflow: hidden;
+                                             border: none;
+                                             font: normal 16px/1 Times New Roman, Times, serif;
+                                             color: rgba(255,255,255,1);
+                                             text-align: center;
+                                             -o-text-overflow: ellipsis;
+                                             text-overflow: ellipsis;
+                                             background:#f31818;
+                                             -webkit-box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.3) ;
+                                             box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.3) ;
+                                             text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+                                             margin-left: 30px;
+                                             ">
+
+                                        </div>
+                                        <h5 style="margin-left: 40px">مرفوض</h5>
+                                            
+
+                                    </div>
+                                    <div class=" mb-0  ">
+                                        <p:diagram value="#{showMyServicesManager.model}" style="height:400px;width: available"  styleClass="ui-widget-content" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <br/><hr style="border: 2px solid orange; margin-left: 10px; margin-right: 10px;"/><br/>
+
+                <div style="text-align: right">
+                    <h3 class="mr-5 text-primarytext-primary  "> التكلفة الكلية =   #{showMyServicesManager.totalCost}</h3>
+                </div>
+                <br/><br/>
+
+                <h:form id="applycervce" enctype="multipart/form-data">
+
+                    <div class="col-lg-12 mb-4">
+                        <ui:repeat value="#{showMyServicesManager.stepsAndDecsions}" var="d" >
+
+                            <div class="col-lg-12 mb-4">
+                                <div class="col-lg-12" style="text-align: right; min-width:100px; ">
+                                    <div class="card shadow mb-xl-4">
+                                        <div class="card-header py-3 flexjustify-content">
+                                            <h6 class="m-0 font-weight-bold text-primary">#{d.departmentPaths.nameA} </h6>
+                                            <div class="m-0 font-weight-bold text-primary ">مجموع تكلفة الدائره =   #{d.decisionsDepartment.totalDepCost}</div>
+
+
+                                        </div>
+
+                                        <div class="card-body">
+                                            <div class="row-space flexAm">
+                                                <div class="col-xl-6 col-md-6 mb-3">
+
+                                                    <div class="card border-right-#{d.decisionsDepartment.colorStatus()} shadow h-100 py-2">
+                                                        <div class="card-body">
+
+                                                            <div class="row no-gutters align-items-center">
+
+
+                                                                <div class="col mr-2" style="text-align: right">
+                                                                    <div class="text-s font-weight-bold text-primary text-uppercase mb-1" >حالة الخدمة</div>
+                                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">#{d.decisionsDepartment.nameStatus()}</div>
+
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Earnings (Monthly) Card Example -->
+                                                <div class="col-xl-6 col-md-6 mb-3">
+                                                    <div class="card border-right-#{d.decisionsDepartment.colorDecision()} shadow h-100 py-2">
+                                                        <div class="card-body">
+                                                            <div class="row no-gutters align-items-center">
+
+
+
+                                                                <div class="col-auto" >
+                                                                    <p:link class="fa fa-cogs fa-2x text-gray-300" rendered="#{!d.decisionsDepartment.flagDecision()}"></p:link>
+                                                                </div>
+
+                                                                <div class="col-auto" >
+                                                                    <p:link class="fa fa-thumbs-o-up fa-2x text-gray-300" rendered="#{d.decisionsDepartment.flagDecision()}"></p:link>
+                                                                </div>
+
+                                                                <div class="col mr-2" style="text-align: right">
+                                                                    <div class="col mr-2" style="text-align: right">
+                                                                        <div class="text-s font-weight-bold text-primary text-uppercase mb-1" > قرار الدائرة</div>
+                                                                        <div class="h5 mb-0 font-weight-bold text-gray-800 ">#{d.decisionsDepartment.nameDecision()}</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+
+
+                                            <div class="card border-right-#{d.decisionsDepartment.colorDecision()} border-bottom-#{d.decisionsDepartment.colorDecision()} shadow h-100 py-2 " style="margin: 0 10px">
+                                                <div class="card-body">
+                                                    <div class="row no-gutters align-items-center">
+
+                                                        <div class="col mr-2 " style="text-align: right">
+                                                            <div class="col mr-2" style="text-align: right">
+                                                                <div class="text-s font-weight-bold text-primary text-uppercase mb-1" > تعليق الدائرة </div>
+                                                                <div class="h5 mb-0 font-weight-bold text-gray-800">#{d.decisionsDepartment.externalMessage}</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <br/><br/>
+
+                                            <ui:repeat value="#{d.sections}" var="s" >
+
+                                                <div class="col-lg-12 mb-4">
+                                                    <div class="col-lg-12" style="text-align: right; min-width:100px; ">
+                                                        <div class="card shadow mb-xl-4">
+                                                            <div class="card-header py-3">
+                                                                <h6 class="m-0 font-weight-bold text-primary">#{s.section.name} </h6>
+
+
+                                                            </div>
+
+                                                            <div class="card-body">
+
+
+
+                                                                <ui:repeat value="#{s.job}" var="j" >
+
+                                                                    <div class="card border-right-#{j.decisionsJob.color()} border-bottom-#{j.decisionsJob.color()} shadow h-100 py-2 mb-3" style="margin: 0 10px">
+                                                                        <div class="card-body">
+                                                                            <div class="row no-gutters align-items-center">
+                                                                                <div class="col mr-2 " >
+
+                                                                                    <div class="col mr-2 flexjustify-content" style="text-align: right;">
+
+                                                                                        <div class="col mr-2" style="text-align: right">
+                                                                                            <div class=" font-weight-bold text-primary mb-3   flexAm" style="font-size: 1.5em;" >  
+                                                                                                <div class="fa fa-user" style="padding-top: 4px;color:#12e9ff "></div>
+                                                                                                <p:spacer width="10"/>
+                                                                                                <p>: #{j.jobPath.name} </p>
+                                                                                                <p:spacer width="10"/>
+                                                                                                <p>#{j.decisionsJob.employee.emp_name}</p>
+                                                                                                <p:outputLabel style="margin-top: 4px; font-size: .9em ; color: #f6c23e" rendered="#{j.decisionsJob.isRun()}" >قيد الانتظار</p:outputLabel>
+
+                                                                                            </div>
+
+                                                                                        </div>
+
+                                                                                        <div class="h5 mb-0  text-primarytext-primary  ">تكلفة = #{j.decisionsJob.cost}</div>
+                                                                                    </div>
+
+                                                                                    <p:outputPanel  rendered="#{d.decisionsDepartment.flagDecision()}">
+                                                                                        <div class="flexAm row-space " style="margin-right: 14px">
+
+                                                                                            <div class="  py-3 bg-gradient-#{j.decisionsJob.color()} text-white border-bottom-#{j.decisionsJob.color()}" style="padding: 5px" >:تعليق الموظف</div>
+                                                                                            <div class="col-sm-11   mb-2 py-2  ">
+                                                                                                <div class="flexjustify-content row-space" style="margin-right: 14px ;font-size: 1.3em">
+
+
+
+
+                                                                                                    <p>#{j.decisionsJob.externalMessage}</p>
+
+
+
+                                                                                                </div>
+                                                                                            </div>
+
+
+                                                                                        </div>
+                                                                                    </p:outputPanel>
+                                                                                    <br/>
+                                                                                    <p:outputPanel rendered="#{d.decisionsDepartment.flagDecision()}">
+                                                                                        <p:outputPanel rendered="#{!j.attachmentServiceEmployee.isEmpty()}">
+                                                                                            <div class="col-lg-12 mb-4">
+                                                                                                <div class="col-lg-12" style="text-align: right; min-width:100px; ">
+                                                                                                    <div class="card shadow mb-xl-4">
+                                                                                                        <div class="card-header py-3">
+                                                                                                            <h6 class="m-0 font-weight-bold text-primary">مرفقات الموظف</h6>
+
+
+                                                                                                        </div>
+                                                                                                        <p:dataTable  id="allfiles" var="att" value="#{j.attachmentServiceEmployee}"
+                                                                                                                      style=""
+                                                                                                                      selection="#{showMyServicesManager.selectAttEMP}"
+                                                                                                                      rowKey="#{att.sel}" selectionMode="single"
+                                                                                                                      >
+
+
+                                                                                                            <f:facet name="header"  >
+
+
+                                                                                                                الملفات المرفوعة
+
+
+                                                                                                            </f:facet>
+
+                                                                                                            <p:ajax event="rowSelect" process="@this"  listener="#{showMyServicesManager.onServiceSelect}"/>
+
+                                                                                                            <p:column  style="width:90px;text-align: center">
+                                                                                                                <p:commandLink update=":applycervce:datshwo" oncomplete="PF('attshow').show()"  
+                                                                                                                               class="btn btn-success btn-circle marginBuAdd"
+                                                                                                                               >
+                                                                                                                    <h:outputText styleClass="fa fa-fw fa-eye" style="margin:0 auto;" />
+                                                                                                                    <f:setPropertyActionListener value="#{att}" target="#{msession.selectAtt}" />
+
+                                                                                                                </p:commandLink>
+                                                                                                            </p:column>
+
+                                                                                                            <p:column headerText="الحجم">
+                                                                                                                <h:outputText value="#{att.sizeFile()}" />
+                                                                                                            </p:column>
+
+
+
+
+                                                                                                            <p:column headerText="الاسم">
+                                                                                                                <h:outputText value="#{att.filename}" />
+                                                                                                            </p:column>
+
+
+
+
+
+                                                                                                        </p:dataTable>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </p:outputPanel>
+                                                                                    </p:outputPanel>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                </ui:repeat>
+
+
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </ui:repeat>
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </ui:repeat>  
+
+                    </div>
+                    <p:dialog id="datshwo" dir="rtl" header="معلومات المرفق" widgetVar="attshow"  position="top,center" width="800"
+                              height="650" maximizable="true" resizable="false"> 
+
+
+                        <p:scrollPanel  rendered="#{showMyServicesManager.selectAttEMP.isImage()}" style="width:auto; height:auto;" mode="native">
+
+                            <div class="CenterFlex">
+                                <h:graphicImage id="image" alt="uploaded image" url="/image?type=archsit" style="margin: 10px 0 10px 0; max-height: 100%; max-width: 98%;"/>
+                            </div>
+
+                            <div class="CenterFlex">#{showMyServicesManager.selectAttEMP.filename}"</div>
+
+                            <div class="CenterFlex" >
+                                <p:commandButton id="downloadAT"  value="تنزيل" ajax="false"  icon="fa fa-arrow-down" 
+                                                 style="color: #f1e5e6; background: #e74a3b 50% 50%; margin: 10px 0 10px 0;
+                                                 border: none; width: 40%; font-size: 20px; font-weight: bold;">
+                                    <p:fileDownload value="#{showMyServicesManager.selectAttEMP.fileDownload}"/>
+                                </p:commandButton>
+                                <br/>
+
+                            </div>
+
+                        </p:scrollPanel>
+                        <p:scrollPanel  rendered="#{showMyServicesManager.selectAttEMP.isPDF()}" style="width:auto; height:auto;" mode="native">
+
+                            <div class="CenterFlex">
+                                <h:graphicImage id="pdf" alt="uploaded image" value="/imgs/pdf-512.png" style="margin: 10px 0 10px 0; max-height: 100%; max-width: 98%;"/>
+                            </div>
+
+                            <div class="CenterFlex">#{showMyServicesManager.selectAttEMP.filename}"</div>
+
+                            <div class="CenterFlex" >
+                                <p:commandButton id="downloadATpdf"  value="تنزيل" ajax="false"  icon="fa fa-arrow-down" 
+                                                 style="color: #f1e5e6; background: #e74a3b 50% 50%; margin: 10px 0 10px 0;
+                                                 border: none; width: 40%; font-size: 20px; font-weight: bold;">
+                                    <p:fileDownload value="#{showMyServicesManager.selectAttEMP.fileDownload}"/>
+                                </p:commandButton>
+                                <br/>
+                            </div>
+
+                        </p:scrollPanel>
+                        <p:scrollPanel  rendered="#{showMyServicesManager.selectAttEMP.canntOpenFile()}" style="width:auto; height:auto;" mode="native">
+
+                            <div class="CenterFlex">
+                                <h:graphicImage id="n" alt="uploaded image" value="/imgs/download.png" style="margin: 10px 0 10px 0; max-height: 100%; max-width: 98%;"/>
+                            </div>
+
+                            <div class="CenterFlex">#{showMyServicesManager.selectAttEMP.filename}"</div>
+
+                            <div class="CenterFlex" >
+                                <p:commandButton id="downloadATn"  value="تنزيل" ajax="false"  icon="fa fa-arrow-down" 
+                                                 style="color: #f1e5e6; background: #e74a3b 50% 50%; margin: 10px 0 10px 0;
+                                                 border: none; width: 40%; font-size: 20px; font-weight: bold;">
+                                    <p:fileDownload value="#{showMyServicesManager.selectAttEMP.fileDownload}"/>
+                                </p:commandButton>
+                                <br/>
+                            </div>
+
+                        </p:scrollPanel>
+
+
+
+
+
+
+
+
+                    </p:dialog>
+
+
+                </h:form>
+
+                <br/><br/>
+                <!-- End of Main Content -->
+
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright © Your Website 2019</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End of Footer -->
+
+            </div>
+
+
+            <!--<ui:include src="sidebar.xhtml"/>-->
+
+
+        </div>
+
+        <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Core plugin JavaScript-->
+        <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+
+        <!-- Custom scripts for all pages-->
+        <script src="../js/sb-admin-2.min.js"></script>
+
+        <!-- Page level plugins -->
+
+
+        <!-- Page level custom scripts -->
+
+        <script src="../js/js.js" type="text/javascript"></script>
+
+    </h:body>
+</html>
+
