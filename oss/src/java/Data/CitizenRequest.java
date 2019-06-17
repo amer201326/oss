@@ -323,7 +323,7 @@ public class CitizenRequest implements Serializable {
 
         int idMax = GetDB_Eman.getMaxIdCitizenRequest();
         this.Cit_ID = idMax + 1;
-        Cit_Password = Crypto.encPas(k, Cit_Password);
+        
         String q = "INSERT INTO  oss.requestcitizen (`Cit_ID`, `Cit_FirstName`, `Cit_FatherName`, `Cit_GrandfatherName`, `Cit_LastName`, `Cit_Gender`, "
                 + "`Cit_FamilyMembers`, `Cit_ID_Card`, `Cit_Telephone`, `Cit_Mobile`, `Cit_Email`,`Cit_Fax`, `Cit_Birthday`,`Cit_PlaceOfBirth`, "
                 + "`Cit_Region`,`Cit_Quarter`, `Cit_Street`,`Cit_Address`, `Cit_Job`, `Cit_PassportNumber`,`Cit_PassportType`, `Cit_Username`, `Cit_Password`) \n"

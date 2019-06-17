@@ -142,9 +142,10 @@
                                
 
                                                                     
-                                                                     <p:column filterBy="#{service.department.nameA}" headerText="الدائرة" filterMatchMode="exact">
+                                                                     <p:column filterBy="#{service.department.nameA}" headerText="الدائرة" filterMatchMode="exact" >
                                                                         <f:facet name="filter">
-                                                                            <p:selectOneMenu onchange="PF('done').filter()" styleClass="custom-filter">
+                                                                            <p:selectOneMenu onchange="PF('done').filter()" styleClass="custom-filter" 
+                                                                               style="width: 200px;">
                                                                                 <f:selectItem itemLabel="اختار واحدة" itemValue="#{null}" noSelectionOption="true" />
                                                                                 <f:selectItems value="#{serviceCitizenManager.departments}" />
                                                                             </p:selectOneMenu>
