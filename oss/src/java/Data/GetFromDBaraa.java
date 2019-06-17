@@ -198,6 +198,7 @@ public class GetFromDBaraa {
     }
 
     public static ArrayList<DecisionSection> sectionsteps(int idcitizen, int idSerCit, int idService) {
+        System.out.println("\n\n\n DecisionSectionDecisionSection \n\n");
         ArrayList<DecisionSection> sections = new ArrayList<>();
         try {
             DB db = new DB();

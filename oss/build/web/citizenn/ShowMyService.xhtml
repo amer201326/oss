@@ -20,9 +20,82 @@
         <!-- Custom styles for this template-->
         <link href="../css/sb-admin-2.min.css" rel="stylesheet"/>
         <link href="../css/amer.css" rel="stylesheet"/>
+        <style type="text/css">
+            .ui-diagram-element {   
+
+                max-width: 9em;
+                line-height:2em;
+                text-align: center;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.8);
+                border-radius: 4px;
+                border: 1px solid transparent;
+                background-color: #98AFC7;
+                color: #ffffff;
+                padding-left: 3px;
+                padding-right: 3px;
+            }
+
+            .ui-diagram-successDEP {
+                padding-top: 10px;
+                min-width:10em;
+                height:3em;   
+                background-color: #23ef30;
+                color: #ffffff;
+                border-color: #7ab02c;
+            }
+            .ui-diagram-failDEP {
+                padding-top: 10px;
+                min-width:10em;
+                height:3em;   
+                background-color: #f14a4a;
+                color: #ffffff;
+                border-color: #7ab02c;
+            }
+            .ui-diagram-success {
+                min-width:10em;
+                height:2em;   
+                background-color: #23ef30;
+                color: #ffffff;
+                border-color: #7ab02c;
+            }
+            .ui-diagram-fail {
+                min-width:10em;
+                height:2em;   
+                background-color: #f31818;
+                color: #ffffff;
+                border-color: #7ab02c;
+            }
+            .ui-diagram-start {
+                width: 47px;
+                height:52px;   
+                -webkit-border-radius: 100px;
+                border-radius: 100px;
+                background-color: #1896f3;
+                color: #ffffff;
+                border-color: #7ab02c;
+            }
+            .ui-diagram-end {
+                width: 47px;
+                height:52px;   
+                -webkit-border-radius: 100px;
+                border-radius: 100px;
+                background-color: #ee5b5b;
+                color: #ffffff;
+                border-color: #7ab02c;
+            }
+
+
+            .flow-label {
+                min-width:200px; 
+                height:2em;   
+                font-size: 24px;
+                font-weight: bold;
+                color: #816A51;
+            }
+        </style>
 
     </h:head>
-    
+
     <h:body id="page-top">
         <style type="text/css"> 
             .hoverDiv:hover {background: #f5f5f5;}
@@ -40,7 +113,7 @@
                 <div id="content">
 
                     <!-- Topbar -->
-                    <ui:include src="heder.xhtml"/>
+                    <!--                    <ui:include src="heder.xhtml"/>-->
                     <!-- End of Topbar -->
                     <!-- Begin Page Content -->
                     <div class="row">
@@ -61,7 +134,8 @@
 
 
 
-                            <br/><hr style="border: 2px solid orange; margin-left: 10px; margin-right: 10px;"/><br/>
+
+
                         </div>
                     </div>
 
@@ -70,6 +144,97 @@
 
 
                 </div>
+                <br/><hr style="border: 2px solid orange; margin-left: 10px; margin-right: 10px;"/><br/>
+                <div class="card  border-bottom-success shadow h-100 py-2 " style="margin: 0 10px">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+
+                            <div class="col mr-2 " style="text-align: right">
+                                <div class="col mr-2" style="text-align: right">
+
+                                    <div class="text-primarytext-primary h3 font-weight-bold text-primary text-uppercase mb-1 text-center" >
+                                        مسار الخدمة
+                                    </div>
+                                    <div class="card-body flexAm">
+                                        <div style="display: inline; -webkit-box-sizing: content-box;
+                                             -moz-box-sizing: content-box;
+                                             box-sizing: content-box;
+                                             width: 0;
+                                             height: 0;
+                                             padding: 15px;
+                                             overflow: hidden;
+                                             border: none;
+                                             font: normal 16px/1 Times New Roman, Times, serif;
+                                             color: rgba(255,255,255,1);
+                                             text-align: center;
+                                             -o-text-overflow: ellipsis;
+                                             text-overflow: ellipsis;
+                                             background:#23ef30;
+                                             -webkit-box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.3) ;
+                                             box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.3) ;
+                                             text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+                                             margin-left: 30px;
+                                             ">
+
+                                        </div>
+                                        <h5 style="margin-left: 40px">جاهزة</h5>
+                                        <div style="display: inline; -webkit-box-sizing: content-box;
+                                             -moz-box-sizing: content-box;
+                                             box-sizing: content-box;
+                                             width: 0;
+                                             height: 0;
+                                             padding: 15px;
+                                             overflow: hidden;
+                                             border: none;
+                                             font: normal 16px/1 Times New Roman, Times, serif;
+                                             color: rgba(255,255,255,1);
+                                             text-align: center;
+                                             -o-text-overflow: ellipsis;
+                                             text-overflow: ellipsis;
+                                             background:#98AFC7;
+                                             -webkit-box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.3) ;
+                                             box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.3) ;
+                                             text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+                                             margin-left: 30px;
+                                             ">
+
+                                        </div>
+                                        <h5 style="margin-left: 40px">قيد التنفيذ</h5>
+                                        <div style="display: inline; -webkit-box-sizing: content-box;
+                                             -moz-box-sizing: content-box;
+                                             box-sizing: content-box;
+                                             width: 0;
+                                             height: 0;
+                                             padding: 15px;
+                                             overflow: hidden;
+                                             border: none;
+                                             font: normal 16px/1 Times New Roman, Times, serif;
+                                             color: rgba(255,255,255,1);
+                                             text-align: center;
+                                             -o-text-overflow: ellipsis;
+                                             text-overflow: ellipsis;
+                                             background:#f31818;
+                                             -webkit-box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.3) ;
+                                             box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.3) ;
+                                             text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+                                             margin-left: 30px;
+                                             ">
+
+                                        </div>
+                                        <h5 style="margin-left: 40px">مرفوض</h5>
+                                            
+
+                                    </div>
+                                    <div class=" mb-0  ">
+                                        <p:diagram value="#{showMyServicesManager.model}" style="height:400px;width: available"  styleClass="ui-widget-content" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <br/><hr style="border: 2px solid orange; margin-left: 10px; margin-right: 10px;"/><br/>
 
                 <div style="text-align: right">
                     <h3 class="mr-5 text-primarytext-primary  "> التكلفة الكلية =   #{showMyServicesManager.totalCost}</h3>
@@ -310,7 +475,7 @@
                     <p:dialog id="datshwo" dir="rtl" header="معلومات المرفق" widgetVar="attshow"  position="top,center" width="800"
                               height="650" maximizable="true" resizable="false"> 
 
-                        
+
                         <p:scrollPanel  rendered="#{showMyServicesManager.selectAttEMP.isImage()}" style="width:auto; height:auto;" mode="native">
 
                             <div class="CenterFlex">

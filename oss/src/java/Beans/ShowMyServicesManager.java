@@ -56,7 +56,7 @@ public class ShowMyServicesManager implements Serializable {
 
     DefaultDiagramModel model;
 
-    public ShowMyServicesManager() { 
+    public ShowMyServicesManager() {
         selectAttEMP = new AttachmentServiceEmployee();
     }
     @ManagedProperty(value = "#{msession}")
@@ -79,7 +79,9 @@ public class ShowMyServicesManager implements Serializable {
 
     public List<StepsAndDecsions> StepsAndDesion(int idcitizen, int idSerCit, int idService) {
         List<StepsAndDecsions> pathD = GetFromDBaraa.stepAndDecDep(idcitizen, idSerCit);
+        
         List<DecisionSection> pathS = GetFromDBaraa.sectionsteps(idcitizen, idSerCit, idService);
+        
         List<StepsAndDecsionsJob> pathJ = GetFromDBaraa.stepAndDecJop(idcitizen, idSerCit);
 
         System.out.println("lllll" + pathJ.size());
