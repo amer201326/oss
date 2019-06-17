@@ -5,6 +5,7 @@
  */
 package Data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  *
  * @author baraakali
  */
-public class StepsAndDecsions {
+public class StepsAndDecsions implements Serializable{
 
     public DepartmentPaths departmentPaths;
     public DecisionsDepartment decisionsDepartment;

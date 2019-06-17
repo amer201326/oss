@@ -93,7 +93,7 @@ public class ShowMyServicesDoneManager implements Serializable {
 //    }
     public List<StepsAndDecsions> paths(int idcitizen, int idSerCit) {
         List<StepsAndDecsions> pathD = GetFromDBaraa.stepAndDecDep(idcitizen, idSerCit);
-        List<DecisionSection> pathS = GetFromDBaraa.sectionsteps(thisService.getId());
+        List<DecisionSection> pathS = GetFromDBaraa.sectionsteps( idcitizen,  idSerCit,  thisService.getId());
         List<StepsAndDecsionsJob> pathJ = GetFromDBaraa.stepAndDecJop(idcitizen, idSerCit);
         System.out.println("lllll" + pathJ.size());
         for (StepsAndDecsions d : pathD) {

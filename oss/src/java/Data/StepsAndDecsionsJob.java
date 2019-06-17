@@ -5,6 +5,7 @@
  */
 package Data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  *
  * @author baraakali
  */
-public class StepsAndDecsionsJob {
+public class StepsAndDecsionsJob implements Serializable{
     public JobPath jobPath;
     public DecisionsJob decisionsJob;
     List<AttachmentServiceEmployee> attachmentServiceEmployee;
@@ -45,6 +46,11 @@ public class StepsAndDecsionsJob {
 
     public void setAttachmentServiceEmployee(List<AttachmentServiceEmployee> attachmentServiceEmployee) {
         this.attachmentServiceEmployee = attachmentServiceEmployee;
+    }
+
+    @Override
+    public String toString() {
+        return "StepsAndDecsionsJob{" + "jobPath=" + jobPath + ", decisionsJob=" + decisionsJob ;
     }
 
     

@@ -123,12 +123,14 @@ public class SectionPath implements Serializable {
     public void setOrderDepartment(int orderDepartment) {
         this.orderDepartment = orderDepartment;
     }
- 
-    
+
     @Override
     public String toString() {
-        return "SectionPath{" + "departmentId=" + departmentId + ", id=" + id + ", name=" + name + ", order=" + order + ", jobs=" + jobs + '}';
+        return "SectionPath{" + "departmentId=" + departmentId + ", id=" + id + ", idService=" + idService + ", name=" + name + ", orderDepartment=" + orderDepartment + ", order=" + order + ", jobs=" + jobs + '}';
     }
+ 
+    
+    
 
     public boolean addToDataBase(int idService) throws SQLException, ClassNotFoundException {
    

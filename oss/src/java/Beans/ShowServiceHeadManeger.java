@@ -86,7 +86,7 @@ public class ShowServiceHeadManeger implements Serializable {
 
     public List<StepsAndDecsions> StepsAndDesion(int idcitizen, int idSerCit, int idService) {
         List<StepsAndDecsions> pathD = GetFromDBaraa.stepAndDecDep(idcitizen, idSerCit);
-        List<DecisionSection> pathS = GetFromDBaraa.sectionsteps(idService);
+        List<DecisionSection> pathS = GetFromDBaraa.sectionsteps( idcitizen,  idSerCit,  idService);
         List<StepsAndDecsionsJob> pathJ = GetFromDBaraa.stepAndDecJop(idcitizen, idSerCit);
         attachmentServiceEmployees = GetFromDBaraa.AttachmentServiceEmployee(serviseCitizen.getCit_ID(), serviseCitizen.getService_Citizen_ID(), serviseCitizen.getServices_Provided_ID());
 

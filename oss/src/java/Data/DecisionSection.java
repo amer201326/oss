@@ -6,6 +6,7 @@
 package Data;
 
 import DB.DB;
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.logging.Logger;
  *
  * @author baraakali
  */
-public class DecisionSection {
+public class DecisionSection implements Serializable{
 
     SectionPath section;
      int Cit_ID; int Service_Citizen_ID;

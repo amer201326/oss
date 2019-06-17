@@ -6,6 +6,7 @@
 package Data;
 
 import DB.DB;
+import java.io.Serializable;
 import java.sql.SQLException;
 
 /**
@@ -13,7 +14,7 @@ import java.sql.SQLException;
  * @author Amer$_$
  */
 
-public class Screen {
+public class Screen implements Serializable{
     int screenId;
     String screenName;
 

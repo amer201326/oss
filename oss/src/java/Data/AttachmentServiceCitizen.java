@@ -9,6 +9,7 @@ import DB.DB;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -22,7 +23,7 @@ import org.primefaces.model.UploadedFile;
  *
  * @author baraakali
  */
-public class AttachmentServiceCitizen {
+public class AttachmentServiceCitizen implements Serializable{
 
     int Atta_ArchiveC_ID;
     int Service_Citizen_ID;

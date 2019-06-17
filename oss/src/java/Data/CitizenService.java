@@ -5,11 +5,13 @@
  */
 package Data;
 
+import java.io.Serializable;
+
 /**
  *
  * @author baraakali
  */
-public class CitizenService {
+public class CitizenService implements Serializable{
     int id;
     Service providServicee;
     String date;

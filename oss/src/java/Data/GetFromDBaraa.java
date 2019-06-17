@@ -38,7 +38,6 @@ public class GetFromDBaraa {
         }
         return services;
 
-
     }
 
     public static ArrayList<ServiceCitizen> notDoneCitizenServices(int idcitizen) {
@@ -61,7 +60,6 @@ public class GetFromDBaraa {
         return services;
 
     }
-    
 
     public static ArrayList<DepartmentPaths> departmentPath(int idservice) {
         ArrayList<DepartmentPaths> departments = new ArrayList<>();
@@ -162,8 +160,8 @@ public class GetFromDBaraa {
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
-                s = new DepartmentPaths(r.getInt(1), r.getString(17), r.getInt(2), r.getString(16));
-                d = new DecisionsDepartment(r.getString(8), r.getString(9), r.getString(6), r.getDouble(7), r.getInt(1), r.getInt(2), r.getString(16), r.getString(11),r.getString(12));
+                s = new DepartmentPaths(r.getInt(1), r.getString(18), r.getInt(2), r.getString(16));
+                d = new DecisionsDepartment(r.getString(8), r.getString(9), r.getString(6), r.getDouble(7), r.getInt(1), r.getInt(2), r.getString(16), r.getString(11), r.getString(12));
                 sd = new StepsAndDecsions(s, d);
                 deps.add(sd);
             }
@@ -199,18 +197,22 @@ public class GetFromDBaraa {
         return Lsdj;
     }
 
-    public static ArrayList<DecisionSection> sectionsteps(int idservice) {
+    public static ArrayList<DecisionSection> sectionsteps(int idcitizen, int idSerCit, int idService) {
         ArrayList<DecisionSection> sections = new ArrayList<>();
         try {
             DB db = new DB();
             SectionPath sp;
             DecisionSection s;
-            String sql = "SELECT * FROM steps_section as ss  inner join section as s on ss.Sec_ID = s.Sec_ID where ss.Services_Provided_ID = " + idservice + " ;";
+            String sql = "SELECT * FROM dicisions_section as ds inner join steps_section as ss on "
+                    + " ds.Dep_ID = ss.Dep_ID and ds.Sec_ID = ss.Sec_ID and ds.Services_Provided_ID = ss.Services_Provided_ID and ds.Order_Departmant = ss.Order_Departmant "
+                    + " and  ds.Order_Section = ss.Order_Section "
+                    + " inner join section as s on ds.Sec_ID = s.Sec_ID "
+                    + " where ss.Services_Provided_ID = "+idService+" and ds.Service_Citizen_ID = "+idSerCit+" and ds.Cit_ID = "+idcitizen+";";
             System.out.println(sql);
             ResultSet r = db.read(sql);
             while (r.next()) {
-                sp = new SectionPath(r.getInt(1), r.getInt(4), r.getInt(2), r.getString(8), r.getInt(5));
-                s = new DecisionSection();
+                sp = new SectionPath(r.getInt(1), r.getInt(4), r.getInt(2), r.getString(16), r.getInt(5));
+                s = new DecisionSection(sp, idcitizen, idcitizen, idService, r.getString(7));
                 s.setSection(sp);;
                 sections.add(s);
             }
@@ -305,12 +307,12 @@ public class GetFromDBaraa {
         return id;
     }
 
-    public static int getMaxId_service_citizen() {
+    public static int getMaxId_service_citizen(int cid) {
         int id = 0;
         try {
             DB db = new DB();
 
-            String sql = "SELECT MAX(Service_Citizen_ID) FROM service_citizen;";
+            String sql = "SELECT MAX(Service_Citizen_ID) FROM service_citizen where Cit_ID = " + cid + ";";
 
             System.out.println(sql);
             ResultSet r = db.read(sql);

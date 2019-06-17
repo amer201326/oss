@@ -35,6 +35,9 @@ public class NotificationUser implements Serializable {
         this.date = date;
         this.show = show;
     }
+
+    NotificationUser() {
+    }
     
 
     public int getService_Citizen_ID() {

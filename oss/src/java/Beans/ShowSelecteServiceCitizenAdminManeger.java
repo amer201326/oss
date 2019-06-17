@@ -86,7 +86,7 @@ public class ShowSelecteServiceCitizenAdminManeger implements Serializable{
 
     public List<StepsAndDecsions> StepsAndDesion(int idcitizen, int idSerCit, int idService) {
         List<StepsAndDecsions> pathD = GetFromDBaraa.stepAndDecDep(idcitizen, idSerCit);
-        List<DecisionSection> pathS = GetFromDBaraa.sectionsteps(idService);
+        List<DecisionSection> pathS = GetFromDBaraa.sectionsteps(idcitizen,  idSerCit,  idService);
         List<StepsAndDecsionsJob> pathJ = GetFromDBaraa.stepAndDecJop(idcitizen, idSerCit);
 
         System.out.println("lllll" + pathJ.size());

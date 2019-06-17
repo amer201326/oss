@@ -6,15 +6,15 @@
 package Data;
 
 import DB.DB;
+import java.io.Serializable;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *
  * @author baraakali
  */
-public class DecisionsJob {
+public class DecisionsJob implements Serializable{
 
     JobPath job;
     int idEmployee;

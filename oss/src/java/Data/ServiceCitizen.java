@@ -45,14 +45,14 @@ public class ServiceCitizen implements Serializable {
     Department department;
     DecisionsDepartment decisionsDepartment = new DecisionsDepartment();
     
-    public NotificationUser notificationUser;
+    public NotificationUser notificationUser = new NotificationUser();
     public List<AttachmentServiceCitizen> attachmentServiceCitizens = new ArrayList<AttachmentServiceCitizen>();
 
     public List<AttachmentServiceEmployee> attachmentServiceEmployees = new ArrayList<AttachmentServiceEmployee>();
 
     public ServiceCitizen() {
-
     }
+     
 
     public ServiceCitizen(int Service_Citizen_ID, int Services_Provided_ID, int Cit_ID, String Date, String status, String note) {
 

@@ -51,7 +51,7 @@ public class MessagesEmployesManager implements Serializable {
 
     public List<StepsAndDecsions> StepsAndDesion(int idcitizen, int idSerCit, int idService) {
         List<StepsAndDecsions> pathD = GetFromDBaraa.stepAndDecDep(idcitizen, idSerCit);
-        List<DecisionSection> pathS = GetFromDBaraa.sectionsteps(idService);
+        List<DecisionSection> pathS = GetFromDBaraa.sectionsteps( idcitizen,  idSerCit,  idService);
         List<StepsAndDecsionsJob> pathJ = GetFromDBaraa.stepAndDecJop(idcitizen, idSerCit);
         List<AttachmentServiceEmployee> att = GetFromDB.getAttachmentServiceEmployee( idcitizen, idSerCit, idService);
         for (StepsAndDecsionsJob j : pathJ) {
