@@ -12,13 +12,16 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Eman/Desktop/GP/oss/oss/src/java/Data/EmployeeAccount.java</file>
-            <file>file:/C:/Users/Eman/Desktop/GP/oss/oss/src/java/Data/GetFromDB.java</file>
-            <file>file:/C:/Users/Eman/Desktop/GP/oss/oss/web/managerEmployee/editEmployee.xhtml</file>
-            <file>file:/C:/Users/Eman/Desktop/GP/oss/oss/src/java/Data/Employee.java</file>
-            <file>file:/C:/Users/Eman/Desktop/GP/oss/oss/src/java/Beans/DepartmentManager.java</file>
-            <file>file:/C:/Users/Eman/Desktop/GP/oss/oss/src/java/Beans/EditEmployeeManager.java</file>
-            <file>file:/C:/Users/Eman/Desktop/GP/oss/oss/web/managerService/addService.xhtml</file>
+            <file>file:/E:/study/github/oss/oss/src/java/Beans/ShowMyServicesManager.java</file>
+            <file>file:/E:/study/github/oss/oss/src/java/Beans/ApplyServiceManager.java</file>
+            <file>file:/E:/study/github/oss/oss/src/java/Data/GetFromDBaraa.java</file>
+            <file>file:/E:/study/github/oss/oss/src/java/Data/GetFromDB.java</file>
+            <file>file:/E:/study/github/oss/oss/src/java/Beans/MessagesEmployesManager.java</file>
+            <file>file:/E:/study/github/oss/oss/src/java/Beans/ShowSelecteServiceCitizenAdminManeger.java</file>
+            <file>file:/E:/study/github/oss/oss/web/citizenn/ApplyService.xhtml</file>
+            <file>file:/E:/study/github/oss/oss/src/java/Beans/ShowMyServicesDoneManager.java</file>
+            <file>file:/E:/study/github/oss/oss/web/citizenn/ShowMyService.xhtml</file>
+            <file>file:/E:/study/github/oss/oss/src/java/Data/ServiceCitizen.java</file>
         </group>
     </open-files>
 </project-private>
